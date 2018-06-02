@@ -120,7 +120,7 @@ public class RssReader {
                 return next;
             }
 
-            boolean channelPart = true;
+            boolean isChannelPart = true;
             String elementName = null;
             Item item = null;
 
@@ -129,10 +129,25 @@ public class RssReader {
                     int type = reader.next(); // do something here
 
                     if (type == XMLEvent.CHARACTERS) {
-                        parseCharacters(elementName, item, channelPart);
+                        parseCharacters(elementName, item, isChannelPart);
                     }
                     else if (type == XMLEvent.START_ELEMENT) {
-                        channelPart = parseStartElement(elementName, item, channelPart);
+                        elementName = reader.getName().toString();
+
+                        if ("channel".equals(reader.getName().getLocalPart())) {
+                            channel = new Channel();
+                            isChannelPart = true;
+                        }
+                        else if ("item".equals(reader.getName().getLocalPart())) {
+                            item = new Item();
+                            item.setChannel(channel);
+                            isChannelPart = false;
+                        }
+                        else if ("guid".equals(elementName)) {
+                            String value = reader.getAttributeValue(null, "isPermaLink");
+                            if (item != null)
+                                item.setIsPermaLink(Boolean.valueOf(value));
+                        }
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
                         String name = reader.getName().toString();
@@ -142,7 +157,7 @@ public class RssReader {
                     }
                 }
             }
-            catch (XMLStreamException | NoSuchElementException e) {
+            catch (XMLStreamException e) {
                 Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
@@ -160,7 +175,7 @@ public class RssReader {
                     logger.log(Level.WARNING, "Failed to close XML stream. ", e);
             }
 
-            throw new NoSuchElementException();
+            return null;
         }
 
         void parseCharacters(String elementName, Item item, boolean isChannelPart) {
@@ -197,27 +212,6 @@ public class RssReader {
                 else if ("link".equals(elementName))
                     item.setLink(text);
             }
-        }
-
-        boolean parseStartElement(String elementName, Item item, boolean isChannelPart) {
-            elementName = reader.getName().toString();
-
-            if ("channel".equals(reader.getName().getLocalPart())) {
-                channel = new Channel();
-                isChannelPart = true;
-            }
-            else if ("item".equals(reader.getName().getLocalPart())) {
-                item = new Item();
-                item.setChannel(channel);
-                isChannelPart = false;
-            }
-            else if ("guid".equals(elementName)) {
-                String value = reader.getAttributeValue(null, "isPermaLink");
-                if (item != null)
-                    item.setIsPermaLink(Boolean.valueOf(value));
-            }
-
-            return isChannelPart;
         }
     }
 
