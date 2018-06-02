@@ -39,6 +39,7 @@ import java.util.zip.GZIPInputStream;
 
 
 public class RssReader {
+    private static final String LOG_GROUP = "com.apptastic.rssreader";
     private static final String HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
 
     public Stream<Item> read(String url) throws IOException {
@@ -46,9 +47,7 @@ public class RssReader {
         removeBadDate(inputStream);
 
         RssItemIterator itemIterator = new RssItemIterator(inputStream);
-        Stream<Item> itemStream = StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
-
-        return itemStream;
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
     }
 
     void removeBadDate(InputStream inputStream)throws IOException {
@@ -94,7 +93,7 @@ public class RssReader {
                 reader = xmlInFact.createXMLStreamReader(is);
             }
             catch (XMLStreamException e) {
-                Logger logger = Logger.getLogger("com.apptastic.rssreader");
+                Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to process XML. ", e);
@@ -130,56 +129,10 @@ public class RssReader {
                     int type = reader.next(); // do something here
 
                     if (type == XMLEvent.CHARACTERS) {
-                        String text = reader.getText().trim();
-
-                        if (text.isEmpty())
-                            continue;
-
-                        if (channelPart) {
-                            if ("title".equals(elementName))
-                                channel.setTitle(text);
-                            else if ("description".equals(elementName))
-                                channel.setDescription(text);
-                            else if ("language".equals(elementName))
-                                channel.setLanguage(text);
-                            else if ("link".equals(elementName))
-                                channel.setLink(text);
-                            else if ("copyright".equals(elementName))
-                                channel.setCopyright(text);
-                            else if ("generator".equals(elementName))
-                                channel.setGenerator(text);
-                            else if ("lastBuildDate".equals(elementName))
-                                channel.setLastBuildDate(text);
-                        }
-                        else {
-                            if ("guid".equals(elementName))
-                                item.setGuid(text);
-                            else if ("title".equals(elementName))
-                                item.setTitle(text);
-                            else if ("description".equals(elementName))
-                                item.setDescription(text);
-                            else if ("pubDate".equals(elementName))
-                                item.setPubDate(text);
-                            else if ("link".equals(elementName))
-                                item.setLink(text);
-                        }
+                        parseCharacters(elementName, item, channelPart);
                     }
                     else if (type == XMLEvent.START_ELEMENT) {
-                        elementName = reader.getName().toString();
-
-                        if ("channel".equals(reader.getName().getLocalPart())) {
-                            channel = new Channel();
-                            channelPart = true;
-                        }
-                        else if ("item".equals(reader.getName().getLocalPart())) {
-                            item = new Item();
-                            item.setChannel(channel);
-                            channelPart = false;
-                        }
-                        else if ("guid".equals(elementName)) {
-                            String value = reader.getAttributeValue(null, "isPermaLink");
-                            item.setIsPermaLink(Boolean.valueOf(value));
-                        }
+                        channelPart = parseStartElement(elementName, item, channelPart);
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
                         String name = reader.getName().toString();
@@ -190,7 +143,7 @@ public class RssReader {
                 }
             }
             catch (XMLStreamException | NoSuchElementException e) {
-                Logger logger = Logger.getLogger("com.apptastic.rssreader");
+                Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to parse XML. ", e);
@@ -201,13 +154,71 @@ public class RssReader {
                 is.close();
             }
             catch (XMLStreamException | IOException e) {
-                Logger logger = Logger.getLogger("com.apptastic.rssreader");
+                Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to close XML stream. ", e);
             }
 
-            return null;
+            throw new NoSuchElementException();
+        }
+
+        void parseCharacters(String elementName, Item item, boolean isChannelPart) {
+            String text = reader.getText().trim();
+
+            if (text.isEmpty())
+                return;
+
+            if (isChannelPart) {
+                if ("title".equals(elementName))
+                    channel.setTitle(text);
+                else if ("description".equals(elementName))
+                    channel.setDescription(text);
+                else if ("language".equals(elementName))
+                    channel.setLanguage(text);
+                else if ("link".equals(elementName))
+                    channel.setLink(text);
+                else if ("copyright".equals(elementName))
+                    channel.setCopyright(text);
+                else if ("generator".equals(elementName))
+                    channel.setGenerator(text);
+                else if ("lastBuildDate".equals(elementName))
+                    channel.setLastBuildDate(text);
+            }
+            else {
+                if ("guid".equals(elementName))
+                    item.setGuid(text);
+                else if ("title".equals(elementName))
+                    item.setTitle(text);
+                else if ("description".equals(elementName))
+                    item.setDescription(text);
+                else if ("pubDate".equals(elementName))
+                    item.setPubDate(text);
+                else if ("link".equals(elementName))
+                    item.setLink(text);
+            }
+        }
+
+        boolean parseStartElement(String elementName, Item item, boolean isChannelPart) {
+            elementName = reader.getName().toString();
+
+            if ("channel".equals(reader.getName().getLocalPart())) {
+                channel = new Channel();
+                isChannelPart = true;
+            }
+            else if ("item".equals(reader.getName().getLocalPart())) {
+                item = new Item();
+                item.setChannel(channel);
+                isChannelPart = false;
+            }
+            else if ("guid".equals(elementName)) {
+                String value = reader.getAttributeValue(null, "isPermaLink");
+                if (item != null)
+                    item.setIsPermaLink(Boolean.valueOf(value));
+            }
+
+            return isChannelPart;
         }
     }
+
 }
