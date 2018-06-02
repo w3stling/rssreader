@@ -50,7 +50,7 @@ public class RssReader {
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
     }
 
-    void removeBadDate(InputStream inputStream)throws IOException {
+    void removeBadDate(InputStream inputStream) throws IOException {
         inputStream.mark(1);
         int firstChar = inputStream.read();
 
@@ -60,6 +60,7 @@ public class RssReader {
 
     /**
      * Internal method for sending the http request.
+     *
      * @param url URL to send the request
      * @return The response for the request
      * @throws IOException exception
@@ -91,8 +92,7 @@ public class RssReader {
             try {
                 XMLInputFactory xmlInFact = XMLInputFactory.newInstance();
                 reader = xmlInFact.createXMLStreamReader(is);
-            }
-            catch (XMLStreamException e) {
+            } catch (XMLStreamException e) {
                 Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
@@ -125,39 +125,34 @@ public class RssReader {
             Item item = null;
 
             try {
-                while(reader.hasNext()) {
+                while (reader.hasNext()) {
                     int type = reader.next(); // do something here
 
                     if (type == XMLEvent.CHARACTERS) {
                         parseCharacters(elementName, item, isChannelPart);
-                    }
-                    else if (type == XMLEvent.START_ELEMENT) {
+                    } else if (type == XMLEvent.START_ELEMENT) {
                         elementName = reader.getName().toString();
 
                         if ("channel".equals(reader.getName().getLocalPart())) {
                             channel = new Channel();
                             isChannelPart = true;
-                        }
-                        else if ("item".equals(reader.getName().getLocalPart())) {
+                        } else if ("item".equals(reader.getName().getLocalPart())) {
                             item = new Item();
                             item.setChannel(channel);
                             isChannelPart = false;
-                        }
-                        else if ("guid".equals(elementName)) {
+                        } else if ("guid".equals(elementName)) {
                             String value = reader.getAttributeValue(null, "isPermaLink");
                             if (item != null)
                                 item.setIsPermaLink(Boolean.valueOf(value));
                         }
-                    }
-                    else if (type == XMLEvent.END_ELEMENT) {
+                    } else if (type == XMLEvent.END_ELEMENT) {
                         String name = reader.getName().toString();
 
                         if ("item".equals(name))
                             return item;
                     }
                 }
-            }
-            catch (XMLStreamException e) {
+            } catch (XMLStreamException e) {
                 Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
@@ -167,8 +162,7 @@ public class RssReader {
             try {
                 reader.close();
                 is.close();
-            }
-            catch (XMLStreamException | IOException e) {
+            } catch (XMLStreamException | IOException e) {
                 Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
@@ -185,34 +179,41 @@ public class RssReader {
                 return;
 
             if (isChannelPart) {
-                if ("title".equals(elementName))
-                    channel.setTitle(text);
-                else if ("description".equals(elementName))
-                    channel.setDescription(text);
-                else if ("language".equals(elementName))
-                    channel.setLanguage(text);
-                else if ("link".equals(elementName))
-                    channel.setLink(text);
-                else if ("copyright".equals(elementName))
-                    channel.setCopyright(text);
-                else if ("generator".equals(elementName))
-                    channel.setGenerator(text);
-                else if ("lastBuildDate".equals(elementName))
-                    channel.setLastBuildDate(text);
-            }
-            else {
-                if ("guid".equals(elementName))
-                    item.setGuid(text);
-                else if ("title".equals(elementName))
-                    item.setTitle(text);
-                else if ("description".equals(elementName))
-                    item.setDescription(text);
-                else if ("pubDate".equals(elementName))
-                    item.setPubDate(text);
-                else if ("link".equals(elementName))
-                    item.setLink(text);
+                parseChannelCharacters(elementName, item, text);
+            } else {
+                parseItemCharacters(elementName, item, text);
             }
         }
-    }
 
+        void parseChannelCharacters(String elementName, Item item, String text) {
+            if ("title".equals(elementName))
+                channel.setTitle(text);
+            else if ("description".equals(elementName))
+                channel.setDescription(text);
+            else if ("language".equals(elementName))
+                channel.setLanguage(text);
+            else if ("link".equals(elementName))
+                channel.setLink(text);
+            else if ("copyright".equals(elementName))
+                channel.setCopyright(text);
+            else if ("generator".equals(elementName))
+                channel.setGenerator(text);
+            else if ("lastBuildDate".equals(elementName))
+                channel.setLastBuildDate(text);
+        }
+
+        void parseItemCharacters(String elementName, Item item, String text) {
+            if ("guid".equals(elementName))
+                item.setGuid(text);
+            else if ("title".equals(elementName))
+                item.setTitle(text);
+            else if ("description".equals(elementName))
+                item.setDescription(text);
+            else if ("pubDate".equals(elementName))
+                item.setPubDate(text);
+            else if ("link".equals(elementName))
+                item.setLink(text);
+        }
+
+    }
 }
