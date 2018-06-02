@@ -189,13 +189,13 @@ public class RssReader {
                 return;
 
             if (isChannelPart) {
-                parseChannelCharacters(elementName, item, text);
+                parseChannelCharacters(elementName, text);
             } else {
                 parseItemCharacters(elementName, item, text);
             }
         }
 
-        void parseChannelCharacters(String elementName, Item item, String text) {
+        void parseChannelCharacters(String elementName, String text) {
             if ("title".equals(elementName))
                 channel.setTitle(text);
             else if ("description".equals(elementName))
