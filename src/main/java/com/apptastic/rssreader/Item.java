@@ -25,7 +25,7 @@ package com.apptastic.rssreader;
 
 
 /**
- * A channel may contain any number of <item>s. An item may represent a "story" -- much like a story in a
+ * A channel may contain any number of items. An item may represent a "story" -- much like a story in a
  * newspaper or magazine; if so its description is a synopsis of the story, and the link points to the full story.
  */
 public class Item {

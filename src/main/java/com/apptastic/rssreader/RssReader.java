@@ -49,7 +49,7 @@ public class RssReader {
      * Read RSS feed with the given URL.
      * @param url URL to RSS feed.
      * @return Stream of items
-     * @throws IOException
+     * @throws IOException Fail to read url or its content
      */
     public Stream<Item> read(String url) throws IOException {
         InputStream inputStream = sendRequest(url);
