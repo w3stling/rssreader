@@ -88,10 +88,13 @@ public class RssReader {
     }
 
     static class RssItemIterator implements Iterator<Item> {
-        InputStream is;
-        XMLStreamReader reader;
-        Channel channel;
+        private InputStream is;
+        private XMLStreamReader reader;
+        private Channel channel;
+        private Item item = null;
         private Item nextItem;
+        private boolean isChannelPart = true;
+        private String elementName = null;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
@@ -134,10 +137,6 @@ public class RssReader {
                 return next;
             }
 
-            boolean isChannelPart = true;
-            String elementName = null;
-            Item item = null;
-
             try {
                 while (reader.hasNext()) {
                     int type = reader.next(); // do something here
@@ -146,27 +145,12 @@ public class RssReader {
                         parseCharacters(elementName, item, isChannelPart);
                     }
                     else if (type == XMLEvent.START_ELEMENT) {
-                        elementName = reader.getName().toString();
-
-                        if ("channel".equals(reader.getName().getLocalPart())) {
-                            channel = new Channel();
-                            isChannelPart = true;
-                        }
-                        else if ("item".equals(reader.getName().getLocalPart())) {
-                            item = new Item();
-                            item.setChannel(channel);
-                            isChannelPart = false;
-                        }
-                        else if ("guid".equals(elementName)) {
-                            String value = reader.getAttributeValue(null, "isPermaLink");
-                            if (item != null)
-                                item.setIsPermaLink(Boolean.valueOf(value));
-                        }
+                        parseStartElement();
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
-                        String name = reader.getName().toString();
+                        boolean itemParsed = parseEndElement();
 
-                        if ("item".equals(name))
+                        if (itemParsed)
                             return item;
                     }
                 }
@@ -188,6 +172,31 @@ public class RssReader {
             }
 
             throw new NoSuchElementException();
+        }
+
+        void parseStartElement() {
+            elementName = reader.getName().toString();
+
+            if ("channel".equals(reader.getName().getLocalPart())) {
+                channel = new Channel();
+                isChannelPart = true;
+            }
+            else if ("item".equals(reader.getName().getLocalPart())) {
+                item = new Item();
+                item.setChannel(channel);
+                isChannelPart = false;
+            }
+            else if ("guid".equals(elementName)) {
+                String value = reader.getAttributeValue(null, "isPermaLink");
+                if (item != null)
+                    item.setIsPermaLink(Boolean.valueOf(value));
+            }
+        }
+
+        boolean parseEndElement() {
+            String name = reader.getName().toString();
+
+            return "item".equals(name);
         }
 
         void parseCharacters(String elementName, Item item, boolean isChannelPart) {
