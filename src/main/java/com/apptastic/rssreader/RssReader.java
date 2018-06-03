@@ -95,15 +95,18 @@ public class RssReader {
         private Item nextItem;
         private boolean isChannelPart = true;
         private String elementName = null;
+        private StringBuilder textBuilder;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
             nextItem = null;
+            textBuilder = new StringBuilder();
 
             try {
                 XMLInputFactory xmlInFact = XMLInputFactory.newInstance();
                 reader = xmlInFact.createXMLStreamReader(is);
-            } catch (XMLStreamException e) {
+            }
+            catch (XMLStreamException e) {
                 Logger logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
@@ -142,7 +145,7 @@ public class RssReader {
                     int type = reader.next(); // do something here
 
                     if (type == XMLEvent.CHARACTERS) {
-                        parseCharacters(elementName, item, isChannelPart);
+                        parseCharacters();
                     }
                     else if (type == XMLEvent.START_ELEMENT) {
                         parseStartElement();
@@ -175,6 +178,7 @@ public class RssReader {
         }
 
         void parseStartElement() {
+            textBuilder.setLength(0);
             elementName = reader.getName().toString();
 
             if ("channel".equals(reader.getName().getLocalPart())) {
@@ -195,24 +199,31 @@ public class RssReader {
 
         boolean parseEndElement() {
             String name = reader.getName().toString();
+            String text = textBuilder.toString().trim();
+
+            if (isChannelPart)
+                parseChannelCharacters(elementName, text);
+            else
+                parseItemCharacters(elementName, item, text);
+
+            textBuilder.setLength(0);
 
             return "item".equals(name);
         }
 
-        void parseCharacters(String elementName, Item item, boolean isChannelPart) {
-            String text = reader.getText().trim();
+        void parseCharacters() {
+            String text = reader.getText();
 
-            if (text.isEmpty())
+            if (text.trim().isEmpty())
                 return;
 
-            if (isChannelPart) {
-                parseChannelCharacters(elementName, text);
-            } else {
-                parseItemCharacters(elementName, item, text);
-            }
+            textBuilder.append(text);
         }
 
         void parseChannelCharacters(String elementName, String text) {
+            if (text.isEmpty())
+                return;
+
             if ("title".equals(elementName))
                 channel.setTitle(text);
             else if ("description".equals(elementName))
@@ -230,6 +241,9 @@ public class RssReader {
         }
 
         void parseItemCharacters(String elementName, Item item, String text) {
+            if (text.isEmpty())
+                return;
+
             if ("guid".equals(elementName))
                 item.setGuid(text);
             else if ("title".equals(elementName))
