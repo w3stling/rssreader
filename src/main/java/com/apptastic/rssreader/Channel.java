@@ -25,7 +25,7 @@ package com.apptastic.rssreader;
 
 
 /**
- * Class representing the RSS channel
+ * Class representing the RSS channel.
  */
 public class Channel {
     private String title;
