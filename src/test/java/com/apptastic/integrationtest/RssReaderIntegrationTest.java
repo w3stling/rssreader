@@ -137,6 +137,7 @@ public class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     public void rssEkobrottsmyndigheten() throws IOException {
         RssReader reader = new RssReader();
@@ -163,6 +164,37 @@ public class RssReaderIntegrationTest {
             assertEquals("https://www.ekobrottsmyndigheten.se/sv/press/nyheter/", channel.getLink());
             assertNull(channel.getCopyright());
             assertEquals("Argotic Syndication Framework 2008.0.2.0, http://www.codeplex.com/Argotic", channel.getGenerator());
+            assertNull(channel.getLastBuildDate());
+        }
+    }
+
+
+    @Test
+    public void rssVeckansAffarer() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://www.va.se/rss/").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate item
+            assertNotNull(item);
+            assertTrue(!item.getGuid().isEmpty());
+            assertFalse(item.getIsPermaLink());
+            assertTrue(!item.getTitle().isEmpty());
+            assertTrue(!item.getDescription().isEmpty());
+            assertTrue(!item.getPubDate().isEmpty());
+            assertTrue(!item.getLink().isEmpty());
+
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertEquals("RSS", channel.getTitle());
+            assertNull(channel.getDescription());
+            assertNull(channel.getLanguage());
+            assertEquals("http://www.va.se/rss/", channel.getLink());
+            assertNull(channel.getCopyright());
+            assertNull(channel.getGenerator());
             assertNull(channel.getLastBuildDate());
         }
     }
