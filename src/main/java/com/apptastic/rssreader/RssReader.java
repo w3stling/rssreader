@@ -38,10 +38,19 @@ import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
 
+/**
+ * Class for reading  RSS (Rich Site Summary) type of web feeds.
+ */
 public class RssReader {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
     private static final String HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
 
+    /**
+     * Read RSS feed with the given URL.
+     * @param url URL to RSS feed.
+     * @return Stream of items
+     * @throws IOException
+     */
     public Stream<Item> read(String url) throws IOException {
         InputStream inputStream = sendRequest(url);
         removeBadDate(inputStream);
@@ -50,7 +59,7 @@ public class RssReader {
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
     }
 
-    void removeBadDate(InputStream inputStream) throws IOException {
+    private void removeBadDate(InputStream inputStream) throws IOException {
         inputStream.mark(1);
         int firstChar = inputStream.read();
 
@@ -77,7 +86,6 @@ public class RssReader {
 
         return new BufferedInputStream(inputStream);
     }
-
 
     static class RssItemIterator implements Iterator<Item> {
         InputStream is;

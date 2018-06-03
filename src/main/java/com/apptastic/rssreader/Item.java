@@ -24,6 +24,10 @@
 package com.apptastic.rssreader;
 
 
+/**
+ * A channel may contain any number of <item>s. An item may represent a "story" -- much like a story in a
+ * newspaper or magazine; if so its description is a synopsis of the story, and the link points to the full story.
+ */
 public class Item {
     private String title;
     private String description;
@@ -33,58 +37,118 @@ public class Item {
     private String pubDate;
     private Channel channel;
 
+    /**
+     * Get the title of the item.
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Set the title of the item.
+     * @param title title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Get the item synopsis.
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Set the item synopsis.
+     * @param description description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Get the URL of the item.
+     * @return link
+     */
     public String getLink() {
         return link;
     }
 
+    /**
+     * Set the URL of the item.
+     * @param link link
+     */
     public void setLink(String link) {
         this.link = link;
     }
 
+    /**
+     * Get a string that uniquely identifies the item.
+     * @return guid
+     */
     public String getGuid() {
         return guid;
     }
 
+    /**
+     * Set a string that uniquely identifies the item.
+     * @param guid guid
+     */
     public void setGuid(String guid) {
         this.guid = guid;
     }
 
+    /**
+     * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
+     * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+     * item described by the item element.
+     * @return permanent link
+     */
     public boolean getIsPermaLink() {
         return isPermaLink;
     }
 
+    /**
+     * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
+     * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+     * item described by the item element.
+     * @param isPermaLink is perma link
+     */
     public void setIsPermaLink(boolean isPermaLink) {
         this.isPermaLink = isPermaLink;
     }
 
+    /**
+     * Get a string that indicates when the item was published.
+     * @return publication date
+     */
     public String getPubDate() {
         return pubDate;
     }
 
+    /**
+     * Set a string that indicates when the item was published.
+     * @param pubDate publication date
+     */
     public void setPubDate(String pubDate) {
         this.pubDate = pubDate;
     }
 
+    /**
+     * Get the channel that this item was published in.
+     * @return channel
+     */
     public Channel getChannel() {
         return channel;
     }
 
+    /**
+     * Set the channel that this item was published in.
+     * @param channel channel
+     */
     public void setChannel(Channel channel) {
         this.channel = channel;
     }
