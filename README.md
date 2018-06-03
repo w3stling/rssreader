@@ -10,13 +10,16 @@ RSS Reader
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.apptastic%3Arssreader&metric=vulnerabilities)](https://sonarcloud.io/component_measures?id=com.apptastic%3Arssreader&metric=vulnerabilities)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=com.apptastic%3Arssreader&metric=code_smells)](https://sonarcloud.io/component_measures?id=com.apptastic%3Arssreader&metric=code_smells)
 
+RSS (Rich Site Summary) is a type of web feed which allows users to access updates to online content in a
+standardized, computer-readable format. Subscribing to a website RSS removes the need for the user to manually
+check the website for new content.
 
-This Java library makes it easier to automate data extraction from RSS feeds.
+This Java library makes it easier to automate data extraction from RSS 2.0 feeds via Java 8 stream API.
 
 Examples
 --------
-### Search
-Searches all items in the RSS feed that contains the word football in the title. 
+### Read RSS feed
+Reads from a RSS feeds and extract all items in that contains the word football in the title. 
 ```java
 RssReader reader = new RssReader();
 List<Item> items = reader.read(URL)
