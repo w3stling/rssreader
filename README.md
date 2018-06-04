@@ -20,7 +20,7 @@ This Java library makes it easier to automate data extraction from RSS 2.0 feeds
 Examples
 --------
 ### Read RSS feed
-Reads from a RSS feeds and extract all items in that contains the word football in the title. 
+Reads from a RSS feeds and extract all items that contains the word football in the title. 
 ```java
 RssReader reader = new RssReader();
 List<Item> items = reader.read(URL)
