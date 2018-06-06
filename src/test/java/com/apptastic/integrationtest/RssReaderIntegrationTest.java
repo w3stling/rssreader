@@ -198,4 +198,35 @@ public class RssReaderIntegrationTest {
             assertNull(channel.getLastBuildDate());
         }
     }
+
+
+    @Test
+    public void rssPlacera() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate item
+            assertNotNull(item);
+            assertTrue(!item.getGuid().isEmpty());
+            assertTrue(item.getIsPermaLink());
+            assertTrue(!item.getTitle().isEmpty());
+            assertTrue(!item.getDescription().isEmpty());
+            assertTrue(!item.getPubDate().isEmpty());
+            assertTrue(!item.getLink().isEmpty());
+
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertEquals("Placera.se", channel.getTitle());
+            assertTrue(!channel.getDescription().isEmpty());
+            assertNull(channel.getLanguage());
+            assertEquals("https://www.placera.se", channel.getLink());
+            assertNull(channel.getCopyright());
+            assertNull(channel.getGenerator());
+            assertNull(channel.getLastBuildDate());
+        }
+    }
 }
