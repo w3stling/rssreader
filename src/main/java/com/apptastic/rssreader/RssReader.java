@@ -60,11 +60,20 @@ public class RssReader {
     }
 
     private void removeBadDate(InputStream inputStream) throws IOException {
-        inputStream.mark(1);
+        inputStream.mark(2);
         int firstChar = inputStream.read();
 
-        if (firstChar != 65279)
+        if (firstChar != 65279 && firstChar != 13)
             inputStream.reset();
+
+        if (firstChar == 13) {
+            int secondChar = inputStream.read();
+
+            if (secondChar != 10) {
+                inputStream.reset();
+                inputStream.read();
+            }
+        }
     }
 
     /**
