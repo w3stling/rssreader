@@ -6,6 +6,7 @@ import com.apptastic.rssreader.RssReader;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -235,6 +236,11 @@ public class RssReaderIntegrationTest {
     public void rssBreakit() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
+
+        if (items.isEmpty() && (
+                Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
+                Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
 
         assertTrue(!items.isEmpty());
 
