@@ -322,7 +322,7 @@ public class RssReaderIntegrationTest {
             assertEquals("vafinans.se", channel.getTitle());
             assertEquals("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen", channel.getDescription());
             assertEquals("de-ch", channel.getLanguage());
-            assertEquals("http://www.vafinans.se", channel.getLink());
+            assertEquals("https://www.vafinans.se", channel.getLink());
             assertEquals("finanzen.net GmbH",channel.getCopyright());
             assertNull(channel.getGenerator());
             assertNull(channel.getLastBuildDate());
