@@ -3,11 +3,13 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
+import com.sun.tools.javac.main.Option;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
