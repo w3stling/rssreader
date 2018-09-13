@@ -281,7 +281,7 @@ public class RssReaderIntegrationTest {
             assertTrue(!item.getGuid().isEmpty());
             assertTrue(!item.getIsPermaLink());
             assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
+            assertTrue(item.getDescription() == null || !item.getDescription().isEmpty());
             assertTrue(!item.getPubDate().isEmpty());
             assertTrue(!item.getLink().isEmpty());
 
