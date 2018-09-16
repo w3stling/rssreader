@@ -24,6 +24,8 @@
 package com.apptastic.rssreader;
 
 
+import java.util.Optional;
+
 /**
  * Class representing the RSS channel.
  */
@@ -40,8 +42,8 @@ public class Channel {
      * Get the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
      * @return title
      */
-    public String getTitle() {
-        return title;
+    public Optional<String> getTitle() {
+        return Optional.ofNullable(title);
     }
 
     /**
@@ -56,8 +58,8 @@ public class Channel {
      * Get phrase or sentence describing the channel.
      * @return description
      */
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     /**
@@ -72,8 +74,8 @@ public class Channel {
      * Get the language the channel is written in.
      * @return language
      */
-    public String getLanguage() {
-        return language;
+    public Optional<String> getLanguage() {
+        return Optional.ofNullable(language);
     }
 
     /**
@@ -88,8 +90,8 @@ public class Channel {
      * Get the URL to the HTML website corresponding to the channel.
      * @return link
      */
-    public String getLink() {
-        return link;
+    public Optional<String> getLink() {
+        return Optional.ofNullable(link);
     }
 
     /**
@@ -104,8 +106,8 @@ public class Channel {
      * Get gopyright notice for content in the channel.
      * @return URL
      */
-    public String getCopyright() {
-        return copyright;
+    public Optional<String> getCopyright() {
+        return Optional.ofNullable(copyright);
     }
 
     /**
@@ -120,8 +122,8 @@ public class Channel {
      * Get a string indicating the program used to generate the channel.
      * @return generator
      */
-    public String getGenerator() {
-        return generator;
+    public Optional<String> getGenerator() {
+        return Optional.ofNullable(generator);
     }
 
     /**
@@ -136,8 +138,8 @@ public class Channel {
      * Get the last time the content of the channel changed.
      * @return last build date
      */
-    public String getLastBuildDate() {
-        return lastBuildDate;
+    public Optional<String> getLastBuildDate() {
+        return Optional.ofNullable(lastBuildDate);
     }
 
     /**

@@ -24,6 +24,8 @@
 package com.apptastic.rssreader;
 
 
+import java.util.Optional;
+
 /**
  * Class representing a RSS item. A channel may contain any number of items. An item may represent a "story" -- much
  * like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points
@@ -34,7 +36,7 @@ public class Item {
     private String description;
     private String link;
     private String guid;
-    private boolean isPermaLink;
+    private Boolean isPermaLink;
     private String pubDate;
     private Channel channel;
 
@@ -42,8 +44,8 @@ public class Item {
      * Get the title of the item.
      * @return title
      */
-    public String getTitle() {
-        return title;
+    public Optional<String> getTitle() {
+        return Optional.ofNullable(title);
     }
 
     /**
@@ -58,8 +60,8 @@ public class Item {
      * Get the item synopsis.
      * @return description
      */
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 
     /**
@@ -74,8 +76,8 @@ public class Item {
      * Get the URL of the item.
      * @return link
      */
-    public String getLink() {
-        return link;
+    public Optional<String> getLink() {
+        return Optional.ofNullable(link);
     }
 
     /**
@@ -90,8 +92,8 @@ public class Item {
      * Get a string that uniquely identifies the item.
      * @return guid
      */
-    public String getGuid() {
-        return guid;
+    public Optional<String> getGuid() {
+        return Optional.ofNullable(guid);
     }
 
     /**
@@ -108,8 +110,8 @@ public class Item {
      * item described by the item element.
      * @return permanent link
      */
-    public boolean getIsPermaLink() {
-        return isPermaLink;
+    public Optional<Boolean> getIsPermaLink() {
+        return Optional.ofNullable(isPermaLink);
     }
 
     /**
@@ -126,8 +128,8 @@ public class Item {
      * Get a string that indicates when the item was published.
      * @return publication date
      */
-    public String getPubDate() {
-        return pubDate;
+    public Optional<String> getPubDate() {
+        return Optional.ofNullable(pubDate);
     }
 
     /**

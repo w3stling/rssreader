@@ -25,23 +25,23 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertFalse(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertTrue(!item.getGuid().get().isEmpty());
+            assertFalse(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Pressmeddelanden - Riksbanken", channel.getTitle());
-            assertEquals("Pressmeddelanden från Sveriges riksbank som RSS-flöde.", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("https://www.riksbank.se/sv/rss/pressmeddelanden/", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertTrue(channel.getLastBuildDate() != null && !channel.getLastBuildDate().isEmpty());
+            assertEquals("Pressmeddelanden - Riksbanken", channel.getTitle().get());
+            assertEquals("Pressmeddelanden från Sveriges riksbank som RSS-flöde.", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("https://www.riksbank.se/sv/rss/pressmeddelanden/", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertTrue(channel.getLastBuildDate().isPresent() && !channel.getLastBuildDate().get().isEmpty());
         }
     }
 
@@ -56,23 +56,24 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertNull(item.getGuid());
-            assertFalse(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().isPresent());
+            assertFalse(item.getIsPermaLink().isPresent());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Finanspolitiska rådet", channel.getTitle());
-            assertEquals("Nyheter från Finanspolitiska rådet", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166.html", channel.getLink());
-            assertEquals("Finanspolitiska rådet", channel.getCopyright());
-            assertTrue(channel.getGenerator().startsWith("SiteVision"));
-            assertNull(channel.getLastBuildDate());
+            assertEquals("Finanspolitiska rådet", channel.getTitle().get());
+            assertEquals("Nyheter från Finanspolitiska rådet", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166.html", channel.getLink().get());
+            assertEquals("Finanspolitiska rådet", channel.getCopyright().get());
+            assertTrue(channel.getGenerator().isPresent());
+            assertTrue(channel.getGenerator().get().startsWith("SiteVision"));
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -87,23 +88,24 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertNull(item.getGuid());
-            assertFalse(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().isPresent());
+            assertFalse(item.getIsPermaLink().isPresent());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Publikationer från Konjunkturinstitutet", channel.getTitle());
-            assertEquals("Rapportutgåvor publicerade på konj.se", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("https://konj.se/om-ki/aktuellt/publikationer.html", channel.getLink());
-            assertEquals("Konjunkturinstitutet", channel.getCopyright());
-            assertTrue(channel.getGenerator().startsWith("SiteVision"));
-            assertNull(channel.getLastBuildDate());
+            assertEquals("Publikationer från Konjunkturinstitutet", channel.getTitle().get());
+            assertEquals("Rapportutgåvor publicerade på konj.se", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("https://konj.se/om-ki/aktuellt/publikationer.html", channel.getLink().get());
+            assertEquals("Konjunkturinstitutet", channel.getCopyright().get());
+            assertTrue(channel.getGenerator().isPresent());
+            assertTrue(channel.getGenerator().get().startsWith("SiteVision"));
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -118,23 +120,23 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertTrue(!item.getGuid().get().isEmpty());
+            assertTrue(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("www.scb.se - Statistiknyheter", channel.getTitle());
-            assertEquals("Statistiknyheter via RSS", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("http://www.scb.se/sv_/Om-SCB/Nyheter-och-pressmeddelanden/Bevaka-nyheter-fran-SCB/Statistiknyheter-via-RSS/", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertNull(channel.getLastBuildDate());
+            assertEquals("www.scb.se - Statistiknyheter", channel.getTitle().get());
+            assertEquals("Statistiknyheter via RSS", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("http://www.scb.se/sv_/Om-SCB/Nyheter-och-pressmeddelanden/Bevaka-nyheter-fran-SCB/Statistiknyheter-via-RSS/", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -149,23 +151,24 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertTrue(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Nyheter", channel.getTitle());
-            assertEquals("Senaste nyheterna på Ekobrottsmyndigheten", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("https://www.ekobrottsmyndigheten.se/sv/press/nyheter/", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertTrue(channel.getGenerator().startsWith("Argotic Syndication"));
-            assertNull(channel.getLastBuildDate());
+            assertEquals("Nyheter", channel.getTitle().get());
+            assertEquals("Senaste nyheterna på Ekobrottsmyndigheten", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("https://www.ekobrottsmyndigheten.se/sv/press/nyheter/", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertTrue(channel.getGenerator().isPresent());
+            assertTrue(channel.getGenerator().get().startsWith("Argotic Syndication"));
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -180,23 +183,23 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertFalse(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertFalse(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("RSS", channel.getTitle());
-            assertNull(channel.getDescription());
-            assertNull(channel.getLanguage());
-            assertEquals("http://www.va.se/rss/", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertNull(channel.getLastBuildDate());
+            assertEquals("RSS", channel.getTitle().get());
+            assertFalse(channel.getDescription().isPresent());
+            assertFalse(channel.getLanguage().isPresent());
+            assertEquals("http://www.va.se/rss/", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -211,23 +214,24 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertTrue(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Placera.se", channel.getTitle());
-            assertTrue(!channel.getDescription().isEmpty());
-            assertNull(channel.getLanguage());
-            assertEquals("https://www.placera.se", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertNull(channel.getLastBuildDate());
+            assertEquals("Placera.se", channel.getTitle().get());
+            assertTrue(channel.getDescription().isPresent());
+            assertTrue(!channel.getDescription().get().isEmpty());
+            assertFalse(channel.getLanguage().isPresent());
+            assertEquals("https://www.placera.se", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -247,23 +251,24 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertTrue(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("breakit.se", channel.getTitle());
-            assertEquals("Breakit är Sveriges nyhetssajt om techbolag och startups.", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("http://breakit.se", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertTrue(!channel.getLastBuildDate().isEmpty());
+            assertEquals("breakit.se", channel.getTitle().get());
+            assertEquals("Breakit är Sveriges nyhetssajt om techbolag och startups.", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("http://breakit.se", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertTrue(channel.getLastBuildDate().isPresent());
+            assertTrue(!channel.getLastBuildDate().get().isEmpty());
         }
     }
 
@@ -278,23 +283,23 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(!item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(item.getDescription() == null || !item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertFalse(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertTrue(!item.getDescription().isPresent() || !item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("Affärsvärlden", channel.getTitle());
-            assertEquals("Nyheter från www.affarsvarlden.se", channel.getDescription());
-            assertEquals("sv", channel.getLanguage());
-            assertEquals("http://www.affarsvarlden.se/", channel.getLink());
-            assertNull(channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertNull(channel.getLastBuildDate());
+            assertEquals("Affärsvärlden", channel.getTitle().get());
+            assertEquals("Nyheter från www.affarsvarlden.se", channel.getDescription().get());
+            assertEquals("sv", channel.getLanguage().get());
+            assertEquals("http://www.affarsvarlden.se/", channel.getLink().get());
+            assertFalse(channel.getCopyright().isPresent());
+            assertFalse(channel.getGenerator().isPresent());
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 
@@ -309,23 +314,23 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertTrue(!item.getGuid().isEmpty());
-            assertTrue(item.getIsPermaLink());
-            assertTrue(!item.getTitle().isEmpty());
-            assertTrue(!item.getDescription().isEmpty());
-            assertTrue(!item.getPubDate().isEmpty());
-            assertTrue(!item.getLink().isEmpty());
+            assertFalse(item.getGuid().get().isEmpty());
+            assertTrue(item.getIsPermaLink().get());
+            assertFalse(item.getTitle().get().isEmpty());
+            assertFalse(item.getDescription().get().isEmpty());
+            assertFalse(item.getPubDate().get().isEmpty());
+            assertFalse(item.getLink().get().isEmpty());
 
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertEquals("vafinans.se", channel.getTitle());
-            assertEquals("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen", channel.getDescription());
-            assertEquals("de-ch", channel.getLanguage());
-            assertEquals("https://www.vafinans.se", channel.getLink());
-            assertEquals("finanzen.net GmbH",channel.getCopyright());
-            assertNull(channel.getGenerator());
-            assertNull(channel.getLastBuildDate());
+            assertEquals("vafinans.se", channel.getTitle().get());
+            assertEquals("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen", channel.getDescription().get());
+            assertEquals("de-ch", channel.getLanguage().get());
+            assertEquals("https://www.vafinans.se", channel.getLink().get());
+            assertEquals("finanzen.net GmbH",channel.getCopyright().get());
+            assertFalse(channel.getGenerator().isPresent());
+            assertFalse(channel.getLastBuildDate().isPresent());
         }
     }
 

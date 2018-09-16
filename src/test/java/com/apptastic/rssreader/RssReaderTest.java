@@ -79,20 +79,20 @@ public class RssReaderTest {
         Item item = items.get(0);
 
         assertNotNull(item);
-        assertEquals("Title item 1", item.getTitle());
-        assertEquals("Description item 1.", item.getDescription());
-        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate());
-        assertEquals("https://www.dummy.com/item1", item.getLink());
-        assertEquals("https://www.dummy.com/item1", item.getGuid());
-        assertFalse(item.getIsPermaLink());
+        assertEquals("Title item 1", item.getTitle().get());
+        assertEquals("Description item 1.", item.getDescription().get());
+        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate().get());
+        assertEquals("https://www.dummy.com/item1", item.getLink().get());
+        assertEquals("https://www.dummy.com/item1", item.getGuid().get());
+        assertFalse(item.getIsPermaLink().get());
 
         Channel channel = item.getChannel();
 
         assertNotNull(channel);
-        assertEquals("Title", channel.getTitle());
-        assertEquals("Description", channel.getDescription());
-        assertEquals("sv", channel.getLanguage());
-        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate());
+        assertEquals("Title", channel.getTitle().get());
+        assertEquals("Description", channel.getDescription().get());
+        assertEquals("sv", channel.getLanguage().get());
+        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate().get());
     }
 
     @Test
@@ -128,20 +128,20 @@ public class RssReaderTest {
         Item item = items.get(0);
 
         assertNotNull(item);
-        assertEquals("Title item 1", item.getTitle());
-        assertEquals("Description item 1.", item.getDescription());
-        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate());
-        assertEquals("https://www.dummy.com/item1", item.getLink());
-        assertEquals("https://www.dummy.com/item1", item.getGuid());
-        assertFalse(item.getIsPermaLink());
+        assertEquals("Title item 1", item.getTitle().get());
+        assertEquals("Description item 1.", item.getDescription().get());
+        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate().get());
+        assertEquals("https://www.dummy.com/item1", item.getLink().get());
+        assertEquals("https://www.dummy.com/item1", item.getGuid().get());
+        assertFalse(item.getIsPermaLink().get());
 
         Channel channel = item.getChannel();
 
         assertNotNull(channel);
-        assertEquals("Title", channel.getTitle());
-        assertEquals("Description", channel.getDescription());
-        assertEquals("sv", channel.getLanguage());
-        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate());
+        assertEquals("Title", channel.getTitle().get());
+        assertEquals("Description", channel.getDescription().get());
+        assertEquals("sv", channel.getLanguage().get());
+        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate().get());
     }
 
     @Test
