@@ -29,7 +29,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile gourp: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
     testCompile group: 'com.github.npathai', name: 'hamcrest-optional', version: '2.0.0'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.15.0'
 }
