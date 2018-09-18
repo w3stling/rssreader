@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -77,22 +78,20 @@ public class RssReaderTest {
         assertEquals(1, items.size());
 
         Item item = items.get(0);
-
         assertNotNull(item);
-        assertEquals("Title item 1", item.getTitle().get());
-        assertEquals("Description item 1.", item.getDescription().get());
-        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate().get());
-        assertEquals("https://www.dummy.com/item1", item.getLink().get());
-        assertEquals("https://www.dummy.com/item1", item.getGuid().get());
-        assertFalse(item.getIsPermaLink().get());
+        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
+        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
+        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
+        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
 
         Channel channel = item.getChannel();
-
         assertNotNull(channel);
-        assertEquals("Title", channel.getTitle().get());
-        assertEquals("Description", channel.getDescription().get());
-        assertEquals("sv", channel.getLanguage().get());
-        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate().get());
+        assertThat(channel.getTitle(), isPresentAndIs("Title"));
+        assertThat(channel.getDescription(), isPresentAndIs("Description"));
+        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
+        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
     }
 
     @Test
@@ -126,22 +125,20 @@ public class RssReaderTest {
         assertEquals(1, items.size());
 
         Item item = items.get(0);
-
         assertNotNull(item);
-        assertEquals("Title item 1", item.getTitle().get());
-        assertEquals("Description item 1.", item.getDescription().get());
-        assertEquals("Wed, 23 May 2018 09:30:20 +0200", item.getPubDate().get());
-        assertEquals("https://www.dummy.com/item1", item.getLink().get());
-        assertEquals("https://www.dummy.com/item1", item.getGuid().get());
-        assertFalse(item.getIsPermaLink().get());
+        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
+        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
+        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
+        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
 
         Channel channel = item.getChannel();
-
         assertNotNull(channel);
-        assertEquals("Title", channel.getTitle().get());
-        assertEquals("Description", channel.getDescription().get());
-        assertEquals("sv", channel.getLanguage().get());
-        assertEquals("Fri, 01 Jun 2018 07:17:52 +0200", channel.getLastBuildDate().get());
+        assertThat(channel.getTitle(), isPresentAndIs("Title"));
+        assertThat(channel.getDescription(), isPresentAndIs("Description"));
+        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
+        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
     }
 
     @Test
