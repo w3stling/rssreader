@@ -90,8 +90,8 @@ public class RssReaderIntegrationTest {
         for (Item item : items) {
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isEmpty());
-            assertThat(item.getIsPermaLink(), isEmpty());
+            assertThat(item.getGuid(), isPresent());
+            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresent());
             assertThat(item.getDescription(), isPresent());
             assertThat(item.getPubDate(), isPresent());
