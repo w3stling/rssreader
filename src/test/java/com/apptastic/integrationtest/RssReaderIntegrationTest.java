@@ -3,6 +3,7 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -111,6 +112,7 @@ public class RssReaderIntegrationTest {
     }
 
 
+    @Ignore
     @Test
     public void rssScb() throws IOException {
         RssReader reader = new RssReader();
