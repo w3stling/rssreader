@@ -112,11 +112,10 @@ public class RssReaderIntegrationTest {
     }
 
 
-    @Ignore
     @Test
     public void rssScb() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("http://www.scb.se/rss/").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.scb.se/Feed/statistiknyheter/").collect(Collectors.toList());
 
         assertTrue(!items.isEmpty());
 
@@ -124,7 +123,7 @@ public class RssReaderIntegrationTest {
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresent());
-            assertThat(item.getIsPermaLink(), isPresent());
+            assertThat(item.getIsPermaLink(), isEmpty());
             assertThat(item.getTitle(), isPresent());
             assertThat(item.getDescription(), isPresent());
             assertThat(item.getPubDate(), isPresent());
@@ -133,13 +132,13 @@ public class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), isPresentAndIs("www.scb.se - Statistiknyheter"));
+            assertThat(channel.getTitle(), isPresentAndIs("Statistiska centralbyrån - Statistiknyheter"));
             assertThat(channel.getDescription(), isPresentAndIs("Statistiknyheter via RSS"));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), isPresentAndIs("http://www.scb.se/sv_/Om-SCB/Nyheter-och-pressmeddelanden/Bevaka-nyheter-fran-SCB/Statistiknyheter-via-RSS/"));
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), isPresentAndIs("http://www.scb.se/feed/statistiknyheter/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isPresent());
         }
     }
 

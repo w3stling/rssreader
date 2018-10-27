@@ -161,6 +161,19 @@ public class RssReader {
                     }
                     else if (type == XMLEvent.START_ELEMENT) {
                         parseStartElement();
+
+                        if (reader.getLocalName().equals("link")) {
+                            String rel = reader.getAttributeValue(null, "rel");
+                            String link = reader.getAttributeValue(null, "href");
+                            boolean isAlternate = "alternate".equals(rel);
+
+                            if (link != null && isAlternate) {
+                                if (isChannelPart)
+                                    channel.setLink(link);
+                                else
+                                    item.setLink(link);
+                            }
+                        }
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
                         boolean itemParsed = parseEndElement();
@@ -191,13 +204,13 @@ public class RssReader {
 
         void parseStartElement() {
             textBuilder.setLength(0);
-            elementName = reader.getName().toString();
+            elementName = reader.getLocalName();
 
-            if ("channel".equals(reader.getName().getLocalPart())) {
+            if ("channel".equals(elementName) || "feed".equals(elementName)) {
                 channel = new Channel();
                 isChannelPart = true;
             }
-            else if ("item".equals(reader.getName().getLocalPart())) {
+            else if ("item".equals(elementName) || "entry".equals(elementName)) {
                 item = new Item();
                 item.setChannel(channel);
                 isChannelPart = false;
@@ -210,7 +223,7 @@ public class RssReader {
         }
 
         boolean parseEndElement() {
-            String name = reader.getName().toString();
+            String name = reader.getLocalName();
             String text = textBuilder.toString().trim();
 
             if (isChannelPart)
@@ -220,7 +233,7 @@ public class RssReader {
 
             textBuilder.setLength(0);
 
-            return "item".equals(name);
+            return "item".equals(name) || "entry".equals(name);
         }
 
         void parseCharacters() {
@@ -238,7 +251,7 @@ public class RssReader {
 
             if ("title".equals(elementName))
                 channel.setTitle(text);
-            else if ("description".equals(elementName))
+            else if ("description".equals(elementName) || "subtitle".equals(elementName))
                 channel.setDescription(text);
             else if ("language".equals(elementName))
                 channel.setLanguage(text);
@@ -248,7 +261,7 @@ public class RssReader {
                 channel.setCopyright(text);
             else if ("generator".equals(elementName))
                 channel.setGenerator(text);
-            else if ("lastBuildDate".equals(elementName))
+            else if ("lastBuildDate".equals(elementName) || "updated".equals(elementName))
                 channel.setLastBuildDate(text);
         }
 
@@ -256,13 +269,13 @@ public class RssReader {
             if (text.isEmpty())
                 return;
 
-            if ("guid".equals(elementName))
+            if ("guid".equals(elementName) || "id".equals(elementName))
                 item.setGuid(text);
             else if ("title".equals(elementName))
                 item.setTitle(text);
-            else if ("description".equals(elementName))
+            else if ("description".equals(elementName) || "content".equals(elementName))
                 item.setDescription(text);
-            else if ("pubDate".equals(elementName))
+            else if ("pubDate".equals(elementName) || "published".equals(elementName))
                 item.setPubDate(text);
             else if ("link".equals(elementName))
                 item.setLink(text);
