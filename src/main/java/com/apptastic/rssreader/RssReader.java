@@ -162,18 +162,8 @@ public class RssReader {
                     else if (type == XMLEvent.START_ELEMENT) {
                         parseStartElement();
 
-                        if (reader.getLocalName().equals("link")) {
-                            String rel = reader.getAttributeValue(null, "rel");
-                            String link = reader.getAttributeValue(null, "href");
-                            boolean isAlternate = "alternate".equals(rel);
-
-                            if (link != null && isAlternate) {
-                                if (isChannelPart)
-                                    channel.setLink(link);
-                                else
-                                    item.setLink(link);
-                            }
-                        }
+                        if (reader.getLocalName().equals("link"))
+                            parseLinkAttribute();
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
                         boolean itemParsed = parseEndElement();
@@ -219,6 +209,19 @@ public class RssReader {
                 String value = reader.getAttributeValue(null, "isPermaLink");
                 if (item != null)
                     item.setIsPermaLink(Boolean.valueOf(value));
+            }
+        }
+
+        void parseLinkAttribute() {
+            String rel = reader.getAttributeValue(null, "rel");
+            String link = reader.getAttributeValue(null, "href");
+            boolean isAlternate = "alternate".equals(rel);
+
+            if (link != null && isAlternate) {
+                if (isChannelPart)
+                    channel.setLink(link);
+                else
+                    item.setLink(link);
             }
         }
 
