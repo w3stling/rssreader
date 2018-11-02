@@ -3,7 +3,6 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;

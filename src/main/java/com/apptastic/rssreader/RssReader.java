@@ -28,8 +28,11 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +47,13 @@ import java.util.zip.GZIPInputStream;
 public class RssReader {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
     private static final String HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
+    private final HttpClient httpClient;
+
+    public RssReader() {
+        httpClient = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(15))
+                .build();
+    }
 
     /**
      * Read RSS feed with the given URL.
@@ -52,22 +62,22 @@ public class RssReader {
      * @throws IOException Fail to read url or its content
      */
     public Stream<Item> read(String url) throws IOException {
-        InputStream inputStream = sendRequest(url);
+        var inputStream = sendRequest(url);
         removeBadDate(inputStream);
 
-        RssItemIterator itemIterator = new RssItemIterator(inputStream);
+        var itemIterator = new RssItemIterator(inputStream);
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
     }
 
     private void removeBadDate(InputStream inputStream) throws IOException {
         inputStream.mark(2);
-        int firstChar = inputStream.read();
+        var firstChar = inputStream.read();
 
         if (firstChar != 65279 && firstChar != 13)
             inputStream.reset();
 
         if (firstChar == 13) {
-            int secondChar = inputStream.read();
+            var secondChar = inputStream.read();
 
             if (secondChar != 10) {
                 inputStream.reset();
@@ -84,19 +94,25 @@ public class RssReader {
      * @throws IOException exception
      */
     protected InputStream sendRequest(String url) throws IOException {
-        URLConnection connection = new URL(url).openConnection();
+        var req = HttpRequest.newBuilder(URI.create(url))
+                   .timeout(Duration.ofSeconds(15))
+                   .header("Accept-Encoding", "gzip")
+                   .header("User-Agent", HTTP_USER_AGENT)
+                   .GET()
+                   .build();
 
-        connection.setConnectTimeout(15 * 1000);
-        connection.setReadTimeout(15 * 1000);
-        connection.setRequestProperty("Accept-Encoding", "gzip");
-        connection.setRequestProperty("User-Agent", HTTP_USER_AGENT);
-        connection.connect();
-        InputStream inputStream = connection.getInputStream();
+        try {
+            var resp = httpClient.send(req, HttpResponse.BodyHandlers.ofInputStream());
+            var inputStream = resp.body();
 
-        if ("gzip".equals(connection.getContentEncoding()))
-            inputStream = new GZIPInputStream(inputStream);
+            if (Optional.of("gzip").equals(resp.headers().firstValue("Content-Encoding")))
+                inputStream = new GZIPInputStream(inputStream);
 
-        return new BufferedInputStream(inputStream);
+            return new BufferedInputStream(inputStream);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IOException(e);
+        }
     }
 
     static class RssItemIterator implements Iterator<Item> {
@@ -115,11 +131,11 @@ public class RssReader {
             textBuilder = new StringBuilder();
 
             try {
-                XMLInputFactory xmlInFact = XMLInputFactory.newInstance();
+                var xmlInFact = XMLInputFactory.newInstance();
                 reader = xmlInFact.createXMLStreamReader(is);
             }
             catch (XMLStreamException e) {
-                Logger logger = Logger.getLogger(LOG_GROUP);
+                var logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to process XML. ", e);
@@ -146,7 +162,7 @@ public class RssReader {
         @Override
         public Item next() {
             if (nextItem != null) {
-                Item next = nextItem;
+                var next = nextItem;
                 nextItem = null;
 
                 return next;
@@ -154,7 +170,7 @@ public class RssReader {
 
             try {
                 while (reader.hasNext()) {
-                    int type = reader.next(); // do something here
+                    var type = reader.next(); // do something here
 
                     if (type == XMLEvent.CHARACTERS) {
                         parseCharacters();
@@ -164,14 +180,14 @@ public class RssReader {
                         parseAttributes();
                     }
                     else if (type == XMLEvent.END_ELEMENT) {
-                        boolean itemParsed = parseEndElement();
+                        var itemParsed = parseEndElement();
 
                         if (itemParsed)
                             return item;
                     }
                 }
             } catch (XMLStreamException e) {
-                Logger logger = Logger.getLogger(LOG_GROUP);
+                var logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to parse XML. ", e);
@@ -181,7 +197,7 @@ public class RssReader {
                 reader.close();
                 is.close();
             } catch (XMLStreamException | IOException e) {
-                Logger logger = Logger.getLogger(LOG_GROUP);
+                var logger = Logger.getLogger(LOG_GROUP);
 
                 if (logger.isLoggable(Level.WARNING))
                     logger.log(Level.WARNING, "Failed to close XML stream. ", e);
@@ -204,7 +220,7 @@ public class RssReader {
                 isChannelPart = false;
             }
             else if ("guid".equals(elementName)) {
-                String value = reader.getAttributeValue(null, "isPermaLink");
+                var value = reader.getAttributeValue(null, "isPermaLink");
                 if (item != null)
                     item.setIsPermaLink(Boolean.valueOf(value));
             }
@@ -212,9 +228,9 @@ public class RssReader {
 
         void parseAttributes() {
             if (reader.getLocalName().equals("link")) {
-                String rel = reader.getAttributeValue(null, "rel");
-                String link = reader.getAttributeValue(null, "href");
-                boolean isAlternate = "alternate".equals(rel);
+                var rel = reader.getAttributeValue(null, "rel");
+                var link = reader.getAttributeValue(null, "href");
+                var isAlternate = "alternate".equals(rel);
 
                 if (link != null && isAlternate) {
                     if (isChannelPart)
@@ -226,8 +242,8 @@ public class RssReader {
         }
 
         boolean parseEndElement() {
-            String name = reader.getLocalName();
-            String text = textBuilder.toString().trim();
+            var name = reader.getLocalName();
+            var text = textBuilder.toString().trim();
 
             if (isChannelPart)
                 parseChannelCharacters(elementName, text);
@@ -240,7 +256,7 @@ public class RssReader {
         }
 
         void parseCharacters() {
-            String text = reader.getText();
+            var text = reader.getText();
 
             if (text.trim().isEmpty())
                 return;
@@ -283,6 +299,6 @@ public class RssReader {
             else if ("link".equals(elementName))
                 item.setLink(text);
         }
-
     }
+
 }
