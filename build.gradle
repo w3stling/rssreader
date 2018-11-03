@@ -62,6 +62,18 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+ext.moduleName = 'com.apptastic.rssreader'
+
+compileJava {
+    inputs.property('moduleName', moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath
+        ]
+        classpath = files()
+    }
+}
+
 jacoco {
     toolVersion = "0.8.2"
 }
