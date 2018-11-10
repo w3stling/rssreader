@@ -70,6 +70,7 @@ public class RssReader {
      * @return Stream of items
      * @throws IOException Fail to read url or its content
      */
+    @SuppressWarnings("squid:S1181")
     public Stream<Item> read(String url) throws IOException {
         try {
             return readAsync(url).join();
