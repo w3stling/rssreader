@@ -40,6 +40,9 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -62,17 +65,32 @@ public class RssReader {
     }
 
     /**
-     * Read RSS feed with the given URL.
+     * Read RSS feed synchronous with the given URL.
      * @param url URL to RSS feed.
      * @return Stream of items
      * @throws IOException Fail to read url or its content
      */
     public Stream<Item> read(String url) throws IOException {
-        var inputStream = sendRequest(url);
-        removeBadDate(inputStream);
+        try {
+            return readAsync(url).join();
+        } catch (CompletionException e) {
+            try {
+                throw e.getCause();
+            } catch (IOException e2) {
+                throw e2;
+            } catch(Throwable e2) {
+                throw new AssertionError(e2);
+            }
+        }
+    }
 
-        var itemIterator = new RssItemIterator(inputStream);
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
+    /**
+     * Read RSS feed asynchronous with the given URL.
+     * @param url URL to RSS feed.
+     * @return Stream of items
+     */
+    public CompletableFuture<Stream<Item>> readAsync(String url) {
+        return sendAsyncRequest(url).thenApplyAsync(processResponse());
     }
 
     private void removeBadDate(InputStream inputStream) throws IOException {
@@ -92,33 +110,35 @@ public class RssReader {
         }
     }
 
-    /**
-     * Internal method for sending the http request.
-     *
-     * @param url URL to send the request
-     * @return The response for the request
-     * @throws IOException exception
-     */
-    protected InputStream sendRequest(String url) throws IOException {
-        var req = HttpRequest.newBuilder(URI.create(url))
-                   .timeout(Duration.ofSeconds(15))
-                   .header("Accept-Encoding", "gzip")
-                   .header("User-Agent", HTTP_USER_AGENT)
-                   .GET()
-                   .build();
+    protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
 
-        try {
-            var resp = httpClient.send(req, HttpResponse.BodyHandlers.ofInputStream());
-            var inputStream = resp.body();
+        HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+                .timeout(Duration.ofSeconds(15))
+                .header("Accept-Encoding", "gzip")
+                .header("User-Agent", HTTP_USER_AGENT)
+                .GET()
+                .build();
 
-            if (Optional.of("gzip").equals(resp.headers().firstValue("Content-Encoding")))
-                inputStream = new GZIPInputStream(inputStream);
+        return httpClient.sendAsync(req, HttpResponse.BodyHandlers.ofInputStream());
+    }
 
-            return new BufferedInputStream(inputStream);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new IOException(e);
-        }
+    private Function<HttpResponse<InputStream>, Stream<Item>> processResponse() {
+        return response -> {
+            try {
+                var inputStream = response.body();
+
+                if (Optional.of("gzip").equals(response.headers().firstValue("Content-Encoding")))
+                    inputStream = new GZIPInputStream(inputStream);
+
+                inputStream = new BufferedInputStream(inputStream);
+
+                removeBadDate(inputStream);
+                var itemIterator = new RssItemIterator(inputStream);
+                return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
+            } catch (IOException e) {
+                throw new CompletionException(e);
+            }
+        };
     }
 
     static class RssItemIterator implements Iterator<Item> {
@@ -271,7 +291,7 @@ public class RssReader {
         }
 
         void parseChannelCharacters(String elementName, String text) {
-            if (text.isEmpty())
+            if (channel == null || text.isEmpty())
                 return;
 
             if ("title".equals(elementName))

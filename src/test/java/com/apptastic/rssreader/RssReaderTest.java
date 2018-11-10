@@ -2,11 +2,14 @@ package com.apptastic.rssreader;
 
 import org.junit.Test;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
@@ -40,9 +43,9 @@ public class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        InputStream responseStream = new ByteArrayInputStream(response.getBytes());
+        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
         RssReader readerMock = spy(RssReader.class);
-        doReturn(responseStream).when(readerMock).sendRequest(anyString());
+        doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
     }
@@ -69,9 +72,9 @@ public class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        InputStream responseStream = new ByteArrayInputStream(response.getBytes());
+        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
         RssReader readerMock = spy(RssReader.class);
-        doReturn(responseStream).when(readerMock).sendRequest(anyString());
+        doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
 
@@ -116,9 +119,9 @@ public class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        InputStream responseStream = new ByteArrayInputStream(response.getBytes());
+        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
         RssReader readerMock = spy(RssReader.class);
-        doReturn(responseStream).when(readerMock).sendRequest(anyString());
+        doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
 
@@ -145,41 +148,23 @@ public class RssReaderTest {
     public void emptyResponse() throws IOException {
         String response = "";
 
+        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        RssReader readerMock = spy(RssReader.class);
+        doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
+
+        readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
+    }
+
+    private CompletableFuture<HttpResponse<InputStream>> createMock(String response) {
+        HttpResponse httpResponse = mock(HttpResponse.class);
+
         InputStream responseStream = new ByteArrayInputStream(response.getBytes());
-        RssReader readerMock = spy(RssReader.class);
-        doReturn(responseStream).when(readerMock).sendRequest(anyString());
+        doReturn(responseStream).when(httpResponse).body();
 
-        readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
-    }
+        HttpHeaders httpHeaders = mock(HttpHeaders.class);
+        doReturn(Optional.empty()).when(httpHeaders).firstValue(anyString());
+        doReturn(httpHeaders).when(httpResponse).headers();
 
-
-    @Test
-    public void failToResetStream() {
-        try {
-            String response = "";
-            InputStream responseStream = spy(new BufferedInputStream(new ByteArrayInputStream(response.getBytes())));
-
-            doThrow(new IOException("Dummy reset")).when(responseStream).reset();
-            RssReader readerMock = spy(RssReader.class);
-            doReturn(responseStream).when(readerMock).sendRequest(anyString());
-
-            readerMock.read("");
-            fail();
-        }
-        catch (IOException e) {
-            assertEquals("Dummy reset", e.getMessage());
-        }
-    }
-
-    @Test
-    public void failToCloseStream() throws IOException {
-        String response = "";
-        InputStream responseStream = spy(new ByteArrayInputStream(response.getBytes()));
-
-        doThrow(new IOException("Dummy close")).when(responseStream).close();
-        RssReader readerMock = spy(RssReader.class);
-        doReturn(responseStream).when(readerMock).sendRequest(anyString());
-
-        readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
+        return CompletableFuture.completedFuture(httpResponse);
     }
 }

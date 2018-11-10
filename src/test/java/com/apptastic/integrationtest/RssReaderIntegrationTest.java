@@ -331,4 +331,41 @@ public class RssReaderIntegrationTest {
         }
     }
 
+    @Test
+    public void rssVAFinansBadUrl() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://www.vafinans.se/rss/nyheter2").collect(Collectors.toList());
+
+        assertTrue(items.isEmpty());
+    }
+
+    @Test
+    public void rssVAFinansAsync() {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.readAsync("https://www.vafinans.se/rss/nyheter").join().collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
+            assertThat(item.getTitle(), isPresent());
+            assertThat(item.getDescription(), isPresent());
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), isPresentAndIs("vafinans.se"));
+            assertThat(channel.getDescription(), isPresentAndIs("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen"));
+            assertThat(channel.getLanguage(), isPresentAndIs("de-ch"));
+            assertThat(channel.getLink(), isPresentAndIs("https://www.vafinans.se"));
+            assertThat(channel.getCopyright(), isPresentAndIs("finanzen.net GmbH"));
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+        }
+    }
 }
