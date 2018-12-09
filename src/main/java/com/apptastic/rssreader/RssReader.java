@@ -65,7 +65,7 @@ public class RssReader {
     }
 
     /**
-     * Read RSS feed synchronous with the given URL.
+     * Read RSS feed with the given URL.
      * @param url URL to RSS feed.
      * @return Stream of items
      * @throws IOException Fail to read url or its content
@@ -98,10 +98,10 @@ public class RssReader {
         inputStream.mark(2);
         var firstChar = inputStream.read();
 
-        if (firstChar != 65279 && firstChar != 13)
+        if (firstChar != 65279 && firstChar != 13 && firstChar != 10) {
             inputStream.reset();
-
-        if (firstChar == 13) {
+        }
+        else if (firstChar == 13) {
             var secondChar = inputStream.read();
 
             if (secondChar != 10) {
