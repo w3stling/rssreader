@@ -269,6 +269,35 @@ public class RssReaderIntegrationTest {
         }
     }
 
+    @Test
+    public void rssRealtid() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://www.realtid.se/rss/senaste").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), isEmpty());
+            assertThat(channel.getDescription(), isEmpty());
+            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
+            assertThat(channel.getLink(), isPresentAndIs("https://www.realtid.se/rss/senaste"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+        }
+    }
 
     @Test
     public void rssAffarsvarlden() throws IOException {
