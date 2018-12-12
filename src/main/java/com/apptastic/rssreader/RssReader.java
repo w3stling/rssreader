@@ -340,6 +340,8 @@ public class RssReader {
                 item.setCategory(text);
             else if ("pubDate".equals(elementName) || "published".equals(elementName))
                 item.setPubDate(text);
+            else if ("updated".equals(elementName) && item.getPubDate().isEmpty())
+                item.setPubDate(text);
         }
     }
 
