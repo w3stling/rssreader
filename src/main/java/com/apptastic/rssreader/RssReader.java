@@ -292,6 +292,7 @@ public class RssReader {
             textBuilder.append(text);
         }
 
+        @SuppressWarnings("squid:S3776")
         void parseChannelCharacters(String elementName, String text) {
             if (channel == null || text.isEmpty())
                 return;
