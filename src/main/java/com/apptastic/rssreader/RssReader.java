@@ -90,7 +90,7 @@ public class RssReader {
      * @return Stream of items
      */
     public CompletableFuture<Stream<Item>> readAsync(String url) {
-        return sendAsyncRequest(url).thenApplyAsync(processResponse());
+        return sendAsyncRequest(url).thenApply(processResponse());
     }
 
     private void removeBadDate(InputStream inputStream) throws IOException {
