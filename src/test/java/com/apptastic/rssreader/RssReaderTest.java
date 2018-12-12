@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -91,8 +92,8 @@ public class RssReaderTest {
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), isPresentAndIs("Title"));
-        assertThat(channel.getDescription(), isPresentAndIs("Description"));
+        assertThat(channel.getTitle(), is("Title"));
+        assertThat(channel.getDescription(), is("Description"));
         assertThat(channel.getLanguage(), isPresentAndIs("sv"));
         assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
     }
@@ -138,8 +139,8 @@ public class RssReaderTest {
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), isPresentAndIs("Title"));
-        assertThat(channel.getDescription(), isPresentAndIs("Description"));
+        assertThat(channel.getTitle(), is("Title"));
+        assertThat(channel.getDescription(), is("Description"));
         assertThat(channel.getLanguage(), isPresentAndIs("sv"));
         assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
     }

@@ -55,7 +55,6 @@ import java.util.zip.GZIPInputStream;
  */
 public class RssReader {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
-    private static final String HTTP_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
     private final HttpClient httpClient;
 
     public RssReader() {
@@ -116,7 +115,6 @@ public class RssReader {
         HttpRequest req = HttpRequest.newBuilder(URI.create(url))
                 .timeout(Duration.ofSeconds(15))
                 .header("Accept-Encoding", "gzip")
-                .header("User-Agent", HTTP_USER_AGENT)
                 .GET()
                 .build();
 
@@ -239,6 +237,9 @@ public class RssReader {
 
             if ("channel".equals(elementName) || "feed".equals(elementName)) {
                 channel = new Channel();
+                channel.setTitle("");
+                channel.setDescription("");
+                channel.setLink("");
                 isChannelPart = true;
             }
             else if ("item".equals(elementName) || "entry".equals(elementName)) {
@@ -299,16 +300,26 @@ public class RssReader {
                 channel.setTitle(text);
             else if ("description".equals(elementName) || "subtitle".equals(elementName))
                 channel.setDescription(text);
-            else if ("language".equals(elementName))
-                channel.setLanguage(text);
             else if ("link".equals(elementName))
                 channel.setLink(text);
-            else if ("copyright".equals(elementName))
+            else if ("category".equals(elementName))
+                channel.setCategory(text);
+            else if ("language".equals(elementName))
+                channel.setLanguage(text);
+            else if ("copyright".equals(elementName) || "rights".equals(elementName))
                 channel.setCopyright(text);
             else if ("generator".equals(elementName))
                 channel.setGenerator(text);
+            else if ("ttl".equals(elementName))
+                channel.setTtl(text);
+            else if ("pubDate".equals(elementName))
+                channel.setPubDate(text);
             else if ("lastBuildDate".equals(elementName) || "updated".equals(elementName))
                 channel.setLastBuildDate(text);
+            else if ("managingEditor".equals(elementName))
+                channel.setManagingEditor(text);
+            else if ("webMaster".equals(elementName))
+                channel.setWebMaster(text);
         }
 
         void parseItemCharacters(String elementName, Item item, String text) {
@@ -319,12 +330,16 @@ public class RssReader {
                 item.setGuid(text);
             else if ("title".equals(elementName))
                 item.setTitle(text);
-            else if ("description".equals(elementName) || "content".equals(elementName))
+            else if ("description".equals(elementName) || "summary".equals(elementName) || "content".equals(elementName))
                 item.setDescription(text);
-            else if ("pubDate".equals(elementName) || "published".equals(elementName))
-                item.setPubDate(text);
             else if ("link".equals(elementName))
                 item.setLink(text);
+            else if ("author".equals(elementName))
+                item.setAuthor(text);
+            else if ("category".equals(elementName))
+                item.setCategory(text);
+            else if ("pubDate".equals(elementName) || "published".equals(elementName))
+                item.setPubDate(text);
         }
     }
 

@@ -35,6 +35,8 @@ public class Item {
     private String title;
     private String description;
     private String link;
+    private String author;
+    private String category;
     private String guid;
     private Boolean isPermaLink;
     private String pubDate;
@@ -78,6 +80,38 @@ public class Item {
      */
     public Optional<String> getLink() {
         return Optional.ofNullable(link);
+    }
+
+    /**
+     * Set email address of the author of the item.
+     * @param author author
+     */
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    /**
+     * Get email address of the author of the item.
+     * @return author
+     */
+    public Optional<String> getAuthor() {
+        return Optional.ofNullable(author);
+    }
+
+    /**
+     * Set category for item.
+     * @param category category
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     * Get category for item.
+     * @return category
+     */
+    public Optional<String> getCategory() {
+        return Optional.ofNullable(category);
     }
 
     /**
