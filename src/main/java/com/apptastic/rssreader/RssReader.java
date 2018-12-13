@@ -93,25 +93,7 @@ public class RssReader {
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
-    private void removeBadDate(InputStream inputStream) throws IOException {
-        inputStream.mark(2);
-        var firstChar = inputStream.read();
-
-        if (firstChar != 65279 && firstChar != 13 && firstChar != 10) {
-            inputStream.reset();
-        }
-        else if (firstChar == 13) {
-            var secondChar = inputStream.read();
-
-            if (secondChar != 10) {
-                inputStream.reset();
-                inputStream.read();
-            }
-        }
-    }
-
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
-
         HttpRequest req = HttpRequest.newBuilder(URI.create(url))
                 .timeout(Duration.ofSeconds(15))
                 .header("Accept-Encoding", "gzip")
@@ -138,6 +120,23 @@ public class RssReader {
                 throw new CompletionException(e);
             }
         };
+    }
+
+    private void removeBadDate(InputStream inputStream) throws IOException {
+        inputStream.mark(2);
+        var firstChar = inputStream.read();
+
+        if (firstChar != 65279 && firstChar != 13 && firstChar != 10) {
+            inputStream.reset();
+        }
+        else if (firstChar == 13) {
+            var secondChar = inputStream.read();
+
+            if (secondChar != 10) {
+                inputStream.reset();
+                inputStream.read();
+            }
+        }
     }
 
     static class RssItemIterator implements Iterator<Item> {
