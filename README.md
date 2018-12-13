@@ -23,9 +23,9 @@ Examples
 Reads from a RSS feeds and extract all items that contains the word football in the title. 
 ```java
 RssReader reader = new RssReader();
-List<Item> items = reader.read(URL)
-                        .filter(i -> i.getTitle().contains("football"))
-                        .collect(Collectors.toList());
+Stream<Item> rssFeed = reader.read(URL);
+List<Item> articles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("football")))
+                             .collect(Collectors.toList());
 ```
 
 Download
