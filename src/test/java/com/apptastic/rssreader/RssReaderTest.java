@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -162,8 +162,7 @@ public class RssReaderTest {
         InputStream responseStream = new ByteArrayInputStream(response.getBytes());
         doReturn(responseStream).when(httpResponse).body();
 
-        HttpHeaders httpHeaders = mock(HttpHeaders.class);
-        doReturn(Optional.empty()).when(httpHeaders).firstValue(anyString());
+        HttpHeaders httpHeaders = HttpHeaders.of(new HashMap<>(), (a, b) -> true);
         doReturn(httpHeaders).when(httpResponse).headers();
 
         return CompletableFuture.completedFuture(httpResponse);

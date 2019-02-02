@@ -329,74 +329,12 @@ public class RssReaderIntegrationTest {
         }
     }
 
-    @Ignore
-    @Test
-    public void rssVAFinans() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.vafinans.se/rss/nyheter").collect(Collectors.toList());
-
-        assertTrue(!items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("vafinans.se"));
-            assertThat(channel.getDescription(), is("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen"));
-            assertThat(channel.getLanguage(), isPresentAndIs("de-ch"));
-            assertThat(channel.getLink(), is("https://www.vafinans.se"));
-            assertThat(channel.getCopyright(), isPresentAndIs("finanzen.net GmbH"));
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresent());
-            assertThat(item.getDescription(), isPresent());
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
     @Test
     public void rssVAFinansBadUrl() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.vafinans.se/rss/nyheter2").collect(Collectors.toList());
 
         assertTrue(items.isEmpty());
-    }
-
-    @Ignore
-    @Test
-    public void rssVAFinansAsync() {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.readAsync("https://www.vafinans.se/rss/nyheter").join().collect(Collectors.toList());
-
-        assertTrue(!items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("vafinans.se"));
-            assertThat(channel.getDescription(), is("www.vafinans.se bietet Finanznachrichten zum weltweiten Boersengeschehen"));
-            assertThat(channel.getLanguage(), isPresentAndIs("de-ch"));
-            assertThat(channel.getLink(), is("https://www.vafinans.se"));
-            assertThat(channel.getCopyright(), isPresentAndIs("finanzen.net GmbH"));
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresent());
-            assertThat(item.getDescription(), isPresent());
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
     }
 
     @Test
