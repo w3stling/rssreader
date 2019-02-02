@@ -156,6 +156,11 @@ public class RssReader {
 
             try {
                 var xmlInFact = XMLInputFactory.newInstance();
+
+                // disable XML external entity (XXE) processing
+                xmlInFact.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+                xmlInFact.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+
                 reader = xmlInFact.createXMLStreamReader(is);
             }
             catch (XMLStreamException e) {
