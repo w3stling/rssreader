@@ -48,7 +48,8 @@ public class RssReaderTest {
         RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
-        readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
+        long count = readerMock.read("").count();
+        assertEquals(0, count);
     }
 
     @Test
@@ -153,7 +154,8 @@ public class RssReaderTest {
         RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
-        readerMock.read("").forEach(i -> System.out.println(i.getTitle()));
+        long count = readerMock.read("").count();
+        assertEquals(0, count);
     }
 
     private CompletableFuture<HttpResponse<InputStream>> createMock(String response) {
