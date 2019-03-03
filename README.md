@@ -15,12 +15,14 @@ RSS (Rich Site Summary) is a type of web feed which allows users to access updat
 standardized, computer-readable format. Subscribing to a website RSS removes the need for the user to manually
 check the website for new content.
 
-This Java library makes it easier to automate data extraction from RSS feeds via Java stream API.
+Atom feeds is supported from version 2.0.0 and later.
+
+This Java library makes it easier to automate data extraction from RSS or Atom feeds via Java stream API.
 
 Examples
 --------
 ### Read RSS feed
-Reads from a RSS feeds and extract all items that contains the word football in the title. 
+Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title. 
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
