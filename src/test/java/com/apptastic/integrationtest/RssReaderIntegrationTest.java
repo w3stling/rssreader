@@ -401,4 +401,95 @@ public class RssReaderIntegrationTest {
         }
     }
 
+    @Test
+    public void investingcom() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://se.investing.com/rss/news.rss").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Alla nyheter"));
+            assertThat(channel.getDescription(), is(""));
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), is("https://se.investing.com"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isEmpty());
+            assertThat(item.getIsPermaLink(), isEmpty());
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+        }
+    }
+
+    @Test
+    public void investingcom_mest_lasta() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://se.investing.com/rss/news_285.rss").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Mest lästa nyheter"));
+            assertThat(channel.getDescription(), is(""));
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), is("https://se.investing.com"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isEmpty());
+            assertThat(item.getIsPermaLink(), isEmpty());
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+        }
+    }
+
+
+    @Test
+    public void diDigital() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
+            assertEquals(channel.getDescription(), "");
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+        }
+    }
+
 }
