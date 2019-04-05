@@ -474,7 +474,37 @@ public class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
-            assertEquals(channel.getDescription(), "");
+            assertEquals("", channel.getDescription());
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+        }
+    }
+
+    @Test
+    public void ehandel() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("http://www.ehandel.se/feed2.php").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
+            assertEquals("", channel.getDescription());
             assertThat(channel.getLanguage(), isEmpty());
             assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
             assertThat(channel.getCopyright(), isEmpty());
