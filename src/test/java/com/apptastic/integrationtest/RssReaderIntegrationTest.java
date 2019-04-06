@@ -3,7 +3,6 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
+import static com.github.npathai.hamcrestopt.OptionalMatchers.isEmpty;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -474,7 +474,7 @@ public class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
-            assertEquals("", channel.getDescription());
+            assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isEmpty());
             assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
             assertThat(channel.getCopyright(), isEmpty());
@@ -503,18 +503,18 @@ public class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
-            assertEquals("", channel.getDescription());
-            assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getTitle(), is("Ehandel.se"));
+            assertTrue(channel.getDescription().length() > 0);
+            assertThat(channel.getLanguage(), isPresentAndIs("sv-se"));
+            assertThat(channel.getLink(), is("http://www.ehandel.se"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isEmpty());
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getGuid(), isEmpty());
+            assertThat(item.getIsPermaLink(), isEmpty());
             assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
             assertThat(item.getPubDate(), isPresent());
