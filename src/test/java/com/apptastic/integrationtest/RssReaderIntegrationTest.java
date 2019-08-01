@@ -3,6 +3,7 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssFinanspolitiskaradet() throws IOException {
+    public void rssFinanspolitiskaRadet() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166/12.778e24d112a169fd1c1800036576.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
 
@@ -492,6 +493,7 @@ public class RssReaderIntegrationTest {
         }
     }
 
+    @Ignore
     @Test
     public void ehandel() throws IOException {
         RssReader reader = new RssReader();
