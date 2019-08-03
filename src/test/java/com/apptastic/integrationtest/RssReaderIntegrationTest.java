@@ -493,35 +493,4 @@ public class RssReaderIntegrationTest {
         }
     }
 
-    @Ignore
-    @Test
-    public void ehandel() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("http://www.ehandel.se/feed2.php").collect(Collectors.toList());
-
-        assertTrue(!items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Ehandel.se"));
-            assertTrue(channel.getDescription().length() > 0);
-            assertThat(channel.getLanguage(), isPresentAndIs("sv-se"));
-            assertThat(channel.getLink(), is("http://www.ehandel.se"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isEmpty());
-            assertThat(item.getIsPermaLink(), isEmpty());
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
 }
