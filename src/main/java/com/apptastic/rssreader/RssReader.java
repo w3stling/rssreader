@@ -26,7 +26,6 @@ package com.apptastic.rssreader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +47,10 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
+
+import static javax.xml.stream.XMLStreamConstants.CHARACTERS;
+import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
+import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 
 
 /**
@@ -201,14 +204,14 @@ public class RssReader {
                 while (reader.hasNext()) {
                     var type = reader.next(); // do something here
 
-                    if (type == XMLEvent.CHARACTERS) {
+                    if (type == CHARACTERS) {
                         parseCharacters();
                     }
-                    else if (type == XMLEvent.START_ELEMENT) {
+                    else if (type == START_ELEMENT) {
                         parseStartElement();
                         parseAttributes();
                     }
-                    else if (type == XMLEvent.END_ELEMENT) {
+                    else if (type == END_ELEMENT) {
                         var itemParsed = parseEndElement();
 
                         if (itemParsed)
