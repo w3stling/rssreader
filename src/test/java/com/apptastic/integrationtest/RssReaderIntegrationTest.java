@@ -3,7 +3,6 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -367,38 +366,6 @@ public class RssReaderIntegrationTest {
             assertThat(item.getDescription(), isPresent());
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
-        }
-    }
-
-    @Test
-    public void rss2sample() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://cyber.harvard.edu/rss/examples/rss2sample.xml").collect(Collectors.toList());
-
-        assertTrue(!items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Liftoff News"));
-            assertThat(channel.getDescription(), is("Liftoff to Space Exploration."));
-            assertThat(channel.getCategory(), isEmpty());
-            assertThat(channel.getLanguage(), isPresentAndIs("en-us"));
-            assertThat(channel.getLink(), is("http://liftoff.msfc.nasa.gov/"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isPresentAndIs("Weblog Editor 2.0"));
-            assertThat(channel.getPubDate(), isPresentAndIs("Tue, 10 Jun 2003 04:00:00 GMT"));
-            assertThat(channel.getLastBuildDate(), isPresentAndIs("Tue, 10 Jun 2003 09:41:01 GMT"));
-            assertThat(channel.getManagingEditor(), isPresentAndIs("editor@example.com"));
-            assertThat(channel.getWebMaster(), isPresentAndIs("webmaster@example.com"));
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
         }
     }
 
