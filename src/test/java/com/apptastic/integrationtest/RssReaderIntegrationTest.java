@@ -329,11 +329,10 @@ public class RssReaderIntegrationTest {
         }
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void rssVAFinansBadUrl() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.vafinans.se/rss/nyheter2").collect(Collectors.toList());
-
         assertTrue(items.isEmpty());
     }
 
