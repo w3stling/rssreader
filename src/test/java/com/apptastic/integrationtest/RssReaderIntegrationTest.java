@@ -3,9 +3,16 @@ package com.apptastic.integrationtest;
 import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import javax.net.ssl.SSLContext;
 import java.io.IOException;
+import java.net.http.HttpClient;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +25,16 @@ import static org.junit.Assert.assertThat;
 
 
 public class RssReaderIntegrationTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void nullHttpClient() throws IOException {
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("Http client must not be null");
+        RssReader reader = new RssReader(null);
+    }
 
     @Test
     public void rssRiksbanken() throws IOException {
@@ -459,4 +476,43 @@ public class RssReaderIntegrationTest {
         }
     }
 
+
+    @Test
+    public void httpClient() throws IOException, KeyManagementException, NoSuchAlgorithmException {
+        SSLContext context = SSLContext.getInstance("TLSv1.3");
+        context.init(null, null, null);
+
+        HttpClient httpClient = HttpClient.newBuilder()
+                .sslContext(context)
+                .connectTimeout(Duration.ofSeconds(15))
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
+
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
+            assertThat(channel.getDescription(), is(""));
+            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
+            assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getLink(), isPresent());
+        }
+    }
 }

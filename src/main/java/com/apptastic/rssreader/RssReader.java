@@ -39,6 +39,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
@@ -82,6 +83,7 @@ public class RssReader {
     }
 
     public RssReader(HttpClient httpClient) {
+        Objects.requireNonNull(httpClient, "Http client must not be null");
         this.httpClient = httpClient;
     }
 
