@@ -23,6 +23,7 @@
  */
 package com.apptastic.rssreader;
 
+import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -33,6 +34,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -58,12 +61,28 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  */
 public class RssReader {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
-    private final HttpClient httpClient;
+    private HttpClient httpClient;
 
     public RssReader() {
-        httpClient = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(15))
-                .build();
+        try {
+            SSLContext context = SSLContext.getInstance("TLSv1.3");
+            context.init(null, null, null);
+
+            httpClient = HttpClient.newBuilder()
+                    .sslContext(context)
+                    .connectTimeout(Duration.ofSeconds(15))
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            httpClient = HttpClient.newBuilder()
+                    .connectTimeout(Duration.ofSeconds(15))
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+        }
+    }
+
+    public RssReader(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     /**
