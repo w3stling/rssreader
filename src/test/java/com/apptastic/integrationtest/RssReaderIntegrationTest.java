@@ -488,7 +488,7 @@ public class RssReaderIntegrationTest {
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
 
-        RssReader reader = new RssReader();
+        RssReader reader = new RssReader(httpClient);
         List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
 
         assertTrue(!items.isEmpty());
