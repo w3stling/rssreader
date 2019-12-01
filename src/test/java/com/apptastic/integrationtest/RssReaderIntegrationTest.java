@@ -72,7 +72,12 @@ public class RssReaderIntegrationTest {
 
     @Test
     public void rssFinanspolitiskaRadet() throws IOException {
-        RssReader reader = new RssReader();
+        HttpClient httpClient = HttpClient.newBuilder()
+                                          .connectTimeout(Duration.ofSeconds(15))
+                                          .followRedirects(HttpClient.Redirect.NORMAL)
+                                          .build();
+
+        RssReader reader = new RssReader(httpClient);
         List<Item> items = reader.read("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166/12.778e24d112a169fd1c1800036576.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
 
         assertTrue(!items.isEmpty());
