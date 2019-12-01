@@ -158,6 +158,70 @@ public class RssReaderTest {
         assertEquals(0, count);
     }
 
+    @Test
+    public void hashCodeTest() {
+        Item item1 = new Item();
+        item1.setAuthor("a1");
+        item1.setCategory("a2");
+        item1.setTitle("a3");
+        item1.setDescription("a4");
+        item1.setGuid("a5");
+        item1.setIsPermaLink(false);
+        item1.setLink("a6");
+        item1.setPubDate("a7");
+        int h1 = item1.hashCode();
+
+        Item item2 = new Item();
+        item2.setAuthor("b1");
+        item2.setCategory("a2");
+        item2.setTitle("a3");
+        item2.setDescription("a4");
+        item2.setGuid("a5");
+        item2.setIsPermaLink(false);
+        item2.setLink("a6");
+        item2.setPubDate("a7");
+        int h2 = item2.hashCode();
+
+        assertNotEquals(h1, h2);
+    }
+
+    @Test
+    public void equalsTest() {
+        Item item1 = new Item();
+        item1.setAuthor("a1");
+        item1.setCategory("a2");
+        item1.setTitle("a3");
+        item1.setDescription("a4");
+        item1.setGuid("a5");
+        item1.setIsPermaLink(false);
+        item1.setLink("a6");
+        item1.setPubDate("a7");
+
+        Item item2 = new Item();
+        item2.setAuthor("b1");
+        item2.setCategory("a2");
+        item2.setTitle("a3");
+        item2.setDescription("a4");
+        item2.setGuid("a5");
+        item2.setIsPermaLink(false);
+        item2.setLink("a6");
+        item2.setPubDate("a7");
+
+        Item item3 = new Item();
+        item3.setAuthor("a1");
+        item3.setCategory("a2");
+        item3.setTitle("a3");
+        item3.setDescription("a4");
+        item3.setGuid("a5");
+        item3.setIsPermaLink(false);
+        item3.setLink("a6");
+        item3.setPubDate("a7");
+
+        assertNotEquals(item1, item2);
+        assertEquals(item1, item3);
+    }
+
+
     private CompletableFuture<HttpResponse<InputStream>> createMock(String response) {
         HttpResponse httpResponse = mock(HttpResponse.class);
 
