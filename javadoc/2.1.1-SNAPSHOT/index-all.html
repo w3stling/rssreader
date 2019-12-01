@@ -92,7 +92,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </nav>
 </header>
 <main role="main">
-<div class="contentContainer"><a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:C">
+<div class="contentContainer"><a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a><a id="I:C">
 <!--   -->
 </a>
 <h2 class="title">C</h2>
@@ -111,6 +111,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">This package is intended for RSS reader.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/Item.html#compareTo(com.apptastic.rssreader.Item)">compareTo(Item)</a></span> - Method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/Item.html" title="class in com.apptastic.rssreader">Item</a></dt>
+<dd>
+<div class="block">Compares publication time of two <code>Item</code> objects.</div>
+</dd>
 </dl>
 <a id="I:D">
 <!--   -->
@@ -121,8 +125,6 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Date Time util class for converting date time strings</div>
 </dd>
-<dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html#%3Cinit%3E()">DateTime()</a></span> - Constructor for class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html" title="class in com.apptastic.rssreader">DateTime</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <a id="I:G">
 <!--   -->
@@ -228,6 +230,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/Item.html#%3Cinit%3E()">Item()</a></span> - Constructor for class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/Item.html" title="class in com.apptastic.rssreader">Item</a></dt>
 <dd>&nbsp;</dd>
 </dl>
+<a id="I:P">
+<!--   -->
+</a>
+<h2 class="title">P</h2>
+<dl>
+<dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html#pubDateComparator()">pubDateComparator()</a></span> - Static method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html" title="class in com.apptastic.rssreader">DateTime</a></dt>
+<dd>
+<div class="block">Comparator comparing publication date of Item class.</div>
+</dd>
+</dl>
 <a id="I:R">
 <!--   -->
 </a>
@@ -276,6 +288,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/Channel.html#setCopyright(java.lang.String)">setCopyright(String)</a></span> - Method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/Channel.html" title="class in com.apptastic.rssreader">Channel</a></dt>
 <dd>
 <div class="block">Set copyright notice for content in the channel.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html#setDefaultZone(java.time.ZoneId)">setDefaultZone(ZoneId)</a></span> - Static method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html" title="class in com.apptastic.rssreader">DateTime</a></dt>
+<dd>
+<div class="block">Time zone to use if now zone information if found in date time string</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/Channel.html#setDescription(java.lang.String)">setDescription(String)</a></span> - Method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/Channel.html" title="class in com.apptastic.rssreader">Channel</a></dt>
 <dd>
@@ -355,10 +371,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html#toLocalDateTime(java.lang.String)">toLocalDateTime(String)</a></span> - Static method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html" title="class in com.apptastic.rssreader">DateTime</a></dt>
 <dd>
-<div class="block">Converts date time string to LocalDateTime object</div>
+<div class="block">Converts date time string to LocalDateTime object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html#toZonedDateTime(java.lang.String)">toZonedDateTime(String)</a></span> - Static method in class com.apptastic.rssreader.<a href="com.apptastic.rssreader/com/apptastic/rssreader/DateTime.html" title="class in com.apptastic.rssreader">DateTime</a></dt>
+<dd>
+<div class="block">Converts date time string to ZonedDateTime object.</div>
 </dd>
 </dl>
-<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
+<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes</a>&nbsp;<a href="allpackages-index.html">All&nbsp;Packages</a></div>
 </main>
 <footer role="contentinfo">
 <nav role="navigation">
