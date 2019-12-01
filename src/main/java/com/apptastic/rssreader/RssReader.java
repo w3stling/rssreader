@@ -58,7 +58,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 
 
 /**
- * Class for reading  RSS (Rich Site Summary) type of web feeds.
+ * Class for reading RSS (Rich Site Summary) and Atom types of web feeds.
  */
 public class RssReader {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
