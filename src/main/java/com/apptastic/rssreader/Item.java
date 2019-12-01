@@ -24,6 +24,7 @@
 package com.apptastic.rssreader;
 
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -188,6 +189,27 @@ public class Item implements Comparable<Item> {
      */
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return Objects.equals(getTitle(), item.getTitle()) &&
+                Objects.equals(getDescription(), item.getDescription()) &&
+                Objects.equals(getLink(), item.getLink()) &&
+                Objects.equals(getAuthor(), item.getAuthor()) &&
+                Objects.equals(getCategory(), item.getCategory()) &&
+                Objects.equals(getGuid(), item.getGuid()) &&
+                Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
+                Objects.equals(getPubDate(), item.getPubDate()) &&
+                Objects.equals(getChannel(), item.getChannel());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(), getIsPermaLink(), getPubDate(), getChannel());
     }
 
     /**

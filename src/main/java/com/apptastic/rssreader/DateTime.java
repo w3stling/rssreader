@@ -56,16 +56,7 @@ public class DateTime {
         if (dateTime == null)
             return null;
 
-        DateTimeFormatter formatter = null;
-
-        if (dateTime.length() == 31)
-            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 29)
-            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 25)
-            formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        else if (dateTime.length() == 19)
-            formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        DateTimeFormatter formatter = getDateTimeFormatter(dateTime);
 
         if (formatter == null) {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
@@ -83,15 +74,9 @@ public class DateTime {
         if (dateTime == null)
             return null;
 
-        DateTimeFormatter formatter = null;
+        DateTimeFormatter formatter = getDateTimeFormatter(dateTime);
 
-        if (dateTime.length() == 31)
-            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 29)
-            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 25)
-            formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        else if (dateTime.length() == 19) {
+        if (dateTime.length() == 19) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -103,6 +88,17 @@ public class DateTime {
         }
 
         return ZonedDateTime.parse(dateTime, formatter);
+    }
+
+    private static DateTimeFormatter getDateTimeFormatter(String dateTime) {
+        if (dateTime.length() == 31 || dateTime.length() == 29)
+            return DateTimeFormatter.RFC_1123_DATE_TIME;
+        else if (dateTime.length() == 25)
+            return DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        else if (dateTime.length() == 19)
+            return DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+        return null;
     }
 
     /**
