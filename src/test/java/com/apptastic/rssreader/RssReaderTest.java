@@ -223,7 +223,7 @@ public class RssReaderTest {
 
 
     private CompletableFuture<HttpResponse<InputStream>> createMock(String response) {
-        HttpResponse httpResponse = mock(HttpResponse.class);
+        HttpResponse<InputStream> httpResponse = mock(HttpResponse.class);
 
         InputStream responseStream = new ByteArrayInputStream(response.getBytes());
         doReturn(responseStream).when(httpResponse).body();
