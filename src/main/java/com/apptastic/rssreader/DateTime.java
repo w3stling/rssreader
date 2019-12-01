@@ -33,7 +33,7 @@ import java.util.Comparator;
  * Date Time util class for converting date time strings
  */
 public class DateTime {
-    private static ZoneId defaultZone = ZoneId.systemDefault();
+    private static ZoneId defaultZone = ZoneId.of("UTC");
 
     private DateTime() {
 
