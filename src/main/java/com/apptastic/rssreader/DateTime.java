@@ -24,17 +24,31 @@
 package com.apptastic.rssreader;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
+import java.util.Comparator;
 
 /**
  * Date Time util class for converting date time strings
  */
 public class DateTime {
+    private static ZoneId defaultZone = ZoneId.systemDefault();
+
+    private DateTime() {
+
+    }
 
     /**
-     * Converts date time string to LocalDateTime object
+     * Time zone to use if now zone information if found in date time string
+     * @param defaultZone time zone to use
+     */
+    public static void setDefaultZone(ZoneId defaultZone) {
+        DateTime.defaultZone = defaultZone;
+    }
+
+    /**
+     * Converts date time string to LocalDateTime object. Note any time zone information in date time string is ignored.
      * @param dateTime date time string
      * @return local date time object
      */
@@ -46,6 +60,8 @@ public class DateTime {
 
         if (dateTime.length() == 31)
             formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
+        else if (dateTime.length() == 29)
+            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
         else if (dateTime.length() == 25)
             formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
         else if (dateTime.length() == 19)
@@ -55,9 +71,38 @@ public class DateTime {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        Objects.requireNonNull(formatter, "Unknown date time format");
-
         return LocalDateTime.parse(dateTime, formatter);
+    }
+
+    /**
+     * Converts date time string to ZonedDateTime object. Use if time date string contains time zone information.
+     * @param dateTime date time string
+     * @return zoned date time object
+     */
+    public static ZonedDateTime toZonedDateTime(String dateTime) {
+        if (dateTime == null)
+            return null;
+
+        DateTimeFormatter formatter = null;
+
+        if (dateTime.length() == 31)
+            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
+        else if (dateTime.length() == 29)
+            formatter = DateTimeFormatter.RFC_1123_DATE_TIME;
+        else if (dateTime.length() == 25)
+            formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        else if (dateTime.length() == 19) {
+            // Missing time zone information use default time zone. If not setting any default time zone system default
+            // time zone is used.
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            return ZonedDateTime.of(localDateTime, defaultZone);
+        }
+
+        if (formatter == null) {
+            throw new IllegalArgumentException("Unknown date time format " + dateTime);
+        }
+
+        return ZonedDateTime.parse(dateTime, formatter);
     }
 
     /**
@@ -66,11 +111,21 @@ public class DateTime {
      * @return time in milliseconds
      */
     public static Long toEpochMilli(String dateTime) {
-        LocalDateTime localDateTime = toLocalDateTime(dateTime);
+        ZonedDateTime zonedDateTime = toZonedDateTime(dateTime);
 
-        if (localDateTime == null)
+        if (zonedDateTime == null)
             return null;
 
-        return localDateTime.toInstant(ZoneOffset.UTC).toEpochMilli();
+        return zonedDateTime.toInstant().toEpochMilli();
     }
+
+
+    /**
+     * Comparator comparing publication date of Item class. Sorted in ascending order (oldest first)
+     * @return comparator
+     */
+    public static Comparator<Item> pubDateComparator() {
+        return Comparator.comparing(i -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L));
+    }
+
 }

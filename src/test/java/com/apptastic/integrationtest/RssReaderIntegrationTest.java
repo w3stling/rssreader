@@ -1,6 +1,7 @@
 package com.apptastic.integrationtest;
 
 import com.apptastic.rssreader.Channel;
+import com.apptastic.rssreader.DateTime;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
 import org.junit.Rule;
@@ -13,8 +14,10 @@ import java.net.http.HttpClient;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
@@ -474,6 +477,37 @@ public class RssReaderIntegrationTest {
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
         }
+    }
+
+    @Test
+    public void zonedDateTime() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+
+        assertFalse(items.isEmpty());
+
+        ZonedDateTime dateTime = items.stream()
+                                      .sorted()
+                                      .findFirst()
+                                      .flatMap(Item::getPubDate)
+                                      .map(DateTime::toZonedDateTime)
+                                      .orElse(null);
+        assertNotNull(dateTime);
+    }
+
+    @Test
+    public void dateTime() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+
+        assertTrue(!items.isEmpty());
+
+        Optional<ZonedDateTime> dateTime = items.stream()
+                                                .findFirst()
+                                                .flatMap(Item::getPubDate)
+                                                .map(DateTime::toZonedDateTime);
+
+        assertThat(dateTime, isPresent());
     }
 
 

@@ -31,7 +31,7 @@ import java.util.Optional;
  * like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points
  * to the full story.
  */
-public class Item {
+public class Item implements Comparable<Item> {
     private String title;
     private String description;
     private String link;
@@ -188,5 +188,16 @@ public class Item {
      */
     public void setChannel(Channel channel) {
         this.channel = channel;
+    }
+
+    /**
+     * Compares publication time of two {@code Item} objects.
+     * @param o item to compare
+     * @return value
+     * @since 2.2.0
+     */
+    @Override
+    public int compareTo(Item o) {
+        return DateTime.pubDateComparator().compare(this, o);
     }
 }
