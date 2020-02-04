@@ -120,7 +120,7 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Publikationer från Konjunkturinstitutet"));
             assertThat(channel.getDescription(), is("Rapportutgåvor publicerade på konj.se"));
             assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("https://konj.se/om-ki/aktuellt/publikationer.html"));
+            assertThat(channel.getLink(), is("https://www.konj.se/om-ki/aktuellt/publikationer.html"));
             assertThat(channel.getCopyright(), isPresentAndIs("Konjunkturinstitutet"));
             assertThat(channel.getGenerator(), isPresentAnd(startsWith("SiteVision")));
             assertThat(channel.getLastBuildDate(), isEmpty());
