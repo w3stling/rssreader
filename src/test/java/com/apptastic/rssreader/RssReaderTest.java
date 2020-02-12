@@ -147,6 +147,53 @@ public class RssReaderTest {
     }
 
     @Test
+    public void leadingWhitespace() throws IOException {
+        String response = "  <?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
+                "<channel xml:base=\"channel\">\n" +
+                "<title>Title</title>\n" +
+                "<description>Description</description>\n" +
+                "<language>sv</language>\n" +
+                "<lastBuildDate>Fri, 01 Jun 2018 07:17:52 +0200</lastBuildDate>\n" +
+                "<ttl>10</ttl>\n" +
+                "<link>https://www.dummy.com/</link>\n" +
+                "<item xml:base=\"https://www.dummy.com/item1\">\n" +
+                "<guid isPermaLink=\"false\">https://www.dummy.com/item1</guid>\n" +
+                "<title>Title item 1</title>\n" +
+                "<description>Description item 1.</description>\n" +
+                "<pubDate>Wed, 23 May 2018 09:30:20 +0200</pubDate>\n" +
+                "<a10:updated>2018-05-23T09:30:20+02:00</a10:updated>\n" +
+                "<link>https://www.dummy.com/item1</link>\n" +
+                "</item>\n" +
+                "</channel>\n" +
+                "</rss>\n";
+
+        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        RssReader readerMock = spy(RssReader.class);
+        doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
+
+        List<Item> items = readerMock.read("").collect(Collectors.toList());
+
+        assertEquals(1, items.size());
+
+        Item item = items.get(0);
+        assertNotNull(item);
+        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
+        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
+        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
+        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
+        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+
+        Channel channel = item.getChannel();
+        assertNotNull(channel);
+        assertThat(channel.getTitle(), is("Title"));
+        assertThat(channel.getDescription(), is("Description"));
+        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
+        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
+    }
+
+    @Test
     public void Cdata() throws IOException {
         String response = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
