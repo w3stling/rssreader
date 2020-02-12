@@ -214,6 +214,7 @@ public class RssReader {
         }
 
         @Override
+        @SuppressWarnings("squid:S3776")
         public Item next() {
             if (nextItem != null) {
                 var next = nextItem;
