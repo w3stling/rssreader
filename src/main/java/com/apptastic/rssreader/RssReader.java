@@ -52,6 +52,7 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
+import static javax.xml.stream.XMLStreamConstants.CDATA;
 import static javax.xml.stream.XMLStreamConstants.CHARACTERS;
 import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
 import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
@@ -225,7 +226,7 @@ public class RssReader {
                 while (reader.hasNext()) {
                     var type = reader.next(); // do something here
 
-                    if (type == CHARACTERS) {
+                    if (type == CHARACTERS || type == CDATA) {
                         parseCharacters();
                     }
                     else if (type == START_ELEMENT) {
