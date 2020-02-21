@@ -12,7 +12,7 @@ cache:
     - $HOME/.gradle
 
 script:
-  - ./gradlew clean build jacocoTestReport sonarqube -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN
+  - ./gradlew clean build jacocoTestReport sonarqube -info -Dsonar.organization=$SONAR_ORGANIZATION -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_LOGIN
 
 after_success:
   - if [[ "$TRAVIS_EVENT_TYPE" != "cron" ]]; then ./gradlew gitPublishPush artifactoryPublish bintrayUpload; fi
