@@ -13,9 +13,11 @@ import java.io.IOException;
 import java.net.http.HttpClient;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
+import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -204,6 +206,11 @@ public class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.va.se/rss/").collect(Collectors.toList());
 
+        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
+        if (items.isEmpty() && dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+            return; // Veckans Affarer articles are removed after one day and no articles published on Saturday or Sunday
+        }
+
         assertFalse(items.isEmpty());
 
         for (Item item : items) {
@@ -264,10 +271,10 @@ public class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
-        if (items.isEmpty() && (
-                Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
-                Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY))
+        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
+        if (items.isEmpty() && dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
             return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
 
         assertFalse(items.isEmpty());
 
