@@ -153,7 +153,7 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Statistiska centralbyrån - Statistiknyheter"));
             assertThat(channel.getDescription(), is("Statistiknyheter via RSS"));
             assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("http://www.scb.se/feed/statistiknyheter/"));
+            assertThat(channel.getLink().toLowerCase(), is("http://www.scb.se/feed/statistiknyheter/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isPresent());
