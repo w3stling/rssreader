@@ -202,41 +202,6 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssVeckansAffarer() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.va.se/rss/").collect(Collectors.toList());
-
-        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
-        if (items.isEmpty() && dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
-            return; // Veckans Affarer articles are removed after one day and no articles published on Saturday or Sunday
-        }
-
-        assertFalse(items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("RSS"));
-            assertThat(channel.getDescription(), is(""));
-            assertThat(channel.getLink(), is("http://www.va.se/rss/"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresent());
-            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
-        }
-    }
-
-
-    @Test
     public void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
