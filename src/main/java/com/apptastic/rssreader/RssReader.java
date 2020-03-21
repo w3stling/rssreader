@@ -66,21 +66,6 @@ public class RssReader {
     private HttpClient httpClient;
 
     public RssReader() {
-        try {
-            SSLContext context = SSLContext.getInstance("TLSv1.3");
-            context.init(null, null, null);
-
-            httpClient = HttpClient.newBuilder()
-                    .sslContext(context)
-                    .connectTimeout(Duration.ofSeconds(15))
-                    .followRedirects(HttpClient.Redirect.NORMAL)
-                    .build();
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            httpClient = HttpClient.newBuilder()
-                    .connectTimeout(Duration.ofSeconds(15))
-                    .followRedirects(HttpClient.Redirect.NORMAL)
-                    .build();
-        }
     }
 
     public RssReader(HttpClient httpClient) {
@@ -124,6 +109,12 @@ public class RssReader {
                 .header("Accept-Encoding", "gzip")
                 .GET()
                 .build();
+
+        HttpClient httpClient = this.httpClient;
+
+        if (httpClient == null) {
+            httpClient = createHttpClient();
+        }
 
         return httpClient.sendAsync(req, HttpResponse.BodyHandlers.ofInputStream());
     }
@@ -374,6 +365,28 @@ public class RssReader {
             else if ("updated".equals(elementName) && item.getPubDate().isEmpty())
                 item.setPubDate(text);
         }
+    }
+
+    private HttpClient createHttpClient() {
+        HttpClient httpClient;
+
+        try {
+            SSLContext context = SSLContext.getInstance("TLSv1.3");
+            context.init(null, null, null);
+
+            httpClient = HttpClient.newBuilder()
+                    .sslContext(context)
+                    .connectTimeout(Duration.ofSeconds(15))
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+        } catch (NoSuchAlgorithmException | KeyManagementException e) {
+            httpClient = HttpClient.newBuilder()
+                    .connectTimeout(Duration.ofSeconds(15))
+                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .build();
+        }
+
+        return httpClient;
     }
 
 }
