@@ -3,7 +3,7 @@ RSS Reader
 
 [![Build Status](https://travis-ci.org/w3stling/rssreader.svg?branch=master)](https://travis-ci.org/w3stling/rssreader)
 [![Download](https://api.bintray.com/packages/apptastic/maven-repo/rssreader/images/download.svg)](https://bintray.com/apptastic/maven-repo/rssreader/_latestVersion)
-[![Javadoc](https://img.shields.io/badge/javadoc-2.2.1-blue.svg)](https://w3stling.github.io/rssreader/javadoc/2.2.1)
+[![Javadoc](https://img.shields.io/badge/javadoc-2.2.2-blue.svg)](https://w3stling.github.io/rssreader/javadoc/2.2.2)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.apptastic%3Arssreader&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.apptastic%3Arssreader)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.apptastic%3Arssreader&metric=coverage)](https://sonarcloud.io/component_measures?id=com.apptastic%3Arssreader&metric=Coverage)
@@ -83,7 +83,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptastic</groupId>
             <artifactId>rssreader</artifactId>
-            <version>2.2.1</version>
+            <version>2.2.2</version>
         </dependency>
     </dependencies>
     ...
@@ -101,7 +101,7 @@ repositories {
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptastic:rssreader:2.2.1'
+    implementation 'com.apptastic:rssreader:2.2.2'
 }
 ```
 
