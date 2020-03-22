@@ -110,13 +110,13 @@ public class RssReader {
                 .GET()
                 .build();
 
-        HttpClient httpClient = this.httpClient;
+        HttpClient client = this.httpClient;
 
-        if (httpClient == null) {
-            httpClient = createHttpClient();
+        if (client == null) {
+            client = createHttpClient();
         }
 
-        return httpClient.sendAsync(req, HttpResponse.BodyHandlers.ofInputStream());
+        return client.sendAsync(req, HttpResponse.BodyHandlers.ofInputStream());
     }
 
     private Function<HttpResponse<InputStream>, Stream<Item>> processResponse() {
@@ -368,25 +368,25 @@ public class RssReader {
     }
 
     private HttpClient createHttpClient() {
-        HttpClient httpClient;
+        HttpClient client;
 
         try {
             SSLContext context = SSLContext.getInstance("TLSv1.3");
             context.init(null, null, null);
 
-            httpClient = HttpClient.newBuilder()
+            client = HttpClient.newBuilder()
                     .sslContext(context)
                     .connectTimeout(Duration.ofSeconds(15))
                     .followRedirects(HttpClient.Redirect.NORMAL)
                     .build();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            httpClient = HttpClient.newBuilder()
+            client = HttpClient.newBuilder()
                     .connectTimeout(Duration.ofSeconds(15))
                     .followRedirects(HttpClient.Redirect.NORMAL)
                     .build();
         }
 
-        return httpClient;
+        return client;
     }
 
 }
