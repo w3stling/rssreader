@@ -296,36 +296,6 @@ public class RssReaderIntegrationTest {
         }
     }
 
-    @Test
-    public void rssAffarsvarlden() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.affarsvarlden.se/rss.xml").collect(Collectors.toList());
-
-        assertFalse(items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Affärsvärlden"));
-            assertThat(channel.getDescription(), is("Nyheter från www.affarsvarlden.se"));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("http://www.affarsvarlden.se/"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
     @Test(expected = IOException.class)
     public void rssVAFinansBadUrl() throws IOException {
         RssReader reader = new RssReader();
