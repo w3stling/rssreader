@@ -122,8 +122,11 @@ public class RssReader {
     private Function<HttpResponse<InputStream>, Stream<Item>> processResponse() {
         return response -> {
             try {
-                var inputStream = response.body();
+                if (response.statusCode() >= 400 && response.statusCode() < 600) {
+                    throw new IOException("Response http status code: " + response.statusCode());
+                }
 
+                var inputStream = response.body();
                 if (Optional.of("gzip").equals(response.headers().firstValue("Content-Encoding")))
                     inputStream = new GZIPInputStream(inputStream);
 
