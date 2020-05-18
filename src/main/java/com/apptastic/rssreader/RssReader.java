@@ -92,7 +92,7 @@ public class RssReader {
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new RuntimeException(e);
+            throw new IOException(e);
         } catch (ExecutionException | TimeoutException e) {
             throw new IOException(e);
         }
