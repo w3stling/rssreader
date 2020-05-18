@@ -24,6 +24,7 @@
 package com.apptastic.rssreader;
 
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 /**
@@ -182,6 +183,14 @@ public class Channel {
     }
 
     /**
+     * Get the publication date for the content in the channel.
+     * @return publication date
+     */
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDate().map(DateTime::toZonedDateTime);
+    }
+
+    /**
      * Set the publication date for the content in the channel.
      * @param pubDate publication date
      */
@@ -195,6 +204,14 @@ public class Channel {
      */
     public Optional<String> getLastBuildDate() {
         return Optional.ofNullable(lastBuildDate);
+    }
+
+    /**
+     * Get the last time the content of the channel changed.
+     * @return last build date
+     */
+    public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
+        return getLastBuildDate().map(DateTime::toZonedDateTime);
     }
 
     /**

@@ -322,7 +322,9 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getCopyright(), isPresentAndIs("Copyright 2004 NotePage, Inc."));
             assertThat(channel.getGenerator(), isPresentAndIs("FeedForAll Beta1 (0.0.1.8)"));
             assertThat(channel.getPubDate(), isPresentAndIs("Tue, 26 Oct 2004 14:06:44 -0500"));
+            assertThat(channel.getPubDateZonedDateTime(), isPresentAndIs(DateTime.toZonedDateTime("Tue, 26 Oct 2004 14:06:44 -0500")));
             assertThat(channel.getLastBuildDate(), isPresentAndIs("Mon, 1 Nov 2004 13:17:17 -0500"));
+            assertThat(channel.getLastBuildDateZonedDateTime(), isPresentAndIs(DateTime.toZonedDateTime("Mon, 1 Nov 2004 13:17:17 -0500")));
 
             // Validate item
             assertNotNull(item);
@@ -331,6 +333,7 @@ public class RssReaderIntegrationTest {
             assertThat(item.getTitle(), isPresent());
             assertThat(item.getDescription(), isPresent());
             assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getPubDateZonedDateTime(), isPresent());
             assertThat(item.getLink(), isPresent());
         }
     }

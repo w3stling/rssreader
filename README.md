@@ -42,19 +42,6 @@ Stream.concat(reader.read(URL1),
       .forEach(System.out::println);
 ```
 
-### Extracting timestamp
-DateTime class can be used for converting date time strings to Java object such as
-LocalDateTime, ZonedDateTime, and epoch milliseconds.
-
-Get the publication timestamp from the first item in the feed. 
-```java
-RssReader reader = new RssReader();
-Optional<ZonedDateTime> dateTime = reader.read(URL)
-                                         .findFirst()
-                                         .flatMap(Item::getPubDate)
-                                         .map(DateTime::toZonedDateTime);
-```
-
 Download
 --------
 

@@ -24,6 +24,7 @@
 package com.apptastic.rssreader;
 
 
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -165,6 +166,14 @@ public class Item implements Comparable<Item> {
      */
     public Optional<String> getPubDate() {
         return Optional.ofNullable(pubDate);
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was published.
+     * @return publication date
+     */
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDate().map(DateTime::toZonedDateTime);
     }
 
     /**

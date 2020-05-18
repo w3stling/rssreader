@@ -43,8 +43,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
+import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,7 +81,7 @@ public class RssReader {
     @SuppressWarnings("squid:S1181")
     public Stream<Item> read(String url) throws IOException {
         try {
-            return readAsync(url).join();
+            return readAsync(url).get(1, TimeUnit.MINUTES);
         } catch (CompletionException e) {
             try {
                 throw e.getCause();
@@ -91,6 +90,11 @@ public class RssReader {
             } catch(Throwable e2) {
                 throw new AssertionError(e2);
             }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        } catch (ExecutionException | TimeoutException e) {
+            throw new IOException(e);
         }
     }
 
@@ -105,7 +109,7 @@ public class RssReader {
 
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
         HttpRequest req = HttpRequest.newBuilder(URI.create(url))
-                .timeout(Duration.ofSeconds(15))
+                .timeout(Duration.ofSeconds(25))
                 .header("Accept-Encoding", "gzip")
                 .GET()
                 .build();
@@ -379,12 +383,12 @@ public class RssReader {
 
             client = HttpClient.newBuilder()
                     .sslContext(context)
-                    .connectTimeout(Duration.ofSeconds(15))
+                    .connectTimeout(Duration.ofSeconds(25))
                     .followRedirects(HttpClient.Redirect.NORMAL)
                     .build();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             client = HttpClient.newBuilder()
-                    .connectTimeout(Duration.ofSeconds(15))
+                    .connectTimeout(Duration.ofSeconds(25))
                     .followRedirects(HttpClient.Redirect.NORMAL)
                     .build();
         }
