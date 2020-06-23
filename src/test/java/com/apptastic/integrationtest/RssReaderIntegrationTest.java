@@ -73,42 +73,6 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssFinanspolitiskaRadet() throws IOException {
-        HttpClient httpClient = HttpClient.newBuilder()
-                                          .connectTimeout(Duration.ofSeconds(15))
-                                          .followRedirects(HttpClient.Redirect.NORMAL)
-                                          .build();
-
-        RssReader reader = new RssReader(httpClient);
-        List<Item> items = reader.read("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166/12.778e24d112a169fd1c1800036576.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
-
-        assertFalse(items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Finanspolitiska rådet"));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("http://www.finanspolitiskaradet.se/2.5dd459a31158f2d75c380003166.html"));
-            assertThat(channel.getCopyright(), isPresentAndIs("Finanspolitiska rådet"));
-            assertThat(channel.getCopyright(), isPresent());
-            assertThat(channel.getGenerator(), isPresentAnd(startsWith("SiteVision")));
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresent());
-            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
-            assertThat(item.getTitle(), isPresent());
-            assertThat(item.getDescription(), isPresent());
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
-
-    @Test
     public void rssKonjunkturinstitutet() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
