@@ -4,6 +4,7 @@ import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.DateTime;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -363,6 +364,7 @@ public class RssReaderIntegrationTest {
     }
 
 
+    @Ignore
     @Test
     public void diDigital() throws IOException {
         RssReader reader = new RssReader();
@@ -396,7 +398,7 @@ public class RssReaderIntegrationTest {
     @Test
     public void zonedDateTime() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -412,7 +414,7 @@ public class RssReaderIntegrationTest {
     @Test
     public void dateTime() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -437,7 +439,7 @@ public class RssReaderIntegrationTest {
                 .build();
 
         RssReader reader = new RssReader(httpClient);
-        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -445,18 +447,18 @@ public class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
-            assertThat(channel.getDescription(), is(""));
-            assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getTitle(), is("breakit.se"));
+            assertThat(channel.getDescription(), is("Breakit är Sveriges nyhetssajt om techbolag och startups."));
+            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
+            assertThat(channel.getLink(), is("http://breakit.se"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isPresent());
 
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getIsPermaLink(), isPresentAnd(is(true)));
             assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
             assertThat(item.getPubDate(), isPresent());
