@@ -76,7 +76,7 @@ public class RssReaderIntegrationTest {
     @Test
     public void rssKonjunkturinstitutet() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
+        List<Item> items = reader.read("http://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -87,7 +87,7 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Publikationer från Konjunkturinstitutet"));
             assertThat(channel.getDescription(), is("Rapportutgåvor publicerade på konj.se"));
             assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("https://www.konj.se/om-ki/aktuellt/publikationer.html"));
+            assertThat(channel.getLink(), is("http://www.konj.se/om-ki/aktuellt/publikationer.html"));
             assertThat(channel.getCopyright(), isPresentAndIs("Konjunkturinstitutet"));
             assertThat(channel.getGenerator(), isPresentAnd(startsWith("SiteVision")));
             assertThat(channel.getLastBuildDate(), isEmpty());
