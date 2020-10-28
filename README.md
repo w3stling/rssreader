@@ -1,7 +1,7 @@
 RSS Reader
 ==========
 
-[![Build Status](https://travis-ci.org/w3stling/rssreader.svg?branch=master)](https://travis-ci.org/w3stling/rssreader)
+[![Build Status](https://travis-ci.com/w3stling/rssreader.svg?branch=master)](https://travis-ci.com/w3stling/rssreader)
 [![Download](https://api.bintray.com/packages/apptastic/maven-repo/rssreader/images/download.svg)](https://bintray.com/apptastic/maven-repo/rssreader/_latestVersion)
 [![Javadoc](https://img.shields.io/badge/javadoc-2.3.1-blue.svg)](https://w3stling.github.io/rssreader/javadoc/2.3.1)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
