@@ -364,7 +364,6 @@ public class RssReaderIntegrationTest {
     }
 
 
-    @Ignore
     @Test
     public void diDigital() throws IOException {
         RssReader reader = new RssReader();
@@ -379,7 +378,7 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
             assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("http://www.digital.di.se/rss"));
+            assertThat(channel.getLink(), is("https://digital.di.se/rss"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isEmpty());
