@@ -99,6 +99,16 @@ public class RssReader {
     }
 
     /**
+     * Read RSS feed from input stream.
+     * @param inputStream inputStream containing the RSS feed.
+     * @return Stream of items
+     */
+    public Stream<Item> read(InputStream inputStream) {
+        var itemIterator = new RssItemIterator(inputStream);
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
+    }
+
+    /**
      * Read RSS feed asynchronous with the given URL.
      * @param url URL to RSS feed.
      * @return Stream of items

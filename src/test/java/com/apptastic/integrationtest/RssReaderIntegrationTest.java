@@ -4,14 +4,19 @@ import com.apptastic.rssreader.Channel;
 import com.apptastic.rssreader.DateTime;
 import com.apptastic.rssreader.Item;
 import com.apptastic.rssreader.RssReader;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javax.net.ssl.SSLContext;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.time.DayOfWeek;
@@ -36,7 +41,7 @@ public class RssReaderIntegrationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void nullHttpClient() throws IOException {
+    public void nullHttpClient() {
         thrown.expect(NullPointerException.class);
         thrown.expectMessage("Http client must not be null");
         RssReader reader = new RssReader(null);
@@ -170,6 +175,38 @@ public class RssReaderIntegrationTest {
     public void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
+
+        assertFalse(items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("Placera.se"));
+            assertThat(channel.getDescription(), is(not(isEmptyString())));
+            assertThat(channel.getLink(), is("https://www.placera.se"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+        }
+    }
+
+    @Test
+    public void rssPlaceraString() throws IOException, InterruptedException {
+        String rssText = getRssFeedAsString("https://www.avanza.se/placera/forstasidan.rss.xml");
+        InputStream inputStream = new ByteArrayInputStream(rssText.getBytes(StandardCharsets.UTF_8));
+
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read(inputStream).collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -463,5 +500,19 @@ public class RssReaderIntegrationTest {
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
         }
+    }
+
+    private String getRssFeedAsString(String url) throws IOException, InterruptedException {
+        HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+                .timeout(Duration.ofSeconds(25))
+                .GET()
+                .build();
+
+        HttpClient client = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.NORMAL)
+                .build();
+
+        HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 }
