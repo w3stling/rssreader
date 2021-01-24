@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -181,19 +181,26 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="Item.html" title="class in com.apptastic.rssreader">Item</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.io.InputStream)">read</a></span>&#8203;(java.io.InputStream&nbsp;inputStream)</code></th>
+<td class="colLast">
+<div class="block">Read RSS feed from input stream.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.util.stream.Stream&lt;<a href="Item.html" title="class in com.apptastic.rssreader">Item</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.lang.String)">read</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed with the given URL.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.util.stream.Stream&lt;<a href="Item.html" title="class in com.apptastic.rssreader">Item</a>&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readAsync(java.lang.String)">readAsync</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed asynchronous with the given URL.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected java.util.concurrent.CompletableFuture&lt;java.net.http.HttpResponse&lt;java.io.InputStream&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendAsyncRequest(java.lang.String)">sendAsyncRequest</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">&nbsp;</td>
@@ -266,6 +273,22 @@ extends java.lang.Object</pre>
 <dd>Stream of items</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code>java.io.IOException</code> - Fail to read url or its content</dd>
+</dl>
+</li>
+</ul>
+<a id="read(java.io.InputStream)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>read</h4>
+<pre class="methodSignature">public&nbsp;java.util.stream.Stream&lt;<a href="Item.html" title="class in com.apptastic.rssreader">Item</a>&gt;&nbsp;read&#8203;(java.io.InputStream&nbsp;inputStream)</pre>
+<div class="block">Read RSS feed from input stream.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>inputStream</code> - inputStream containing the RSS feed.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Stream of items</dd>
 </dl>
 </li>
 </ul>
