@@ -173,7 +173,8 @@ public class RssReader {
     }
 
     static class RssItemIterator implements Iterator<Item> {
-        private InputStream is;
+        private final StringBuilder textBuilder;
+        private final InputStream is;
         private XMLStreamReader reader;
         private Channel channel;
         private Image image = null;
@@ -182,7 +183,6 @@ public class RssReader {
         private boolean isChannelPart = true;
         private boolean isImagePart = false;
         private String elementName = null;
-        private StringBuilder textBuilder;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
@@ -271,6 +271,7 @@ public class RssReader {
             throw new NoSuchElementException();
         }
 
+        @SuppressWarnings("squid:S1192")
         void parseStartElement() {
             textBuilder.setLength(0);
             elementName = reader.getLocalName();
@@ -341,7 +342,7 @@ public class RssReader {
             textBuilder.append(text);
         }
 
-        @SuppressWarnings("squid:S3776")
+        @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseChannelCharacters(String elementName, String text) {
             if (channel == null || text.isEmpty())
                 return;

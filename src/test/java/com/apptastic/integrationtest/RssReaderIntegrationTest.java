@@ -450,6 +450,10 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getImage(), isPresent());
             assertThat(channel.getImage().map(Image::getTitle).orElse(null), is("World of Tanks news — free tank game, official WoT website | World of Tanks"));
             assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));
+            assertThat(channel.getImage().map(Image::getUrl).orElse(null), is("https://worldoftanks.eu/static/5.82.1_d15c27/portalnews/img/news.png"));
+            assertThat(channel.getImage().get().getDescription(), isEmpty());
+            assertThat(channel.getImage().get().getWidth(), isEmpty());
+            assertThat(channel.getImage().get().getHeight(), isEmpty());
 
             // Validate item
             assertNotNull(item);

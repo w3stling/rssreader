@@ -52,6 +52,7 @@ public class RssReaderTest {
         assertEquals(0, count);
     }
 
+    @SuppressWarnings("squid:S5976")
     @Test
     public void leadingCRCharacter() throws IOException {
         String response = "\015<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
