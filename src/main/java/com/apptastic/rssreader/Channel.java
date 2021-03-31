@@ -43,6 +43,7 @@ public class Channel {
     private String lastBuildDate;
     private String managingEditor;
     private String webMaster;
+    private Image image;
 
     /**
      * Get the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
@@ -252,6 +253,22 @@ public class Channel {
      */
     public void setWebMaster(String webMaster) {
         this.webMaster = webMaster;
+    }
+
+    /**
+     * Get a GIF, JPEG or PNG image that can be displayed with the channel.
+     * @return image
+     */
+    public Optional<Image> getImage() {
+        return Optional.ofNullable(image);
+    }
+
+    /**
+     * Set a GIF, JPEG or PNG image that can be displayed with the channel.
+     * @param image image
+     */
+    public void setImage(Image image) {
+        this.image = image;
     }
 
 }

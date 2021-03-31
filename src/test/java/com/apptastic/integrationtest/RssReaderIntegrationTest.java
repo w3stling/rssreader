@@ -1,9 +1,6 @@
 package com.apptastic.integrationtest;
 
-import com.apptastic.rssreader.Channel;
-import com.apptastic.rssreader.DateTime;
-import com.apptastic.rssreader.Item;
-import com.apptastic.rssreader.RssReader;
+import com.apptastic.rssreader.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -46,6 +43,7 @@ public class RssReaderIntegrationTest {
         thrown.expectMessage("Http client must not be null");
         RssReader reader = new RssReader(null);
     }
+
 
     @Test
     public void rssRiksbanken() throws IOException {
@@ -316,9 +314,9 @@ public class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("FeedForAll Sample Feed"));
-            assertThat(channel.getDescription(), is("FeedForAll Sample Feed"));
-            assertThat(channel.getLink(), is("http://www.feedforall.com/industry-solutions.htm"));
+            assertThat(channel.getTitle(), is("Sample Feed - Favorite RSS Related Software & Resources"));
+            assertThat(channel.getDescription(), is("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS."));
+            assertThat(channel.getLink(), is("http://www.feedforall.com"));
             assertThat(channel.getCategory(), isPresentAndIs("Computers/Software/Internet/Site Management/Content Management"));
             assertThat(channel.getLanguage(), isPresentAndIs("en-us"));
             assertThat(channel.getCopyright(), isPresentAndIs("Copyright 2004 NotePage, Inc."));
@@ -428,6 +426,39 @@ public class RssReaderIntegrationTest {
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
+        }
+    }
+
+
+    @Test
+    public void rssWorldOfTank() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://worldoftanks.eu/en/rss/news/").collect(Collectors.toList());
+        assertFalse(items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), is("World of Tanks news — free tank game, official WoT website | World of Tanks"));
+            assertThat(channel.getDescription(), is("World of Tanks news — read the latest news on the free MMO World of Tanks game, the best game for boys"));
+            assertThat(channel.getLanguage(), isPresentAndIs("en"));
+            assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
+            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getGenerator(), isEmpty());
+            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getImage(), isPresent());
+            assertThat(channel.getImage().map(Image::getTitle).orElse(null), is("World of Tanks news — free tank game, official WoT website | World of Tanks"));
+            assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getIsPermaLink(), isPresentAnd(is(true)));
+            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
         }
     }
 

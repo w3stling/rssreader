@@ -176,9 +176,11 @@ public class RssReader {
         private InputStream is;
         private XMLStreamReader reader;
         private Channel channel;
+        private Image image = null;
         private Item item = null;
         private Item nextItem;
         private boolean isChannelPart = true;
+        private boolean isImagePart = false;
         private String elementName = null;
         private StringBuilder textBuilder;
 
@@ -290,6 +292,11 @@ public class RssReader {
                 if (item != null)
                     item.setIsPermaLink(Boolean.valueOf(value));
             }
+            else if ("image".equals(elementName)) {
+                image = new Image();
+                channel.setImage(image);
+                isImagePart = true;
+            }
         }
 
         void parseAttributes() {
@@ -311,7 +318,11 @@ public class RssReader {
             var name = reader.getLocalName();
             var text = textBuilder.toString().trim();
 
-            if (isChannelPart)
+            if ("image".equals(name))
+                isImagePart = false;
+            else if (isImagePart)
+                parseImageCharacters(elementName, text);
+            else if (isChannelPart)
                 parseChannelCharacters(elementName, text);
             else
                 parseItemCharacters(elementName, item, text);
@@ -359,6 +370,26 @@ public class RssReader {
                 channel.setManagingEditor(text);
             else if ("webMaster".equals(elementName))
                 channel.setWebMaster(text);
+        }
+
+        void parseImageCharacters(String elementName, String text) {
+            if (image == null || text.isEmpty())
+                return;
+
+            if ("title".equals(elementName))
+                image.setTitle(text);
+            else if ("link".equals(elementName))
+                image.setLink(text);
+            else if ("url".equals(elementName))
+                image.setUrl(text);
+            else if ("description".equals(elementName))
+                image.setDescription(text);
+            else if ("height".equals(elementName))
+                image.setHeight(Integer.valueOf(text));
+            else if ("width".equals(elementName))
+                image.setWidth(Integer.valueOf(text));
+            else if ("image".equals(elementName))
+                isImagePart = false;
         }
 
         void parseItemCharacters(String elementName, Item item, String text) {
