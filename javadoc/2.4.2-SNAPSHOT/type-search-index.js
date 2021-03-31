@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.apptastic.rssreader","l":"Channel"},{"p":"com.apptastic.rssreader","l":"DateTime"},{"p":"com.apptastic.rssreader","l":"Item"},{"p":"com.apptastic.rssreader","l":"RssReader"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.apptastic.rssreader","l":"Channel"},{"p":"com.apptastic.rssreader","l":"DateTime"},{"p":"com.apptastic.rssreader","l":"Image"},{"p":"com.apptastic.rssreader","l":"Item"},{"p":"com.apptastic.rssreader","l":"RssReader"}]
