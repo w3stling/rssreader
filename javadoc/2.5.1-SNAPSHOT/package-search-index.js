@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"m":"com.apptastic.rssreader","l":"com.apptastic.rssreader"}]
