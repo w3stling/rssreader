@@ -85,7 +85,7 @@ public class Image {
     }
 
     /**
-     * Set the description.
+     * Get the description.
      * @return description
      */
     public Optional<String> getDescription() {
