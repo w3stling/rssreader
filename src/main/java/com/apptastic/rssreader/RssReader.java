@@ -312,6 +312,12 @@ public class RssReader {
                     else
                         item.setLink(link);
                 }
+            } else if(reader.getLocalName().equals("enclosure")) {
+                var url = reader.getAttributeValue(null, "url");
+                var type = reader.getAttributeValue(null, "type");
+                var length = reader.getAttributeValue(null, "length");
+                Long parsedLength = (length == null || length.isEmpty()) ? null : Long.parseLong(length);
+                item.setEclosure(new Enclosure(url, type, parsedLength));
             }
         }
 
