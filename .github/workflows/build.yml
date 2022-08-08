@@ -6,8 +6,7 @@ on:
   schedule:
     - cron: '40 5 * * SAT'
   push:
-    branches:
-      - '**'
+    branches: [ master ]
     tags-ignore:
       - 'v*'
 
