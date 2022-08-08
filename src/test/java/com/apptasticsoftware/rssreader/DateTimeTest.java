@@ -35,6 +35,12 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormat5() {
+        Long timestamp = DateTime.toEpochMilli("2021-11-17T13:21:21Z");
+        assertEquals(Long.valueOf(1637155281000L), timestamp);
+    }
+
+    @Test
     void badInputNull() {
         assertNull(DateTime.toLocalDateTime(null));
         assertNull(DateTime.toZonedDateTime(null));

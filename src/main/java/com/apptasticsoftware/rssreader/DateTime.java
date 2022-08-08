@@ -93,11 +93,10 @@ public class DateTime {
     private static DateTimeFormatter getDateTimeFormatter(String dateTime) {
         if (dateTime.length() >= 29 && dateTime.length() <= 31)
             return DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 25)
+        else if (dateTime.length() == 20 || dateTime.length() == 25)
             return DateTimeFormatter.ISO_OFFSET_DATE_TIME;
         else if (dateTime.length() == 19)
             return DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
         return null;
     }
 
