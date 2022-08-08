@@ -1,10 +1,11 @@
 package com.apptasticsoftware.rssreader;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.ZoneId;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class DateTimeTest {
 
@@ -40,14 +41,16 @@ public class DateTimeTest {
         assertNull(DateTime.toEpochMilli(null));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void badInputZonedDateTime() {
-        DateTime.toZonedDateTime("sdflksd");
+        assertThrows(IllegalArgumentException.class, () ->
+                DateTime.toZonedDateTime("sdflksd"));
     }
 
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void badInputLocalDateTime() {
-        DateTime.toLocalDateTime("sdflksd");
+        assertThrows(IllegalArgumentException.class, () ->
+                DateTime.toLocalDateTime("sdflksd"));
     }
 }

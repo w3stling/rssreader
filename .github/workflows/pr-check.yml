@@ -1,0 +1,53 @@
+# This workflow will check pull request and run tests
+
+name: Pull Request Check
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: 🛂 Pull Request Check
+    timeout-minutes: 20
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Java 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper 🔎
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Build and test 🏗
+        run: ./gradlew clean build
+
+      - name: Archive build and test reports 🗃️
+        uses: actions/upload-artifact@v2
+        if: success() || failure()
+        with:
+          name: test-results
+          path: ./**/build/test-results/test/*.xml
+          retention-days: 7

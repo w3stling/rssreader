@@ -1,0 +1,50 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚨 Breaking Changes'
+    label: 'breaking change'
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: '🔒 Security'
+    label: 'security'
+  - title: '🛠 Improvements'
+    label: 'improvement'
+  - title: '⚡️ Performance'
+    label: 'performance'
+  - title: '🐛 Bug Fixes'
+    label: 'bug'
+  - title: '📖 Documentation'
+    label: 'documentation'
+  - title: '🧰 Maintenance'
+    label: 'chore'
+  - title: '♻️ Refactoring'
+    label: 'refactor'
+  - title: '🧪 Tests'
+    label: 'test'
+  - title: '🎨️ Style'
+    labels:
+      - 'style'
+      - 'cleanup'
+  - title: '📦 Dependencies'
+    label: 'dependencies'
+  - title: '🚧 Wip'
+    label: 'wip'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
+version-resolver:
+  major:
+    labels:
+      - 'breaking change'
+  minor:
+    labels:
+      - 'feature'
+      - 'improvement'
+  default: patch
+exclude-contributors:
+  - 'w3stling'
+  - 'dependabot'
+template: |
+  ## What's Changed
+  $CHANGES

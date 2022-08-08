@@ -1,0 +1,223 @@
+# This workflow will build a Java project with Gradle
+
+name: Build
+
+on:
+  schedule:
+    - cron: '40 5 * * SAT'
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - 'v*'
+
+jobs:
+  build:
+    name: 🏗️ Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build trigger event 🔎
+        run: |
+          echo "event name - ${{github.event_name}}"
+          echo "github.ref - ${{github.ref}}"
+
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Set up JDK 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Grant execute permission for gradlew ⚙️
+        run: chmod +x gradlew
+
+      - name: Build and test 🏗️
+        run: ./gradlew clean build jacocoTestReport javadoc
+
+
+  code-analysis:
+    name: 🔎 Code Analysis
+    needs: [build]
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.event_name != 'schedule' && github.repository == 'w3stling/rssreader' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Cache SonarCloud packages ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+      - name: Grant execute permission for gradlew ⚙️
+        run: chmod +x gradlew
+
+      - name: Get version number 🔢
+        id: version
+        uses: patrickjahns/version-drafter-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Next version 🔢
+        run: |
+          echo "Next version: ${{ steps.version.outputs.next-version }}"
+
+      - name: Analyze code 🔎️
+        run: ./gradlew test jacocoTestReport sonarqube --info -Dsonar.projectVersion=${{ steps.version.outputs.next-version }}-SNAPSHOT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+  documentation:
+    name: 📚 Publish Javadoc
+    needs: [build]
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.event_name != 'schedule' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+      - name: Grant execute permission for gradlew ⚙️
+        run: chmod +x gradlew
+
+      - name: Get version number 🔢
+        id: version
+        uses: patrickjahns/version-drafter-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Next version 🔢
+        run: |
+          echo "Next version: ${{ steps.version.outputs.next-version }}"
+
+      - name: Generate Javadoc 📝
+        run: ./gradlew javadoc
+
+      - name: Deploy Javadoc 📚
+        uses: JamesIves/github-pages-deploy-action@4.2.0
+        with:
+          branch: gh-pages
+          folder: build/docs/javadoc
+          target-folder: javadoc/${{ steps.version.outputs.next-version }}-SNAPSHOT
+          commit-message: Publishing javadoc
+          clean: true
+          dry-run: false
+
+
+  publish-snapshot:
+    name: 🚀 Publish Snapshot
+    needs: [build]
+    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.event_name != 'schedule' && github.repository == 'w3stling/rssreader' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+
+      - name: Grant execute permission for gradlew ⚙️
+        run: chmod +x gradlew
+
+      - name: Get version number 🔢
+        id: version
+        uses: patrickjahns/version-drafter-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Next version 🔢
+        run: |
+          echo "Next version: ${{ steps.version.outputs.next-version }}"
+
+      - name: Publish snapshot build 🚀
+        env:
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_SECRET }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_PASSPHRASE }}
+        run: ./gradlew publishToSonatype -Pversion=${{ steps.version.outputs.next-version }}-SNAPSHOT

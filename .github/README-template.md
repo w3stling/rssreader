@@ -2,8 +2,8 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-3.0.0-brightgreen.svg)](https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.0.0/jar)
-[![Javadoc](https://img.shields.io/badge/javadoc-3.0.0-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.0.0)
+[![Download](https://img.shields.io/badge/download-%%version%%-brightgreen.svg)](https://search.maven.org/artifact/com.apptasticsoftware/rssreader/%%version%%/jar)
+[![Javadoc](https://img.shields.io/badge/javadoc-%%version%%-blue.svg)](https://w3stling.github.io/rssreader/javadoc/%%version%%)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
@@ -23,7 +23,7 @@ This Java library makes it easier to automate data extraction from RSS or Atom f
 Examples
 --------
 ### Read RSS feed
-Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title. 
+Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title.
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
@@ -56,7 +56,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.0.0</version>
+            <version>%%version%%</version>
         </dependency>
     </dependencies>
     ...
@@ -67,7 +67,7 @@ Add dependency declaration:
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptasticsoftware:rssreader:3.0.0'
+    implementation 'com.apptasticsoftware:rssreader:%%version%%'
 }
 ```
 
@@ -78,7 +78,7 @@ License
 
     MIT License
     
-    Copyright (c) 2022, Apptastic Software
+    Copyright (c) %%year%%, Apptastic Software
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -99,6 +99,6 @@ License
     SOFTWARE.
 
 
-[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/4.0.0/jar
+[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/%%version%%/jar
 [2]: https://maven.apache.org
 [3]: https://gradle.org

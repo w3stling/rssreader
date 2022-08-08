@@ -1,0 +1,3 @@
+major-labels: ['semver:major', 'breaking change']
+minor-labels: ['semver:minor','enhancement','feature']
+patch-labels: ['semver:patch','bug']
