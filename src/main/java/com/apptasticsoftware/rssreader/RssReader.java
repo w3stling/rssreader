@@ -291,7 +291,7 @@ public class RssReader {
             else if ("guid".equals(elementName)) {
                 var value = reader.getAttributeValue(null, "isPermaLink");
                 if (item != null)
-                    item.setIsPermaLink(Boolean.valueOf(value));
+                    item.setIsPermaLink(Boolean.parseBoolean(value));
             }
             else if ("image".equals(elementName)) {
                 image = new Image();
