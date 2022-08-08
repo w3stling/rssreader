@@ -12,6 +12,11 @@ RSS Reader
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
 
+> **Note** - from version 3.0.0:
+> * New Java package name
+> * New group ID in Maven / Gradle dependency declaration
+> * Moved repository from `JCenter` to `Maven Central Repository`
+
 RSS (Rich Site Summary) is a type of web feed which allows users to access updates to online content in a
 standardized, computer-readable format. Subscribing to a website RSS removes the need for the user to manually
 check the website for new content.
