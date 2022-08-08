@@ -33,17 +33,17 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class RssReaderIntegrationTest {
+class RssReaderIntegrationTest {
 
     @Test
-    public void nullHttpClient() {
+    void nullHttpClient() {
         assertThrows(NullPointerException.class, () ->
                 new RssReader(null));
     }
 
 
     @Test
-    public void rssRiksbanken() throws IOException {
+    void rssRiksbanken() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.riksbank.se/sv/rss/pressmeddelanden").collect(Collectors.toList());
 
@@ -76,7 +76,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssKonjunkturinstitutet() throws IOException {
+    void rssKonjunkturinstitutet() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
 
@@ -107,7 +107,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssScb() throws IOException {
+    void rssScb() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.scb.se/Feed/statistiknyheter/").collect(Collectors.toList());
 
@@ -138,7 +138,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssPlacera() throws IOException {
+    void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
 
@@ -167,7 +167,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void rssPlaceraString() throws IOException, InterruptedException {
+    void rssPlaceraString() throws IOException, InterruptedException {
         String rssText = getRssFeedAsString("https://www.avanza.se/placera/forstasidan.rss.xml");
         InputStream inputStream = new ByteArrayInputStream(rssText.getBytes(StandardCharsets.UTF_8));
 
@@ -200,7 +200,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssBreakit() throws IOException {
+    void rssBreakit() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
@@ -235,7 +235,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void rssRealtid() throws IOException {
+    void rssRealtid() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.realtid.se/rss/senaste").collect(Collectors.toList());
 
@@ -265,14 +265,14 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void rssVAFinansBadUrl() {
+    void rssVAFinansBadUrl() {
         RssReader reader = new RssReader();
         assertThrows(IOException.class, () ->
                 reader.read("https://www.vafinans.se/rss/nyheter2"));
     }
 
     @Test
-    public void feedForAll() throws IOException {
+    void feedForAll() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://feedforall.com/sample-feed.xml").collect(Collectors.toList());
 
@@ -307,7 +307,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void investingcom() throws IOException {
+    void investingcom() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://se.investing.com/rss/news.rss").collect(Collectors.toList());
 
@@ -337,7 +337,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void investingcom_mest_lasta() throws IOException {
+    void investingcom_mest_lasta() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://se.investing.com/rss/news_285.rss").collect(Collectors.toList());
 
@@ -372,7 +372,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void diDigital() throws IOException {
+    void diDigital() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
 
@@ -403,7 +403,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssWorldOfTank() throws IOException {
+    void rssWorldOfTank() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://worldoftanks.eu/en/rss/news/").collect(Collectors.toList());
         assertFalse(items.isEmpty());
@@ -439,7 +439,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void zonedDateTime() throws IOException {
+    void zonedDateTime() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
@@ -455,7 +455,7 @@ public class RssReaderIntegrationTest {
     }
 
     @Test
-    public void dateTime() throws IOException {
+    void dateTime() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
@@ -471,7 +471,7 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void httpClient() throws IOException, KeyManagementException, NoSuchAlgorithmException {
+    void httpClient() throws IOException, KeyManagementException, NoSuchAlgorithmException {
         SSLContext context = SSLContext.getInstance("TLSv1.3");
         context.init(null, null, null);
 

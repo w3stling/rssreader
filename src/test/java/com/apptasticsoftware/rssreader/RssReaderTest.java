@@ -21,10 +21,10 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
-public class RssReaderTest {
+class RssReaderTest {
 
     @Test
-    public void badFormattedXml() throws IOException {
+    void badFormattedXml() throws IOException {
         String response = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
                 "<channel xml:base=\"channel\">\n" +
@@ -55,7 +55,7 @@ public class RssReaderTest {
 
     @SuppressWarnings("squid:S5976")
     @Test
-    public void leadingCRCharacter() throws IOException {
+    void leadingCRCharacter() throws IOException {
         String response = "\015<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
                 "<channel xml:base=\"channel\">\n" +
@@ -102,7 +102,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void leadingCRLDCharacters() throws IOException {
+    void leadingCRLDCharacters() throws IOException {
         String response = "\015\012<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
                 "<channel xml:base=\"channel\">\n" +
@@ -149,7 +149,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void leadingWhitespace() throws IOException {
+    void leadingWhitespace() throws IOException {
         String response = "  <?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
                 "<channel xml:base=\"channel\">\n" +
@@ -196,7 +196,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void Cdata() throws IOException {
+    void Cdata() throws IOException {
         String response = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<rss xmlns:a10=\"http://www.w3.org/2005/Atom\" version=\"2.0\">\n" +
                 "<channel xml:base=\"channel\">\n" +
@@ -243,7 +243,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void emptyResponse() throws IOException {
+    void emptyResponse() throws IOException {
         String response = "";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
@@ -255,7 +255,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void hashCodeTest() {
+    void hashCodeTest() {
         Item item1 = new Item();
         item1.setAuthor("a1");
         item1.setCategory("a2");
@@ -282,7 +282,7 @@ public class RssReaderTest {
     }
 
     @Test
-    public void equalsTest() {
+    void equalsTest() {
         Item item1 = new Item();
         item1.setAuthor("a1");
         item1.setCategory("a2");
