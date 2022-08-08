@@ -395,6 +395,10 @@ public class RssReaderIntegrationTest {
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(isEmptyString()))));
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
+            if(item.getEnclosure().isPresent()) {
+                assertNotNull(item.getEnclosure().get().getUrl());
+                assertNotNull(item.getEnclosure().get().getType());
+            }
         }
     }
 

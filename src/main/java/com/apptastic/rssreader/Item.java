@@ -43,9 +43,29 @@ public class Item implements Comparable<Item> {
     private Boolean isPermaLink;
     private String pubDate;
     private Channel channel;
+    private Enclosure enclosure;
+
+    /**
+     * Get the enclosure of the item.
+     *
+     * @return enclosure
+     */
+    public Optional<Enclosure> getEnclosure() {
+        return Optional.ofNullable(enclosure);
+    }
+
+    /**
+     * Set the enclosure of the item.
+     *
+     * @param enclosure enclosure
+     */
+    public void setEclosure(Enclosure enclosure) {
+        this.enclosure = enclosure;
+    }
 
     /**
      * Get the title of the item.
+     *
      * @return title
      */
     public Optional<String> getTitle() {
@@ -54,6 +74,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Set the title of the item.
+     *
      * @param title title
      */
     public void setTitle(String title) {
@@ -62,6 +83,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Get the item synopsis.
+     *
      * @return description
      */
     public Optional<String> getDescription() {
@@ -70,6 +92,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Set the item synopsis.
+     *
      * @param description description
      */
     public void setDescription(String description) {
@@ -78,6 +101,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Get the URL of the item.
+     *
      * @return link
      */
     public Optional<String> getLink() {
@@ -85,39 +109,8 @@ public class Item implements Comparable<Item> {
     }
 
     /**
-     * Set email address of the author of the item.
-     * @param author author
-     */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    /**
-     * Get email address of the author of the item.
-     * @return author
-     */
-    public Optional<String> getAuthor() {
-        return Optional.ofNullable(author);
-    }
-
-    /**
-     * Set category for item.
-     * @param category category
-     */
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    /**
-     * Get category for item.
-     * @return category
-     */
-    public Optional<String> getCategory() {
-        return Optional.ofNullable(category);
-    }
-
-    /**
      * Set the URL of the item.
+     *
      * @param link link
      */
     public void setLink(String link) {
@@ -125,7 +118,44 @@ public class Item implements Comparable<Item> {
     }
 
     /**
+     * Get email address of the author of the item.
+     *
+     * @return author
+     */
+    public Optional<String> getAuthor() {
+        return Optional.ofNullable(author);
+    }
+
+    /**
+     * Set email address of the author of the item.
+     *
+     * @param author author
+     */
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    /**
+     * Get category for item.
+     *
+     * @return category
+     */
+    public Optional<String> getCategory() {
+        return Optional.ofNullable(category);
+    }
+
+    /**
+     * Set category for item.
+     *
+     * @param category category
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
      * Get a string that uniquely identifies the item.
+     *
      * @return guid
      */
     public Optional<String> getGuid() {
@@ -134,6 +164,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Set a string that uniquely identifies the item.
+     *
      * @param guid guid
      */
     public void setGuid(String guid) {
@@ -144,6 +175,7 @@ public class Item implements Comparable<Item> {
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
      * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
      * item described by the item element.
+     *
      * @return permanent link
      */
     public Optional<Boolean> getIsPermaLink() {
@@ -154,6 +186,7 @@ public class Item implements Comparable<Item> {
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
      * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
      * item described by the item element.
+     *
      * @param isPermaLink is perma link
      */
     public void setIsPermaLink(boolean isPermaLink) {
@@ -162,6 +195,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Get a string that indicates when the item was published.
+     *
      * @return publication date
      */
     public Optional<String> getPubDate() {
@@ -169,15 +203,8 @@ public class Item implements Comparable<Item> {
     }
 
     /**
-     * Get a ZonedDateTime that indicates when the item was published.
-     * @return publication date
-     */
-    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
-        return getPubDate().map(DateTime::toZonedDateTime);
-    }
-
-    /**
      * Set a string that indicates when the item was published.
+     *
      * @param pubDate publication date
      */
     public void setPubDate(String pubDate) {
@@ -185,7 +212,17 @@ public class Item implements Comparable<Item> {
     }
 
     /**
+     * Get a ZonedDateTime that indicates when the item was published.
+     *
+     * @return publication date
+     */
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDate().map(DateTime::toZonedDateTime);
+    }
+
+    /**
      * Get the channel that this item was published in.
+     *
      * @return channel
      */
     public Channel getChannel() {
@@ -194,6 +231,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * Set the channel that this item was published in.
+     *
      * @param channel channel
      */
     public void setChannel(Channel channel) {
@@ -213,16 +251,18 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getGuid(), item.getGuid()) &&
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
-                Objects.equals(getChannel(), item.getChannel());
+                Objects.equals(getChannel(), item.getChannel()) &&
+                Objects.equals(getEnclosure(), item.getEnclosure());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(), getIsPermaLink(), getPubDate(), getChannel());
+        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(), getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
     }
 
     /**
      * Compares publication time of two {@code Item} objects.
+     *
      * @param o item to compare
      * @return value
      * @since 2.2.0
