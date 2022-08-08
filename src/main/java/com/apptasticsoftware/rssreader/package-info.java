@@ -25,4 +25,4 @@
 /**
  * This package is intended for RSS reader.
  */
-package com.apptastic.rssreader;
+package com.apptasticsoftware.rssreader;

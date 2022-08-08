@@ -1,4 +1,4 @@
-package com.apptastic.rssreader;
+package com.apptasticsoftware.rssreader;
 
 import org.junit.Test;
 

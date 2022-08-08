@@ -1,6 +1,7 @@
-package com.apptastic.rssreader;
+package com.apptasticsoftware.rssreader;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -45,7 +46,7 @@ public class RssReaderTest {
                 "</rss>\n";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         long count = readerMock.read("").count();
@@ -76,7 +77,7 @@ public class RssReaderTest {
                 "</rss>\n";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -123,7 +124,7 @@ public class RssReaderTest {
                 "</rss>\n";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -170,7 +171,7 @@ public class RssReaderTest {
                 "</rss>\n";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -217,7 +218,7 @@ public class RssReaderTest {
                 "</rss>\n";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -246,7 +247,7 @@ public class RssReaderTest {
         String response = "";
 
         CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
-        RssReader readerMock = spy(RssReader.class);
+        RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         long count = readerMock.read("").count();
