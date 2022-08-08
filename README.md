@@ -28,7 +28,7 @@ This Java library makes it easier to automate data extraction from RSS or Atom f
 Examples
 --------
 ### Read RSS feed
-Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title. 
+Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title.
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
@@ -104,6 +104,6 @@ License
     SOFTWARE.
 
 
-[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/4.0.0/jar
+[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.0.0/jar
 [2]: https://maven.apache.org
 [3]: https://gradle.org
