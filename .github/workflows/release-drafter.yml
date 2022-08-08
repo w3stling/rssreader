@@ -21,6 +21,8 @@ jobs:
     steps:
       # Drafts your next Release notes as Pull Requests are merged into "master"
       - uses: release-drafter/release-drafter@v5
+        with:
+          version: 3.0.0
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
