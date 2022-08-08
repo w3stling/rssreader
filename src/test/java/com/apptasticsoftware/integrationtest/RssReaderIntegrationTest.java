@@ -1,9 +1,7 @@
 package com.apptasticsoftware.integrationtest;
 
 import com.apptasticsoftware.rssreader.*;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.ByteArrayInputStream;
@@ -27,21 +25,20 @@ import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isEmpty;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.emptyString;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RssReaderIntegrationTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void nullHttpClient() {
-        thrown.expect(NullPointerException.class);
-        thrown.expectMessage("Http client must not be null");
-        RssReader reader = new RssReader(null);
+        assertThrows(NullPointerException.class, () ->
+                new RssReader(null));
     }
 
 
@@ -62,18 +59,20 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getLink(), is("https://www.riksbank.se/sv/rss/pressmeddelanden/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isPresentAnd(not(isEmptyString())));
+            assertThat(channel.getLastBuildDate(), isPresentAnd(not(emptyString())));
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
+
+
 
 
     @Test
@@ -92,7 +91,7 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getLanguage(), isPresentAndIs("sv"));
             assertThat(channel.getLink(), is("https://www.konj.se/om-ki/aktuellt/publikationer.html"));
             assertThat(channel.getCopyright(), isPresentAndIs("Konjunkturinstitutet"));
-            assertThat(channel.getGenerator(), isPresentAnd(startsWith("SiteVision")));
+            assertThat(channel.getGenerator(), isPresentAnd(startsWith("Sitevision")));
             assertThat(channel.getLastBuildDate(), isEmpty());
 
             // Validate item
@@ -139,37 +138,6 @@ public class RssReaderIntegrationTest {
 
 
     @Test
-    public void rssEkobrottsmyndigheten() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.ekobrottsmyndigheten.se/Templates/Handlers/News/HandlerNewsRss.ashx?languageBranch=sv").collect(Collectors.toList());
-
-        assertFalse(items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Nyheter"));
-            assertThat(channel.getDescription(), is("Senaste nyheterna på Ekobrottsmyndigheten"));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("https://www.ekobrottsmyndigheten.se/sv/press/nyheter/"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isPresentAnd(startsWith("Argotic Syndication")));
-            assertThat(channel.getLastBuildDate(), isEmpty());
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isPresent());
-            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresent());
-            assertThat(item.getDescription(), isPresent());
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
-
-    @Test
     public void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
@@ -189,12 +157,12 @@ public class RssReaderIntegrationTest {
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
 
@@ -213,7 +181,7 @@ public class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Placera.se"));
-            assertThat(channel.getDescription(), is(not(isEmptyString())));
+            assertThat(channel.getDescription(), is(not(emptyString())));
             assertThat(channel.getLink(), is("https://www.placera.se"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
@@ -221,12 +189,12 @@ public class RssReaderIntegrationTest {
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
 
@@ -253,16 +221,16 @@ public class RssReaderIntegrationTest {
             assertThat(channel.getLink(), is("http://breakit.se"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isPresentAnd(not(isEmptyString())));
+            assertThat(channel.getLastBuildDate(), isPresentAnd(not(emptyString())));
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(true));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
 
@@ -277,7 +245,7 @@ public class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is(""));
+            assertThat(channel.getTitle(), is("Realtid"));
             assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isPresentAndIs("sv"));
             assertThat(channel.getLink(), is("https://www.realtid.se/rss/senaste"));
@@ -287,20 +255,20 @@ public class RssReaderIntegrationTest {
 
             // Validate item
             assertNotNull(item);
-            assertThat(item.getGuid(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
-            assertThat(item.getTitle(), isPresentAnd(not(isEmptyString())));
-            //assertThat(item.getDescription(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getPubDate(), isPresentAnd(not(isEmptyString())));
-            assertThat(item.getLink(), isPresentAnd(not(isEmptyString())));
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            //assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
+            assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
 
-    @Test(expected = IOException.class)
-    public void rssVAFinansBadUrl() throws IOException {
+    @Test
+    public void rssVAFinansBadUrl() {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.vafinans.se/rss/nyheter2").collect(Collectors.toList());
-        assertTrue(items.isEmpty());
+        assertThrows(IOException.class, () ->
+                reader.read("https://www.vafinans.se/rss/nyheter2"));
     }
 
     @Test

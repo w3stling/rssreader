@@ -1,0 +1,19 @@
+name: Test Report
+
+on:
+  workflow_run:
+    workflows: ['Pull Request Check']      # runs after CI workflow
+    types:
+      - completed
+
+jobs:
+  report:
+    name: 🧪 Test Report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: dorny/test-reporter@v1
+        with:
+          artifact: test-results                       # artifact name
+          name: Test results 🧪                        # Name of the check run which will be created
+          path: './**/build/test-results/test/*.xml'   # Path to test results (inside artifact .zip)
+          reporter: java-junit                         # Format of test results

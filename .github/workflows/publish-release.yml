@@ -1,0 +1,183 @@
+# This workflow will publish the release to Maven Central Repository
+
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: 🏗️ Build Release
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    if: github.repository == 'w3stling/rssreader'
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Java 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Get version number 🔢
+        run: |
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
+          echo "New version: ${NEW_VERSION}"
+          echo "new_version=${NEW_VERSION}" >> $GITHUB_ENV
+          echo "year=$(date +%Y)" >> $GITHUB_ENV
+
+      - name: Update README.md 📝
+        uses: bluwy/substitute-string-action@v1
+        with:
+          _input-file: './.github/README-template.md'
+          _output-file: ./README.md
+          _format-key: '%%key%%'
+          version: ${{ env.new_version }}
+          year: ${{ env.year }}
+
+      - name: Commit README.md
+        uses: stefanzweifel/git-auto-commit-action@v4
+        id: auto-commit-action-readme
+        with:
+          commit_message: Update version to ${{ env.new_version }}
+          file_pattern: README.md
+          branch: master
+
+      - name: "README.md - changes have been detected 🔍"
+        if: steps.auto-commit-action-readme.outputs.changes_detected == 'true'
+        run: echo "Updated README.md with release version ${{ env.new_version }} ✅"
+
+      - name: Build release 🏗️
+        run: ./gradlew clean build javadoc -x test
+
+
+  documentation:
+    name: 📚 Publish Javadoc
+    needs: [build]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Java 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Get version number 🔢
+        run: |
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
+          echo "New version: ${NEW_VERSION}"
+          echo "new_version=${NEW_VERSION}" >> $GITHUB_ENV
+          echo "year=$(date +%Y)" >> $GITHUB_ENV
+
+      - name: Generate Javadoc 📝
+        run: ./gradlew javadoc
+
+      - name: Deploy Javadoc 📚
+        uses: JamesIves/github-pages-deploy-action@4.2.0
+        with:
+          branch: gh-pages
+          folder: build/docs/javadoc
+          target-folder: javadoc/${{ env.new_version }}
+          commit-message: Publishing javadoc
+          clean: true
+          dry-run: false
+
+
+  publish-release:
+    needs: [build]
+    name: 🚀 Publish Release
+    permissions:
+      contents: write
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository ⚙️
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+
+      - name: Setup Java 11 ⚙️
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Setup Gradle dependencies cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
+
+      - name: Setup Gradle wrapper cache ⚙️
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
+
+      - name: Validate Gradle wrapper ⚙️
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Get version number 🔢
+        run: |
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
+          echo "New version: ${NEW_VERSION}"
+          echo "new_version=${NEW_VERSION}" >> $GITHUB_ENV
+          echo "year=$(date +%Y)" >> $GITHUB_ENV
+
+      - name: Publish release build 🚀
+        env:
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_SECRET }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_PASSPHRASE }}
+        run: |
+          ./gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository -Pversion=${{ env.new_version }}
