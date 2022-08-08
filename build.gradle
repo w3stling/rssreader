@@ -12,7 +12,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
 apply plugin: 'distribution'
 
-group 'com.apptastic'
+group 'com.apptasticsoftware'
 version "${version}"
 
 sourceCompatibility = JavaVersion.VERSION_11

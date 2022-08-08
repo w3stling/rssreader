@@ -1,6 +1,6 @@
-package com.apptastic.integrationtest;
+package com.apptasticsoftware.integrationtest;
 
-import com.apptastic.rssreader.*;
+import com.apptasticsoftware.rssreader.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

@@ -23,12 +23,12 @@
  */
 
 /**
- * This modules defines the base APIs for RSS reader.
+ * These modules define the base APIs for RSS reader.
  */
-module com.apptastic.rssreader {
+module com.apptasticsoftware.rssreader {
     requires java.net.http;
     requires java.xml;
     requires java.logging;
 
-    exports com.apptastic.rssreader;
+    exports com.apptasticsoftware.rssreader;
 }
