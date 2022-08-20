@@ -40,6 +40,7 @@ version-resolver:
   minor:
     labels:
       - 'feature'
+      - 'enhancement'
       - 'improvement'
   default: patch
 exclude-contributors:
