@@ -23,7 +23,7 @@ check the website for new content.
 
 Atom feeds is supported from version 2.0.0 and later.
 
-This Java library makes it easier to automate data extraction from RSS or Atom feeds via Java stream API.
+This Java RSS parser library makes it easier to automate data extraction from RSS or Atom feeds via Java stream API.
 
 Examples
 --------
