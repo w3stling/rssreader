@@ -47,6 +47,16 @@ Stream.concat(reader.read(URL1),
       .forEach(System.out::println);
 ```
 
+### RSS / Atom feed extension
+Support for mapping extension to item and channel object.
+```java
+List<Item> items = new RssReader()
+             .addItemExtension("dc:creator", Item::setAuthor)
+             .addItemExtension("dc:date", Item::setPubDate)
+             .read("https://lwn.net/headlines/rss")
+             .collect(Collectors.toList());
+```
+
 Download
 --------
 
