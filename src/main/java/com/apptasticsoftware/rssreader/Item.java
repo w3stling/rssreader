@@ -59,7 +59,7 @@ public class Item implements Comparable<Item> {
      *
      * @param enclosure enclosure
      */
-    public void setEclosure(Enclosure enclosure) {
+    public void setEnclosure(Enclosure enclosure) {
         this.enclosure = enclosure;
     }
 
