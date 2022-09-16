@@ -76,25 +76,51 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     protected abstract I createItem();
 
-    public AbstractRssReader<C, I> addItemExtension(String tag, BiConsumer<I, String> c) {
-        itemExtensions.put(tag, c);
+    /**
+     * Add item extension for tags
+     * @param tag - tag name
+     * @param consumer - setter method in Item class to use for mapping
+     * @return this instance
+     */
+    public AbstractRssReader<C, I> addItemExtension(String tag, BiConsumer<I, String> consumer) {
+        itemExtensions.put(tag, consumer);
         return this;
     }
 
-    public AbstractRssReader<C, I> addItemExtension(String tag, String attribute, BiConsumer<I, String> c) {
+    /**
+     * Add item extension for attributes
+     * @param tag - tag name
+     * @param attribute - attribute name
+     * @param consumer - setter method in Item class to use for mapping
+     * @return this instance
+     */
+    public AbstractRssReader<C, I> addItemExtension(String tag, String attribute, BiConsumer<I, String> consumer) {
         itemAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                               .put(attribute, c);
+                               .put(attribute, consumer);
         return this;
     }
 
-    public AbstractRssReader<C, I> addChannelExtension(String tag, BiConsumer<C, String> c) {
-        channelExtensions.put(tag, c);
+    /**
+     * Add channel extension for tags
+     * @param tag - tag name
+     * @param consumer - setter method in Channel class to use for mapping
+     * @return this instance
+     */
+    public AbstractRssReader<C, I> addChannelExtension(String tag, BiConsumer<C, String> consumer) {
+        channelExtensions.put(tag, consumer);
         return this;
     }
 
-    public AbstractRssReader<C, I> addChannelExtension(String tag, String attribute, BiConsumer<C, String> c) {
+    /**
+     * Add channel extension for attributes
+     * @param tag - tag name
+     * @param attribute - attribute name
+     * @param consumer - setter method in Channel class to use for mapping
+     * @return this instance
+     */
+    public AbstractRssReader<C, I> addChannelExtension(String tag, String attribute, BiConsumer<C, String> consumer) {
         channelAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                                  .put(attribute, c);
+                                  .put(attribute, consumer);
         return this;
     }
 
