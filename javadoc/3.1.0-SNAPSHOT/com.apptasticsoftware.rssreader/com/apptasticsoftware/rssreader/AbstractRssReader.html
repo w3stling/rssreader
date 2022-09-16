@@ -187,27 +187,35 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addChannelExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a></span>&#8203;(java.lang.String&nbsp;tag,
                    java.lang.String&nbsp;attribute,
-                   java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;c)</code></th>
-<td class="colLast">&nbsp;</td>
+                   java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</code></th>
+<td class="colLast">
+<div class="block">Add channel extension for attributes</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addChannelExtension(java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a></span>&#8203;(java.lang.String&nbsp;tag,
-                   java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;c)</code></th>
-<td class="colLast">&nbsp;</td>
+                   java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</code></th>
+<td class="colLast">
+<div class="block">Add channel extension for tags</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addItemExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addItemExtension</a></span>&#8203;(java.lang.String&nbsp;tag,
                 java.lang.String&nbsp;attribute,
-                java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;c)</code></th>
-<td class="colLast">&nbsp;</td>
+                java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</code></th>
+<td class="colLast">
+<div class="block">Add item extension for attributes</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addItemExtension(java.lang.String,java.util.function.BiConsumer)">addItemExtension</a></span>&#8203;(java.lang.String&nbsp;tag,
-                java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;c)</code></th>
-<td class="colLast">&nbsp;</td>
+                java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</code></th>
+<td class="colLast">
+<div class="block">Add item extension for tags</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a></code></td>
@@ -322,7 +330,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>addItemExtension</h4>
 <pre class="methodSignature">public&nbsp;<a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&nbsp;addItemExtension&#8203;(java.lang.String&nbsp;tag,
-                                                     java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;c)</pre>
+                                                     java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</pre>
+<div class="block">Add item extension for tags</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tag</code> - - tag name</dd>
+<dd><code>consumer</code> - - setter method in Item class to use for mapping</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this instance</dd>
+</dl>
 </li>
 </ul>
 <a id="addItemExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">
@@ -333,7 +349,16 @@ extends java.lang.Object</pre>
 <h4>addItemExtension</h4>
 <pre class="methodSignature">public&nbsp;<a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&nbsp;addItemExtension&#8203;(java.lang.String&nbsp;tag,
                                                      java.lang.String&nbsp;attribute,
-                                                     java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;c)</pre>
+                                                     java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</pre>
+<div class="block">Add item extension for attributes</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tag</code> - - tag name</dd>
+<dd><code>attribute</code> - - attribute name</dd>
+<dd><code>consumer</code> - - setter method in Item class to use for mapping</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this instance</dd>
+</dl>
 </li>
 </ul>
 <a id="addChannelExtension(java.lang.String,java.util.function.BiConsumer)">
@@ -343,7 +368,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>addChannelExtension</h4>
 <pre class="methodSignature">public&nbsp;<a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&nbsp;addChannelExtension&#8203;(java.lang.String&nbsp;tag,
-                                                        java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;c)</pre>
+                                                        java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</pre>
+<div class="block">Add channel extension for tags</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tag</code> - - tag name</dd>
+<dd><code>consumer</code> - - setter method in Channel class to use for mapping</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this instance</dd>
+</dl>
 </li>
 </ul>
 <a id="addChannelExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">
@@ -354,7 +387,16 @@ extends java.lang.Object</pre>
 <h4>addChannelExtension</h4>
 <pre class="methodSignature">public&nbsp;<a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&nbsp;addChannelExtension&#8203;(java.lang.String&nbsp;tag,
                                                         java.lang.String&nbsp;attribute,
-                                                        java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;c)</pre>
+                                                        java.util.function.BiConsumer&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;java.lang.String&gt;&nbsp;consumer)</pre>
+<div class="block">Add channel extension for attributes</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>tag</code> - - tag name</dd>
+<dd><code>attribute</code> - - attribute name</dd>
+<dd><code>consumer</code> - - setter method in Channel class to use for mapping</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this instance</dd>
+</dl>
 </li>
 </ul>
 <a id="read(java.lang.String)">
