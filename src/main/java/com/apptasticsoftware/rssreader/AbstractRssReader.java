@@ -64,10 +64,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<I, String>> itemExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
 
-    public AbstractRssReader() {
+    protected AbstractRssReader() {
     }
 
-    public AbstractRssReader(HttpClient httpClient) {
+    protected AbstractRssReader(HttpClient httpClient) {
         Objects.requireNonNull(httpClient, "Http client must not be null");
         this.httpClient = httpClient;
     }
@@ -355,6 +355,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
+        @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseAttributes() {
             if (reader.getLocalName().equals("link")) {
                 var rel = reader.getAttributeValue(null, "rel");
@@ -486,6 +487,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 isImagePart = false;
         }
 
+        @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseItemCharacters(String prefix, String elementName, I item, final String text) {
             if (text.isEmpty())
                 return;
