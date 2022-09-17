@@ -86,7 +86,7 @@ dependencies {
 }
 ```
 
-RSS Reader library requires at minimum Java 11.
+RSS library requires at minimum Java 11.
 
 License
 -------
