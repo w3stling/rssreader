@@ -47,8 +47,8 @@ Stream.concat(reader.read(URL1),
       .forEach(System.out::println);
 ```
 
-### RSS / Atom feed extension
-Support for mapping extension to item and channel object.
+### RSS / Atom feed extensions
+Support for mapping custom tags and attributes in the RSS / Atom to item and channel object.
 ```java
 List<Item> items = new RssReader()
              .addItemExtension("dc:creator", Item::setAuthor)
