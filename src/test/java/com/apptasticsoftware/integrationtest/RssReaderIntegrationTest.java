@@ -555,4 +555,15 @@ class RssReaderIntegrationTest {
             assertThat(item.getChannel().getTitle(), is("LWN.net"));
         }
     }
+
+    @Test
+    void testHttpHeader() throws IOException {
+        List<Item> items = new RssReader().addHeader("If-None-Match", "response_version1")
+                                          .read("https://lwn.net/headlines/rss")
+                                          .collect(Collectors.toList());
+
+        for (Item item : items) {
+            assertThat(item.getChannel().getTitle(), is("LWN.net"));
+        }
+    }
 }

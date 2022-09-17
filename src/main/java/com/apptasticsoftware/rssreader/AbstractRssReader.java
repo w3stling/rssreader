@@ -59,11 +59,12 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
     private final HttpClient httpClient;
+    private String userAgent = "";
+    private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributeExtensions = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
-    private String userAgent = "";
 
     protected AbstractRssReader() {
         httpClient = createHttpClient();
@@ -96,6 +97,18 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(userAgent, "User-agent must not be null");
 
         this.userAgent = userAgent;
+        return this;
+    }
+
+    /**
+     * Adds a header to the HttpClient.
+     * This is completely optional and if no headers are set then it will not add anything.
+     * @param key the key name of the header.
+     * @param value the value of the header.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> addHeader(String key, String value){
+        this.headers.put(key, value);
         return this;
     }
 
@@ -219,6 +232,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         if (!userAgent.isBlank())
             builder.header("User-Agent", userAgent);
+
+        headers.forEach(builder::header);
 
         return httpClient.sendAsync(builder.GET().build(), HttpResponse.BodyHandlers.ofInputStream());
     }
