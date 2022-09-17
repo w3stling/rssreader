@@ -72,8 +72,16 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         this.httpClient = httpClient;
     }
 
+    /**
+     * Returns an object of a Channel implementation.
+     * @return channel
+     */
     protected abstract C createChannel();
 
+    /**
+     * Returns an object of an Item implementation.
+     * @return item
+     */
     protected abstract I createItem();
 
     /**
@@ -83,6 +91,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addItemExtension(String tag, BiConsumer<I, String> consumer) {
+        Objects.requireNonNull(tag, "Tag must not be null");
+        Objects.requireNonNull(consumer, "Consumer must not be null");
+
         itemExtensions.put(tag, consumer);
         return this;
     }
@@ -95,6 +106,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addItemExtension(String tag, String attribute, BiConsumer<I, String> consumer) {
+        Objects.requireNonNull(tag, "Tag must not be null");
+        Objects.requireNonNull(attribute, "Attribute must not be null");
+        Objects.requireNonNull(consumer, "Consumer must not be null");
+
         itemAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
                                .put(attribute, consumer);
         return this;
@@ -107,6 +122,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addChannelExtension(String tag, BiConsumer<C, String> consumer) {
+        Objects.requireNonNull(tag, "Tag must not be null");
+        Objects.requireNonNull(consumer, "Consumer must not be null");
+
         channelExtensions.put(tag, consumer);
         return this;
     }
@@ -119,6 +137,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addChannelExtension(String tag, String attribute, BiConsumer<C, String> consumer) {
+        Objects.requireNonNull(tag, "Tag must not be null");
+        Objects.requireNonNull(attribute, "Attribute must not be null");
+        Objects.requireNonNull(consumer, "Consumer must not be null");
+
         channelAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
                                   .put(attribute, consumer);
         return this;
@@ -132,6 +154,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     @SuppressWarnings("squid:S1181")
     public Stream<I> read(String url) throws IOException {
+        Objects.requireNonNull(url, "URL must not be null");
+
         try {
             return readAsync(url).get(1, TimeUnit.MINUTES);
         } catch (CompletionException e) {
@@ -156,6 +180,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public Stream<I> read(InputStream inputStream) {
+        Objects.requireNonNull(inputStream, "Input stream must not be null");
+
         var itemIterator = new RssItemIterator(inputStream);
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
     }
@@ -166,6 +192,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public CompletableFuture<Stream<I>> readAsync(String url) {
+        Objects.requireNonNull(url, "URL must not be null");
+
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
