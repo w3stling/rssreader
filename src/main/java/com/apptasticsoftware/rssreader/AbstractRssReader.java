@@ -119,8 +119,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addItemExtension(String tag, BiConsumer<I, String> consumer) {
-        Objects.requireNonNull(tag, "Tag must not be null");
-        Objects.requireNonNull(consumer, "Consumer must not be null");
+        Objects.requireNonNull(tag, "Item tag must not be null");
+        Objects.requireNonNull(consumer, "Item consumer must not be null");
 
         itemExtensions.put(tag, consumer);
         return this;
@@ -134,9 +134,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addItemExtension(String tag, String attribute, BiConsumer<I, String> consumer) {
-        Objects.requireNonNull(tag, "Tag must not be null");
-        Objects.requireNonNull(attribute, "Attribute must not be null");
-        Objects.requireNonNull(consumer, "Consumer must not be null");
+        Objects.requireNonNull(tag, "Item tag must not be null");
+        Objects.requireNonNull(attribute, "Item attribute must not be null");
+        Objects.requireNonNull(consumer, "Item consumer must not be null");
 
         itemAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
                                .put(attribute, consumer);
@@ -150,8 +150,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addChannelExtension(String tag, BiConsumer<C, String> consumer) {
-        Objects.requireNonNull(tag, "Tag must not be null");
-        Objects.requireNonNull(consumer, "Consumer must not be null");
+        Objects.requireNonNull(tag, "Channel tag must not be null");
+        Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
         channelExtensions.put(tag, consumer);
         return this;
@@ -165,9 +165,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return this instance
      */
     public AbstractRssReader<C, I> addChannelExtension(String tag, String attribute, BiConsumer<C, String> consumer) {
-        Objects.requireNonNull(tag, "Tag must not be null");
-        Objects.requireNonNull(attribute, "Attribute must not be null");
-        Objects.requireNonNull(consumer, "Consumer must not be null");
+        Objects.requireNonNull(tag, "Channel tag must not be null");
+        Objects.requireNonNull(attribute, "Channel attribute must not be null");
+        Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
         channelAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
                                   .put(attribute, consumer);
