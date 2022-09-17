@@ -223,12 +223,16 @@ extends java.lang.Object</pre>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createChannel()">createChannel</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns an object of a Channel implementation.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createItem()">createItem</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns an object of an Item implementation.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
@@ -315,6 +319,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>createChannel</h4>
 <pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>&nbsp;createChannel()</pre>
+<div class="block">Returns an object of a Channel implementation.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>channel</dd>
+</dl>
 </li>
 </ul>
 <a id="createItem()">
@@ -324,6 +333,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>createItem</h4>
 <pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&nbsp;createItem()</pre>
+<div class="block">Returns an object of an Item implementation.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>item</dd>
+</dl>
 </li>
 </ul>
 <a id="addItemExtension(java.lang.String,java.util.function.BiConsumer)">
