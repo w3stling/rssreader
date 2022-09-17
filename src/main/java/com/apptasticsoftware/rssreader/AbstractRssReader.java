@@ -58,13 +58,15 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  */
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final String LOG_GROUP = "com.apptastic.rssreader";
-    private HttpClient httpClient;
+    private final HttpClient httpClient;
     private final HashMap<String, BiConsumer<C, String>> channelExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributeExtensions = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
+    private String userAgent = "";
 
     protected AbstractRssReader() {
+        httpClient = createHttpClient();
     }
 
     protected AbstractRssReader(HttpClient httpClient) {
@@ -83,6 +85,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return item
      */
     protected abstract I createItem();
+
+    /**
+     * Sets the user-agent of the HttpClient.
+     * This is completely optional and if not set then it will not send a user-agent header.
+     * @param userAgent the user-agent to use.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> setUserAgent(String userAgent) {
+        Objects.requireNonNull(userAgent, "User-agent must not be null");
+
+        this.userAgent = userAgent;
+        return this;
+    }
 
     /**
      * Add item extension for tags
@@ -198,19 +213,14 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
-        HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+        HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(url))
                 .timeout(Duration.ofSeconds(25))
-                .header("Accept-Encoding", "gzip")
-                .GET()
-                .build();
+                .header("Accept-Encoding", "gzip");
 
-        HttpClient client = this.httpClient;
+        if (!userAgent.isBlank())
+            builder.header("User-Agent", userAgent);
 
-        if (client == null) {
-            client = createHttpClient();
-        }
-
-        return client.sendAsync(req, HttpResponse.BodyHandlers.ofInputStream());
+        return httpClient.sendAsync(builder.GET().build(), HttpResponse.BodyHandlers.ofInputStream());
     }
 
     private Function<HttpResponse<InputStream>, Stream<I>> processResponse() {

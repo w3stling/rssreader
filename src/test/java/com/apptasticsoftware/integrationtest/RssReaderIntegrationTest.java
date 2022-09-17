@@ -545,4 +545,14 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @Test
+    void testUserAgent() throws IOException {
+        List<Item> items = new RssReader().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101")
+                                          .read("https://lwn.net/headlines/rss")
+                                          .collect(Collectors.toList());
+
+        for (Item item : items) {
+            assertThat(item.getChannel().getTitle(), is("LWN.net"));
+        }
+    }
 }
