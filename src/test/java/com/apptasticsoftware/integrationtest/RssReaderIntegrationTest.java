@@ -525,6 +525,7 @@ class RssReaderIntegrationTest {
     void testItemExtension() throws IOException {
         List<Item> items = new RssReader().addItemExtension("dc:creator", Item::setAuthor)
                                           .addItemExtension("dc:date", Item::setPubDate)
+                                          .addItemExtension("dc:date", "href", Item::setPubDate)
                                           .read("https://lwn.net/headlines/rss")
                                           .collect(Collectors.toList());
 
@@ -537,6 +538,7 @@ class RssReaderIntegrationTest {
     @Test
     void testChannelExtension() throws IOException {
         List<Item> items = new RssReader().addChannelExtension("syn:updatePeriod", Channel::setCategory)
+                                          .addChannelExtension("syn:updatePeriod", "href", Channel::setCategory)
                                           .read("https://lwn.net/headlines/rss")
                                           .collect(Collectors.toList());
 
