@@ -69,9 +69,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
+    private static final BiConsumer<Image, String> EMPTY_IMAGE_MAPPING = (image, value) -> {};
+    @SuppressWarnings("java:S1170")
     private final BiConsumer<C, String> emptyChannelMapping = (channel, value) -> {};
+    @SuppressWarnings("java:S1170")
     private final BiConsumer<I, String> emptyItemMapping = (item, value) -> {};
-    private final BiConsumer<Image, String> emptyImageMapping = (image, value) -> {};
 
     protected AbstractRssReader() {
         httpClient = createHttpClient();
@@ -559,7 +561,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (image == null || text.isEmpty())
                 return;
 
-            imageTags.getOrDefault(elementName, emptyImageMapping).accept(image, text);
+            imageTags.getOrDefault(elementName, EMPTY_IMAGE_MAPPING).accept(image, text);
         }
 
         void parseItemCharacters(I item, String prefix, String elementName, String text) {
