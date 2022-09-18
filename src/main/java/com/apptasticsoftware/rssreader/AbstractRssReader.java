@@ -284,7 +284,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
-        HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(url))
+        var builder = HttpRequest.newBuilder(URI.create(url))
                 .timeout(Duration.ofSeconds(25))
                 .header("Accept-Encoding", "gzip");
 
@@ -486,14 +486,14 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 var url = reader.getAttributeValue(null, "url");
                 var type = reader.getAttributeValue(null, "type");
                 var length = reader.getAttributeValue(null, "length");
-                Long parsedLength = (length == null || length.isEmpty()) ? null : Long.parseLong(length);
+                var parsedLength = (length == null || length.isEmpty()) ? null : Long.parseLong(length);
                 item.setEnclosure(new Enclosure(url, type, parsedLength));
             } else {
                 var prefix = reader.getPrefix();
                 var nsElementName = prefix.isEmpty() ? localName : prefix + ":" + localName;
 
                 if (isChannelPart) {
-                    Map<String, BiConsumer<C, String>> consumers = channelAttributeExtensions.get(nsElementName);
+                    var consumers = channelAttributeExtensions.get(nsElementName);
                     if (consumers != null) {
                         consumers.forEach((attributeName, consumer) -> {
                             var attributeValue = reader.getAttributeValue(null, attributeName);
@@ -501,7 +501,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                         });
                     }
                 } else if (isItemPart) {
-                    Map<String, BiConsumer<I, String>> consumers = itemAttributeExtensions.get(nsElementName);
+                    var consumers = itemAttributeExtensions.get(nsElementName);
                     if (consumers != null) {
                         consumers.forEach((attributeName, consumer) -> {
                             var attributeValue = reader.getAttributeValue(null, attributeName);
@@ -586,7 +586,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         HttpClient client;
 
         try {
-            SSLContext context = SSLContext.getInstance("TLSv1.3");
+            var context = SSLContext.getInstance("TLSv1.3");
             context.init(null, null, null);
 
             client = HttpClient.newBuilder()
