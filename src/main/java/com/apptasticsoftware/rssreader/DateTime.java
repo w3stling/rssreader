@@ -131,12 +131,8 @@ public class DateTime {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        if (dateTime.length() == 19) {
-            // Missing time zone information use default time zone. If not setting any default time zone system default
-            // time zone is used.
-            LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
-            return ZonedDateTime.of(localDateTime, defaultZone);
-        } else if ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',') {
+        if (dateTime.length() == 19 ||
+            ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
