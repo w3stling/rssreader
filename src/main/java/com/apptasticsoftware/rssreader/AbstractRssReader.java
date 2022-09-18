@@ -562,9 +562,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 return;
 
             var consumer = imageTags.get(elementName);
-            if (consumer != null) {
+            if (consumer != null)
                 consumer.accept(image, text);
-            }
         }
 
         void parseItemCharacters(I item, String prefix, String elementName, String text) {
