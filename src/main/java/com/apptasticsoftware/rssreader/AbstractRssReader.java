@@ -69,11 +69,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
-    private static final BiConsumer<Image, String> EMPTY_IMAGE_MAPPING = (image, value) -> {};
-    @SuppressWarnings("java:S1170")
-    private final BiConsumer<C, String> emptyChannelMapping = (channel, value) -> {};
-    @SuppressWarnings("java:S1170")
-    private final BiConsumer<I, String> emptyItemMapping = (item, value) -> {};
+
 
     protected AbstractRssReader() {
         httpClient = createHttpClient();
@@ -549,31 +545,42 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (channel == null || text.isEmpty())
                 return;
 
+            BiConsumer<C, String> consumer;
             if (prefix.isEmpty()) {
-                channelTags.getOrDefault(elementName, emptyChannelMapping).accept(channel, text);
+                consumer = channelTags.get(elementName);
             } else {
                 var nsElementName = prefix + ":" + elementName;
-                channelTagExtensions.getOrDefault(nsElementName, emptyChannelMapping).accept(channel, text);
+                consumer = channelTagExtensions.get(nsElementName);
             }
+
+            if (consumer != null)
+                consumer.accept(channel, text);
         }
 
         void parseImageCharacters(Image image, String elementName, String text) {
             if (image == null || text.isEmpty())
                 return;
 
-            imageTags.getOrDefault(elementName, EMPTY_IMAGE_MAPPING).accept(image, text);
+            var consumer = imageTags.get(elementName);
+            if (consumer != null) {
+                consumer.accept(image, text);
+            }
         }
 
         void parseItemCharacters(I item, String prefix, String elementName, String text) {
             if (item == null || text.isEmpty())
                 return;
 
+            BiConsumer<I, String> consumer;
             if (prefix.isEmpty()) {
-                itemTags.getOrDefault(elementName, emptyItemMapping).accept(item, text);
+                consumer = itemTags.get(elementName);
             } else {
                 var nsElementName = prefix + ":" + elementName;
-                itemTagExtensions.getOrDefault(nsElementName, emptyItemMapping).accept(item, text);
+                consumer = itemTagExtensions.get(nsElementName);
             }
+
+            if (consumer != null)
+                consumer.accept(item, text);
         }
     }
 
