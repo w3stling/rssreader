@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":6,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":6,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -243,32 +243,52 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#init()">init</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.io.InputStream)">read</a></span>&#8203;(java.io.InputStream&nbsp;inputStream)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed from input stream.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.lang.String)">read</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed with the given URL.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readAsync(java.lang.String)">readAsync</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed asynchronous with the given URL.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerChanelTags()">registerChanelTags</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerImageTags()">registerImageTags</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerItemTags()">registerItemTags</a></span>()</code></th>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>protected java.util.concurrent.CompletableFuture&lt;java.net.http.HttpResponse&lt;java.io.InputStream&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendAsyncRequest(java.lang.String)">sendAsyncRequest</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setUserAgent(java.lang.String)">setUserAgent</a></span>&#8203;(java.lang.String&nbsp;userAgent)</code></th>
 <td class="colLast">
@@ -353,6 +373,42 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>item</dd>
 </dl>
+</li>
+</ul>
+<a id="init()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>init</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;init()</pre>
+</li>
+</ul>
+<a id="registerChanelTags()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>registerChanelTags</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;registerChanelTags()</pre>
+</li>
+</ul>
+<a id="registerItemTags()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>registerItemTags</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;registerItemTags()</pre>
+</li>
+</ul>
+<a id="registerImageTags()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>registerImageTags</h4>
+<pre class="methodSignature">protected&nbsp;void&nbsp;registerImageTags()</pre>
 </li>
 </ul>
 <a id="setUserAgent(java.lang.String)">
