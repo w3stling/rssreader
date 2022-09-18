@@ -469,7 +469,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseAttributes() {
-            if (reader.getLocalName().equals("link")) {
+            var localName = reader.getLocalName();
+
+            if (localName.equals("link")) {
                 var rel = reader.getAttributeValue(null, "rel");
                 var link = reader.getAttributeValue(null, "href");
                 var isAlternate = "alternate".equals(rel);
@@ -480,33 +482,30 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     else
                         item.setLink(link);
                 }
-            } else if(reader.getLocalName().equals("enclosure")) {
+            } else if(localName.equals("enclosure")) {
                 var url = reader.getAttributeValue(null, "url");
                 var type = reader.getAttributeValue(null, "type");
                 var length = reader.getAttributeValue(null, "length");
                 Long parsedLength = (length == null || length.isEmpty()) ? null : Long.parseLong(length);
                 item.setEnclosure(new Enclosure(url, type, parsedLength));
             } else {
+                var prefix = reader.getPrefix();
+                var nsElementName = prefix.isEmpty() ? localName : prefix + ":" + localName;
+
                 if (isChannelPart) {
-                    var name = reader.getLocalName();
-                    var prefix = reader.getPrefix();
-                    var nsElementName = prefix.isEmpty() ? name : prefix + ":" + name;
-                    Map<String, BiConsumer<C, String>> a = channelAttributeExtensions.get(nsElementName);
-                    if (a != null) {
-                        a.forEach((key, value) -> {
-                            var attributeValue = reader.getAttributeValue(null, key);
-                            value.accept(channel, attributeValue);
+                    Map<String, BiConsumer<C, String>> consumers = channelAttributeExtensions.get(nsElementName);
+                    if (consumers != null) {
+                        consumers.forEach((attributeName, consumer) -> {
+                            var attributeValue = reader.getAttributeValue(null, attributeName);
+                            consumer.accept(channel, attributeValue);
                         });
                     }
                 } else if (isItemPart) {
-                    var name = reader.getLocalName();
-                    var prefix = reader.getPrefix();
-                    var nsElementName = prefix.isEmpty() ? name : prefix + ":" + name;
-                    Map<String, BiConsumer<I, String>> a = itemAttributeExtensions.get(nsElementName);
-                    if (a != null) {
-                        a.forEach((key, value) -> {
-                            var attributeValue = reader.getAttributeValue(null, key);
-                            value.accept(item, attributeValue);
+                    Map<String, BiConsumer<I, String>> consumers = itemAttributeExtensions.get(nsElementName);
+                    if (consumers != null) {
+                        consumers.forEach((attributeName, consumer) -> {
+                            var attributeValue = reader.getAttributeValue(null, attributeName);
+                            consumer.accept(item, attributeValue);
                         });
                     }
                 }
