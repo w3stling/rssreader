@@ -64,7 +64,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributeExtensions = new HashMap<>();
-
     private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
@@ -165,7 +164,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @param value the value of the header.
      * @return updated RSSReader.
      */
-    public AbstractRssReader<C, I> addHeader(String key, String value){
+    public AbstractRssReader<C, I> addHeader(String key, String value) {
+        Objects.requireNonNull(key, "Key must not be null");
+        Objects.requireNonNull(value, "Value must not be null");
+
         this.headers.put(key, value);
         return this;
     }
@@ -285,8 +287,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
         var builder = HttpRequest.newBuilder(URI.create(url))
-                .timeout(Duration.ofSeconds(25))
-                .header("Accept-Encoding", "gzip");
+                                         .timeout(Duration.ofSeconds(25))
+                                         .header("Accept-Encoding", "gzip");
 
         if (!userAgent.isBlank())
             builder.header("User-Agent", userAgent);
@@ -309,7 +311,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
                 inputStream = new BufferedInputStream(inputStream);
 
-                removeBadDate(inputStream);
+                removeBadData(inputStream);
                 var itemIterator = new RssItemIterator(inputStream);
                 return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
             } catch (IOException e) {
@@ -318,7 +320,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         };
     }
 
-    private void removeBadDate(InputStream inputStream) throws IOException {
+    private void removeBadData(InputStream inputStream) throws IOException {
         inputStream.mark(2);
         var firstChar = inputStream.read();
 
