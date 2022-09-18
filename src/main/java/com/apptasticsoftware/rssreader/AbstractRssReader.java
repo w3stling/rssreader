@@ -69,9 +69,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
-    private final BiConsumer<C, String> NOP_CHANNEL = (t, v) -> {};
-    private final BiConsumer<I, String> NOP_ITEM = (t, v) -> {};
-    private final BiConsumer<Image, String> NOP_IMAGE = (t, v) -> {};
+    private final BiConsumer<C, String> emptyChannelMapping = (channel, value) -> {};
+    private final BiConsumer<I, String> emptyItemMapping = (item, value) -> {};
+    private final BiConsumer<Image, String> emptyImageMapping = (image, value) -> {};
 
     protected AbstractRssReader() {
         httpClient = createHttpClient();
@@ -101,6 +101,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         registerItemTags();
         registerImageTags();
     }
+
+    @SuppressWarnings("java:S1192")
     protected void registerChanelTags() {
         channelTags.put("title", Channel::setTitle);
         channelTags.put("description", Channel::setDescription);
@@ -119,6 +121,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("webMaster", Channel::setWebMaster);
     }
 
+    @SuppressWarnings("java:S1192")
     protected void registerItemTags() {
         itemTags.put("guid", Item::setGuid);
         itemTags.put("id", Item::setGuid);
@@ -134,6 +137,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
     }
 
+    @SuppressWarnings("java:S1192")
     protected void registerImageTags() {
         imageTags.put("title", Image::setTitle);
         imageTags.put("link", Image::setLink);
@@ -544,10 +548,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 return;
 
             if (prefix.isEmpty()) {
-                channelTags.getOrDefault(elementName, NOP_CHANNEL).accept(channel, text);
+                channelTags.getOrDefault(elementName, emptyChannelMapping).accept(channel, text);
             } else {
                 var nsElementName = prefix + ":" + elementName;
-                channelTagExtensions.getOrDefault(nsElementName, NOP_CHANNEL).accept(channel, text);
+                channelTagExtensions.getOrDefault(nsElementName, emptyChannelMapping).accept(channel, text);
             }
         }
 
@@ -555,7 +559,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (image == null || text.isEmpty())
                 return;
 
-            imageTags.getOrDefault(elementName, NOP_IMAGE).accept(image, text);
+            imageTags.getOrDefault(elementName, emptyImageMapping).accept(image, text);
         }
 
         void parseItemCharacters(I item, String prefix, String elementName, String text) {
@@ -563,10 +567,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 return;
 
             if (prefix.isEmpty()) {
-                itemTags.getOrDefault(elementName, NOP_ITEM).accept(item, text);
+                itemTags.getOrDefault(elementName, emptyItemMapping).accept(item, text);
             } else {
                 var nsElementName = prefix + ":" + elementName;
-                itemTagExtensions.getOrDefault(nsElementName, NOP_ITEM).accept(item, text);
+                itemTagExtensions.getOrDefault(nsElementName, emptyItemMapping).accept(item, text);
             }
         }
     }
