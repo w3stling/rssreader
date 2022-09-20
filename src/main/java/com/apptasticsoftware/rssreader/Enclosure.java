@@ -33,6 +33,10 @@ public class Enclosure {
     private String type;
     private Long length;
 
+    public Enclosure() {
+
+    }
+
     public Enclosure(String url, String type, Long length) {
         this.url = url;
         this.type = type;
@@ -74,4 +78,5 @@ public class Enclosure {
     public void setLength(Long length) {
         this.length = length;
     }
+
 }
