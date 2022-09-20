@@ -62,10 +62,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private String userAgent = "";
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
+    private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributeExtensions = new HashMap<>();
     private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
+    private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
 
@@ -95,7 +97,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     protected void init() {
         registerChanelTags();
+        registerChanelAttributes();
         registerItemTags();
+        registerItemAttributes();
         registerImageTags();
     }
 
@@ -118,6 +122,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("webMaster", Channel::setWebMaster);
     }
 
+    protected void registerChanelAttributes() {
+        channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
+    }
+
     @SuppressWarnings("java:S1192")
     protected void registerItemTags() {
         itemTags.put("guid", Item::setGuid);
@@ -132,6 +140,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("pubDate", Item::setPubDate);
         itemTags.put("published", Item::setPubDate);
         itemTags.put("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
+    }
+
+    protected void registerItemAttributes() {
+        //channelAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("href", );
+        itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Item::setLink);
+        itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).put("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
+        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
+        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
+        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("length", (i, v) -> i.getEnclosure().ifPresent(e -> e.setLength(Long.parseLong(v))) );
     }
 
     @SuppressWarnings("java:S1192")
@@ -199,7 +216,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(consumer, "Item consumer must not be null");
 
         itemAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                               .put(attribute, consumer);
+                .put(attribute, consumer);
         return this;
     }
 
@@ -230,7 +247,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
         channelAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                                  .put(attribute, consumer);
+                .put(attribute, consumer);
         return this;
     }
 
@@ -442,27 +459,26 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             textBuilder.setLength(0);
             elementName = reader.getLocalName();
             var prefix = reader.getPrefix();
+            var nsLocalName = prefix.isEmpty() ? elementName : prefix + ":" + elementName;
 
-            if ("channel".equals(elementName) || "feed".equals(elementName)) {
+            if ("channel".equals(nsLocalName) || "feed".equals(nsLocalName)) {
                 channel = createChannel();
                 channel.setTitle("");
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
             }
-            else if ("item".equals(elementName) || "entry".equals(elementName)) {
+            else if ("item".equals(nsLocalName) || "entry".equals(nsLocalName)) {
                 item = createItem();
                 item.setChannel(channel);
                 isChannelPart = false;
                 isImagePart = false;
                 isItemPart = true;
             }
-            else if ("guid".equals(elementName)) {
-                var value = reader.getAttributeValue(null, "isPermaLink");
-                if (item != null)
-                    item.setIsPermaLink(Boolean.parseBoolean(value));
+            else if ("enclosure".equals(nsLocalName)) {
+                item.setEnclosure(new Enclosure());
             }
-            else if ("image".equals(elementName) && prefix.isEmpty()) {
+            else if ("image".equals(nsLocalName) && prefix.isEmpty()) {
                 image = new Image();
                 channel.setImage(image);
                 isImagePart = true;
@@ -472,54 +488,55 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseAttributes() {
             var localName = reader.getLocalName();
+            var prefix = reader.getPrefix();
+            var nsLocalName = prefix.isEmpty() ? localName : prefix + ":" + localName;
 
-            if (localName.equals("link")) {
-                var rel = reader.getAttributeValue(null, "rel");
-                var link = reader.getAttributeValue(null, "href");
-                var isAlternate = "alternate".equals(rel);
-
-                if (link != null && isAlternate) {
-                    if (isChannelPart)
-                        channel.setLink(link);
-                    else
-                        item.setLink(link);
+            if (isChannelPart) {
+                // Map standard channel attributes
+                var consumers = channelAttributes.get(nsLocalName);
+                if (consumers != null) {
+                    consumers.forEach((attributeName, consumer) -> {
+                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                        attributeValue.ifPresent(v -> consumer.accept(channel, v));
+                    });
                 }
-            } else if(localName.equals("enclosure")) {
-                var url = reader.getAttributeValue(null, "url");
-                var type = reader.getAttributeValue(null, "type");
-                var length = reader.getAttributeValue(null, "length");
-                var parsedLength = (length == null || length.isEmpty()) ? null : Long.parseLong(length);
-                item.setEnclosure(new Enclosure(url, type, parsedLength));
-            } else {
-                var prefix = reader.getPrefix();
-                var nsElementName = prefix.isEmpty() ? localName : prefix + ":" + localName;
 
-                if (isChannelPart) {
-                    var consumers = channelAttributeExtensions.get(nsElementName);
-                    if (consumers != null) {
-                        consumers.forEach((attributeName, consumer) -> {
-                            var attributeValue = reader.getAttributeValue(null, attributeName);
-                            consumer.accept(channel, attributeValue);
-                        });
-                    }
-                } else if (isItemPart) {
-                    var consumers = itemAttributeExtensions.get(nsElementName);
-                    if (consumers != null) {
-                        consumers.forEach((attributeName, consumer) -> {
-                            var attributeValue = reader.getAttributeValue(null, attributeName);
-                            consumer.accept(item, attributeValue);
-                        });
-                    }
+                // Map extension channel attributes
+                consumers = channelAttributeExtensions.get(nsLocalName);
+                if (consumers != null) {
+                    consumers.forEach((attributeName, consumer) -> {
+                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                        attributeValue.ifPresent(v -> consumer.accept(channel, v));
+                    });
+                }
+            } else if (isItemPart) {
+                // Map standard item attributes
+                var consumers = itemAttributes.get(nsLocalName);
+                if (consumers != null) {
+                    consumers.forEach((attributeName, consumer) -> {
+                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                        attributeValue.ifPresent(v -> consumer.accept(item, v));
+                    });
+                }
+
+                // Map extension item attributes
+                consumers = itemAttributeExtensions.get(nsLocalName);
+                if (consumers != null) {
+                    consumers.forEach((attributeName, consumer) -> {
+                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                        attributeValue.ifPresent(v -> consumer.accept(item, v));
+                    });
                 }
             }
         }
 
         boolean parseEndElement() {
-            var name = reader.getLocalName();
+            var localName = reader.getLocalName();
             var prefix = reader.getPrefix();
+            var nsLocalName = prefix.isEmpty() ? localName : prefix + ":" + localName;
             var text = textBuilder.toString().trim();
 
-            if ("image".equals(name))
+            if ("image".equals(nsLocalName))
                 isImagePart = false;
             else if (isImagePart)
                 parseImageCharacters(image, elementName, text);
@@ -530,7 +547,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
             textBuilder.setLength(0);
 
-            return "item".equals(name) || "entry".equals(name);
+            return "item".equals(nsLocalName) || "entry".equals(nsLocalName);
         }
 
         void parseCharacters() {

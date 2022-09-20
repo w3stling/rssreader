@@ -71,8 +71,6 @@ class RssReaderIntegrationTest {
     }
 
 
-
-
     @Test
     void rssKonjunkturinstitutet() throws IOException {
         RssReader reader = new RssReader();
@@ -95,7 +93,7 @@ class RssReaderIntegrationTest {
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresent());
-            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+            assertThat(item.getIsPermaLink(), isEmpty());
             assertThat(item.getTitle(), isPresent());
             assertThat(item.getDescription(), isPresent());
             assertThat(item.getPubDate(), isPresent());
@@ -163,6 +161,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
     }
+
 
     @Test
     void rssPlaceraString() throws IOException, InterruptedException {
@@ -232,6 +231,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     void rssRealtid() throws IOException {
         RssReader reader = new RssReader();
@@ -262,12 +262,14 @@ class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     void rssVAFinansBadUrl() {
         RssReader reader = new RssReader();
         assertThrows(IOException.class, () ->
                 reader.read("https://www.vafinans.se/rss/nyheter2"));
     }
+
 
     @Test
     void feedForAll() throws IOException {
@@ -304,6 +306,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     void investingcom() throws IOException {
         RssReader reader = new RssReader();
@@ -333,6 +336,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getLink(), isPresent());
         }
     }
+
 
     @Test
     void investingcom_mest_lasta() throws IOException {
@@ -391,7 +395,7 @@ class RssReaderIntegrationTest {
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAnd(is(false)));
+            assertThat(item.getIsPermaLink(), isEmpty());
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
@@ -433,8 +437,13 @@ class RssReaderIntegrationTest {
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
+            assertThat(item.getEnclosure(), isPresent());
+            assertThat(item.getEnclosure().get().getUrl(), is(not(emptyString())));
+            assertThat(item.getEnclosure().get().getType(), is(not(emptyString())));
+            assertThat(item.getEnclosure().get().getLength(), isPresent());
         }
     }
+
 
     @Test
     void zonedDateTime() throws IOException {
@@ -451,6 +460,7 @@ class RssReaderIntegrationTest {
                                       .orElse(null);
         assertNotNull(dateTime);
     }
+
 
     @Test
     void dateTime() throws IOException {
@@ -521,6 +531,7 @@ class RssReaderIntegrationTest {
         return response.body();
     }
 
+
     @Test
     void testItemExtension() throws IOException {
         List<Item> items = new RssReader().addItemExtension("dc:creator", Item::setAuthor)
@@ -535,6 +546,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     void testChannelExtension() throws IOException {
         List<Item> items = new RssReader().addChannelExtension("syn:updatePeriod", Channel::setCategory)
@@ -547,6 +559,26 @@ class RssReaderIntegrationTest {
         }
     }
 
+
+    @Test
+    void testAttributeExtension() throws IOException {
+        List<Item> items = new RssReader()
+                .addChannelExtension("atom:link", "rel", Channel::setCategory)
+                .addChannelExtension("atom:link", "type", Channel::setManagingEditor)
+                .addItemExtension("atom:link", "rel", Item::setAuthor)
+                .read("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
+                .collect(Collectors.toList());
+
+        int i = 0;
+        for (Item item : items) {
+            System.out.println(++i);
+            assertThat(item.getChannel().getCategory(), isPresentAndIs("self"));
+            assertThat(item.getChannel().getManagingEditor(), isPresentAnd(not(emptyString())));
+            assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));
+        }
+    }
+
+
     @Test
     void testUserAgent() throws IOException {
         List<Item> items = new RssReader().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101")
@@ -558,6 +590,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+
     @Test
     void testHttpHeader() throws IOException {
         List<Item> items = new RssReader().addHeader("If-None-Match", "response_version1")
@@ -568,4 +601,5 @@ class RssReaderIntegrationTest {
             assertThat(item.getChannel().getTitle(), is("LWN.net"));
         }
     }
+
 }
