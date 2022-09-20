@@ -418,9 +418,6 @@ class RssReaderIntegrationTest {
             assertThat(channel.getDescription(), is("World of Tanks news — read the latest news on the free MMO World of Tanks game, the best game for boys"));
             assertThat(channel.getLanguage(), isPresentAndIs("en"));
             assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
             assertThat(channel.getImage(), isPresent());
             assertThat(channel.getImage().map(Image::getTitle).orElse(null), is("World of Tanks news — free tank game, official WoT website | World of Tanks"));
             assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));

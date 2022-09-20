@@ -143,12 +143,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     protected void registerItemAttributes() {
-        //channelAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("href", );
         itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Item::setLink);
         itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).put("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
-        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
-        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
-        itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>()).put("length", (i, v) -> i.getEnclosure().ifPresent(e -> e.setLength(Long.parseLong(v))) );
+
+        var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
+        enclosureAttributes.put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
+        enclosureAttributes.put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
+        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> e.setLength(Long.parseLong(v))) );
     }
 
     @SuppressWarnings("java:S1192")
