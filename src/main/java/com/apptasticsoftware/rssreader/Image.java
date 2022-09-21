@@ -23,6 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -130,5 +131,20 @@ public class Image {
      */
     public void setWidth(Integer width) {
         this.width = width;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Image)) return false;
+        Image image = (Image) o;
+        return Objects.equals(getTitle(), image.getTitle()) && Objects.equals(getLink(), image.getLink()) &&
+                Objects.equals(getUrl(), image.getUrl()) && Objects.equals(getDescription(), image.getDescription()) &&
+                Objects.equals(getHeight(), image.getHeight()) && Objects.equals(getWidth(), image.getWidth());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getLink(), getUrl(), getDescription(), getHeight(), getWidth());
     }
 }

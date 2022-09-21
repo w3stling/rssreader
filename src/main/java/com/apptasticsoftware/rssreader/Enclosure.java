@@ -23,6 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -32,16 +33,6 @@ public class Enclosure {
     private String url;
     private String type;
     private Long length;
-
-    public Enclosure() {
-
-    }
-
-    public Enclosure(String url, String type, Long length) {
-        this.url = url;
-        this.type = type;
-        this.length = length;
-    }
 
     /**
      * Get the url of enclosure.
@@ -77,6 +68,19 @@ public class Enclosure {
 
     public void setLength(Long length) {
         this.length = length;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Enclosure)) return false;
+        Enclosure enclosure = (Enclosure) o;
+        return Objects.equals(getUrl(), enclosure.getUrl()) && Objects.equals(getType(), enclosure.getType()) && Objects.equals(getLength(), enclosure.getLength());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getType(), getLength());
     }
 
 }

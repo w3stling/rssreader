@@ -257,7 +257,8 @@ public class Item implements Comparable<Item> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(), getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
+        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(),
+                getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
     }
 
     /**
