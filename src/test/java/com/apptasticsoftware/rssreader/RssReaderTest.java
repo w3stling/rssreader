@@ -255,7 +255,7 @@ class RssReaderTest {
     }
 
     @Test
-    void hashCodeTest() {
+    void itemHashCodeTest() {
         Item item1 = new Item();
         item1.setAuthor("a1");
         item1.setCategory("a2");
@@ -282,7 +282,7 @@ class RssReaderTest {
     }
 
     @Test
-    void equalsTest() {
+    void itemEqualsTest() {
         Item item1 = new Item();
         item1.setAuthor("a1");
         item1.setCategory("a2");
@@ -315,6 +315,186 @@ class RssReaderTest {
 
         assertNotEquals(item1, item2);
         assertEquals(item1, item3);
+    }
+
+
+    @Test
+    void channelHashCodeTest() {
+        Channel channel1 = new Channel();
+        channel1.setTitle("a1");
+        channel1.setDescription("a2");
+        channel1.setCategory("a3");
+        channel1.setLanguage("a4");
+        channel1.setLink("a5");
+        channel1.setCopyright("a6");
+        channel1.setGenerator("a7");
+        channel1.setTtl("a8");
+        channel1.setPubDate("20220922T10:11:12");
+        channel1.setLastBuildDate("20220922T10:11:13");
+        channel1.setManagingEditor("a9");
+        channel1.setWebMaster("a10");
+        int h1 = channel1.hashCode();
+
+        Channel channel2 = new Channel();
+        channel2.setTitle("b1");
+        channel2.setDescription("a2");
+        channel2.setCategory("a3");
+        channel2.setLanguage("a4");
+        channel2.setLink("a5");
+        channel2.setCopyright("a6");
+        channel2.setGenerator("a7");
+        channel2.setTitle("a8");
+        channel2.setPubDate("20220922T10:11:12");
+        channel2.setLastBuildDate("20220922T10:11:13");
+        channel2.setManagingEditor("a9");
+        channel2.setWebMaster("a10");
+        int h2 = channel2.hashCode();
+
+        assertNotEquals(h1, h2);
+    }
+
+
+    @Test
+    void channelEqualsTest() {
+        Channel channel1 = new Channel();
+        channel1.setTitle("a1");
+        channel1.setDescription("a2");
+        channel1.setCategory("a3");
+        channel1.setLanguage("a4");
+        channel1.setLink("a5");
+        channel1.setCopyright("a6");
+        channel1.setGenerator("a7");
+        channel1.setTtl("a8");
+        channel1.setPubDate("20220922T10:11:12");
+        channel1.setLastBuildDate("20220922T10:11:13");
+        channel1.setManagingEditor("a9");
+        channel1.setWebMaster("a10");
+
+        Channel channel2 = new Channel();
+        channel2.setTitle("b1");
+        channel2.setDescription("a2");
+        channel2.setCategory("a3");
+        channel2.setLanguage("a4");
+        channel2.setLink("a5");
+        channel2.setCopyright("a6");
+        channel2.setGenerator("a7");
+        channel2.setTitle("a8");
+        channel2.setPubDate("20220922T10:11:12");
+        channel2.setLastBuildDate("20220922T10:11:13");
+        channel2.setManagingEditor("a9");
+        channel2.setWebMaster("a10");
+
+        Channel channel3 = new Channel();
+        channel3.setTitle("a1");
+        channel3.setDescription("a2");
+        channel3.setCategory("a3");
+        channel3.setLanguage("a4");
+        channel3.setLink("a5");
+        channel3.setCopyright("a6");
+        channel3.setGenerator("a7");
+        channel3.setTtl("a8");
+        channel3.setPubDate("20220922T10:11:12");
+        channel3.setLastBuildDate("20220922T10:11:13");
+        channel3.setManagingEditor("a9");
+        channel3.setWebMaster("a10");
+
+        assertNotEquals(channel1, channel2);
+        assertEquals(channel1, channel3);
+    }
+
+
+    @Test
+    void imageHashCodeTest() {
+        Image image1 = new Image();
+        image1.setTitle("a1");
+        image1.setLink("a2");
+        image1.setUrl("a3");
+        image1.setDescription("a4");
+        image1.setHeight(1);
+        image1.setWidth(2);
+        int h1 = image1.hashCode();
+
+        Image image2 = new Image();
+        image2.setTitle("b1");
+        image2.setLink("a2");
+        image2.setUrl("a3");
+        image2.setDescription("a4");
+        image2.setHeight(1);
+        image2.setWidth(2);
+        int h2 = image2.hashCode();
+
+        assertNotEquals(h1, h2);
+    }
+
+
+    @Test
+    void imageEqualsTest() {
+        Image image1 = new Image();
+        image1.setTitle("a1");
+        image1.setLink("a2");
+        image1.setUrl("a3");
+        image1.setDescription("a4");
+        image1.setHeight(1);
+        image1.setWidth(2);
+
+        Image image2 = new Image();
+        image2.setTitle("b1");
+        image2.setLink("a2");
+        image2.setUrl("a3");
+        image2.setDescription("a4");
+        image2.setHeight(1);
+        image2.setWidth(2);
+
+        Image image3 = new Image();
+        image3.setTitle("a1");
+        image3.setLink("a2");
+        image3.setUrl("a3");
+        image3.setDescription("a4");
+        image3.setHeight(1);
+        image3.setWidth(2);
+
+        assertNotEquals(image1, image2);
+        assertEquals(image1, image3);
+    }
+
+
+    @Test
+    void enclosureHashCodeTest() {
+        Enclosure enclosure1 = new Enclosure();
+        enclosure1.setUrl("a1");
+        enclosure1.setType("a2");
+        enclosure1.setLength(1L);
+        int h1 = enclosure1.hashCode();
+
+        Enclosure enclosure2 = new Enclosure();
+        enclosure2.setUrl("b1");
+        enclosure2.setType("a2");
+        enclosure2.setLength(1L);
+        int h2 = enclosure2.hashCode();
+
+        assertNotEquals(h1, h2);
+    }
+
+
+    @Test
+    void enclosureEqualsTest() {
+        Enclosure enclosure1 = new Enclosure();
+        enclosure1.setUrl("a1");
+        enclosure1.setType("a2");
+        enclosure1.setLength(1L);
+
+        Enclosure enclosure2 = new Enclosure();
+        enclosure2.setUrl("b1");
+        enclosure2.setType("a2");
+        enclosure2.setLength(1L);
+
+        Enclosure enclosure3 = new Enclosure();
+        enclosure3.setUrl("a1");
+        enclosure3.setType("a2");
+        enclosure3.setLength(1L);
+
+        assertNotEquals(enclosure1, enclosure2);
+        assertEquals(enclosure1, enclosure3);
     }
 
 
