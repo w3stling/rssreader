@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -495,6 +496,15 @@ class RssReaderTest {
 
         assertNotEquals(enclosure1, enclosure2);
         assertEquals(enclosure1, enclosure3);
+    }
+
+
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.simple().forClass(Channel.class).verify();
+        EqualsVerifier.simple().forClass(Item.class).verify();
+        EqualsVerifier.simple().forClass(Enclosure.class).verify();
+        EqualsVerifier.simple().forClass(Image.class).verify();
     }
 
 

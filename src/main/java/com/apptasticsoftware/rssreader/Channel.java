@@ -275,7 +275,7 @@ public class Channel {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Channel)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Channel channel = (Channel) o;
         return Objects.equals(getTitle(), channel.getTitle()) &&
                 Objects.equals(getDescription(), channel.getDescription()) &&

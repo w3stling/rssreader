@@ -241,7 +241,7 @@ public class Item implements Comparable<Item> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Item)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
         return Objects.equals(getTitle(), item.getTitle()) &&
                 Objects.equals(getDescription(), item.getDescription()) &&

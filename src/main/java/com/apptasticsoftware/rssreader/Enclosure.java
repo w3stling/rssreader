@@ -73,7 +73,7 @@ public class Enclosure {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Enclosure)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Enclosure enclosure = (Enclosure) o;
         return Objects.equals(getUrl(), enclosure.getUrl()) && Objects.equals(getType(), enclosure.getType()) && Objects.equals(getLength(), enclosure.getLength());
     }

@@ -136,7 +136,7 @@ public class Image {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Image)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Image image = (Image) o;
         return Objects.equals(getTitle(), image.getTitle()) && Objects.equals(getLink(), image.getLink()) &&
                 Objects.equals(getUrl(), image.getUrl()) && Objects.equals(getDescription(), image.getDescription()) &&
