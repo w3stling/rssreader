@@ -500,7 +500,7 @@ class RssReaderTest {
 
 
     @Test
-    public void equalsContract() {
+    void equalsContract() {
         EqualsVerifier.simple().forClass(Channel.class).verify();
         EqualsVerifier.simple().forClass(Item.class).verify();
         EqualsVerifier.simple().forClass(Enclosure.class).verify();
