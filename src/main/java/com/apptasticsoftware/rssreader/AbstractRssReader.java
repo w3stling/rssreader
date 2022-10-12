@@ -96,15 +96,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     protected abstract I createItem();
 
     protected void init() {
-        registerChanelTags();
-        registerChanelAttributes();
+        registerChannelTags();
+        registerChannelAttributes();
         registerItemTags();
         registerItemAttributes();
         registerImageTags();
     }
 
     @SuppressWarnings("java:S1192")
-    protected void registerChanelTags() {
+    protected void registerChannelTags() {
         channelTags.put("title", Channel::setTitle);
         channelTags.put("description", Channel::setDescription);
         channelTags.put("subtitle", Channel::setDescription);
@@ -122,7 +122,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("webMaster", Channel::setWebMaster);
     }
 
-    protected void registerChanelAttributes() {
+    protected void registerChannelAttributes() {
         channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
     }
 
