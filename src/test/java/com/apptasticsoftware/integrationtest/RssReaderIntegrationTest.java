@@ -566,11 +566,22 @@ class RssReaderIntegrationTest {
                 .read("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
                 .collect(Collectors.toList());
 
-        int i = 0;
         for (Item item : items) {
-            System.out.println(++i);
             assertThat(item.getChannel().getCategory(), isPresentAndIs("self"));
             assertThat(item.getChannel().getManagingEditor(), isPresentAnd(not(emptyString())));
+            assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));
+        }
+    }
+
+    @Test
+    void testItemExtensionNoNamespace() throws IOException {
+        List<Item> items = new RssReader()
+                .addItemExtension("name", Item::setAuthor)
+                .addItemExtension("email", Item::setAuthor)
+                .read("https://github.com/openjdk/jdk/commits.atom")
+                .collect(Collectors.toList());
+
+        for (Item item : items) {
             assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));
         }
     }

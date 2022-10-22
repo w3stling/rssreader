@@ -63,13 +63,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
-    private final HashMap<String, BiConsumer<C, String>> channelTagExtensions = new HashMap<>();
-    private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributeExtensions = new HashMap<>();
-    private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
-    private final HashMap<String, BiConsumer<I, String>> itemTagExtensions = new HashMap<>();
-    private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributeExtensions = new HashMap<>();
+    private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
 
 
     protected AbstractRssReader() {
@@ -200,7 +196,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(tag, "Item tag must not be null");
         Objects.requireNonNull(consumer, "Item consumer must not be null");
 
-        itemTagExtensions.put(tag, consumer);
+        itemTags.put(tag, consumer);
         return this;
     }
 
@@ -216,8 +212,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(attribute, "Item attribute must not be null");
         Objects.requireNonNull(consumer, "Item consumer must not be null");
 
-        itemAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                .put(attribute, consumer);
+        itemAttributes.computeIfAbsent(tag, k -> new HashMap<>())
+                      .put(attribute, consumer);
         return this;
     }
 
@@ -231,7 +227,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(tag, "Channel tag must not be null");
         Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
-        channelTagExtensions.put(tag, consumer);
+        channelTags.put(tag, consumer);
         return this;
     }
 
@@ -247,8 +243,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(attribute, "Channel attribute must not be null");
         Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
-        channelAttributeExtensions.computeIfAbsent(tag, k -> new HashMap<>())
-                .put(attribute, consumer);
+        channelAttributes.computeIfAbsent(tag, k -> new HashMap<>())
+                         .put(attribute, consumer);
         return this;
     }
 
@@ -460,7 +456,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             textBuilder.setLength(0);
             elementName = reader.getLocalName();
             var prefix = reader.getPrefix();
-            var nsLocalName = prefix.isEmpty() ? elementName : prefix + ":" + elementName;
+            var nsLocalName = toNsName(prefix, elementName);
 
             if ("channel".equals(nsLocalName) || "feed".equals(nsLocalName)) {
                 channel = createChannel();
@@ -479,7 +475,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             else if ("enclosure".equals(nsLocalName)) {
                 item.setEnclosure(new Enclosure());
             }
-            else if ("image".equals(nsLocalName) && prefix.isEmpty()) {
+            else if ("image".equals(nsLocalName)) {
                 image = new Image();
                 channel.setImage(image);
                 isImagePart = true;
@@ -490,10 +486,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         void parseAttributes() {
             var localName = reader.getLocalName();
             var prefix = reader.getPrefix();
-            var nsLocalName = prefix.isEmpty() ? localName : prefix + ":" + localName;
+            var nsLocalName = toNsName(prefix, localName);
 
             if (isChannelPart) {
-                // Map standard channel attributes
+                // Map channel attributes
                 var consumers = channelAttributes.get(nsLocalName);
                 if (consumers != null) {
                     consumers.forEach((attributeName, consumer) -> {
@@ -501,27 +497,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                         attributeValue.ifPresent(v -> consumer.accept(channel, v));
                     });
                 }
-
-                // Map extension channel attributes
-                consumers = channelAttributeExtensions.get(nsLocalName);
-                if (consumers != null) {
-                    consumers.forEach((attributeName, consumer) -> {
-                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
-                        attributeValue.ifPresent(v -> consumer.accept(channel, v));
-                    });
-                }
             } else if (isItemPart) {
-                // Map standard item attributes
+                // Map item attributes
                 var consumers = itemAttributes.get(nsLocalName);
-                if (consumers != null) {
-                    consumers.forEach((attributeName, consumer) -> {
-                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
-                        attributeValue.ifPresent(v -> consumer.accept(item, v));
-                    });
-                }
-
-                // Map extension item attributes
-                consumers = itemAttributeExtensions.get(nsLocalName);
                 if (consumers != null) {
                     consumers.forEach((attributeName, consumer) -> {
                         var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
@@ -534,7 +512,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         boolean parseEndElement() {
             var localName = reader.getLocalName();
             var prefix = reader.getPrefix();
-            var nsLocalName = prefix.isEmpty() ? localName : prefix + ":" + localName;
+            var nsLocalName = toNsName(prefix, localName);
             var text = textBuilder.toString().trim();
 
             if ("image".equals(nsLocalName))
@@ -554,7 +532,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         void parseCharacters() {
             var text = reader.getText();
 
-            if (text.trim().isEmpty())
+            if (text.isBlank())
                 return;
 
             textBuilder.append(text);
@@ -564,13 +542,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (channel == null || text.isEmpty())
                 return;
 
-            BiConsumer<C, String> consumer;
-            if (prefix.isEmpty()) {
-                consumer = channelTags.get(elementName);
-            } else {
-                var nsElementName = prefix + ":" + elementName;
-                consumer = channelTagExtensions.get(nsElementName);
-            }
+            var nsElementName = toNsName(prefix, elementName);
+            BiConsumer<C, String> consumer = channelTags.get(nsElementName);
 
             if (consumer != null)
                 consumer.accept(channel, text);
@@ -589,16 +562,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (item == null || text.isEmpty())
                 return;
 
-            BiConsumer<I, String> consumer;
-            if (prefix.isEmpty()) {
-                consumer = itemTags.get(elementName);
-            } else {
-                var nsElementName = prefix + ":" + elementName;
-                consumer = itemTagExtensions.get(nsElementName);
-            }
+            var nsElementName = toNsName(prefix, elementName);
+            BiConsumer<I, String> consumer = itemTags.get(nsElementName);
 
             if (consumer != null)
                 consumer.accept(item, text);
+        }
+
+        String toNsName(String prefix, String name) {
+            return prefix.isEmpty() ? name : prefix + ":" + name;
         }
     }
 
