@@ -31,6 +31,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 import static java.time.temporal.ChronoField.*;
 
 /**
@@ -38,8 +40,8 @@ import static java.time.temporal.ChronoField.*;
  */
 public class DateTime {
     private static ZoneId defaultZone = ZoneId.of("UTC");
-
     public static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
+    public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
     static {
         // manually code maps to ensure correct data always used
         // (locale data can be changed by application code)
@@ -83,6 +85,13 @@ public class DateTime {
                 .optionalStart()
                 .appendLiteral(':')
                 .appendValue(SECOND_OF_MINUTE, 2)
+                .toFormatter();
+
+        ISO_LOCAL_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .append(ISO_LOCAL_DATE)
+                .appendLiteral(' ')
+                .append(ISO_LOCAL_TIME)
                 .toFormatter();
     }
 
@@ -149,8 +158,10 @@ public class DateTime {
             return DateTimeFormatter.RFC_1123_DATE_TIME;
         else if ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')
             return RFC_1123_DATE_TIME_NO_TIMEZONE;
-        else if (dateTime.length() == 19)
+        else if (dateTime.length() == 19 && dateTime.charAt(10) == 'T')
             return DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+        else if (dateTime.length() == 19 && dateTime.charAt(10) == ' ')
+            return ISO_LOCAL_DATE_TIME_SPECIAL;
         return null;
     }
 
