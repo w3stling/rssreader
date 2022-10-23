@@ -17,9 +17,10 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isEmpty;
@@ -607,6 +608,77 @@ class RssReaderIntegrationTest {
 
         for (Item item : items) {
             assertThat(item.getChannel().getTitle(), is("LWN.net"));
+        }
+    }
+
+    @Test
+    void testClose() throws IOException {
+        Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss");
+        stream.close();
+
+        try {
+            long count = stream.count();
+            assertTrue(count > 0);
+            fail();
+        } catch (IllegalStateException ignored) {
+
+        }
+    }
+
+    @Test
+    void testAutoClose() throws IOException {
+
+        try (Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss")) {
+            var list = stream.limit(2).collect(Collectors.toList());
+            assertEquals(2, list.size());
+        }
+
+    }
+
+    @Test
+    void testReadAsync() {
+        var urlList = List.of(
+                "https://www.riksbank.se/sv/rss/pressmeddelanden",
+                "https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8",
+                "https://www.scb.se/Feed/statistiknyheter/",
+                "https://www.avanza.se/placera/forstasidan.rss.xml",
+                "https://www.breakit.se/feed/artiklar",
+                "https://www.realtid.se/rss/senaste",
+                "https://feedforall.com/sample-feed.xml",
+                "https://se.investing.com/rss/news.rss",
+                "https://digital.di.se/rss",
+                "https://worldoftanks.eu/en/rss/news/",
+                "https://lwn.net/headlines/rss",
+                "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+                "https://github.com/openjdk/jdk/commits.atom");
+
+        final var reader = new RssReader();
+
+        var timestamps = urlList.stream().parallel()
+                .map(url -> {
+                       try {
+                           return reader.readAsync(url);
+                       } catch (Exception e) {
+                           e.printStackTrace();
+                           return null;
+                       }
+                  })
+                .filter(Objects::nonNull)
+                .flatMap(CompletableFuture::join)
+                .sorted()
+                .map(Item::getPubDateZonedDateTime)
+                .flatMap(Optional::stream)
+                .map(t -> t.toInstant().toEpochMilli())
+                .collect(Collectors.toList());
+
+        assertTrue(timestamps.size() > 10);
+
+        var iter = timestamps.iterator();
+        Long current, previous = iter.next();
+        while (iter.hasNext()) {
+            current = iter.next();
+            assertTrue(previous.compareTo(current) <= 0);
+            previous = current;
         }
     }
 

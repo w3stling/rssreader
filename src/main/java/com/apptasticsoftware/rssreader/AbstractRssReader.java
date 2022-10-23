@@ -285,7 +285,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(inputStream, "Input stream must not be null");
 
         var itemIterator = new RssItemIterator(inputStream);
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
+                            .onClose(itemIterator::close);
     }
 
     /**
@@ -327,7 +328,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
                 removeBadData(inputStream);
                 var itemIterator = new RssItemIterator(inputStream);
-                return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false);
+                return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
+                                    .onClose(itemIterator::close);
             } catch (IOException e) {
                 throw new CompletionException(e);
             }
@@ -386,6 +388,18 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
+        public void close() {
+            try {
+                reader.close();
+                is.close();
+            } catch (XMLStreamException | IOException e) {
+                var logger = Logger.getLogger(LOG_GROUP);
+
+                if (logger.isLoggable(Level.WARNING))
+                    logger.log(Level.WARNING, "Failed to close XML stream. ", e);
+            }
+        }
+
         void peekNext() {
             if (nextItem == null) {
                 try {
@@ -438,16 +452,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     logger.log(Level.WARNING, "Failed to parse XML. ", e);
             }
 
-            try {
-                reader.close();
-                is.close();
-            } catch (XMLStreamException | IOException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, "Failed to close XML stream. ", e);
-            }
-
+            close();
             throw new NoSuchElementException();
         }
 
