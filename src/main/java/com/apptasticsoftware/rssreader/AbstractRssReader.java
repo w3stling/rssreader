@@ -57,7 +57,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  * Abstract base class for implementing modules or extensions of RSS / Atom feeds with custom tags and attributes.
  */
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
-    private static final String LOG_GROUP = "com.apptastic.rssreader";
+    private static final String LOG_GROUP = "com.apptasticsoftware.rssreader";
     private final HttpClient httpClient;
     private String userAgent = "";
     private final Map<String, String> headers = new HashMap<>();
