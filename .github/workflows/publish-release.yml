@@ -120,7 +120,7 @@ jobs:
         run: ./gradlew javadoc
 
       - name: Deploy Javadoc 📚
-        uses: JamesIves/github-pages-deploy-action@4.2.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build/docs/javadoc
