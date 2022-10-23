@@ -616,13 +616,7 @@ class RssReaderIntegrationTest {
         Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss");
         stream.close();
 
-        try {
-            long count = stream.count();
-            assertTrue(count > 0);
-            fail();
-        } catch (IllegalStateException ignored) {
-
-        }
+        assertThrows(IllegalStateException.class, stream::count);
     }
 
     @Test
