@@ -587,7 +587,6 @@ class RssReaderIntegrationTest {
         }
     }
 
-
     @Test
     void testUserAgent() throws IOException {
         List<Item> items = new RssReader().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101")
@@ -598,7 +597,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getChannel().getTitle(), is("LWN.net"));
         }
     }
-
 
     @Test
     void testHttpHeader() throws IOException {
@@ -621,12 +619,18 @@ class RssReaderIntegrationTest {
 
     @Test
     void testAutoClose() throws IOException {
-
         try (Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss")) {
             var list = stream.limit(2).collect(Collectors.toList());
             assertEquals(2, list.size());
         }
+    }
 
+    @Test
+    void testCloseTwice() throws IOException {
+        try (Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss")) {
+            var list = stream.collect(Collectors.toList());
+            assertEquals(15, list.size());
+        }
     }
 
     @Test
@@ -644,7 +648,8 @@ class RssReaderIntegrationTest {
                 "https://worldoftanks.eu/en/rss/news/",
                 "https://lwn.net/headlines/rss",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-                "https://github.com/openjdk/jdk/commits.atom");
+                "https://github.com/openjdk/jdk/commits.atom",
+                "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements");
 
         final var reader = new RssReader();
 
@@ -674,6 +679,13 @@ class RssReaderIntegrationTest {
             assertTrue(previous.compareTo(current) <= 0);
             previous = current;
         }
+    }
+
+    @Test
+    void testReadFromFile() {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("itunes-podcast.xml");
+        long count = new RssReader().read(is).count();
+        assertEquals(9, count);
     }
 
 }
