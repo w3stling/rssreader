@@ -78,6 +78,12 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormat9() {
+        var timestamp = DateTime.toEpochMilli("Fri, 04 Nov 2022 23:00:18 Z");
+        assertEquals(Long.valueOf(1667602818000L), timestamp);
+    }
+
+    @Test
     void badInputNull() {
         assertNull(DateTime.toLocalDateTime(null));
         assertNull(DateTime.toZonedDateTime(null));
