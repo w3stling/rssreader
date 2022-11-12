@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.*;
 import java.util.Comparator;
@@ -40,6 +41,15 @@ public class DateTime {
     public static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT;
+
     static {
 
         RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss")
@@ -52,7 +62,16 @@ public class DateTime {
                 .append(ISO_LOCAL_TIME)
                 .toFormatter();
 
-        RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("EEE, dd LLL yyyy HH:mm:ss X");
+        RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss z");
+
+        RFC_1123_DATE_TIME_SPECIAL_EDT = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'EDT'").withZone(ZoneOffset.ofHours(-4));
+        RFC_1123_DATE_TIME_SPECIAL_EST = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'EST'").withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CDT = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'CDT'").withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CST = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'CST'").withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MDT = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'MDT'").withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MST = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'MST'").withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PDT = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'PDT'").withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PST = DateTimeFormatter.ofPattern("EEE, d LLL yyyy HH:mm:ss 'PST'").withZone(ZoneOffset.ofHours(-8));
     }
 
     private DateTime() {
@@ -114,9 +133,27 @@ public class DateTime {
     private static DateTimeFormatter getDateTimeFormatter(String dateTime) {
         if (dateTime.length() >= 20 && dateTime.length() <= 31 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T')
             return DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-        else if (dateTime.length() >= 29 && dateTime.length() <= 31)
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" UTC"))
+            return RFC_1123_DATE_TIME_SPECIAL;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" EDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_EDT;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" EST"))
+            return RFC_1123_DATE_TIME_SPECIAL_EST;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" CDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_CDT;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" CST"))
+            return RFC_1123_DATE_TIME_SPECIAL_CST;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" MDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_MDT;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" MST"))
+            return RFC_1123_DATE_TIME_SPECIAL_MST;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" PDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_PDT;
+        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" PST"))
+            return RFC_1123_DATE_TIME_SPECIAL_PST;
+        else if (dateTime.length() >= 28 && dateTime.length() <= 31)
             return DateTimeFormatter.RFC_1123_DATE_TIME;
-        else if (dateTime.length() == 27 && dateTime.charAt(3) == ',')
+        else if ((dateTime.length() == 26 || dateTime.length() == 27) && dateTime.charAt(3) == ',' && dateTime.endsWith(" Z"))
             return RFC_1123_DATE_TIME_SPECIAL;
         else if ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')
             return RFC_1123_DATE_TIME_NO_TIMEZONE;
