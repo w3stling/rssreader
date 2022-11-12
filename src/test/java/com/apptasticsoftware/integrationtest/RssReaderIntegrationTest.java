@@ -641,7 +641,7 @@ class RssReaderIntegrationTest {
                 "https://www.scb.se/Feed/statistiknyheter/",
                 "https://www.avanza.se/placera/forstasidan.rss.xml",
                 "https://www.breakit.se/feed/artiklar",
-                "https://www.realtid.se/rss/senaste",
+                //"https://www.realtid.se/rss/senaste",
                 "https://feedforall.com/sample-feed.xml",
                 "https://se.investing.com/rss/news.rss",
                 "https://digital.di.se/rss",
@@ -649,7 +649,9 @@ class RssReaderIntegrationTest {
                 "https://lwn.net/headlines/rss",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
                 "https://github.com/openjdk/jdk/commits.atom",
-                "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements");
+                "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
+                "https://blog.ploeh.dk/rss.xml",
+                "https://www.politico.com/rss/politicopicks.xml");
 
         final var reader = new RssReader();
 
