@@ -130,6 +130,7 @@ public class DateTime {
         return ZonedDateTime.parse(dateTime, formatter);
     }
 
+    @SuppressWarnings("java:S3776")
     private static DateTimeFormatter getDateTimeFormatter(String dateTime) {
         if (dateTime.length() >= 20 && dateTime.length() <= 31 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T')
             return DateTimeFormatter.ISO_OFFSET_DATE_TIME;
