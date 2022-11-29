@@ -689,5 +689,12 @@ class RssReaderIntegrationTest {
         long count = new RssReader().read(is).count();
         assertEquals(9, count);
     }
+    
+    @Test
+    void testFieheInfo() throws IOException {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("podcast-with-bad-enclosure.xml");
+        long count = new RssReader().read(is).count();
+        assertEquals(1, count);
+    }
 
 }
