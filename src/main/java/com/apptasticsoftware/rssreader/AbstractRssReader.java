@@ -145,7 +145,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
         enclosureAttributes.put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
         enclosureAttributes.put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
-        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> e.setLength(Long.parseLong(v))) );
+        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> {
+            if (!v.isBlank()) {
+                e.setLength(Long.parseLong(v));
+            }
+        }));
     }
 
     @SuppressWarnings("java:S1192")

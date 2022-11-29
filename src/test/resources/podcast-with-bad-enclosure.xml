@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>1LIVE Fiehe</title>
+    <link>https://fiehe.info/</link>
+    <atom:link href="https://fiehe.info/1live-fiehe-podcast.rss" rel="self" type="application/rss+xml"/>
+    <description>Korrektes Zeug</description>
+    <category>Music</category>
+    <pubDate>Tue, 29 Nov 2022 13:49:44 +0100</pubDate>
+    <lastBuildDate>Tue, 29 Nov 2022 13:49:44 +0100</lastBuildDate>
+    <language>de-de</language>
+    <generator>https://fiehe.info</generator>
+    <managingEditor>kontakt@fiehe.info (Fiehe.info)</managingEditor>
+    <webMaster>kontakt@fiehe.info (Fiehe.info)</webMaster>
+    <ttl>360</ttl>
+    <itunes:author>Klaus Fiehe</itunes:author>
+    <itunes:subtitle>Korrektes Zeug</itunes:subtitle>
+    <itunes:summary>1Live Fiehe als Podcast, bereitgestellt von Fiehe.info.</itunes:summary>
+    <itunes:category text="Music"/>
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:owner>
+        <itunes:name>Fiehe.info</itunes:name>
+        <itunes:email>kontakt@fiehe.info</itunes:email>
+    </itunes:owner>
+    <itunes:image href="https://www1.wdr.de/radio/1live/team/moderatoren/klaus-fiehe-sw-100~_v-gseapremiumxl.jpg" />
+    <image>
+        <url>https://www1.wdr.de/radio/1live/team/moderatoren/klaus-fiehe-sw-100~_v-gseapremiumxl.jpg</url>
+        <title>1LIVE Fiehe</title>
+    </image>
+
+    <item>
+        <title>27.11.2022</title>
+        <pubDate>Sun, 27 Nov 2022 00:00:00 +0100</pubDate>
+        <enclosure url="https://wdrmedien-a.akamaihd.net/medp/ondemand/weltweit/fsk0/283/2833737/2833737_49185285.mp3" length="" type="audio/mpeg" />
+        <guid isPermaLink="true">https://fiehe.info/1live-fiehe/2022-11-27/</guid>
+        <description>Hammock – Untruth</description>
+        <itunes:duration>2:52:00</itunes:duration>
+        <itunes:summary>Eine bekannt wunderbare Sendung von Klaus Fiehe vom 27.11.2022, unter anderem mit Titeln von Unknown Cases feat. Reebop Kwaku Baah, CEO Trayle und Mountain.</itunes:summary>
+    </item>
+</channel>
+</rss>
