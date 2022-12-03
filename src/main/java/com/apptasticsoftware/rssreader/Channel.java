@@ -43,6 +43,8 @@ public class Channel {
     private String lastBuildDate;
     private String managingEditor;
     private String webMaster;
+    private String docs;
+    private String rating;
     private Image image;
 
     /**
@@ -287,6 +289,38 @@ public class Channel {
     }
 
     /**
+     * Get the documentation for the format used in the RSS file.
+     * @return documentation
+     */
+    public String getDocs() {
+        return docs;
+    }
+
+    /**
+     * Set  the documentation for the format used in the RSS file.
+     * @param docs documentation
+     */
+    public void setDocs(String docs) {
+        this.docs = docs;
+    }
+
+    /**
+     * Get the PICS rating for the channel.
+     * @return rating
+     */
+    public String getRating() {
+        return rating;
+    }
+
+    /**
+     * Set the PICS rating for the channel.
+     * @param rating rating
+     */
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    /**
      * Get a GIF, JPEG or PNG image that can be displayed with the channel.
      * @return image
      */
@@ -308,25 +342,26 @@ public class Channel {
         if (o == null || getClass() != o.getClass()) return false;
         Channel channel = (Channel) o;
         return Objects.equals(getTitle(), channel.getTitle()) &&
-               Objects.equals(getDescription(), channel.getDescription()) &&
-               getCategories().equals(channel.getCategories()) &&
-               Objects.equals(getLanguage(), channel.getLanguage()) &&
-               Objects.equals(getLink(), channel.getLink()) &&
-               Objects.equals(getCopyright(), channel.getCopyright()) &&
-               Objects.equals(getGenerator(), channel.getGenerator()) &&
-               Objects.equals(getTtl(), channel.getTtl()) &&
-               Objects.equals(getPubDate(), channel.getPubDate()) &&
-               Objects.equals(getLastBuildDate(), channel.getLastBuildDate()) &&
-               Objects.equals(getManagingEditor(), channel.getManagingEditor()) &&
-               Objects.equals(getWebMaster(), channel.getWebMaster()) &&
-               Objects.equals(getImage(), channel.getImage());
+                Objects.equals(getDescription(), channel.getDescription()) &&
+                getCategories().equals(channel.getCategories()) &&
+                Objects.equals(getLanguage(), channel.getLanguage()) &&
+                Objects.equals(getLink(), channel.getLink()) &&
+                Objects.equals(getCopyright(), channel.getCopyright()) &&
+                Objects.equals(getGenerator(), channel.getGenerator()) &&
+                Objects.equals(getTtl(), channel.getTtl()) &&
+                Objects.equals(getPubDate(), channel.getPubDate()) &&
+                Objects.equals(getLastBuildDate(), channel.getLastBuildDate()) &&
+                Objects.equals(getManagingEditor(), channel.getManagingEditor()) &&
+                Objects.equals(getWebMaster(), channel.getWebMaster()) &&
+                Objects.equals(getDocs(), channel.getDocs()) &&
+                Objects.equals(getRating(), channel.getRating()) &&
+                Objects.equals(getImage(), channel.getImage());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getCategories(), getLanguage(), getLink(),
                 getCopyright(), getGenerator(), getTtl(), getPubDate(), getLastBuildDate(),
-                getManagingEditor(), getWebMaster(), getImage());
+                getManagingEditor(), getWebMaster(), getDocs(), getRating(), getImage());
     }
-
 }

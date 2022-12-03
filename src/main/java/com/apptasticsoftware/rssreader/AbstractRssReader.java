@@ -116,6 +116,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("updated", Channel::setLastBuildDate);
         channelTags.put("managingEditor", Channel::setManagingEditor);
         channelTags.put("webMaster", Channel::setWebMaster);
+        channelTags.put("docs", Channel::setDocs);
+        channelTags.put("rating", Channel::setRating);
     }
 
     protected void registerChannelAttributes() {
@@ -136,6 +138,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("pubDate", Item::setPubDate);
         itemTags.put("published", Item::setPubDate);
         itemTags.put("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
+        itemTags.put("comments", Item::setComments);
     }
 
     protected void registerItemAttributes() {
