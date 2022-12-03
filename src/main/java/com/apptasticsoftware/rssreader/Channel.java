@@ -127,7 +127,7 @@ public class Channel {
     }
 
     /**
-     * Get gopyright notice for content in the channel.
+     * Get copyright notice for content in the channel.
      * @return URL
      */
     public Optional<String> getCopyright() {
