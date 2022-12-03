@@ -24,7 +24,10 @@
 package com.apptasticsoftware.rssreader;
 
 
+import com.apptasticsoftware.rssreader.util.ItemComparator;
+
 import java.time.ZonedDateTime;
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -34,6 +37,7 @@ import java.util.Optional;
  * to the full story.
  */
 public class Item implements Comparable<Item> {
+    private static final Comparator<Item> DEFAULT_COMPARATOR = ItemComparator.newestItemFirst();
     private String title;
     private String description;
     private String link;
@@ -270,6 +274,6 @@ public class Item implements Comparable<Item> {
      */
     @Override
     public int compareTo(Item o) {
-        return DateTime.pubDateComparator().compare(this, o);
+        return DEFAULT_COMPARATOR.compare(this, o);
     }
 }

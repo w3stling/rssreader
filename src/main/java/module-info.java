@@ -31,4 +31,5 @@ module com.apptasticsoftware.rssreader {
     requires java.logging;
 
     exports com.apptasticsoftware.rssreader;
+    exports com.apptasticsoftware.rssreader.util;
 }

@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -634,57 +633,6 @@ class RssReaderIntegrationTest {
     }
 
     @Test
-    void testReadAsync() {
-        var urlList = List.of(
-                "https://www.riksbank.se/sv/rss/pressmeddelanden",
-                "https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8",
-                "https://www.scb.se/Feed/statistiknyheter/",
-                "https://www.avanza.se/placera/forstasidan.rss.xml",
-                "https://www.breakit.se/feed/artiklar",
-                //"https://www.realtid.se/rss/senaste",
-                "https://feedforall.com/sample-feed.xml",
-                "https://se.investing.com/rss/news.rss",
-                "https://www.di.se/digital/rss",
-                "https://worldoftanks.eu/en/rss/news/",
-                "https://lwn.net/headlines/rss",
-                "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-                "https://github.com/openjdk/jdk/commits.atom",
-                "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
-                "https://blog.ploeh.dk/rss.xml",
-                "https://www.politico.com/rss/politicopicks.xml",
-                "https://www.e1.ru/talk/forum/rss.php?f=86");
-
-        final var reader = new RssReader();
-
-        var timestamps = urlList.stream().parallel()
-                .map(url -> {
-                       try {
-                           return reader.readAsync(url);
-                       } catch (Exception e) {
-                           e.printStackTrace();
-                           return null;
-                       }
-                  })
-                .filter(Objects::nonNull)
-                .flatMap(CompletableFuture::join)
-                .sorted()
-                .map(Item::getPubDateZonedDateTime)
-                .flatMap(Optional::stream)
-                .map(t -> t.toInstant().toEpochMilli())
-                .collect(Collectors.toList());
-
-        assertTrue(timestamps.size() > 10);
-
-        var iter = timestamps.iterator();
-        Long current, previous = iter.next();
-        while (iter.hasNext()) {
-            current = iter.next();
-            assertTrue(previous.compareTo(current) <= 0);
-            previous = current;
-        }
-    }
-
-    @Test
     void testReadFromFile() {
         InputStream is = getClass().getClassLoader().getResourceAsStream("itunes-podcast.xml");
         long count = new RssReader().read(is).count();
@@ -692,7 +640,7 @@ class RssReaderIntegrationTest {
     }
     
     @Test
-    void testFieheInfo() throws IOException {
+    void testBadEnclosureInfo() {
         InputStream is = getClass().getClassLoader().getResourceAsStream("podcast-with-bad-enclosure.xml");
         long count = new RssReader().read(is).count();
         assertEquals(1, count);
