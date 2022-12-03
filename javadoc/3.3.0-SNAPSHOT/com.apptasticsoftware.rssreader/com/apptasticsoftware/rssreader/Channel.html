@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":42,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":42,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":42,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":42,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -219,95 +219,109 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDocs()">getDocs</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get the documentation for the format used in the RSS file.</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGenerator()">getGenerator</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a string indicating the program used to generate the channel.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getImage()">getImage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLanguage()">getLanguage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the language the channel is written in.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLastBuildDate()">getLastBuildDate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLastBuildDateZonedDateTime()">getLastBuildDateZonedDateTime</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLink()">getLink</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the URL to the HTML website corresponding to the channel.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getManagingEditor()">getManagingEditor</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get email address for person responsible for editorial content.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPubDate()">getPubDate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPubDateZonedDateTime()">getPubDateZonedDateTime</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getRating()">getRating</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get the PICS rating for the channel.</div>
+</td>
+</tr>
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTitle()">getTitle</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the name of the channel.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTtl()">getTtl</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get ttl (time to live).</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWebMaster()">getWebMaster</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get email address for person responsible for technical issues relating to channel.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCategory(java.lang.String)">setCategory</a></span>&#8203;(java.lang.String&nbsp;category)</code></th>
 <td class="colLast">
@@ -316,84 +330,98 @@ extends java.lang.Object</pre>
 </div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCopyright(java.lang.String)">setCopyright</a></span>&#8203;(java.lang.String&nbsp;copyright)</code></th>
 <td class="colLast">
 <div class="block">Set copyright notice for content in the channel.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDescription(java.lang.String)">setDescription</a></span>&#8203;(java.lang.String&nbsp;description)</code></th>
 <td class="colLast">
 <div class="block">Set phrase or sentence describing the channel.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i24" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDocs(java.lang.String)">setDocs</a></span>&#8203;(java.lang.String&nbsp;docs)</code></th>
+<td class="colLast">
+<div class="block">Set  the documentation for the format used in the RSS file.</div>
+</td>
+</tr>
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGenerator(java.lang.String)">setGenerator</a></span>&#8203;(java.lang.String&nbsp;generator)</code></th>
 <td class="colLast">
 <div class="block">Set a string indicating the program used to generate the channel.</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setImage(com.apptasticsoftware.rssreader.Image)">setImage</a></span>&#8203;(<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</code></th>
 <td class="colLast">
 <div class="block">Set a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLanguage(java.lang.String)">setLanguage</a></span>&#8203;(java.lang.String&nbsp;language)</code></th>
 <td class="colLast">
 <div class="block">Set the language the channel is written in.</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLastBuildDate(java.lang.String)">setLastBuildDate</a></span>&#8203;(java.lang.String&nbsp;lastBuildDate)</code></th>
 <td class="colLast">
 <div class="block">Set the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLink(java.lang.String)">setLink</a></span>&#8203;(java.lang.String&nbsp;link)</code></th>
 <td class="colLast">
 <div class="block">Set the URL to the HTML website corresponding to the channel.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setManagingEditor(java.lang.String)">setManagingEditor</a></span>&#8203;(java.lang.String&nbsp;managingEditor)</code></th>
 <td class="colLast">
 <div class="block">Set email address for person responsible for editorial content.</div>
 </td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPubDate(java.lang.String)">setPubDate</a></span>&#8203;(java.lang.String&nbsp;pubDate)</code></th>
 <td class="colLast">
 <div class="block">Set the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i32" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setRating(java.lang.String)">setRating</a></span>&#8203;(java.lang.String&nbsp;rating)</code></th>
+<td class="colLast">
+<div class="block">Set the PICS rating for the channel.</div>
+</td>
+</tr>
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTitle(java.lang.String)">setTitle</a></span>&#8203;(java.lang.String&nbsp;title)</code></th>
 <td class="colLast">
 <div class="block">Set the name of the channel.</div>
 </td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTtl(java.lang.String)">setTtl</a></span>&#8203;(java.lang.String&nbsp;ttl)</code></th>
 <td class="colLast">
 <div class="block">Set ttl (time to live).</div>
 </td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setWebMaster(java.lang.String)">setWebMaster</a></span>&#8203;(java.lang.String&nbsp;webMaster)</code></th>
 <td class="colLast">
@@ -846,6 +874,62 @@ public&nbsp;void&nbsp;setCategory&#8203;(java.lang.String&nbsp;category)</pre>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>webMaster</code> - web master</dd>
+</dl>
+</li>
+</ul>
+<a id="getDocs()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDocs</h4>
+<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getDocs()</pre>
+<div class="block">Get the documentation for the format used in the RSS file.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>documentation</dd>
+</dl>
+</li>
+</ul>
+<a id="setDocs(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDocs</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setDocs&#8203;(java.lang.String&nbsp;docs)</pre>
+<div class="block">Set  the documentation for the format used in the RSS file.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>docs</code> - documentation</dd>
+</dl>
+</li>
+</ul>
+<a id="getRating()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRating</h4>
+<pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getRating()</pre>
+<div class="block">Get the PICS rating for the channel.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>rating</dd>
+</dl>
+</li>
+</ul>
+<a id="setRating(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setRating</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;setRating&#8203;(java.lang.String&nbsp;rating)</pre>
+<div class="block">Set the PICS rating for the channel.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>rating</code> - rating</dd>
 </dl>
 </li>
 </ul>
