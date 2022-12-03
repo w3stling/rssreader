@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":10,"i2":10,"i3":42,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":42,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -170,212 +170,230 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addCategory(java.lang.String)">addCategory</a></span>&#8203;(java.lang.String&nbsp;category)</code></th>
+<td class="colLast">
+<div class="block">Add category for the channel.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;o)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCategories()">getCategories</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Get categories for the channel.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCategory()">getCategory</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Get category for the channel.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.</div>
+</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getCopyright()">getCopyright</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get copyright notice for content in the channel.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDescription()">getDescription</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get phrase or sentence describing the channel.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getGenerator()">getGenerator</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a string indicating the program used to generate the channel.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getImage()">getImage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLanguage()">getLanguage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the language the channel is written in.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLastBuildDate()">getLastBuildDate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLastBuildDateZonedDateTime()">getLastBuildDateZonedDateTime</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getLink()">getLink</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the URL to the HTML website corresponding to the channel.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getManagingEditor()">getManagingEditor</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get email address for person responsible for editorial content.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPubDate()">getPubDate</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPubDateZonedDateTime()">getPubDateZonedDateTime</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTitle()">getTitle</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get the name of the channel.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getTtl()">getTtl</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get ttl (time to live).</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getWebMaster()">getWebMaster</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get email address for person responsible for technical issues relating to channel.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hashCode()">hashCode</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCategory(java.lang.String)">setCategory</a></span>&#8203;(java.lang.String&nbsp;category)</code></th>
 <td class="colLast">
-<div class="block">Set category for the channel.</div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.</div>
+</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setCopyright(java.lang.String)">setCopyright</a></span>&#8203;(java.lang.String&nbsp;copyright)</code></th>
 <td class="colLast">
 <div class="block">Set copyright notice for content in the channel.</div>
 </td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDescription(java.lang.String)">setDescription</a></span>&#8203;(java.lang.String&nbsp;description)</code></th>
 <td class="colLast">
 <div class="block">Set phrase or sentence describing the channel.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setGenerator(java.lang.String)">setGenerator</a></span>&#8203;(java.lang.String&nbsp;generator)</code></th>
 <td class="colLast">
 <div class="block">Set a string indicating the program used to generate the channel.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setImage(com.apptasticsoftware.rssreader.Image)">setImage</a></span>&#8203;(<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</code></th>
 <td class="colLast">
 <div class="block">Set a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLanguage(java.lang.String)">setLanguage</a></span>&#8203;(java.lang.String&nbsp;language)</code></th>
 <td class="colLast">
 <div class="block">Set the language the channel is written in.</div>
 </td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLastBuildDate(java.lang.String)">setLastBuildDate</a></span>&#8203;(java.lang.String&nbsp;lastBuildDate)</code></th>
 <td class="colLast">
 <div class="block">Set the last time the content of the channel changed.</div>
 </td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setLink(java.lang.String)">setLink</a></span>&#8203;(java.lang.String&nbsp;link)</code></th>
 <td class="colLast">
 <div class="block">Set the URL to the HTML website corresponding to the channel.</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setManagingEditor(java.lang.String)">setManagingEditor</a></span>&#8203;(java.lang.String&nbsp;managingEditor)</code></th>
 <td class="colLast">
 <div class="block">Set email address for person responsible for editorial content.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setPubDate(java.lang.String)">setPubDate</a></span>&#8203;(java.lang.String&nbsp;pubDate)</code></th>
 <td class="colLast">
 <div class="block">Set the publication date for the content in the channel.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTitle(java.lang.String)">setTitle</a></span>&#8203;(java.lang.String&nbsp;title)</code></th>
 <td class="colLast">
 <div class="block">Set the name of the channel.</div>
 </td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setTtl(java.lang.String)">setTtl</a></span>&#8203;(java.lang.String&nbsp;ttl)</code></th>
 <td class="colLast">
 <div class="block">Set ttl (time to live).</div>
 </td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setWebMaster(java.lang.String)">setWebMaster</a></span>&#8203;(java.lang.String&nbsp;webMaster)</code></th>
 <td class="colLast">
@@ -487,7 +505,12 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCategory</h4>
-<pre class="methodSignature">public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getCategory()</pre>
+<pre class="methodSignature">@Deprecated
+public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getCategory()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="#getCategories()"><code>getCategories()</code></a> instead.</div>
+</div>
 <div class="block">Get category for the channel.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -501,8 +524,41 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>setCategory</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setCategory&#8203;(java.lang.String&nbsp;category)</pre>
+<pre class="methodSignature">@Deprecated
+public&nbsp;void&nbsp;setCategory&#8203;(java.lang.String&nbsp;category)</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="#addCategory(java.lang.String)"><code>addCategory(String category)</code></a> instead.</div>
+</div>
 <div class="block">Set category for the channel.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>category</code> - channel category</dd>
+</dl>
+</li>
+</ul>
+<a id="getCategories()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCategories</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;getCategories()</pre>
+<div class="block">Get categories for the channel.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>list of categories</dd>
+</dl>
+</li>
+</ul>
+<a id="addCategory(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addCategory</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;addCategory&#8203;(java.lang.String&nbsp;category)</pre>
+<div class="block">Add category for the channel.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>category</code> - channel category</dd>

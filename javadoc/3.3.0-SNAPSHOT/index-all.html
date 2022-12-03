@@ -105,6 +105,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#%3Cinit%3E(java.net.http.HttpClient)">AbstractRssReader(HttpClient)</a></span> - Constructor for class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#addCategory(java.lang.String)">addCategory(String)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a></dt>
+<dd>
+<div class="block">Add category for the channel.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#addCategory(java.lang.String)">addCategory(String)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
+<dd>
+<div class="block">Add category for item.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#addChannelExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addChannelExtension(String, String, BiConsumer&lt;C, String&gt;)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
 <dd>
 <div class="block">Add channel extension for attributes</div>
@@ -207,13 +215,27 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Get email address of the author of the item.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#getCategories()">getCategories()</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a></dt>
+<dd>
+<div class="block">Get categories for the channel.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#getCategories()">getCategories()</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
+<dd>
+<div class="block">Get categories for item.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#getCategory()">getCategory()</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a></dt>
 <dd>
-<div class="block">Get category for the channel.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#getCategories()"><code>Channel.getCategories()</code></a> instead.</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#getCategory()">getCategory()</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
 <dd>
-<div class="block">Get category for item.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#getCategories()"><code>Item.getCategories()</code></a> instead.</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#getChannel()">getChannel()</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
 <dd>
@@ -492,11 +514,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#setCategory(java.lang.String)">setCategory(String)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a></dt>
 <dd>
-<div class="block">Set category for the channel.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#addCategory(java.lang.String)"><code>Channel.addCategory(String category)</code></a> instead.</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#setCategory(java.lang.String)">setCategory(String)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
 <dd>
-<div class="block">Set category for item.</div>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span>
+<div class="deprecationComment">This method be removed in a future version.
+ <p> Use <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#addCategory(java.lang.String)"><code>Item.addCategory(String category)</code></a> instead.</div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html#setChannel(com.apptasticsoftware.rssreader.Channel)">setChannel(Channel)</a></span> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></dt>
 <dd>
