@@ -276,7 +276,7 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getDescription(), item.getDescription()) &&
                 Objects.equals(getLink(), item.getLink()) &&
                 Objects.equals(getAuthor(), item.getAuthor()) &&
-                Objects.equals(getCategory(), item.getCategory()) &&
+                getCategories().equals(item.getCategories()) &&
                 Objects.equals(getGuid(), item.getGuid()) &&
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
@@ -286,8 +286,8 @@ public class Item implements Comparable<Item> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategory(), getGuid(),
-                getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
+        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
+                getGuid(), getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
     }
 
     /**
