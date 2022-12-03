@@ -16,6 +16,18 @@ class DateTimeTest {
 
         timestamp = DateTime.toEpochMilli("Fri, 1 Jun 2018 07:17:52 +0200");
         assertEquals(Long.valueOf(1527830272000L), timestamp);
+
+        timestamp = DateTime.toEpochMilli("Wed, 02 Oct 2002 15:00:00 +0200");
+        assertEquals(Long.valueOf(1033563600000L), timestamp);
+
+        timestamp = DateTime.toEpochMilli("Wed, 2 Oct 2002 15:00:00 +0200");
+        assertEquals(Long.valueOf(1033563600000L), timestamp);
+
+        timestamp = DateTime.toEpochMilli("Thu, 02 Jun 22 07:46:24 +0000");
+        assertEquals(Long.valueOf(1654155984000L), timestamp);
+
+        timestamp = DateTime.toEpochMilli("Thu, 2 Jun 22 07:46:24 +0000");
+        assertEquals(Long.valueOf(1654155984000L), timestamp);
     }
 
     @Test
@@ -42,11 +54,11 @@ class DateTimeTest {
         timestamp = DateTime.toEpochMilli("Wed, 9 Nov 2022 23:25:57 GMT");
         assertEquals(Long.valueOf(1668036357000L), timestamp);
 
-        timestamp = DateTime.toEpochMilli("Wed, 02 Oct 2002 15:00:00 +0200");
-        assertEquals(Long.valueOf(1033563600000L), timestamp);
+        timestamp = DateTime.toEpochMilli("Wed, 15 Jan 2020 10:13:32 GMT+6");
+        assertEquals(Long.valueOf(1579061612000L), timestamp);
 
-        timestamp = DateTime.toEpochMilli("Wed, 2 Oct 2002 15:00:00 +0200");
-        assertEquals(Long.valueOf(1033563600000L), timestamp);
+        timestamp = DateTime.toEpochMilli("Wed, 15 Jan 2020 10:13:32 GMT+06:00");
+        assertEquals(Long.valueOf(1579061612000L), timestamp);
     }
 
     @Test

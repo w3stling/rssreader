@@ -644,14 +644,15 @@ class RssReaderIntegrationTest {
                 //"https://www.realtid.se/rss/senaste",
                 "https://feedforall.com/sample-feed.xml",
                 "https://se.investing.com/rss/news.rss",
-                "https://digital.di.se/rss",
+                "https://www.di.se/digital/rss",
                 "https://worldoftanks.eu/en/rss/news/",
                 "https://lwn.net/headlines/rss",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
                 "https://github.com/openjdk/jdk/commits.atom",
                 "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
                 "https://blog.ploeh.dk/rss.xml",
-                "https://www.politico.com/rss/politicopicks.xml");
+                "https://www.politico.com/rss/politicopicks.xml",
+                "https://www.e1.ru/talk/forum/rss.php?f=86");
 
         final var reader = new RssReader();
 
