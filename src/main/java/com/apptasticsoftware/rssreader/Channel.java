@@ -86,7 +86,7 @@ public class Channel {
      *
      * @return category
      */
-    @Deprecated()
+    @Deprecated(since="3.3.0", forRemoval=true)
     public Optional<String> getCategory() {
         return Optional.ofNullable(category);
     }
@@ -100,7 +100,7 @@ public class Channel {
      *
      * @param category channel category
      */
-    @Deprecated()
+    @Deprecated(since="3.3.0", forRemoval=true)
     public void setCategory(String category) {
         this.category = category;
     }
@@ -118,6 +118,7 @@ public class Channel {
      * @param category channel category
      */
     public void addCategory(String category) {
+        this.category = category;
         categories.add(category);
     }
 

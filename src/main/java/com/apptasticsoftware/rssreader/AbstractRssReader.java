@@ -105,7 +105,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("description", Channel::setDescription);
         channelTags.put("subtitle", Channel::setDescription);
         channelTags.put("link", Channel::setLink);
-        channelTags.put("category", AbstractRssReader::setCategory);
+        channelTags.put("category", Channel::addCategory);
         channelTags.put("language", Channel::setLanguage);
         channelTags.put("copyright", Channel::setCopyright);
         channelTags.put("rights", Channel::setCopyright);
@@ -116,11 +116,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("updated", Channel::setLastBuildDate);
         channelTags.put("managingEditor", Channel::setManagingEditor);
         channelTags.put("webMaster", Channel::setWebMaster);
-    }
-
-    private static void setCategory(Channel channel, String category) {
-        channel.setCategory(category);
-        channel.addCategory(category);
     }
 
     protected void registerChannelAttributes() {
@@ -137,15 +132,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("content", Item::setDescription);
         itemTags.put("link", Item::setLink);
         itemTags.put("author", Item::setAuthor);
-        itemTags.put("category", AbstractRssReader::setCategory);
+        itemTags.put("category", Item::addCategory);
         itemTags.put("pubDate", Item::setPubDate);
         itemTags.put("published", Item::setPubDate);
         itemTags.put("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
-    }
-
-    private static void setCategory(Item item, String category) {
-        item.setCategory(category);
-        item.addCategory(category);
     }
 
     protected void registerItemAttributes() {
