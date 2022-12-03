@@ -27,9 +27,7 @@ package com.apptasticsoftware.rssreader;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 
 import java.time.ZonedDateTime;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class representing a RSS item. A channel may contain any number of items. An item may represent a "story" -- much
@@ -43,6 +41,7 @@ public class Item implements Comparable<Item> {
     private String link;
     private String author;
     private String category;
+    private final List<String> categories = new ArrayList<>();
     private String guid;
     private Boolean isPermaLink;
     private String pubDate;
@@ -142,8 +141,13 @@ public class Item implements Comparable<Item> {
     /**
      * Get category for item.
      *
+     * @deprecated
+     * This method be removed in a future version.
+     * <p> Use {@link Item#getCategories()} instead.
+     *
      * @return category
      */
+    @Deprecated
     public Optional<String> getCategory() {
         return Optional.ofNullable(category);
     }
@@ -151,10 +155,31 @@ public class Item implements Comparable<Item> {
     /**
      * Set category for item.
      *
+     * @deprecated
+     * This method be removed in a future version.
+     * <p> Use {@link Item#addCategory(String category)} instead.
+     *
      * @param category category
      */
+    @Deprecated
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    /**
+     * Get categories for item.
+     * @return list of categories
+     */
+    public List<String> getCategories() {
+        return Collections.unmodifiableList(categories);
+    }
+
+    /**
+     * Add category for item.
+     * @param category category
+     */
+    public void addCategory(String category) {
+        categories.add(category);
     }
 
     /**

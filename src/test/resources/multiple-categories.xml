@@ -1,0 +1,33 @@
+<rss version="2.0">
+    <channel>
+        <title>NYT > Top Stories</title>
+        <link>https://www.nytimes.com</link>
+        <description/>
+        <language>en-us</language>
+        <copyright>Copyright 2022 The New York Times Company</copyright>
+        <lastBuildDate>Sat, 03 Dec 2022 11:41:48 +0000</lastBuildDate>
+        <pubDate>Sat, 03 Dec 2022 11:33:26 +0000</pubDate>
+        <category>News</category>
+        <category>China</category>
+        <image>
+            <title>NYT > Top Stories</title>
+            <url>https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png</url>
+            <link>https://www.nytimes.com</link>
+        </image>
+        <item>
+            <title>After Fanning Covid Fears, China Must Now Try to Allay Them</title>
+            <link>https://www.nytimes.com/2022/12/03/business/china-zero-covid.html</link>
+            <guid isPermaLink="true">https://www.nytimes.com/2022/12/03/business/china-zero-covid.html</guid>
+            <description>Beijing had long warned that the only effective response was testing, quarantine and lockdowns. As it shifts policy, it must change how it portrays the risks.</description>
+            <pubDate>Sat, 03 Dec 2022 10:02:47 +0000</pubDate>
+            <category>Beijing (China)</category>
+            <category>China</category>
+            <category>Guangxi (China)</category>
+            <category>Guangzhou (China)</category>
+            <category>Coronavirus (2019-nCoV)</category>
+            <category>Politics and Government</category>
+            <category>Quarantines</category>
+            <category>Propaganda</category>
+        </item>
+    </channel>
+</rss>
