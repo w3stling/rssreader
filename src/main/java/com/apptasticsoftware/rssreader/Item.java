@@ -45,26 +45,9 @@ public class Item implements Comparable<Item> {
     private String guid;
     private Boolean isPermaLink;
     private String pubDate;
-    private Channel channel;
+    private String comments;
     private Enclosure enclosure;
-
-    /**
-     * Get the enclosure of the item.
-     *
-     * @return enclosure
-     */
-    public Optional<Enclosure> getEnclosure() {
-        return Optional.ofNullable(enclosure);
-    }
-
-    /**
-     * Set the enclosure of the item.
-     *
-     * @param enclosure enclosure
-     */
-    public void setEnclosure(Enclosure enclosure) {
-        this.enclosure = enclosure;
-    }
+    private Channel channel;
 
     /**
      * Get the title of the item.
@@ -252,6 +235,41 @@ public class Item implements Comparable<Item> {
         return getPubDate().map(DateTime::toZonedDateTime);
     }
 
+
+    /**
+     * Get comments relating to the item.
+     * @return comments
+     */
+    public Optional<String> getComments() {
+        return Optional.ofNullable(comments);
+    }
+
+    /**
+     * Set comments relating to the item.
+     * @param comments comments
+     */
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    /**
+     * Get the enclosure of the item.
+     *
+     * @return enclosure
+     */
+    public Optional<Enclosure> getEnclosure() {
+        return Optional.ofNullable(enclosure);
+    }
+
+    /**
+     * Set the enclosure of the item.
+     *
+     * @param enclosure enclosure
+     */
+    public void setEnclosure(Enclosure enclosure) {
+        this.enclosure = enclosure;
+    }
+
     /**
      * Get the channel that this item was published in.
      *
@@ -283,14 +301,15 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getGuid(), item.getGuid()) &&
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
-                Objects.equals(getChannel(), item.getChannel()) &&
-                Objects.equals(getEnclosure(), item.getEnclosure());
+                Objects.equals(getComments(), item.getComments()) &&
+                Objects.equals(getEnclosure(), item.getEnclosure()) &&
+                Objects.equals(getChannel(), item.getChannel());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
-                getGuid(), getIsPermaLink(), getPubDate(), getChannel(), getEnclosure());
+                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getEnclosure(), getChannel());
     }
 
     /**
