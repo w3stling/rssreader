@@ -501,8 +501,8 @@ class RssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(Channel.class).verify();
-        EqualsVerifier.simple().forClass(Item.class).verify();
+        EqualsVerifier.simple().forClass(Channel.class).withIgnoredFields("category").withNonnullFields("categories").verify();
+        EqualsVerifier.simple().forClass(Item.class).withIgnoredFields("category").withNonnullFields("categories").verify();
         EqualsVerifier.simple().forClass(Enclosure.class).verify();
         EqualsVerifier.simple().forClass(Image.class).verify();
     }

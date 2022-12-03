@@ -285,7 +285,7 @@ class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Sample Feed - Favorite RSS Related Software & Resources"));
             assertThat(channel.getDescription(), is("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS."));
             assertThat(channel.getLink(), is("http://www.feedforall.com"));
-            assertThat(channel.getCategory(), isPresentAndIs("Computers/Software/Internet/Site Management/Content Management"));
+            assertThat(channel.getCategories().get(0), is("Computers/Software/Internet/Site Management/Content Management"));
             assertThat(channel.getLanguage(), isPresentAndIs("en-us"));
             assertThat(channel.getCopyright(), isPresentAndIs("Copyright 2004 NotePage, Inc."));
             assertThat(channel.getGenerator(), isPresentAndIs("FeedForAll Beta1 (0.0.1.8)"));
@@ -546,13 +546,13 @@ class RssReaderIntegrationTest {
 
     @Test
     void testChannelExtension() throws IOException {
-        List<Item> items = new RssReader().addChannelExtension("syn:updatePeriod", Channel::setCategory)
-                                          .addChannelExtension("syn:updatePeriod", "href", Channel::setCategory)
+        List<Item> items = new RssReader().addChannelExtension("syn:updatePeriod", Channel::addCategory)
+                                          .addChannelExtension("syn:updatePeriod", "href", Channel::addCategory)
                                           .read("https://lwn.net/headlines/rss")
                                           .collect(Collectors.toList());
 
         for (Item item : items) {
-            assertThat(item.getChannel().getCategory(), isPresentAnd(not(emptyString())));
+            assertThat(item.getChannel().getCategories().get(0), is(not(emptyString())));
         }
     }
 
@@ -560,14 +560,14 @@ class RssReaderIntegrationTest {
     @Test
     void testAttributeExtension() throws IOException {
         List<Item> items = new RssReader()
-                .addChannelExtension("atom:link", "rel", Channel::setCategory)
+                .addChannelExtension("atom:link", "rel", Channel::addCategory)
                 .addChannelExtension("atom:link", "type", Channel::setManagingEditor)
                 .addItemExtension("atom:link", "rel", Item::setAuthor)
                 .read("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml")
                 .collect(Collectors.toList());
 
         for (Item item : items) {
-            assertThat(item.getChannel().getCategory(), isPresentAndIs("self"));
+            assertThat(item.getChannel().getCategories().get(0), is("self"));
             assertThat(item.getChannel().getManagingEditor(), isPresentAnd(not(emptyString())));
             assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));
         }
@@ -644,6 +644,19 @@ class RssReaderIntegrationTest {
         InputStream is = getClass().getClassLoader().getResourceAsStream("podcast-with-bad-enclosure.xml");
         long count = new RssReader().read(is).count();
         assertEquals(1, count);
+    }
+
+    @Test
+    void testMultipleCategories() {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("multiple-categories.xml");
+        var list = new RssReader().read(is).collect(Collectors.toList());
+
+        assertTrue(list.size() > 0);
+        var item = list.get(0);
+        assertTrue(item.getChannel().getCategories().size() > 1);
+        assertTrue(item.getChannel().getCategory().isPresent());
+        assertTrue(item.getCategories().size() > 1);
+        assertTrue(item.getCategory().isPresent());
     }
 
 }

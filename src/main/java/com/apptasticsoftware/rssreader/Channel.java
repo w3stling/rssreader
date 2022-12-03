@@ -23,10 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
-
 import java.time.ZonedDateTime;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Class representing the RSS channel.
@@ -35,6 +33,7 @@ public class Channel {
     private String title;
     private String description;
     private String category;
+    private final List<String> categories = new ArrayList<>();
     private String language;
     private String link;
     private String copyright;
@@ -80,18 +79,46 @@ public class Channel {
 
     /**
      * Get category for the channel.
+     *
+     * @deprecated
+     * This method be removed in a future version.
+     * <p> Use {@link Channel#getCategories()} instead.
+     *
      * @return category
      */
+    @Deprecated()
     public Optional<String> getCategory() {
         return Optional.ofNullable(category);
     }
 
     /**
      * Set category for the channel.
+     *
+     * @deprecated
+     * This method be removed in a future version.
+     * <p> Use {@link Channel#addCategory(String category)} instead.
+     *
      * @param category channel category
      */
+    @Deprecated()
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    /**
+     * Get categories for the channel.
+     * @return list of categories
+     */
+    public List<String> getCategories() {
+        return Collections.unmodifiableList(categories);
+    }
+
+    /**
+     * Add category for the channel.
+     * @param category channel category
+     */
+    public void addCategory(String category) {
+        categories.add(category);
     }
 
     /**
@@ -278,24 +305,25 @@ public class Channel {
         if (o == null || getClass() != o.getClass()) return false;
         Channel channel = (Channel) o;
         return Objects.equals(getTitle(), channel.getTitle()) &&
-                Objects.equals(getDescription(), channel.getDescription()) &&
-                Objects.equals(getCategory(), channel.getCategory()) &&
-                Objects.equals(getLanguage(), channel.getLanguage()) &&
-                Objects.equals(getLink(), channel.getLink()) &&
-                Objects.equals(getCopyright(), channel.getCopyright()) &&
-                Objects.equals(getGenerator(), channel.getGenerator()) &&
-                Objects.equals(getTtl(), channel.getTtl()) &&
-                Objects.equals(getPubDate(), channel.getPubDate()) &&
-                Objects.equals(getLastBuildDate(), channel.getLastBuildDate()) &&
-                Objects.equals(getManagingEditor(), channel.getManagingEditor()) &&
-                Objects.equals(getWebMaster(), channel.getWebMaster()) &&
-                Objects.equals(getImage(), channel.getImage());
+               Objects.equals(getDescription(), channel.getDescription()) &&
+               getCategories().equals(channel.getCategories()) &&
+               Objects.equals(getLanguage(), channel.getLanguage()) &&
+               Objects.equals(getLink(), channel.getLink()) &&
+               Objects.equals(getCopyright(), channel.getCopyright()) &&
+               Objects.equals(getGenerator(), channel.getGenerator()) &&
+               Objects.equals(getTtl(), channel.getTtl()) &&
+               Objects.equals(getPubDate(), channel.getPubDate()) &&
+               Objects.equals(getLastBuildDate(), channel.getLastBuildDate()) &&
+               Objects.equals(getManagingEditor(), channel.getManagingEditor()) &&
+               Objects.equals(getWebMaster(), channel.getWebMaster()) &&
+               Objects.equals(getImage(), channel.getImage());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getCategory(), getLanguage(), getLink(),
+        return Objects.hash(getTitle(), getDescription(), getCategories(), getLanguage(), getLink(),
                 getCopyright(), getGenerator(), getTtl(), getPubDate(), getLastBuildDate(),
                 getManagingEditor(), getWebMaster(), getImage());
     }
+
 }
