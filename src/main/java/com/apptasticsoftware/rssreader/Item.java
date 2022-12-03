@@ -147,6 +147,7 @@ public class Item implements Comparable<Item> {
      *
      * @return category
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public Optional<String> getCategory() {
         return Optional.ofNullable(category);
@@ -161,6 +162,7 @@ public class Item implements Comparable<Item> {
      *
      * @param category category
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public void setCategory(String category) {
         this.category = category;

@@ -198,6 +198,7 @@ public class DateTime {
      *
      * @return comparator
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public static Comparator<Item> pubDateComparator() {
         return Comparator.comparing(i -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L));
