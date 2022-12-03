@@ -23,6 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.util.ItemComparator;
+
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -187,11 +189,16 @@ public class DateTime {
         return zonedDateTime.toInstant().toEpochMilli();
     }
 
-
     /**
      * Comparator comparing publication date of Item class. Sorted in ascending order (oldest first)
+     *
+     * @deprecated
+     * This method be removed in a future version.
+     * <p> Use {@link ItemComparator#oldestItemFirst()} instead.
+     *
      * @return comparator
      */
+    @Deprecated()
     public static Comparator<Item> pubDateComparator() {
         return Comparator.comparing(i -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L));
     }
