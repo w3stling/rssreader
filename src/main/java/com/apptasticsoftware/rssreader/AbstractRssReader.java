@@ -296,7 +296,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                         } catch (Exception e) {
                             var logger = Logger.getLogger(LOG_GROUP);
                             if (logger.isLoggable(Level.WARNING))
-                                logger.log(Level.WARNING, "Failed read URL " + url + ". Message: " + e.getMessage());
+                                logger.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
                             return null;
                         }
                     })
@@ -307,7 +307,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                        } catch (Exception e) {
                            var logger = Logger.getLogger(LOG_GROUP);
                            if (logger.isLoggable(Level.WARNING))
-                               logger.log(Level.WARNING, "Failed to read URL " + f.getKey() + ". Message: " + e.getMessage());
+                               logger.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
                            return null;
                        }
                    });
