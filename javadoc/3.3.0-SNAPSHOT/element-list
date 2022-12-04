@@ -1,3 +1,4 @@
 module:com.apptasticsoftware.rssreader
 com.apptasticsoftware.rssreader
+com.apptasticsoftware.rssreader.module.itunes
 com.apptasticsoftware.rssreader.util
