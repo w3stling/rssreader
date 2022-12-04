@@ -220,6 +220,7 @@ public final class DateTime {
             return null;
     }
 
+    @SuppressWarnings("java:S3776")
     private static DateTimeFormatter parseRfcDateTime(String dateTime) {
         if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" UTC"))
             return RFC_1123_DATE_TIME_SPECIAL;
@@ -253,6 +254,7 @@ public final class DateTime {
             return null;
     }
 
+    @SuppressWarnings("java:S3776")
     private static DateTimeFormatter parseRfcDateTimeFullDayOfWeek (String dateTime) {
         if (dateTime.endsWith(" UTC"))
             return RFC_1123_DATE_TIME_SPECIAL_FULL_EOW;
@@ -282,6 +284,7 @@ public final class DateTime {
             return null;
     }
 
+    @SuppressWarnings("java:S3776")
     private static DateTimeFormatter parseRfcDateTimeNoDayOfWeek (String dateTime) {
         if (dateTime.endsWith(" UTC"))
             return RFC_1123_DATE_TIME_SPECIAL_NO_EOW;
