@@ -162,6 +162,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         imageTags.put("width", (i, v) -> mapInteger(v, i::setWidth) );
     }
 
+    protected void mapBoolean(String text, Consumer<Boolean> func) {
+        text = text.toLowerCase();
+        if ("true".equals(text) || "yes".equals(text)) {
+            func.accept(Boolean.TRUE);
+        } else if ("false".equals(text) || "no".equals(text)) {
+            func.accept(Boolean.FALSE);
+        }
+    }
+
     protected void mapInteger(String text, Consumer<Integer> func) {
         mapNumber(text, func, Integer::valueOf);
     }
