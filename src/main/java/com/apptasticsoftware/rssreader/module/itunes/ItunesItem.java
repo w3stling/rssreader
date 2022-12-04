@@ -38,6 +38,7 @@ public class ItunesItem extends Item {
         this.itunesDuration = itunesDuration;
     }
 
+    @SuppressWarnings("java:S108")
     public Optional<Duration> getItunesDurationAsDuration() {
         if (itunesDuration != null && !itunesDuration.isBlank()) {
             try {

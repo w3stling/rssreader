@@ -7,6 +7,7 @@ import com.apptasticsoftware.rssreader.AbstractRssReader;
  */
 public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem> {
 
+    @Override
     protected void registerChannelTags() {
         super.registerChannelTags();
         addChannelExtension("itunes:explicit", (i, v) -> mapBoolean(v, i::setItunesExplicit));
