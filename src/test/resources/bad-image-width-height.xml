@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss>
+    <channel>
+        <title>title</title>
+        <link>https://test.com/</link>
+        <description>Test channel</description>
+        <category>testing</category>
+        <pubDate>Tue, 29 Nov 2022 13:49:44 +0100</pubDate>
+        <lastBuildDate>Tue, 29 Nov 2022 13:49:44 +0100</lastBuildDate>
+        <language>en</language>
+        <generator>https://test.com/generator</generator>
+        <managingEditor>testing@test.com</managingEditor>
+        <webMaster>webmaster@test.com</webMaster>
+        <ttl>120</ttl>
+        <image>
+            <url>https://www.test.com/testing.jpg</url>
+            <title>testing</title>
+            <width>  </width>
+            <hight>not-a-number</hight>
+        </image>
+
+        <item>
+            <title>test item 1</title>
+            <pubDate>Sun, 27 Nov 2022 00:00:00 +0100</pubDate>
+            <enclosure url="https://www.test.com/testing.mp3" length="not-a-number" type="audio/mpeg" />
+            <guid isPermaLink="true">test-id-1</guid>
+            <description>A test item</description>
+        </item>
+    </channel>
+</rss>

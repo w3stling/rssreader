@@ -659,4 +659,11 @@ class RssReaderIntegrationTest {
         assertTrue(item.getCategory().isPresent());
     }
 
+    @Test
+    void testImageBadWidthHeight() {
+        InputStream is = getClass().getClassLoader().getResourceAsStream("bad-image-width-height.xml");
+        var list = new RssReader().read(is).collect(Collectors.toList());
+        assertEquals(list.size(), 1);
+    }
+
 }
