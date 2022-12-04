@@ -40,6 +40,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,11 +149,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
         enclosureAttributes.put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
         enclosureAttributes.put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
-        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> {
-            if (!v.isBlank()) {
-                e.setLength(Long.parseLong(v));
-            }
-        }));
+        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> mapLong(v, e::setLength)) );
     }
 
     @SuppressWarnings("java:S1192")
@@ -161,8 +158,28 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         imageTags.put("link", Image::setLink);
         imageTags.put("url", Image::setUrl);
         imageTags.put("description", Image::setDescription);
-        imageTags.put("height", (i, v) -> i.setHeight(Integer.valueOf(v)) );
-        imageTags.put("width", (i, v) -> i.setWidth(Integer.valueOf(v)) );
+        imageTags.put("height", (i, v) -> mapInteger(v, i::setHeight) );
+        imageTags.put("width", (i, v) -> mapInteger(v, i::setWidth) );
+    }
+
+    protected void mapInteger(String text, Consumer<Integer> func) {
+        mapNumber(text, func, Integer::valueOf);
+    }
+
+    protected void mapLong(String text, Consumer<Long> func) {
+        mapNumber(text, func, Long::valueOf);
+    }
+
+    private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
+        if (text != null && !text.isBlank()) {
+            try {
+                func.accept(convert.apply(text));
+            } catch (NumberFormatException e) {
+                var logger = Logger.getLogger(LOG_GROUP);
+                if (logger.isLoggable(Level.WARNING))
+                    logger.log(Level.WARNING, () -> String.format("Failed to convert %s. Message: %s", text, e.getMessage()));
+            }
+        }
     }
 
     /**
