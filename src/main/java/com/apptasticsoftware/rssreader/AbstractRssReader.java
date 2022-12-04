@@ -284,6 +284,36 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
+     * Read from a collections of RSS feed.
+     * @param urls collections of URLs
+     * @return Stream of items
+     */
+    public Stream<Item> read(Collection<String> urls) {
+        return urls.stream().parallel()
+                   .map(url -> {
+                        try {
+                            return Map.entry(url, readAsync(url));
+                        } catch (Exception e) {
+                            var logger = Logger.getLogger(LOG_GROUP);
+                            if (logger.isLoggable(Level.WARNING))
+                                logger.log(Level.WARNING, "Failed read URL " + url + ". Message: " + e.getMessage());
+                            return null;
+                        }
+                    })
+                   .filter(Objects::nonNull)
+                   .flatMap(f -> {
+                       try {
+                           return f.getValue().join();
+                       } catch (Exception e) {
+                           var logger = Logger.getLogger(LOG_GROUP);
+                           if (logger.isLoggable(Level.WARNING))
+                               logger.log(Level.WARNING, "Failed to read URL " + f.getKey() + ". Message: " + e.getMessage());
+                           return null;
+                       }
+                   });
+    }
+
+    /**
      * Read RSS feed from input stream.
      * @param inputStream inputStream containing the RSS feed.
      * @return Stream of items
@@ -303,7 +333,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     public CompletableFuture<Stream<I>> readAsync(String url) {
         Objects.requireNonNull(url, "URL must not be null");
-
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
@@ -368,7 +397,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private Image image = null;
         private I item = null;
         private I nextItem;
-        private boolean isChannelPart = true;
+        private boolean isChannelPart = false;
         private boolean isImagePart = false;
         private boolean isItemPart = false;
         private String elementName = null;
@@ -503,7 +532,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (isChannelPart) {
                 // Map channel attributes
                 var consumers = channelAttributes.get(nsLocalName);
-                if (consumers != null) {
+                if (consumers != null && channel != null) {
                     consumers.forEach((attributeName, consumer) -> {
                         var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
                         attributeValue.ifPresent(v -> consumer.accept(channel, v));
@@ -512,7 +541,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             } else if (isItemPart) {
                 // Map item attributes
                 var consumers = itemAttributes.get(nsLocalName);
-                if (consumers != null) {
+                if (consumers != null && item != null) {
                     consumers.forEach((attributeName, consumer) -> {
                         var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
                         attributeValue.ifPresent(v -> consumer.accept(item, v));

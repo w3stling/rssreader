@@ -6,10 +6,9 @@ import com.apptasticsoftware.rssreader.util.ItemComparator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,33 +35,26 @@ class SortTest {
                 "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
                 "https://blog.ploeh.dk/rss.xml",
                 "https://www.politico.com/rss/politicopicks.xml",
-                "https://www.e1.ru/talk/forum/rss.php?f=86");
+                "https://www.e1.ru/talk/forum/rss.php?f=86",
+                "https://failed-to-read-from-this-url.com");
 
-        final var reader = new RssReader();
 
-        var timestamps = urlList.stream().parallel()
-                .map(url -> {
-                    try {
-                        return reader.readAsync(url);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
-                .filter(Objects::nonNull)
-                .flatMap(CompletableFuture::join)
-                .sorted()
-                .map(Item::getPubDateZonedDateTime)
-                .flatMap(Optional::stream)
-                .map(t -> t.toInstant().toEpochMilli())
-                .collect(Collectors.toList());
+        List<String> extendedUrlList = new ArrayList<>(urlList);
+        extendedUrlList.add(null);
+
+        var timestamps = new RssReader().read(extendedUrlList)
+                                                   .sorted()
+                                                   .map(Item::getPubDateZonedDateTime)
+                                                   .flatMap(Optional::stream)
+                                                   .map(t -> t.toInstant().toEpochMilli())
+                                                   .collect(Collectors.toList());
 
         assertTrue(timestamps.size() > 10);
 
-        var iter = timestamps.iterator();
-        Long current, previous = iter.next();
-        while (iter.hasNext()) {
-            current = iter.next();
+        var iterator = timestamps.iterator();
+        Long current, previous = iterator.next();
+        while (iterator.hasNext()) {
+            current = iterator.next();
             assertTrue(previous.compareTo(current) >= 0);
             previous = current;
         }
