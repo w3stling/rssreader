@@ -53,7 +53,7 @@ public class ItunesItem extends Item {
                                                .plusMinutes(Long.parseLong(parts[1]))
                                                .plusSeconds(Long.parseLong(parts[2])));
                 }
-            } catch (Exception ignored) { }
+            } catch (NumberFormatException ignored) { }
         }
 
         return Optional.empty();
