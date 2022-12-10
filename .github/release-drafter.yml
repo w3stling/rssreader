@@ -15,7 +15,7 @@ categories:
     label: 'performance'
   - title: '🐛 Bug Fixes'
     label: 'bug'
-  - title: '📖 Documentation'
+  - title: '📚 Documentation'
     label: 'documentation'
   - title: '🧰 Maintenance'
     label: 'chore'
