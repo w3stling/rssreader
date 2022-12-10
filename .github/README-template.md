@@ -52,7 +52,7 @@ new RssReader().read(urls)
                .forEach(System.out::println);
 ```
 
-To change the sort order to oldest first
+To change sort order to ascending (oldest first) publication date
 ```java
 .sorted(ItemComparator.oldestItemFirst())
 ```
