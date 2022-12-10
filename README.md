@@ -2,8 +2,8 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-3.2.5-brightgreen.svg)](https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.2.5/jar)
-[![Javadoc](https://img.shields.io/badge/javadoc-3.2.5-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.2.5)
+[![Download](https://img.shields.io/badge/download-3.3.0-brightgreen.svg)](https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.3.0/jar)
+[![Javadoc](https://img.shields.io/badge/javadoc-3.3.0-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.3.0)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
@@ -59,7 +59,7 @@ To change sort order to ascending (oldest first) publication date
 
 
 ### Podcast / iTunes module
-Use iTunes module for extracting data from [Podcast][4] specific tags and attributes. 
+Use iTunes module for extracting data from [Podcast][4] specific tags and attributes.
 ```java
 List<ItunesItem> items = new ItunesRssReader().read(URL)
                                               .collect(Collectors.toList());
@@ -89,7 +89,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.2.5</version>
+            <version>3.3.0</version>
         </dependency>
     </dependencies>
     ...
@@ -100,7 +100,7 @@ Add dependency declaration:
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptasticsoftware:rssreader:3.2.5'
+    implementation 'com.apptasticsoftware:rssreader:3.3.0'
 }
 ```
 
@@ -144,7 +144,7 @@ License
     SOFTWARE.
 
 
-[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.2.5/jar
+[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/3.3.0/jar
 [2]: https://maven.apache.org
 [3]: https://gradle.org
 [4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
