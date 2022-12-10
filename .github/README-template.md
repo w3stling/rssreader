@@ -17,18 +17,24 @@ RSS Reader
 > * New group ID in Maven / Gradle dependency declaration
 > * Moved repository from `JCenter` to `Maven Central Repository`
 
+RSS Reader is a simple Java library for reading RSS and Atom feeds. Requires at minimum Java 11.
+
 RSS (Rich Site Summary) is a type of web feed which allows users to access updates to online content in a
-standardized, computer-readable format. Subscribing to a website RSS removes the need for the user to manually
+standardized, computer-readable format. It removes the need for the user to manually
 check the website for new content.
 
-Atom feeds is supported from version 2.0.0 and later.
-
-This Java RSS parser library makes it easier to automate data extraction from RSS or Atom feeds via Java stream API.
 
 Examples
 --------
 ### Read RSS feed
-Reads from a RSS (or Atom) feeds and extract all items that contains the word football in the title.
+Reads from a RSS (or Atom) feed.
+```java
+RssReader rssReader = new RssReader();
+List<Items> items = rssReader.read(URL)
+                             .collect(Collectors.toList());
+```
+
+Extract all items that contains the word football in the title.
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
@@ -36,19 +42,31 @@ List<Item> articles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("footb
                              .collect(Collectors.toList());
 ```
 
-### Merging RSS feeds
-Merging several feeds into one feed sored in ascending (oldest first) publication date order and prints the title.
+### Read from multiple feeds
+Read from multiple feeds into a single stream of items sored in descending (newest first) publication date order and prints the title.
 ```java
-RssReader reader = new RssReader();
-Stream.concat(reader.read(URL1),
-              reader.read(URL2))
-      .sorted()
-      .map(Item::getTitle)
-      .forEach(System.out::println);
+List<String> urls = List.of(URL1, URL2, URL3, URL4, URL5); 
+new RssReader().read(urls)
+               .sorted()
+               .map(Item::getTitle)
+               .forEach(System.out::println);
 ```
 
-### RSS / Atom feed extensions
-Support for mapping custom tags and attributes in the RSS / Atom feed to item and channel object.
+To change the sort order to oldest first
+```java
+.sorted(ItemComparator.oldestItemFirst())
+```
+
+
+### Podcast / iTunes module
+Use iTunes module for extracting data from [Podcast][4] specific tags and attributes.
+```java
+List<ItunesItem> items = new ItunesRssReader().read(URL)
+                                              .collect(Collectors.toList());
+```
+
+### Custom RSS / Atom feed extensions
+Support for mapping custom tags and attributes in feed to item and channel object.
 ```java
 List<Item> items = new RssReader()
              .addItemExtension("dc:creator", Item::setAuthor)
@@ -86,7 +104,19 @@ dependencies {
 }
 ```
 
-RSS library requires at minimum Java 11.
+
+Markup Validation Services
+-------
+Useful links for validating feeds
+
+### RSS / Atom
+https://validator.w3.org/feed/
+
+### Podcast / iTunes
+https://podba.se/validate/ <br />
+https://www.castfeedvalidator.com/
+
+
 
 License
 -------
@@ -117,3 +147,4 @@ License
 [1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/%%version%%/jar
 [2]: https://maven.apache.org
 [3]: https://gradle.org
+[4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
