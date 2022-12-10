@@ -634,22 +634,19 @@ class RssReaderIntegrationTest {
 
     @Test
     void testReadFromFile() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("itunes-podcast.xml");
-        long count = new RssReader().read(is).count();
+        long count = new RssReader().read(fromFile("itunes-podcast.xml")).count();
         assertEquals(9, count);
     }
     
     @Test
     void testBadEnclosureInfo() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("podcast-with-bad-enclosure.xml");
-        long count = new RssReader().read(is).count();
+        long count = new RssReader().read(fromFile("podcast-with-bad-enclosure.xml")).count();
         assertEquals(1, count);
     }
 
     @Test
     void testMultipleCategories() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("multiple-categories.xml");
-        var list = new RssReader().read(is).collect(Collectors.toList());
+        var list = new RssReader().read(fromFile("multiple-categories.xml")).collect(Collectors.toList());
 
         assertTrue(list.size() > 0);
         var item = list.get(0);
@@ -661,10 +658,19 @@ class RssReaderIntegrationTest {
 
     @Test
     void testImageBadWidthHeight() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream("bad-image-width-height.xml");
-        var list = new RssReader().read(is).collect(Collectors.toList());
+        var list = new RssReader().read(fromFile("bad-image-width-height.xml")).collect(Collectors.toList());
         assertEquals(1, list.size());
         assertTrue(list.get(0).getChannel().getImage().isPresent());
     }
 
+    @Test
+    void skipEmptyCategory() {
+        var list = new RssReader().read(fromFile("empty-category.xml")).collect(Collectors.toList());
+        assertEquals(1, list.size());
+        assertTrue(list.get(0).getCategories().isEmpty());
+    }
+
+    private InputStream fromFile(String fileName) {
+        return getClass().getClassLoader().getResourceAsStream(fileName);
+    }
 }

@@ -439,6 +439,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 // disable XML external entity (XXE) processing
                 xmlInFact.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
                 xmlInFact.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+                xmlInFact.setProperty(XMLInputFactory.IS_COALESCING, true);
 
                 reader = xmlInFact.createXMLStreamReader(is);
             }
@@ -592,6 +593,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 parseItemCharacters(item, prefix, elementName, text);
 
             textBuilder.setLength(0);
+            elementName = "";
 
             return "item".equals(nsLocalName) || "entry".equals(nsLocalName);
         }
