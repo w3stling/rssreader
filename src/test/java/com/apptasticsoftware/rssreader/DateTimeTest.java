@@ -59,6 +59,9 @@ class DateTimeTest {
 
         timestamp = DateTime.toEpochMilli("Wed, 15 Jan 2020 10:13:32 GMT+06:00");
         assertEquals(1579061612000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Tue, 01 Mar 2022 16:03:00 GMT+0000");
+        assertEquals(1646150580000L, timestamp);
     }
 
     @Test
