@@ -67,17 +67,16 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
+    private boolean isInitialized;
 
 
     protected AbstractRssReader() {
         httpClient = createHttpClient();
-        init();
     }
 
     protected AbstractRssReader(HttpClient httpClient) {
         Objects.requireNonNull(httpClient, "Http client must not be null");
         this.httpClient = httpClient;
-        init();
     }
 
     /**
@@ -92,12 +91,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected abstract I createItem();
 
-    protected void init() {
+    protected void initialize() {
         registerChannelTags();
         registerChannelAttributes();
         registerItemTags();
         registerItemAttributes();
         registerImageTags();
+        isInitialized = true;
     }
 
     @SuppressWarnings("java:S1192")
@@ -291,6 +291,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     public Stream<I> read(String url) throws IOException {
         Objects.requireNonNull(url, "URL must not be null");
 
+        if (!isInitialized) {
+            initialize();
+            isInitialized = true;
+        }
+
         try {
             return readAsync(url).get(1, TimeUnit.MINUTES);
         } catch (CompletionException e) {
@@ -315,6 +320,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public Stream<Item> read(Collection<String> urls) {
+        Objects.requireNonNull(urls, "URLs collection must not be null");
+
+        if (!isInitialized) {
+            initialize();
+            isInitialized = true;
+        }
+
         return urls.stream().parallel()
                    .map(url -> {
                         try {
@@ -346,6 +358,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     public Stream<I> read(InputStream inputStream) {
         Objects.requireNonNull(inputStream, "Input stream must not be null");
+
+        if (!isInitialized) {
+            initialize();
+            isInitialized = true;
+        }
 
         var itemIterator = new RssItemIterator(inputStream);
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
