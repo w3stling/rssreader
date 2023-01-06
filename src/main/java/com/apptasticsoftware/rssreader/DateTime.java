@@ -45,6 +45,7 @@ public final class DateTime {
     public static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_AND_OFFSET;
     public static final DateTimeFormatter RFC_822_DATE_TIME;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT;
@@ -90,6 +91,7 @@ public final class DateTime {
         RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss").withZone(ZoneId.of("UTC"));
         RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss z");
         RFC_1123_DATE_TIME_GMT_OFFSET = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss O");
+        RFC_1123_DATE_TIME_GMT_AND_OFFSET = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm:ss 'GMT'Z");
         RFC_822_DATE_TIME = DateTimeFormatter.ofPattern("E, d LLL yy HH:mm:ss X");
         RFC_1123_DATE_TIME_SPECIAL_EDT = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'EDT'").withZone(ZoneOffset.ofHours(-4));
         RFC_1123_DATE_TIME_SPECIAL_EST = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'EST'").withZone(ZoneOffset.ofHours(-5));
@@ -240,6 +242,8 @@ public final class DateTime {
             return RFC_1123_DATE_TIME_SPECIAL_PDT;
         else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" PST"))
             return RFC_1123_DATE_TIME_SPECIAL_PST;
+        else if (dateTime.length() > 31 && dateTime.contains("GMT") && !dateTime.endsWith("GMT") && dateTime.lastIndexOf(':') < 29)
+            return RFC_1123_DATE_TIME_GMT_AND_OFFSET;
         else if (dateTime.length() >= 28 && dateTime.length() <= 35 && dateTime.charAt(3) == ',' && dateTime.contains("GMT"))
             return RFC_1123_DATE_TIME_GMT_OFFSET;
         else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && (dateTime.charAt(13) == ' ' || dateTime.charAt(14) == ' '))
