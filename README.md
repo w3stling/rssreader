@@ -30,7 +30,7 @@ Examples
 Reads from a RSS (or Atom) feed.
 ```java
 RssReader rssReader = new RssReader();
-List<Items> items = rssReader.read(URL)
+List<Item> items = rssReader.read(URL)
                              .collect(Collectors.toList());
 ```
 
