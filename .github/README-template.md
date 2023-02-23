@@ -30,8 +30,8 @@ Examples
 Reads from a RSS (or Atom) feed.
 ```java
 RssReader rssReader = new RssReader();
-List<Items> items = rssReader.read(URL)
-                             .collect(Collectors.toList());
+List<Item> items = rssReader.read(URL)
+                            .collect(Collectors.toList());
 ```
 
 Extract all items that contains the word football in the title.
