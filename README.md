@@ -31,7 +31,7 @@ Reads from a RSS (or Atom) feed.
 ```java
 RssReader rssReader = new RssReader();
 List<Item> items = rssReader.read(URL)
-                             .collect(Collectors.toList());
+                            .collect(Collectors.toList());
 ```
 
 Extract all items that contains the word football in the title.
