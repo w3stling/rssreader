@@ -291,11 +291,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     public Stream<I> read(String url) throws IOException {
         Objects.requireNonNull(url, "URL must not be null");
 
-        if (!isInitialized) {
-            initialize();
-            isInitialized = true;
-        }
-
         try {
             return readAsync(url).get(1, TimeUnit.MINUTES);
         } catch (CompletionException e) {
@@ -321,11 +316,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     public Stream<Item> read(Collection<String> urls) {
         Objects.requireNonNull(urls, "URLs collection must not be null");
-
-        if (!isInitialized) {
-            initialize();
-            isInitialized = true;
-        }
 
         return urls.stream().parallel()
                    .map(url -> {
@@ -376,6 +366,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     public CompletableFuture<Stream<I>> readAsync(String url) {
         Objects.requireNonNull(url, "URL must not be null");
+
+        if (!isInitialized) {
+            initialize();
+            isInitialized = true;
+        }
+
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
