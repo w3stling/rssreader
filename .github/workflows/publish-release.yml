@@ -50,7 +50,7 @@ jobs:
           echo "year=$(date +%Y)" >> $GITHUB_ENV
 
       - name: Update README.md 📝
-        uses: bluwy/substitute-string-action@v1
+        uses: bluwy/substitute-string-action@v2
         with:
           _input-file: './.github/README-template.md'
           _output-file: ./README.md

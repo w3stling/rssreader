@@ -16,7 +16,7 @@ public final class ItemComparator {
 
     /**
      * Comparator for sorting Items on publication date in ascending order (oldest first)
-     *
+     * @param <I> any class that extend Item
      * @return comparator
      */
     public static <I extends Item> Comparator<I> oldestItemFirst() {
@@ -25,7 +25,7 @@ public final class ItemComparator {
 
     /**
      * Comparator for sorting Items on publication date in descending order (newest first)
-     *
+     * @param <I> any class that extend Item
      * @return comparator
      */
     public static <I extends Item> Comparator<I> newestItemFirst() {
@@ -34,7 +34,7 @@ public final class ItemComparator {
 
     /**
      * Comparator for sorting Items on channel title
-     *
+     * @param <I> any class that extend Item
      * @return comparator
      */
     public static <I extends Item> Comparator<I> channelTitle() {

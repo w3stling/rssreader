@@ -2,7 +2,7 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-%%version%%-brightgreen.svg)](https://search.maven.org/artifact/com.apptasticsoftware/rssreader/%%version%%/jar)
+[![Download](https://img.shields.io/badge/download-%%version%%-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/%%version%%/overview)
 [![Javadoc](https://img.shields.io/badge/javadoc-%%version%%-blue.svg)](https://w3stling.github.io/rssreader/javadoc/%%version%%)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
@@ -30,8 +30,8 @@ Examples
 Reads from a RSS (or Atom) feed.
 ```java
 RssReader rssReader = new RssReader();
-List<Items> items = rssReader.read(URL)
-                             .collect(Collectors.toList());
+List<Item> items = rssReader.read(URL)
+                            .collect(Collectors.toList());
 ```
 
 Extract all items that contains the word football in the title.
@@ -144,7 +144,7 @@ License
     SOFTWARE.
 
 
-[1]: https://search.maven.org/artifact/com.apptasticsoftware/rssreader/%%version%%/jar
+[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/%%version%%/overview
 [2]: https://maven.apache.org
 [3]: https://gradle.org
 [4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
