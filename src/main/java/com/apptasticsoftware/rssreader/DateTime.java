@@ -47,6 +47,7 @@ public final class DateTime {
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
 
     public static final DateTimeFormatter RFC_1123_DATE_TIME;
+    public static final DateTimeFormatter RFC_1123_DATE_TIME_TIMEZONE;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL;
     public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET;
@@ -91,6 +92,7 @@ public final class DateTime {
         ISO_LOCAL_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder().parseCaseInsensitive().append(ISO_LOCAL_DATE).appendLiteral(' ').append(ISO_LOCAL_TIME).toFormatter().withLocale(Locale.ENGLISH);
 
         RFC_1123_DATE_TIME = DateTimeFormatter.RFC_1123_DATE_TIME.withLocale(Locale.ENGLISH);
+        RFC_1123_DATE_TIME_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss zzz", Locale.ENGLISH);
         RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss", Locale.ENGLISH).withZone(ZoneId.of("UTC"));
         RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss z", Locale.ENGLISH);
         RFC_1123_DATE_TIME_GMT_OFFSET = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss O", Locale.ENGLISH);
@@ -251,8 +253,15 @@ public final class DateTime {
             return RFC_1123_DATE_TIME_GMT_OFFSET;
         else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && (dateTime.charAt(13) == ' ' || dateTime.charAt(14) == ' '))
             return RFC_822_DATE_TIME;
-        else if (dateTime.length() >= 28 && dateTime.length() <= 31)
-            return RFC_1123_DATE_TIME;
+        else if (dateTime.length() >= 28 && dateTime.length() <= 31) {
+            int startOfTimezonePart = dateTime.lastIndexOf(' ');
+            boolean hasTimezoneOffset = dateTime.indexOf('+', startOfTimezonePart) != -1 || dateTime.indexOf('-', startOfTimezonePart) != -1;
+            if  (hasTimezoneOffset) {
+                return DateTimeFormatter.RFC_1123_DATE_TIME;
+            } else {
+                return RFC_1123_DATE_TIME_TIMEZONE;
+            }
+        }
         else if ((dateTime.length() == 26 || dateTime.length() == 27) && dateTime.charAt(3) == ',' && dateTime.endsWith(" Z"))
             return RFC_1123_DATE_TIME_SPECIAL;
         else if ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')

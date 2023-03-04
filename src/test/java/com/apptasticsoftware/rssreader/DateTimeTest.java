@@ -177,7 +177,6 @@ class DateTimeTest {
         assertEquals(1667982114000L, timestamp);
     }
 
-
     @Test
     void dateTimeFormat12() {
         assertEquals(1423026000000L, DateTime.toEpochMilli("Wednesday, 04 Feb 2015 00:00:00 EST"));
@@ -235,6 +234,15 @@ class DateTimeTest {
 
         timestamp = DateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 PST");
         assertEquals(1667982114000L, timestamp);
+    }
+
+    @Test
+    void dateTimeFormat13() {
+        var timestamp = DateTime.toEpochMilli("Wed, 02 Oct 2002 13:00:00 CET");
+        assertEquals(1033556400000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Wed, 2 Oct 2002 13:00:00 CET");
+        assertEquals(1033556400000L, timestamp);
     }
 
     @Test
