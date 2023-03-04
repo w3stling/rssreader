@@ -253,11 +253,35 @@ class DateTimeTest {
         timestamp = DateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53+5:30");
         assertEquals(1677829433000L, timestamp);
 
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53-5:30");
+        assertEquals(1677869033000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53+5:30");
+        assertEquals(1677829433000L, timestamp);
+
         timestamp = DateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53-10:30");
         assertEquals(1677887033000L, timestamp);
 
         timestamp = DateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53+10:30");
         assertEquals(1677811433000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53-10:30");
+        assertEquals(1677887033000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53+10:30");
+        assertEquals(1677811433000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53-05:30");
+        assertEquals(1677869033000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53+05:30");
+        assertEquals(1677829433000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53-05:30");
+        assertEquals(1677869033000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("Fri, 3 Mar 2023 13:13:53+05:30");
+        assertEquals(1677829433000L, timestamp);
     }
 
     @Test

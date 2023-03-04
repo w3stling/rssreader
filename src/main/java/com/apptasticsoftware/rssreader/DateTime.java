@@ -94,7 +94,7 @@ public final class DateTime {
 
         RFC_1123_DATE_TIME = DateTimeFormatter.RFC_1123_DATE_TIME.withLocale(Locale.ENGLISH);
         RFC_1123_DATE_TIME_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss zzz", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_TIMEZONE2 = new DateTimeFormatterBuilder().appendPattern("E, d LLL yyyy HH:mm:ss").appendOffset("+H:mm", "+0").toFormatter().withLocale(Locale.ENGLISH);
+        RFC_1123_DATE_TIME_TIMEZONE2 = new DateTimeFormatterBuilder().appendPattern("E, d LLL yyyy HH:mm:ss").appendOffset("+H:mm", "+00").toFormatter().withLocale(Locale.ENGLISH);
         RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss", Locale.ENGLISH).withZone(ZoneId.of("UTC"));
         RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss z", Locale.ENGLISH);
         RFC_1123_DATE_TIME_GMT_OFFSET = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss O", Locale.ENGLISH);
