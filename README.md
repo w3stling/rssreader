@@ -2,8 +2,8 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-3.4.2-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.4.2/overview)
-[![Javadoc](https://img.shields.io/badge/javadoc-3.4.2-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.4.2)
+[![Download](https://img.shields.io/badge/download-3.4.3-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.4.3/overview)
+[![Javadoc](https://img.shields.io/badge/javadoc-3.4.3-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.4.3)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
@@ -89,7 +89,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.4.2</version>
+            <version>3.4.3</version>
         </dependency>
     </dependencies>
     ...
@@ -100,7 +100,7 @@ Add dependency declaration:
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptasticsoftware:rssreader:3.4.2'
+    implementation 'com.apptasticsoftware:rssreader:3.4.3'
 }
 ```
 
@@ -144,7 +144,7 @@ License
     SOFTWARE.
 
 
-[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.4.2/overview
+[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.4.3/overview
 [2]: https://maven.apache.org
 [3]: https://gradle.org
 [4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
