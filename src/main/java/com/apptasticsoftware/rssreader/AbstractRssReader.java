@@ -97,7 +97,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         registerItemTags();
         registerItemAttributes();
         registerImageTags();
-        isInitialized = true;
     }
 
     @SuppressWarnings("java:S1192")
@@ -317,7 +316,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     public Stream<Item> read(Collection<String> urls) {
         Objects.requireNonNull(urls, "URLs collection must not be null");
 
-        return urls.stream().parallel()
+        if (!isInitialized) {
+            initialize();
+            isInitialized = true;
+        }
+
+        return urls.stream()
+                   .parallel()
                    .map(url -> {
                         try {
                             return Map.entry(url, readAsync(url));
