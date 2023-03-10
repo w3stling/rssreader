@@ -25,15 +25,11 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.*;
 import java.util.Comparator;
 import java.util.Locale;
 
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
 /**
@@ -42,6 +38,8 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 public final class DateTime {
     private static ZoneId defaultZone = ZoneId.of("UTC");
 
+    public static final DateTimeFormatter BASIC_ISO_DATE;
+    public static final DateTimeFormatter ISO_LOCAL_DATE;
     public static final DateTimeFormatter ISO_OFFSET_DATE_TIME;
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
@@ -88,6 +86,8 @@ public final class DateTime {
     public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_NO_EOW;
 
     static {
+        BASIC_ISO_DATE = DateTimeFormatter.BASIC_ISO_DATE.withLocale(Locale.ENGLISH);
+        ISO_LOCAL_DATE = DateTimeFormatter.ISO_LOCAL_DATE.withLocale(Locale.ENGLISH);
         ISO_OFFSET_DATE_TIME = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withLocale(Locale.ENGLISH);
         ISO_LOCAL_DATE_TIME = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withLocale(Locale.ENGLISH);
         ISO_LOCAL_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder().parseCaseInsensitive().append(ISO_LOCAL_DATE).appendLiteral(' ').append(ISO_LOCAL_TIME).toFormatter().withLocale(Locale.ENGLISH);
@@ -183,7 +183,12 @@ public final class DateTime {
         }
 
         try {
-            return ZonedDateTime.parse(dateTime, formatter);
+            if (isDateOnly(formatter)) {
+                LocalDate date = LocalDate.parse(dateTime, formatter);
+                return ZonedDateTime.of(date, LocalTime.MIDNIGHT, defaultZone);
+            } else {
+                return ZonedDateTime.parse(dateTime, formatter);
+            }
         } catch (DateTimeParseException e) {
             int index = dateTime.indexOf(',');
             if (index != -1 && e.getMessage().contains("Conflict found: Field DayOfWeek")) {
@@ -199,6 +204,10 @@ public final class DateTime {
                 throw e;
             }
         }
+    }
+
+    private static boolean isDateOnly(DateTimeFormatter formatter) {
+        return formatter == ISO_LOCAL_DATE || formatter == BASIC_ISO_DATE;
     }
 
     @SuppressWarnings("java:S3776")
@@ -225,6 +234,10 @@ public final class DateTime {
             return ISO_LOCAL_DATE_TIME;
         else if (dateTime.length() == 19 && dateTime.charAt(10) == ' ')
             return ISO_LOCAL_DATE_TIME_SPECIAL;
+        else if (dateTime.length() == 10 && dateTime.charAt(4) == '-' && dateTime.charAt(7) == '-')
+            return ISO_LOCAL_DATE;
+        else if (dateTime.length() == 8)
+            return BASIC_ISO_DATE;
         else
             return null;
     }

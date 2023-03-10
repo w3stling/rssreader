@@ -347,6 +347,15 @@ class DateTimeTest {
     }
 
     @Test
+    void dateOnly() {
+        var timestamp = DateTime.toEpochMilli("2023-03-10");
+        assertEquals(1678406400000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("20230310");
+        assertEquals(1678406400000L, timestamp);
+    }
+
+    @Test
     void badInputNull() {
         assertNull(DateTime.toLocalDateTime(null));
         assertNull(DateTime.toZonedDateTime(null));
