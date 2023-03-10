@@ -671,12 +671,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             client = HttpClient.newBuilder()
                     .sslContext(context)
                     .connectTimeout(Duration.ofSeconds(25))
-                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .followRedirects(HttpClient.Redirect.ALWAYS)
                     .build();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             client = HttpClient.newBuilder()
                     .connectTimeout(Duration.ofSeconds(25))
-                    .followRedirects(HttpClient.Redirect.NORMAL)
+                    .followRedirects(HttpClient.Redirect.ALWAYS)
                     .build();
         }
 
