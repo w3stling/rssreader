@@ -414,12 +414,12 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("World of Tanks News | World of Tanks"));
+            assertThat(channel.getTitle(), containsString("World of Tanks"));
             assertThat(channel.getDescription(), is("The latest news, updates, specials, and events for World of Tanks, the team-based, MMO tank battle game from Wargaming. Everything about WoT in one place."));
             assertThat(channel.getLanguage(), isPresentAndIs("en"));
             assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
             assertThat(channel.getImage(), isPresent());
-            assertThat(channel.getImage().map(Image::getTitle).orElse(null), is("World of Tanks News | World of Tanks"));
+            assertThat(channel.getImage().map(Image::getTitle).orElse(null), containsString("World of Tanks"));
             assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));
             assertThat(channel.getImage().map(Image::getUrl), isPresentAnd(not(emptyString())));
             assertThat(channel.getImage().get().getDescription(), isEmpty());
