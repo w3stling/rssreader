@@ -22,7 +22,7 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
     testImplementation('com.github.npathai:hamcrest-optional:2.0.0')
     testImplementation('org.hamcrest:hamcrest:2.2')
-    testImplementation('org.mockito:mockito-core:5.2.0')
+    testImplementation('org.mockito:mockito-core:5.3.0')
     testImplementation('nl.jqno.equalsverifier:equalsverifier:3.14.1')
 }
 
