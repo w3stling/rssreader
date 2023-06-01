@@ -3,6 +3,7 @@ package com.apptasticsoftware.rssreader.util;
 import com.apptasticsoftware.rssreader.DateTime;
 import com.apptasticsoftware.rssreader.Item;
 
+import java.time.Instant;
 import java.util.Comparator;
 
 /**
@@ -20,7 +21,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> oldestItemFirst() {
-        return Comparator.comparing((I i) -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L));
+        return Comparator.comparing((I i) -> i.getPubDate().map(DateTime::toInstant).orElse(Instant.EPOCH));
     }
 
     /**
@@ -29,7 +30,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> newestItemFirst() {
-        return Comparator.comparing((I i) -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L)).reversed();
+        return Comparator.comparing((I i) -> i.getPubDate().map(DateTime::toInstant).orElse(Instant.EPOCH)).reversed();
     }
 
     /**
