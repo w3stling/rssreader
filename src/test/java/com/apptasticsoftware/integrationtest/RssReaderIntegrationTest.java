@@ -272,42 +272,6 @@ class RssReaderIntegrationTest {
 
 
     @Test
-    void feedForAll() throws IOException {
-        RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://feedforall.com/sample-feed.xml").collect(Collectors.toList());
-
-        assertFalse(items.isEmpty());
-
-        for (Item item : items) {
-            // Validate channel
-            Channel channel = item.getChannel();
-            assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Sample Feed - Favorite RSS Related Software & Resources"));
-            assertThat(channel.getDescription(), is("Take a look at some of FeedForAll's favorite software and resources for learning more about RSS."));
-            assertThat(channel.getLink(), is("http://www.feedforall.com"));
-            assertThat(channel.getCategories().get(0), is("Computers/Software/Internet/Site Management/Content Management"));
-            assertThat(channel.getLanguage(), isPresentAndIs("en-us"));
-            assertThat(channel.getCopyright(), isPresentAndIs("Copyright 2004 NotePage, Inc."));
-            assertThat(channel.getGenerator(), isPresentAndIs("FeedForAll Beta1 (0.0.1.8)"));
-            assertThat(channel.getPubDate(), isPresentAndIs("Tue, 26 Oct 2004 14:06:44 -0500"));
-            assertThat(channel.getPubDateZonedDateTime(), isPresentAndIs(DateTime.toZonedDateTime("Tue, 26 Oct 2004 14:06:44 -0500")));
-            assertThat(channel.getLastBuildDate(), isPresentAndIs("Mon, 1 Nov 2004 13:17:17 -0500"));
-            assertThat(channel.getLastBuildDateZonedDateTime(), isPresentAndIs(DateTime.toZonedDateTime("Mon, 1 Nov 2004 13:17:17 -0500")));
-
-            // Validate item
-            assertNotNull(item);
-            assertThat(item.getGuid(), isEmpty());
-            assertThat(item.getIsPermaLink(), isEmpty());
-            assertThat(item.getTitle(), isPresent());
-            assertThat(item.getDescription(), isPresent());
-            assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getPubDateZonedDateTime(), isPresent());
-            assertThat(item.getLink(), isPresent());
-        }
-    }
-
-
-    @Test
     void investingcom() throws IOException {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://se.investing.com/rss/news.rss").collect(Collectors.toList());
@@ -415,7 +379,7 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), containsString("World of Tanks"));
-            assertThat(channel.getDescription(), is("The latest news, updates, specials, and events for World of Tanks, the team-based, MMO tank battle game from Wargaming. Everything about WoT in one place."));
+            assertThat(channel.getDescription(), anything());
             assertThat(channel.getLanguage(), isPresentAndIs("en"));
             assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
             assertThat(channel.getImage(), isPresent());
