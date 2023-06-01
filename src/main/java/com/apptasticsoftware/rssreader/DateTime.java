@@ -174,7 +174,7 @@ public final class DateTime {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        if (dateTime.length() == 19 ||
+        if (dateTime.length() == 19 || ((dateTime.length() == 29 || dateTime.length() == 32 || dateTime.length() == 35) && dateTime.charAt(10) == 'T') ||
             ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
@@ -228,7 +228,7 @@ public final class DateTime {
     }
 
     private static DateTimeFormatter parseIsoDateTime(String dateTime) {
-        if (dateTime.length() >= 20 && dateTime.length() <= 31 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T')
+        if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T')
             return ISO_OFFSET_DATE_TIME;
         else if (dateTime.length() == 19 && dateTime.charAt(10) == 'T')
             return ISO_LOCAL_DATE_TIME;
@@ -358,6 +358,15 @@ public final class DateTime {
         return zonedDateTime.toInstant().toEpochMilli();
     }
 
+    public static Instant toInstant(String dateTime) {
+        ZonedDateTime zonedDateTime = toZonedDateTime(dateTime);
+
+        if (zonedDateTime == null)
+            return null;
+
+        return zonedDateTime.toInstant();
+    }
+
     /**
      * Comparator comparing publication date of Item class. Sorted in ascending order (oldest first)
      *
@@ -370,7 +379,7 @@ public final class DateTime {
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public static Comparator<Item> pubDateComparator() {
-        return Comparator.comparing(i -> i.getPubDate().map(DateTime::toEpochMilli).orElse(0L));
+        return Comparator.comparing(i -> i.getPubDate().map(DateTime::toInstant).orElse(Instant.EPOCH));
     }
 
 }
