@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     testImplementation(platform('org.junit:junit-bom:5.9.3'))
-    testImplementation('org.junit.jupiter:junit-jupiter:5.9.2')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.9.3')
     testImplementation('com.github.npathai:hamcrest-optional:2.0.0')
     testImplementation('org.hamcrest:hamcrest:2.2')
     testImplementation('org.mockito:mockito-core:5.3.1')
