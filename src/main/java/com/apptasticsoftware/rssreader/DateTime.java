@@ -164,6 +164,7 @@ public final class DateTime {
      * @param dateTime date time string
      * @return zoned date time object
      */
+    @SuppressWarnings("java:S3776")
     public static ZonedDateTime toZonedDateTime(String dateTime) {
         if (dateTime == null)
             return null;
