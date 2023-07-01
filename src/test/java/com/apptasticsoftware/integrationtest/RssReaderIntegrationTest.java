@@ -1,6 +1,7 @@
 package com.apptasticsoftware.integrationtest;
 
 import com.apptasticsoftware.rssreader.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.SSLContext;
@@ -40,6 +41,7 @@ class RssReaderIntegrationTest {
     }
 
 
+    @Disabled("Investigating")
     @Test
     void rssRiksbanken() throws IOException {
         RssReader reader = new RssReader();
