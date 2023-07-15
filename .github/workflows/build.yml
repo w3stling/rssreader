@@ -14,6 +14,8 @@ jobs:
   build:
     name: 🏗️ Build and Test
     runs-on: ubuntu-latest
+    outputs:
+      next-version: ${{ steps.version.outputs.next-version }}
     steps:
       - name: Build trigger event 🔎
         run: |
@@ -53,6 +55,20 @@ jobs:
       - name: Build and test 🏗️
         run: ./gradlew clean build jacocoTestReport javadoc
 
+      - name: Get version number 🔢
+        id: get-version
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Store next version 🔢
+        id: version
+        run: |
+          echo "next-version=${{ steps.get-version.outputs.tag_name }}" | cut -c -13,15- >> $GITHUB_OUTPUT
+
+      - name: Print next version 🔢
+        run: |
+          echo "Next version: ${{ steps.version.outputs.next-version }}"
 
   code-analysis:
     name: 🔎 Code Analysis
@@ -94,18 +110,12 @@ jobs:
       - name: Grant execute permission for gradlew ⚙️
         run: chmod +x gradlew
 
-      - name: Get version number 🔢
-        id: version
-        uses: patrickjahns/version-drafter-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Next version 🔢
         run: |
-          echo "Next version: ${{ steps.version.outputs.next-version }}"
+          echo "Next version: ${{ needs.build.outputs.next-version }}"
 
       - name: Analyze code 🔎️
-        run: ./gradlew test jacocoTestReport sonarqube --info -Dsonar.projectVersion=${{ steps.version.outputs.next-version }}-SNAPSHOT
+        run: ./gradlew test jacocoTestReport sonarqube --info -Dsonar.projectVersion=${{ needs.build.outputs.next-version }}-SNAPSHOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -145,15 +155,9 @@ jobs:
       - name: Grant execute permission for gradlew ⚙️
         run: chmod +x gradlew
 
-      - name: Get version number 🔢
-        id: version
-        uses: patrickjahns/version-drafter-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Next version 🔢
         run: |
-          echo "Next version: ${{ steps.version.outputs.next-version }}"
+          echo "Next version: ${{ needs.build.outputs.next-version }}"
 
       - name: Generate Javadoc 📝
         run: ./gradlew javadoc
@@ -163,7 +167,7 @@ jobs:
         with:
           branch: gh-pages
           folder: build/docs/javadoc
-          target-folder: javadoc/${{ steps.version.outputs.next-version }}-SNAPSHOT
+          target-folder: javadoc/${{ needs.build.outputs.next-version }}-SNAPSHOT
           commit-message: Publishing javadoc
           clean: true
           dry-run: false
@@ -203,15 +207,9 @@ jobs:
       - name: Grant execute permission for gradlew ⚙️
         run: chmod +x gradlew
 
-      - name: Get version number 🔢
-        id: version
-        uses: patrickjahns/version-drafter-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Next version 🔢
         run: |
-          echo "Next version: ${{ steps.version.outputs.next-version }}"
+          echo "Next version: ${{ needs.build.outputs.next-version }}"
 
       - name: Publish snapshot build 🚀
         env:
@@ -219,4 +217,4 @@ jobs:
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_SECRET }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.PGP_PASSPHRASE }}
-        run: ./gradlew publishToSonatype -Pversion=${{ steps.version.outputs.next-version }}-SNAPSHOT
+        run: ./gradlew publishToSonatype -Pversion=${{ needs.build.outputs.next-version }}-SNAPSHOT

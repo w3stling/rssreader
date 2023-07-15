@@ -42,7 +42,7 @@ jobs:
       - name: Validate Gradle wrapper ⚙️
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Get version number 🔢
+      - name: Version number 🔢
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
           echo "New version: ${NEW_VERSION}"
@@ -55,8 +55,9 @@ jobs:
           _input-file: './.github/README-template.md'
           _output-file: ./README.md
           _format-key: '%%key%%'
-          version: ${{ env.new_version }}
-          year: ${{ env.year }}
+        env:
+          INPUT_VERSION: ${{ env.new_version }}
+          INPUT_YEAR: ${{ env.year }}
 
       - name: Commit README.md
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -109,7 +110,7 @@ jobs:
       - name: Validate Gradle wrapper ⚙️
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Get version number 🔢
+      - name: Version number 🔢
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
           echo "New version: ${NEW_VERSION}"
@@ -166,7 +167,7 @@ jobs:
       - name: Validate Gradle wrapper ⚙️
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Get version number 🔢
+      - name: Version number 🔢
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3 | cut -c2-)
           echo "New version: ${NEW_VERSION}"
