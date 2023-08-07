@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SortTest {
 
@@ -36,18 +37,19 @@ class SortTest {
                 "https://blog.ploeh.dk/rss.xml",
                 "https://www.politico.com/rss/politicopicks.xml",
                 "https://www.e1.ru/talk/forum/rss.php?f=86",
-                "https://failed-to-read-from-this-url.com");
+                "https://failed-to-read-from-this-url.com",
+                "https://www.nrdc.org/rss.xml");
 
 
         List<String> extendedUrlList = new ArrayList<>(urlList);
         extendedUrlList.add(null);
 
         var timestamps = new RssReader().read(extendedUrlList)
-                                                   .sorted()
-                                                   .map(Item::getPubDateZonedDateTime)
-                                                   .flatMap(Optional::stream)
-                                                   .map(t -> t.toInstant().toEpochMilli())
-                                                   .collect(Collectors.toList());
+                                        .sorted()
+                                        .map(Item::getPubDateZonedDateTime)
+                                        .flatMap(Optional::stream)
+                                        .map(t -> t.toInstant().toEpochMilli())
+                                        .collect(Collectors.toList());
 
         assertTrue(timestamps.size() > 10);
 
@@ -66,7 +68,7 @@ class SortTest {
                 .sorted(ItemComparator.newestItemFirst())
                 .collect(Collectors.toList());
 
-        assertTrue(list.size() > 0);
+        assertFalse(list.isEmpty());
 
         var previous = list.get(0);
         for (Item current : list) {
@@ -81,7 +83,7 @@ class SortTest {
                 .sorted(ItemComparator.oldestItemFirst())
                 .collect(Collectors.toList());
 
-        assertTrue(list.size() > 0);
+        assertFalse(list.isEmpty());
 
         var previous = list.get(0);
         for (Item current : list) {

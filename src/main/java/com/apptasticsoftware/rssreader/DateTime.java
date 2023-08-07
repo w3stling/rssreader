@@ -41,6 +41,7 @@ public final class DateTime {
     public static final DateTimeFormatter BASIC_ISO_DATE;
     public static final DateTimeFormatter ISO_LOCAL_DATE;
     public static final DateTimeFormatter ISO_OFFSET_DATE_TIME;
+    public static final DateTimeFormatter ISO_OFFSET_DATE_TIME_SPECIAL;
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
     public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
 
@@ -91,6 +92,7 @@ public final class DateTime {
         ISO_OFFSET_DATE_TIME = DateTimeFormatter.ISO_OFFSET_DATE_TIME.withLocale(Locale.ENGLISH);
         ISO_LOCAL_DATE_TIME = DateTimeFormatter.ISO_LOCAL_DATE_TIME.withLocale(Locale.ENGLISH);
         ISO_LOCAL_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder().parseCaseInsensitive().append(ISO_LOCAL_DATE).appendLiteral(' ').append(ISO_LOCAL_TIME).toFormatter().withLocale(Locale.ENGLISH);
+        ISO_OFFSET_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder().parseCaseInsensitive().append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral('T').append(ISO_LOCAL_TIME).appendOffset("+HHMM", "0000").toFormatter(Locale.ENGLISH);
 
         RFC_1123_DATE_TIME = DateTimeFormatter.RFC_1123_DATE_TIME.withLocale(Locale.ENGLISH);
         RFC_1123_DATE_TIME_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss zzz", Locale.ENGLISH);
@@ -229,7 +231,9 @@ public final class DateTime {
     }
 
     private static DateTimeFormatter parseIsoDateTime(String dateTime) {
-        if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T')
+        if (dateTime.length() == 24 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && (dateTime.charAt(dateTime.length() - 5) == '-' || dateTime.charAt(dateTime.length() - 5) == '+'))
+            return ISO_OFFSET_DATE_TIME_SPECIAL;
+        else if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T') // && dateTime.charAt(dateTime.length() - 3) == ':')
             return ISO_OFFSET_DATE_TIME;
         else if (dateTime.length() == 19 && dateTime.charAt(10) == 'T')
             return ISO_LOCAL_DATE_TIME;
