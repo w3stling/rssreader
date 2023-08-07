@@ -297,6 +297,15 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormat16() {
+        var timestamp = DateTime.toEpochMilli("2023-08-07T10:06:05-0400");
+        assertEquals(1691417165000L, timestamp);
+
+        timestamp = DateTime.toEpochMilli("2023-08-07T10:06:05+0400");
+        assertEquals(1691388365000L, timestamp);
+    }
+
+    @Test
     void testWrongDayOfWeek() {
         assertEquals(1423026000000L, DateTime.toEpochMilli("Monday, 04 Feb 2015 00:00:00 EST"));
         // Eastern time
