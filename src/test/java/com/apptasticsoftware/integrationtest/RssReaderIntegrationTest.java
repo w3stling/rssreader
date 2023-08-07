@@ -554,13 +554,12 @@ class RssReaderIntegrationTest {
 
     @Test
     void testUserAgent() throws IOException {
-        List<Item> items = new RssReader().setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101")
-                                          .read("https://lwn.net/headlines/rss")
-                                          .collect(Collectors.toList());
-
-        for (Item item : items) {
-            assertThat(item.getChannel().getTitle(), is("LWN.net"));
-        }
+        var list = new RssReader()
+                .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
+                .read("https://www.sciencedaily.com/rss/top.xml")
+                .sorted()
+                .collect(Collectors.toList());
+        assertTrue(list.size() > 10);
     }
 
     @Test
