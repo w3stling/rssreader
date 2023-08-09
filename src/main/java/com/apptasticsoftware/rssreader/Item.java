@@ -35,7 +35,7 @@ import java.util.*;
  * to the full story.
  */
 public class Item implements Comparable<Item> {
-    private static final Comparator<Item> DEFAULT_COMPARATOR = ItemComparator.newestItemFirst();
+    private final Comparator<Item> defaultComparator;
     private String title;
     private String description;
     private String link;
@@ -48,6 +48,17 @@ public class Item implements Comparable<Item> {
     private String comments;
     private Enclosure enclosure;
     private Channel channel;
+    private final DateTimeParser dateTimeParser;
+
+    public Item() {
+        dateTimeParser = new DateTime();
+        defaultComparator = ItemComparator.newestItemFirst();
+    }
+
+    public Item(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
+        defaultComparator = ItemComparator.newestItemFirst(dateTimeParser);
+    }
 
     /**
      * Get the title of the item.
@@ -232,9 +243,8 @@ public class Item implements Comparable<Item> {
      * @return publication date
      */
     public Optional<ZonedDateTime> getPubDateZonedDateTime() {
-        return getPubDate().map(DateTime::toZonedDateTime);
+        return getPubDate().map(dateTimeParser::parse);
     }
-
 
     /**
      * Get comments relating to the item.
@@ -321,6 +331,6 @@ public class Item implements Comparable<Item> {
      */
     @Override
     public int compareTo(Item o) {
-        return DEFAULT_COMPARATOR.compare(this, o);
+        return defaultComparator.compare(this, o);
     }
 }

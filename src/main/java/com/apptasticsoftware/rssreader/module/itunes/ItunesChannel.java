@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
 import com.apptasticsoftware.rssreader.Channel;
+import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.util.*;
 
@@ -21,6 +22,10 @@ public class ItunesChannel extends Channel {
     private String itunesNewFeedUrl;
     private boolean itunesBlock;
     private boolean itunesComplete;
+
+    public ItunesChannel(DateTimeParser dateTimeParser) {
+        super(dateTimeParser);
+    }
 
     /**
      * Get the artwork for the show.

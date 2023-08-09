@@ -96,9 +96,9 @@ class SortTest {
     void testSortChannelTitle() throws IOException {
 
         var list = Stream.concat(new RssReader().read("https://lwn.net/headlines/rss"),
-                                           new RssReader().read("https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements"))
-                                    .sorted(ItemComparator.channelTitle())
-                                    .collect(Collectors.toList());
+                                 new RssReader().read("https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements"))
+                         .sorted(ItemComparator.channelTitle())
+                         .collect(Collectors.toList());
 
         var first = list.get(0);
         var last = list.get(list.size() - 1);
