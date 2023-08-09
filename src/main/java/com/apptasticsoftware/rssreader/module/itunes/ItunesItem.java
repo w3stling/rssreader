@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.Item;
 
 import java.time.Duration;
@@ -21,6 +22,10 @@ public class ItunesItem extends Item {
     private Integer itunesSeason;
     private String itunesEpisodeType;
     private boolean itunesBlock;
+
+    public ItunesItem(DateTimeParser dateTimeParser) {
+        super(dateTimeParser);
+    }
 
     /**
      * Get the duration of an episode.

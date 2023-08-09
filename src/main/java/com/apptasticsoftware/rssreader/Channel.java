@@ -46,6 +46,15 @@ public class Channel {
     private String docs;
     private String rating;
     private Image image;
+    private final DateTimeParser dateTimeParser;
+
+    public Channel() {
+        dateTimeParser = new DateTime();
+    }
+
+    public Channel(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
+    }
 
     /**
      * Get the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
@@ -221,7 +230,7 @@ public class Channel {
      * @return publication date
      */
     public Optional<ZonedDateTime> getPubDateZonedDateTime() {
-        return getPubDate().map(DateTime::toZonedDateTime);
+        return getPubDate().map(dateTimeParser::parse);
     }
 
     /**
@@ -245,7 +254,7 @@ public class Channel {
      * @return last build date
      */
     public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
-        return getLastBuildDate().map(DateTime::toZonedDateTime);
+        return getLastBuildDate().map(dateTimeParser::parse);
     }
 
     /**

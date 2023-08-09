@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.DateTime;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
@@ -31,14 +32,14 @@ class ItunesRssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(ItunesChannel.class).withIgnoredFields("category").withNonnullFields("categories").withNonnullFields("itunesCategories").verify();
-        EqualsVerifier.simple().forClass(ItunesItem.class).withIgnoredFields("category").withNonnullFields("categories").verify();
+        EqualsVerifier.simple().forClass(ItunesChannel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withNonnullFields("itunesCategories").verify();
+        EqualsVerifier.simple().forClass(ItunesItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").verify();
         EqualsVerifier.simple().forClass(ItunesOwner.class).verify();
     }
 
     @Test
     void duration() {
-        ItunesItem item = new ItunesItem();
+        ItunesItem item = new ItunesItem(new DateTime());
         item.setItunesDuration("1");
         assertEquals(1, item.getItunesDurationAsDuration().get().getSeconds());
         item.setItunesDuration("01:02");
@@ -49,7 +50,7 @@ class ItunesRssReaderTest {
 
     @Test
     void badDuration() {
-        ItunesItem item = new ItunesItem();
+        ItunesItem item = new ItunesItem(new DateTime());
         item.setItunesDuration(null);
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(" ");

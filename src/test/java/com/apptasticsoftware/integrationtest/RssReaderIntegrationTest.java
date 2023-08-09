@@ -613,7 +613,7 @@ class RssReaderIntegrationTest {
     void testMultipleCategories() {
         var list = new RssReader().read(fromFile("multiple-categories.xml")).collect(Collectors.toList());
 
-        assertTrue(list.size() > 0);
+        assertFalse(list.isEmpty());
         var item = list.get(0);
         assertTrue(item.getChannel().getCategories().size() > 1);
         assertTrue(item.getChannel().getCategory().isPresent());

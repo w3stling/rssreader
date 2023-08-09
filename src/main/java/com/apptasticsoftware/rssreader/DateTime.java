@@ -35,8 +35,8 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 /**
  * Date Time util class for converting date time strings
  */
-public final class DateTime {
-    private static ZoneId defaultZone = ZoneId.of("UTC");
+public class DateTime implements DateTimeParser {
+    public static ZoneId defaultZone = ZoneId.of("UTC");
 
     public static final DateTimeFormatter BASIC_ISO_DATE;
     public static final DateTimeFormatter ISO_LOCAL_DATE;
@@ -136,7 +136,7 @@ public final class DateTime {
         RFC_1123_DATE_TIME_SPECIAL_PST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
     }
 
-    private DateTime() {
+    public DateTime() {
 
     }
 
@@ -177,12 +177,14 @@ public final class DateTime {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        if (dateTime.length() == 19 || ((dateTime.length() == 29 || dateTime.length() == 32 || dateTime.length() == 35) && dateTime.charAt(10) == 'T') ||
-            ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
+        if (dateTime.length() == 19) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
             return ZonedDateTime.of(localDateTime, defaultZone);
+        } else if (((dateTime.length() == 29 || dateTime.length() == 32 || dateTime.length() == 35) && dateTime.charAt(10) == 'T') ||
+            ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
+            return ZonedDateTime.parse(dateTime, formatter);
         }
 
         try {
@@ -387,4 +389,13 @@ public final class DateTime {
         return Comparator.comparing(i -> i.getPubDate().map(DateTime::toInstant).orElse(Instant.EPOCH));
     }
 
+    /**
+     * Converts a timestamp in String format to a ZonedDateTime
+     * @param timestamp timestamp
+     * @return ZonedDateTime
+     */
+    @Override
+    public ZonedDateTime parse(String timestamp) {
+        return DateTime.toZonedDateTime(timestamp);
+    }
 }

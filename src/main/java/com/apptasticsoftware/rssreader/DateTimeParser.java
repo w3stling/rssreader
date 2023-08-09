@@ -23,29 +23,17 @@
  */
 package com.apptasticsoftware.rssreader;
 
-import java.net.http.HttpClient;
+import java.time.ZonedDateTime;
 
 /**
- * Class for reading RSS (Rich Site Summary) and Atom types of web feeds.
+ * For parsing timestamp in channel and items.
  */
-public class RssReader extends AbstractRssReader<Channel, Item> {
+public interface DateTimeParser {
 
-    public RssReader() {
-        super();
-    }
-
-    public RssReader(HttpClient httpClient) {
-        super(httpClient);
-    }
-
-    @Override
-    protected Channel createChannel() {
-        return new Channel(getDateTimeParser());
-    }
-
-    @Override
-    protected Item createItem() {
-        return new Item(getDateTimeParser());
-    }
-
+    /**
+     * Converts a timestamp in String format to a ZonedDateTime
+     * @param timestamp timestamp
+     * @return ZonedDateTime
+     */
+    ZonedDateTime parse(String timestamp);
 }

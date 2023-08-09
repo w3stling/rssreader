@@ -60,6 +60,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final String LOG_GROUP = "com.apptasticsoftware.rssreader";
     private final HttpClient httpClient;
+    private DateTimeParser dateTimeParser = new DateTime();
     private String userAgent = "";
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
@@ -191,6 +192,22 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
+     * Date and Time parser for parsing timestamps.
+     * @param dateTimeParser the date time parser to use.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> setDateTimeParser(DateTimeParser dateTimeParser) {
+        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+
+        this.dateTimeParser = dateTimeParser;
+        return this;
+    }
+
+    protected DateTimeParser getDateTimeParser() {
+        return dateTimeParser;
+    }
+
+    /**
      * Sets the user-agent of the HttpClient.
      * This is completely optional and if not set then it will not send a user-agent header.
      * @param userAgent the user-agent to use.
@@ -204,7 +221,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Adds a header to the HttpClient.
+     * Adds a http header to the HttpClient.
      * This is completely optional and if no headers are set then it will not add anything.
      * @param key the key name of the header.
      * @param value the value of the header.
