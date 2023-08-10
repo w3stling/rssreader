@@ -110,7 +110,8 @@ Markup Validation Services
 Useful links for validating feeds
 
 ### RSS / Atom
-https://validator.w3.org/feed/
+https://validator.w3.org/feed/ <br />
+https://www.feedvalidator.org/check.cgi
 
 ### Podcast / iTunes
 https://podba.se/validate/ <br />
