@@ -458,7 +458,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     class RssItemIterator implements Iterator<I> {
         private final StringBuilder textBuilder;
         private final InputStream is;
-        private final Stack<String> elementStack;
+        private final Deque<String> elementStack;
         private XMLStreamReader reader;
         private C channel;
         private I item = null;
@@ -471,7 +471,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             this.is = is;
             nextItem = null;
             textBuilder = new StringBuilder();
-            elementStack = new Stack<>();
+            elementStack = new ArrayDeque<>();
 
             try {
                 var xmlInFact = XMLInputFactory.newInstance();
@@ -564,7 +564,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             elementName = reader.getLocalName();
             var prefix = reader.getPrefix();
             var nsLocalName = toNsName(prefix, elementName);
-            elementStack.push(nsLocalName);
+            elementStack.addLast(nsLocalName);
 
             if ("channel".equals(nsLocalName) || "feed".equals(nsLocalName)) {
                 channel = createChannel();
@@ -625,7 +625,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var nsLocalName = toNsName(prefix, localName);
             var text = textBuilder.toString().trim();
             var elementFullPath = getElementFullPath();
-            elementStack.pop();
+            elementStack.removeLast();
 
             if (isChannelPart)
                 parseChannelCharacters(channel, prefix, elementName, elementFullPath, text);
