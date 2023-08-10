@@ -39,9 +39,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import java.util.function.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -67,7 +65,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
-    private final HashMap<String, BiConsumer<Image, String>> imageTags = new HashMap<>();
     private boolean isInitialized;
 
 
@@ -97,7 +94,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         registerChannelAttributes();
         registerItemTags();
         registerItemAttributes();
-        registerImageTags();
     }
 
     @SuppressWarnings("java:S1192")
@@ -119,6 +115,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("webMaster", Channel::setWebMaster);
         channelTags.put("docs", Channel::setDocs);
         channelTags.put("rating", Channel::setRating);
+        channelTags.put("/rss/channel/image/link", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setLink(v));
+        channelTags.put("/rss/channel/image/title", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setTitle(v));
+        channelTags.put("/rss/channel/image/url", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setUrl(v));
+        channelTags.put("/rss/channel/image/height", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setHeight)));
+        channelTags.put("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
     }
 
     protected void registerChannelAttributes() {
@@ -147,19 +148,23 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).put("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
 
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
-        enclosureAttributes.put("url", (i, v) -> i.getEnclosure().ifPresent(e -> e.setUrl(v)) );
-        enclosureAttributes.put("type", (i, v) -> i.getEnclosure().ifPresent(e -> e.setType(v)) );
-        enclosureAttributes.put("length", (i, v) -> i.getEnclosure().ifPresent(e -> mapLong(v, e::setLength)) );
+        enclosureAttributes.put("url", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setUrl(v));
+        enclosureAttributes.put("type", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setType(v));
+        enclosureAttributes.put("length", (i, v) -> createIfNullOptional(i::getEnclosure, i::setEnclosure, Enclosure::new).ifPresent(e -> mapLong(v, e::setLength)));
     }
 
-    @SuppressWarnings("java:S1192")
-    protected void registerImageTags() {
-        imageTags.put("title", Image::setTitle);
-        imageTags.put("link", Image::setLink);
-        imageTags.put("url", Image::setUrl);
-        imageTags.put("description", Image::setDescription);
-        imageTags.put("height", (i, v) -> mapInteger(v, i::setHeight) );
-        imageTags.put("width", (i, v) -> mapInteger(v, i::setWidth) );
+    static <T> T createIfNull(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
+        return createIfNullOptional(getter, setter, factory).orElse(null);
+    }
+
+    static <T> Optional<T> createIfNullOptional(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
+        Optional<T> instance = getter.get();
+        if (instance.isEmpty()) {
+            T newInstance = factory.get();
+            setter.accept(newInstance);
+            instance = Optional.of(newInstance);
+        }
+        return instance;
     }
 
     protected void mapBoolean(String text, Consumer<Boolean> func) {
@@ -453,13 +458,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     class RssItemIterator implements Iterator<I> {
         private final StringBuilder textBuilder;
         private final InputStream is;
+        private final Stack<String> elementStack;
         private XMLStreamReader reader;
         private C channel;
-        private Image image = null;
         private I item = null;
         private I nextItem;
         private boolean isChannelPart = false;
-        private boolean isImagePart = false;
         private boolean isItemPart = false;
         private String elementName = null;
 
@@ -467,6 +471,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             this.is = is;
             nextItem = null;
             textBuilder = new StringBuilder();
+            elementStack = new Stack<>();
 
             try {
                 var xmlInFact = XMLInputFactory.newInstance();
@@ -554,12 +559,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             throw new NoSuchElementException();
         }
 
-        @SuppressWarnings("squid:S1192")
         void parseStartElement() {
             textBuilder.setLength(0);
             elementName = reader.getLocalName();
             var prefix = reader.getPrefix();
             var nsLocalName = toNsName(prefix, elementName);
+            elementStack.push(nsLocalName);
 
             if ("channel".equals(nsLocalName) || "feed".equals(nsLocalName)) {
                 channel = createChannel();
@@ -572,43 +577,45 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 item = createItem();
                 item.setChannel(channel);
                 isChannelPart = false;
-                isImagePart = false;
                 isItemPart = true;
-            }
-            else if ("enclosure".equals(nsLocalName)) {
-                item.setEnclosure(new Enclosure());
-            }
-            else if ("image".equals(nsLocalName)) {
-                image = new Image();
-                channel.setImage(image);
-                isImagePart = true;
             }
         }
 
-        @SuppressWarnings({"squid:S3776", "squid:S1192"})
         void parseAttributes() {
             var localName = reader.getLocalName();
             var prefix = reader.getPrefix();
             var nsLocalName = toNsName(prefix, localName);
+            var attributeFullPath = getElementFullPath();
 
             if (isChannelPart) {
                 // Map channel attributes
-                var consumers = channelAttributes.get(nsLocalName);
-                if (consumers != null && channel != null) {
-                    consumers.forEach((attributeName, consumer) -> {
-                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
-                        attributeValue.ifPresent(v -> consumer.accept(channel, v));
-                    });
-                }
-            } else if (isItemPart) {
+                mapChannelAttributes(nsLocalName);
+                mapChannelAttributes(attributeFullPath);
+            }
+            else if (isItemPart) {
                 // Map item attributes
-                var consumers = itemAttributes.get(nsLocalName);
-                if (consumers != null && item != null) {
-                    consumers.forEach((attributeName, consumer) -> {
-                        var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
-                        attributeValue.ifPresent(v -> consumer.accept(item, v));
-                    });
-                }
+                mapItemAttributes(nsLocalName);
+                mapItemAttributes(attributeFullPath);
+            }
+        }
+
+        void mapChannelAttributes(String key) {
+            var consumers = channelAttributes.get(key);
+            if (consumers != null && channel != null) {
+                consumers.forEach((attributeName, consumer) -> {
+                    var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                    attributeValue.ifPresent(v -> consumer.accept(channel, v));
+                });
+            }
+        }
+
+        void mapItemAttributes(String key) {
+            var consumers = itemAttributes.get(key);
+            if (consumers != null && item != null) {
+                consumers.forEach((attributeName, consumer) -> {
+                    var attributeValue = Optional.ofNullable(reader.getAttributeValue(null, attributeName));
+                    attributeValue.ifPresent(v -> consumer.accept(item, v));
+                });
             }
         }
 
@@ -617,15 +624,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var prefix = reader.getPrefix();
             var nsLocalName = toNsName(prefix, localName);
             var text = textBuilder.toString().trim();
+            var elementFullPath = getElementFullPath();
+            elementStack.pop();
 
-            if ("image".equals(nsLocalName))
-                isImagePart = false;
-            else if (isImagePart)
-                parseImageCharacters(image, elementName, text);
-            else if (isChannelPart)
-                parseChannelCharacters(channel, prefix, elementName, text);
+            if (isChannelPart)
+                parseChannelCharacters(channel, prefix, elementName, elementFullPath, text);
             else
-                parseItemCharacters(item, prefix, elementName, text);
+                parseItemCharacters(item, prefix, elementName, elementFullPath, text);
 
             textBuilder.setLength(0);
             elementName = "";
@@ -642,39 +647,30 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             textBuilder.append(text);
         }
 
-        void parseChannelCharacters(C channel, String prefix, String elementName, String text) {
+        void parseChannelCharacters(C channel, String prefix, String elementName, String elementFullPath, String text) {
             if (channel == null || text.isEmpty())
                 return;
 
             var nsElementName = toNsName(prefix, elementName);
-            BiConsumer<C, String> consumer = channelTags.get(nsElementName);
-
-            if (consumer != null)
-                consumer.accept(channel, text);
+            channelTags.computeIfPresent(nsElementName, (k, f) -> { f.accept(channel, text); return f; });
+            channelTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(channel, text); return f; });
         }
 
-        void parseImageCharacters(Image image, String elementName, String text) {
-            if (image == null || text.isEmpty())
-                return;
-
-            var consumer = imageTags.get(elementName);
-            if (consumer != null)
-                consumer.accept(image, text);
-        }
-
-        void parseItemCharacters(I item, String prefix, String elementName, String text) {
+        void parseItemCharacters(final I item, String prefix, String elementName, String elementFullPath, final String text) {
             if (item == null || text.isEmpty())
                 return;
 
             var nsElementName = toNsName(prefix, elementName);
-            BiConsumer<I, String> consumer = itemTags.get(nsElementName);
-
-            if (consumer != null)
-                consumer.accept(item, text);
+            itemTags.computeIfPresent(nsElementName, (k, f) -> { f.accept(item, text); return f; });
+            itemTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(item, text); return f; });
         }
 
         String toNsName(String prefix, String name) {
             return prefix.isEmpty() ? name : prefix + ":" + name;
+        }
+
+        String getElementFullPath() {
+            return "/" + String.join("/", elementStack);
         }
     }
 

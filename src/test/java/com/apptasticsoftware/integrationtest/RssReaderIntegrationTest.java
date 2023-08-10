@@ -542,13 +542,13 @@ class RssReaderIntegrationTest {
     @Test
     void testItemExtensionNoNamespace() throws IOException {
         List<Item> items = new RssReader()
-                .addItemExtension("name", Item::setAuthor)
-                .addItemExtension("email", Item::setAuthor)
+                .addItemExtension("name", Item::setComments)
+                .addItemExtension("email", Item::setComments)
                 .read("https://github.com/openjdk/jdk/commits.atom")
                 .collect(Collectors.toList());
 
         for (Item item : items) {
-            assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));
+            assertThat(item.getComments(), isPresentAnd(not(emptyString())));
         }
     }
 
