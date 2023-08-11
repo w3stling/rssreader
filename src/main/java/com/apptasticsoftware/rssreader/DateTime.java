@@ -33,10 +33,10 @@ import java.util.Locale;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
 /**
- * Date Time util class for converting date time strings
+ * Class for converting date time strings
  */
 public class DateTime implements DateTimeParser {
-    public static ZoneId defaultZone = ZoneId.of("UTC");
+    private final ZoneId defaultZone;
 
     public static final DateTimeFormatter BASIC_ISO_DATE;
     public static final DateTimeFormatter ISO_LOCAL_DATE;
@@ -136,16 +136,20 @@ public class DateTime implements DateTimeParser {
         RFC_1123_DATE_TIME_SPECIAL_PST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
     }
 
+    /**
+     * Creates DateTime object for converting timestamps.
+     * Using default timezone UTC if no timezone information if found in timestamp.
+     */
     public DateTime() {
-
+        defaultZone = ZoneId.of("UTC");
     }
 
     /**
-     * Time zone to use if now zone information if found in date time string
-     * @param defaultZone time zone to use
+     * Creates DateTime object for converting timestamps.
+     * @param defaultZone time zone to use if no timezone information if found in timestamp
      */
-    public static void setDefaultZone(ZoneId defaultZone) {
-        DateTime.defaultZone = defaultZone;
+    public DateTime(ZoneId defaultZone) {
+        this.defaultZone = defaultZone;
     }
 
     /**
@@ -153,7 +157,7 @@ public class DateTime implements DateTimeParser {
      * @param dateTime date time string
      * @return local date time object
      */
-    public static LocalDateTime toLocalDateTime(String dateTime) {
+    public LocalDateTime toLocalDateTime(String dateTime) {
         var zonedDateTime = toZonedDateTime(dateTime);
         if (zonedDateTime == null) {
             return null;
@@ -167,7 +171,7 @@ public class DateTime implements DateTimeParser {
      * @return zoned date time object
      */
     @SuppressWarnings("java:S3776")
-    public static ZonedDateTime toZonedDateTime(String dateTime) {
+    public ZonedDateTime toZonedDateTime(String dateTime) {
         if (dateTime == null)
             return null;
 
@@ -356,7 +360,7 @@ public class DateTime implements DateTimeParser {
      * @param dateTime date time string
      * @return time in milliseconds
      */
-    public static Long toEpochMilli(String dateTime) {
+    public Long toEpochMilli(String dateTime) {
         ZonedDateTime zonedDateTime = toZonedDateTime(dateTime);
 
         if (zonedDateTime == null)
@@ -365,7 +369,7 @@ public class DateTime implements DateTimeParser {
         return zonedDateTime.toInstant().toEpochMilli();
     }
 
-    public static Instant toInstant(String dateTime) {
+    public Instant toInstant(String dateTime) {
         ZonedDateTime zonedDateTime = toZonedDateTime(dateTime);
 
         if (zonedDateTime == null)
@@ -386,7 +390,8 @@ public class DateTime implements DateTimeParser {
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public static Comparator<Item> pubDateComparator() {
-        return Comparator.comparing(i -> i.getPubDate().map(DateTime::toInstant).orElse(Instant.EPOCH));
+        var dateTime = new DateTime();
+        return Comparator.comparing(i -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH));
     }
 
     /**
@@ -396,6 +401,6 @@ public class DateTime implements DateTimeParser {
      */
     @Override
     public ZonedDateTime parse(String timestamp) {
-        return DateTime.toZonedDateTime(timestamp);
+        return toZonedDateTime(timestamp);
     }
 }
