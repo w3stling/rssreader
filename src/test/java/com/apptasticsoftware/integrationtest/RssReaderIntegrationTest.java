@@ -418,8 +418,7 @@ class RssReaderIntegrationTest {
         ZonedDateTime dateTime = items.stream()
                                       .sorted()
                                       .findFirst()
-                                      .flatMap(Item::getPubDate)
-                                      .map(DateTime::toZonedDateTime)
+                                      .flatMap(Item::getPubDateZonedDateTime)
                                       .orElse(null);
         assertNotNull(dateTime);
     }
@@ -434,8 +433,7 @@ class RssReaderIntegrationTest {
 
         Optional<ZonedDateTime> dateTime = items.stream()
                                                 .findFirst()
-                                                .flatMap(Item::getPubDate)
-                                                .map(DateTime::toZonedDateTime);
+                                                .flatMap(Item::getPubDateZonedDateTime);
 
         assertThat(dateTime, isPresent());
     }
