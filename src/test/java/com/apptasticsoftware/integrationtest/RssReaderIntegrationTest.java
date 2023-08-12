@@ -596,6 +596,14 @@ class RssReaderIntegrationTest {
     }
 
     @Test
+    void testAtomFeed() {
+        var items = new RssReader().read(fromFile("atom-feed.xml"))
+                                   .collect(Collectors.toList());
+        assertEquals(1, items.size());
+        assertEquals("Mark Pilgrim", items.get(0).getAuthor().orElse(null));
+    }
+
+    @Test
     void testReadFromFile() {
         long count = new RssReader().read(fromFile("itunes-podcast.xml")).count();
         assertEquals(9, count);
