@@ -136,6 +136,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("content", Item::setDescription);
         itemTags.put("link", Item::setLink);
         itemTags.put("author", Item::setAuthor);
+        itemTags.put("/feed/entry/author/name", Item::setAuthor);
         itemTags.put("category", Item::addCategory);
         itemTags.put("pubDate", Item::setPubDate);
         itemTags.put("published", Item::setPubDate);
