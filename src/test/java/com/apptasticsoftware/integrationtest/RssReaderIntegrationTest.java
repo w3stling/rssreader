@@ -599,8 +599,29 @@ class RssReaderIntegrationTest {
     void testAtomFeed() {
         var items = new RssReader().read(fromFile("atom-feed.xml"))
                                    .collect(Collectors.toList());
-        assertEquals(1, items.size());
-        assertEquals("Mark Pilgrim", items.get(0).getAuthor().orElse(null));
+
+        assertEquals(3, items.size());
+
+        assertEquals("dive into mark", items.get(0).getChannel().getTitle());
+        assertEquals(65, items.get(0).getChannel().getDescription().length());
+        assertEquals("http://example.org/feed.atom", items.get(0).getChannel().getLink());
+        assertEquals("Copyright (c) 2003, Mark Pilgrim", items.get(0).getChannel().getCopyright().orElse(null));
+        assertEquals("Example Toolkit", items.get(0).getChannel().getGenerator().orElse(null));
+        assertEquals("2005-07-31T12:29:29Z", items.get(0).getChannel().getLastBuildDate().orElse(null));
+
+        assertEquals("Atom-Powered Robots Run Amok", items.get(1).getTitle().orElse(null));
+        assertNull(items.get(1).getAuthor().orElse(null));
+        assertEquals("http://example.org/2003/12/13/atom03", items.get(1).getLink().orElse(null));
+        assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a", items.get(1).getGuid().orElse(null));
+        assertEquals("2003-12-13T18:30:02Z", items.get(1).getPubDate().orElse(null));
+        assertEquals(211, items.get(1).getDescription().orElse("").length());
+
+        assertEquals("Atom-Powered Robots Run Amok 2", items.get(2).getTitle().orElse(null));
+        assertNull(items.get(2).getAuthor().orElse(null));
+        assertEquals("http://example.org/2003/12/13/atom04", items.get(2).getLink().orElse(null));
+        assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b", items.get(2).getGuid().orElse(null));
+        assertEquals("2003-12-13T18:30:01Z", items.get(2).getPubDate().orElse(null));
+        assertEquals(47, items.get(2).getDescription().orElse("").length());
     }
 
     @Test
