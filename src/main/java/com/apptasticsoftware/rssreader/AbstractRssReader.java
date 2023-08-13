@@ -65,6 +65,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
+    private final Set<String> collectChildNodesForTag = Set.of("content", "summary");
     private boolean isInitialized;
 
 
@@ -458,6 +459,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     class RssItemIterator implements Iterator<I> {
         private final StringBuilder textBuilder;
+        private final Map<String, StringBuilder> childNodeTextBuilder;
         private final InputStream is;
         private final Deque<String> elementStack;
         private XMLStreamReader reader;
@@ -466,12 +468,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private I nextItem;
         private boolean isChannelPart = false;
         private boolean isItemPart = false;
-        private String elementName = null;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
             nextItem = null;
             textBuilder = new StringBuilder();
+            childNodeTextBuilder = new HashMap<>();
             elementStack = new ArrayDeque<>();
 
             try {
@@ -533,7 +535,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
             try {
                 while (reader.hasNext()) {
-                    var type = reader.next(); // do something here
+                    var type = reader.next();
+                    collectChildNodes(type);
 
                     if (type == CHARACTERS || type == CDATA) {
                         parseCharacters();
@@ -560,21 +563,66 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             throw new NoSuchElementException();
         }
 
+        void collectChildNodes(int type) {
+            if (type == START_ELEMENT) {
+                var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
+
+                if (!childNodeTextBuilder.isEmpty()) {
+                    StringBuilder startTagBuilder = new StringBuilder("<").append(nsTagName);
+                    // Add namespaces to start tag
+                    for (int i = 0; i < reader.getNamespaceCount(); ++i) {
+                        startTagBuilder.append(" ")
+                                       .append(toNamespacePrefix(reader.getNamespacePrefix(i)))
+                                       .append("=")
+                                       .append(reader.getNamespaceURI(i));
+                    }
+                    // Add attributes to start tag
+                    for (int i = 0; i < reader.getAttributeCount(); ++i) {
+                        startTagBuilder.append(" ")
+                                       .append(toNsName(reader.getAttributePrefix(i), reader.getAttributeLocalName(i)))
+                                       .append("=")
+                                       .append(reader.getAttributeValue(i));
+                    }
+                    startTagBuilder.append(">");
+                    var startTag = startTagBuilder.toString();
+
+                    childNodeTextBuilder.entrySet()
+                            .stream()
+                            .filter(e -> !e.getKey().equals(nsTagName))
+                            .forEach(e -> e.getValue().append(startTag));
+                }
+
+                // Collect child notes for tag names in this set
+                if (collectChildNodesForTag.contains(nsTagName)) {
+                    childNodeTextBuilder.put(nsTagName, new StringBuilder());
+                }
+            }
+            else if (type == CHARACTERS || type == CDATA) {
+                childNodeTextBuilder.forEach((k, builder) -> builder.append(reader.getText()));
+            }
+            else if (type == END_ELEMENT) {
+                var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
+                var endTag = "</" + nsTagName + ">";
+                childNodeTextBuilder.entrySet()
+                                    .stream()
+                                    .filter(e -> !e.getKey().equals(nsTagName))
+                                    .forEach(e -> e.getValue().append(endTag));
+            }
+        }
+
         void parseStartElement() {
             textBuilder.setLength(0);
-            elementName = reader.getLocalName();
-            var prefix = reader.getPrefix();
-            var nsLocalName = toNsName(prefix, elementName);
-            elementStack.addLast(nsLocalName);
+            var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
+            elementStack.addLast(nsTagName);
 
-            if ("channel".equals(nsLocalName) || "feed".equals(nsLocalName)) {
+            if ("channel".equals(nsTagName) || "feed".equals(nsTagName)) {
                 channel = createChannel();
                 channel.setTitle("");
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
             }
-            else if ("item".equals(nsLocalName) || "entry".equals(nsLocalName)) {
+            else if ("item".equals(nsTagName) || "entry".equals(nsTagName)) {
                 item = createItem();
                 item.setChannel(channel);
                 isChannelPart = false;
@@ -583,20 +631,18 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         void parseAttributes() {
-            var localName = reader.getLocalName();
-            var prefix = reader.getPrefix();
-            var nsLocalName = toNsName(prefix, localName);
-            var attributeFullPath = getElementFullPath();
+            var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
+            var elementFullPath = getElementFullPath();
 
             if (isChannelPart) {
                 // Map channel attributes
-                mapChannelAttributes(nsLocalName);
-                mapChannelAttributes(attributeFullPath);
+                mapChannelAttributes(nsTagName);
+                mapChannelAttributes(elementFullPath);
             }
             else if (isItemPart) {
                 // Map item attributes
-                mapItemAttributes(nsLocalName);
-                mapItemAttributes(attributeFullPath);
+                mapItemAttributes(nsTagName);
+                mapItemAttributes(elementFullPath);
             }
         }
 
@@ -621,22 +667,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         boolean parseEndElement() {
-            var localName = reader.getLocalName();
-            var prefix = reader.getPrefix();
-            var nsLocalName = toNsName(prefix, localName);
+            var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
             var text = textBuilder.toString().trim();
             var elementFullPath = getElementFullPath();
             elementStack.removeLast();
 
             if (isChannelPart)
-                parseChannelCharacters(channel, prefix, elementName, elementFullPath, text);
+                parseChannelCharacters(channel, nsTagName, elementFullPath, text);
             else
-                parseItemCharacters(item, prefix, elementName, elementFullPath, text);
+                parseItemCharacters(item, nsTagName, elementFullPath, text);
 
             textBuilder.setLength(0);
-            elementName = "";
 
-            return "item".equals(nsLocalName) || "entry".equals(nsLocalName);
+            return "item".equals(nsTagName) || "entry".equals(nsTagName);
         }
 
         void parseCharacters() {
@@ -648,26 +691,30 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             textBuilder.append(text);
         }
 
-        void parseChannelCharacters(C channel, String prefix, String elementName, String elementFullPath, String text) {
+        void parseChannelCharacters(C channel, String nsTagName, String elementFullPath, String text) {
             if (channel == null || text.isEmpty())
                 return;
 
-            var nsElementName = toNsName(prefix, elementName);
-            channelTags.computeIfPresent(nsElementName, (k, f) -> { f.accept(channel, text); return f; });
+            channelTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(channel, text); return f; });
             channelTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(channel, text); return f; });
         }
 
-        void parseItemCharacters(final I item, String prefix, String elementName, String elementFullPath, final String text) {
-            if (item == null || text.isEmpty())
+        void parseItemCharacters(final I item, String nsTagName, String elementFullPath, final String text) {
+            var builder = childNodeTextBuilder.remove(nsTagName);
+            if (item == null || (text.isEmpty() && builder == null))
                 return;
 
-            var nsElementName = toNsName(prefix, elementName);
-            itemTags.computeIfPresent(nsElementName, (k, f) -> { f.accept(item, text); return f; });
+            var textValue = (builder != null) ? builder.toString().trim() : text;
+            itemTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(item, textValue); return f; });
             itemTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(item, text); return f; });
         }
 
         String toNsName(String prefix, String name) {
             return prefix.isEmpty() ? name : prefix + ":" + name;
+        }
+
+        String toNamespacePrefix(String prefix) {
+            return prefix == null || prefix.isEmpty() ? "xmlns" : "xmlns" + ":" + prefix;
         }
 
         String getElementFullPath() {

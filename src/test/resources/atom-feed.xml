@@ -37,9 +37,32 @@
         </contributor>
         <content type="xhtml" xml:lang="en"
                  xml:base="http://diveintomark.org/">
-            <div xmlns="http://www.w3.org/1999/xhtml">
+            <div xmlns="http://www.w3.org/1999/xhtml" xmlns:t="https://www.apptasticsoftware.com/testing" t:text="some value">
                 <p><i>[Update: The Atom draft is finished.]</i></p>
             </div>
         </content>
+    </entry>
+    <entry>
+        <summary type="text/xml">
+            <p:Customer xmlns:p="http://www.ibm.com/crm"
+                        xmlns="http://www.ibm.com/crm">
+                <id>10</id>
+                <firstName>John</firstName>
+                <lastName>Doe</lastName>
+            </p:Customer>
+        </summary>
+        <title>Atom-Powered Robots Run Amok</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2003-12-13T18:30:02Z</updated>
+    </entry>
+    <entry>
+        <content type="text/json">
+            {"firstName"="John","lastName"="Doe","id"="10"}
+        </content>
+        <title>Atom-Powered Robots Run Amok 2</title>
+        <link href="http://example.org/2003/12/13/atom04"/>
+        <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b</id>
+        <updated>2003-12-13T18:30:01Z</updated>
     </entry>
 </feed>
