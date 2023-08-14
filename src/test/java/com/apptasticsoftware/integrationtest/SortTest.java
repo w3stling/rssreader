@@ -38,7 +38,9 @@ class SortTest {
                 "https://www.politico.com/rss/politicopicks.xml",
                 "https://www.e1.ru/talk/forum/rss.php?f=86",
                 "https://failed-to-read-from-this-url.com",
-                "https://www.nrdc.org/rss.xml");
+                "https://www.nrdc.org/rss.xml",
+                "https://www.theverge.com/rss/reviews/index.xml",
+                "https://feeds.macrumors.com/MacRumors-All");
 
 
         List<String> extendedUrlList = new ArrayList<>(urlList);
