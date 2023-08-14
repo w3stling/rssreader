@@ -384,6 +384,8 @@ class RssReaderIntegrationTest {
             assertThat(channel.getDescription(), anything());
             assertThat(channel.getLanguage(), isPresentAndIs("en"));
             assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
+            assertThat(channel.getPubDate(), isPresent());
+            assertThat(channel.getPubDateZonedDateTime(), isPresent());
             assertThat(channel.getImage(), isPresent());
             assertThat(channel.getImage().map(Image::getTitle).orElse(null), containsString("World of Tanks"));
             assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));
@@ -466,6 +468,7 @@ class RssReaderIntegrationTest {
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isPresent());
+            assertThat(channel.getLastBuildDateZonedDateTime(), isPresent());
 
             // Validate item
             assertNotNull(item);
@@ -474,6 +477,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
+            assertThat(item.getPubDateZonedDateTime(), isPresent());
             assertThat(item.getLink(), isPresent());
         }
     }
