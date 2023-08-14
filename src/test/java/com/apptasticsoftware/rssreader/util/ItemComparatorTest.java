@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ItemComparatorTest {
+class ItemComparatorTest {
 
     @Test
     void testSortNewestItem() throws IOException {
