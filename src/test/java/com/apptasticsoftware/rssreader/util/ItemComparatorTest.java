@@ -17,11 +17,24 @@ public class ItemComparatorTest {
     @Test
     void testSortNewestItem() throws IOException {
         var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
-                .sorted(ItemComparator.newestItemFirst())
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
-                .filter(Objects::nonNull)
-                .map(ZonedDateTime::toEpochSecond)
-                .collect(Collectors.toList());
+                                   .sorted(ItemComparator.newestItemFirst())
+                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .filter(Objects::nonNull)
+                                   .map(ZonedDateTime::toEpochSecond)
+                                   .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
+    void testSortNewestItemWithCustomDateTimeParser() throws IOException {
+        var items = new RssReader().setDateTimeParser(new DateTime())
+                                   .read("https://www.theverge.com/rss/reviews/index.xml")
+                                   .sorted(ItemComparator.newestItemFirst())
+                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .filter(Objects::nonNull)
+                                   .map(ZonedDateTime::toEpochSecond)
+                                   .collect(Collectors.toList());
 
         assertTrue(isDescendingSortOrder(items));
     }
@@ -29,11 +42,11 @@ public class ItemComparatorTest {
     @Test
     void testSortNewestItemWithDateTimeParser() throws IOException {
         var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
-                .sorted(ItemComparator.newestItemFirst(new DateTime()))
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
-                .filter(Objects::nonNull)
-                .map(ZonedDateTime::toEpochSecond)
-                .collect(Collectors.toList());
+                                   .sorted(ItemComparator.newestItemFirst(new DateTime()))
+                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .filter(Objects::nonNull)
+                                   .map(ZonedDateTime::toEpochSecond)
+                                   .collect(Collectors.toList());
 
         assertTrue(isDescendingSortOrder(items));
     }
@@ -52,10 +65,10 @@ public class ItemComparatorTest {
     @Test
     void testSortOldestItemFirstWithDateTimeParser() throws IOException {
         var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
-                .sorted(ItemComparator.oldestItemFirst(new DateTime()))
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                                   .sorted(ItemComparator.oldestItemFirst(new DateTime()))
+                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .filter(Objects::nonNull)
+                                   .collect(Collectors.toList());
 
         assertTrue(isAscendingSortOrder(items));
     }
@@ -64,10 +77,10 @@ public class ItemComparatorTest {
     void testSortChannelTitle() {
         var urlList = List.of("https://www.theverge.com/rss/reviews/index.xml", "https://feeds.macrumors.com/MacRumors-All");
         var items = new RssReader().read(urlList)
-                .sorted(ItemComparator.channelTitle())
-                .map(i -> i.getChannel().getTitle())
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+                                   .sorted(ItemComparator.channelTitle())
+                                   .map(i -> i.getChannel().getTitle())
+                                   .filter(Objects::nonNull)
+                                   .collect(Collectors.toList());
 
         assertTrue(isAscendingSortOrder(items));
     }
