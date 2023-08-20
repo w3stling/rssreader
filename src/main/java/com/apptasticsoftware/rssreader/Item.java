@@ -55,6 +55,7 @@ public class Item implements Comparable<Item> {
      * @deprecated
      * Use {@link Item#Item(DateTimeParser)} instead.
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.5.0", forRemoval=true)
     public Item() {
         dateTimeParser = new DateTime();

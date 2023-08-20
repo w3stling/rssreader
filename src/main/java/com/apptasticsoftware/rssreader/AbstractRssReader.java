@@ -86,6 +86,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      *
      * @return channel
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.5.0", forRemoval=true)
     protected C createChannel() {
         return null;
@@ -107,6 +108,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      *
      * @return item
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.5.0", forRemoval=true)
     protected I createItem() {
         return null;

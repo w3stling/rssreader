@@ -53,6 +53,7 @@ public class Channel {
      * @deprecated
      * Use {@link Channel#Channel(DateTimeParser)} instead.
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.5.0", forRemoval=true)
     public Channel() {
         dateTimeParser = new DateTime();

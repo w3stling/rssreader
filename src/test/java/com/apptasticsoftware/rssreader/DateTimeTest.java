@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+@SuppressWarnings("java:S5976")
 class DateTimeTest {
 
     @Test
