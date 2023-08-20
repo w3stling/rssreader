@@ -268,7 +268,7 @@ class RssReaderTest {
         item1.setPubDate("a7");
         int h1 = item1.hashCode();
 
-        Item item2 = new Item();
+        Item item2 = new Item(new DateTime());
         item2.setAuthor("b1");
         item2.setCategory("a2");
         item2.setTitle("a3");
@@ -284,7 +284,7 @@ class RssReaderTest {
 
     @Test
     void itemEqualsTest() {
-        Item item1 = new Item();
+        Item item1 = new Item(new DateTime());
         item1.setAuthor("a1");
         item1.setCategory("a2");
         item1.setTitle("a3");
@@ -294,7 +294,7 @@ class RssReaderTest {
         item1.setLink("a6");
         item1.setPubDate("a7");
 
-        Item item2 = new Item();
+        Item item2 = new Item(new DateTime());
         item2.setAuthor("b1");
         item2.setCategory("a2");
         item2.setTitle("a3");
@@ -304,7 +304,7 @@ class RssReaderTest {
         item2.setLink("a6");
         item2.setPubDate("a7");
 
-        Item item3 = new Item();
+        Item item3 = new Item(new DateTime());
         item3.setAuthor("a1");
         item3.setCategory("a2");
         item3.setTitle("a3");
@@ -334,9 +334,10 @@ class RssReaderTest {
         channel1.setLastBuildDate("20220922T10:11:13");
         channel1.setManagingEditor("a9");
         channel1.setWebMaster("a10");
+        channel1.setRating("a11");
         int h1 = channel1.hashCode();
 
-        Channel channel2 = new Channel();
+        Channel channel2 = new Channel(new DateTime());
         channel2.setTitle("b1");
         channel2.setDescription("a2");
         channel2.setCategory("a3");
@@ -349,6 +350,7 @@ class RssReaderTest {
         channel2.setLastBuildDate("20220922T10:11:13");
         channel2.setManagingEditor("a9");
         channel2.setWebMaster("a10");
+        channel2.setRating("a11");
         int h2 = channel2.hashCode();
 
         assertNotEquals(h1, h2);
@@ -357,7 +359,7 @@ class RssReaderTest {
 
     @Test
     void channelEqualsTest() {
-        Channel channel1 = new Channel();
+        Channel channel1 = new Channel(new DateTime());
         channel1.setTitle("a1");
         channel1.setDescription("a2");
         channel1.setCategory("a3");
@@ -370,8 +372,9 @@ class RssReaderTest {
         channel1.setLastBuildDate("20220922T10:11:13");
         channel1.setManagingEditor("a9");
         channel1.setWebMaster("a10");
+        channel1.setRating("a11");
 
-        Channel channel2 = new Channel();
+        Channel channel2 = new Channel(new DateTime());
         channel2.setTitle("b1");
         channel2.setDescription("a2");
         channel2.setCategory("a3");
@@ -384,8 +387,9 @@ class RssReaderTest {
         channel2.setLastBuildDate("20220922T10:11:13");
         channel2.setManagingEditor("a9");
         channel2.setWebMaster("a10");
+        channel2.setRating("a11");
 
-        Channel channel3 = new Channel();
+        Channel channel3 = new Channel(new DateTime());
         channel3.setTitle("a1");
         channel3.setDescription("a2");
         channel3.setCategory("a3");
@@ -398,6 +402,7 @@ class RssReaderTest {
         channel3.setLastBuildDate("20220922T10:11:13");
         channel3.setManagingEditor("a9");
         channel3.setWebMaster("a10");
+        channel3.setRating("a11");
 
         assertNotEquals(channel1, channel2);
         assertEquals(channel1, channel3);

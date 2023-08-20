@@ -48,10 +48,20 @@ public class Channel {
     private Image image;
     private final DateTimeParser dateTimeParser;
 
+    /**
+     * Constructor for Channel
+     * @deprecated
+     * Use {@link Channel#Channel(DateTimeParser)} instead.
+     */
+    @Deprecated(since="3.5.0", forRemoval=true)
     public Channel() {
         dateTimeParser = new DateTime();
     }
 
+    /**
+     * Constructor for Channel
+     * @param dateTimeParser dateTimeParser
+     */
     public Channel(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
     }

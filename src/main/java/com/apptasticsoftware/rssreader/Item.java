@@ -50,11 +50,21 @@ public class Item implements Comparable<Item> {
     private Channel channel;
     private final DateTimeParser dateTimeParser;
 
+    /**
+     * Constructor for Item
+     * @deprecated
+     * Use {@link Item#Item(DateTimeParser)} instead.
+     */
+    @Deprecated(since="3.5.0", forRemoval=true)
     public Item() {
         dateTimeParser = new DateTime();
         defaultComparator = ItemComparator.newestItemFirst();
     }
 
+    /**
+     * Constructor for Item
+     * @param dateTimeParser dateTimeParser
+     */
     public Item(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
         defaultComparator = ItemComparator.newestItemFirst(dateTimeParser);
