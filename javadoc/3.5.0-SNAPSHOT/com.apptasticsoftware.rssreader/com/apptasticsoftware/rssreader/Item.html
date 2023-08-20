@@ -167,11 +167,17 @@ implements java.lang.Comparable&lt;<a href="Item.html" title="class in com.appta
 </tr>
 <tr class="altColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E()">Item</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)"><code>Item(DateTimeParser)</code></a> instead.</div>
+</div>
+</td>
 </tr>
 <tr class="rowColor">
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)">Item</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Constructor for Item</div>
+</td>
 </tr>
 </table>
 </li>
@@ -421,7 +427,13 @@ implements java.lang.Comparable&lt;<a href="Item.html" title="class in com.appta
 <ul class="blockList">
 <li class="blockList">
 <h4>Item</h4>
-<pre>public&nbsp;Item()</pre>
+<pre>@Deprecated(since="3.5.0",
+            forRemoval=true)
+public&nbsp;Item()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)"><code>Item(DateTimeParser)</code></a> instead.</div>
+</div>
+<div class="block">Constructor for Item</div>
 </li>
 </ul>
 <a id="&lt;init&gt;(com.apptasticsoftware.rssreader.DateTimeParser)">
@@ -431,6 +443,11 @@ implements java.lang.Comparable&lt;<a href="Item.html" title="class in com.appta
 <li class="blockList">
 <h4>Item</h4>
 <pre>public&nbsp;Item&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</pre>
+<div class="block">Constructor for Item</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dateTimeParser</code> - dateTimeParser</dd>
+</dl>
 </li>
 </ul>
 </li>
