@@ -615,19 +615,27 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
             elementStack.addLast(nsTagName);
 
-            if ("channel".equals(nsTagName) || "feed".equals(nsTagName)) {
+            if (isChannel(nsTagName)) {
                 channel = createChannel();
                 channel.setTitle("");
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
             }
-            else if ("item".equals(nsTagName) || "entry".equals(nsTagName)) {
+            else if (isItem(nsTagName)) {
                 item = createItem();
                 item.setChannel(channel);
                 isChannelPart = false;
                 isItemPart = true;
             }
+        }
+
+        protected boolean isChannel(String tagName) {
+            return "channel".equals(tagName) || "feed".equals(tagName);
+        }
+
+        protected boolean isItem(String tagName) {
+            return "item".equals(tagName) || "entry".equals(tagName);
         }
 
         void parseAttributes() {
@@ -679,7 +687,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
             textBuilder.setLength(0);
 
-            return "item".equals(nsTagName) || "entry".equals(nsTagName);
+            return isItem(nsTagName);
         }
 
         void parseCharacters() {
