@@ -24,6 +24,7 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.DateTimeParser;
 
 /**
  * Class for reading podcast (itunes) feeds.
@@ -81,12 +82,12 @@ public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem
     }
 
     @Override
-    protected ItunesChannel createChannel() {
-        return new ItunesChannel(getDateTimeParser());
+    protected ItunesChannel createChannel(DateTimeParser dateTimeParser) {
+        return new ItunesChannel(dateTimeParser);
     }
 
     @Override
-    protected ItunesItem createItem() {
-        return new ItunesItem(getDateTimeParser());
+    protected ItunesItem createItem(DateTimeParser dateTimeParser) {
+        return new ItunesItem(dateTimeParser);
     }
 }

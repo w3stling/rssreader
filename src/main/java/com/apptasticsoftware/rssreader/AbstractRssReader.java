@@ -80,15 +80,45 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     /**
      * Returns an object of a Channel implementation.
+     *
+     * @deprecated
+     * Use {@link AbstractRssReader#createChannel(DateTimeParser)} instead.
+     *
      * @return channel
      */
-    protected abstract C createChannel();
+    @Deprecated(since="3.5.0", forRemoval=true)
+    protected C createChannel() {
+        return null;
+    }
+
+    /**
+     * Returns an object of a Channel implementation.
+     *
+     * @param dateTimeParser dateTimeParser
+     * @return channel
+     */
+    protected abstract C createChannel(DateTimeParser dateTimeParser);
 
     /**
      * Returns an object of an Item implementation.
+     *
+     * @deprecated
+     * Use {@link AbstractRssReader#createItem(DateTimeParser)} instead.
+     *
      * @return item
      */
-    protected abstract I createItem();
+    @Deprecated(since="3.5.0", forRemoval=true)
+    protected I createItem() {
+        return null;
+    }
+
+    /**
+     * Returns an object of an Item implementation.
+     *
+     * @param dateTimeParser dateTimeParser
+     * @return item
+     */
+    protected abstract I createItem(DateTimeParser dateTimeParser);
 
     protected void initialize() {
         registerChannelTags();
@@ -208,10 +238,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         this.dateTimeParser = dateTimeParser;
         return this;
-    }
-
-    protected DateTimeParser getDateTimeParser() {
-        return dateTimeParser;
     }
 
     /**
@@ -616,14 +642,14 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             elementStack.addLast(nsTagName);
 
             if (isChannel(nsTagName)) {
-                channel = createChannel();
+                channel = createChannel(dateTimeParser);
                 channel.setTitle("");
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
             }
             else if (isItem(nsTagName)) {
-                item = createItem();
+                item = createItem(dateTimeParser);
                 item.setChannel(channel);
                 isChannelPart = false;
                 isItemPart = true;

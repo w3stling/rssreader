@@ -39,13 +39,13 @@ public class RssReader extends AbstractRssReader<Channel, Item> {
     }
 
     @Override
-    protected Channel createChannel() {
-        return new Channel(getDateTimeParser());
+    protected Channel createChannel(DateTimeParser dateTimeParser) {
+        return new Channel(dateTimeParser);
     }
 
     @Override
-    protected Item createItem() {
-        return new Item(getDateTimeParser());
+    protected Item createItem(DateTimeParser dateTimeParser) {
+        return new Item(dateTimeParser);
     }
 
 }
