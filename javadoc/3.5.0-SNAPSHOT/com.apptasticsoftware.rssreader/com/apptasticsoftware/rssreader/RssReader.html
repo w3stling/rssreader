@@ -187,14 +187,14 @@ extends <a href="AbstractRssReader.html" title="class in com.apptasticsoftware.r
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>protected <a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createChannel()">createChannel</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">createChannel</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
 <td class="colLast">
 <div class="block">Returns an object of a Channel implementation.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected <a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createItem()">createItem</a></span>()</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createItem(com.apptasticsoftware.rssreader.DateTimeParser)">createItem</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
 <td class="colLast">
 <div class="block">Returns an object of an Item implementation.</div>
 </td>
@@ -205,7 +205,7 @@ extends <a href="AbstractRssReader.html" title="class in com.apptasticsoftware.r
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;com.apptasticsoftware.rssreader.<a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></h3>
-<code><a href="AbstractRssReader.html#addChannelExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a>, <a href="AbstractRssReader.html#addChannelExtension(java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a>, <a href="AbstractRssReader.html#addHeader(java.lang.String,java.lang.String)">addHeader</a>, <a href="AbstractRssReader.html#addItemExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addItemExtension</a>, <a href="AbstractRssReader.html#addItemExtension(java.lang.String,java.util.function.BiConsumer)">addItemExtension</a>, <a href="AbstractRssReader.html#getDateTimeParser()">getDateTimeParser</a>, <a href="AbstractRssReader.html#initialize()">initialize</a>, <a href="AbstractRssReader.html#mapBoolean(java.lang.String,java.util.function.Consumer)">mapBoolean</a>, <a href="AbstractRssReader.html#mapInteger(java.lang.String,java.util.function.Consumer)">mapInteger</a>, <a href="AbstractRssReader.html#mapLong(java.lang.String,java.util.function.Consumer)">mapLong</a>, <a href="AbstractRssReader.html#read(java.io.InputStream)">read</a>, <a href="AbstractRssReader.html#read(java.lang.String)">read</a>, <a href="AbstractRssReader.html#read(java.util.Collection)">read</a>, <a href="AbstractRssReader.html#readAsync(java.lang.String)">readAsync</a>, <a href="AbstractRssReader.html#registerChannelAttributes()">registerChannelAttributes</a>, <a href="AbstractRssReader.html#registerChannelTags()">registerChannelTags</a>, <a href="AbstractRssReader.html#registerItemAttributes()">registerItemAttributes</a>, <a href="AbstractRssReader.html#registerItemTags()">registerItemTags</a>, <a href="AbstractRssReader.html#sendAsyncRequest(java.lang.String)">sendAsyncRequest</a>, <a href="AbstractRssReader.html#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)">setDateTimeParser</a>, <a href="AbstractRssReader.html#setUserAgent(java.lang.String)">setUserAgent</a></code></li>
+<code><a href="AbstractRssReader.html#addChannelExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a>, <a href="AbstractRssReader.html#addChannelExtension(java.lang.String,java.util.function.BiConsumer)">addChannelExtension</a>, <a href="AbstractRssReader.html#addHeader(java.lang.String,java.lang.String)">addHeader</a>, <a href="AbstractRssReader.html#addItemExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)">addItemExtension</a>, <a href="AbstractRssReader.html#addItemExtension(java.lang.String,java.util.function.BiConsumer)">addItemExtension</a>, <a href="AbstractRssReader.html#createChannel()">createChannel</a>, <a href="AbstractRssReader.html#createItem()">createItem</a>, <a href="AbstractRssReader.html#initialize()">initialize</a>, <a href="AbstractRssReader.html#mapBoolean(java.lang.String,java.util.function.Consumer)">mapBoolean</a>, <a href="AbstractRssReader.html#mapInteger(java.lang.String,java.util.function.Consumer)">mapInteger</a>, <a href="AbstractRssReader.html#mapLong(java.lang.String,java.util.function.Consumer)">mapLong</a>, <a href="AbstractRssReader.html#read(java.io.InputStream)">read</a>, <a href="AbstractRssReader.html#read(java.lang.String)">read</a>, <a href="AbstractRssReader.html#read(java.util.Collection)">read</a>, <a href="AbstractRssReader.html#readAsync(java.lang.String)">readAsync</a>, <a href="AbstractRssReader.html#registerChannelAttributes()">registerChannelAttributes</a>, <a href="AbstractRssReader.html#registerChannelTags()">registerChannelTags</a>, <a href="AbstractRssReader.html#registerItemAttributes()">registerItemAttributes</a>, <a href="AbstractRssReader.html#registerItemTags()">registerItemTags</a>, <a href="AbstractRssReader.html#sendAsyncRequest(java.lang.String)">sendAsyncRequest</a>, <a href="AbstractRssReader.html#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)">setDateTimeParser</a>, <a href="AbstractRssReader.html#setUserAgent(java.lang.String)">setUserAgent</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a id="methods.inherited.from.class.java.lang.Object">
@@ -258,35 +258,39 @@ extends <a href="AbstractRssReader.html" title="class in com.apptasticsoftware.r
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="createChannel()">
+<a id="createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>createChannel</h4>
-<pre class="methodSignature">protected&nbsp;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>&nbsp;createChannel()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractRssReader.html#createChannel()">AbstractRssReader</a></code></span></div>
+<pre class="methodSignature">protected&nbsp;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>&nbsp;createChannel&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractRssReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">AbstractRssReader</a></code></span></div>
 <div class="block">Returns an object of a Channel implementation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AbstractRssReader.html#createChannel()">createChannel</a></code>&nbsp;in class&nbsp;<code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>,&#8203;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dd><code><a href="AbstractRssReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">createChannel</a></code>&nbsp;in class&nbsp;<code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>,&#8203;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dateTimeParser</code> - dateTimeParser</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>channel</dd>
 </dl>
 </li>
 </ul>
-<a id="createItem()">
+<a id="createItem(com.apptasticsoftware.rssreader.DateTimeParser)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createItem</h4>
-<pre class="methodSignature">protected&nbsp;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&nbsp;createItem()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractRssReader.html#createItem()">AbstractRssReader</a></code></span></div>
+<pre class="methodSignature">protected&nbsp;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&nbsp;createItem&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="AbstractRssReader.html#createItem(com.apptasticsoftware.rssreader.DateTimeParser)">AbstractRssReader</a></code></span></div>
 <div class="block">Returns an object of an Item implementation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="AbstractRssReader.html#createItem()">createItem</a></code>&nbsp;in class&nbsp;<code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>,&#8203;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dd><code><a href="AbstractRssReader.html#createItem(com.apptasticsoftware.rssreader.DateTimeParser)">createItem</a></code>&nbsp;in class&nbsp;<code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="Channel.html" title="class in com.apptasticsoftware.rssreader">Channel</a>,&#8203;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dateTimeParser</code> - dateTimeParser</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>item</dd>
 </dl>

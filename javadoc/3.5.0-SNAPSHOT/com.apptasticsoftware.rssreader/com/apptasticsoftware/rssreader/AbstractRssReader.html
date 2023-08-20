@@ -27,8 +27,8 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":6,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":42,"i6":6,"i7":42,"i8":6,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -181,7 +181,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colSecond" scope="col">Method</th>
@@ -230,108 +230,121 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a></code></td>
+<td class="colFirst"><code>protected <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createChannel()">createChannel</a></span>()</code></th>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)"><code>createChannel(DateTimeParser)</code></a> instead.</div>
+</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">createChannel</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
 <td class="colLast">
 <div class="block">Returns an object of a Channel implementation.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a></code></td>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>protected <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createItem()">createItem</a></span>()</code></th>
+<td class="colLast">
+<div class="block"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#createItem(com.apptasticsoftware.rssreader.DateTimeParser)"><code>createItem(DateTimeParser)</code></a> instead.</div>
+</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>protected abstract <a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#createItem(com.apptasticsoftware.rssreader.DateTimeParser)">createItem</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
 <td class="colLast">
 <div class="block">Returns an object of an Item implementation.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code>protected <a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDateTimeParser()">getDateTimeParser</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#initialize()">initialize</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mapBoolean(java.lang.String,java.util.function.Consumer)">mapBoolean</a></span>&#8203;(java.lang.String&nbsp;text,
           java.util.function.Consumer&lt;java.lang.Boolean&gt;&nbsp;func)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mapInteger(java.lang.String,java.util.function.Consumer)">mapInteger</a></span>&#8203;(java.lang.String&nbsp;text,
           java.util.function.Consumer&lt;java.lang.Integer&gt;&nbsp;func)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#mapLong(java.lang.String,java.util.function.Consumer)">mapLong</a></span>&#8203;(java.lang.String&nbsp;text,
        java.util.function.Consumer&lt;java.lang.Long&gt;&nbsp;func)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.io.InputStream)">read</a></span>&#8203;(java.io.InputStream&nbsp;inputStream)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed from input stream.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.lang.String)">read</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed with the given URL.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.util.stream.Stream&lt;<a href="Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#read(java.util.Collection)">read</a></span>&#8203;(java.util.Collection&lt;java.lang.String&gt;&nbsp;urls)</code></th>
 <td class="colLast">
 <div class="block">Read from a collections of RSS feed.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.util.stream.Stream&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#readAsync(java.lang.String)">readAsync</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">
 <div class="block">Read RSS feed asynchronous with the given URL.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerChannelAttributes()">registerChannelAttributes</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerChannelTags()">registerChannelTags</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerItemAttributes()">registerItemAttributes</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#registerItemTags()">registerItemTags</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>protected java.util.concurrent.CompletableFuture&lt;java.net.http.HttpResponse&lt;java.io.InputStream&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendAsyncRequest(java.lang.String)">sendAsyncRequest</a></span>&#8203;(java.lang.String&nbsp;url)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)">setDateTimeParser</a></span>&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></th>
 <td class="colLast">
 <div class="block">Date and Time parser for parsing timestamps.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,&#8203;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setUserAgent(java.lang.String)">setUserAgent</a></span>&#8203;(java.lang.String&nbsp;userAgent)</code></th>
 <td class="colLast">
@@ -396,9 +409,30 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>createChannel</h4>
-<pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>&nbsp;createChannel()</pre>
+<pre class="methodSignature">@Deprecated(since="3.5.0",
+            forRemoval=true)
+protected&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>&nbsp;createChannel()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)"><code>createChannel(DateTimeParser)</code></a> instead.</div>
+</div>
 <div class="block">Returns an object of a Channel implementation.</div>
 <dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>channel</dd>
+</dl>
+</li>
+</ul>
+<a id="createChannel(com.apptasticsoftware.rssreader.DateTimeParser)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createChannel</h4>
+<pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>&nbsp;createChannel&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</pre>
+<div class="block">Returns an object of a Channel implementation.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dateTimeParser</code> - dateTimeParser</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>channel</dd>
 </dl>
@@ -410,9 +444,30 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>createItem</h4>
-<pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&nbsp;createItem()</pre>
+<pre class="methodSignature">@Deprecated(since="3.5.0",
+            forRemoval=true)
+protected&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&nbsp;createItem()</pre>
+<div class="deprecationBlock"><span class="deprecatedLabel">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecationComment">Use <a href="#createItem(com.apptasticsoftware.rssreader.DateTimeParser)"><code>createItem(DateTimeParser)</code></a> instead.</div>
+</div>
 <div class="block">Returns an object of an Item implementation.</div>
 <dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>item</dd>
+</dl>
+</li>
+</ul>
+<a id="createItem(com.apptasticsoftware.rssreader.DateTimeParser)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createItem</h4>
+<pre class="methodSignature">protected abstract&nbsp;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&nbsp;createItem&#8203;(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</pre>
+<div class="block">Returns an object of an Item implementation.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>dateTimeParser</code> - dateTimeParser</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>item</dd>
 </dl>
@@ -507,15 +562,6 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>updated RSSReader.</dd>
 </dl>
-</li>
-</ul>
-<a id="getDateTimeParser()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getDateTimeParser</h4>
-<pre class="methodSignature">protected&nbsp;<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;getDateTimeParser()</pre>
 </li>
 </ul>
 <a id="setUserAgent(java.lang.String)">
