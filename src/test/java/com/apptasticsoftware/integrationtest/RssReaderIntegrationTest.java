@@ -269,7 +269,7 @@ class RssReaderIntegrationTest {
     void rssVAFinansBadUrl() {
         RssReader reader = new RssReader();
         assertThrows(IOException.class, () ->
-                reader.read("https://www.vafinans.se/rss/nyheter2"));
+                reader.read("https://www.vafinans2.se/rss/nyheter"));
     }
 
 
