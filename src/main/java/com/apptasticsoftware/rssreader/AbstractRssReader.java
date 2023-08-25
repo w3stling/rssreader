@@ -638,6 +638,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
+        @SuppressWarnings("java:S5738")
         void parseStartElement() {
             textBuilder.setLength(0);
             var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
