@@ -644,14 +644,14 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             elementStack.addLast(nsTagName);
 
             if (isChannel(nsTagName)) {
-                channel = createChannel(dateTimeParser);
+                channel = Objects.requireNonNullElse(createChannel(dateTimeParser), createChannel());
                 channel.setTitle("");
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
             }
             else if (isItem(nsTagName)) {
-                item = createItem(dateTimeParser);
+                item = Objects.requireNonNullElse(createItem(dateTimeParser), createItem());
                 item.setChannel(channel);
                 isChannelPart = false;
                 isItemPart = true;
