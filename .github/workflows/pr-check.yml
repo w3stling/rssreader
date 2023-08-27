@@ -42,7 +42,10 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build and test 🏗
-        run: ./gradlew clean build
+        run: ./gradlew test jacocoTestReport sonarqube
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Archive build and test reports 🗃️
         uses: actions/upload-artifact@v3
