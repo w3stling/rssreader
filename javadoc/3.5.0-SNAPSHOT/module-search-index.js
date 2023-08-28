@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"com.apptasticsoftware.rssreader"}]
+moduleSearchIndex = [{"l":"com.apptasticsoftware.rssreader"}];updateSearchResults();
