@@ -42,7 +42,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build and test 🏗
-        run: ./gradlew test jacocoTestReport sonarqube
+        run: ./gradlew test jacocoTestReport sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

@@ -57,7 +57,6 @@ jacoco {
 jacocoTestReport {
     reports {
         xml.required = true
-        xml.outputLocation = file("${buildDir}/reports/jacoco/report.xml")
     }
 }
 
@@ -110,7 +109,7 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-sonarqube {
+sonar {
     properties {
         property "sonar.projectKey", "w3stling_rssreader"
         property "sonar.organization", "w3stling"
