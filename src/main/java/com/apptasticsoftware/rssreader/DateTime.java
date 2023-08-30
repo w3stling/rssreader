@@ -33,58 +33,71 @@ import java.util.Locale;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
 /**
- * Class for converting date time strings
+ * Class for converting date time strings.
+ * This class is only used when sorting or when calling getters that returns ZonedDateTime.
  */
 public class DateTime implements DateTimeParser {
     private final ZoneId defaultZone;
 
-    public static final DateTimeFormatter BASIC_ISO_DATE;
-    public static final DateTimeFormatter ISO_LOCAL_DATE;
-    public static final DateTimeFormatter ISO_OFFSET_DATE_TIME;
-    public static final DateTimeFormatter ISO_OFFSET_DATE_TIME_SPECIAL;
-    public static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
-    public static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
+    private static final DateTimeFormatter BASIC_ISO_DATE;
+    private static final DateTimeFormatter ISO_LOCAL_DATE;
+    private static final DateTimeFormatter ISO_OFFSET_DATE_TIME;
+    private static final DateTimeFormatter ISO_OFFSET_DATE_TIME_SPECIAL;
+    private static final DateTimeFormatter ISO_LOCAL_DATE_TIME;
+    private static final DateTimeFormatter ISO_LOCAL_DATE_TIME_SPECIAL;
 
-    public static final DateTimeFormatter RFC_1123_DATE_TIME;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_TIMEZONE;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_TIMEZONE2;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_AND_OFFSET;
-    public static final DateTimeFormatter RFC_822_DATE_TIME;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_TIMEZONE;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_TIMEZONE2;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_NO_TIMEZONE;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_AND_OFFSET;
+    private static final DateTimeFormatter RFC_822_DATE_TIME;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT;
 
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET_FULL_EOW;
-    public static final DateTimeFormatter RFC_822_DATE_TIME_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_FULL_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_EOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW;
+    private static final DateTimeFormatter RFC_822_DATE_TIME_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW;
 
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET_NO_EOW;
-    public static final DateTimeFormatter RFC_822_DATE_TIME_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_NO_EOW;
-    public static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_NO_EOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_822_DATE_TIME_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW_MONTH;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW_MONTH;
+
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_GMT_OFFSET_NO_DOW;
+    private static final DateTimeFormatter RFC_822_DATE_TIME_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EST_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_EDT_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CST_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_CDT_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MST_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_MDT_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW;
+    private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW;
 
     static {
         BASIC_ISO_DATE = DateTimeFormatter.BASIC_ISO_DATE.withLocale(Locale.ENGLISH);
@@ -95,45 +108,58 @@ public class DateTime implements DateTimeParser {
         ISO_OFFSET_DATE_TIME_SPECIAL = new DateTimeFormatterBuilder().parseCaseInsensitive().append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral('T').append(ISO_LOCAL_TIME).appendOffset("+HHMM", "0000").toFormatter(Locale.ENGLISH);
 
         RFC_1123_DATE_TIME = DateTimeFormatter.RFC_1123_DATE_TIME.withLocale(Locale.ENGLISH);
-        RFC_1123_DATE_TIME_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss zzz", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_TIMEZONE2 = new DateTimeFormatterBuilder().appendPattern("E, d LLL yyyy HH:mm:ss").appendOffset("+H:mm", "+00").toFormatter().withLocale(Locale.ENGLISH);
-        RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss", Locale.ENGLISH).withZone(ZoneId.of("UTC"));
-        RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss z", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_GMT_OFFSET = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss O", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_GMT_AND_OFFSET = DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm:ss 'GMT'Z", Locale.ENGLISH);
-        RFC_822_DATE_TIME = DateTimeFormatter.ofPattern("E, d LLL yy HH:mm:ss X", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_SPECIAL_EDT = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
-        RFC_1123_DATE_TIME_SPECIAL_EST = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CDT = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CST = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MDT = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MST = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PDT = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PST = DateTimeFormatter.ofPattern("E, d LLL yyyy HH:mm:ss 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
+        RFC_1123_DATE_TIME_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s zzz", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_TIMEZONE2 = new DateTimeFormatterBuilder().appendPattern("E, d LLL yyyy H:m:s").appendOffset("+H:mm", "+00").toFormatter().withLocale(Locale.ENGLISH);
+        RFC_1123_DATE_TIME_NO_TIMEZONE = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s", Locale.ENGLISH).withZone(ZoneId.of("UTC"));
+        RFC_1123_DATE_TIME_SPECIAL = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s z", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_GMT_OFFSET = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s O", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_GMT_AND_OFFSET = DateTimeFormatter.ofPattern("E, dd MMM yyyy H:m:s 'GMT'Z", Locale.ENGLISH);
+        RFC_822_DATE_TIME = DateTimeFormatter.ofPattern("E, d LLL yy H:m:s X", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_SPECIAL_EDT = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
+        RFC_1123_DATE_TIME_SPECIAL_EST = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CDT = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CST = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MDT = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MST = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PDT = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PST = DateTimeFormatter.ofPattern("E, d LLL yyyy H:m:s 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
 
-        RFC_1123_DATE_TIME_SPECIAL_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss z", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_GMT_OFFSET_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss O", Locale.ENGLISH);
-        RFC_822_DATE_TIME_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss X", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
-        RFC_1123_DATE_TIME_SPECIAL_EST_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CST_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MST_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PST_FULL_EOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy HH:mm:ss 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
+        RFC_1123_DATE_TIME_SPECIAL_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s z", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s O", Locale.ENGLISH);
+        RFC_822_DATE_TIME_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s X", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
+        RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW = DateTimeFormatter.ofPattern("EEEE, d LLL yyyy H:m:s 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
 
-        RFC_1123_DATE_TIME_SPECIAL_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss z", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_GMT_OFFSET_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss O", Locale.ENGLISH);
-        RFC_822_DATE_TIME_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss X", Locale.ENGLISH);
-        RFC_1123_DATE_TIME_SPECIAL_EDT_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
-        RFC_1123_DATE_TIME_SPECIAL_EST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CDT_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
-        RFC_1123_DATE_TIME_SPECIAL_CST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MDT_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
-        RFC_1123_DATE_TIME_SPECIAL_MST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PDT_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
-        RFC_1123_DATE_TIME_SPECIAL_PST_NO_EOW = DateTimeFormatter.ofPattern("d LLL yyyy HH:mm:ss 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
+        RFC_1123_DATE_TIME_SPECIAL_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s z", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s O", Locale.ENGLISH);
+        RFC_822_DATE_TIME_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s X", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
+        RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW_MONTH = DateTimeFormatter.ofPattern("EEEE, d LLLL yyyy H:m:s 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
+
+
+        RFC_1123_DATE_TIME_SPECIAL_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s z", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_GMT_OFFSET_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s O", Locale.ENGLISH);
+        RFC_822_DATE_TIME_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s X", Locale.ENGLISH);
+        RFC_1123_DATE_TIME_SPECIAL_EDT_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'EDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-4));
+        RFC_1123_DATE_TIME_SPECIAL_EST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'EST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CDT_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'CDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-5));
+        RFC_1123_DATE_TIME_SPECIAL_CST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'CST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MDT_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'MDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-6));
+        RFC_1123_DATE_TIME_SPECIAL_MST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
+        RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
     }
 
     /**
@@ -232,8 +258,20 @@ public class DateTime implements DateTimeParser {
         } else if (index <= 3) {
             return parseRfcDateTime(dateTime);
         } else {
-            return parseRfcDateTimeFullDayOfWeek(dateTime);
+            if (isLongMonthText(dateTime)) {
+                return parseRfcDateTimeLongDayOfWeekLongMonth(dateTime);
+            } else {
+                return parseRfcDateTimeLongDayOfWeek(dateTime);
+            }
         }
+    }
+
+    private static boolean isLongMonthText(String dateTime) {
+        int index1 = dateTime.indexOf(' ');
+        int index2 = dateTime.indexOf(' ', index1 + 1);
+        int index3 = dateTime.indexOf(' ', index2 + 1);
+
+        return (index3 - index2 - 1) > 3;
     }
 
     private static DateTimeFormatter parseIsoDateTime(String dateTime) {
@@ -257,21 +295,21 @@ public class DateTime implements DateTimeParser {
     private static DateTimeFormatter parseRfcDateTime(String dateTime) {
         if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" UTC"))
             return RFC_1123_DATE_TIME_SPECIAL;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" EDT"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" EDT"))
             return RFC_1123_DATE_TIME_SPECIAL_EDT;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" EST"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" EST"))
             return RFC_1123_DATE_TIME_SPECIAL_EST;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" CDT"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" CDT"))
             return RFC_1123_DATE_TIME_SPECIAL_CDT;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" CST"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" CST"))
             return RFC_1123_DATE_TIME_SPECIAL_CST;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" MDT"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" MDT"))
             return RFC_1123_DATE_TIME_SPECIAL_MDT;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" MST"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" MST"))
             return RFC_1123_DATE_TIME_SPECIAL_MST;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" PDT"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" PDT"))
             return RFC_1123_DATE_TIME_SPECIAL_PDT;
-        else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && dateTime.endsWith(" PST"))
+        else if (dateTime.length() <= 29 && dateTime.charAt(3) == ',' && dateTime.endsWith(" PST"))
             return RFC_1123_DATE_TIME_SPECIAL_PST;
         else if (dateTime.length() > 31 && dateTime.contains("GMT") && !dateTime.endsWith("GMT") && dateTime.lastIndexOf(':') < 29)
             return RFC_1123_DATE_TIME_GMT_AND_OFFSET;
@@ -279,9 +317,11 @@ public class DateTime implements DateTimeParser {
             return RFC_1123_DATE_TIME_GMT_OFFSET;
         else if ((dateTime.length() == 28 || dateTime.length() == 29) && dateTime.charAt(3) == ',' && (dateTime.charAt(13) == ' ' || dateTime.charAt(14) == ' '))
             return RFC_822_DATE_TIME;
-        else if (dateTime.length() >= 28 && dateTime.length() <= 31) {
+        else if (dateTime.length() >= 28 && dateTime.length() <= 32) {
+            if ((dateTime.contains(" +") || dateTime.contains(" -")) && dateTime.charAt(dateTime.length()-3) == ':')
+                return RFC_1123_DATE_TIME_TIMEZONE;
             if (dateTime.contains(" +") || dateTime.contains(" -"))
-                return RFC_1123_DATE_TIME;
+                 return RFC_1123_DATE_TIME;
             else if (dateTime.contains("+") || dateTime.contains("-"))
                 return RFC_1123_DATE_TIME_TIMEZONE2;
             else
@@ -296,61 +336,95 @@ public class DateTime implements DateTimeParser {
     }
 
     @SuppressWarnings("java:S3776")
-    private static DateTimeFormatter parseRfcDateTimeFullDayOfWeek (String dateTime) {
+    private static DateTimeFormatter parseRfcDateTimeLongDayOfWeek(String dateTime) {
         if (dateTime.endsWith(" UTC"))
-            return RFC_1123_DATE_TIME_SPECIAL_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW;
         else if (dateTime.endsWith(" EDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW;
         else if (dateTime.endsWith(" EST"))
-            return RFC_1123_DATE_TIME_SPECIAL_EST_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW;
         else if (dateTime.endsWith(" CDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW;
         else if (dateTime.endsWith(" CST"))
-            return RFC_1123_DATE_TIME_SPECIAL_CST_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW;
         else if (dateTime.endsWith(" MDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW;
         else if (dateTime.endsWith(" MST"))
-            return RFC_1123_DATE_TIME_SPECIAL_MST_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW;
         else if (dateTime.endsWith(" PDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW;
         else if (dateTime.endsWith(" PST"))
-            return RFC_1123_DATE_TIME_SPECIAL_PST_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW;
         else if (dateTime.contains("GMT"))
-            return RFC_1123_DATE_TIME_GMT_OFFSET_FULL_EOW;
+            return RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW;
         else if (dateTime.endsWith(" Z"))
-            return RFC_1123_DATE_TIME_SPECIAL_FULL_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW;
+        else if (dateTime.charAt(3) != ',' && dateTime.charAt(dateTime.length() - 3) == ':' && dateTime.charAt(dateTime.length() - 7) == ' ')
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW;
         else if (dateTime.contains("-") ||dateTime.contains("+"))
-            return RFC_822_DATE_TIME_FULL_EOW;
+            return RFC_822_DATE_TIME_FULL_DOW;
         else
             return null;
     }
 
     @SuppressWarnings("java:S3776")
-    private static DateTimeFormatter parseRfcDateTimeNoDayOfWeek (String dateTime) {
+    private static DateTimeFormatter parseRfcDateTimeLongDayOfWeekLongMonth(String dateTime) {
         if (dateTime.endsWith(" UTC"))
-            return RFC_1123_DATE_TIME_SPECIAL_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" EDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_EDT_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_EDT_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" EST"))
-            return RFC_1123_DATE_TIME_SPECIAL_EST_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_EST_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" CDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_CDT_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_CDT_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" CST"))
-            return RFC_1123_DATE_TIME_SPECIAL_CST_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_CST_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" MDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_MDT_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_MDT_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" MST"))
-            return RFC_1123_DATE_TIME_SPECIAL_MST_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_MST_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" PDT"))
-            return RFC_1123_DATE_TIME_SPECIAL_PDT_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_PDT_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" PST"))
-            return RFC_1123_DATE_TIME_SPECIAL_PST_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_PST_FULL_DOW_MONTH;
         else if (dateTime.contains("GMT"))
-            return RFC_1123_DATE_TIME_GMT_OFFSET_NO_EOW;
+            return RFC_1123_DATE_TIME_GMT_OFFSET_FULL_DOW_MONTH;
         else if (dateTime.endsWith(" Z"))
-            return RFC_1123_DATE_TIME_SPECIAL_NO_EOW;
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW_MONTH;
+        else if (dateTime.charAt(3) != ',' && dateTime.charAt(dateTime.length() - 3) == ':' && dateTime.charAt(dateTime.length() - 7) == ' ')
+            return RFC_1123_DATE_TIME_SPECIAL_FULL_DOW_MONTH;
         else if (dateTime.contains("-") ||dateTime.contains("+"))
-            return RFC_822_DATE_TIME_NO_EOW;
+            return RFC_822_DATE_TIME_FULL_DOW_MONTH;
+        else
+            return null;
+    }
+
+    @SuppressWarnings("java:S3776")
+    private static DateTimeFormatter parseRfcDateTimeNoDayOfWeek(String dateTime) {
+        if (dateTime.endsWith(" UTC"))
+            return RFC_1123_DATE_TIME_SPECIAL_NO_DOW;
+        else if (dateTime.endsWith(" EDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_EDT_NO_DOW;
+        else if (dateTime.endsWith(" EST"))
+            return RFC_1123_DATE_TIME_SPECIAL_EST_NO_DOW;
+        else if (dateTime.endsWith(" CDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_CDT_NO_DOW;
+        else if (dateTime.endsWith(" CST"))
+            return RFC_1123_DATE_TIME_SPECIAL_CST_NO_DOW;
+        else if (dateTime.endsWith(" MDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_MDT_NO_DOW;
+        else if (dateTime.endsWith(" MST"))
+            return RFC_1123_DATE_TIME_SPECIAL_MST_NO_DOW;
+        else if (dateTime.endsWith(" PDT"))
+            return RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW;
+        else if (dateTime.endsWith(" PST"))
+            return RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW;
+        else if (dateTime.contains("GMT"))
+            return RFC_1123_DATE_TIME_GMT_OFFSET_NO_DOW;
+        else if (dateTime.endsWith(" Z"))
+            return RFC_1123_DATE_TIME_SPECIAL_NO_DOW;
+        else if (dateTime.contains("-") ||dateTime.contains("+"))
+            return RFC_822_DATE_TIME_NO_DOW;
         else
             return null;
     }

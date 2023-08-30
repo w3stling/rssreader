@@ -40,6 +40,42 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormat3() {
+        var dateTime = new DateTime();
+
+        var timestamp = dateTime.toEpochMilli("Saturday, 26 August 2023 21:00:00 +07:00");
+        assertEquals(1693058400000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 21:00:00 +07:00");
+        assertEquals(1693058400000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 August 2023 21:00:00 +0700");
+        assertEquals(1693058400000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 21:00:00 +0700");
+        assertEquals(1693058400000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 21:00:00 +07:00");
+        assertEquals(1693058400000L, timestamp);
+
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 August 2023 21:00:00 -07:00");
+        assertEquals(1693108800000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 21:00:00 -07:00");
+        assertEquals(1693108800000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 August 2023 21:00:00 -0700");
+        assertEquals(1693108800000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 21:00:00 -0700");
+        assertEquals(1693108800000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 21:00:00 -07:00");
+        assertEquals(1693108800000L, timestamp);
+    }
+
+    @Test
     void dateTimeFormat4() {
         var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Sat, 30 Nov 2019 08:21:14 GMT");
@@ -126,6 +162,7 @@ class DateTimeTest {
     void dateTimeFormat11() {
         // Eastern time
         var dateTime = new DateTime();
+
         var timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 EDT");
         assertEquals(1667967714000L, timestamp);
 
@@ -159,6 +196,13 @@ class DateTimeTest {
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 MDT");
         assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:15:12 MDT"); // new
+        assertEquals(1693055712000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:5:2 MDT"); // new
+        assertEquals(1693055102000L, timestamp);
+
 
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 MST");
         assertEquals(1667978514000L, timestamp);
