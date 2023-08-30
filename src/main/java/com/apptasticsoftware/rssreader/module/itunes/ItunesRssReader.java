@@ -26,6 +26,9 @@ package com.apptasticsoftware.rssreader.module.itunes;
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
+import static com.apptasticsoftware.rssreader.util.Mapper.mapBoolean;
+import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
+
 /**
  * Class for reading podcast (itunes) feeds.
  */

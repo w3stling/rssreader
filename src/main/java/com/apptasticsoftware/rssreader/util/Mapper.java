@@ -1,0 +1,91 @@
+package com.apptasticsoftware.rssreader.util;
+
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Mapper util class
+ */
+public final class Mapper {
+    private static final String LOG_GROUP = "com.apptasticsoftware.rssreader.util";
+
+    private Mapper() { }
+
+    /**
+     * Maps a boolean text value (true, false, no or yes) to a boolean field. Text value can be in any casing.
+     * @param text text value
+     * @param func boolean setter method
+     */
+    public static void mapBoolean(String text, Consumer<Boolean> func) {
+        text = text.toLowerCase();
+        if ("true".equals(text) || "yes".equals(text)) {
+            func.accept(Boolean.TRUE);
+        } else if ("false".equals(text) || "no".equals(text)) {
+            func.accept(Boolean.FALSE);
+        }
+    }
+
+    /**
+     * Maps a integer text value to a integer field.
+     * @param text text value
+     * @param func integer setter method
+     */
+    public static void mapInteger(String text, Consumer<Integer> func) {
+        mapNumber(text, func, Integer::valueOf);
+    }
+
+    /**
+     * Maps a long text value to a long field.
+     * @param text text value
+     * @param func long setter method
+     */
+    public static void mapLong(String text, Consumer<Long> func) {
+        mapNumber(text, func, Long::valueOf);
+    }
+
+    private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
+        if (text != null && !text.isBlank()) {
+            try {
+                func.accept(convert.apply(text));
+            } catch (NumberFormatException e) {
+                var logger = Logger.getLogger(LOG_GROUP);
+                if (logger.isLoggable(Level.WARNING))
+                    logger.log(Level.WARNING, () -> String.format("Failed to convert %s. Message: %s", text, e.getMessage()));
+            }
+        }
+    }
+
+    /**
+     * Create a new instance if a getter returns optional empty and assigns the field the new instance.
+     * @param getter getter method
+     * @param setter setter method
+     * @param factory factory for creating a new instance if field is not set before
+     * @return existing or new instance
+     * @param <T> any class
+     */
+    public static <T> T createIfNull(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
+        return createIfNullOptional(getter, setter, factory).orElse(null);
+    }
+
+    /**
+     * Create a new instance if a getter returns optional empty and assigns the field the new instance.
+     * @param getter getter method
+     * @param setter setter method
+     * @param factory factory for creating a new instance if field is not set before
+     * @return existing or new instance
+     * @param <T> any class
+     */
+    public static <T> Optional<T> createIfNullOptional(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
+        Optional<T> instance = getter.get();
+        if (instance.isEmpty()) {
+            T newInstance = factory.get();
+            setter.accept(newInstance);
+            instance = Optional.of(newInstance);
+        }
+        return instance;
+    }
+}

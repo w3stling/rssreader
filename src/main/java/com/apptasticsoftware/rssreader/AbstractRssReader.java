@@ -46,6 +46,11 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
+import static com.apptasticsoftware.rssreader.util.Mapper.mapLong;
+import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
+import static com.apptasticsoftware.rssreader.util.Mapper.createIfNull;
+import static com.apptasticsoftware.rssreader.util.Mapper.createIfNullOptional;
+
 import static javax.xml.stream.XMLStreamConstants.CDATA;
 import static javax.xml.stream.XMLStreamConstants.CHARACTERS;
 import static javax.xml.stream.XMLStreamConstants.END_ELEMENT;
@@ -151,6 +156,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("/rss/channel/image/link", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setLink(v));
         channelTags.put("/rss/channel/image/title", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setTitle(v));
         channelTags.put("/rss/channel/image/url", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setUrl(v));
+        channelTags.put("/rss/channel/image/description", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> i.setDescription(v)));
         channelTags.put("/rss/channel/image/height", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setHeight)));
         channelTags.put("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
     }
@@ -185,49 +191,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         enclosureAttributes.put("url", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setUrl(v));
         enclosureAttributes.put("type", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setType(v));
         enclosureAttributes.put("length", (i, v) -> createIfNullOptional(i::getEnclosure, i::setEnclosure, Enclosure::new).ifPresent(e -> mapLong(v, e::setLength)));
-    }
-
-    static <T> T createIfNull(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
-        return createIfNullOptional(getter, setter, factory).orElse(null);
-    }
-
-    static <T> Optional<T> createIfNullOptional(Supplier<Optional<T>> getter, Consumer<T> setter, Supplier<T> factory) {
-        Optional<T> instance = getter.get();
-        if (instance.isEmpty()) {
-            T newInstance = factory.get();
-            setter.accept(newInstance);
-            instance = Optional.of(newInstance);
-        }
-        return instance;
-    }
-
-    protected void mapBoolean(String text, Consumer<Boolean> func) {
-        text = text.toLowerCase();
-        if ("true".equals(text) || "yes".equals(text)) {
-            func.accept(Boolean.TRUE);
-        } else if ("false".equals(text) || "no".equals(text)) {
-            func.accept(Boolean.FALSE);
-        }
-    }
-
-    protected void mapInteger(String text, Consumer<Integer> func) {
-        mapNumber(text, func, Integer::valueOf);
-    }
-
-    protected void mapLong(String text, Consumer<Long> func) {
-        mapNumber(text, func, Long::valueOf);
-    }
-
-    private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
-        if (text != null && !text.isBlank()) {
-            try {
-                func.accept(convert.apply(text));
-            } catch (NumberFormatException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, () -> String.format("Failed to convert %s. Message: %s", text, e.getMessage()));
-            }
-        }
     }
 
     /**
