@@ -144,6 +144,14 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/RssReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createChannel(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/RssReader.html" title="class in com.apptasticsoftware.rssreader">RssReader</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html#createIfNull(java.util.function.Supplier,java.util.function.Consumer,java.util.function.Supplier)" class="member-name-link">createIfNull(Supplier&lt;Optional&lt;T&gt;&gt;, Consumer&lt;T&gt;, Supplier&lt;T&gt;)</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" title="class in com.apptasticsoftware.rssreader.util">Mapper</a></dt>
+<dd>
+<div class="block">Create a new instance if a getter returns optional empty and assigns the field the new instance.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html#createIfNullOptional(java.util.function.Supplier,java.util.function.Consumer,java.util.function.Supplier)" class="member-name-link">createIfNullOptional(Supplier&lt;Optional&lt;T&gt;&gt;, Consumer&lt;T&gt;, Supplier&lt;T&gt;)</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" title="class in com.apptasticsoftware.rssreader.util">Mapper</a></dt>
+<dd>
+<div class="block">Create a new instance if a getter returns optional empty and assigns the field the new instance.</div>
+</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#createItem()" class="member-name-link">createItem()</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
 <dd>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
@@ -546,12 +554,22 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:M">M</h2>
 <dl class="index">
-<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#mapBoolean(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapBoolean(String, Consumer&lt;Boolean&gt;)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#mapInteger(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapInteger(String, Consumer&lt;Integer&gt;)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#mapLong(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapLong(String, Consumer&lt;Long&gt;)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html#mapBoolean(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapBoolean(String, Consumer&lt;Boolean&gt;)</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" title="class in com.apptasticsoftware.rssreader.util">Mapper</a></dt>
+<dd>
+<div class="block">Maps a boolean text value (true, false, no or yes) to a boolean field.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html#mapInteger(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapInteger(String, Consumer&lt;Integer&gt;)</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" title="class in com.apptasticsoftware.rssreader.util">Mapper</a></dt>
+<dd>
+<div class="block">Maps a integer text value to a integer field.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html#mapLong(java.lang.String,java.util.function.Consumer)" class="member-name-link">mapLong(String, Consumer&lt;Long&gt;)</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" title="class in com.apptasticsoftware.rssreader.util">Mapper</a></dt>
+<dd>
+<div class="block">Maps a long text value to a long field.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Mapper.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.util">Mapper</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/package-summary.html">com.apptasticsoftware.rssreader.util</a></dt>
+<dd>
+<div class="block">Mapper util class</div>
+</dd>
 </dl>
 <h2 class="title" id="I:N">N</h2>
 <dl class="index">
