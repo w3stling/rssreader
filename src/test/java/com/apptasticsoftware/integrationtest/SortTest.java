@@ -40,8 +40,13 @@ class SortTest {
                 "https://failed-to-read-from-this-url.com",
                 "https://www.nrdc.org/rss.xml",
                 "https://www.theverge.com/rss/reviews/index.xml",
-                "https://feeds.macrumors.com/MacRumors-All");
-
+                "https://feeds.macrumors.com/MacRumors-All",
+                "https://www.ksl.com/rss/news",
+                "http://rss.cnn.com/rss/cnn_latest.rss",
+                "https://moxie.foxnews.com/google-publisher/latest.xml",
+                "https://techcrunch.com/feed/",
+                "https://feeds.arstechnica.com/arstechnica/science"
+                );
 
         List<String> extendedUrlList = new ArrayList<>(urlList);
         extendedUrlList.add(null);
@@ -53,7 +58,7 @@ class SortTest {
                                         .map(t -> t.toInstant().toEpochMilli())
                                         .collect(Collectors.toList());
 
-        assertTrue(timestamps.size() > 10);
+        assertTrue(timestamps.size() > 200);
 
         var iterator = timestamps.iterator();
         Long current, previous = iterator.next();
