@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Mapper util class
+ * Provides methods for mapping field
  */
 public final class Mapper {
     private static final String LOG_GROUP = "com.apptasticsoftware.rssreader.util";

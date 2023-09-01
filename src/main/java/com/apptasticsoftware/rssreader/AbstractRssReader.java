@@ -74,10 +74,17 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private boolean isInitialized;
 
 
+    /**
+     * Constructor
+     */
     protected AbstractRssReader() {
         httpClient = createHttpClient();
     }
 
+    /**
+     * Constructor
+     * @param httpClient http client
+     */
     protected AbstractRssReader(HttpClient httpClient) {
         Objects.requireNonNull(httpClient, "Http client must not be null");
         this.httpClient = httpClient;
@@ -127,6 +134,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected abstract I createItem(DateTimeParser dateTimeParser);
 
+    /**
+     * Initialize channel and items tags and attributes
+     */
     protected void initialize() {
         registerChannelTags();
         registerChannelAttributes();
@@ -134,6 +144,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         registerItemAttributes();
     }
 
+    /**
+     * Register channel tags for mapping to channel object fields
+     */
     @SuppressWarnings("java:S1192")
     protected void registerChannelTags() {
         channelTags.put("title", Channel::setTitle);
@@ -161,10 +174,16 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.put("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
     }
 
+    /**
+     * Register channel attributes for mapping to channel object fields
+     */
     protected void registerChannelAttributes() {
         channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
     }
 
+    /**
+     * Register item tags for mapping to item object fields
+     */
     @SuppressWarnings("java:S1192")
     protected void registerItemTags() {
         itemTags.put("guid", Item::setGuid);
@@ -183,6 +202,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.put("comments", Item::setComments);
     }
 
+    /**
+     * Register itam attributes for mapping to item object fields
+     */
     protected void registerItemAttributes() {
         itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Item::setLink);
         itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).put("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
@@ -395,6 +417,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
+    /**
+     * Sends request
+     * @param url url
+     * @return response
+     */
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
         var builder = HttpRequest.newBuilder(URI.create(url))
                                          .timeout(Duration.ofSeconds(25))

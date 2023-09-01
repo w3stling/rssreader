@@ -46,6 +46,10 @@ public class ItunesChannel extends Channel {
     private boolean itunesBlock;
     private boolean itunesComplete;
 
+    /**
+     * Constructor
+     * @param dateTimeParser timestamp parser
+     */
     public ItunesChannel(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }

@@ -35,13 +35,17 @@ public class Enclosure {
     private Long length;
 
     /**
-     * Get the url of enclosure.
+     * Get the URL of enclosure.
      * @return url
      */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * Set the URL of the enclosure.
+     * @param url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
@@ -54,6 +58,10 @@ public class Enclosure {
         return type;
     }
 
+    /**
+     * Set the type of the enclosure.
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -66,6 +74,10 @@ public class Enclosure {
         return Optional.ofNullable(length);
     }
 
+    /**
+     * Set the length of the enclosure.
+     * @param length
+     */
     public void setLength(Long length) {
         this.length = length;
     }

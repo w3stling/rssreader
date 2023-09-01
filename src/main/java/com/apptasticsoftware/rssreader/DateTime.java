@@ -443,6 +443,11 @@ public class DateTime implements DateTimeParser {
         return zonedDateTime.toInstant().toEpochMilli();
     }
 
+    /**
+     * Converts timestamp string to Instant
+     * @param dateTime timestamp
+     * @return instant
+     */
     public Instant toInstant(String dateTime) {
         ZonedDateTime zonedDateTime = toZonedDateTime(dateTime);
 

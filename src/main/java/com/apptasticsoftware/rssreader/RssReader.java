@@ -30,10 +30,17 @@ import java.net.http.HttpClient;
  */
 public class RssReader extends AbstractRssReader<Channel, Item> {
 
+    /**
+     * Constructor
+     */
     public RssReader() {
         super();
     }
 
+    /**
+     * Constructor
+     * @param httpClient http client
+     */
     public RssReader(HttpClient httpClient) {
         super(httpClient);
     }

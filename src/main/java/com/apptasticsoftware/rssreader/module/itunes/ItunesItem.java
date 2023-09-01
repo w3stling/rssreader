@@ -46,6 +46,10 @@ public class ItunesItem extends Item {
     private String itunesEpisodeType;
     private boolean itunesBlock;
 
+    /**
+     * Constructor
+     * @param dateTimeParser timestamp parser
+     */
     public ItunesItem(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }
@@ -66,6 +70,10 @@ public class ItunesItem extends Item {
         this.itunesDuration = itunesDuration;
     }
 
+    /**
+     * Get the duration
+     * @return duration
+     */
     @SuppressWarnings("java:S108")
     public Optional<Duration> getItunesDurationAsDuration() {
         if (itunesDuration != null && !itunesDuration.isBlank()) {

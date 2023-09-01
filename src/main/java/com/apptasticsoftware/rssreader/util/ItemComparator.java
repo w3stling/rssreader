@@ -33,7 +33,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * Comparator for sorting item objects.
+ * Provides different comparators for sorting item objects.
  */
 public final class ItemComparator {
 
