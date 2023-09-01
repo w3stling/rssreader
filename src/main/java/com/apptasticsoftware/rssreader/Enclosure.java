@@ -44,7 +44,7 @@ public class Enclosure {
 
     /**
      * Set the URL of the enclosure.
-     * @param url
+     * @param url URL
      */
     public void setUrl(String url) {
         this.url = url;
@@ -60,7 +60,7 @@ public class Enclosure {
 
     /**
      * Set the type of the enclosure.
-     * @param type
+     * @param type type
      */
     public void setType(String type) {
         this.type = type;
@@ -76,7 +76,7 @@ public class Enclosure {
 
     /**
      * Set the length of the enclosure.
-     * @param length
+     * @param length length
      */
     public void setLength(Long length) {
         this.length = length;
