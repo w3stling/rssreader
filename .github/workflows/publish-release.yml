@@ -60,7 +60,7 @@ jobs:
           INPUT_YEAR: ${{ env.year }}
 
       - name: Commit README.md
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         id: auto-commit-action-readme
         with:
           commit_message: Update version to ${{ env.new_version }}
