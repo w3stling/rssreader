@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java 17 ⚙️
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -60,7 +60,7 @@ jobs:
           INPUT_YEAR: ${{ env.year }}
 
       - name: Commit README.md
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         id: auto-commit-action-readme
         with:
           commit_message: Update version to ${{ env.new_version }}
@@ -90,7 +90,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java 17 ⚙️
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -147,7 +147,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java 17 ⚙️
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
