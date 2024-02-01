@@ -509,7 +509,6 @@ class RssReaderIntegrationTest {
                                           .filter(item -> item.getPubDate().isPresent())
                                           .collect(Collectors.toList());
 
-
         assertFalse(items.isEmpty());
         for (Item item : items) {
             assertThat(item.getAuthor(), isPresentAnd(not(emptyString())));

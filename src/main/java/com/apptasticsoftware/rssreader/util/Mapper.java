@@ -60,6 +60,19 @@ public final class Mapper {
     }
 
     /**
+     * Map value if field has not been mapped before
+     * @param text value to map
+     * @param getter getter to check if field is empty
+     * @param setter setter to set value
+     * @param <T> type
+     */
+    public static <T> void mapIfEmpty(String text, Supplier<T> getter, Consumer<String> setter) {
+        if ((getter.get() == null || getter.get() == Optional.empty()) && text != null && !text.isBlank()) {
+            setter.accept(text);
+        }
+    }
+
+    /**
      * Create a new instance if a getter returns optional empty and assigns the field the new instance.
      * @param getter getter method
      * @param setter setter method
