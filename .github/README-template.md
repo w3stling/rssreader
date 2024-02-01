@@ -17,7 +17,7 @@ RSS Reader
 > * New group ID in Maven / Gradle dependency declaration
 > * Moved repository from `JCenter` to `Maven Central Repository`
 
-RSS Reader is a simple Java library for reading RSS and Atom feeds. Requires at minimum Java 11.
+RSS Reader is a simple Java library for reading RSS and Atom feeds. It has zero 3rd party dependencies, a low memory footprint and can process large feeds. Requires at minimum Java 11.
 
 RSS (Rich Site Summary) is a type of web feed which allows users to access updates to online content in a
 standardized, computer-readable format. It removes the need for the user to manually
@@ -31,15 +31,22 @@ Reads from a RSS (or Atom) feed.
 ```java
 RssReader rssReader = new RssReader();
 List<Item> items = rssReader.read(URL)
-                            .collect(Collectors.toList());
+                            .toList();
 ```
 
 Extract all items that contains the word football in the title.
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
-List<Item> articles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("football")))
-                             .collect(Collectors.toList());
+List<Item> footballArticles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("football")))
+                                     .toList();
+```
+
+### Read feed from a file
+```java
+InputStream file = new FileInputStream("Path to file");
+List<Item> items = new RssReader().read(file);
+                                  .toList();
 ```
 
 ### Read from multiple feeds
@@ -62,7 +69,7 @@ To change sort order to ascending (oldest first) publication date
 Use iTunes module for extracting data from [Podcast][4] specific tags and attributes.
 ```java
 List<ItunesItem> items = new ItunesRssReader().read(URL)
-                                              .collect(Collectors.toList());
+                                              .toList();
 ```
 
 ### Custom RSS / Atom feed extensions
@@ -72,7 +79,7 @@ List<Item> items = new RssReader()
              .addItemExtension("dc:creator", Item::setAuthor)
              .addItemExtension("dc:date", Item::setPubDate)
              .read("https://lwn.net/headlines/rss")
-             .collect(Collectors.toList());
+             .toList();
 ```
 
 Download
@@ -110,7 +117,8 @@ Markup Validation Services
 Useful links for validating feeds
 
 ### RSS / Atom
-https://validator.w3.org/feed/
+https://validator.w3.org/feed/ <br />
+https://www.feedvalidator.org/check.cgi
 
 ### Podcast / iTunes
 https://podba.se/validate/ <br />
