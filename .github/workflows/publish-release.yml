@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2
 
       - name: Version number 🔢
         run: |
@@ -108,7 +108,7 @@ jobs:
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2
 
       - name: Version number 🔢
         run: |
@@ -165,7 +165,7 @@ jobs:
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2
 
       - name: Version number 🔢
         run: |
