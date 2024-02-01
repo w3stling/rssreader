@@ -23,6 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.util.Mapper;
+
 import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -149,29 +151,29 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     @SuppressWarnings("java:S1192")
     protected void registerChannelTags() {
-        channelTags.put("title", Channel::setTitle);
-        channelTags.put("description", Channel::setDescription);
-        channelTags.put("subtitle", Channel::setDescription);
-        channelTags.put("link", Channel::setLink);
-        channelTags.put("category", Channel::addCategory);
-        channelTags.put("language", Channel::setLanguage);
-        channelTags.put("copyright", Channel::setCopyright);
-        channelTags.put("rights", Channel::setCopyright);
-        channelTags.put("generator", Channel::setGenerator);
-        channelTags.put("ttl", Channel::setTtl);
-        channelTags.put("pubDate", Channel::setPubDate);
-        channelTags.put("lastBuildDate", Channel::setLastBuildDate);
-        channelTags.put("updated", Channel::setLastBuildDate);
-        channelTags.put("managingEditor", Channel::setManagingEditor);
-        channelTags.put("webMaster", Channel::setWebMaster);
-        channelTags.put("docs", Channel::setDocs);
-        channelTags.put("rating", Channel::setRating);
-        channelTags.put("/rss/channel/image/link", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setLink(v));
-        channelTags.put("/rss/channel/image/title", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setTitle(v));
-        channelTags.put("/rss/channel/image/url", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setUrl(v));
-        channelTags.put("/rss/channel/image/description", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> i.setDescription(v)));
-        channelTags.put("/rss/channel/image/height", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setHeight)));
-        channelTags.put("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
+        channelTags.putIfAbsent("title", Channel::setTitle);
+        channelTags.putIfAbsent("description", Channel::setDescription);
+        channelTags.putIfAbsent("subtitle", Channel::setDescription);
+        channelTags.putIfAbsent("link", Channel::setLink);
+        channelTags.putIfAbsent("category", Channel::addCategory);
+        channelTags.putIfAbsent("language", Channel::setLanguage);
+        channelTags.putIfAbsent("copyright", Channel::setCopyright);
+        channelTags.putIfAbsent("rights", Channel::setCopyright);
+        channelTags.putIfAbsent("generator", Channel::setGenerator);
+        channelTags.putIfAbsent("ttl", Channel::setTtl);
+        channelTags.putIfAbsent("pubDate", Channel::setPubDate);
+        channelTags.putIfAbsent("lastBuildDate", Channel::setLastBuildDate);
+        channelTags.putIfAbsent("updated", Channel::setLastBuildDate);
+        channelTags.putIfAbsent("managingEditor", Channel::setManagingEditor);
+        channelTags.putIfAbsent("webMaster", Channel::setWebMaster);
+        channelTags.putIfAbsent("docs", Channel::setDocs);
+        channelTags.putIfAbsent("rating", Channel::setRating);
+        channelTags.putIfAbsent("/rss/channel/image/link", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setLink(v));
+        channelTags.putIfAbsent("/rss/channel/image/title", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setTitle(v));
+        channelTags.putIfAbsent("/rss/channel/image/url", (C c, String v) -> createIfNull(c::getImage, c::setImage, Image::new).setUrl(v));
+        channelTags.putIfAbsent("/rss/channel/image/description", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> i.setDescription(v)));
+        channelTags.putIfAbsent("/rss/channel/image/height", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setHeight)));
+        channelTags.putIfAbsent("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
     }
 
     /**
@@ -186,33 +188,35 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     @SuppressWarnings("java:S1192")
     protected void registerItemTags() {
-        itemTags.put("guid", Item::setGuid);
-        itemTags.put("id", Item::setGuid);
-        itemTags.put("title", Item::setTitle);
-        itemTags.put("description", Item::setDescription);
-        itemTags.put("summary", Item::setDescription);
-        itemTags.put("content", Item::setDescription);
-        itemTags.put("link", Item::setLink);
-        itemTags.put("author", Item::setAuthor);
-        itemTags.put("/feed/entry/author/name", Item::setAuthor);
-        itemTags.put("category", Item::addCategory);
-        itemTags.put("pubDate", Item::setPubDate);
-        itemTags.put("published", Item::setPubDate);
-        itemTags.put("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
-        itemTags.put("comments", Item::setComments);
+        itemTags.putIfAbsent("guid", Item::setGuid);
+        itemTags.putIfAbsent("id", Item::setGuid);
+        itemTags.putIfAbsent("title", Item::setTitle);
+        itemTags.putIfAbsent("description", Item::setDescription);
+        itemTags.putIfAbsent("summary", Item::setDescription);
+        itemTags.putIfAbsent("content", Item::setDescription);
+        itemTags.putIfAbsent("link", Item::setLink);
+        itemTags.putIfAbsent("author", Item::setAuthor);
+        itemTags.putIfAbsent("/feed/entry/author/name", Item::setAuthor);
+        itemTags.putIfAbsent("category", Item::addCategory);
+        itemTags.putIfAbsent("pubDate", Item::setPubDate);
+        itemTags.putIfAbsent("published", Item::setPubDate);
+        itemTags.putIfAbsent("updated", (i, v) -> { if (i.getPubDate().isEmpty()) i.setPubDate(v); });
+        itemTags.putIfAbsent("comments", Item::setComments);
+        itemTags.putIfAbsent("dc:creator", (i, v) -> Mapper.mapIfEmpty(v, i::getAuthor, i::setAuthor));
+        itemTags.putIfAbsent("dc:date", (i, v) -> Mapper.mapIfEmpty(v, i::getPubDate, i::setPubDate));
     }
 
     /**
      * Register itam attributes for mapping to item object fields
      */
     protected void registerItemAttributes() {
-        itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Item::setLink);
-        itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).put("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
+        itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).putIfAbsent("href", Item::setLink);
+        itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).putIfAbsent("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
 
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
-        enclosureAttributes.put("url", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setUrl(v));
-        enclosureAttributes.put("type", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setType(v));
-        enclosureAttributes.put("length", (i, v) -> createIfNullOptional(i::getEnclosure, i::setEnclosure, Enclosure::new).ifPresent(e -> mapLong(v, e::setLength)));
+        enclosureAttributes.putIfAbsent("url", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setUrl(v));
+        enclosureAttributes.putIfAbsent("type", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setType(v));
+        enclosureAttributes.putIfAbsent("length", (i, v) -> createIfNullOptional(i::getEnclosure, i::setEnclosure, Enclosure::new).ifPresent(e -> mapLong(v, e::setLength)));
     }
 
     /**

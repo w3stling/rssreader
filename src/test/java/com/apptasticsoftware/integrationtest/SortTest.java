@@ -71,7 +71,7 @@ class SortTest {
 
     @Test
     void testSortNewestFirst() throws IOException {
-        var list = new RssReader().read("https://lwn.net/headlines/rss")
+        var list = new RssReader().read("https://feeds.macrumors.com/MacRumors-All")
                 .sorted(ItemComparator.newestItemFirst())
                 .collect(Collectors.toList());
 
@@ -79,14 +79,14 @@ class SortTest {
 
         var previous = list.get(0);
         for (Item current : list) {
-            assertTrue(previous.compareTo(current) >= 0);
+            assertTrue(previous.compareTo(current) <= 0);
             previous = current;
         }
     }
 
     @Test
     void testSortOldestFirst() throws IOException {
-        var list = new RssReader().read("https://lwn.net/headlines/rss")
+        var list = new RssReader().read("https://feeds.macrumors.com/MacRumors-All")
                 .sorted(ItemComparator.oldestItemFirst())
                 .collect(Collectors.toList());
 
@@ -94,7 +94,7 @@ class SortTest {
 
         var previous = list.get(0);
         for (Item current : list) {
-            assertTrue(previous.compareTo(current) <= 0);
+            assertTrue(previous.compareTo(current) >= 0);
             previous = current;
         }
     }
