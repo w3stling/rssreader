@@ -658,6 +658,33 @@ class RssReaderIntegrationTest {
     }
 
     @Test
+    void testMultipleEnclosures() {
+        var list = new RssReader().read(fromFile("multiple-enclosures.xml")).collect(Collectors.toList());
+
+        assertEquals(2, list.size());
+        var item = list.get(0);
+        assertEquals(3, item.getEnclosures().size());
+        assertEquals("https://url1", item.getEnclosures().get(0).getUrl());
+        assertEquals("image/jpeg", item.getEnclosures().get(0).getType());
+        assertEquals(1L, item.getEnclosures().get(0).getLength().orElse(-1L));
+        assertEquals("https://url2", item.getEnclosures().get(1).getUrl());
+        assertEquals("image/png", item.getEnclosures().get(1).getType());
+        assertEquals(2L, item.getEnclosures().get(1).getLength().orElse(-1L));
+        assertEquals("https://url3", item.getEnclosures().get(2).getUrl());
+        assertEquals("image/gif", item.getEnclosures().get(2).getType());
+        assertEquals(3L, item.getEnclosures().get(2).getLength().orElse(-1L));
+
+        item = list.get(1);
+        assertEquals(2, item.getEnclosures().size());
+        assertEquals("https://url4", item.getEnclosures().get(0).getUrl());
+        assertEquals("image/svg", item.getEnclosures().get(0).getType());
+        assertEquals(4L, item.getEnclosures().get(0).getLength().orElse(-1L));
+        assertEquals("https://url5", item.getEnclosures().get(1).getUrl());
+        assertEquals("image/webp", item.getEnclosures().get(1).getType());
+        assertEquals(5L, item.getEnclosures().get(1).getLength().orElse(-1L));
+    }
+
+    @Test
     void testImageBadWidthHeight() {
         var list = new RssReader().read(fromFile("bad-image-width-height.xml")).collect(Collectors.toList());
         assertEquals(1, list.size());

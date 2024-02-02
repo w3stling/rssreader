@@ -70,6 +70,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
+    private final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final Set<String> collectChildNodesForTag = Set.of("content", "summary");
@@ -204,6 +205,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("comments", Item::setComments);
         itemTags.putIfAbsent("dc:creator", (i, v) -> Mapper.mapIfEmpty(v, i::getAuthor, i::setAuthor));
         itemTags.putIfAbsent("dc:date", (i, v) -> Mapper.mapIfEmpty(v, i::getPubDate, i::setPubDate));
+
+        onItemTags.put("enclosure", (i) -> i.addEnclosure(new Enclosure()));
     }
 
     /**
@@ -214,9 +217,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).putIfAbsent("isPermaLink", (i, v) -> i.setIsPermaLink(Boolean.parseBoolean(v)) );
 
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
-        enclosureAttributes.putIfAbsent("url", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setUrl(v));
-        enclosureAttributes.putIfAbsent("type", (i, v) -> createIfNull(i::getEnclosure, i::setEnclosure, Enclosure::new).setType(v));
-        enclosureAttributes.putIfAbsent("length", (i, v) -> createIfNullOptional(i::getEnclosure, i::setEnclosure, Enclosure::new).ifPresent(e -> mapLong(v, e::setLength)));
+        enclosureAttributes.putIfAbsent("url", (i, v) -> i.getEnclosure().ifPresent(a -> a.setUrl(v)));
+        enclosureAttributes.putIfAbsent("type", (i, v) -> i.getEnclosure().ifPresent(a -> a.setType(v)));
+        enclosureAttributes.putIfAbsent("length", (i, v) -> i.getEnclosure().ifPresent(e -> mapLong(v, e::setLength)));
     }
 
     /**
@@ -671,6 +674,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 mapChannelAttributes(elementFullPath);
             }
             else if (isItemPart) {
+                onItemTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(item); return f; });
+                onItemTags.computeIfPresent(getElementFullPath(), (k, f) -> { f.accept(item); return f; });
                 // Map item attributes
                 mapItemAttributes(nsTagName);
                 mapItemAttributes(elementFullPath);

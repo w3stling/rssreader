@@ -47,6 +47,7 @@ public class Item implements Comparable<Item> {
     private String pubDate;
     private String comments;
     private Enclosure enclosure;
+    private final List<Enclosure> enclosures = new ArrayList<>();
     private Channel channel;
     private final DateTimeParser dateTimeParser;
 
@@ -288,7 +289,25 @@ public class Item implements Comparable<Item> {
      * @param enclosure enclosure
      */
     public void setEnclosure(Enclosure enclosure) {
+        addEnclosure(enclosure);
+    }
+
+    /**
+     * Get enclosures for item.
+     * Use this method if multiple enclosures exist per item.
+     * @return list of enclosures
+     */
+    public List<Enclosure> getEnclosures() {
+        return Collections.unmodifiableList(enclosures);
+    }
+
+    /**
+     * Add enclosure for item.
+     * @param enclosure enclosure
+     */
+    public void addEnclosure(Enclosure enclosure) {
         this.enclosure = enclosure;
+        enclosures.add(enclosure);
     }
 
     /**
@@ -323,14 +342,14 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
                 Objects.equals(getComments(), item.getComments()) &&
-                Objects.equals(getEnclosure(), item.getEnclosure()) &&
+                getEnclosures().equals(item.getEnclosures()) &&
                 Objects.equals(getChannel(), item.getChannel());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
-                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getEnclosure(), getChannel());
+                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getEnclosures(), getChannel());
     }
 
     /**
