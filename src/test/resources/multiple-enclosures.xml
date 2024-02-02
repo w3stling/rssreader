@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="https://worldoftanks.eu/static/5.132.2_d0fd33/portalnews/css/rss.xsl" media="screen"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <atom:link href="https://worldoftanks.eu/en/news/" rel="self" type="application/rss+xml" />
+        <title>World of Tanks News | World of Tanks</title>
+        <link>https://worldoftanks.eu/en/news/</link>
+        <description>The latest news, updates, specials, and events for World of Tanks, the team-based, MMO tank battle game from Wargaming. Everything about WoT in one place.</description>
+        <language>en</language>
+        <pubDate>Fri, 02 Feb 2024 11:05:26 GMT</pubDate>
+        <image>
+            <url>https://worldoftanks.eu/static/5.132.2_d0fd33/portalnews/img/news.png</url>
+            <title>World of Tanks News | World of Tanks</title>
+            <link>https://worldoftanks.eu/en/news/</link>
+        </image>
+        <item>
+            <title>A Warrior&#39;s Path: Unleash the Power of Japanese Tanks With Special Bundles!</title>
+            <link>https://worldoftanks.eu/en/news/specials/a-warriors-path-sale-feb-2024/</link>
+            <description>Embark on an epic journey with the A Warrior's Path event, featuring exclusive bundle sales for the newly introduced Japanese heavy tanks.</description>
+            <guid isPermaLink="true">https://worldoftanks.eu/en/news/specials/a-warriors-path-sale-feb-2024/</guid>
+            <pubDate>Thu, 01 Feb 2024 09:00:00 GMT</pubDate>
+            <category>Specials</category>
+            <enclosure url="https://url1" length="1" type="image/jpeg" />
+            <enclosure url="https://url2" length="2" type="image/png" />
+            <enclosure url="https://url3" length="3" type="image/gif" />
+        </item>
+        <item>
+            <title>WoT Monthly: Valentine&#39;s Day and More in February 2024</title>
+            <link>https://worldoftanks.eu/en/news/general-news/wot-monthly-february-2024/</link>
+            <description>A quick look at World of Tanks events during the month of love!</description>
+            <guid isPermaLink="true">https://worldoftanks.eu/en/news/general-news/wot-monthly-february-2024/</guid>
+            <pubDate>Wed, 31 Jan 2024 14:00:00 GMT</pubDate>
+            <category>General News</category>
+            <enclosure url="https://url4" length="4" type="image/svg" />
+            <enclosure url="https://url5" length="5" type="image/webp" />
+        </item>
+
+    </channel>
+</rss>
