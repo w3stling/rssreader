@@ -2,8 +2,8 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-3.5.0-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.5.0/overview)
-[![Javadoc](https://img.shields.io/badge/javadoc-3.5.0-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.5.0)
+[![Download](https://img.shields.io/badge/download-3.6.0-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.6.0/overview)
+[![Javadoc](https://img.shields.io/badge/javadoc-3.6.0-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.6.0)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
@@ -38,8 +38,15 @@ Extract all items that contains the word football in the title.
 ```java
 RssReader reader = new RssReader();
 Stream<Item> rssFeed = reader.read(URL);
-List<Item> articles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("football")))
-                             .toList();
+List<Item> footballArticles = rssFeed.filter(i -> i.getTitle().equals(Optional.of("football")))
+                                     .toList();
+```
+
+### Read feed from a file
+```java
+InputStream file = new FileInputStream("Path to file");
+List<Item> items = new RssReader().read(file);
+                                  .toList();
 ```
 
 ### Read from multiple feeds
@@ -89,7 +96,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.5.0</version>
+            <version>3.6.0</version>
         </dependency>
     </dependencies>
     ...
@@ -100,7 +107,7 @@ Add dependency declaration:
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptasticsoftware:rssreader:3.5.0'
+    implementation 'com.apptasticsoftware:rssreader:3.6.0'
 }
 ```
 
@@ -124,7 +131,7 @@ License
 
     MIT License
     
-    Copyright (c) 2023, Apptastic Software
+    Copyright (c) 2024, Apptastic Software
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
@@ -145,7 +152,7 @@ License
     SOFTWARE.
 
 
-[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.5.0/overview
+[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.6.0/overview
 [2]: https://maven.apache.org
 [3]: https://gradle.org
 [4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
