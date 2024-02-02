@@ -206,7 +206,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("dc:creator", (i, v) -> Mapper.mapIfEmpty(v, i::getAuthor, i::setAuthor));
         itemTags.putIfAbsent("dc:date", (i, v) -> Mapper.mapIfEmpty(v, i::getPubDate, i::setPubDate));
 
-        onItemTags.put("enclosure", (i) -> i.addEnclosure(new Enclosure()));
+        onItemTags.put("enclosure", i -> i.addEnclosure(new Enclosure()));
     }
 
     /**
