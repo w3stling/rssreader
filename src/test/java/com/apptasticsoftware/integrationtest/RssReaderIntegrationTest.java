@@ -351,10 +351,10 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
+            assertThat(channel.getTitle(), is("Nyheter"));
             assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("https://digital.di.se/rss"));
+            assertThat(channel.getLink(), is("https://www.di.se/rss"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isEmpty());
@@ -519,8 +519,7 @@ class RssReaderIntegrationTest {
 
     @Test
     void testChannelExtension() throws IOException {
-        List<Item> items = new RssReader().addChannelExtension("syn:updatePeriod", Channel::addCategory)
-                                          .addChannelExtension("syn:updatePeriod", "href", Channel::addCategory)
+        List<Item> items = new RssReader().addChannelExtension("docs", Channel::addCategory)
                                           .read("https://lwn.net/headlines/rss")
                                           .collect(Collectors.toList());
 
