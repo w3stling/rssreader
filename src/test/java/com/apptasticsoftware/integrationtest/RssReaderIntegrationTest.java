@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
-import java.net.URI;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -351,10 +351,10 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Nyheter"));
+            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
             assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("https://www.di.se/rss"));
+            assertThat(channel.getLink(), is("https://digital.di.se/rss"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isEmpty());
