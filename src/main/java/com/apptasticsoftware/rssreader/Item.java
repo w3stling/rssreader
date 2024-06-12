@@ -46,6 +46,7 @@ public class Item implements Comparable<Item> {
     private Boolean isPermaLink;
     private String pubDate;
     private String comments;
+    private String image;
     private Enclosure enclosure;
     private final List<Enclosure> enclosures = new ArrayList<>();
     private Channel channel;
@@ -272,6 +273,22 @@ public class Item implements Comparable<Item> {
      */
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    /**
+     * Get image relating to the item.
+     * @return image url
+     */
+    public Optional<String> getImage() {
+        return Optional.ofNullable(image);
+    }
+
+    /**
+     * Set image relating to the item.
+     * @param image image url
+     */
+    public void setImage(String image) {
+        this.image = image;
     }
 
     /**
