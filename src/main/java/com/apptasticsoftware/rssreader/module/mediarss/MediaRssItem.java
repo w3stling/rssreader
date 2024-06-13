@@ -30,7 +30,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Class representing the Itunes item.
+ * Class representing the media rss item.
  */
 public class MediaRssItem extends Item {
     private MediaThumbnail mediaThumbnail;

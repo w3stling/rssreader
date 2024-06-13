@@ -30,7 +30,7 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import java.util.function.BiConsumer;
 
 /**
- * Class for reading podcast (itunes) feeds.
+ * Class for reading media rss feeds.
  */
 public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
