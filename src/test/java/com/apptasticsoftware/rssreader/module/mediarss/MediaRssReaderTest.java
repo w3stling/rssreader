@@ -20,7 +20,7 @@ class MediaRssReaderTest {
                 .sorted(ItemComparator.oldestItemFirst())
                 .collect(Collectors.toList());
 
-        assertEquals(9, res.size());
+        assertEquals(10, res.size());
     }
 
     @Test
