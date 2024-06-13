@@ -220,9 +220,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         enclosureAttributes.putIfAbsent("url", (i, v) -> i.getEnclosure().ifPresent(a -> a.setUrl(v)));
         enclosureAttributes.putIfAbsent("type", (i, v) -> i.getEnclosure().ifPresent(a -> a.setType(v)));
         enclosureAttributes.putIfAbsent("length", (i, v) -> i.getEnclosure().ifPresent(e -> mapLong(v, e::setLength)));
-
-        var mediaThumbnailAttributes = itemAttributes.computeIfAbsent("media:thumbnail", k -> new HashMap<>());
-        mediaThumbnailAttributes.putIfAbsent("url", Item::setImage);
     }
 
     /**

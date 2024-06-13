@@ -46,7 +46,6 @@ public class Item implements Comparable<Item> {
     private Boolean isPermaLink;
     private String pubDate;
     private String comments;
-    private String image;
     private Enclosure enclosure;
     private final List<Enclosure> enclosures = new ArrayList<>();
     private Channel channel;
@@ -276,22 +275,6 @@ public class Item implements Comparable<Item> {
     }
 
     /**
-     * Get image relating to the item.
-     * @return image url
-     */
-    public Optional<String> getImage() {
-        return Optional.ofNullable(image);
-    }
-
-    /**
-     * Set image relating to the item.
-     * @param image image url
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    /**
      * Get the enclosure of the item.
      *
      * @return enclosure
@@ -359,7 +342,6 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
                 Objects.equals(getComments(), item.getComments()) &&
-                Objects.equals(getImage(), item.getImage()) &&
                 getEnclosures().equals(item.getEnclosures()) &&
                 Objects.equals(getChannel(), item.getChannel());
     }
@@ -367,7 +349,7 @@ public class Item implements Comparable<Item> {
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
-                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getImage(), getEnclosures(), getChannel());
+                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getEnclosures(), getChannel());
     }
 
     /**
