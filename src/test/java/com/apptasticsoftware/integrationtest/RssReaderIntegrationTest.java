@@ -698,6 +698,12 @@ class RssReaderIntegrationTest {
         assertTrue(list.get(0).getCategories().isEmpty());
     }
 
+    @Test
+    void startWithWhitespaceAndMissingNamespace() {
+        var list = new RssReader().read(fromFile("starts-with-whitespace-and-missing-namespace.xml")).collect(Collectors.toList());
+        assertEquals(24, list.size());
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
