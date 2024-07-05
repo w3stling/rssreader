@@ -507,6 +507,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 xmlInFact.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
                 xmlInFact.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
                 xmlInFact.setProperty(XMLInputFactory.IS_COALESCING, true);
+                xmlInFact.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.FALSE);
 
                 reader = xmlInFact.createXMLStreamReader(is);
             }
