@@ -403,6 +403,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             isInitialized = true;
         }
 
+        inputStream = new BufferedInputStream(inputStream);
+        removeBadData(inputStream);
         var itemIterator = new RssItemIterator(inputStream);
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
                             .onClose(itemIterator::close);
@@ -465,21 +467,18 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         };
     }
 
-    private void removeBadData(InputStream inputStream) throws IOException {
-        inputStream.mark(2);
-        var firstChar = inputStream.read();
-
-        if (firstChar != 65279 && firstChar != 13 && firstChar != 10 && !Character.isWhitespace(firstChar)) {
-            inputStream.reset();
-        }
-        else if (firstChar == 13 || Character.isWhitespace(firstChar)) {
-            var secondChar = inputStream.read();
-
-            if (secondChar != 10 && !Character.isWhitespace(secondChar)) {
-                inputStream.reset();
-                inputStream.read();
+    private void removeBadData(InputStream inputStream) {
+        try {
+            inputStream.mark(128);
+            int count = 0;
+            int data = inputStream.read();
+            while (Character.isWhitespace(data)) {
+                data = inputStream.read();
+                ++count;
             }
-        }
+            inputStream.reset();
+            inputStream.skip(count);
+        } catch (Exception ignore) { }
     }
 
     class RssItemIterator implements Iterator<I> {
