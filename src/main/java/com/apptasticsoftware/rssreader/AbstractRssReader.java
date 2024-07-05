@@ -467,10 +467,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         };
     }
 
+    @SuppressWarnings({"java:S108", "java:S2674"})
     private void removeBadData(InputStream inputStream) {
         try {
             inputStream.mark(128);
-            int count = 0;
+            long count = 0;
             int data = inputStream.read();
             while (Character.isWhitespace(data)) {
                 data = inputStream.read();
@@ -478,7 +479,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
             inputStream.reset();
             inputStream.skip(count);
-        } catch (Exception ignore) { }
+        } catch (IOException ignore) { }
     }
 
     class RssItemIterator implements Iterator<I> {
