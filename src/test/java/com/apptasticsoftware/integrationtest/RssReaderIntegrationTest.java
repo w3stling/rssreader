@@ -32,6 +32,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+@SuppressWarnings("java:S5738")
 class RssReaderIntegrationTest {
 
     @Test
@@ -259,7 +260,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
-            //assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }

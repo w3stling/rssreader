@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
+@SuppressWarnings("java:S5738")
 class RssReaderTest {
 
     @Test
