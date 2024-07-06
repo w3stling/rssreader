@@ -152,8 +152,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     @SuppressWarnings("java:S1192")
     protected void registerChannelTags() {
-        channelTags.putIfAbsent("title", Channel::setTitle);
-        channelTags.putIfAbsent("description", Channel::setDescription);
+        channelTags.putIfAbsent("/feed/title", Channel::setTitle);
+        channelTags.putIfAbsent("/rss/channel/title", Channel::setTitle);
+        channelTags.putIfAbsent("/rss/channel/description", Channel::setDescription);
         channelTags.putIfAbsent("subtitle", Channel::setDescription);
         channelTags.putIfAbsent("link", Channel::setLink);
         channelTags.putIfAbsent("category", Channel::addCategory);
@@ -191,7 +192,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     protected void registerItemTags() {
         itemTags.putIfAbsent("guid", Item::setGuid);
         itemTags.putIfAbsent("id", Item::setGuid);
-        itemTags.putIfAbsent("title", Item::setTitle);
+        itemTags.putIfAbsent("/feed/entry/title", Item::setTitle);
+        itemTags.putIfAbsent("/rss/channel/item/title", Item::setTitle);
         itemTags.putIfAbsent("description", Item::setDescription);
         itemTags.putIfAbsent("summary", Item::setDescription);
         itemTags.putIfAbsent("content", Item::setDescription);

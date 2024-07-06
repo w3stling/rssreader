@@ -1,0 +1,33 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>AC Social</title>
+    <generator uri="http://tt-rss.org/">Tiny Tiny RSS/22.01-4a4928e (Unsupported)</generator>
+    <updated>2022-01-04T14:02:01+00:00</updated>
+    <id>https://reader.lanath.fr/public.php?op=rss&#38;id=-1027&#38;key=sso1m061d4298ba0860</id>
+    <link href="https://reader.lanath.fr/public.php?op=rss&#38;id=-1027&#38;key=sso1m061d4298ba0860" rel="self"/>
+    <link href="https://reader.lanath.fr" rel="alternate"/>
+    <entry>
+        <id>tag:reader.lanath.fr,2022-01-09:/1961725</id>
+        <link href="https://korben.info/timelapse-images-satellites.html" rel="alternate" type="text/html"/>
+        <title type="html">Créer un timelapse d’images satellites</title>
+        <summary type="html">
+            <![CDATA[ <p>Vous vous passionnez pour les images satellites et vous aimeriez bien faire un timelapse d&rsquo;un...</p> ]]>
+        </summary>
+        <content type="html">
+            <![CDATA[ <p><img src="https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN.webp" alt="" loading="lazy" srcset="https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN.webp 600w,https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN-300x200.webp 300w,https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN.webp 600w,https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN-300x200.webp 300w" sizes="(max-width: 600px) 100vw, 600px" referrerpolicy="no-referrer"></p> <p>Vous vous passionnez pour les images satellites et vous aimeriez bien faire un timelapse d&rsquo;une zone particuli&egrave;re de la plan&egrave;te pour montrer son &eacute;volution ?</p> <div><div></div> <div></div></div><p>Et bien avec <a href="https://streamlit.gishub.org/" target="_blank" rel="noopener noreferrer"><strong>Streamlit</strong></a> c&rsquo;est possible. Le principe est simple. Vous s&eacute;lectionnez une zone sur la carte, vous exportez cette zone dans un fichier json. Vous r&eacute;importez ensuite ce json, vous choisissez une collection d&rsquo;images satellites et vous cliquez sur le bouton &laquo;&nbsp;Submit&nbsp;&raquo;.</p> <p>Et voil&agrave;, vous aurez un joli GIF anim&eacute; ou MP4 &agrave; t&eacute;l&eacute;charger. Je vous laisse regarder les vid&eacute;os pour voir ce que &ccedil;a donne.</p> <figure><div> </div></figure><figure><div> </div></figure> ]]>
+        </content>
+        <updated>2022-01-09T08:00:00+00:00</updated>
+        <author>
+            <name>Korben</name>
+        </author>
+        <source>
+            <id>http://korben.info</id>
+            <link rel="self" href="http://korben.info"/>
+            <updated>2022-01-09T08:00:00+00:00</updated>
+            <title>Korben</title>
+        </source>
+        <category term="photos satellites"/>
+        <category term="service web"/>
+        <category term="timelapse"/>
+        <link rel="enclosure" type="" length="1" href="https://korben.info/app/uploads/2021/12/UPTVemppFhNYKNCZUZoDclEEhZ4j8uqN-150x150.webp"/>
+    </entry>
+</feed>
