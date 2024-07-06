@@ -178,6 +178,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("/rss/channel/image/description", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> i.setDescription(v)));
         channelTags.putIfAbsent("/rss/channel/image/height", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setHeight)));
         channelTags.putIfAbsent("/rss/channel/image/width", (C c, String v) -> createIfNullOptional(c::getImage, c::setImage, Image::new).ifPresent(i -> mapInteger(v, i::setWidth)));
+        channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
+        channelTags.putIfAbsent("dc:publisher", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
+        channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
     }
 
     /**
@@ -210,6 +213,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("comments", Item::setComments);
         itemTags.putIfAbsent("dc:creator", (i, v) -> Mapper.mapIfEmpty(v, i::getAuthor, i::setAuthor));
         itemTags.putIfAbsent("dc:date", (i, v) -> Mapper.mapIfEmpty(v, i::getPubDate, i::setPubDate));
+        itemTags.putIfAbsent("dc:identifier", (i, v) -> Mapper.mapIfEmpty(v, i::getGuid, i::setGuid));
+        itemTags.putIfAbsent("dc:title", (i, v) -> Mapper.mapIfEmpty(v, i::getTitle, i::setTitle));
 
         onItemTags.put("enclosure", i -> i.addEnclosure(new Enclosure()));
     }
