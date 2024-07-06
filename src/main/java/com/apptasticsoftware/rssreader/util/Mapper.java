@@ -67,7 +67,7 @@ public final class Mapper {
      * @param <T> type
      */
     public static <T> void mapIfEmpty(String text, Supplier<T> getter, Consumer<String> setter) {
-        if ((getter.get() == null || getter.get() == Optional.empty()) && text != null && !text.isBlank()) {
+        if ((getter.get() == null || "".equals(getter.get()) || getter.get() == Optional.empty()) && text != null && !text.isBlank()) {
             setter.accept(text);
         }
     }

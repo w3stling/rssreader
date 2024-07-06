@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns="http://purl.org/rss/1.0/"
+         xmlns:cc="http://web.resource.org/cc/"
+         xmlns:content="http://purl.org/rss/1.0/modules/content/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/">
+    <channel rdf:about="https://www.tandfonline.com/loi/wjwl20?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>tandf: Journal of Web Librarianship: Table of Contents</title>
+        <description>Table of Contents for Journal of Web Librarianship. List of articles from both the latest and ahead of print issues.</description>
+        <link>https://www.tandfonline.com/loi/wjwl20?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <dc:title>tandf: Journal of Web Librarianship: Table of Contents</dc:title>
+        <dc:publisher>tandf</dc:publisher>
+        <dc:language>en-US</dc:language>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <items>
+            <rdf:Seq>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326687?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326688?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327822?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327879?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327877?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364324?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364323?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364328?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+                <rdf:li rdf:resource="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2368111?ai=1dl&amp;mi=el63dh&amp;af=R"/>
+            </rdf:Seq>
+        </items>
+    </channel>
+    <image rdf:about="https://www.tandfonline.com/cms/asset/66f7625d-e646-4c24-a36d-18dcf406d2ad/default_cover.jpg">
+        <title>Journal of Web Librarianship</title>
+        <url>https://www.tandfonline.com/cms/asset/66f7625d-e646-4c24-a36d-18dcf406d2ad/default_cover.jpg</url>
+        <link>https://www.tandfonline.com/loi/wjwl20?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+    </image>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326687?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>I Can’t Get No Satis-Searching: Reassessing Discovery Layers in Academic Libraries Journal of Web Librarianship</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326687?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>&lt;a href="/toc/wjwl20/18/1"&gt;Volume 18, Issue 1&lt;/a&gt;, January-March 2024, Page 1-14&lt;br/&gt;. &lt;br/&gt;</content:encoded>
+        <description>Volume 18, Issue 1, January-March 2024, Page 1-14&lt;br/&gt;. &lt;br/&gt;</description>
+        <dc:title>I Can’t Get No Satis-Searching: Reassessing Discovery Layers in Academic Libraries Journal of Web Librarianship</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2326687</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-04-26T05:36:56Z</dc:date>
+        <dc:creator>Richard Wisneski Miami University, Oxford, Ohio, USA</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:volume>18</prism:volume>
+        <prism:number>1</prism:number>
+        <prism:startingPage>1</prism:startingPage>
+        <prism:endingPage>14</prism:endingPage>
+        <prism:coverDate>2024-01-02T08:00:00Z</prism:coverDate>
+        <prism:coverDisplayDate>2024-01-02T08:00:00Z</prism:coverDisplayDate>
+        <prism:doi>10.1080/19322909.2024.2326687</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326687?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326688?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Press Pause on the Pandemic: Using Design Thinking to Make Decisions in High Pressure Situations</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326688?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>&lt;a href="/toc/wjwl20/18/1"&gt;Volume 18, Issue 1&lt;/a&gt;, January-March 2024, Page 15-31&lt;br/&gt;. &lt;br/&gt;</content:encoded>
+        <description>Volume 18, Issue 1, January-March 2024, Page 15-31&lt;br/&gt;. &lt;br/&gt;</description>
+        <dc:title>Press Pause on the Pandemic: Using Design Thinking to Make Decisions in High Pressure Situations</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2326688</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-05-07T12:15:53Z</dc:date>
+        <dc:creator>Christopher Jimenez Associate Librarian</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:volume>18</prism:volume>
+        <prism:number>1</prism:number>
+        <prism:startingPage>15</prism:startingPage>
+        <prism:endingPage>31</prism:endingPage>
+        <prism:coverDate>2024-01-02T08:00:00Z</prism:coverDate>
+        <prism:coverDisplayDate>2024-01-02T08:00:00Z</prism:coverDisplayDate>
+        <prism:doi>10.1080/19322909.2024.2326688</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2326688?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327822?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Intersections of Open Educational Resources and Information Literacy</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327822?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>&lt;a href="/toc/wjwl20/18/1"&gt;Volume 18, Issue 1&lt;/a&gt;, January-March 2024, Page 32-33&lt;br/&gt;. &lt;br/&gt;</content:encoded>
+        <description>Volume 18, Issue 1, January-March 2024, Page 32-33&lt;br/&gt;. &lt;br/&gt;</description>
+        <dc:title>Intersections of Open Educational Resources and Information Literacy</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2327822</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-04-05T03:11:33Z</dc:date>
+        <dc:creator>Steve Brantley Professor of Library Services, Eastern Illinois University, Charleston, IL, USA</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:volume>18</prism:volume>
+        <prism:number>1</prism:number>
+        <prism:startingPage>32</prism:startingPage>
+        <prism:endingPage>33</prism:endingPage>
+        <prism:coverDate>2024-01-02T08:00:00Z</prism:coverDate>
+        <prism:coverDisplayDate>2024-01-02T08:00:00Z</prism:coverDisplayDate>
+        <prism:doi>10.1080/19322909.2024.2327822</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327822?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327879?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Copyright: Best Practices for Academic Libraries</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327879?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>&lt;a href="/toc/wjwl20/18/1"&gt;Volume 18, Issue 1&lt;/a&gt;, January-March 2024, Page 34-34&lt;br/&gt;. &lt;br/&gt;</content:encoded>
+        <description>Volume 18, Issue 1, January-March 2024, Page 34-34&lt;br/&gt;. &lt;br/&gt;</description>
+        <dc:title>Copyright: Best Practices for Academic Libraries</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2327879</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-04-17T10:15:00Z</dc:date>
+        <dc:creator>Bradford Lee Eden Independent Scholar and Academic Librarian, Philadelphia, Pennsylvania</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:volume>18</prism:volume>
+        <prism:number>1</prism:number>
+        <prism:startingPage>34</prism:startingPage>
+        <prism:endingPage>34</prism:endingPage>
+        <prism:coverDate>2024-01-02T08:00:00Z</prism:coverDate>
+        <prism:coverDisplayDate>2024-01-02T08:00:00Z</prism:coverDisplayDate>
+        <prism:doi>10.1080/19322909.2024.2327879</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327879?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327877?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Sinclair, S., &amp; Rockwell. G. 2016. Voyant Tools. http://voyant-tools.org/</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327877?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>&lt;a href="/toc/wjwl20/18/1"&gt;Volume 18, Issue 1&lt;/a&gt;, January-March 2024, Page 35-37&lt;br/&gt;. &lt;br/&gt;</content:encoded>
+        <description>Volume 18, Issue 1, January-March 2024, Page 35-37&lt;br/&gt;. &lt;br/&gt;</description>
+        <dc:title>Sinclair, S., &amp; Rockwell. G. 2016. Voyant Tools. http://voyant-tools.org/</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2327877</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-04-30T12:15:13Z</dc:date>
+        <dc:creator>Aida Marissa Smith Clinical Informationist/Medical Librarian, Ascension Health, Nursing Research and Quality, St. Louis, MO</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:volume>18</prism:volume>
+        <prism:number>1</prism:number>
+        <prism:startingPage>35</prism:startingPage>
+        <prism:endingPage>37</prism:endingPage>
+        <prism:coverDate>2024-01-02T08:00:00Z</prism:coverDate>
+        <prism:coverDisplayDate>2024-01-02T08:00:00Z</prism:coverDisplayDate>
+        <prism:doi>10.1080/19322909.2024.2327877</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2327877?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364324?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Unlocking the Future: Exploring Librarian’s Perspectives and Readiness for Artificial Intelligence Integration in Eswatini Libraries</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364324?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>. &lt;br/&gt;</content:encoded>
+        <description>. &lt;br/&gt;</description>
+        <dc:title>Unlocking the Future: Exploring Librarian’s Perspectives and Readiness for Artificial Intelligence Integration in Eswatini Libraries</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2364324</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-07-01T10:29:47Z</dc:date>
+        <dc:creator>Zamokuhle Hlatshwako Vusi Tsabedze Department of Computer Science, University of Eswatini, Kwaluseni</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:startingPage>1</prism:startingPage>
+        <prism:endingPage>20</prism:endingPage>
+        <prism:doi>10.1080/19322909.2024.2364324</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364324?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364323?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Web metrics for library and information professionals</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364323?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>. &lt;br/&gt;</content:encoded>
+        <description>. &lt;br/&gt;</description>
+        <dc:title>Web metrics for library and information professionals</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2364323</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-07-01T07:21:14Z</dc:date>
+        <dc:creator>Bradford Lee Eden </dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:startingPage>1</prism:startingPage>
+        <prism:endingPage>2</prism:endingPage>
+        <prism:doi>10.1080/19322909.2024.2364323</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364323?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364328?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>Knowledge as a feeling: How neuroscience and psychology impact human information behavior</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364328?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>. &lt;br/&gt;</content:encoded>
+        <description>. &lt;br/&gt;</description>
+        <dc:title>Knowledge as a feeling: How neuroscience and psychology impact human information behavior</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2364328</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-07-01T07:29:36Z</dc:date>
+        <dc:creator>Elizabeth Fronk Collection Development Librarian, Kolwyck Library and Information Commons, Chattanooga State Community College, Chattanooga, Tennessee, USA</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:startingPage>1</prism:startingPage>
+        <prism:endingPage>2</prism:endingPage>
+        <prism:doi>10.1080/19322909.2024.2364328</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2364328?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+    <item rdf:about="https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2368111?ai=1dl&amp;mi=el63dh&amp;af=R">
+        <title>The scholarly communication handbook: From research dissemination to societal impact</title>
+        <link>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2368111?ai=1dl&amp;mi=el63dh&amp;af=R</link>
+        <content:encoded>. &lt;br/&gt;</content:encoded>
+        <description>. &lt;br/&gt;</description>
+        <dc:title>The scholarly communication handbook: From research dissemination to societal impact</dc:title>
+        <dc:identifier>doi:10.1080/19322909.2024.2368111</dc:identifier>
+        <dc:source>Journal of Web Librarianship</dc:source>
+        <dc:date>2024-07-01T07:31:26Z</dc:date>
+        <dc:creator>Aida Marissa Smith Nursing Quality, Regulatory, and Research, St. Louis, MO</dc:creator>
+        <prism:publicationName>Journal of Web Librarianship</prism:publicationName>
+        <prism:startingPage>1</prism:startingPage>
+        <prism:endingPage>2</prism:endingPage>
+        <prism:doi>10.1080/19322909.2024.2368111</prism:doi>
+        <prism:url>https://www.tandfonline.com/doi/full/10.1080/19322909.2024.2368111?ai=1dl&amp;mi=el63dh&amp;af=R</prism:url>
+        <prism:copyright/>
+    </item>
+</rdf:RDF>

@@ -732,6 +732,17 @@ class RssReaderIntegrationTest {
         assertEquals("NYT > image description", item.getChannel().getImage().map(image -> image.getDescription().orElse("")).orElse(""));
     }
 
+    @Test
+    void readRdfFeed() {
+        var list = new RssReader().read(fromFile("rdf-feed.xml")).collect(Collectors.toList());
+        assertEquals(9, list.size());
+        var item = list.get(0);
+        assertEquals("tandf: Journal of Web Librarianship: Table of Contents", item.getChannel().getTitle());
+        assertEquals("Table of Contents for Journal of Web Librarianship. List of articles from both the latest and ahead of print issues.", item.getChannel().getDescription());
+        assertEquals("I Can’t Get No Satis-Searching: Reassessing Discovery Layers in Academic Libraries Journal of Web Librarianship", item.getTitle().orElse(""));
+        assertEquals("Volume 18, Issue 1, January-March 2024, Page 1-14<br/>. <br/>", item.getDescription().orElse(""));
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
