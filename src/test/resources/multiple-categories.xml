@@ -2,7 +2,7 @@
     <channel>
         <title>NYT > Top Stories</title>
         <link>https://www.nytimes.com</link>
-        <description/>
+        <description>NYT > channel description</description>>
         <language>en-us</language>
         <copyright>Copyright 2022 The New York Times Company</copyright>
         <lastBuildDate>Sat, 03 Dec 2022 11:41:48 +0000</lastBuildDate>
@@ -10,7 +10,8 @@
         <category>News</category>
         <category>China</category>
         <image>
-            <title>NYT > Top Stories</title>
+            <title>NYT > Top Stories image title</title>
+            <description>NYT > image description</description>
             <url>https://static01.nyt.com/images/misc/NYT_logo_rss_250x40.png</url>
             <link>https://www.nytimes.com</link>
         </image>

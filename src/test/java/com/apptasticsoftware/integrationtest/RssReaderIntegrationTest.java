@@ -704,6 +704,34 @@ class RssReaderIntegrationTest {
         assertEquals(24, list.size());
     }
 
+    @Test
+    void multipleItemTitleOnDifferentLevels() {
+        var list = new RssReader().read(fromFile("multiple-title-on-different-levels.xml")).collect(Collectors.toList());
+        assertEquals(1, list.size());
+        var item = list.get(0);
+        assertEquals("AC Social", item.getChannel().getTitle());
+        assertEquals("Créer un timelapse d’images satellites", item.getTitle().orElse(""));
+    }
+
+    @Test
+    void multipleChanelTitleOnDifferentLevels() {
+        var list = new RssReader().read(fromFile("multiple-categories.xml")).collect(Collectors.toList());
+        assertEquals(1, list.size());
+        var item = list.get(0);
+        assertEquals("NYT > Top Stories", item.getChannel().getTitle());
+        assertEquals("NYT > Top Stories image title", item.getChannel().getImage().map(Image::getTitle).orElse(""));
+        assertEquals("After Fanning Covid Fears, China Must Now Try to Allay Them", item.getTitle().orElse(""));
+    }
+
+    @Test
+    void multipleChanelDescriptionOnDifferentLevels() {
+        var list = new RssReader().read(fromFile("multiple-categories.xml")).collect(Collectors.toList());
+        assertEquals(1, list.size());
+        var item = list.get(0);
+        assertEquals("NYT > channel description", item.getChannel().getDescription());
+        assertEquals("NYT > image description", item.getChannel().getImage().map(image -> image.getDescription().orElse("")).orElse(""));
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
