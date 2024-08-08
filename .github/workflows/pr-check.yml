@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Publish Test Results
+      - name: Publish Test Results 🚦
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
