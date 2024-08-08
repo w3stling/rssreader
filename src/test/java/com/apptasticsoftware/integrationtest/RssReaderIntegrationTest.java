@@ -745,6 +745,40 @@ class RssReaderIntegrationTest {
         assertEquals("doi:10.1080/19322909.2024.2326687", item.getGuid().orElse(""));
     }
 
+    @Test
+    void atomFeedWithCategory() {
+        var list = new RssReader().read(fromFile("atom-feed-category.xml"))
+                .collect(Collectors.toList());
+        assertEquals(3, list.size());
+
+        // Item 1
+        assertEquals(3, list.get(0).getChannel().getCategories().size());
+        assertEquals("Programming", list.get(0).getChannel().getCategories().get(0));
+        assertEquals("Computer", list.get(0).getChannel().getCategories().get(1));
+        assertEquals("Developer", list.get(0).getChannel().getCategories().get(2));
+        assertEquals(2, list.get(0).getCategories().size());
+        assertEquals("Microsoft", list.get(0).getCategories().get(0));
+        assertEquals("Azure", list.get(0).getCategories().get(1));
+
+        // Item 2
+        assertEquals(3, list.get(1).getChannel().getCategories().size());
+        assertEquals("Programming", list.get(1).getChannel().getCategories().get(0));
+        assertEquals("Computer", list.get(1).getChannel().getCategories().get(1));
+        assertEquals("Developer", list.get(1).getChannel().getCategories().get(2));
+        assertEquals(1, list.get(1).getCategories().size());
+        assertEquals("Microsoft", list.get(1).getCategories().get(0));
+
+        // Item 3
+        assertEquals(3, list.get(2).getChannel().getCategories().size());
+        assertEquals("Programming", list.get(2).getChannel().getCategories().get(0));
+        assertEquals("Computer", list.get(2).getChannel().getCategories().get(1));
+        assertEquals("Developer", list.get(2).getChannel().getCategories().get(2));
+        assertEquals(3, list.get(2).getCategories().size());
+        assertEquals("Microsoft", list.get(2).getCategories().get(0));
+        assertEquals("API", list.get(2).getCategories().get(1));
+        assertEquals("Azure", list.get(2).getCategories().get(2));
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
