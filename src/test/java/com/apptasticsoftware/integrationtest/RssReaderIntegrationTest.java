@@ -618,18 +618,30 @@ class RssReaderIntegrationTest {
         assertEquals("Example Toolkit", items.get(0).getChannel().getGenerator().orElse(null));
         assertEquals("2005-07-31T12:29:29Z", items.get(0).getChannel().getLastBuildDate().orElse(null));
 
+        assertEquals("Atom draft-07 snapshot", items.get(0).getTitle().orElse(null));
+        assertNull(items.get(1).getAuthor().orElse(null));
+        assertEquals("http://example.org/audio/ph34r_my_podcast.mp3", items.get(0).getLink().orElse(null));
+        assertEquals("tag:example.org,2003:3.2397", items.get(0).getGuid().orElse(null));
+        assertEquals("2003-12-13T08:29:29-04:00", items.get(0).getPubDate().orElse(null));
+        assertEquals("2005-07-31T12:29:29Z", items.get(0).getUpdated().orElse(null));
+        assertEquals(211, items.get(1).getDescription().orElse("").length());
+
         assertEquals("Atom-Powered Robots Run Amok", items.get(1).getTitle().orElse(null));
         assertNull(items.get(1).getAuthor().orElse(null));
         assertEquals("http://example.org/2003/12/13/atom03", items.get(1).getLink().orElse(null));
         assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a", items.get(1).getGuid().orElse(null));
         assertEquals("2003-12-13T18:30:02Z", items.get(1).getPubDate().orElse(null));
+        assertEquals("2003-12-13T18:30:02Z", items.get(1).getUpdated().orElse(null));
         assertEquals(211, items.get(1).getDescription().orElse("").length());
 
         assertEquals("Atom-Powered Robots Run Amok 2", items.get(2).getTitle().orElse(null));
         assertNull(items.get(2).getAuthor().orElse(null));
         assertEquals("http://example.org/2003/12/13/atom04", items.get(2).getLink().orElse(null));
         assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b", items.get(2).getGuid().orElse(null));
-        assertEquals("2003-12-13T18:30:01Z", items.get(2).getPubDate().orElse(null));
+        assertEquals("2003-12-13T09:28:28-04:00", items.get(2).getPubDate().orElse(null));
+        assertEquals(1071322108, items.get(2).getPubDateZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
+        assertEquals("2003-12-13T18:30:01Z", items.get(2).getUpdated().orElse(null));
+        assertEquals(1071340201, items.get(2).getUpdatedZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
         assertEquals(47, items.get(2).getDescription().orElse("").length());
     }
 
