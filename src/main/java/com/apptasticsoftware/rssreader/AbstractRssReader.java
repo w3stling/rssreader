@@ -189,6 +189,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected void registerChannelAttributes() {
         channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
+        channelAttributes.computeIfAbsent("category", k -> new HashMap<>()).putIfAbsent("term", Channel::addCategory);
     }
 
     /**
@@ -227,6 +228,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     protected void registerItemAttributes() {
         itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).putIfAbsent("href", Item::setLink);
         itemAttributes.computeIfAbsent("guid", k -> new HashMap<>()).putIfAbsent("isPermaLink", (item, value) -> item.setIsPermaLink(Boolean.parseBoolean(value)) );
+        itemAttributes.computeIfAbsent("category", k -> new HashMap<>()).putIfAbsent("term", Item::addCategory);
 
         var enclosureAttributes = itemAttributes.computeIfAbsent("enclosure", k -> new HashMap<>());
         enclosureAttributes.putIfAbsent("url", (item, value) -> item.getEnclosure().ifPresent(a -> a.setUrl(value)));
