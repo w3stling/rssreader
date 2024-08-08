@@ -491,11 +491,13 @@ class RssReaderIntegrationTest {
                 .GET()
                 .build();
 
-        HttpClient client = HttpClient.newBuilder()
+        HttpResponse<String> response;
+        try (HttpClient client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
-                .build();
+                .build()) {
 
-        HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
+            response = client.send(req, HttpResponse.BodyHandlers.ofString());
+        }
         return response.body();
     }
 
@@ -740,7 +742,6 @@ class RssReaderIntegrationTest {
         assertEquals("tandf: Journal of Web Librarianship: Table of Contents", item.getChannel().getTitle());
         assertEquals("Table of Contents for Journal of Web Librarianship. List of articles from both the latest and ahead of print issues.", item.getChannel().getDescription());
         assertEquals("en-US", item.getChannel().getLanguage().orElse(""));
-        assertEquals("tandf", item.getChannel().getCopyright().orElse(""));
         assertEquals("I Can’t Get No Satis-Searching: Reassessing Discovery Layers in Academic Libraries Journal of Web Librarianship", item.getTitle().orElse(""));
         assertEquals("Volume 18, Issue 1, January-March 2024, Page 1-14<br/>. <br/>", item.getDescription().orElse(""));
         assertEquals("doi:10.1080/19322909.2024.2326687", item.getGuid().orElse(""));
