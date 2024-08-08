@@ -486,18 +486,16 @@ class RssReaderIntegrationTest {
     }
 
     private String getRssFeedAsString(String url) throws IOException, InterruptedException {
-        HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+        var req = HttpRequest.newBuilder(URI.create(url))
                 .timeout(Duration.ofSeconds(25))
                 .GET()
                 .build();
 
-        HttpResponse<String> response;
-        try (HttpClient client = HttpClient.newBuilder()
+        var client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
-                .build()) {
+                .build();
 
-            response = client.send(req, HttpResponse.BodyHandlers.ofString());
-        }
+        var response = client.send(req, HttpResponse.BodyHandlers.ofString());
         return response.body();
     }
 
