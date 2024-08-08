@@ -179,8 +179,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("/rss/channel/image/height", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setHeight)));
         channelTags.putIfAbsent("/rss/channel/image/width", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setWidth)));
         channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
-        channelTags.putIfAbsent("dc:publisher", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
+        channelTags.putIfAbsent("dc:rights", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
+        channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
     }
 
     /**
@@ -209,18 +210,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("category", Item::addCategory);
         itemTags.putIfAbsent("pubDate", Item::setPubDate);
         itemTags.putIfAbsent("published", Item::setPubDate);
-        itemTags.putIfAbsent("updated", (item, value) -> { if (item.getPubDate().isEmpty()) item.setPubDate(value); });
+        itemTags.putIfAbsent("updated", (item, value) -> Mapper.mapIfEmpty(value, item::getPubDate, item::setPubDate));
         itemTags.putIfAbsent("comments", Item::setComments);
         itemTags.putIfAbsent("dc:creator", (item, value) -> Mapper.mapIfEmpty(value, item::getAuthor, item::setAuthor));
         itemTags.putIfAbsent("dc:date", (item, value) -> Mapper.mapIfEmpty(value, item::getPubDate, item::setPubDate));
         itemTags.putIfAbsent("dc:identifier", (item, value) -> Mapper.mapIfEmpty(value, item::getGuid, item::setGuid));
         itemTags.putIfAbsent("dc:title", (item, value) -> Mapper.mapIfEmpty(value, item::getTitle, item::setTitle));
+        itemTags.putIfAbsent("dc:description", (item, value) -> Mapper.mapIfEmpty(value, item::getDescription, item::setDescription));
 
         onItemTags.put("enclosure", item -> item.addEnclosure(new Enclosure()));
     }
 
     /**
-     * Register itam attributes for mapping to item object fields
+     * Register item attributes for mapping to item object fields
      */
     protected void registerItemAttributes() {
         itemAttributes.computeIfAbsent("link", k -> new HashMap<>()).putIfAbsent("href", Item::setLink);

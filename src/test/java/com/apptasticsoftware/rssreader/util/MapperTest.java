@@ -3,11 +3,17 @@ package com.apptasticsoftware.rssreader.util;
 import com.apptasticsoftware.rssreader.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+
 import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MapperTest {
 
@@ -25,6 +31,14 @@ class MapperTest {
         Item item = new Item(new DateTime());
         Mapper.mapBoolean(falseValue, item::setIsPermaLink);
         assertEquals(false, item.getIsPermaLink().orElse(null));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Bad value", ""})
+    void testMapBooleanBadValue(String falseValue) {
+        Item item = new Item(new DateTime());
+        Mapper.mapBoolean(falseValue, item::setIsPermaLink);
+        assertNull(item.getIsPermaLink().orElse(null));
     }
 
     @ParameterizedTest
@@ -78,6 +92,74 @@ class MapperTest {
         Mapper.createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger("100", i::setWidth));
         assertEquals(100, channel.getImage().flatMap(Image::getWidth).orElse(0));
         assertEquals(200, channel.getImage().flatMap(Image::getHeight).orElse(0));
+    }
+
+    @Test
+    void testBadNumberLogging() {
+        var logger = Logger.getLogger("com.apptasticsoftware.rssreader.util");
+        logger.setLevel(Level.ALL);
+
+        var image = new Image();
+        Mapper.mapInteger("-", image::setHeight);
+        assertEquals(Optional.empty(), image.getHeight());
+
+        logger.setLevel(Level.OFF);
+        Mapper.mapInteger("-", image::setHeight);
+        assertEquals(Optional.empty(), image.getHeight());
+
+        Mapper.mapInteger("", image::setHeight);
+        assertEquals(Optional.empty(), image.getHeight());
+
+        Mapper.mapInteger(null, image::setHeight);
+        assertEquals(Optional.empty(), image.getHeight());
+    }
+
+    @ParameterizedTest
+    @MethodSource("mapIfEmptyParameters")
+    void testMapIfEmpty(TestObject testObject, String value, String expected) {
+        Mapper.mapIfEmpty(value, testObject::getText, testObject::setText);
+        assertEquals(expected, testObject.getText());
+    }
+
+    @ParameterizedTest
+    @MethodSource("mapIfEmptyParameters")
+    void testOptionalMapIfEmpty(TestObject testObject, String value, String expected) {
+        Mapper.mapIfEmpty(value, testObject::getOptionalText, testObject::setText);
+        assertEquals(expected, testObject.getText());
+    }
+
+    private static Stream<Arguments> mapIfEmptyParameters() {
+        return Stream.of(
+                Arguments.of(new TestObject(null), "value", "value"),
+                Arguments.of(new TestObject(""), "value", "value"),
+                Arguments.of(new TestObject(null), "", null),
+                Arguments.of(new TestObject(null), null, null),
+                Arguments.of(new TestObject(""), "", ""),
+                Arguments.of(new TestObject(""), null, ""),
+                Arguments.of(new TestObject("value"), "other value", "value")
+        );
+    }
+
+
+    static class TestObject {
+        private String text;
+
+        public TestObject(String value) {
+            text = value;
+        }
+
+        public void setText(String value) {
+            text = value;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public Optional<String> getOptionalText() {
+            return Optional.ofNullable(text);
+        }
+
     }
 
 }

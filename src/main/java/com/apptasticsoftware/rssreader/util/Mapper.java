@@ -48,7 +48,7 @@ public final class Mapper {
     }
 
     private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
-        if (text != null && !text.isBlank()) {
+        if (!isNullOrEmpty(text)) {
             try {
                 func.accept(convert.apply(text));
             } catch (NumberFormatException e) {
@@ -67,7 +67,7 @@ public final class Mapper {
      * @param <T> type
      */
     public static <T> void mapIfEmpty(String text, Supplier<T> getter, Consumer<String> setter) {
-        if ((getter.get() == null || "".equals(getter.get()) || getter.get() == Optional.empty()) && text != null && !text.isBlank()) {
+        if (isNullOrEmpty(getter) && !isNullOrEmpty(text)) {
             setter.accept(text);
         }
     }
@@ -100,5 +100,21 @@ public final class Mapper {
             instance = Optional.of(newInstance);
         }
         return instance;
+    }
+
+    private static <T> boolean isNullOrEmpty(Supplier<T> getter) {
+        return getter.get() == null ||
+                "".equals(getter.get()) ||
+                getter.get() == Optional.empty() ||
+                getter.get() instanceof Optional<?> &&
+                        ((Optional<?>) getter.get())
+                                .filter(String.class::isInstance)
+                                .map(String.class::cast)
+                                .map(String::isBlank)
+                                .orElse(false);
+    }
+
+    private static boolean isNullOrEmpty(String text) {
+        return text == null || text.isBlank();
     }
 }
