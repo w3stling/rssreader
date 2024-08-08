@@ -209,7 +209,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIsPermaLink()" class="member-name-link">getIsPermaLink</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
- it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+ it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
  item described by the item element.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
@@ -231,6 +231,16 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTitle()" class="member-name-link">getTitle</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the title of the item.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUpdated()" class="member-name-link">getUpdated</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get a string that indicates when the item was updated.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUpdatedZonedDateTime()" class="member-name-link">getUpdatedZonedDateTime</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get a ZonedDateTime that indicates when the item was updated.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
@@ -276,7 +286,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIsPermaLink(boolean)" class="member-name-link">setIsPermaLink</a><wbr>(boolean&nbsp;isPermaLink)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
- it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+ it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
  item described by the item element.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
@@ -293,6 +303,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTitle(java.lang.String)" class="member-name-link">setTitle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set the title of the item.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUpdated(java.lang.String)" class="member-name-link">setUpdated</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;updated)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Set a string that indicates when the item was updated.</div>
 </div>
 </div>
 </div>
@@ -513,7 +528,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <h3>getIsPermaLink</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt;</span>&nbsp;<span class="element-name">getIsPermaLink</span>()</div>
 <div class="block">If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
- it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+ it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
  item described by the item element.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -526,7 +541,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <h3>setIsPermaLink</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setIsPermaLink</span><wbr><span class="parameters">(boolean&nbsp;isPermaLink)</span></div>
 <div class="block">If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
- it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+ it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
  item described by the item element.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -561,6 +576,39 @@ implements <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base
 <h3>getPubDateZonedDateTime</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&gt;</span>&nbsp;<span class="element-name">getPubDateZonedDateTime</span>()</div>
 <div class="block">Get a ZonedDateTime that indicates when the item was published.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>publication date</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getUpdated()">
+<h3>getUpdated</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getUpdated</span>()</div>
+<div class="block">Get a string that indicates when the item was updated.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>updated date</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setUpdated(java.lang.String)">
+<h3>setUpdated</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setUpdated</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;updated)</span></div>
+<div class="block">Set a string that indicates when the item was updated.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>updated</code> - updated date</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getUpdatedZonedDateTime()">
+<h3>getUpdatedZonedDateTime</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/ZonedDateTime.html" title="class or interface in java.time" class="external-link">ZonedDateTime</a>&gt;</span>&nbsp;<span class="element-name">getUpdatedZonedDateTime</span>()</div>
+<div class="block">Get a ZonedDateTime that indicates when the item was updated.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>publication date</dd>
