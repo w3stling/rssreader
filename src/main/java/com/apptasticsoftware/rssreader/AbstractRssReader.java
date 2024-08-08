@@ -211,7 +211,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("category", Item::addCategory);
         itemTags.putIfAbsent("pubDate", Item::setPubDate);
         itemTags.putIfAbsent("published", Item::setPubDate);
-        itemTags.putIfAbsent("updated", (item, value) -> Mapper.mapIfEmpty(value, item::getPubDate, item::setPubDate));
+        itemTags.putIfAbsent("updated", (item, value) -> {
+            item.setUpdated(value);
+            Mapper.mapIfEmpty(value, item::getPubDate, item::setPubDate);
+        });
         itemTags.putIfAbsent("comments", Item::setComments);
         itemTags.putIfAbsent("dc:creator", (item, value) -> Mapper.mapIfEmpty(value, item::getAuthor, item::setAuthor));
         itemTags.putIfAbsent("dc:date", (item, value) -> Mapper.mapIfEmpty(value, item::getPubDate, item::setPubDate));

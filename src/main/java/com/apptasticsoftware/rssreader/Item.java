@@ -45,6 +45,7 @@ public class Item implements Comparable<Item> {
     private String guid;
     private Boolean isPermaLink;
     private String pubDate;
+    private String updated;
     private String comments;
     private Enclosure enclosure;
     private final List<Enclosure> enclosures = new ArrayList<>();
@@ -211,7 +212,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
-     * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+     * it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
      * item described by the item element.
      *
      * @return permanent link
@@ -222,7 +223,7 @@ public class Item implements Comparable<Item> {
 
     /**
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
-     * it is a permalink to the item, that is, a url that can be opened in a Web browser, that points to the full
+     * it is a permalink to the item, that is, an url that can be opened in a Web browser, that points to the full
      * item described by the item element.
      *
      * @param isPermaLink is perma link
@@ -256,6 +257,33 @@ public class Item implements Comparable<Item> {
      */
     public Optional<ZonedDateTime> getPubDateZonedDateTime() {
         return getPubDate().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get a string that indicates when the item was updated.
+     *
+     * @return updated date
+     */
+    public Optional<String> getUpdated() {
+        return Optional.ofNullable(updated);
+    }
+
+    /**
+     * Set a string that indicates when the item was updated.
+     *
+     * @param updated updated date
+     */
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was updated.
+     *
+     * @return publication date
+     */
+    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
+        return getUpdated().map(dateTimeParser::parse);
     }
 
     /**
@@ -341,6 +369,7 @@ public class Item implements Comparable<Item> {
                 Objects.equals(getGuid(), item.getGuid()) &&
                 Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
                 Objects.equals(getPubDate(), item.getPubDate()) &&
+                Objects.equals(getUpdated(), item.getUpdated()) &&
                 Objects.equals(getComments(), item.getComments()) &&
                 getEnclosures().equals(item.getEnclosures()) &&
                 Objects.equals(getChannel(), item.getChannel());
@@ -349,7 +378,7 @@ public class Item implements Comparable<Item> {
     @Override
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
-                getGuid(), getIsPermaLink(), getPubDate(), getComments(), getEnclosures(), getChannel());
+                getGuid(), getIsPermaLink(), getPubDate(), getUpdated(), getComments(), getEnclosures(), getChannel());
     }
 
     /**
