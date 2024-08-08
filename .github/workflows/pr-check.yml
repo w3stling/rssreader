@@ -47,10 +47,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Archive build and test reports 🗃️
-        uses: actions/upload-artifact@v4
-        if: success() || failure()
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
         with:
-          name: test-results
-          path: ./**/build/test-results/test/*.xml
-          retention-days: 7
+          files: |
+            build/test-results/test/*.xml
