@@ -604,6 +604,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @SuppressWarnings("java:S5961")
     @Test
     void testAtomFeed() {
         var items = new RssReader().read(fromFile("atom-feed.xml"))
