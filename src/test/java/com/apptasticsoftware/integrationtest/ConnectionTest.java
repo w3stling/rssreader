@@ -14,42 +14,49 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ConnectionTest {
+class ConnectionTest {
     private static final int PORT = 8008;
+    private static final Duration NEGATIVE_DURATION = Duration.ofSeconds(-30);
 
     @Test
     void testConnectionTimeoutWithNullValue() {
-        var exception = assertThrows(NullPointerException.class, () -> new RssReader().setConnectionTimeout(null));
+        var rssReader = new RssReader();
+        var exception = assertThrows(NullPointerException.class, () -> rssReader.setConnectionTimeout(null));
         assertEquals("Connection timeout must not be null", exception.getMessage());
     }
 
     @Test
     void testRequestTimeoutWithNullValue() {
-        var exception = assertThrows(NullPointerException.class, () -> new RssReader().setRequestTimeout(null));
+        var rssReader = new RssReader();
+        var exception = assertThrows(NullPointerException.class, () -> rssReader.setRequestTimeout(null));
         assertEquals("Request timeout must not be null", exception.getMessage());
     }
 
     @Test
     void testReadTimeoutWithNullValue() {
-        var exception = assertThrows(NullPointerException.class, () -> new RssReader().setReadTimeout(null));
+        var rssReader = new RssReader();
+        var exception = assertThrows(NullPointerException.class, () -> rssReader.setReadTimeout(null));
         assertEquals("Read timeout must not be null", exception.getMessage());
     }
 
     @Test
     void testConnectionTimeoutWithNegativeValue() {
-        var exception = assertThrows(IllegalArgumentException.class, () -> new RssReader().setConnectionTimeout(Duration.ofSeconds(-30)));
+        var rssReader = new RssReader();
+        var exception = assertThrows(IllegalArgumentException.class, () -> rssReader.setConnectionTimeout(NEGATIVE_DURATION));
         assertEquals("Connection timeout must not be negative", exception.getMessage());
     }
 
     @Test
     void testRequestTimeoutWithNegativeValue() {
-        var exception = assertThrows(IllegalArgumentException.class, () -> new RssReader().setRequestTimeout(Duration.ofSeconds(-30)));
+        var rssReader = new RssReader();
+        var exception = assertThrows(IllegalArgumentException.class, () -> rssReader.setRequestTimeout(NEGATIVE_DURATION));
         assertEquals("Request timeout must not be negative", exception.getMessage());
     }
 
     @Test
     void testReadTimeoutWithNegativeValue() {
-        var exception = assertThrows(IllegalArgumentException.class, () -> new RssReader().setReadTimeout(Duration.ofSeconds(-30)));
+        var rssReader = new RssReader();
+        var exception = assertThrows(IllegalArgumentException.class, () -> rssReader.setReadTimeout(NEGATIVE_DURATION));
         assertEquals("Read timeout must not be negative", exception.getMessage());
     }
 

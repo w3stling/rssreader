@@ -119,6 +119,7 @@ public class RssServer {
             return writeBodyPause.toMillis() > 0 && length >= totalLength * 0.90;
         }
 
+        @SuppressWarnings("java:S2925")
         private void pause(Duration duration) {
             try {
                 TimeUnit.MILLISECONDS.sleep(duration.toMillis());
