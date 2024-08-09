@@ -151,7 +151,7 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addHeader(java.lang.String,java.lang.String)" class="member-name-link">addHeader</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Adds a http header to the HttpClient.</div>
+<div class="block">Adds a http header to the http client.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addItemExtension(java.lang.String,java.lang.String,java.util.function.BiConsumer)" class="member-name-link">addItemExtension</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;tag,
@@ -241,14 +241,29 @@ loadScripts(document, 'script');</script>
 <div class="block">Sends request</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">setDateTimeParser</a><wbr>(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setConnectionTimeout(java.time.Duration)" class="member-name-link">setConnectionTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;connectionTimeout)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Date and Time parser for parsing timestamps.</div>
+<div class="block">Sets the connection timeout for the http client.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUserAgent(java.lang.String)" class="member-name-link">setUserAgent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userAgent)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">setDateTimeParser</a><wbr>(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Sets the user-agent of the HttpClient.</div>
+<div class="block">Date and time parser for parsing timestamps.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setReadTimeout(java.time.Duration)" class="member-name-link">setReadTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;readTimeout)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the read timeout.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRequestTimeout(java.time.Duration)" class="member-name-link">setRequestTimeout</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;requestTimeout)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the request timeout for the http client.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a><wbr>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setUserAgent(java.lang.String)" class="member-name-link">setUserAgent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userAgent)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the user-agent of the http client.</div>
 </div>
 </div>
 </div>
@@ -390,7 +405,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)">
 <h3>setDateTimeParser</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">setDateTimeParser</span><wbr><span class="parameters">(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
-<div class="block">Date and Time parser for parsing timestamps.</div>
+<div class="block">Date and time parser for parsing timestamps.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>dateTimeParser</code> - the date time parser to use.</dd>
@@ -403,8 +418,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setUserAgent(java.lang.String)">
 <h3>setUserAgent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">setUserAgent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userAgent)</span></div>
-<div class="block">Sets the user-agent of the HttpClient.
- This is completely optional and if not set then it will not send a user-agent header.</div>
+<div class="block">Sets the user-agent of the http client.
+ Optional parameter if not set the default value for <code>java.net.http.HttpClient</code> will be used.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>userAgent</code> - the user-agent to use.</dd>
@@ -418,12 +433,59 @@ loadScripts(document, 'script');</script>
 <h3>addHeader</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">addHeader</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;key,
  <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;value)</span></div>
-<div class="block">Adds a http header to the HttpClient.
- This is completely optional and if no headers are set then it will not add anything.</div>
+<div class="block">Adds a http header to the http client.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>key</code> - the key name of the header.</dd>
 <dd><code>value</code> - the value of the header.</dd>
+<dt>Returns:</dt>
+<dd>updated RSSReader.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setConnectionTimeout(java.time.Duration)">
+<h3>setConnectionTimeout</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">setConnectionTimeout</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;connectionTimeout)</span></div>
+<div class="block">Sets the connection timeout for the http client.
+ The connection timeout is the time it takes to establish a connection to the server.
+ If set to zero the default value for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpClient.Builder.html#connectTimeout(java.time.Duration)" title="class or interface in java.net.http" class="external-link"><code>HttpClient.Builder.connectTimeout(Duration)</code></a> will be used.
+ Default: 25 seconds.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>connectionTimeout</code> - the timeout duration.</dd>
+<dt>Returns:</dt>
+<dd>updated RSSReader.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setRequestTimeout(java.time.Duration)">
+<h3>setRequestTimeout</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">setRequestTimeout</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;requestTimeout)</span></div>
+<div class="block">Sets the request timeout for the http client.
+ The request timeout is the time between the request is sent and the first byte of the response is received.
+ If set to zero the default value for <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.net.http/java/net/http/HttpRequest.Builder.html#timeout(java.time.Duration)" title="class or interface in java.net.http" class="external-link"><code>HttpRequest.Builder.timeout(Duration)</code></a> will be used.
+ Default: 25 seconds.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>requestTimeout</code> - the timeout duration.</dd>
+<dt>Returns:</dt>
+<dd>updated RSSReader.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setReadTimeout(java.time.Duration)">
+<h3>setReadTimeout</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a>&lt;<a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">C</a>,<wbr><a href="AbstractRssReader.html" title="type parameter in AbstractRssReader">I</a>&gt;</span>&nbsp;<span class="element-name">setReadTimeout</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/Duration.html" title="class or interface in java.time" class="external-link">Duration</a>&nbsp;readTimeout)</span></div>
+<div class="block">Sets the read timeout.
+ The read timeout it the time for reading all data in the response body.
+ The effect of setting the timeout to zero is the same as setting an infinite Duration, ie. block forever.
+ Default: 25 seconds.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>readTimeout</code> - the timeout duration.</dd>
 <dt>Returns:</dt>
 <dd>updated RSSReader.</dd>
 </dl>
