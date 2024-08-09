@@ -64,9 +64,13 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  */
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final String LOG_GROUP = "com.apptasticsoftware.rssreader";
+    private static final ScheduledThreadPoolExecutor EXECUTOR = new ScheduledThreadPoolExecutor(1);
     private final HttpClient httpClient;
     private DateTimeParser dateTimeParser = new DateTime();
     private String userAgent = "";
+    private Duration connectionTimeout = Duration.ofSeconds(25);
+    private Duration requestTimeout = Duration.ofSeconds(25);
+    private Duration readTimeout = Duration.ofSeconds(25);
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
@@ -240,7 +244,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Date and Time parser for parsing timestamps.
+     * Date and time parser for parsing timestamps.
      * @param dateTimeParser the date time parser to use.
      * @return updated RSSReader.
      */
@@ -252,8 +256,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Sets the user-agent of the HttpClient.
-     * This is completely optional and if not set then it will not send a user-agent header.
+     * Sets the user-agent of the http client.
+     * Optional parameter if not set the default value for {@code java.net.http.HttpClient} will be used.
      * @param userAgent the user-agent to use.
      * @return updated RSSReader.
      */
@@ -265,8 +269,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Adds a http header to the HttpClient.
-     * This is completely optional and if no headers are set then it will not add anything.
+     * Adds a http header to the http client.
      * @param key the key name of the header.
      * @param value the value of the header.
      * @return updated RSSReader.
@@ -277,6 +280,58 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         this.headers.put(key, value);
         return this;
+    }
+
+    /**
+     * Sets the connection timeout for the http client.
+     * The connection timeout is the time it takes to establish a connection to the server.
+     * If set to zero the default value for {@link java.net.http.HttpClient.Builder#connectTimeout(Duration)} will be used.
+     * Default: 25 seconds.
+     *
+     * @param connectionTimeout the timeout duration.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> setConnectionTimeout(Duration connectionTimeout) {
+        validate(connectionTimeout, "Connection timeout");
+        this.connectionTimeout = connectionTimeout;
+        return this;
+    }
+
+    /**
+     * Sets the request timeout for the http client.
+     * The request timeout is the time between the request is sent and the first byte of the response is received.
+     * If set to zero the default value for {@link java.net.http.HttpRequest.Builder#timeout(Duration)} will be used.
+     * Default: 25 seconds.
+     *
+     * @param requestTimeout the timeout duration.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> setRequestTimeout(Duration requestTimeout) {
+        validate(requestTimeout, "Request timeout");
+        this.requestTimeout = requestTimeout;
+        return this;
+    }
+
+    /**
+     * Sets the read timeout.
+     * The read timeout it the time for reading all data in the response body.
+     * The effect of setting the timeout to zero is the same as setting an infinite Duration, ie. block forever.
+     * Default: 25 seconds.
+     *
+     * @param readTimeout the timeout duration.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> setReadTimeout(Duration readTimeout) {
+        validate(readTimeout, "Read timeout");
+        this.readTimeout = readTimeout;
+        return this;
+    }
+
+    private void validate(Duration duration, String name) {
+        Objects.requireNonNull(duration, name + " must not be null");
+        if (duration.isNegative()) {
+            throw new IllegalArgumentException(name + " must not be negative");
+        }
     }
 
     /**
@@ -450,8 +505,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
         var builder = HttpRequest.newBuilder(URI.create(url))
-                                         .timeout(Duration.ofSeconds(25))
                                          .header("Accept-Encoding", "gzip");
+        if (requestTimeout.toMillis() > 0) {
+            builder.timeout(requestTimeout);
+        }
 
         if (!userAgent.isBlank())
             builder.header("User-Agent", userAgent);
@@ -510,6 +567,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private I nextItem;
         private boolean isChannelPart = false;
         private boolean isItemPart = false;
+        private ScheduledFuture<?> parseWatchdog;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
@@ -528,6 +586,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 xmlInFact.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.FALSE);
 
                 reader = xmlInFact.createXMLStreamReader(is);
+                if (!readTimeout.isZero()) {
+                    parseWatchdog = EXECUTOR.schedule(this::close, readTimeout.toMillis(), TimeUnit.MILLISECONDS);
+                }
             }
             catch (XMLStreamException e) {
                 var logger = Logger.getLogger(LOG_GROUP);
@@ -539,6 +600,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         public void close() {
             try {
+                if (parseWatchdog != null) {
+                    parseWatchdog.cancel(false);
+                }
                 reader.close();
                 is.close();
             } catch (XMLStreamException | IOException e) {
@@ -783,16 +847,20 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var context = SSLContext.getInstance("TLSv1.3");
             context.init(null, null, null);
 
-            client = HttpClient.newBuilder()
+            var builder = HttpClient.newBuilder()
                     .sslContext(context)
-                    .connectTimeout(Duration.ofSeconds(25))
-                    .followRedirects(HttpClient.Redirect.ALWAYS)
-                    .build();
+                    .followRedirects(HttpClient.Redirect.ALWAYS);
+            if (connectionTimeout.toMillis() > 0) {
+                builder.connectTimeout(connectionTimeout);
+            }
+            client = builder.build();
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            client = HttpClient.newBuilder()
-                    .connectTimeout(Duration.ofSeconds(25))
-                    .followRedirects(HttpClient.Redirect.ALWAYS)
-                    .build();
+            var builder = HttpClient.newBuilder()
+                    .followRedirects(HttpClient.Redirect.ALWAYS);
+            if (connectionTimeout.toMillis() > 0) {
+                builder.connectTimeout(connectionTimeout);
+            }
+            client = builder.build();
         }
 
         return client;
