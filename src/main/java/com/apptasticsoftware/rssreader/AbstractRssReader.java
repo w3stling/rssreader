@@ -24,6 +24,7 @@
 package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.util.Mapper;
+import com.apptasticsoftware.rssreader.util.DaemonThreadFactory;
 
 import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
@@ -64,7 +65,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  */
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final String LOG_GROUP = "com.apptasticsoftware.rssreader";
-    private static final ScheduledThreadPoolExecutor EXECUTOR = new ScheduledThreadPoolExecutor(1);
+    private static final ScheduledExecutorService EXECUTOR = new ScheduledThreadPoolExecutor(1, new DaemonThreadFactory("RssReaderWorker"));
     private final HttpClient httpClient;
     private DateTimeParser dateTimeParser = new DateTime();
     private String userAgent = "";
