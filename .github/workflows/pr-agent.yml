@@ -1,6 +1,6 @@
 # This workflow will review pull request
 
-name: Pull Request Review
+name: Pull Request Review 🤖
 
 on:
   pull_request:
