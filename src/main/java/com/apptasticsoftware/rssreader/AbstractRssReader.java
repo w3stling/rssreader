@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.util.DaemonThreadFactory;
+import com.apptasticsoftware.rssreader.util.XMLInputFactorySecurity;
 
 import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
@@ -578,15 +579,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             elementStack = new ArrayDeque<>();
 
             try {
-                var xmlInFact = XMLInputFactory.newInstance();
-
                 // disable XML external entity (XXE) processing
-                xmlInFact.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
-                xmlInFact.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
-                xmlInFact.setProperty(XMLInputFactory.IS_COALESCING, true);
-                xmlInFact.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.FALSE);
+                var xmlInputFactory = XMLInputFactorySecurity.hardenFactory(XMLInputFactory.newInstance());
+                xmlInputFactory.setProperty(XMLInputFactory.IS_COALESCING, true);
+                xmlInputFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
 
-                reader = xmlInFact.createXMLStreamReader(is);
+                reader = xmlInputFactory.createXMLStreamReader(is);
                 if (!readTimeout.isZero()) {
                     parseWatchdog = EXECUTOR.schedule(this::close, readTimeout.toMillis(), TimeUnit.MILLISECONDS);
                 }
