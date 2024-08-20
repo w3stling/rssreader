@@ -65,7 +65,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
  * Abstract base class for implementing modules or extensions of RSS / Atom feeds with custom tags and attributes.
  */
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
-    private static final String LOG_GROUP = "com.apptasticsoftware.rssreader";
+    private static final Logger LOGGER = Logger.getLogger("com.apptasticsoftware.rssreader");
     private static final ScheduledExecutorService EXECUTOR = new ScheduledThreadPoolExecutor(1, new DaemonThreadFactory("RssReaderWorker"));
     private final HttpClient httpClient;
     private DateTimeParser dateTimeParser = new DateTime();
@@ -81,7 +81,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final Set<String> collectChildNodesForTag = Set.of("content", "summary");
     private boolean isInitialized;
-
 
     /**
      * Constructor
@@ -331,6 +330,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     private void validate(Duration duration, String name) {
         Objects.requireNonNull(duration, name + " must not be null");
+
         if (duration.isNegative()) {
             throw new IllegalArgumentException(name + " must not be negative");
         }
@@ -438,16 +438,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             initialize();
             isInitialized = true;
         }
-
         return urls.stream()
                    .parallel()
                    .map(url -> {
                         try {
                             return Map.entry(url, readAsync(url));
                         } catch (Exception e) {
-                            var logger = Logger.getLogger(LOG_GROUP);
-                            if (logger.isLoggable(Level.WARNING))
-                                logger.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
+                            if (LOGGER.isLoggable(Level.WARNING)) {
+                                LOGGER.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
+                            }
                             return null;
                         }
                     })
@@ -456,9 +455,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                        try {
                            return f.getValue().join();
                        } catch (Exception e) {
-                           var logger = Logger.getLogger(LOG_GROUP);
-                           if (logger.isLoggable(Level.WARNING))
-                               logger.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
+                           if (LOGGER.isLoggable(Level.WARNING)) {
+                               LOGGER.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
+                           }
                            return null;
                        }
                    });
@@ -496,7 +495,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             initialize();
             isInitialized = true;
         }
-
         return sendAsyncRequest(url).thenApply(processResponse());
     }
 
@@ -512,11 +510,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             builder.timeout(requestTimeout);
         }
 
-        if (!userAgent.isBlank())
+        if (!userAgent.isBlank()) {
             builder.header("User-Agent", userAgent);
+        }
 
         headers.forEach(builder::header);
-
         return httpClient.sendAsync(builder.GET().build(), HttpResponse.BodyHandlers.ofInputStream());
     }
 
@@ -528,11 +526,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
 
                 var inputStream = response.body();
-                if (Optional.of("gzip").equals(response.headers().firstValue("Content-Encoding")))
+                if (Optional.of("gzip").equals(response.headers().firstValue("Content-Encoding"))) {
                     inputStream = new GZIPInputStream(inputStream);
+                }
 
                 inputStream = new BufferedInputStream(inputStream);
-
                 removeBadData(inputStream);
                 var itemIterator = new RssItemIterator(inputStream);
                 return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
@@ -590,10 +588,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
             }
             catch (XMLStreamException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, "Failed to process XML. ", e);
+                if (LOGGER.isLoggable(Level.WARNING)) {
+                    LOGGER.log(Level.WARNING, "Failed to process XML. ", e);
+                }
             }
         }
 
@@ -605,19 +602,17 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 reader.close();
                 is.close();
             } catch (XMLStreamException | IOException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, "Failed to close XML stream. ", e);
+                if (LOGGER.isLoggable(Level.WARNING)) {
+                    LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
+                }
             }
         }
 
-        void peekNext() {
+        private void peekNext() {
             if (nextItem == null) {
                 try {
                     nextItem = next();
-                }
-                catch (NoSuchElementException e) {
+                } catch (NoSuchElementException e) {
                     nextItem = null;
                 }
             }
@@ -635,7 +630,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             if (nextItem != null) {
                 var next = nextItem;
                 nextItem = null;
-
                 return next;
             }
 
@@ -646,30 +640,27 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
                     if (type == CHARACTERS || type == CDATA) {
                         parseCharacters();
-                    }
-                    else if (type == START_ELEMENT) {
+                    } else if (type == START_ELEMENT) {
                         parseStartElement();
                         parseAttributes();
-                    }
-                    else if (type == END_ELEMENT) {
+                    } else if (type == END_ELEMENT) {
                         var itemParsed = parseEndElement();
-
-                        if (itemParsed)
+                        if (itemParsed) {
                             return item;
+                        }
                     }
                 }
             } catch (XMLStreamException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, "Failed to parse XML. ", e);
+                if (LOGGER.isLoggable(Level.WARNING)) {
+                    LOGGER.log(Level.WARNING, "Failed to parse XML. ", e);
+                }
             }
 
             close();
             throw new NoSuchElementException();
         }
 
-        void collectChildNodes(int type) {
+        private void collectChildNodes(int type) {
             if (type == START_ELEMENT) {
                 var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
 
@@ -702,11 +693,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 if (collectChildNodesForTag.contains(nsTagName)) {
                     childNodeTextBuilder.put(nsTagName, new StringBuilder());
                 }
-            }
-            else if (type == CHARACTERS || type == CDATA) {
+            } else if (type == CHARACTERS || type == CDATA) {
                 childNodeTextBuilder.forEach((k, builder) -> builder.append(reader.getText()));
-            }
-            else if (type == END_ELEMENT) {
+            } else if (type == END_ELEMENT) {
                 var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
                 var endTag = "</" + nsTagName + ">";
                 childNodeTextBuilder.entrySet()
@@ -717,7 +706,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         @SuppressWarnings("java:S5738")
-        void parseStartElement() {
+        private void parseStartElement() {
             textBuilder.setLength(0);
             var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
             elementStack.addLast(nsTagName);
@@ -728,8 +717,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 channel.setDescription("");
                 channel.setLink("");
                 isChannelPart = true;
-            }
-            else if (isItem(nsTagName)) {
+            } else if (isItem(nsTagName)) {
                 item = Objects.requireNonNullElse(createItem(dateTimeParser), createItem());
                 item.setChannel(channel);
                 isChannelPart = false;
@@ -745,7 +733,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             return "item".equals(tagName) || "entry".equals(tagName);
         }
 
-        void parseAttributes() {
+        private void parseAttributes() {
             var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
             var elementFullPath = getElementFullPath();
 
@@ -753,8 +741,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 // Map channel attributes
                 mapChannelAttributes(nsTagName);
                 mapChannelAttributes(elementFullPath);
-            }
-            else if (isItemPart) {
+            } else if (isItemPart) {
                 onItemTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(item); return f; });
                 onItemTags.computeIfPresent(getElementFullPath(), (k, f) -> { f.accept(item); return f; });
                 // Map item attributes
@@ -763,7 +750,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
-        void mapChannelAttributes(String key) {
+        private void mapChannelAttributes(String key) {
             var consumers = channelAttributes.get(key);
             if (consumers != null && channel != null) {
                 consumers.forEach((attributeName, consumer) -> {
@@ -773,7 +760,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
-        void mapItemAttributes(String key) {
+        private void mapItemAttributes(String key) {
             var consumers = itemAttributes.get(key);
             if (consumers != null && item != null) {
                 consumers.forEach((attributeName, consumer) -> {
@@ -783,65 +770,63 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
         }
 
-        boolean parseEndElement() {
+        private boolean parseEndElement() {
             var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
             var text = textBuilder.toString().trim();
             var elementFullPath = getElementFullPath();
             elementStack.removeLast();
 
-            if (isChannelPart)
+            if (isChannelPart) {
                 parseChannelCharacters(channel, nsTagName, elementFullPath, text);
-            else
+            } else {
                 parseItemCharacters(item, nsTagName, elementFullPath, text);
+            }
 
             textBuilder.setLength(0);
-
             return isItem(nsTagName);
         }
 
-        void parseCharacters() {
+        private void parseCharacters() {
             var text = reader.getText();
-
-            if (text.isBlank())
+            if (text.isBlank()) {
                 return;
-
+            }
             textBuilder.append(text);
         }
 
-        void parseChannelCharacters(C channel, String nsTagName, String elementFullPath, String text) {
-            if (channel == null || text.isEmpty())
+        private void parseChannelCharacters(C channel, String nsTagName, String elementFullPath, String text) {
+            if (channel == null || text.isEmpty()) {
                 return;
-
+            }
             channelTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(channel, text); return f; });
             channelTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(channel, text); return f; });
         }
 
-        void parseItemCharacters(final I item, String nsTagName, String elementFullPath, final String text) {
+        private void parseItemCharacters(final I item, String nsTagName, String elementFullPath, final String text) {
             var builder = childNodeTextBuilder.remove(nsTagName);
-            if (item == null || (text.isEmpty() && builder == null))
+            if (item == null || (text.isEmpty() && builder == null)) {
                 return;
-
+            }
             var textValue = (builder != null) ? builder.toString().trim() : text;
             itemTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(item, textValue); return f; });
             itemTags.computeIfPresent(elementFullPath, (k, f) -> { f.accept(item, text); return f; });
         }
 
-        String toNsName(String prefix, String name) {
+        private String toNsName(String prefix, String name) {
             return prefix.isEmpty() ? name : prefix + ":" + name;
         }
 
-        String toNamespacePrefix(String prefix) {
+        private String toNamespacePrefix(String prefix) {
             return prefix == null || prefix.isEmpty() ? "xmlns" : "xmlns" + ":" + prefix;
         }
 
-        String getElementFullPath() {
+        private String getElementFullPath() {
             return "/" + String.join("/", elementStack);
         }
     }
 
     private HttpClient createHttpClient() {
         HttpClient client;
-
         try {
             var context = SSLContext.getInstance("TLSv1.3");
             context.init(null, null, null);
@@ -861,7 +846,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
             client = builder.build();
         }
-
         return client;
     }
 
