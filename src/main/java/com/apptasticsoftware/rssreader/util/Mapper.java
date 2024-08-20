@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Provides methods for mapping field
  */
 public final class Mapper {
-    private static final String LOG_GROUP = "com.apptasticsoftware.rssreader.util";
+    private static final Logger LOGGER = Logger.getLogger("com.apptasticsoftware.rssreader.util");
 
     private Mapper() { }
 
@@ -52,9 +52,9 @@ public final class Mapper {
             try {
                 func.accept(convert.apply(text));
             } catch (NumberFormatException e) {
-                var logger = Logger.getLogger(LOG_GROUP);
-                if (logger.isLoggable(Level.WARNING))
-                    logger.log(Level.WARNING, () -> String.format("Failed to convert %s. Message: %s", text, e.getMessage()));
+                if (LOGGER.isLoggable(Level.WARNING)) {
+                    LOGGER.log(Level.WARNING, () -> String.format("Failed to convert %s. Message: %s", text, e.getMessage()));
+                }
             }
         }
     }
