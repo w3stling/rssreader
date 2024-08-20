@@ -458,7 +458,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                            if (LOGGER.isLoggable(Level.WARNING)) {
                                LOGGER.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
                            }
-                           return null;
+                           return Stream.empty();
                        }
                    });
     }
@@ -522,11 +522,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         return response -> {
             try {
                 if (response.statusCode() >= 400 && response.statusCode() < 600) {
-                    throw new IOException("Response http status code: " + response.statusCode());
+                    throw new IOException(String.format("Response HTTP status code: %d", response.statusCode()));
                 }
 
                 var inputStream = response.body();
-                if (Optional.of("gzip").equals(response.headers().firstValue("Content-Encoding"))) {
+                if ("gzip".equals(response.headers().firstValue("Content-Encoding").orElse(null))) {
                     inputStream = new GZIPInputStream(inputStream);
                 }
 

@@ -30,7 +30,6 @@ class SortTest {
                 "https://se.investing.com/rss/news.rss",
                 "https://www.di.se/digital/rss",
                 "https://worldoftanks.eu/en/rss/news/",
-                "https://lwn.net/headlines/rss",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
                 "https://github.com/openjdk/jdk/commits.atom",
                 "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
@@ -103,14 +102,14 @@ class SortTest {
     void testSortChannelTitle() throws IOException {
 
         var list = Stream.concat(new RssReader().read("https://feeds.a.dj.com/rss/RSSMarketsMain.xml"),
-                                 new RssReader().read("https://lwn.net/headlines/rss"))
+                                 new RssReader().read("https://gizmodo.com/feed"))
                          .sorted(ItemComparator.channelTitle())
                          .collect(Collectors.toList());
 
         var first = list.get(0);
         var last = list.get(list.size() - 1);
         assertNotEquals(first.getChannel().getTitle(), last.getChannel().getTitle());
-        assertTrue(first.getChannel().getTitle().toLowerCase().contains("lwn"));
+        assertTrue(first.getChannel().getTitle().toLowerCase().contains("gizmodo"));
         assertTrue(last.getChannel().getTitle().toLowerCase().contains("wsj"));
     }
 }

@@ -572,17 +572,17 @@ class RssReaderIntegrationTest {
     @Test
     void testHttpHeader() throws IOException {
         List<Item> items = new RssReader().addHeader("If-None-Match", "response_version1")
-                                          .read("https://lwn.net/headlines/rss")
+                                          .read("https://rss.nytimes.com/services/xml/rss/nyt/World.xml")
                                           .collect(Collectors.toList());
 
         for (Item item : items) {
-            assertThat(item.getChannel().getTitle(), is("LWN.net"));
+            assertThat(item.getChannel().getTitle(), is("NYT > World News"));
         }
     }
 
     @Test
     void testClose() throws IOException {
-        Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss");
+        Stream<Item> stream = new RssReader().read("https://www.engadget.com/rss.xml");
         stream.close();
 
         assertThrows(IllegalStateException.class, stream::count);
@@ -590,7 +590,7 @@ class RssReaderIntegrationTest {
 
     @Test
     void testAutoClose() throws IOException {
-        try (Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss")) {
+        try (Stream<Item> stream = new RssReader().read("https://feeds.macrumors.com/MacRumors-All")) {
             var list = stream.limit(2).collect(Collectors.toList());
             assertEquals(2, list.size());
         }
@@ -598,9 +598,9 @@ class RssReaderIntegrationTest {
 
     @Test
     void testCloseTwice() throws IOException {
-        try (Stream<Item> stream = new RssReader().read("https://lwn.net/headlines/rss")) {
+        try (Stream<Item> stream = new RssReader().read("https://www.cnet.com/rss/news/")) {
             var list = stream.collect(Collectors.toList());
-            assertEquals(15, list.size());
+            assertEquals(25, list.size());
         }
     }
 
