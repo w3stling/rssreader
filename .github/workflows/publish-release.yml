@@ -1,6 +1,6 @@
 # This workflow will publish the release to Maven Central Repository
 
-name: Publish Release
+name: 🚀 Publish Release
 
 on:
   release:

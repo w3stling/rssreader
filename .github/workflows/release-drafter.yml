@@ -1,6 +1,6 @@
 # This workflow will create a draft release and update release notes
 
-name: Release Drafter
+name: 📝 Release Drafter
 
 on:
   push:

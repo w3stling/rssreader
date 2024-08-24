@@ -1,6 +1,6 @@
 # This workflow will check pull request and run tests
 
-name: Pull Request Check
+name: 🛂 Pull Request Check
 
 on:
   pull_request:
@@ -12,6 +12,9 @@ jobs:
     name: 🛂 Pull Request Check
     timeout-minutes: 20
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
 
     steps:
       - name: Checkout repository ⚙️

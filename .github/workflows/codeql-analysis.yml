@@ -1,6 +1,6 @@
 # This workflow will run code analysis
 
-name: CodeQL
+name: 🔎 CodeQL
 
 on:
   push:
