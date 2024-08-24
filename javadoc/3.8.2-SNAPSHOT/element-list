@@ -1,5 +1,7 @@
 module:com.apptasticsoftware.rssreader
 com.apptasticsoftware.rssreader
+com.apptasticsoftware.rssreader.internal
+com.apptasticsoftware.rssreader.internal.stream
 com.apptasticsoftware.rssreader.module.itunes
 com.apptasticsoftware.rssreader.module.mediarss
 com.apptasticsoftware.rssreader.util
