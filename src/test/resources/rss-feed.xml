@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+    <channel>
+        <title>TechCrunch</title>
+        <atom:link href="https://techcrunch.com/feed/" rel="self" type="application/rss+xml" />
+        <link>https://techcrunch.com/</link>
+        <description>Startup and Technology News</description>
+        <lastBuildDate>Fri, 23 Aug 2024 01:11:17 +0000</lastBuildDate>
+        <language>en-US</language>
+        <sy:updatePeriod>hourly</sy:updatePeriod>
+        <sy:updateFrequency>1</sy:updateFrequency>
+        <generator>https://wordpress.org/?v=6.5.5</generator>
+        <image>
+            <url>https://techcrunch.com/wp-content/uploads/2015/02/cropped-cropped-favicon-gradient.png?w=32</url>
+            <title>TechCrunch</title>
+            <link>https://techcrunch.com/</link>
+            <width>32</width>
+            <height>32</height>
+        </image>
+        <item>
+        <title>DeepMind workers sign letter in protest of Google&#8217;s defense contracts</title>
+        <link>https://techcrunch.com/2024/08/22/deepmind-workers-sign-letter-in-protest-of-googles-defense-contracts/</link>
+        <dc:creator><![CDATA[Kyle Wiggers]]></dc:creator>
+        <pubDate>Thu, 22 Aug 2024 22:15:21 +0000</pubDate>
+        <category><![CDATA[AI]]></category>
+        <category><![CDATA[DeepMind]]></category>
+        <category><![CDATA[defense]]></category>
+        <category><![CDATA[Google]]></category>
+        <category><![CDATA[letter]]></category>
+        <category><![CDATA[military]]></category>
+        <guid isPermaLink="false">https://techcrunch.com/?p=2841593</guid>
+        <description><![CDATA[<p>At least 200 workers at DeepMind, Google&#8217;s AI R&#38;D division, are displeased with Google&#8217;s reported defense contracts &#8212; and according to Time, they circulated a letter internally back in May to say as much. The letter, dated May 16, says the undersigned are concerned by &#8220;Google’s contracts with military organizations,&#8221; citing articles about the tech [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>NASA to decide Saturday whether astronauts will ride Boeing’s Starliner home — or use SpaceX’s Dragon instead </title>
+            <link>https://techcrunch.com/2024/08/22/nasa-to-decide-saturday-whether-astronauts-will-ride-boeings-starliner-home-or-use-spacexs-dragon-instead/</link>
+            <dc:creator><![CDATA[Aria Alamalhodaei]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 22:14:04 +0000</pubDate>
+            <category><![CDATA[Government & Policy]]></category>
+            <category><![CDATA[Space]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841608</guid>
+            <description><![CDATA[<p>NASA officials will announce their final decision on Saturday as to whether two NASA astronauts — Butch Wilmore and Sunita Williams — will return to Earth on Boeing’s Starliner spacecraft or hitch a ride home with SpaceX instead — a decision that could have a huge impact across the rapidly evolving space industry. Here&#8217;s the [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Gimbal Space takes on legacy suppliers with fast-paced component supply chain</title>
+            <link>https://techcrunch.com/2024/08/22/gimbal-space-takes-on-legacy-suppliers-with-fast-paced-component-supply-chain/</link>
+            <dc:creator><![CDATA[Aria Alamalhodaei]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 21:15:16 +0000</pubDate>
+            <category><![CDATA[Space]]></category>
+            <category><![CDATA[Gimbal Space]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2840801</guid>
+            <description><![CDATA[<p>America’s space industry seems mature, but the supply chain that provides all the parts and components for rockets, satellites, and other spacecraft is considerably less so. Gimbal Space is aiming to change that, starting with components in the crucial subsystem that enables a spacecraft to orient itself in space — but delivered cheaper and a whole [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Waymo wants to chauffeur your kids</title>
+            <link>https://techcrunch.com/2024/08/22/waymo-wants-to-chauffeur-your-kids/</link>
+            <dc:creator><![CDATA[Kyle Wiggers]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 20:36:06 +0000</pubDate>
+            <category><![CDATA[AI]]></category>
+            <category><![CDATA[Transportation]]></category>
+            <category><![CDATA[driverless]]></category>
+            <category><![CDATA[In Brief]]></category>
+            <category><![CDATA[kids]]></category>
+            <category><![CDATA[self-driving]]></category>
+            <category><![CDATA[Teens]]></category>
+            <category><![CDATA[Waymo]]></category>
+            <category><![CDATA[waymo kids]]></category>
+            <category><![CDATA[waymo teens]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841545</guid>
+            <description><![CDATA[<p>Soon, parents in range of Waymo robotaxis might not have to worry about picking up their kids from after-school activities &#8212; or any time, really. The San Francisco Standard reports that Waymo, the Alphabet subsidiary, is considering a subscription program that would let teens hail one of its cars solo and send pickup and drop-off [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Synapse’s collapse has frozen nearly $160M from fintech users — here’s how it happened</title>
+            <link>https://techcrunch.com/2024/08/22/synapses-collapse-has-frozen-nearly-160m-from-fintech-users-heres-how-it-happened/</link>
+            <dc:creator><![CDATA[Mary Ann Azevedo]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 20:33:27 +0000</pubDate>
+            <category><![CDATA[Fintech]]></category>
+            <category><![CDATA[Startups]]></category>
+            <category><![CDATA[embedded fintech]]></category>
+            <category><![CDATA[evergreens]]></category>
+            <category><![CDATA[Synapse]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2807823</guid>
+            <description><![CDATA[<p>Here is a timeline of Synapse’s troubles and the ongoing impact it is having on banking consumers. </p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Founder of failed fintech Synapse says he&#8217;s raised $11M for new robotics startup</title>
+            <link>https://techcrunch.com/2024/08/22/founder-of-failed-fintech-synapse-says-hes-raised-11m-for-new-robotics-startup/</link>
+            <dc:creator><![CDATA[Mary Ann Azevedo]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 20:21:36 +0000</pubDate>
+            <category><![CDATA[Fintech]]></category>
+            <category><![CDATA[Robotics]]></category>
+            <category><![CDATA[Startups]]></category>
+            <category><![CDATA[sankaet pathak]]></category>
+            <category><![CDATA[Synapse]]></category>
+            <category><![CDATA[Tribe Capital]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841538</guid>
+            <description><![CDATA[<p>Tens of millions of customer dollars remain unaccounted for at his previous startup, fintech Synapse. But that’s not deterring Sankaet Pathak from forging full steam ahead with his new robotics venture. Foundation is a robotics startup with a self-proclaimed mission “to create advanced humanoid robots that can operate in complex environments” to address the labor [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Cruise’s robotaxis are coming to the Uber app in 2025</title>
+            <link>https://techcrunch.com/2024/08/22/cruises-robotaxis-are-coming-to-the-uber-app-in-2025/</link>
+            <dc:creator><![CDATA[Rebecca Bellan]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 20:04:47 +0000</pubDate>
+            <category><![CDATA[Transportation]]></category>
+            <category><![CDATA[autonomous vehicles]]></category>
+            <category><![CDATA[Cruise]]></category>
+            <category><![CDATA[General Motors]]></category>
+            <category><![CDATA[ridehail]]></category>
+            <category><![CDATA[robotaxi]]></category>
+            <category><![CDATA[Uber]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841539</guid>
+            <description><![CDATA[<p>Cruise, General Motors’ self-driving subsidiary, said it has signed a multi-year partnership with ride-hailing giant Uber to bring its robotaxis to the ride-hailing platform in 2025.&#160; Cruise didn’t say when exactly customers would see its vehicles on Uber’s platform, but a spokesperson told TechCrunch that this partnership will follow the re-launch of Cruise’s own driverless [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Boston Dynamics’ new electric Atlas can do push-ups</title>
+            <link>https://techcrunch.com/2024/08/22/boston-dynamics-new-electric-atlas-can-do-push-ups/</link>
+            <dc:creator><![CDATA[Brian Heater]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 19:28:43 +0000</pubDate>
+            <category><![CDATA[Robotics]]></category>
+            <category><![CDATA[boston dynamics]]></category>
+            <category><![CDATA[In Brief]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841507</guid>
+            <description><![CDATA[<p>Until today, we’ve seen exactly 40 seconds of Boston Dynamics’ new electric Atlas in action. The Hyundai-owned robotics stalwart is very much still in the early stages of commercializing the biped for factory floors. For now, however, it’s doing the thing Boston Dynamics does second best after building robots: showing off in viral video form. [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>AI sales rep startups are booming. So why are VCs wary?</title>
+            <link>https://techcrunch.com/2024/08/22/ai-sdr-startups-are-booming-so-why-are-vcs-wary/</link>
+            <dc:creator><![CDATA[Marina Temkin]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 18:23:41 +0000</pubDate>
+            <category><![CDATA[AI]]></category>
+            <category><![CDATA[Startups]]></category>
+            <category><![CDATA[Venture]]></category>
+            <category><![CDATA[HubSpot]]></category>
+            <category><![CDATA[Index Ventures]]></category>
+            <category><![CDATA[Jasper]]></category>
+            <category><![CDATA[Salesforce]]></category>
+            <category><![CDATA[signalfire]]></category>
+            <category><![CDATA[Zoominfo]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841348</guid>
+            <description><![CDATA[<p>When you really probe venture capitalists about investing in AI startups, they&#8217;ll tell you that businesses are experimenting wildly but are very slow to add AI solutions into their ongoing business processes.&#160; But there are some exceptions. And one of them appears to be an area known as AI sales development representatives, or AI SDRs. [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Former Alphabet X spinout Mineral sells technology to John Deere</title>
+            <link>https://techcrunch.com/2024/08/22/former-alphabet-x-spinout-mineral-sells-technology-to-john-deere/</link>
+            <dc:creator><![CDATA[Brian Heater]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 17:29:59 +0000</pubDate>
+            <category><![CDATA[AI]]></category>
+            <category><![CDATA[Hardware]]></category>
+            <category><![CDATA[Robotics]]></category>
+            <category><![CDATA[Alphabet X]]></category>
+            <category><![CDATA[In Brief]]></category>
+            <category><![CDATA[John Deere]]></category>
+            <category><![CDATA[mineral]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841333</guid>
+            <description><![CDATA[<p>Citing a crowded market and profit concerns, Mineral ceased operation and pivoted to technology licensing.</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Relive the Myspace days by adding a favorite song to your Instagram profile</title>
+            <link>https://techcrunch.com/2024/08/22/relive-the-myspace-days-by-adding-a-favorite-song-to-your-instagram-profile/</link>
+            <dc:creator><![CDATA[Lauren Forristal]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 17:11:15 +0000</pubDate>
+            <category><![CDATA[Apps]]></category>
+            <category><![CDATA[Social]]></category>
+            <category><![CDATA[Instagram]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841261</guid>
+            <description><![CDATA[<p>A nod to the Myspace era, Instagram just launched a new feature that allows you to add music to your profile. The feature is in collaboration with singer Sabrina Carpenter, who released a teaser of her new song “Taste” on her Instagram profile ahead of her album release on Friday. To add a song to [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Ford pivots on EVs, Waymo doubles its robotaxi ridership and Canoo leaves California</title>
+            <link>https://techcrunch.com/2024/08/22/ford-pivots-on-evs-waymo-doubles-its-robotaxi-ridership-and-canoo-leaves-california/</link>
+            <dc:creator><![CDATA[Kirsten Korosec]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 17:05:00 +0000</pubDate>
+            <category><![CDATA[Transportation]]></category>
+            <category><![CDATA[Ford]]></category>
+            <category><![CDATA[Waymo]]></category>
+            <category><![CDATA[Canoo]]></category>
+            <category><![CDATA[techcrunch mobility]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2840820</guid>
+            <description><![CDATA[<p>Welcome back to TechCrunch Mobility — your central hub for news and insights on the future of transportation. Sign up here for free — just click TechCrunch Mobility! Monterey Car Week is a wrap. And while it is still steeped in tradition, the collection of parties, auctions and car shows that were held throughout the [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Ecovacs says it will fix bugs that can be abused to spy on robot owners</title>
+            <link>https://techcrunch.com/2024/08/22/ecovacs-says-it-will-fix-bugs-that-can-be-abused-to-spy-on-robot-owners/</link>
+            <dc:creator><![CDATA[Lorenzo Franceschi-Bicchierai]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 16:52:22 +0000</pubDate>
+            <category><![CDATA[Security]]></category>
+            <category><![CDATA[cybersecurity]]></category>
+            <category><![CDATA[DEF CON]]></category>
+            <category><![CDATA[ecovacs]]></category>
+            <category><![CDATA[hackers]]></category>
+            <category><![CDATA[hacking]]></category>
+            <category><![CDATA[infosec]]></category>
+            <category><![CDATA[Internet of Things]]></category>
+            <category><![CDATA[Robot Vacuums]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841191</guid>
+            <description><![CDATA[<p>After saying users "do not need to worry excessively" about a series of security flaws, Ecovacs said it will — in fact — roll out fixes.</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Alphabet X’s latest spinout brings computer vision and AI to salmon farms</title>
+            <link>https://techcrunch.com/2024/08/22/alphabet-xs-latest-spinout-brings-computer-vision-and-ai-to-salmon-farms/</link>
+            <dc:creator><![CDATA[Brian Heater]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 16:32:24 +0000</pubDate>
+            <category><![CDATA[AI]]></category>
+            <category><![CDATA[Hardware]]></category>
+            <category><![CDATA[Robotics]]></category>
+            <category><![CDATA[Alphabet X]]></category>
+            <category><![CDATA[tidal]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841276</guid>
+            <description><![CDATA[<p>Tidal, which quietly spun out of the department in mid-July, has its own grand ambitions to “feed humanity sustainably.”</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>India&#8217;s open commerce network expands into digital lending</title>
+            <link>https://techcrunch.com/2024/08/22/indias-open-commerce-network-expands-into-digital-lending/</link>
+            <dc:creator><![CDATA[Jagmeet Singh]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 16:21:32 +0000</pubDate>
+            <category><![CDATA[Commerce]]></category>
+            <category><![CDATA[Fintech]]></category>
+            <category><![CDATA[India]]></category>
+            <category><![CDATA[ONDC]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841078</guid>
+            <description><![CDATA[<p>India's ONDC has launched digital lending on its network as it expands into financial services after powering e-commerce, mobility and logistics with its standardized framework.</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Under DMA probe, Apple tweaks design of EU browser choice screens, expands app default settings</title>
+            <link>https://techcrunch.com/2024/08/22/under-dma-probe-apple-tweaks-design-of-eu-browser-choice-screens-expands-app-default-settings/</link>
+            <dc:creator><![CDATA[Natasha Lomas]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 16:02:40 +0000</pubDate>
+            <category><![CDATA[Apps]]></category>
+            <category><![CDATA[Government & Policy]]></category>
+            <category><![CDATA[apple browser choice screen]]></category>
+            <category><![CDATA[apple default apps dma]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841174</guid>
+            <description><![CDATA[<p>Apple continues to adjust its approach to compliance with the European Union&#8217;s Digital Markets Act (DMA): Announcing another batch of changes Thursday, the iPhone maker showed off redesigned browser choice screens it said would be coming to iOS and iPadOS &#8220;later this year,&#8221; with version 18 of its mobile software platforms. The tweaked browser choice [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>TechCrunch Minute: AI could help design and test F1 cars faster</title>
+            <link>https://techcrunch.com/video/techcrunch-minute-ai-could-help-design-and-test-f1-cars-faster/</link>
+            <dc:creator><![CDATA[Amanda Silberling]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 16:00:00 +0000</pubDate>
+            <category><![CDATA[AI]]></category>
+            <category><![CDATA[Startups]]></category>
+            <category><![CDATA[formula 1]]></category>
+            <category><![CDATA[TechCrunch Minute]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?post_type=tc_video&#038;p=2841127</guid>
+            <description><![CDATA[<p>Formula One teams are looking at a startup called BeyondMath to bring their car construction to the next level. BeyondMath is working in the field of computational fluid dynamics, which attempts to digitally model how an object moves through water or air. But that’s a lot easier said than done &#8212; even with excessive computing [&#8230;]</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Threads spotted exploring ads, but says &#8216;no immediate timeline&#8217; toward monetization</title>
+            <link>https://techcrunch.com/2024/08/22/threads-explores-ads-but-says-no-immediate-timeline-toward-monetization/</link>
+            <dc:creator><![CDATA[Sarah Perez]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 15:36:56 +0000</pubDate>
+            <category><![CDATA[Apps]]></category>
+            <category><![CDATA[Social]]></category>
+            <category><![CDATA[Meta]]></category>
+            <category><![CDATA[Threads]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841142</guid>
+            <description><![CDATA[<p>These findings indicate that Threads engineers are exploring ad technology, but that doesn't mean Threads will debut ads anytime soon, as some suspect.</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Cruise recalls robotaxi fleet to resolve federal safety probe</title>
+            <link>https://techcrunch.com/2024/08/22/cruise-recall-av-fleet-nhtsa-probe-closed/</link>
+            <dc:creator><![CDATA[Sean O'Kane]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 15:33:05 +0000</pubDate>
+            <category><![CDATA[Transportation]]></category>
+            <category><![CDATA[autonomous vehicles]]></category>
+            <category><![CDATA[avs]]></category>
+            <category><![CDATA[Cruise]]></category>
+            <category><![CDATA[General Motors]]></category>
+            <category><![CDATA[Recall]]></category>
+            <category><![CDATA[robotaxis]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2841150</guid>
+            <description><![CDATA[<p>The recall and the conclusion of the probe takes one worry off of Cruise's plate at a time when the company is under great scrutiny. </p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+        <item>
+            <title>Cache Energy&#8217;s mysterious white pellets could help kill coal and natural gas</title>
+            <link>https://techcrunch.com/2024/08/22/cache-energys-mysterious-white-pellets-could-help-kill-coal-and-natural-gas/</link>
+            <dc:creator><![CDATA[Tim De Chant]]></dc:creator>
+            <pubDate>Thu, 22 Aug 2024 15:30:00 +0000</pubDate>
+            <category><![CDATA[Climate]]></category>
+            <category><![CDATA[Startups]]></category>
+            <category><![CDATA[Batteries]]></category>
+            <category><![CDATA[Cache Energy]]></category>
+            <category><![CDATA[energy storage]]></category>
+            <category><![CDATA[Exclusive]]></category>
+            <category><![CDATA[renewable energy]]></category>
+            <guid isPermaLink="false">https://techcrunch.com/?p=2839682</guid>
+            <description><![CDATA[<p>The pellets can be stored in piles or silos, moved around using conveyor belts, and transported via rail cars.</p>
+<p>© 2024 TechCrunch. All rights reserved. For personal use only.</p>
+]]></description>
+        </item>
+    </channel>
+</rss>

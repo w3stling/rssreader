@@ -2,7 +2,7 @@ package com.apptasticsoftware.integrationtest;
 
 import com.apptasticsoftware.rssreader.Item;
 import com.apptasticsoftware.rssreader.RssReader;
-import com.apptasticsoftware.rssreader.util.RssServer;
+import com.apptasticsoftware.rssreader.internal.RssServer;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
