@@ -45,20 +45,9 @@ jobs:
         uses: gradle/actions/wrapper-validation@v4
 
       - name: Build and test 🏗
-        run: ./gradlew test jacocoTestReport
+        run: ./gradlew test jacocoTestReport sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: SonarCloud Scan 🔎
-        uses: sonarsource/sonarcloud-github-action@v3
-        with:
-          args: >
-            -Dsonar.organization=w3stling
-            -Dsonar.projectKey=w3stling_rssreader
-            -Dsonar.java.binaries=build/classes
-            -Dsonar.sources=src/main/java
-        env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Publish Test Results 🚦
