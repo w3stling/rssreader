@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader.util;
+package com.apptasticsoftware.rssreader.internal;
 
 import javax.xml.stream.XMLInputFactory;
 import java.util.Objects;

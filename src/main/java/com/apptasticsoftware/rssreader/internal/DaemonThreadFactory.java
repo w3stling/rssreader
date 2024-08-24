@@ -1,4 +1,4 @@
-package com.apptasticsoftware.rssreader.util;
+package com.apptasticsoftware.rssreader.internal;
 
 import java.util.concurrent.ThreadFactory;
 

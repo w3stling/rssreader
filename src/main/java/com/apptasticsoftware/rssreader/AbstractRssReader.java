@@ -26,8 +26,8 @@ package com.apptasticsoftware.rssreader;
 import com.apptasticsoftware.rssreader.internal.StreamUtil;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Mapper;
-import com.apptasticsoftware.rssreader.util.DaemonThreadFactory;
-import com.apptasticsoftware.rssreader.util.XMLInputFactorySecurity;
+import com.apptasticsoftware.rssreader.internal.DaemonThreadFactory;
+import com.apptasticsoftware.rssreader.internal.XMLInputFactorySecurity;
 
 import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
