@@ -77,7 +77,7 @@ publishing {
             from(components.java)
             pom {
                 name = 'RSS Reader'
-                description = 'Java library for parsing a RSS (or Atom) feed.'
+                description = 'Java library for reading RSS and Atom feeds'
                 url = 'https://github.com/w3stling/rssreader'
                 licenses {
                     license {
