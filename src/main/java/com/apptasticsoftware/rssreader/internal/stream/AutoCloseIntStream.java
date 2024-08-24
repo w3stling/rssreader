@@ -76,6 +76,7 @@ public class AutoCloseIntStream extends AbstractAutoCloseStream<Integer, IntStre
         return asAutoCloseStream(stream().sorted());
     }
 
+    @SuppressWarnings("java:S3864")
     @Override
     public IntStream peek(IntConsumer action) {
         return asAutoCloseStream(stream().peek(action));

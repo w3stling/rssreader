@@ -112,6 +112,7 @@ public class AutoCloseStream<T> extends AbstractAutoCloseStream<T, Stream<T>> im
         return asAutoCloseStream(stream().sorted(comparator));
     }
 
+    @SuppressWarnings("java:S3864")
     @Override
     public Stream<T> peek(Consumer<? super T> action) {
         return asAutoCloseStream(stream().peek(action));

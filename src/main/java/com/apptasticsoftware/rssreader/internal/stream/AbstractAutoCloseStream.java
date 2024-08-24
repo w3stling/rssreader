@@ -70,7 +70,7 @@ public class AbstractAutoCloseStream<T, S extends BaseStream<T, S>> implements A
         return asAutoCloseStream(stream, AutoCloseDoubleStream::new);
     }
 
-    private <U> U asAutoCloseStream(U stream, Function<U, U> wrapper) {
+    private <U> U asAutoCloseStream(U stream, UnaryOperator<U> wrapper) {
         if (stream instanceof AbstractAutoCloseStream) {
             return stream;
         }

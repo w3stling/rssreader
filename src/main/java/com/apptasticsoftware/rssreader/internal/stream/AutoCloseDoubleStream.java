@@ -79,6 +79,7 @@ public class AutoCloseDoubleStream extends AbstractAutoCloseStream<Double, Doubl
         return asAutoCloseStream(stream().sorted());
     }
 
+    @SuppressWarnings("java:S3864")
     @Override
     public DoubleStream peek(DoubleConsumer action) {
         return asAutoCloseStream(stream().peek(action));

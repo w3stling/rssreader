@@ -76,6 +76,7 @@ public class AutoCloseLongStream extends AbstractAutoCloseStream<Long, LongStrea
         return asAutoCloseStream(stream().sorted());
     }
 
+    @SuppressWarnings("java:S3864")
     @Override
     public LongStream peek(LongConsumer action) {
         return asAutoCloseStream(stream().peek(action));

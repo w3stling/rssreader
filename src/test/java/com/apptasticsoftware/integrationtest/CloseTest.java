@@ -14,7 +14,7 @@ import java.util.stream.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CloseTest {
+class CloseTest {
     private static final String FILE_NAME = "rss-feed.xml";
     private int closeCounter;
 
@@ -500,7 +500,6 @@ public class CloseTest {
 
     @Test
     void testIntStreamParallel() {
-        //var values = getReaderIntStream().parallel().boxed().collect(Collectors.toList());
         var stream = getReaderIntStream().parallel();
         assertTrue(stream.isParallel());
         var values = stream.boxed().collect(Collectors.toList());
@@ -916,7 +915,6 @@ public class CloseTest {
 
     @Test
     void testDoubleStreamParallel() {
-        //var values = getReaderDoubleStream().parallel().boxed().collect(Collectors.toList());
         var stream = getReaderDoubleStream().parallel();
         assertTrue(stream.isParallel());
         var values = stream.boxed().collect(Collectors.toList());

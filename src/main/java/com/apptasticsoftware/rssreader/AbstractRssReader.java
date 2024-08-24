@@ -590,9 +590,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
             }
             catch (XMLStreamException e) {
-                if (LOGGER.isLoggable(Level.WARNING)) {
-                    LOGGER.log(Level.WARNING, "Failed to process XML. ", e);
-                }
+                LOGGER.log(Level.WARNING, "Failed to process XML.", e);
             }
         }
 
@@ -605,9 +603,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     reader.close();
                     is.close();
                 } catch (XMLStreamException | IOException e) {
-                    if (LOGGER.isLoggable(Level.WARNING)) {
-                        LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
-                    }
+                    LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
                 }
             }
         }
@@ -655,9 +651,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     }
                 }
             } catch (XMLStreamException e) {
-                if (LOGGER.isLoggable(Level.WARNING)) {
-                    LOGGER.log(Level.WARNING, "Failed to parse XML. ", e);
-                }
+                LOGGER.log(Level.WARNING, "Failed to parse XML.", e);
             }
 
             close();
