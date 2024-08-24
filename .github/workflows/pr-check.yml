@@ -50,6 +50,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      - name: SonarCloud Scan 🔎
+        uses: sonarsource/sonarcloud-github-action@v3 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Publish Test Results 🚦
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
