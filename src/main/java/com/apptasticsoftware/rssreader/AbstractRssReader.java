@@ -23,6 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.internal.StreamUtil;
+import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.util.DaemonThreadFactory;
 import com.apptasticsoftware.rssreader.util.XMLInputFactorySecurity;
@@ -43,11 +45,11 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 import java.util.zip.GZIPInputStream;
 
 import static com.apptasticsoftware.rssreader.util.Mapper.mapLong;
@@ -363,7 +365,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(consumer, "Item consumer must not be null");
 
         itemAttributes.computeIfAbsent(tag, k -> new HashMap<>())
-                      .put(attribute, consumer);
+                .put(attribute, consumer);
         return this;
     }
 
@@ -394,7 +396,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         Objects.requireNonNull(consumer, "Channel consumer must not be null");
 
         channelAttributes.computeIfAbsent(tag, k -> new HashMap<>())
-                         .put(attribute, consumer);
+                .put(attribute, consumer);
         return this;
     }
 
@@ -438,29 +440,29 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             initialize();
             isInitialized = true;
         }
-        return urls.stream()
-                   .parallel()
-                   .map(url -> {
-                        try {
-                            return Map.entry(url, readAsync(url));
-                        } catch (Exception e) {
-                            if (LOGGER.isLoggable(Level.WARNING)) {
-                                LOGGER.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
-                            }
-                            return null;
+        return AutoCloseStream.of(urls.stream()
+                .parallel()
+                .map(url -> {
+                    try {
+                        return Map.entry(url, readAsync(url));
+                    } catch (Exception e) {
+                        if (LOGGER.isLoggable(Level.WARNING)) {
+                            LOGGER.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
                         }
-                    })
-                   .filter(Objects::nonNull)
-                   .flatMap(f -> {
-                       try {
-                           return f.getValue().join();
-                       } catch (Exception e) {
-                           if (LOGGER.isLoggable(Level.WARNING)) {
-                               LOGGER.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
-                           }
-                           return Stream.empty();
-                       }
-                   });
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .flatMap(f -> {
+                    try {
+                        return f.getValue().join();
+                    } catch (Exception e) {
+                        if (LOGGER.isLoggable(Level.WARNING)) {
+                            LOGGER.log(Level.WARNING, () -> String.format("Failed to read URL %s. Message: %s", f.getKey(), e.getMessage()));
+                        }
+                        return Stream.empty();
+                    }
+                }));
     }
 
     /**
@@ -479,8 +481,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         inputStream = new BufferedInputStream(inputStream);
         removeBadData(inputStream);
         var itemIterator = new RssItemIterator(inputStream);
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
-                            .onClose(itemIterator::close);
+        return AutoCloseStream.of(StreamUtil.asStream(itemIterator).onClose(itemIterator::close));
     }
 
     /**
@@ -505,7 +506,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected CompletableFuture<HttpResponse<InputStream>> sendAsyncRequest(String url) {
         var builder = HttpRequest.newBuilder(URI.create(url))
-                                         .header("Accept-Encoding", "gzip");
+                .header("Accept-Encoding", "gzip");
         if (requestTimeout.toMillis() > 0) {
             builder.timeout(requestTimeout);
         }
@@ -533,8 +534,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 inputStream = new BufferedInputStream(inputStream);
                 removeBadData(inputStream);
                 var itemIterator = new RssItemIterator(inputStream);
-                return StreamSupport.stream(Spliterators.spliteratorUnknownSize(itemIterator, Spliterator.ORDERED), false)
-                                    .onClose(itemIterator::close);
+                return AutoCloseStream.of(StreamUtil.asStream(itemIterator).onClose(itemIterator::close));
             } catch (IOException e) {
                 throw new CompletionException(e);
             }
@@ -568,6 +568,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private boolean isChannelPart = false;
         private boolean isItemPart = false;
         private ScheduledFuture<?> parseWatchdog;
+        private final AtomicBoolean isClosed;
 
         public RssItemIterator(InputStream is) {
             this.is = is;
@@ -575,6 +576,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             textBuilder = new StringBuilder();
             childNodeTextBuilder = new HashMap<>();
             elementStack = new ArrayDeque<>();
+            isClosed = new AtomicBoolean(false);
 
             try {
                 // disable XML external entity (XXE) processing
@@ -588,21 +590,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
             }
             catch (XMLStreamException e) {
-                if (LOGGER.isLoggable(Level.WARNING)) {
-                    LOGGER.log(Level.WARNING, "Failed to process XML. ", e);
-                }
+                LOGGER.log(Level.WARNING, "Failed to process XML.", e);
             }
         }
 
         public void close() {
-            try {
-                if (parseWatchdog != null) {
-                    parseWatchdog.cancel(false);
-                }
-                reader.close();
-                is.close();
-            } catch (XMLStreamException | IOException e) {
-                if (LOGGER.isLoggable(Level.WARNING)) {
+            if (isClosed.compareAndSet(false,true)) {
+                try {
+                    if (parseWatchdog != null) {
+                        parseWatchdog.cancel(false);
+                    }
+                    reader.close();
+                    is.close();
+                } catch (XMLStreamException | IOException e) {
                     LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
                 }
             }
@@ -651,9 +651,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     }
                 }
             } catch (XMLStreamException e) {
-                if (LOGGER.isLoggable(Level.WARNING)) {
-                    LOGGER.log(Level.WARNING, "Failed to parse XML. ", e);
-                }
+                LOGGER.log(Level.WARNING, "Failed to parse XML.", e);
             }
 
             close();
@@ -669,16 +667,16 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     // Add namespaces to start tag
                     for (int i = 0; i < reader.getNamespaceCount(); ++i) {
                         startTagBuilder.append(" ")
-                                       .append(toNamespacePrefix(reader.getNamespacePrefix(i)))
-                                       .append("=")
-                                       .append(reader.getNamespaceURI(i));
+                                .append(toNamespacePrefix(reader.getNamespacePrefix(i)))
+                                .append("=")
+                                .append(reader.getNamespaceURI(i));
                     }
                     // Add attributes to start tag
                     for (int i = 0; i < reader.getAttributeCount(); ++i) {
                         startTagBuilder.append(" ")
-                                       .append(toNsName(reader.getAttributePrefix(i), reader.getAttributeLocalName(i)))
-                                       .append("=")
-                                       .append(reader.getAttributeValue(i));
+                                .append(toNsName(reader.getAttributePrefix(i), reader.getAttributeLocalName(i)))
+                                .append("=")
+                                .append(reader.getAttributeValue(i));
                     }
                     startTagBuilder.append(">");
                     var startTag = startTagBuilder.toString();
@@ -699,9 +697,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 var nsTagName = toNsName(reader.getPrefix(), reader.getLocalName());
                 var endTag = "</" + nsTagName + ">";
                 childNodeTextBuilder.entrySet()
-                                    .stream()
-                                    .filter(e -> !e.getKey().equals(nsTagName))
-                                    .forEach(e -> e.getValue().append(endTag));
+                        .stream()
+                        .filter(e -> !e.getKey().equals(nsTagName))
+                        .forEach(e -> e.getValue().append(endTag));
             }
         }
 

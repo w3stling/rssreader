@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,17 +44,17 @@ class SortTest {
                 "https://moxie.foxnews.com/google-publisher/latest.xml",
                 "https://techcrunch.com/feed/",
                 "https://feeds.arstechnica.com/arstechnica/science"
-                );
+        );
 
         List<String> extendedUrlList = new ArrayList<>(urlList);
         extendedUrlList.add(null);
 
         var timestamps = new RssReader().read(extendedUrlList)
-                                        .sorted()
-                                        .map(Item::getPubDateZonedDateTime)
-                                        .flatMap(Optional::stream)
-                                        .map(t -> t.toInstant().toEpochMilli())
-                                        .collect(Collectors.toList());
+                .sorted()
+                .map(Item::getPubDateZonedDateTime)
+                .flatMap(Optional::stream)
+                .map(t -> t.toInstant().toEpochMilli())
+                .collect(Collectors.toList());
 
         assertTrue(timestamps.size() > 200);
 
@@ -99,12 +98,11 @@ class SortTest {
     }
 
     @Test
-    void testSortChannelTitle() throws IOException {
-
-        var list = Stream.concat(new RssReader().read("https://feeds.a.dj.com/rss/RSSMarketsMain.xml"),
-                                 new RssReader().read("https://gizmodo.com/feed"))
-                         .sorted(ItemComparator.channelTitle())
-                         .collect(Collectors.toList());
+    void testSortChannelTitle() {
+        var urls = List.of("https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "https://gizmodo.com/feed");
+        var list = new RssReader().read(urls)
+                .sorted(ItemComparator.channelTitle())
+                .collect(Collectors.toList());
 
         var first = list.get(0);
         var last = list.get(list.size() - 1);
