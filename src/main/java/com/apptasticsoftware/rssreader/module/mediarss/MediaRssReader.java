@@ -44,6 +44,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return new MediaRssItem(dateTimeParser);
     }
 
+    @SuppressWarnings("java:S1192")
     @Override
     protected void registerItemAttributes() {
         super.registerItemAttributes();
