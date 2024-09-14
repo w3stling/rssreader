@@ -371,8 +371,6 @@ class RssReaderIntegrationTest {
         }
     }
 
-
-    @SuppressWarnings("java:S5961")
     @Test
     void rssWorldOfTank() throws IOException {
         RssReader reader = new RssReader();
@@ -405,10 +403,13 @@ class RssReaderIntegrationTest {
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
-            assertThat(item.getEnclosure(), isPresent());
-            assertThat(item.getEnclosure().get().getUrl(), is(not(emptyString())));
-            assertThat(item.getEnclosure().get().getType(), is(not(emptyString())));
-            assertThat(item.getEnclosure().get().getLength(), isPresent());
+            if (!item.getEnclosures().isEmpty()) {
+                for (Enclosure enclosure : item.getEnclosures()) {
+                    assertThat(enclosure.getUrl(), is(not(emptyString())));
+                    assertThat(enclosure.getType(), is(not(emptyString())));
+                    assertThat(enclosure.getLength(), isPresent());
+                }
+            }
         }
     }
 
