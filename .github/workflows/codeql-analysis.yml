@@ -53,7 +53,8 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    - run: ./gradlew clean build -x test
+    - name: Autobuild
+      run: ./gradlew clean build -x test
 
     - name: Perform CodeQL analysis
       uses: github/codeql-action/analyze@v3
