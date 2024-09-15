@@ -36,6 +36,7 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.Cleaner;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -69,6 +70,7 @@ import static javax.xml.stream.XMLStreamConstants.START_ELEMENT;
 public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final Logger LOGGER = Logger.getLogger("com.apptasticsoftware.rssreader");
     private static final ScheduledExecutorService EXECUTOR = new ScheduledThreadPoolExecutor(1, new DaemonThreadFactory("RssReaderWorker"));
+    private static final Cleaner CLEANER = Cleaner.create();
     private final HttpClient httpClient;
     private DateTimeParser dateTimeParser = new DateTime();
     private String userAgent = "";
@@ -556,10 +558,40 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         } catch (IOException ignore) { }
     }
 
-    class RssItemIterator implements Iterator<I> {
+    private static class CleaningAction implements Runnable {
+        private final XMLStreamReader xmlStreamReader;
+        private final List<AutoCloseable> resources;
+
+        public CleaningAction(XMLStreamReader xmlStreamReader, AutoCloseable... resources) {
+            this.xmlStreamReader = xmlStreamReader;
+            this.resources = List.of(resources);
+        }
+
+        @Override
+        public void run() {
+            try {
+                if (xmlStreamReader != null) {
+                    xmlStreamReader.close();
+                }
+            } catch (XMLStreamException e) {
+                LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
+            }
+
+            for (AutoCloseable resource : resources) {
+                try {
+                    if (resource != null) {
+                        resource.close();
+                    }
+                } catch (Exception e) {
+                    LOGGER.log(Level.WARNING, "Failed to close resource. ", e);
+                }
+            }
+        }
+    }
+
+    class RssItemIterator implements Iterator<I>, AutoCloseable {
         private final StringBuilder textBuilder;
         private final Map<String, StringBuilder> childNodeTextBuilder;
-        private final InputStream is;
         private final Deque<String> elementStack;
         private XMLStreamReader reader;
         private C channel;
@@ -569,9 +601,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private boolean isItemPart = false;
         private ScheduledFuture<?> parseWatchdog;
         private final AtomicBoolean isClosed;
+        private Cleaner.Cleanable cleanable;
 
         public RssItemIterator(InputStream is) {
-            this.is = is;
             nextItem = null;
             textBuilder = new StringBuilder();
             childNodeTextBuilder = new HashMap<>();
@@ -585,6 +617,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 xmlInputFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
 
                 reader = xmlInputFactory.createXMLStreamReader(is);
+                cleanable = CLEANER.register(this, new CleaningAction(reader, is));
                 if (!readTimeout.isZero()) {
                     parseWatchdog = EXECUTOR.schedule(this::close, readTimeout.toMillis(), TimeUnit.MILLISECONDS);
                 }
@@ -595,15 +628,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         public void close() {
-            if (isClosed.compareAndSet(false,true)) {
-                try {
-                    if (parseWatchdog != null) {
-                        parseWatchdog.cancel(false);
-                    }
-                    reader.close();
-                    is.close();
-                } catch (XMLStreamException | IOException e) {
-                    LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
+            if (isClosed.compareAndSet(false, true)) {
+                cleanable.clean();
+                if (parseWatchdog != null) {
+                    parseWatchdog.cancel(false);
                 }
             }
         }

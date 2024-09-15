@@ -47,7 +47,7 @@ class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -78,7 +78,7 @@ class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -125,7 +125,7 @@ class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -172,7 +172,7 @@ class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -219,7 +219,7 @@ class RssReaderTest {
                 "</channel>\n" +
                 "</rss>\n";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -248,7 +248,7 @@ class RssReaderTest {
     void emptyResponse() throws IOException {
         String response = "";
 
-        CompletableFuture<HttpResponse<InputStream>> httpResponse = createMock(response);
+        var httpResponse = createMock(response);
         RssReader readerMock = Mockito.spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
@@ -514,9 +514,8 @@ class RssReaderTest {
     }
 
 
-    private CompletableFuture<HttpResponse<InputStream>> createMock(String response) {
-        HttpResponse<InputStream> httpResponse = mock(HttpResponse.class);
-
+    private CompletableFuture createMock(String response) {
+        var httpResponse = mock(HttpResponse.class);
         InputStream responseStream = new ByteArrayInputStream(response.getBytes());
         doReturn(responseStream).when(httpResponse).body();
 
