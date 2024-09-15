@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
+import java.lang.ref.Reference;
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -492,11 +493,13 @@ class RssReaderIntegrationTest {
                 .GET()
                 .build();
 
-        var client = HttpClient.newBuilder()
+        HttpResponse<String> response;
+        try (var client = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
-                .build();
+                .build()) {
 
-        var response = client.send(req, HttpResponse.BodyHandlers.ofString());
+            response = client.send(req, HttpResponse.BodyHandlers.ofString());
+        }
         return response.body();
     }
 
@@ -603,6 +606,30 @@ class RssReaderIntegrationTest {
             var list = stream.collect(Collectors.toList());
             assertEquals(25, list.size());
         }
+    }
+
+    @Test
+    void testCloseWithCleaner() {
+        var fileInputSteam = fromFile("atom-feed.xml");
+        var stream = new RssReader().setReadTimeout(Duration.ZERO).read(fileInputSteam);
+        var iterator = stream.iterator();
+        var item = iterator.next();
+        assertNotNull(item);
+
+        iterator = null; // Remove this reference to iterator
+        Reference.reachabilityFence(iterator); // Ensure data is not over-optimitically gc'd
+        stream = null; // Remove this reference to stream
+        Reference.reachabilityFence(stream); // Ensure data is not over-optimitically gc'd
+
+        for (int retries = 10; retries > 0; retries--) {
+            System.gc();
+            try {
+                Thread.sleep(10L);
+            } catch (InterruptedException ignore) { }
+        }
+
+        IOException thrown = assertThrows(IOException.class, fileInputSteam::available);
+        assertEquals(thrown.getMessage(), "Stream closed");
     }
 
     @SuppressWarnings("java:S5961")
