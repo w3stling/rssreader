@@ -608,6 +608,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @SuppressWarnings("java:S2925")
     @Test
     void testCloseWithCleaner() {
         var fileInputSteam = fromFile("atom-feed.xml");
@@ -625,11 +626,11 @@ class RssReaderIntegrationTest {
             System.gc();
             try {
                 Thread.sleep(10L);
-            } catch (InterruptedException ignore) { }
+            } catch (InterruptedException ignored) { /* ignore */ }
         }
 
         IOException thrown = assertThrows(IOException.class, fileInputSteam::available);
-        assertEquals(thrown.getMessage(), "Stream closed");
+        assertEquals("Stream closed", thrown.getMessage());
     }
 
     @SuppressWarnings("java:S5961")

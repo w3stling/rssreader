@@ -570,14 +570,18 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         @Override
         public void run() {
             try {
-                xmlStreamReader.close();
+                if (xmlStreamReader != null) {
+                    xmlStreamReader.close();
+                }
             } catch (XMLStreamException e) {
                 LOGGER.log(Level.WARNING, "Failed to close XML stream. ", e);
             }
 
             for (AutoCloseable resource : resources) {
                 try {
-                    resource.close();
+                    if (resource != null) {
+                        resource.close();
+                    }
                 } catch (Exception e) {
                     LOGGER.log(Level.WARNING, "Failed to close resource. ", e);
                 }
@@ -625,10 +629,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         public void close() {
             if (isClosed.compareAndSet(false, true)) {
-                Optional.ofNullable(cleanable).ifPresent(Cleaner.Cleanable::clean);
-                cleanable = null;
-                Optional.ofNullable(parseWatchdog).ifPresent(sf -> sf.cancel(false));
-                parseWatchdog = null;
+                cleanable.clean();
+                if (parseWatchdog != null) {
+                    parseWatchdog.cancel(false);
+                }
             }
         }
 
