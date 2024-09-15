@@ -50,6 +50,10 @@ compileJava {
     }
 }
 
+compileTestJava {
+    options.compilerArgs = [ '-Xlint:unchecked' ]
+}
+
 jacoco {
     toolVersion = "0.8.9"
 }
