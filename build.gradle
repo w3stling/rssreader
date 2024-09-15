@@ -44,7 +44,6 @@ compileJava {
     inputs.property('moduleName', moduleName)
     doFirst {
         options.compilerArgs = [
-                '-Xlint:unchecked',
                 '--module-path', classpath.asPath
         ]
         classpath = files()
