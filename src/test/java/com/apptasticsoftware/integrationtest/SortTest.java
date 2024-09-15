@@ -6,7 +6,6 @@ import com.apptasticsoftware.rssreader.util.ItemComparator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,10 +45,7 @@ class SortTest {
                 "https://feeds.arstechnica.com/arstechnica/science"
         );
 
-        List<String> extendedUrlList = new ArrayList<>(urlList);
-        extendedUrlList.add(null);
-
-        var timestamps = new RssReader().read(extendedUrlList)
+        var timestamps = new RssReader().read(urlList)
                 .sorted()
                 .map(Item::getPubDateZonedDateTime)
                 .flatMap(Optional::stream)

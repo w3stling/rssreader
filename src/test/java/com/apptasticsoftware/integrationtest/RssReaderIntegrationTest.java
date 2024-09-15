@@ -821,7 +821,39 @@ class RssReaderIntegrationTest {
         assertEquals("Azure", list.get(2).getCategories().get(2));
     }
 
+    @Test
+    void readFromFileUri() throws IOException, URISyntaxException {
+        var uri = getFileUri("rss-feed.xml");
+        var items = new RssReader().read(uri).collect(Collectors.toList());
+        assertEquals(20, items.size());
+    }
+
+    @Test
+    void readFromMultipleFileUri() throws URISyntaxException {
+        var uris = List.of(
+                getFileUri("rss-feed.xml"),
+                getFileUri("atom-feed.xml")
+        );
+        var items = new RssReader().read(uris).collect(Collectors.toList());
+        assertEquals(23, items.size());
+    }
+
+    @Test
+    void readFromAMixOfUrlAndFileUri() throws URISyntaxException {
+        var sources = List.of(
+                getFileUri("rss-feed.xml"),
+                "https://www.nasa.gov/news-release/feed/",
+                getFileUri("atom-feed.xml")
+        );
+        var items = new RssReader().read(sources).collect(Collectors.toList());
+        assertEquals(33, items.size());
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
+    }
+
+    private String getFileUri(String fileName) throws URISyntaxException {
+        return getClass().getClassLoader().getResource(fileName).toURI().toString();
     }
 }
