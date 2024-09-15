@@ -33,9 +33,7 @@ import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.ref.Cleaner;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -403,8 +401,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Read RSS feed with the given URL.
-     * @param url URL to RSS feed.
+     * Read RSS feed with the given URL or file URI.
+     * @param url URL to RSS feed or file URI.
      * @return Stream of items
      * @throws IOException Fail to read url or its content
      */
@@ -432,11 +430,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
     /**
      * Read from a collections of RSS feed.
-     * @param urls collections of URLs
+     * @param urls collections of URLs or file URIs
      * @return Stream of items
      */
     public Stream<Item> read(Collection<String> urls) {
         Objects.requireNonNull(urls, "URLs collection must not be null");
+        urls.forEach(url -> Objects.requireNonNull(url, "URL must not be null. Url: " + url));
 
         if (!isInitialized) {
             initialize();
@@ -498,7 +497,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             initialize();
             isInitialized = true;
         }
-        return sendAsyncRequest(url).thenApply(processResponse());
+
+        var uri = URI.create(url);
+        if ("file".equals(uri.getScheme())) {
+            return CompletableFuture.supplyAsync(() -> {
+                try {
+                    return read(new FileInputStream(uri.getPath()));
+                } catch (FileNotFoundException e) {
+                    throw new CompletionException(e);
+                }
+            });
+        } else {
+            return sendAsyncRequest(url).thenApply(processResponse());
+        }
     }
 
     /**
