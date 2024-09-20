@@ -39,6 +39,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
@@ -498,17 +499,24 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             isInitialized = true;
         }
 
-        var uri = URI.create(url);
-        if ("file".equals(uri.getScheme())) {
+        try {
+            var uri = URI.create(url);
+            if ("file".equals(uri.getScheme())) {
+                return CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return read(new FileInputStream(uri.getPath()));
+                    } catch (FileNotFoundException e) {
+                        throw new CompletionException(e);
+                    }
+                });
+            } else {
+                return sendAsyncRequest(url).thenApply(processResponse());
+            }
+        } catch (IllegalArgumentException e) {
             return CompletableFuture.supplyAsync(() -> {
-                try {
-                    return read(new FileInputStream(uri.getPath()));
-                } catch (FileNotFoundException e) {
-                    throw new CompletionException(e);
-                }
+                var inputStream = new ByteArrayInputStream(url.getBytes(StandardCharsets.UTF_8));
+                return read(inputStream);
             });
-        } else {
-            return sendAsyncRequest(url).thenApply(processResponse());
         }
     }
 
