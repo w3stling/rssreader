@@ -849,11 +849,41 @@ class RssReaderIntegrationTest {
         assertEquals(33, items.size());
     }
 
+    @Test
+    void readFromFeedAsString() throws IOException {
+        var rssFeed = toString(fromFile("rss-feed.xml"));
+        var items = new RssReader().read(rssFeed).collect(Collectors.toList());
+        assertEquals(20, items.size());
+    }
+
+    @Test
+    void readFromAMixOfUrlAndString() throws IOException, URISyntaxException {
+        var sources = List.of(
+                toString(fromFile("rss-feed.xml")),
+                "https://www.nasa.gov/news-release/feed/",
+                getFileUri("atom-feed.xml")
+        );
+
+        var items = new RssReader().read(sources).collect(Collectors.toList());
+        assertEquals(33, items.size());
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
 
     private String getFileUri(String fileName) throws URISyntaxException {
         return getClass().getClassLoader().getResource(fileName).toURI().toString();
+    }
+
+    private static String toString(InputStream inputStream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+            return stringBuilder.toString();
+        }
     }
 }
