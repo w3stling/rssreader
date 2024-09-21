@@ -868,6 +868,15 @@ class RssReaderIntegrationTest {
         assertEquals(33, items.size());
     }
 
+    @Test
+    void syUpdatePeriodAndSyUpdateFrequency() throws IOException, URISyntaxException {
+        var source = getFileUri("rss-feed.xml");
+
+        var items = new RssReader().read(source).collect(Collectors.toList());
+        assertEquals(20, items.size());
+        assertEquals("30", items.get(0).getChannel().getTtl().orElse(""));
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }

@@ -189,7 +189,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
         channelTags.putIfAbsent("dc:rights", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
-        channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
+        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> channel.syUpdatePeriod = value);
+        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> mapInteger(value, (number) -> channel.syUpdateFrequency = number ));
     }
 
     /**
