@@ -23,6 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
 import java.time.ZonedDateTime;
 import java.util.*;
 
@@ -46,6 +48,8 @@ public class Channel {
     private String docs;
     private String rating;
     private Image image;
+    protected String syUpdatePeriod;
+    protected int syUpdateFrequency = 1;
     private final DateTimeParser dateTimeParser;
 
     /**
@@ -216,7 +220,11 @@ public class Channel {
      * @return time to live
      */
     public Optional<String> getTtl() {
-        return Optional.ofNullable(ttl);
+        return Optional.ofNullable(ttl)
+                .or(() -> Optional.ofNullable(syUpdatePeriod)
+                        .map(Util::toMinutes)
+                        .map(minutes -> minutes / Math.max(syUpdateFrequency, 1))
+                        .map(String::valueOf));
     }
 
     /**

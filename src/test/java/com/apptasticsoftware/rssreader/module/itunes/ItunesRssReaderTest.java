@@ -32,7 +32,7 @@ class ItunesRssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(ItunesChannel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withNonnullFields("itunesCategories").verify();
+        EqualsVerifier.simple().forClass(ItunesChannel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").withNonnullFields("itunesCategories").verify();
         EqualsVerifier.simple().forClass(ItunesItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(ItunesOwner.class).verify();
     }
