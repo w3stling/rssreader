@@ -502,7 +502,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         try {
             var uri = URI.create(url);
-            if ("file".equals(uri.getScheme())) {
+            if ("file".equalsIgnoreCase(uri.getScheme())) {
+                // Read from file
                 return CompletableFuture.supplyAsync(() -> {
                     try {
                         return read(new FileInputStream(uri.getPath()));
@@ -511,10 +512,12 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     }
                 });
             } else {
+                // Read from http or https
                 return sendAsyncRequest(url).thenApply(processResponse());
             }
         } catch (IllegalArgumentException e) {
             return CompletableFuture.supplyAsync(() -> {
+                // Read feed data provided as a string
                 var inputStream = new ByteArrayInputStream(url.getBytes(StandardCharsets.UTF_8));
                 return read(inputStream);
             });

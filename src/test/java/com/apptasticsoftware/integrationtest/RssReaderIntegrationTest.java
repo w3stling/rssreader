@@ -822,8 +822,15 @@ class RssReaderIntegrationTest {
     }
 
     @Test
-    void readFromFileUri() throws IOException, URISyntaxException {
+    void readFromFileUriLowerCase() throws IOException, URISyntaxException {
         var uri = getFileUri("rss-feed.xml");
+        var items = new RssReader().read(uri).collect(Collectors.toList());
+        assertEquals(20, items.size());
+    }
+
+    @Test
+    void readFromFileUriUpperCase() throws IOException, URISyntaxException {
+        var uri = getFileUri("rss-feed.xml").replace("file:", "FILE:");
         var items = new RssReader().read(uri).collect(Collectors.toList());
         assertEquals(20, items.size());
     }
