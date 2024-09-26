@@ -870,7 +870,6 @@ class RssReaderIntegrationTest {
                 "https://www.nasa.gov/news-release/feed/",
                 getFileUri("atom-feed.xml")
         );
-
         var items = new RssReader().read(sources).collect(Collectors.toList());
         assertEquals(33, items.size());
     }
@@ -878,10 +877,23 @@ class RssReaderIntegrationTest {
     @Test
     void syUpdatePeriodAndSyUpdateFrequency() throws IOException, URISyntaxException {
         var source = getFileUri("rss-feed.xml");
-
         var items = new RssReader().read(source).collect(Collectors.toList());
         assertEquals(20, items.size());
         assertEquals("30", items.get(0).getChannel().getTtl().orElse(""));
+    }
+
+    @Test
+    void feedIcon() throws IOException, URISyntaxException {
+        var source = getFileUri("atom-feed.xml");
+        var items = new RssReader().read(source).collect(Collectors.toList());
+        assertEquals("https://example.com/icon.png", items.get(0).getChannel().getImage().map(Image::getUrl).orElse(""));
+    }
+
+    @Test
+    void feedLogo() throws IOException, URISyntaxException {
+        var source = getFileUri("atom-feed-category.xml");
+        var items = new RssReader().read(source).collect(Collectors.toList());
+        assertEquals("https://example.com/logo.png", items.get(0).getChannel().getImage().map(Image::getUrl).orElse(""));
     }
 
     private InputStream fromFile(String fileName) {

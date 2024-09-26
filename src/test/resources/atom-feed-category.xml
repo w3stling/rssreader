@@ -5,6 +5,7 @@
         large collection of FAQs, tutorials and tips codes for application and
         wWeb developers on Java, .NET, C, PHP, JavaScript, XML, HTML, CSS, RSS,
         MySQL and Oracle - dev.fyicenter.com.</subtitle>
+    <logo>https://example.com/logo.png</logo>
     <link rel="self" href="http://dev.fyicenter.com/atom_xml.php"/>
     <id>http://dev.fyicenter.com/atom_xml.php</id>
     <updated>2017-09-22T03:58:52+02:00</updated>
