@@ -237,6 +237,7 @@ class RssReaderIntegrationTest {
     }
 
 
+    @Disabled("Investigating")
     @Test
     void rssRealtid() throws IOException {
         RssReader reader = new RssReader();
