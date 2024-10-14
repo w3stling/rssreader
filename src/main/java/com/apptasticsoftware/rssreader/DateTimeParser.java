@@ -23,6 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 
 /**
@@ -36,4 +37,11 @@ public interface DateTimeParser {
      * @return ZonedDateTime
      */
     ZonedDateTime parse(String timestamp);
+
+    /**
+     * Converts a timestamp in String format to an Instant
+     * @param dateTime timestamp
+     * @return Instant
+     */
+    Instant toInstant(String dateTime);
 }

@@ -23,7 +23,6 @@
  */
 package com.apptasticsoftware.rssreader.util;
 
-import com.apptasticsoftware.rssreader.DateTime;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.Item;
 
@@ -47,7 +46,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> oldestItemFirst() {
-        var dateTime = new DateTime();
+        var dateTime = Default.getDateTimeParser();
         return Comparator.comparing((I i) -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH));
     }
 
@@ -68,7 +67,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> newestItemFirst() {
-        var dateTime = new DateTime();
+        var dateTime = Default.getDateTimeParser();
         return Comparator.comparing((I i) -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH)).reversed();
     }
 

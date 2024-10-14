@@ -24,6 +24,7 @@
 package com.apptasticsoftware.rssreader;
 
 
+import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 
 import java.time.ZonedDateTime;
@@ -60,7 +61,7 @@ public class Item implements Comparable<Item> {
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.5.0", forRemoval=true)
     public Item() {
-        dateTimeParser = new DateTime();
+        dateTimeParser = Default.getDateTimeParser();
         defaultComparator = ItemComparator.newestItemFirst();
     }
 
