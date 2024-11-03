@@ -467,11 +467,11 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("breakit.se"));
+            assertThat(channel.getTitle(), is("Breakit"));
             assertThat(channel.getDescription(), is("Breakit är Sveriges nyhetssajt om techbolag och startups."));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("http://breakit.se"));
-            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getLanguage(), isPresentAndIs("sv-se"));
+            assertThat(channel.getLink(), is("https://www.breakit.se"));
+            assertThat(channel.getCopyright(), isPresentAndIs("© Breaking Media AB"));
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isPresent());
             assertThat(channel.getLastBuildDateZonedDateTime(), isPresent());
