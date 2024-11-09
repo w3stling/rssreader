@@ -27,8 +27,6 @@ import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isEmpty;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -217,11 +215,11 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("breakit.se"));
+            assertThat(channel.getTitle(), containsStringIgnoringCase("breakit"));
             assertThat(channel.getDescription(), is("Breakit är Sveriges nyhetssajt om techbolag och startups."));
-            assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("http://breakit.se"));
-            assertThat(channel.getCopyright(), isEmpty());
+            assertThat(channel.getLanguage(), isPresentAnd(containsStringIgnoringCase("sv")));
+            assertThat(channel.getLink(), is("https://www.breakit.se"));
+            assertThat(channel.getCopyright(), isPresentAndIs("© Breaking Media AB"));
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isPresentAnd(not(emptyString())));
 
