@@ -507,8 +507,21 @@ class RssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(Channel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").withNonnullFields("categories").verify();
-        EqualsVerifier.simple().forClass(Item.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(Channel.class)
+                .withIgnoredFields("dateTimeParser")
+                .withIgnoredFields("category")
+                .withIgnoredFields("syUpdatePeriod")
+                .withIgnoredFields("syUpdateFrequency")
+                .withNonnullFields("categories")
+                .verify();
+        EqualsVerifier.simple().forClass(Item.class)
+                .withIgnoredFields("defaultComparator")
+                .withIgnoredFields("dateTimeParser")
+                .withIgnoredFields("category")
+                .withNonnullFields("categories")
+                .withIgnoredFields("enclosure")
+                .withNonnullFields("enclosures")
+                .verify();
         EqualsVerifier.simple().forClass(Enclosure.class).verify();
         EqualsVerifier.simple().forClass(Image.class).verify();
     }
