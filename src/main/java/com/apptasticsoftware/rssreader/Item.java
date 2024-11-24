@@ -39,6 +39,7 @@ public class Item implements Comparable<Item> {
     private final Comparator<Item> defaultComparator;
     private String title;
     private String description;
+    private String content;
     private String link;
     private String author;
     private String category;
@@ -98,7 +99,7 @@ public class Item implements Comparable<Item> {
      * @return description
      */
     public Optional<String> getDescription() {
-        return Optional.ofNullable(description);
+        return Optional.ofNullable(description).or(this::getContent);
     }
 
     /**
@@ -108,6 +109,24 @@ public class Item implements Comparable<Item> {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * Get the item content.
+     *
+     * @return content
+     */
+    public Optional<String> getContent() {
+        return Optional.ofNullable(content);
+    }
+
+    /**
+     * Set the item content.
+     *
+     * @param content content
+     */
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
@@ -364,6 +383,7 @@ public class Item implements Comparable<Item> {
         Item item = (Item) o;
         return Objects.equals(getTitle(), item.getTitle()) &&
                 Objects.equals(getDescription(), item.getDescription()) &&
+                Objects.equals(getContent(), item.getContent()) &&
                 Objects.equals(getLink(), item.getLink()) &&
                 Objects.equals(getAuthor(), item.getAuthor()) &&
                 getCategories().equals(item.getCategories()) &&
@@ -378,7 +398,7 @@ public class Item implements Comparable<Item> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getLink(), getAuthor(), getCategories(),
+        return Objects.hash(getTitle(), getDescription(), getContent(), getLink(), getAuthor(), getCategories(),
                 getGuid(), getIsPermaLink(), getPubDate(), getUpdated(), getComments(), getEnclosures(), getChannel());
     }
 

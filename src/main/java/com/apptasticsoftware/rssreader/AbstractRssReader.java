@@ -215,7 +215,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("/rss/channel/item/title", Item::setTitle);
         itemTags.putIfAbsent("description", Item::setDescription);
         itemTags.putIfAbsent("summary", Item::setDescription);
-        itemTags.putIfAbsent("content", Item::setDescription);
+        itemTags.putIfAbsent("content", Item::setContent);
+        itemTags.putIfAbsent("content:encoded", (item, value) -> Mapper.mapIfEmpty(value, item::getContent, item::setContent));
         itemTags.putIfAbsent("link", Item::setLink);
         itemTags.putIfAbsent("author", Item::setAuthor);
         itemTags.putIfAbsent("/feed/entry/author/name", Item::setAuthor);

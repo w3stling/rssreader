@@ -41,7 +41,6 @@ class RssReaderIntegrationTest {
     }
 
 
-    @Disabled("Investigating")
     @Test
     void rssRiksbanken() throws IOException {
         RssReader reader = new RssReader();
@@ -135,7 +134,6 @@ class RssReaderIntegrationTest {
     }
 
 
-    @Disabled("Investigate")
     @Test
     void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
@@ -239,7 +237,7 @@ class RssReaderIntegrationTest {
     @Test
     void rssRealtid() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.realtid.se/rss/senaste").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.realtid.se/rss/").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -250,7 +248,7 @@ class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Realtid"));
             assertThat(channel.getDescription(), is(""));
             assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-            assertThat(channel.getLink(), is("https://www.realtid.se/rss/senaste"));
+            assertThat(channel.getLink(), is("https://www.realtid.se/rss/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isEmpty());
@@ -410,6 +408,29 @@ class RssReaderIntegrationTest {
                     assertThat(enclosure.getLength(), isPresent());
                 }
             }
+        }
+    }
+
+
+    @Test
+    void contentEncoding() throws IOException {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read("https://akka.io/blog/rss.xml").collect(Collectors.toList());
+        assertFalse(items.isEmpty());
+
+        for (Item item : items) {
+            // Validate channel
+            Channel channel = item.getChannel();
+            assertNotNull(channel);
+            assertThat(channel.getTitle(), containsString("AKKA Blogs"));
+            assertThat(channel.getLanguage(), isPresentAndIs("en"));
+
+            // Validate item
+            assertNotNull(item);
+            assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
+            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
+            assertThat(item.getContent(), isPresentAnd(not(emptyString())));
+            assertNotEquals(item.getDescription(), item.getContent());
         }
     }
 
