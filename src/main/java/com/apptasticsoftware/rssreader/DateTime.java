@@ -99,6 +99,8 @@ public class DateTime implements DateTimeParser {
     private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW;
     private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW;
 
+    private static final DateTimeFormatter DATE_TIME_SPECIAL_1;
+
     static {
         BASIC_ISO_DATE = DateTimeFormatter.BASIC_ISO_DATE.withLocale(Locale.ENGLISH);
         ISO_LOCAL_DATE = DateTimeFormatter.ISO_LOCAL_DATE.withLocale(Locale.ENGLISH);
@@ -160,6 +162,8 @@ public class DateTime implements DateTimeParser {
         RFC_1123_DATE_TIME_SPECIAL_MST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'MST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
         RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'PDT'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-7));
         RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'PST'", Locale.ENGLISH).withZone(ZoneOffset.ofHours(-8));
+
+        DATE_TIME_SPECIAL_1 = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
     }
 
     /**
@@ -254,6 +258,10 @@ public class DateTime implements DateTimeParser {
         int index = dateTime.indexOf(',');
 
         if (index == -1) {
+            index = dateTime.indexOf(' ');
+            if (Character.isDigit(dateTime.charAt(0)) && (index == 1 || index == 2)) {
+                return DATE_TIME_SPECIAL_1;
+            }
             return parseIsoDateTime(dateTime);
         } else if (index <= 3) {
             return parseRfcDateTime(dateTime);
