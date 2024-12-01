@@ -37,6 +37,7 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
  * Class for converting date time strings.
  * This class is only used when sorting or when calling getters that returns ZonedDateTime.
  */
+@SuppressWarnings("javaarchitecture:S7091")
 public class DateTime implements DateTimeParser {
     private final ZoneId defaultZone;
 

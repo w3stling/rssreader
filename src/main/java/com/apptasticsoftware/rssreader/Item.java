@@ -35,6 +35,7 @@ import java.util.*;
  * like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points
  * to the full story.
  */
+@SuppressWarnings("javaarchitecture:S7091")
 public class Item implements Comparable<Item> {
     private final Comparator<Item> defaultComparator;
     private String title;
