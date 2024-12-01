@@ -33,7 +33,9 @@ import java.util.Objects;
 /**
  * Provides different comparators for sorting item objects.
  */
+@SuppressWarnings("java:S1133")
 public final class ItemComparator {
+    private static final String MUST_NOT_BE_NULL_MESSAGE = "Date time parser must not be null";
 
     private ItemComparator() {
 
@@ -43,6 +45,8 @@ public final class ItemComparator {
      * Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)
      * @param <I> any class that extends Item
      * @return comparator
+     *
+     * @deprecated As of release 3.9.0, replaced by {@link #oldestPublishedItemFirst()}
      */
     @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> oldestItemFirst() {
@@ -76,6 +80,8 @@ public final class ItemComparator {
      * @param <I> any class that extends Item
      * @param dateTimeParser date time parser
      * @return comparator
+     *
+     * @deprecated As of release 3.9.0, replaced by {@link #oldestPublishedItemFirst(DateTimeParser)}
      */
     @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> oldestItemFirst(DateTimeParser dateTimeParser) {
@@ -89,7 +95,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> oldestPublishedItemFirst(DateTimeParser dateTimeParser) {
-        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        Objects.requireNonNull(dateTimeParser, MUST_NOT_BE_NULL_MESSAGE);
         return Comparator.comparing((I i) ->
                         i.getPubDate().map(dateTimeParser::parse).orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder()));
@@ -102,7 +108,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> oldestUpdatedItemFirst(DateTimeParser dateTimeParser) {
-        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        Objects.requireNonNull(dateTimeParser, MUST_NOT_BE_NULL_MESSAGE);
         return Comparator.comparing((I i) ->
                         i.getUpdated().or(i::getPubDate).map(dateTimeParser::parse).orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder()));
@@ -112,6 +118,8 @@ public final class ItemComparator {
      * Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)
      * @param <I> any class that extends Item
      * @return comparator
+     *
+     * @deprecated As of release 3.9.0, replaced by {@link #newestPublishedItemFirst()}
      */
     @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> newestItemFirst() {
@@ -145,6 +153,8 @@ public final class ItemComparator {
      * @param <I> any class that extends Item
      * @param dateTimeParser date time parser
      * @return comparator
+     *
+     * @deprecated As of release 3.9.0, replaced by {@link #newestPublishedItemFirst(DateTimeParser)}
      */
     @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> newestItemFirst(DateTimeParser dateTimeParser) {
@@ -158,7 +168,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> newestPublishedItemFirst(DateTimeParser dateTimeParser) {
-        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        Objects.requireNonNull(dateTimeParser, MUST_NOT_BE_NULL_MESSAGE);
         return Comparator.comparing((I i) ->
                         i.getPubDate().map(dateTimeParser::parse).orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder())).reversed();
@@ -171,7 +181,7 @@ public final class ItemComparator {
      * @return comparator
      */
     public static <I extends Item> Comparator<I> newestUpdatedItemFirst(DateTimeParser dateTimeParser) {
-        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        Objects.requireNonNull(dateTimeParser, MUST_NOT_BE_NULL_MESSAGE);
         return Comparator.comparing((I i) ->
                         i.getUpdated().or(i::getPubDate).map(dateTimeParser::parse).orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder())).reversed();
