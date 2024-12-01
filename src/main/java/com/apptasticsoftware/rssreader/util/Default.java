@@ -6,6 +6,7 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 /**
  * Provides default implementations for various components.
  */
+@SuppressWarnings("javaarchitecture:S7091")
 public class Default {
 
     private Default() {
