@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.internal.StreamUtil;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
+import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.internal.DaemonThreadFactory;
 import com.apptasticsoftware.rssreader.internal.XMLInputFactorySecurity;
@@ -71,7 +72,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final ScheduledExecutorService EXECUTOR = new ScheduledThreadPoolExecutor(1, new DaemonThreadFactory("RssReaderWorker"));
     private static final Cleaner CLEANER = Cleaner.create();
     private final HttpClient httpClient;
-    private DateTimeParser dateTimeParser = new DateTime();
+    private DateTimeParser dateTimeParser = Default.getDateTimeParser();
     private String userAgent = "";
     private Duration connectionTimeout = Duration.ofSeconds(25);
     private Duration requestTimeout = Duration.ofSeconds(25);

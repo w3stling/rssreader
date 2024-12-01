@@ -1,6 +1,5 @@
 package com.apptasticsoftware.rssreader.util;
 
-import com.apptasticsoftware.rssreader.DateTime;
 import com.apptasticsoftware.rssreader.RssReader;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("java:S5738")
 class ItemComparatorTest {
 
     @Test
@@ -27,8 +27,20 @@ class ItemComparatorTest {
     }
 
     @Test
+    void testSortNewestPublishedItem() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestPublishedItemFirst())
+                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
     void testSortNewestItemWithCustomDateTimeParser() throws IOException {
-        var items = new RssReader().setDateTimeParser(new DateTime())
+        var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                                    .read("https://www.theverge.com/rss/reviews/index.xml")
                                    .sorted(ItemComparator.newestItemFirst())
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -40,13 +52,38 @@ class ItemComparatorTest {
     }
 
     @Test
+    void testSortNewestPublishedItemWithCustomDateTimeParser() throws IOException {
+        var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
+                .read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestPublishedItemFirst())
+                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
     void testSortNewestItemWithDateTimeParser() throws IOException {
         var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
-                                   .sorted(ItemComparator.newestItemFirst(new DateTime()))
+                                   .sorted(ItemComparator.newestItemFirst(Default.getDateTimeParser()))
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .map(ZonedDateTime::toEpochSecond)
                                    .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
+    void testSortNewestPublishedItemWithDateTimeParser() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestPublishedItemFirst(Default.getDateTimeParser()))
+                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
 
         assertTrue(isDescendingSortOrder(items));
     }
@@ -63,12 +100,93 @@ class ItemComparatorTest {
     }
 
     @Test
+    void testSortOldestPublishedItemFirst() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.oldestPublishedItemFirst())
+                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        assertTrue(isAscendingSortOrder(items));
+    }
+
+    @Test
     void testSortOldestItemFirstWithDateTimeParser() throws IOException {
         var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
-                                   .sorted(ItemComparator.oldestItemFirst(new DateTime()))
+                                   .sorted(ItemComparator.oldestItemFirst(Default.getDateTimeParser()))
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .collect(Collectors.toList());
+
+        assertTrue(isAscendingSortOrder(items));
+    }
+
+    @Test
+    void testSortOldestPublishedItemFirstWithDateTimeParser() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.oldestPublishedItemFirst(Default.getDateTimeParser()))
+                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        assertTrue(isAscendingSortOrder(items));
+    }
+
+    @Test
+    void testSortNewestUpdatedItem() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestUpdatedItemFirst())
+                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
+    void testSortNewestUpdatedItemWithCustomDateTimeParser() throws IOException {
+        var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
+                .read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestUpdatedItemFirst())
+                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
+    void testSortNewestUpdatedItemWithDateTimeParser() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.newestUpdatedItemFirst(Default.getDateTimeParser()))
+                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .map(ZonedDateTime::toEpochSecond)
+                .collect(Collectors.toList());
+
+        assertTrue(isDescendingSortOrder(items));
+    }
+
+    @Test
+    void testSortOldestUpdatedItemFirst() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.oldestUpdatedItemFirst())
+                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        assertTrue(isAscendingSortOrder(items));
+    }
+
+    @Test
+    void testSortOldestUpdatedItemFirstWithDateTimeParser() throws IOException {
+        var items = new RssReader().read("https://www.theverge.com/rss/reviews/index.xml")
+                .sorted(ItemComparator.oldestUpdatedItemFirst(Default.getDateTimeParser()))
+                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
 
         assertTrue(isAscendingSortOrder(items));
     }
