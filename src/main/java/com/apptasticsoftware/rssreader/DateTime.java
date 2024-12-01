@@ -23,6 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 
 import java.time.*;
@@ -477,7 +478,7 @@ public class DateTime implements DateTimeParser {
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
     public static Comparator<Item> pubDateComparator() {
-        var dateTime = new DateTime();
+        var dateTime = Default.getDateTimeParser();
         return Comparator.comparing(i -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH));
     }
 
