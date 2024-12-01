@@ -66,7 +66,7 @@ class SortTest {
     @Test
     void testSortNewestFirst() throws IOException {
         var list = new RssReader().read("https://feeds.macrumors.com/MacRumors-All")
-                .sorted(ItemComparator.newestItemFirst())
+                .sorted(ItemComparator.newestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         assertFalse(list.isEmpty());
@@ -81,7 +81,7 @@ class SortTest {
     @Test
     void testSortOldestFirst() throws IOException {
         var list = new RssReader().read("https://feeds.macrumors.com/MacRumors-All")
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         assertFalse(list.isEmpty());

@@ -17,7 +17,6 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeed() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
                 .collect(Collectors.toList());
 
         assertEquals(10, res.size());
@@ -26,7 +25,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedItemTitle() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -36,7 +35,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedItemPubDate() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -46,7 +45,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedItemLink() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -56,7 +55,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedDescription() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -66,7 +65,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedGuid() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -76,7 +75,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedIsPermaLink() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
@@ -86,7 +85,7 @@ class MediaRssReaderTest {
     @Test
     void readMediaRssFeedThumbnail() {
         var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
-                .sorted(ItemComparator.oldestItemFirst())
+                .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);

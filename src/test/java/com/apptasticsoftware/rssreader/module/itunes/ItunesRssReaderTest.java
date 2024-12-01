@@ -16,7 +16,7 @@ class ItunesRssReaderTest {
     @Test
     void readItunesPodcastFeed() {
         var res = new ItunesRssReader().read(ItunesRssReader.class.getClassLoader().getResourceAsStream("itunes-podcast.xml"))
-                                       .sorted(ItemComparator.oldestItemFirst())
+                                       .sorted(ItemComparator.oldestPublishedItemFirst())
                                        .collect(Collectors.toList());
 
         assertEquals(9, res.size());
