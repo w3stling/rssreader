@@ -23,11 +23,10 @@
  */
 package com.apptasticsoftware.rssreader.util;
 
+import com.apptasticsoftware.rssreader.Channel;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.Item;
 
-import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -41,54 +40,153 @@ public final class ItemComparator {
     }
 
     /**
-     * Comparator for sorting Items on publication date in ascending order (oldest first)
-     * @param <I> any class that extend Item
+     * Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)
+     * @param <I> any class that extends Item
      * @return comparator
      */
+    @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> oldestItemFirst() {
-        var dateTime = Default.getDateTimeParser();
-        return Comparator.comparing((I i) -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH));
+        return oldestPublishedItemFirst();
     }
 
     /**
-     * Comparator for sorting Items on publication date in ascending order (oldest first)
-     * @param <I> any class that extend Item
+     * Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)
+     * @param <I> any class that extends Item
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> oldestPublishedItemFirst() {
+        return Comparator.comparing((I i) ->
+                        i.getPubDateZonedDateTime().orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder()));
+    }
+
+    /**
+     * Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)
+     * @param <I> any class that extends Item
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> oldestUpdatedItemFirst() {
+        return Comparator.comparing((I i) ->
+                        i.getUpdatedZonedDateTime().orElse(i.getPubDateZonedDateTime().orElse(null)),
+                Comparator.nullsLast(Comparator.naturalOrder()));
+    }
+
+    /**
+     * Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)
+     * @param <I> any class that extends Item
      * @param dateTimeParser date time parser
      * @return comparator
      */
+    @Deprecated(since = "3.9.0", forRemoval = true)
     public static <I extends Item> Comparator<I> oldestItemFirst(DateTimeParser dateTimeParser) {
-        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
-        return Comparator.comparing((I i) -> i.getPubDate().map(dateTimeParser::parse).map(ZonedDateTime::toInstant).orElse(Instant.EPOCH));
+        return oldestPublishedItemFirst(dateTimeParser);
     }
 
     /**
-     * Comparator for sorting Items on publication date in descending order (newest first)
-     * @param <I> any class that extend Item
-     * @return comparator
-     */
-    public static <I extends Item> Comparator<I> newestItemFirst() {
-        var dateTime = Default.getDateTimeParser();
-        return Comparator.comparing((I i) -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH)).reversed();
-    }
-
-    /**
-     * Comparator for sorting Items on publication date in descending order (newest first)
-     * @param <I> any class that extend Item
+     * Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)
+     * @param <I> any class that extends Item
      * @param dateTimeParser date time parser
      * @return comparator
      */
-    public static <I extends Item> Comparator<I> newestItemFirst(DateTimeParser dateTimeParser) {
+    public static <I extends Item> Comparator<I> oldestPublishedItemFirst(DateTimeParser dateTimeParser) {
         Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
-        return Comparator.comparing((I i) -> i.getPubDate().map(dateTimeParser::parse).map(ZonedDateTime::toInstant).orElse(Instant.EPOCH)).reversed();
+        return Comparator.comparing((I i) ->
+                        i.getPubDate().map(dateTimeParser::parse).orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder()));
+    }
+
+    /**
+     * Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)
+     * @param <I> any class that extends Item
+     * @param dateTimeParser date time parser
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> oldestUpdatedItemFirst(DateTimeParser dateTimeParser) {
+        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        return Comparator.comparing((I i) ->
+                        i.getUpdated().or(i::getPubDate).map(dateTimeParser::parse).orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder()));
+    }
+
+    /**
+     * Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @return comparator
+     */
+    @Deprecated(since = "3.9.0", forRemoval = true)
+    public static <I extends Item> Comparator<I> newestItemFirst() {
+        return newestPublishedItemFirst();
+    }
+
+    /**
+     * Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> newestPublishedItemFirst() {
+        return Comparator.comparing((I i) ->
+                        i.getPubDateZonedDateTime().orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder())).reversed();
+    }
+
+    /**
+     * Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> newestUpdatedItemFirst() {
+        return Comparator.comparing((I i) ->
+                        i.getUpdatedZonedDateTime().orElse(i.getPubDateZonedDateTime().orElse(null)),
+                Comparator.nullsLast(Comparator.naturalOrder())).reversed();
+    }
+
+    /**
+     * Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @param dateTimeParser date time parser
+     * @return comparator
+     */
+    @Deprecated(since = "3.9.0", forRemoval = true)
+    public static <I extends Item> Comparator<I> newestItemFirst(DateTimeParser dateTimeParser) {
+        return newestPublishedItemFirst(dateTimeParser);
+    }
+
+    /**
+     * Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @param dateTimeParser date time parser
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> newestPublishedItemFirst(DateTimeParser dateTimeParser) {
+        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        return Comparator.comparing((I i) ->
+                        i.getPubDate().map(dateTimeParser::parse).orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder())).reversed();
+    }
+
+    /**
+     * Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)
+     * @param <I> any class that extends Item
+     * @param dateTimeParser date time parser
+     * @return comparator
+     */
+    public static <I extends Item> Comparator<I> newestUpdatedItemFirst(DateTimeParser dateTimeParser) {
+        Objects.requireNonNull(dateTimeParser, "Date time parser must not be null");
+        return Comparator.comparing((I i) ->
+                        i.getUpdated().or(i::getPubDate).map(dateTimeParser::parse).orElse(null),
+                Comparator.nullsLast(Comparator.naturalOrder())).reversed();
     }
 
     /**
      * Comparator for sorting Items on channel title
-     * @param <I> any class that extend Item
+     * @param <I> any class that extends Item
      * @return comparator
      */
     public static <I extends Item> Comparator<I> channelTitle() {
-        return Comparator.comparing((I i) -> i.getChannel().getTitle());
+        return Comparator.comparing(
+                Item::getChannel,
+                Comparator.nullsFirst(Comparator.comparing(
+                        Channel::getTitle, Comparator.nullsFirst(Comparator.naturalOrder()))));
     }
 
 }

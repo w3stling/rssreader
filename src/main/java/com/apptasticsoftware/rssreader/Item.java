@@ -63,7 +63,7 @@ public class Item implements Comparable<Item> {
     @Deprecated(since="3.5.0", forRemoval=true)
     public Item() {
         dateTimeParser = Default.getDateTimeParser();
-        defaultComparator = ItemComparator.newestItemFirst();
+        defaultComparator = ItemComparator.newestPublishedItemFirst();
     }
 
     /**
@@ -72,7 +72,7 @@ public class Item implements Comparable<Item> {
      */
     public Item(DateTimeParser dateTimeParser) {
         this.dateTimeParser = dateTimeParser;
-        defaultComparator = ItemComparator.newestItemFirst(dateTimeParser);
+        defaultComparator = ItemComparator.newestPublishedItemFirst(dateTimeParser);
     }
 
     /**
