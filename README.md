@@ -2,8 +2,8 @@ RSS Reader
 ==========
 
 [![Build](https://github.com/w3stling/rssreader/actions/workflows/build.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/build.yml)
-[![Download](https://img.shields.io/badge/download-3.8.2-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.8.2/overview)
-[![Javadoc](https://img.shields.io/badge/javadoc-3.8.2-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.8.2)
+[![Download](https://img.shields.io/badge/download-3.9.0-brightgreen.svg)](https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.9.0/overview)
+[![Javadoc](https://img.shields.io/badge/javadoc-3.9.0-blue.svg)](https://w3stling.github.io/rssreader/javadoc/3.9.0)
 [![License](http://img.shields.io/:license-MIT-blue.svg?style=flat-round)](http://apptastic-software.mit-license.org)   
 [![CodeQL](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/w3stling/rssreader/actions/workflows/codeql-analysis.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
@@ -12,7 +12,8 @@ RSS Reader
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=w3stling_rssreader&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=w3stling_rssreader)
 
-> **Note** - from version 3.0.0:
+> [!NOTE]
+> From version 3.0.0:
 > * New Java package name
 > * New group ID in Maven / Gradle dependency declaration
 > * Moved repository from `JCenter` to `Maven Central Repository`
@@ -43,11 +44,19 @@ List<Item> footballArticles = rssFeed.filter(i -> i.getTitle().equals(Optional.o
 ```
 
 ### Read feed from a file
+Reading from file using InputStream
 ```java
-InputStream file = new FileInputStream("Path to file");
-List<Item> items = new RssReader().read(file);
+InputStream inputStream = new FileInputStream("/path/to/file");
+List<Item> items = new RssReader().read(inputStream);
                                   .toList();
 ```
+
+Reading from file using file URI
+```java
+List<Item> items = new RssReader().read("file:/path/to/file");
+                                  .toList();
+```
+
 
 ### Read from multiple feeds
 Read from multiple feeds into a single stream of items sored in descending (newest first) publication date order and prints the title.
@@ -61,7 +70,12 @@ new RssReader().read(urls)
 
 To change sort order to ascending (oldest first) publication date
 ```java
-.sorted(ItemComparator.oldestItemFirst())
+.sorted(ItemComparator.oldestPublishedItemFirst())
+```
+For sorting on updated date instead of publication date
+```java
+.sorted(ItemComparator.newestUpdatedItemFirst())
+.sorted(ItemComparator.oldestUpdatedItemFirst())
 ```
 
 
@@ -96,7 +110,7 @@ Add dependency declaration:
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.8.2</version>
+            <version>3.9.0</version>
         </dependency>
     </dependencies>
     ...
@@ -107,7 +121,7 @@ Add dependency declaration:
 Add dependency declaration:
 ```groovy
 dependencies {
-    implementation 'com.apptasticsoftware:rssreader:3.8.2'
+    implementation 'com.apptasticsoftware:rssreader:3.9.0'
 }
 ```
 
@@ -152,7 +166,7 @@ License
     SOFTWARE.
 
 
-[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.8.2/overview
+[1]: https://central.sonatype.com/artifact/com.apptasticsoftware/rssreader/3.9.0/overview
 [2]: https://maven.apache.org
 [3]: https://gradle.org
 [4]: https://help.apple.com/itc/podcasts_connect/#/itcb54353390
