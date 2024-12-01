@@ -102,7 +102,7 @@ loadScripts(document, 'script');</script>
 <section class="method-summary" id="method-summary">
 <h2>Method Summary</h2>
 <div id="method-summary-table">
-<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button><button id="method-summary-table-tab6" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab6', 3)" class="table-tab">Deprecated Methods</button></div>
 <div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
 <div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
@@ -113,25 +113,73 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
 <div class="block">Comparator for sorting Items on channel title</div>
 </div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#newestItemFirst()" class="member-name-link">newestItemFirst</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#newestPublishedItemFirst()"><code>newestPublishedItemFirst()</code></a></div>
+</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#newestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">newestItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#newestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)"><code>newestPublishedItemFirst(DateTimeParser)</code></a></div>
+</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestItemFirst()" class="member-name-link">newestItemFirst</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestPublishedItemFirst()" class="member-name-link">newestPublishedItemFirst</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Comparator for sorting Items on publication date in descending order (newest first)</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">newestItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">newestPublishedItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Comparator for sorting Items on publication date in descending order (newest first)</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestItemFirst()" class="member-name-link">oldestItemFirst</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestUpdatedItemFirst()" class="member-name-link">newestUpdatedItemFirst</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Comparator for sorting Items on publication date in ascending order (oldest first)</div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">oldestItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#newestUpdatedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">newestUpdatedItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Comparator for sorting Items on publication date in ascending order (oldest first)</div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#oldestItemFirst()" class="member-name-link">oldestItemFirst</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#oldestPublishedItemFirst()"><code>oldestPublishedItemFirst()</code></a></div>
+</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6"><code><a href="#oldestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">oldestItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4 method-summary-table-tab6">
+<div class="block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#oldestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)"><code>oldestPublishedItemFirst(DateTimeParser)</code></a></div>
+</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestPublishedItemFirst()" class="member-name-link">oldestPublishedItemFirst</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">oldestPublishedItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestUpdatedItemFirst()" class="member-name-link">oldestUpdatedItemFirst</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;<br><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a><wbr>&lt;I&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#oldestUpdatedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">oldestUpdatedItemFirst</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)</div>
 </div>
 </div>
 </div>
@@ -153,11 +201,42 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="oldestItemFirst()">
 <h3>oldestItemFirst</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestItemFirst</span>()</div>
-<div class="block">Comparator for sorting Items on publication date in ascending order (oldest first)</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.9.0",
+            <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestItemFirst</span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#oldestPublishedItemFirst()"><code>oldestPublishedItemFirst()</code></a></div>
+</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>I</code> - any class that extend Item</dd>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="oldestPublishedItemFirst()">
+<h3>oldestPublishedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestPublishedItemFirst</span>()</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="oldestUpdatedItemFirst()">
+<h3>oldestUpdatedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestUpdatedItemFirst</span>()</div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
 <dt>Returns:</dt>
 <dd>comparator</dd>
 </dl>
@@ -166,11 +245,46 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="oldestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
 <h3>oldestItemFirst</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
-<div class="block">Comparator for sorting Items on publication date in ascending order (oldest first)</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.9.0",
+            <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#oldestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)"><code>oldestPublishedItemFirst(DateTimeParser)</code></a></div>
+</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>I</code> - any class that extend Item</dd>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Parameters:</dt>
+<dd><code>dateTimeParser</code> - date time parser</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="oldestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
+<h3>oldestPublishedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestPublishedItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in ascending order (oldest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Parameters:</dt>
+<dd><code>dateTimeParser</code> - date time parser</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="oldestUpdatedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
+<h3>oldestUpdatedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">oldestUpdatedItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in ascending order (oldest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
 <dt>Parameters:</dt>
 <dd><code>dateTimeParser</code> - date time parser</dd>
 <dt>Returns:</dt>
@@ -181,11 +295,42 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="newestItemFirst()">
 <h3>newestItemFirst</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestItemFirst</span>()</div>
-<div class="block">Comparator for sorting Items on publication date in descending order (newest first)</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.9.0",
+            <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestItemFirst</span>()</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#newestPublishedItemFirst()"><code>newestPublishedItemFirst()</code></a></div>
+</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>I</code> - any class that extend Item</dd>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="newestPublishedItemFirst()">
+<h3>newestPublishedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestPublishedItemFirst</span>()</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="newestUpdatedItemFirst()">
+<h3>newestUpdatedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestUpdatedItemFirst</span>()</div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
 <dt>Returns:</dt>
 <dd>comparator</dd>
 </dl>
@@ -194,11 +339,46 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="newestItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
 <h3>newestItemFirst</h3>
-<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
-<div class="block">Comparator for sorting Items on publication date in descending order (newest first)</div>
+<div class="member-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>(<a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#since()" title="class or interface in java.lang" class="external-link">since</a>="3.9.0",
+            <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Deprecated.html#forRemoval()" title="class or interface in java.lang" class="external-link">forRemoval</a>=true)
+</span><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
+<div class="deprecation-comment">As of release 3.9.0, replaced by <a href="#newestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)"><code>newestPublishedItemFirst(DateTimeParser)</code></a></div>
+</div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>I</code> - any class that extend Item</dd>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Parameters:</dt>
+<dd><code>dateTimeParser</code> - date time parser</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="newestPublishedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
+<h3>newestPublishedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestPublishedItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="block">Comparator for sorting Items on initial creation or first availability (publication date) in descending order (newest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
+<dt>Parameters:</dt>
+<dd><code>dateTimeParser</code> - date time parser</dd>
+<dt>Returns:</dt>
+<dd>comparator</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="newestUpdatedItemFirst(com.apptasticsoftware.rssreader.DateTimeParser)">
+<h3>newestUpdatedItemFirst</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;I extends <a href="../Item.html" title="class in com.apptasticsoftware.rssreader">Item</a>&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html" title="class or interface in java.util" class="external-link">Comparator</a>&lt;I&gt;</span>&nbsp;<span class="element-name">newestUpdatedItemFirst</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="block">Comparator for sorting Items on updated date if exist otherwise on publication date in descending order (newest first)</div>
+<dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>I</code> - any class that extends Item</dd>
 <dt>Parameters:</dt>
 <dd><code>dateTimeParser</code> - date time parser</dd>
 <dt>Returns:</dt>
@@ -213,7 +393,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Comparator for sorting Items on channel title</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
-<dd><code>I</code> - any class that extend Item</dd>
+<dd><code>I</code> - any class that extends Item</dd>
 <dt>Returns:</dt>
 <dd>comparator</dd>
 </dl>
