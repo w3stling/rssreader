@@ -44,11 +44,19 @@ List<Item> footballArticles = rssFeed.filter(i -> i.getTitle().equals(Optional.o
 ```
 
 ### Read feed from a file
+Reading from file using InputStream
 ```java
-InputStream file = new FileInputStream("Path to file");
-List<Item> items = new RssReader().read(file);
+InputStream inputStream = new FileInputStream("/path/to/file");
+List<Item> items = new RssReader().read(inputStream);
                                   .toList();
 ```
+
+Reading from file using file URI
+```java
+List<Item> items = new RssReader().read("file:/path/to/file");
+                                  .toList();
+```
+
 
 ### Read from multiple feeds
 Read from multiple feeds into a single stream of items sored in descending (newest first) publication date order and prints the title.
@@ -62,7 +70,12 @@ new RssReader().read(urls)
 
 To change sort order to ascending (oldest first) publication date
 ```java
-.sorted(ItemComparator.oldestItemFirst())
+.sorted(ItemComparator.oldestPublishedItemFirst())
+```
+For sorting on updated date instead of publication date
+```java
+.sorted(ItemComparator.newestUpdatedItemFirst())
+.sorted(ItemComparator.oldestUpdatedItemFirst())
 ```
 
 
