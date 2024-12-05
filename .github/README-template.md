@@ -59,7 +59,7 @@ List<Item> items = new RssReader().read("file:/path/to/file");
 
 
 ### Read from multiple feeds
-Read from multiple feeds into a single stream of items sored in descending (newest first) publication date order and prints the title.
+Read from multiple feeds into a single stream of items sorted in descending (newest first) publication date order and prints the title.
 ```java
 List<String> urls = List.of(URL1, URL2, URL3, URL4, URL5); 
 new RssReader().read(urls)
