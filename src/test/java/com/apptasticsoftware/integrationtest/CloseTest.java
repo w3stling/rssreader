@@ -764,14 +764,14 @@ class CloseTest {
 
     @Test
     void testDoubleStreamMapToInt() {
-        int sum = getReaderDoubleStream().mapToInt(i -> Double.valueOf(i).intValue()).sum();
+        int sum = getReaderDoubleStream().mapToInt(i -> ((int) i)).sum();
         assertEquals(1, closeCounter);
         assertEquals(102.0, sum);
     }
 
     @Test
     void testDoubleStreamMapToLong() {
-        long sum = getReaderDoubleStream().mapToLong(i -> Double.valueOf(i).longValue()).sum();
+        long sum = getReaderDoubleStream().mapToLong(i -> ((long)i)).sum();
         assertEquals(1, closeCounter);
         assertEquals(102, sum);
     }
