@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isEmpty;
@@ -16,7 +17,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeed() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(10, res.size());
@@ -24,7 +25,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedItemTitle() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -34,7 +35,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedItemPubDate() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -44,7 +45,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedItemLink() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -54,7 +55,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedDescription() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -64,7 +65,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedGuid() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -74,7 +75,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedIsPermaLink() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -84,7 +85,7 @@ class MediaRssReaderTest {
 
     @Test
     void readMediaRssFeedThumbnail() {
-        var res = new MediaRssReader().read(MediaRssReader.class.getClassLoader().getResourceAsStream("media-rss.xml"))
+        var res = new MediaRssReader().read(fromFile("media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -99,5 +100,9 @@ class MediaRssReaderTest {
     @Test
     void equalsContract() {
         EqualsVerifier.simple().forClass(MediaRssItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+    }
+
+    private InputStream fromFile(String fileName) {
+        return getClass().getClassLoader().getResourceAsStream(fileName);
     }
 }
