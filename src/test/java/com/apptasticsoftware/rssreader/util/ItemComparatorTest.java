@@ -3,7 +3,6 @@ package com.apptasticsoftware.rssreader.util;
 import com.apptasticsoftware.rssreader.RssReader;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -16,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ItemComparatorTest {
 
     @Test
-    void testSortNewestItem() throws IOException {
+    void testSortNewestItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst())
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -28,7 +27,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestPublishedItem() throws IOException {
+    void testSortNewestPublishedItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst())
                 .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -40,7 +39,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestItemWithCustomDateTimeParser() throws IOException {
+    void testSortNewestItemWithCustomDateTimeParser() {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                                    .read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst())
@@ -53,7 +52,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestPublishedItemWithCustomDateTimeParser() throws IOException {
+    void testSortNewestPublishedItemWithCustomDateTimeParser() {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                 .read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst())
@@ -66,7 +65,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestItemWithDateTimeParser() throws IOException {
+    void testSortNewestItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst(Default.getDateTimeParser()))
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -78,7 +77,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestPublishedItemWithDateTimeParser() throws IOException {
+    void testSortNewestPublishedItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst(Default.getDateTimeParser()))
                 .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -90,7 +89,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestItemFirst() throws IOException {
+    void testSortOldestItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.oldestItemFirst())
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -101,7 +100,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestPublishedItemFirst() throws IOException {
+    void testSortOldestPublishedItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -112,7 +111,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestItemFirstWithDateTimeParser() throws IOException {
+    void testSortOldestItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.oldestItemFirst(Default.getDateTimeParser()))
                                    .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -123,7 +122,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestPublishedItemFirstWithDateTimeParser() throws IOException {
+    void testSortOldestPublishedItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst(Default.getDateTimeParser()))
                 .map(i -> i.getPubDateZonedDateTime().orElse(null))
@@ -134,7 +133,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestUpdatedItem() throws IOException {
+    void testSortNewestUpdatedItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst())
                 .map(i -> i.getUpdatedZonedDateTime().orElse(null))
@@ -146,7 +145,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestUpdatedItemWithCustomDateTimeParser() throws IOException {
+    void testSortNewestUpdatedItemWithCustomDateTimeParser() {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                 .read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst())
@@ -159,7 +158,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortNewestUpdatedItemWithDateTimeParser() throws IOException {
+    void testSortNewestUpdatedItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst(Default.getDateTimeParser()))
                 .map(i -> i.getUpdatedZonedDateTime().orElse(null))
@@ -171,7 +170,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestUpdatedItemFirst() throws IOException {
+    void testSortOldestUpdatedItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestUpdatedItemFirst())
                 .map(i -> i.getUpdatedZonedDateTime().orElse(null))
@@ -182,7 +181,7 @@ class ItemComparatorTest {
     }
 
     @Test
-    void testSortOldestUpdatedItemFirstWithDateTimeParser() throws IOException {
+    void testSortOldestUpdatedItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestUpdatedItemFirst(Default.getDateTimeParser()))
                 .map(i -> i.getUpdatedZonedDateTime().orElse(null))
