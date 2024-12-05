@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.*;
 import java.util.stream.*;
 
+@SuppressWarnings("javaarchitecture:S7027")
 public class AbstractAutoCloseStream<T, S extends BaseStream<T, S>> implements AutoCloseable {
     private final S stream;
     private final AtomicBoolean isClosed;

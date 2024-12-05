@@ -36,6 +36,7 @@ import java.util.stream.*;
  * <p>
  * The {@link #iterator()} and {@link #spliterator()} methods are not supported by this class.
  */
+@SuppressWarnings("javaarchitecture:S7027")
 public class AutoCloseStream<T> extends AbstractAutoCloseStream<T, Stream<T>> implements Stream<T> {
 
     AutoCloseStream(Stream<T> stream) {
