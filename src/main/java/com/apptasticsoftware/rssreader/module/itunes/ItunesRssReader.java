@@ -26,6 +26,8 @@ package com.apptasticsoftware.rssreader.module.itunes;
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
+import java.net.http.HttpClient;
+
 import static com.apptasticsoftware.rssreader.util.Mapper.mapBoolean;
 import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
 
@@ -33,6 +35,21 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
  * Class for reading podcast (itunes) feeds.
  */
 public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem> {
+
+    /**
+     * Constructor
+     */
+    public ItunesRssReader() {
+        super();
+    }
+
+    /**
+     * Constructor
+     * @param httpClient http client
+     */
+    public ItunesRssReader(HttpClient httpClient) {
+        super(httpClient);
+    }
 
     @Override
     protected void registerChannelTags() {
