@@ -350,18 +350,18 @@ class RssReaderIntegrationTest {
             // Validate channel
             Channel channel = item.getChannel();
             assertNotNull(channel);
-            assertThat(channel.getTitle(), is("Di Digital - Senaste nytt"));
-            assertThat(channel.getDescription(), is(""));
+            assertThat(channel.getTitle(), is("Dagens industri"));
+            assertThat(channel.getDescription(), is("Dagens industri"));
             assertThat(channel.getLanguage(), isEmpty());
-            assertThat(channel.getLink(), is("https://digital.di.se/rss"));
+            assertThat(channel.getLink(), is("https://www.di.se"));
             assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getGenerator(), isPresentAndIs("ia-rss"));
+            assertThat(channel.getLastBuildDate(), isPresent());
 
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
-            assertThat(item.getIsPermaLink(), isEmpty());
+            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
