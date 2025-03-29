@@ -148,14 +148,14 @@ class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Placera.se"));
             assertThat(channel.getDescription(), is(not(emptyString())));
             assertThat(channel.getLink(), is("https://www.placera.se"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getCopyright(), isPresentAndIs("Placera.se"));
+            assertThat(channel.getGenerator(), isPresentAndIs("RSS for Node"));
+            assertThat(channel.getLastBuildDate(), isPresent());
 
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
+            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
@@ -181,14 +181,14 @@ class RssReaderIntegrationTest {
             assertThat(channel.getTitle(), is("Placera.se"));
             assertThat(channel.getDescription(), is(not(emptyString())));
             assertThat(channel.getLink(), is("https://www.placera.se"));
-            assertThat(channel.getCopyright(), isEmpty());
-            assertThat(channel.getGenerator(), isEmpty());
-            assertThat(channel.getLastBuildDate(), isEmpty());
+            assertThat(channel.getCopyright(), isPresentAndIs("Placera.se"));
+            assertThat(channel.getGenerator(), isPresentAndIs("RSS for Node"));
+            assertThat(channel.getLastBuildDate(), isPresent());
 
             // Validate item
             assertNotNull(item);
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
-            assertThat(item.getIsPermaLink(), isPresentAndIs(true));
+            assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
