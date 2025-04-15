@@ -479,7 +479,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     public Stream<I> read(InputStream inputStream) {
         Objects.requireNonNull(inputStream, "Input stream must not be null");
+        return read("", inputStream);
+    }
 
+    protected Stream<I> read(String source, InputStream inputStream) {
         if (!isInitialized) {
             initialize();
             isInitialized = true;
@@ -487,7 +490,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         inputStream = new BufferedInputStream(inputStream);
         removeBadData(inputStream);
-        var itemIterator = new RssItemIterator(inputStream);
+        var itemIterator = new RssItemIterator(source, inputStream);
         return AutoCloseStream.of(StreamUtil.asStream(itemIterator).onClose(itemIterator::close));
     }
 
@@ -510,7 +513,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 // Read from file
                 return CompletableFuture.supplyAsync(() -> {
                     try {
-                        return read(new FileInputStream(uri.getPath()));
+                        return read(uri.getPath(), new FileInputStream(uri.getPath()));
                     } catch (FileNotFoundException e) {
                         throw new CompletionException(e);
                     }
@@ -523,7 +526,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             return CompletableFuture.supplyAsync(() -> {
                 // Read feed data provided as a string
                 var inputStream = new ByteArrayInputStream(url.getBytes(StandardCharsets.UTF_8));
-                return read(inputStream);
+                return read("", inputStream);
             });
         }
     }
@@ -562,7 +565,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
                 inputStream = new BufferedInputStream(inputStream);
                 removeBadData(inputStream);
-                var itemIterator = new RssItemIterator(inputStream);
+                var itemIterator = new RssItemIterator(response.uri().toString(), inputStream);
                 return AutoCloseStream.of(StreamUtil.asStream(itemIterator).onClose(itemIterator::close));
             } catch (IOException e) {
                 throw new CompletionException(e);
@@ -620,6 +623,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private final StringBuilder textBuilder;
         private final Map<String, StringBuilder> childNodeTextBuilder;
         private final Deque<String> elementStack;
+        private final String source;
         private XMLStreamReader reader;
         private C channel;
         private I item = null;
@@ -630,12 +634,13 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private final AtomicBoolean isClosed;
         private Cleaner.Cleanable cleanable;
 
-        public RssItemIterator(InputStream is) {
+        public RssItemIterator(String source, InputStream is) {
             nextItem = null;
             textBuilder = new StringBuilder();
             childNodeTextBuilder = new HashMap<>();
             elementStack = new ArrayDeque<>();
             isClosed = new AtomicBoolean(false);
+            this.source = source;
 
             try {
                 // disable XML external entity (XXE) processing
@@ -650,7 +655,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
             }
             catch (XMLStreamException e) {
-                LOGGER.log(Level.WARNING, "Failed to process XML.", e);
+                LOGGER.log(Level.WARNING, String.format("Failed to process XML from feed %s", source), e);
             }
         }
 
@@ -706,7 +711,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     }
                 }
             } catch (XMLStreamException e) {
-                LOGGER.log(Level.WARNING, "Failed to parse XML.", e);
+                LOGGER.log(Level.WARNING, String.format("Failed to parse XML from feed %s", source), e);
             }
 
             close();
