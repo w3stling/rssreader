@@ -655,7 +655,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }
             }
             catch (XMLStreamException e) {
-                LOGGER.log(Level.WARNING, String.format("Failed to process XML from source %s", source), e);
+                LOGGER.log(Level.WARNING, String.format("Failed to process XML from feed %s", source), e);
             }
         }
 
@@ -711,7 +711,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     }
                 }
             } catch (XMLStreamException e) {
-                LOGGER.log(Level.WARNING, String.format("Failed to parse XML from source %s", source), e);
+                LOGGER.log(Level.WARNING, String.format("Failed to parse XML from feed %s", source), e);
             }
 
             close();
