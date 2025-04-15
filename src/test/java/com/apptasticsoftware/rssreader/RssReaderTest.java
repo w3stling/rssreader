@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
@@ -527,8 +528,9 @@ class RssReaderTest {
     }
 
 
-    private CompletableFuture createMock(String response) {
+    private CompletableFuture<?> createMock(String response) {
         var httpResponse = mock(HttpResponse.class);
+        doReturn(URI.create("https://www.site.com/feed")).when(httpResponse).uri();
         InputStream responseStream = new ByteArrayInputStream(response.getBytes());
         doReturn(responseStream).when(httpResponse).body();
 
