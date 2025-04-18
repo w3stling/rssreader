@@ -30,7 +30,7 @@ class SortTest {
                 "https://worldoftanks.eu/en/rss/news/",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
                 "https://github.com/openjdk/jdk/commits.atom",
-                "https://azurecomcdn.azureedge.net/en-us/updates/feed/?updateType=retirements",
+                "https://www.microsoft.com/releasecommunications/api/v2/azure/rss",
                 "https://blog.ploeh.dk/rss.xml",
                 "https://www.politico.com/rss/politicopicks.xml",
                 "https://www.e1.ru/talk/forum/rss.php?f=86",
