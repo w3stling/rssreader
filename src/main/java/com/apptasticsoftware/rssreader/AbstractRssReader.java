@@ -80,7 +80,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final Map<String, String> headers = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
-    private final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
+    protected final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final Set<String> collectChildNodesForTag = Set.of("content", "summary");

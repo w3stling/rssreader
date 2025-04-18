@@ -1,11 +1,17 @@
 package com.apptasticsoftware.rssreader.util;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.function.Predicate.not;
 
 /**
  * Provides methods for mapping field
@@ -21,7 +27,7 @@ public final class Mapper {
      * @param func boolean setter method
      */
     public static void mapBoolean(String text, Consumer<Boolean> func) {
-        text = text.toLowerCase();
+        text = text.toLowerCase(Locale.US);
         if ("true".equals(text) || "yes".equals(text)) {
             func.accept(Boolean.TRUE);
         } else if ("false".equals(text) || "no".equals(text)) {
@@ -47,6 +53,15 @@ public final class Mapper {
         mapNumber(text, func, Long::valueOf);
     }
 
+    /**
+     * Maps a double text value to a double field.
+     * @param text text value
+     * @param func double setter method
+     */
+    public static void mapDouble(String text, Consumer<Double> func) {
+        mapNumber(text, func, Double::valueOf);
+    }
+
     private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
         if (!isNullOrEmpty(text)) {
             try {
@@ -57,6 +72,18 @@ public final class Mapper {
                 }
             }
         }
+    }
+
+    /**
+     * Split string on comma delimiter.
+     * @param string string to split
+     * @return list of strings
+     */
+    public static List<String> split(String string) {
+        return Stream.of(string.split(","))
+                .map(String::trim)
+                .filter(not(String::isBlank))
+                .collect(Collectors.toList());
     }
 
     /**

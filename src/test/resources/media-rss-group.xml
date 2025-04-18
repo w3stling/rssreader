@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0" xml:lang="en-US">
+    <channel>
+        <title>Vimeo / pvz.lt’s videos</title>
+        <link>https://vimeo.com/example/videos</link>
+        <description>Videos uploaded by pvz.lt on Vimeo.</description>
+        <pubDate>Thu, 04 Apr 2024 15:50:23 -0400</pubDate>
+        <generator>Vimeo</generator>
+        <atom:link rel="self" href="https://vimeo.com/example/videos/example/videos/rss"/>
+        <atom:link rel="hub" href="http://vimeo.superfeedr.com"/>
+        <atom:link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
+        <image>
+            <url>https://i.vimeocdn.com/portrait/77867747_100x100?subrect=69%2C49%2C2041%2C2021&amp;r=cover</url>
+            <title>Vimeo / pvz.lt’s videos</title>
+            <link>https://vimeo.com/example/videos</link>
+        </image>
+        <item>
+            <title>Ignitis_wind</title>
+            <pubDate>Mon, 07 Nov 2022 14:51:45 -0500</pubDate>
+            <link>https://vimeo.com/768251452</link>
+            <description>This is &amp;quot;Ignitis_wind&amp;quot; by pvz.lt on Vimeo, the home for high quality videos and the people who love them.</description>
+            <guid isPermaLink="false">tag:vimeo,2022-11-07:clip768251452</guid>
+            <media:group>
+                <media:content url="http://www.example.com/examples/mrss/example1.mp4" fileSize="1326739508" duration="120" medium="video" type="video/mp4" isDefault="true" expression="sample" bitrate="3317.2" framerate="25.3" samplingrate="44.1" channels="2" height="200" width="300" lang="en-us"/>
+                <media:content url="http://www.example.com/examples/mrss/example2.mp4" type="video/mp4" duration="91" width="720" height="406" />
+                <media:title type="plain">Grilling Steaks for Summer</media:title>
+                <media:description type="plain">Get perfectly done steaks every time</media:description>
+                <media:thumbnail url="http://www.example.com/examples/mrss/example.jpg" width="720" />
+                <media:thumbnail url="http://www.foo.com/keyframe.jpg" width="75" height="50" time="12:05:01.123" />
+                <media:keywords>Steaks, Summer</media:keywords>
+                <media:restriction type="sharing" relationship="deny" />
+                <media:restriction relationship="allow" type="country">au us</media:restriction>
+                <media:text type="plain">Oh, say, can you see, by the dawn's early light</media:text>
+                <media:text type="plain" lang="en" start="00:00:10.000" end="00:00:17.000">By the dawn's early light</media:text>
+                <media:comments>
+                    <media:comment>comment1</media:comment>
+                    <media:comment>comment2</media:comment>
+                </media:comments>
+                <media:responses>
+                    <media:response>http://www.response1.com</media:response>
+                    <media:response>http://www.response2.com</media:response>
+                </media:responses>
+                <media:backLinks>
+                    <media:backLink>http://www.backlink1.com</media:backLink>
+                    <media:backLink>http://www.backlink2.com</media:backLink>
+                </media:backLinks>
+                <media:status state="blocked" reason="http://www.reasonforblocking.com" />
+                <media:price type="rent" price="19.99" currency="EUR" />
+                <media:price type="subscription" info="http://www.dummy.jp/subscription_info" price="18.88" currency="USD" />
+                <media:embed url="http://www.foo.com/player.swf" width="512" height="323">
+                    <media:param name="type">application/x-shockwave-flash</media:param>
+                    <media:param name="width">512</media:param>
+                    <media:param name="height">323</media:param>
+                    <media:param name="allowFullScreen">true</media:param>
+                    <media:param name="flashVars">
+                        id=12345&amp;vid=678912i&amp;lang=en-us&amp;intl=us&amp;thumbUrl=http://www.foo.com/thumbnail.jpg
+                    </media:param>
+                </media:embed>
+                <media:subTitle type="application/smil" lang="en-us" href="http://www.foo.org/subtitle.smil" />
+                <media:subTitle type="application/smil" lang="fr-FR" href="http://www.foo.org/fr/subtitle.smil" />
+                <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile480.torrent" />
+                <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile1080.torrent" />
+                <media:location description="My house" start="00:01" end="01:00">
+                    <georss:where>
+                        <gml:Point>
+                            <gml:pos>35.669998 139.770004</gml:pos>
+                        </gml:Point>
+                    </georss:where>
+                </media:location>
+                <media:scenes>
+                    <media:scene>
+                        <sceneTitle>sceneTitle1</sceneTitle>
+                        <sceneDescription>sceneDesc1</sceneDescription>
+                        <sceneStartTime>00:15</sceneStartTime>
+                        <sceneEndTime>00:45</sceneEndTime>
+                    </media:scene>
+                    <media:scene>
+                        <sceneTitle>sceneTitle2</sceneTitle>
+                        <sceneDescription>sceneDesc2</sceneDescription>
+                        <sceneStartTime>00:57</sceneStartTime>
+                        <sceneEndTime>01:45</sceneEndTime>
+                    </media:scene>
+                </media:scenes>
+                <media:hash algo="md5">dfdec888b72151965a34b4b59031290a</media:hash>
+                <media:hash algo="sha-1">2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</media:hash>
+                <!--
+                <media:community>
+                    <media:starRating count="105227" average="4.65" min="1" max="5"/>
+                    <media:statistics views="1944962" />
+                </media:community>
+                -->
+                <media:community>
+                    <media:starRating average="3.5" count="20" min="1" max="10" />
+                    <media:statistics views="56" favorites="5" />
+                    <media:tags>news: 5, abc:3, reuters</media:tags>
+                </media:community>
+                <media:copyright url="https://creativecommons.org/licenses/by/4.0/">2005 FooBar Media</media:copyright>
+            </media:group>
+        </item>
+    </channel>
+</rss>
