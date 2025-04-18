@@ -23,6 +23,8 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.connection.HttpClientConnection;
+import com.apptasticsoftware.rssreader.connection.HttpUrlConnection;
 import com.apptasticsoftware.rssreader.internal.StreamUtil;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Default;
@@ -521,6 +523,31 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             } else {
                 // Read from http or https
                 return sendAsyncRequest(url).thenApply(processResponse());
+                /*
+                //var connection = new HttpClientConnection();
+                var connection = new HttpUrlConnection();
+                return connection.sendAsync(new Connection.Request() {
+                    @Override
+                    public String userAgent() {
+                        return userAgent;
+                    }
+
+                    @Override
+                    public Map<String, String> headers() {
+                        return Map.of();
+                    }
+
+                    @Override
+                    public Duration timeout() {
+                        return readTimeout;
+                    }
+
+                    @Override
+                    public String url() {
+                        return url;
+                    }
+                }).thenApply(processResponse2());
+                */
             }
         } catch (IllegalArgumentException e) {
             return CompletableFuture.supplyAsync(() -> {
@@ -570,6 +597,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             } catch (IOException e) {
                 throw new CompletionException(e);
             }
+        };
+    }
+
+    private Function<Connection.Response, Stream<I>> processResponse2() {
+        return response -> {
+                var inputStream = new BufferedInputStream(response.inputStream());
+                removeBadData(inputStream);
+                var itemIterator = new RssItemIterator("", inputStream);
+                return AutoCloseStream.of(StreamUtil.asStream(itemIterator).onClose(itemIterator::close));
         };
     }
 
