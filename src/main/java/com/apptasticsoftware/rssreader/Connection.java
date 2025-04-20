@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 // See jsoup.Connection for inspiration
+// implements closable ???
 public interface Connection {
 
     CompletableFuture<Response> sendAsync(Request request);
@@ -17,6 +18,7 @@ public interface Connection {
         String url();
     }
 
+    // implements closable interface or close any resources when closing the input stream
     interface Response {
         String url();
         InputStream inputStream();

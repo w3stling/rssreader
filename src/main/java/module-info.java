@@ -29,6 +29,10 @@ module com.apptasticsoftware.rssreader {
     requires java.net.http;
     requires java.xml;
     requires java.logging;
+    requires okhttp3;
+    requires annotations;
+    requires org.apache.httpcomponents.client5.httpclient5;
+    requires org.apache.httpcomponents.core5.httpcore5;
 
     exports com.apptasticsoftware.rssreader;
     exports com.apptasticsoftware.rssreader.util;

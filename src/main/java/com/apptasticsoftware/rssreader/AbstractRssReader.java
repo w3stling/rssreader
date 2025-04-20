@@ -23,8 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
-import com.apptasticsoftware.rssreader.connection.HttpClientConnection;
-import com.apptasticsoftware.rssreader.connection.HttpUrlConnection;
+import com.apptasticsoftware.rssreader.connection.OkHttpConnection;
 import com.apptasticsoftware.rssreader.internal.StreamUtil;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Default;
@@ -522,10 +521,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 });
             } else {
                 // Read from http or https
-                return sendAsyncRequest(url).thenApply(processResponse());
-                /*
+                ///return sendAsyncRequest(url).thenApply(processResponse());
+
                 //var connection = new HttpClientConnection();
-                var connection = new HttpUrlConnection();
+                //var connection = new HttpUrlConnection();
+                var connection = new OkHttpConnection();
                 return connection.sendAsync(new Connection.Request() {
                     @Override
                     public String userAgent() {
@@ -547,7 +547,6 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                         return url;
                     }
                 }).thenApply(processResponse2());
-                */
             }
         } catch (IllegalArgumentException e) {
             return CompletableFuture.supplyAsync(() -> {
