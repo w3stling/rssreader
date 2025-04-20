@@ -3,12 +3,13 @@ plugins {
     id 'jacoco'
     id 'signing'
     id 'maven-publish'
+    id 'biz.aQute.bnd.builder' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
     id 'org.sonarqube' version '6.1.0.5360'
 }
 
-group 'com.apptasticsoftware'
-version "${version}"
+group = 'com.apptasticsoftware'
+version = "${version}"
 
 repositories {
     mavenCentral()
@@ -57,6 +58,24 @@ jacoco {
 jacocoTestReport {
     reports {
         xml.required = true
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                "Build-Jdk-Spec": java.targetCompatibility,
+                "Implementation-Title": "RSS Reader",
+                "Implementation-Version": version,
+                "Specification-Title": "RSS Reader",
+                "Specification-Version": version.replace("-SNAPSHOT", ""),
+                "Automatic-Module-Name": moduleName,
+                "Bundle-SymbolicName": moduleName,
+                "Bundle-Description": "Java library for reading RSS and Atom feeds",
+                "Bundle-License": "https://opensource.org/licenses/MIT",
+                "Bundle-Name": "RSS Reader",
+                "Export-Package": "*;-split-package:=merge-first;-noimport:=true",
+        )
     }
 }
 
