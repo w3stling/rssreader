@@ -333,7 +333,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
-            if(item.getEnclosure().isPresent()) {
+            if (item.getEnclosure().isPresent()) {
                 assertNotNull(item.getEnclosure().get().getUrl());
                 assertNotNull(item.getEnclosure().get().getType());
             }
@@ -841,6 +841,18 @@ class RssReaderIntegrationTest {
         assertEquals("Microsoft", list.get(2).getCategories().get(0));
         assertEquals("API", list.get(2).getCategories().get(1));
         assertEquals("Azure", list.get(2).getCategories().get(2));
+    }
+
+    @Test
+    void feedWithDcContent() throws IOException {
+        var list = new RssReader()
+                // Disable content:encoded mapping to be able to test dc:content mapping
+                .addItemExtension("content:encoded", (i, s) -> {})
+                .read("https://www.techradar.com/rss")
+                .collect(Collectors.toList());
+        assertFalse(list.isEmpty());
+        var item = list.get(0);
+        assertTrue(item.getContent().isPresent());
     }
 
     @Test
