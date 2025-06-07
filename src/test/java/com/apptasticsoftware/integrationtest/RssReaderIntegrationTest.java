@@ -204,8 +204,7 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
-        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
-        if (items.isEmpty() && dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+        if (items.isEmpty() && isWeekend()) {
             return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
         }
 
@@ -442,6 +441,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         ZonedDateTime dateTime = items.stream()
@@ -458,6 +460,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         Optional<ZonedDateTime> dateTime = items.stream()
@@ -482,6 +487,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader(httpClient);
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         for (Item item : items) {
@@ -947,5 +955,10 @@ class RssReaderIntegrationTest {
             }
             return stringBuilder.toString();
         }
+    }
+
+    private static boolean isWeekend() {
+        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
+        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
 }
