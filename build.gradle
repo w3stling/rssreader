@@ -21,7 +21,7 @@ dependencies {
     testImplementation('com.github.npathai:hamcrest-optional:2.0.0')
     testImplementation('org.hamcrest:hamcrest:3.0')
     testImplementation('org.mockito:mockito-core:5.17.0')
-    testImplementation('nl.jqno.equalsverifier:equalsverifier:3.19.3')
+    testImplementation('nl.jqno.equalsverifier:equalsverifier:4.0.3')
 }
 
 test {
