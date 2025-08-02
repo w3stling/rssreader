@@ -219,7 +219,7 @@ public class DateTime implements DateTimeParser {
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
             return ZonedDateTime.of(localDateTime, defaultZone);
         } else if (((dateTime.length() == 29 || dateTime.length() == 32 || dateTime.length() == 35) && dateTime.charAt(10) == 'T') ||
-            ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
+            ((dateTime.length() == 23 || dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')) {
             return ZonedDateTime.parse(dateTime, formatter);
         }
 
@@ -339,7 +339,7 @@ public class DateTime implements DateTimeParser {
         }
         else if ((dateTime.length() == 26 || dateTime.length() == 27) && dateTime.charAt(3) == ',' && dateTime.endsWith(" Z"))
             return RFC_1123_DATE_TIME_SPECIAL;
-        else if ((dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')
+        else if ((dateTime.length() == 23 || dateTime.length() == 24 || dateTime.length() == 25) && dateTime.charAt(3) == ',')
             return RFC_1123_DATE_TIME_NO_TIMEZONE;
         else
             return null;
