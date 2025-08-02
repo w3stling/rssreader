@@ -112,6 +112,9 @@ class DateTimeTest {
 
         timestamp = dateTime.toEpochMilli("Sun, 4 Sep 2022 09:42:16");
         assertEquals(1662284536000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 2 Aug 2025 7:15:12");
+        assertEquals(1754118912000L, timestamp);
     }
 
     @Test
