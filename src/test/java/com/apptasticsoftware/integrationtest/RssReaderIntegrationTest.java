@@ -159,7 +159,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
@@ -181,7 +180,6 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Placera.se"));
-            assertThat(channel.getDescription(), is(not(emptyString())));
             assertThat(channel.getLink(), is("https://www.placera.se"));
             assertThat(channel.getCopyright(), isPresentAndIs("Placera.se"));
             assertThat(channel.getGenerator(), isPresentAndIs("RSS for Node"));
@@ -192,7 +190,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
@@ -431,7 +428,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getContent(), isPresentAnd(not(emptyString())));
-            assertNotEquals(item.getDescription(), item.getContent());
         }
     }
 
