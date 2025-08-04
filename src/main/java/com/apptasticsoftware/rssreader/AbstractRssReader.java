@@ -234,6 +234,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("dc:identifier", (item, value) -> Mapper.mapIfEmpty(value, item::getGuid, item::setGuid));
         itemTags.putIfAbsent("dc:title", (item, value) -> Mapper.mapIfEmpty(value, item::getTitle, item::setTitle));
         itemTags.putIfAbsent("dc:description", (item, value) -> Mapper.mapIfEmpty(value, item::getDescription, item::setDescription));
+        itemTags.putIfAbsent("dc:content", (item, value) -> Mapper.mapIfEmpty(value, item::getContent, item::setContent));
 
         onItemTags.put("enclosure", item -> item.addEnclosure(new Enclosure()));
     }

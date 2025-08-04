@@ -8,6 +8,15 @@ on:
       - master
 
 jobs:
+  pr-labler:
+    permissions:
+      contents: read
+      pull-requests: write
+    name: 🏷️ PR Labeler
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5
+
   build:
     name: 🛂 Pull Request Check
     timeout-minutes: 20

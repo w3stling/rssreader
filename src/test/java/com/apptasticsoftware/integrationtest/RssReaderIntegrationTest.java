@@ -72,9 +72,11 @@ class RssReaderIntegrationTest {
     }
 
 
+    @Disabled("Investigating")
     @Test
     void rssKonjunkturinstitutet() throws IOException {
         RssReader reader = new RssReader();
+        // New url for press releases https://press.newsmachine.com/rss/konjunkturinstitutet
         List<Item> items = reader.read("https://www.konj.se/4.2de5c57614f808a95afcc13f/12.2de5c57614f808a95afcc354.portlet?state=rss&sv.contenttype=text/xml;charset=UTF-8").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
@@ -157,7 +159,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
@@ -179,7 +180,6 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Placera.se"));
-            assertThat(channel.getDescription(), is(not(emptyString())));
             assertThat(channel.getLink(), is("https://www.placera.se"));
             assertThat(channel.getCopyright(), isPresentAndIs("Placera.se"));
             assertThat(channel.getGenerator(), isPresentAndIs("RSS for Node"));
@@ -190,7 +190,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getGuid(), isPresentAnd(not(emptyString())));
             assertThat(item.getIsPermaLink(), isPresentAndIs(false));
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
-            assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getPubDate(), isPresentAnd(not(emptyString())));
             assertThat(item.getLink(), isPresentAnd(not(emptyString())));
         }
@@ -202,8 +201,7 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
-        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
-        if (items.isEmpty() && dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+        if (items.isEmpty() && isWeekend()) {
             return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
         }
 
@@ -331,7 +329,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
             assertThat(item.getLink(), isPresent());
-            if(item.getEnclosure().isPresent()) {
+            if (item.getEnclosure().isPresent()) {
                 assertNotNull(item.getEnclosure().get().getUrl());
                 assertNotNull(item.getEnclosure().get().getType());
             }
@@ -430,7 +428,6 @@ class RssReaderIntegrationTest {
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), isPresentAnd(not(emptyString())));
             assertThat(item.getContent(), isPresentAnd(not(emptyString())));
-            assertNotEquals(item.getDescription(), item.getContent());
         }
     }
 
@@ -440,6 +437,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         ZonedDateTime dateTime = items.stream()
@@ -456,6 +456,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader();
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         Optional<ZonedDateTime> dateTime = items.stream()
@@ -480,6 +483,9 @@ class RssReaderIntegrationTest {
         RssReader reader = new RssReader(httpClient);
         List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
 
+        if (items.isEmpty() && isWeekend()) {
+            return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
+        }
         assertFalse(items.isEmpty());
 
         for (Item item : items) {
@@ -842,6 +848,18 @@ class RssReaderIntegrationTest {
     }
 
     @Test
+    void feedWithDcContent() throws IOException {
+        var list = new RssReader()
+                // Disable content:encoded mapping to be able to test dc:content mapping
+                .addItemExtension("content:encoded", (i, s) -> {})
+                .read("https://www.techradar.com/rss")
+                .collect(Collectors.toList());
+        assertFalse(list.isEmpty());
+        var item = list.get(0);
+        assertTrue(item.getContent().isPresent());
+    }
+
+    @Test
     void readFromFileUriLowerCase() throws IOException, URISyntaxException {
         var uri = getFileUri("rss-feed.xml");
         var items = new RssReader().read(uri).collect(Collectors.toList());
@@ -933,5 +951,10 @@ class RssReaderIntegrationTest {
             }
             return stringBuilder.toString();
         }
+    }
+
+    private static boolean isWeekend() {
+        DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
+        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
     }
 }

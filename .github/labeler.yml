@@ -1,0 +1,9 @@
+# Add a label to any pull request whose head branch matches the specified pattern.
+'enhancement':
+  - head-branch: ['^feature/']
+'bug':
+  - head-branch: ['^bug/']
+'chore':
+  - head-branch: ['^chore/']
+'documentation':
+  - head-branch: ['^doc/']
