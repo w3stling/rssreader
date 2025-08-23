@@ -1,5 +1,10 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 /**
  * Contains user-generated tags separated by commas in the decreasing order of each tag's weight.
  */
@@ -26,5 +31,16 @@ public class MediaTags {
      */
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public List<MediaTag> getTagList() {
+        if (tags == null || tags.isBlank()) {
+            return List.of();
+        }
+
+        return Arrays.stream(tags.split(","))
+                .filter(Predicate.not(String::isBlank))
+                .map(MediaTag::new)
+                .collect(Collectors.toList());
     }
 }

@@ -12,7 +12,10 @@
             <creativeCommons:license>
                 http://www.creativecommons.org/licenses/by-nc/1.0
             </creativeCommons:license>
-            <media:rating>nonadult</media:rating>
+            <media:rating scheme="urn:simple">nonadult</media:rating>
+            <media:keywords>Steaks, Summer</media:keywords>
+            <media:thumbnail url="http://www.example.com/examples/mrss/example.jpg" width="720" time="50.10" />
+            <media:thumbnail url="http://www.foo.com/keyframe.jpg" width="75" height="50" time="12:05:01.123" />
         </item>
     </channel>
 </rss>

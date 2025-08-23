@@ -21,7 +21,7 @@ public class MediaContent {
     private String lang;
     private MediaTitle mediaTitle;
     private MediaDescription mediaDescription;
-    private MediaThumbnail mediaThumbnail;
+    private final List<MediaThumbnail> mediaThumbnails = new ArrayList<>();
     private MediaPlayer mediaPlayer;
     private final List<MediaCredit> mediaCredits = new ArrayList<>();
     private MediaCopyright mediaCopyright;
@@ -397,6 +397,14 @@ public class MediaContent {
 
     public void addMediaScene(MediaScene mediaScene) {
         mediaScenes.add(mediaScene);
+    }
+
+    public List<MediaThumbnail> getMediaThumbnails() {
+        return mediaThumbnails;
+    }
+
+    public void addMediaThumbnails(MediaThumbnail mediaThumbnail) {
+        mediaThumbnails.add(mediaThumbnail);
     }
 
 }

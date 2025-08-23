@@ -93,7 +93,9 @@ class MediaRssReaderTest {
                 .collect(Collectors.toList());
 
         MediaRssItem item = res.get(0);
-        MediaThumbnail mediaThumbnail = item.getMediaThumbnail().get();
+        MediaContent content = item.getMediaContents().get(0);
+        MediaThumbnail mediaThumbnail = content.getMediaThumbnails().get(0);
+
         assertEquals("https://i.vimeocdn.com/video/1542457228-31ab55501fdd5316663c63781ae1a37932abc4b314bcc619e3377c0ca85b859d-d_960", mediaThumbnail.getUrl());
         assertThat(mediaThumbnail.getHeight(), isPresentAnd(equalTo(540)));
         assertThat(mediaThumbnail.getWidth(), isPresentAnd(equalTo(960)));
@@ -415,6 +417,32 @@ class MediaRssReaderTest {
         assertEquals(1, items.size());
         MediaRssItem item = items.get(0);
         assertNotNull(item);
+
+        // Rating
+        var rating = item.getMediaRating().orElse(null);
+        assertNotNull(rating);
+        assertThat(rating.getScheme(), isPresentAnd(equalTo("urn:simple")));
+        assertEquals(rating.getRating(), "nonadult");
+
+        // Keywords
+        var keywords = item.getMediaKeywords();
+        assertEquals(2, keywords.size());
+        assertEquals("Steaks", keywords.get(0));
+        assertEquals("Summer", keywords.get(1));
+
+        // Thumbnails
+        var thumbnails = item.getMediaThumbnails();
+        assertEquals(2, thumbnails.size());
+        assertEquals("http://www.example.com/examples/mrss/example.jpg", thumbnails.get(0).getUrl());
+        assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
+        assertThat(thumbnails.get(0).getHeight(), isEmpty());
+        assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
+        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
+        assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
+        assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
+        assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
+        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
     }
 
     @Test
