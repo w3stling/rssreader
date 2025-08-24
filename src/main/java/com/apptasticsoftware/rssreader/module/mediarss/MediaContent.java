@@ -43,7 +43,7 @@ public class MediaContent {
     private final List<MediaLocation> mediaLocations = new ArrayList<>();
     private final List<MediaScene> mediaScenes = new ArrayList<>();
 
-    // MediaRatings[]??, MediaThumbnail[]??, MediaLicense[]??,
+    // MediaRatings[]??, MediaLicense[]??, Player??,
 
     public Optional<String> getUrl() {
         return Optional.ofNullable(url);

@@ -59,7 +59,7 @@ public class MediaRssItem extends Item {
     private final List<String> mediaBackLinks = new ArrayList<>();
     private MediaStatus mediaStatus;
     private final List<MediaPrice> mediaPrices = new ArrayList<>();
-    private MediaLicense mediaLicense;
+    private final List<MediaLicense> mediaLicenses = new ArrayList<>();
     private final List<MediaSubTitle> mediaSubTitles = new ArrayList<>();
     private final List<MediaPeerLink> mediaPeerLinks = new ArrayList<>();
     // media:rights
@@ -74,22 +74,7 @@ public class MediaRssItem extends Item {
     // TODO: FIXED - Needed? MediaBacklinks change to String?
     // TODO: FIXED - Needed? MediaTags change to String?
 
-    /*
-    Missing mapping on Item level
-    =============================
-    media:keywords
-    media:category
-    media:player <-- missing field
-    media:credit
-    media:comments
-    media:responses
-    media:backLinks
-    media:rights <-- missing field
-    media:scenes
-     */
-
-
-    // MediaRatings[]??, MediaThumbnail[]??, MediaLicense[]??
+    // MediaRatings[]??, Player??
 
 
     /**
@@ -531,8 +516,8 @@ public class MediaRssItem extends Item {
      *
      * @return optional license information
      */
-    public Optional<MediaLicense> getMediaLicense() {
-        return Optional.ofNullable(mediaLicense);
+    public List<MediaLicense> getMediaLicenses() {
+        return mediaLicenses;
     }
 
     /**
@@ -541,8 +526,8 @@ public class MediaRssItem extends Item {
      *
      * @param mediaLicense the license information to set
      */
-    public void setMediaLicense(MediaLicense mediaLicense) {
-        this.mediaLicense = mediaLicense;
+    public void addMediaLicense(MediaLicense mediaLicense) {
+        this.mediaLicenses.add(mediaLicense);
     }
 
     /**
@@ -611,11 +596,11 @@ public class MediaRssItem extends Item {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(getMediaContents(), that.getMediaContents()) && Objects.equals(getMediaGroup(), that.getMediaGroup()) && Objects.equals(getMediaRating(), that.getMediaRating()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(mediaPrices, that.mediaPrices) && Objects.equals(getMediaLicense(), that.getMediaLicense()) && Objects.equals(mediaSubTitles, that.mediaSubTitles) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaScenes(), that.getMediaScenes()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright());
+        return Objects.equals(getMediaContents(), that.getMediaContents()) && Objects.equals(getMediaGroup(), that.getMediaGroup()) && Objects.equals(getMediaRating(), that.getMediaRating()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(mediaPrices, that.mediaPrices) && Objects.equals(getMediaLicenses(), that.getMediaLicenses()) && Objects.equals(mediaSubTitles, that.mediaSubTitles) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaScenes(), that.getMediaScenes()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaContents(), getMediaGroup(), getMediaRating(), getMediaCommunity(), getMediaComments(), getMediaResponses(), getMediaBackLinks(), getMediaThumbnails(), getMediaKeywords(), getMediaHashes(), getMediaCategories(), getMediaTexts(), getMediaCredits(), getMediaStatus(), mediaPrices, getMediaLicense(), mediaSubTitles, getMediaPeerLinks(), getMediaRestrictions(), getMediaLocations(), getMediaScenes(), getMediaEmbed(), getMediaTitle(), getMediaDescription(), getMediaCopyright());
+        return Objects.hash(super.hashCode(), getMediaContents(), getMediaGroup(), getMediaRating(), getMediaCommunity(), getMediaComments(), getMediaResponses(), getMediaBackLinks(), getMediaThumbnails(), getMediaKeywords(), getMediaHashes(), getMediaCategories(), getMediaTexts(), getMediaCredits(), getMediaStatus(), mediaPrices, getMediaLicenses(), mediaSubTitles, getMediaPeerLinks(), getMediaRestrictions(), getMediaLocations(), getMediaScenes(), getMediaEmbed(), getMediaTitle(), getMediaDescription(), getMediaCopyright());
     }
 }

@@ -150,6 +150,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:thumbnail", item -> item.addMediaThumbnail(new MediaThumbnail()));
         onItemTags.put("/rss/channel/item/media:category", item -> item.addMediaCategory(new MediaCategory()));
         onItemTags.put("/rss/channel/item/media:credit", item -> item.addMediaCredit(new MediaCredit()));
+        onItemTags.put("/rss/channel/item/media:license", item -> item.addMediaLicense(new MediaLicense()));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:tags", itemMediaCommunityMediaTags(MediaTags::setTags));
@@ -814,10 +815,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaLicense(BiConsumer<MediaLicense, String> setter) {
-        return (item, value) -> {
-            var status = createIfNull(item::getMediaLicense, item::setMediaLicense, MediaLicense::new);
-            setter.accept(status, value);
-        };
+        return (item, value) -> setter.accept(item.getMediaLicenses().getLast(), value);
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaRestriction(BiConsumer<MediaRestriction, String> setter) {

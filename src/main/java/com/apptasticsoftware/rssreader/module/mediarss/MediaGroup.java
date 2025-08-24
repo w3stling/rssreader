@@ -29,7 +29,7 @@ public class MediaGroup {
     private final List<String> mediaResponses = new ArrayList<>();
     private final List<String> mediaBackLinks = new ArrayList<>();
 
-    // MediaRatings[]??, MediaThumbnail[]??, MediaLicense[]??,
+    // MediaRatings[]??, MediaLicense[]??, Player
 
     /**
      * The title of the particular media object.

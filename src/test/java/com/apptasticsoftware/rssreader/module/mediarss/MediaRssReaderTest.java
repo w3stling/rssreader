@@ -597,11 +597,14 @@ class MediaRssReaderTest {
         assertThat(prices.get(1).getPrice(), isPresentAnd(equalTo(18.88)));
 
         // License
-        var license = item.getMediaLicense().orElse(null);
-        assertNotNull(license);
-        assertThat(license.getLicense(), equalTo("This work is licensed under a Creative Commons License"));
-        assertThat(license.getHref(), is(equalTo("http://creativecommons.org/licenses/by/4.0/")));
-        assertThat(license.getType(), is(equalTo("text/html")));
+        var licenses = item.getMediaLicenses();
+        assertEquals(2, licenses.size());
+        assertThat(licenses.get(0).getLicense(), equalTo("This work is licensed under a Creative Commons License"));
+        assertThat(licenses.get(0).getHref(), is(equalTo("http://creativecommons.org/licenses/by/4.0/")));
+        assertThat(licenses.get(0).getType(), is(equalTo("text/html")));
+        assertThat(licenses.get(1).getLicense(), equalTo("This work is licensed under a GNU General Public License"));
+        assertThat(licenses.get(1).getHref(), is(equalTo("https://www.gnu.org/licenses/gpl-3.0.en.html")));
+        assertThat(licenses.get(1).getType(), is(equalTo("text/html")));
 
         // Subtitles
         var subtitles = item.getMediaSubTitles();
