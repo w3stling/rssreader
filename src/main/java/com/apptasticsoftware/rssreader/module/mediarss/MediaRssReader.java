@@ -148,6 +148,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:hash", item -> item.addMediaHash(new MediaHash()));
         onItemTags.put("/rss/channel/item/media:text", item -> item.addMediaText(new MediaText()));
         onItemTags.put("/rss/channel/item/media:thumbnail", item -> item.addMediaThumbnail(new MediaThumbnail()));
+        onItemTags.put("/rss/channel/item/media:category", item -> item.addMediaCategory(new MediaCategory()));
+        onItemTags.put("/rss/channel/item/media:credit", item -> item.addMediaCredit(new MediaCredit()));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:tags", itemMediaCommunityMediaTags(MediaTags::setTags));
@@ -196,21 +198,18 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
         // media:rating
         super.addItemExtension("/rss/channel/item/media:rating", itemMediaRating(MediaRating::setRating));
+
+        // media:category
+        super.addItemExtension("/rss/channel/item/media:category", itemMediaCategory(MediaCategory::setCategory));
+
+        // media:credit
+        super.addItemExtension("/rss/channel/item/media:credit", itemMediaCredit(MediaCredit::setCredit));
     }
 
     @SuppressWarnings("java:S1192")
     @Override
     protected void registerItemAttributes() {
         super.registerItemAttributes();
-        /*
-        super.addItemExtension("media:thumbnail", "url", mediaThumbnailSetterTemplateBuilder(MediaThumbnail::setUrl));
-        super.addItemExtension("media:thumbnail", "height", mediaThumbnailSetterTemplateBuilder(
-                (mediaThumbnail, height) -> mediaThumbnail.setHeight(Integer.parseInt(height))
-        ));
-        super.addItemExtension("media:thumbnail", "width", mediaThumbnailSetterTemplateBuilder(
-                (mediaThumbnail, width) -> mediaThumbnail.setWidth(Integer.parseInt(width))
-        ));
-        */
 
         // media:content
         super.addItemExtension("/rss/channel/item/media:content", "url", itemMediaContent(MediaContent::setUrl));
@@ -240,7 +239,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:title", "type", itemMediaContentMediaTitle(MediaTitle::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:description", "type", itemMediaContentMediaDescription(MediaDescription::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:copyright", "url", itemMediaContentMediaCopyright(MediaCopyright::setUrl));
-        super.addItemExtension("/rss/channel/item/media:content/media:hash", "algo", itemMediaContentMediaHash(MediaHash::setAlgo));
+        super.addItemExtension("/rss/channel/item/media:content/media:hash", "algo", itemMediaContentMediaHash(MediaHash::setAlgorithm));
         super.addItemExtension("/rss/channel/item/media:content/media:category", "scheme", itemMediaContentMediaCategory(MediaCategory::setScheme));
         super.addItemExtension("/rss/channel/item/media:content/media:category", "label", itemMediaContentMediaCategory(MediaCategory::setLabel));
         super.addItemExtension("/rss/channel/item/media:content/media:text", "type", itemMediaContentMediaText(MediaText::setType));
@@ -311,7 +310,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:category", "label", itemMediaGroupMediaCategory(MediaCategory::setLabel));
         super.addItemExtension("/rss/channel/item/media:group/media:rating", "scheme", itemMediaGroupMediaRating(MediaRating::setScheme));
         super.addItemExtension("/rss/channel/item/media:group/media:copyright", "url", itemMediaGroupMediaCopyright(MediaCopyright::setUrl));
-        super.addItemExtension("/rss/channel/item/media:group/media:hash", "algo", itemMediaGroupMediaHash(MediaHash::setAlgo));
+        super.addItemExtension("/rss/channel/item/media:group/media:hash", "algo", itemMediaGroupMediaHash(MediaHash::setAlgorithm));
         super.addItemExtension("/rss/channel/item/media:group/media:restriction", "type", itemMediaGroupMediaRestriction(MediaRestriction::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:restriction", "relationship", itemMediaGroupMediaRestriction(MediaRestriction::setRelationship));
         super.addItemExtension("/rss/channel/item/media:group/media:text", "type", itemMediaGroupMediaText(MediaText::setType));
@@ -391,7 +390,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:copyright", "url", itemMediaCopyright(MediaCopyright::setUrl));
 
         // media:hash
-        super.addItemExtension("/rss/channel/item/media:hash", "algo", itemMediaHash(MediaHash::setAlgo));
+        super.addItemExtension("/rss/channel/item/media:hash", "algo", itemMediaHash(MediaHash::setAlgorithm));
 
         // media:text
         super.addItemExtension("/rss/channel/item/media:text", "type", itemMediaText(MediaText::setType));
@@ -407,6 +406,15 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
         // media:rating
         super.addItemExtension("/rss/channel/item/media:rating", "scheme", itemMediaRating(MediaRating::setScheme));
+
+        // media:category
+        super.addItemExtension("/rss/channel/item/media:category", "scheme", itemMediaCategory(MediaCategory::setScheme));
+        super.addItemExtension("/rss/channel/item/media:category", "label", itemMediaCategory(MediaCategory::setLabel));
+
+        // media:credit
+        super.addItemExtension("/rss/channel/item/media:credit", "role", itemMediaCredit(MediaCredit::setRole));
+        super.addItemExtension("/rss/channel/item/media:credit", "scheme", itemMediaCredit(MediaCredit::setScheme));
+
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaContent(BiConsumer<MediaContent, String> setter) {
@@ -482,7 +490,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             setter.accept(content.getMediaTexts().getLast(), value);
         };
     }
-
 
     private static BiConsumer<MediaRssItem, String> itemMediaContentMediaRating(BiConsumer<MediaRating, String> setter) {
         return (item, value) -> {
@@ -625,7 +632,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         };
     }
 
-
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaHash(BiConsumer<MediaHash, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
@@ -656,7 +662,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         };
     }
 
-
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaKeywords(BiConsumer<MediaGroup, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
@@ -677,7 +682,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             setter.accept(group.getMediaCategories().getLast(), value);
         };
     }
-
 
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaRating(BiConsumer<MediaRating, String> setter) {
         return (item, value) -> {
@@ -829,7 +833,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaSubTitle(BiConsumer<MediaSubTitle, String> setter) {
-        return (item, value) -> setter.accept(item.getMediaSubTitle().getLast(), value);
+        return (item, value) -> setter.accept(item.getMediaSubTitles().getLast(), value);
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaPeerLink(BiConsumer<MediaPeerLink, String> setter) {
@@ -886,5 +890,13 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var tags = createIfNull(item::getMediaRating, item::setMediaRating, MediaRating::new);
             Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
         };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaCategory(BiConsumer<MediaCategory, String> setter) {
+        return (item, value) -> setter.accept(item.getMediaCategories().getLast(), value);
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaCredit(BiConsumer<MediaCredit, String> setter) {
+        return (item, value) -> setter.accept(item.getMediaCredits().getLast(), value);
     }
 }

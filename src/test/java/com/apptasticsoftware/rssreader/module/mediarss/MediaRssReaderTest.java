@@ -424,6 +424,18 @@ class MediaRssReaderTest {
         assertThat(rating.getScheme(), isPresentAnd(equalTo("urn:simple")));
         assertEquals(rating.getRating(), "nonadult");
 
+        // Title
+        var title = item.getMediaTitle().orElse(null);
+        assertNotNull(title);
+        assertThat(title.getType(), isPresentAnd(equalTo("plain")));
+        assertEquals("The Judy's - The Moo Song", title.getTitle());
+
+        // Description
+        var description = item.getMediaDescription().orElse(null);
+        assertNotNull(description);
+        assertThat(description.getType(), isPresentAnd(equalTo("plain")));
+        assertEquals("Get perfectly done steaks every time", description.getDescription());
+
         // Keywords
         var keywords = item.getMediaKeywords();
         assertEquals(2, keywords.size());
@@ -443,6 +455,186 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
         assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+
+        // Category
+        var categories = item.getMediaCategories();
+        assertEquals(2, categories.size());
+        assertEquals("music/artistname/album/song1", categories.get(0).getCategory());
+        assertThat(categories.get(0).getSchema(), isPresentAnd(equalTo("http://blah.com/scheme")));
+        assertThat(categories.get(0).getLabel(), isPresentAnd(equalTo("music")));
+        assertEquals("music/artistname/album/song2", categories.get(1).getCategory());
+        assertThat(categories.get(1).getSchema(), isEmpty());
+        assertThat(categories.get(1).getLabel(), isEmpty());
+
+        // Hash
+        var hashes = item.getMediaHashes();
+        assertEquals(2, hashes.size());
+        assertEquals("dfdec888b72151965a34b4b59031290a", hashes.get(0).getHash());
+        assertThat(hashes.get(0).getAlgorithm(), isPresentAnd(equalTo("md5")));
+        assertEquals("2fd4e1c67a2d28fced849ee1bb76e7391b93eb12", hashes.get(1).getHash());
+        assertThat(hashes.get(1).getAlgorithm(), isPresentAnd(equalTo("sha-1")));
+
+        // Player
+        // TODO: add mappings
+
+        // Credits
+        var credits = item.getMediaCredits();
+        assertEquals(2, credits.size());
+        assertThat(credits.get(0).getRole(), isPresentAnd(equalTo("producer")));
+        assertThat(credits.get(0).getScheme(), isPresentAnd(equalTo("urn:ebu")));
+        assertEquals("entity name", credits.get(0).getCredit());
+        assertThat(credits.get(1).getRole(), isPresentAnd(equalTo("owner")));
+        assertThat(credits.get(1).getScheme(), isPresentAnd(equalTo("urn:yvs")));
+        assertEquals("copyright holder of the entity", credits.get(1).getCredit());
+
+        // Copyright
+        var copyright = item.getMediaCopyright().orElse(null);
+        assertNotNull(copyright);
+        assertThat(copyright.getUrl(), isPresentAnd(equalTo("https://creativecommons.org/licenses/by/4.0/")));
+        assertEquals("2005 FooBar Media", copyright.getCopyright());
+
+        // Text
+        var texts = item.getMediaTexts();
+        assertEquals(2, texts.size());
+        assertThat(texts.get(0).getType(), isPresentAnd(equalTo("plain")));
+        assertEquals("Oh, say, can you see, by the dawn's early light", texts.get(0).getText());
+        assertThat(texts.get(0).getLang(), isEmpty());
+        assertThat(texts.get(0).getStart(), isEmpty());
+        assertThat(texts.get(0).getEnd(), isEmpty());
+        assertThat(texts.get(1).getType(), isPresentAnd(equalTo("plain")));
+        assertEquals("By the dawn's early light", texts.get(1).getText());
+        assertThat(texts.get(1).getLang(), isPresentAnd(equalTo("en")));
+        assertThat(texts.get(1).getStart(), isPresentAnd(equalTo("00:00:10.000")));
+        assertThat(texts.get(1).getEnd(), isPresentAnd(equalTo("00:00:17.000")));
+
+        // Restriction
+        var restrictions = item.getMediaRestrictions();
+        assertEquals(2, restrictions.size());
+        assertThat(restrictions.get(0).getType(), equalTo("sharing"));
+        assertThat(restrictions.get(0).getRelationship(), equalTo("deny"));
+        assertThat(restrictions.get(0).getRestriction(), is(emptyOrNullString()));
+        assertThat(restrictions.get(1).getType(), equalTo("country"));
+        assertThat(restrictions.get(1).getRelationship(), equalTo("allow"));
+        assertThat(restrictions.get(1).getRestriction(), equalTo("au us"));
+
+        // Community
+        var community = item.getMediaCommunity().orElse(null);
+        assertNotNull(community);
+        var starRating = community.getMediaStarRating().orElse(null);
+        assertNotNull(starRating);
+        assertThat(starRating.getAverage(), equalTo(3.5));
+        assertThat(starRating.getCount(), equalTo(20));
+        assertThat(starRating.getMin(), equalTo(1));
+        assertThat(starRating.getMax(), equalTo(10));
+        var statistics = community.getMediaStatistics().orElse(null);
+        assertNotNull(statistics);
+        assertThat(statistics.getViews(), equalTo(5));
+        assertThat(statistics.getFavorites(), equalTo(4));
+        var tags = community.getMediaTags().orElse(null);
+        assertNotNull(tags);
+        assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
+        var tagList = tags.getTagList();
+        assertEquals(4, tagList.size());
+        assertEquals("news:5", tagList.get(0).getTag());
+        assertEquals("news", tagList.get(0).getName());
+        assertThat(tagList.get(0).getWeight(), isPresentAnd(is(5)));
+        assertEquals("nbc", tagList.get(1).getTag());
+        assertEquals("nbc", tagList.get(1).getName());
+        assertThat(tagList.get(1).getWeight(), isEmpty());
+        assertEquals("abc:3", tagList.get(2).getTag());
+        assertEquals("abc", tagList.get(2).getName());
+        assertThat(tagList.get(2).getWeight(), isPresentAnd(is(3)));
+        assertEquals("reuters:b", tagList.get(3).getTag());
+        assertEquals("reuters", tagList.get(3).getName());
+        assertThat(tagList.get(3).getWeight(), isEmpty());
+
+        // Comments
+        var comments = item.getMediaComments();
+        assertEquals(2, comments.size());
+        assertEquals("comment1", comments.get(0));
+        assertEquals("comment2", comments.get(1));
+
+        // Embed
+        var embed = item.getMediaEmbed().orElse(null);
+        assertNotNull(embed);
+        assertThat(embed.getUrl(), equalTo("http://www.foo.com/player.swf"));
+        assertThat(embed.getHeight(), equalTo(323));
+        assertThat(embed.getWidth(), equalTo(512));
+        assertThat(embed.getParams().size(), is(5));
+        assertThat(embed.getParams(), hasEntry("type", "application/x-shockwave-flash"));
+        assertThat(embed.getParams(), hasEntry("width", "512"));
+        assertThat(embed.getParams(), hasEntry("height", "323"));
+        assertThat(embed.getParams(), hasEntry("allowFullScreen", "true"));
+        assertThat(embed.getParams(), hasEntry("flashVars", "id=12345&vid=678912i&lang=en-us&intl=us&thumbUrl=http://www.foo.com/thumbnail.jpg"));
+
+        // Responses
+        var responses = item.getMediaResponses();
+        assertEquals(2, responses.size());
+        assertEquals("http://www.response1.com", responses.get(0));
+        assertEquals("http://www.response2.com", responses.get(1));
+
+        // BackLinks
+        var backlinks = item.getMediaBackLinks();
+        assertEquals(2, backlinks.size());
+        assertEquals("http://www.backlink1.com", backlinks.get(0));
+        assertEquals("http://www.backlink2.com", backlinks.get(1));
+
+        // Status
+        var status = item.getMediaStatus().orElse(null);
+        assertNotNull(status);
+        assertThat(status.getReason(), isPresentAnd(equalTo("http://www.reasonforblocking.com")));
+        assertThat(status.getState(), equalTo("blocked"));
+
+        // Price
+        var prices = item.getMediaPrice();
+        assertEquals(2, prices.size());
+        assertThat(prices.get(0).getType(), equalTo("rent"));
+        assertThat(prices.get(0).getCurrency(), isPresentAnd(equalTo("EUR")));
+        assertThat(prices.get(0).getPrice(), isPresentAnd(equalTo(19.99)));
+        assertThat(prices.get(1).getType(), equalTo("subscription"));
+        assertThat(prices.get(1).getInfo(), isPresentAnd(equalTo("http://www.dummy.jp/subscription_info")));
+        assertThat(prices.get(1).getCurrency(), isPresentAnd(equalTo("USD")));
+        assertThat(prices.get(1).getPrice(), isPresentAnd(equalTo(18.88)));
+
+        // License
+        var license = item.getMediaLicense().orElse(null);
+        assertNotNull(license);
+        assertThat(license.getLicense(), equalTo("This work is licensed under a Creative Commons License"));
+        assertThat(license.getHref(), is(equalTo("http://creativecommons.org/licenses/by/4.0/")));
+        assertThat(license.getType(), is(equalTo("text/html")));
+
+        // Subtitles
+        var subtitles = item.getMediaSubTitles();
+        assertEquals(2, subtitles.size());
+        assertThat(subtitles.get(0).getType(), equalTo("application/smil"));
+        assertThat(subtitles.get(0).getLang(), equalTo("en-us"));
+        assertThat(subtitles.get(0).getHref(), equalTo("http://www.foo.org/subtitle.smil"));
+        assertThat(subtitles.get(1).getType(), equalTo("application/smil"));
+        assertThat(subtitles.get(1).getLang(), equalTo("fr-FR"));
+        assertThat(subtitles.get(1).getHref(), equalTo("http://www.foo.org/fr/subtitle.smil"));
+
+        // PeerLinks
+        var peerLinks = item.getMediaPeerLinks();
+        assertEquals(2, peerLinks.size());
+        assertThat(peerLinks.get(0).getType(), equalTo("application/x-bittorrent"));
+        assertThat(peerLinks.get(0).getHref(), equalTo("http://www.foo.org/sampleFile480.torrent"));
+        assertThat(peerLinks.get(1).getType(), equalTo("application/x-bittorrent"));
+        assertThat(peerLinks.get(1).getHref(), equalTo("http://www.foo.org/sampleFile1080.torrent"));
+
+        // Rights
+        // TODO: add mappings
+
+        // Scenes
+        var scenes = item.getMediaScenes();
+        assertEquals(2, scenes.size());
+        assertThat(scenes.get(0).getSceneTitle(), equalTo("sceneTitle1"));
+        assertThat(scenes.get(0).getSceneDescription(), equalTo("sceneDesc1"));
+        assertThat(scenes.get(0).getSceneStartTime(), equalTo("00:15"));
+        assertThat(scenes.get(0).getSceneEndTime(), equalTo("00:45"));
+        assertThat(scenes.get(1).getSceneTitle(), equalTo("sceneTitle2"));
+        assertThat(scenes.get(1).getSceneDescription(), equalTo("sceneDesc2"));
+        assertThat(scenes.get(1).getSceneStartTime(), equalTo("00:57"));
+        assertThat(scenes.get(1).getSceneEndTime(), equalTo("01:45"));
     }
 
     @Test

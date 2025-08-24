@@ -34,7 +34,7 @@ public class MediaTag {
         if (tag != null && tag.contains(":")) {
             String[] parts = tag.split(":");
             if (parts.length == 2) {
-                return parts[0];
+                return parts[0].trim();
             }
         }
         return tag;
@@ -49,7 +49,7 @@ public class MediaTag {
             String[] parts = tag.split(":");
             if (parts.length == 2) {
                 try {
-                    return Optional.of(Integer.parseInt(parts[1]));
+                    return Optional.of(Integer.parseInt(parts[1].trim()));
                 } catch (NumberFormatException e) {
                     return Optional.empty();
                 }

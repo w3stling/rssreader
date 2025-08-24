@@ -7,7 +7,7 @@ import java.util.Optional;
  */
 public class MediaHash {
     private String hash;
-    private String algo;
+    private String algorithm;
 
     /**
      * The hash of the binary media file.
@@ -27,17 +27,17 @@ public class MediaHash {
 
     /**
      * The algorithm used to create the hash.
-     * @return algo
+     * @return algorithm
      */
-    public Optional<String> getAlgo() {
-        return Optional.ofNullable(algo);
+    public Optional<String> getAlgorithm() {
+        return Optional.ofNullable(algorithm);
     }
 
     /**
      * The algorithm used to create the hash.
-     * @param algo algo
+     * @param algorithm algorithm
      */
-    public void setAlgo(String algo) {
-        this.algo = algo;
+    public void setAlgorithm(String algorithm) {
+        this.algorithm = algorithm;
     }
 }

@@ -38,11 +38,11 @@
             <media:status state="blocked" reason="http://www.reasonforblocking.com" />
             <media:price type="rent" price="19.99" currency="EUR" />
             <media:price type="subscription" info="http://www.dummy.jp/subscription_info" price="18.88" currency="USD" />
-            <media:license type="text/html" href="http://www.licensehost.com/license"> Sample license for a video</media:license>
+            <media:license type="text/html" href="http://www.licensehost.com/license">Sample license for a video</media:license>
             <media:subTitle type="application/smil" lang="en-us" href="http://www.foo.org/subtitle.smil" />
             <media:subTitle type="application/smil" lang="fr-FR" href="http://www.foo.org/fr/subtitle.smil" />
-            <media:peerLink type="application/x-bittorrent " href="http://www.foo.org/sampleFile480.torrent" />
-            <media:peerLink type="application/x-bittorrent " href="http://www.foo.org/sampleFile1080.torrent" />
+            <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile480.torrent" />
+            <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile1080.torrent" />
             <media:location description="My house" start="00:01" end="01:00">
                 <georss:where>
                     <gml:Point>

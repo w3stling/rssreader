@@ -40,6 +40,7 @@ public class MediaTags {
 
         return Arrays.stream(tags.split(","))
                 .filter(Predicate.not(String::isBlank))
+                .map(String::trim)
                 .map(MediaTag::new)
                 .collect(Collectors.toList());
     }
