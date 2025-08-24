@@ -73,8 +73,8 @@ public class MediaRssItem extends Item {
     // TODO: FIXED - Needed? MediaKeywords change to String?
     // TODO: FIXED - Needed? MediaBacklinks change to String?
     // TODO: FIXED - Needed? MediaTags change to String?
-
-    // MediaRatings[]??, Player??
+    // TODO: MediaRights - String can only exist one
+    // MediaRatings[]??, Player??,
 
 
     /**
