@@ -16,31 +16,31 @@ jobs:
 
     steps:
       - name: Checkout repository ⚙️
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
 
       - name: Setup Java 21 ⚙️
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
         with:
           java-version: '21'
           distribution: 'temurin'
 
       - name: Setup Gradle dependencies cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
 
       - name: Setup Gradle wrapper cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/actions/wrapper-validation@v4
+        uses: gradle/actions/wrapper-validation@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
 
       - name: Version number 🔢
         run: |
@@ -50,7 +50,7 @@ jobs:
           echo "year=$(date +%Y)" >> $GITHUB_ENV
 
       - name: Update README.md 📝
-        uses: bluwy/substitute-string-action@v3
+        uses: bluwy/substitute-string-action@70ff0b17357670ffd3fee68e95b6de9963b66bad # v3.0.0
         with:
           _input-file: './.github/README-template.md'
           _output-file: ./README.md
@@ -60,7 +60,7 @@ jobs:
           INPUT_YEAR: ${{ env.year }}
 
       - name: Commit README.md
-        uses: stefanzweifel/git-auto-commit-action@v6
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0 # v6.0.1
         id: auto-commit-action-readme
         with:
           commit_message: Update version to ${{ env.new_version }}
@@ -84,31 +84,31 @@ jobs:
 
     steps:
       - name: Checkout repository ⚙️
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
 
       - name: Setup Java 21 ⚙️
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
         with:
           java-version: '21'
           distribution: 'temurin'
 
       - name: Setup Gradle dependencies cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
 
       - name: Setup Gradle wrapper cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/actions/wrapper-validation@v4
+        uses: gradle/actions/wrapper-validation@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
 
       - name: Version number 🔢
         run: |
@@ -121,7 +121,7 @@ jobs:
         run: ./gradlew javadoc
 
       - name: Deploy Javadoc 📚
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@6c2d9db40f9296374acc17b90404b6e8864128c8 # v4.7.3
         with:
           branch: gh-pages
           folder: build/docs/javadoc
@@ -141,31 +141,31 @@ jobs:
 
     steps:
       - name: Checkout repository ⚙️
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
           fetch-depth: 0
 
       - name: Setup Java 21 ⚙️
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
         with:
           java-version: '21'
           distribution: 'temurin'
 
       - name: Setup Gradle dependencies cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
 
       - name: Setup Gradle wrapper cache ⚙️
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.0.3
         with:
           path: ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
 
       - name: Validate Gradle wrapper ⚙️
-        uses: gradle/actions/wrapper-validation@v4
+        uses: gradle/actions/wrapper-validation@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
 
       - name: Version number 🔢
         run: |
