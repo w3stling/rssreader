@@ -254,7 +254,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:starRating", "count", itemMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:starRating", "max", itemMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:starRating", "min", itemMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
-        super.addItemExtension("/rss/channel/item/media:content/media:community/media:statistics", "views", itemMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setViews)));
+        super.addItemExtension("/rss/channel/item/media:content/media:community/media:statistics", "views", itemMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:statistics", "favorites", itemMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
         super.addItemExtension("/rss/channel/item/media:content/media:status", "reason",  itemMediaContentMediaStatus(MediaStatus::setReason));
         super.addItemExtension("/rss/channel/item/media:content/media:status", "state",  itemMediaContentMediaStatus(MediaStatus::setState));
@@ -301,7 +301,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "count", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "max", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "min", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
-        super.addItemExtension("/rss/channel/item/media:group/media:community/media:statistics", "views", itemMediaGroupMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setViews)));
+        super.addItemExtension("/rss/channel/item/media:group/media:community/media:statistics", "views", itemMediaGroupMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:statistics", "favorites", itemMediaGroupMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
         super.addItemExtension("/rss/channel/item/media:group/media:status", "reason",  itemMediaGroupMediaStatus(MediaStatus::setReason));
         super.addItemExtension("/rss/channel/item/media:group/media:status", "state",  itemMediaGroupMediaStatus(MediaStatus::setState));
@@ -340,7 +340,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "count", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "max", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "min", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
-        super.addItemExtension("/rss/channel/item/media:community/media:statistics", "views", itemMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setViews)));
+        super.addItemExtension("/rss/channel/item/media:community/media:statistics", "views", itemMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:community/media:statistics", "favorites", itemMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
 
         // media:status

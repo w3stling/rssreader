@@ -4,14 +4,14 @@ package com.apptasticsoftware.rssreader.module.mediarss;
  * Specifies various statistics about a media object like the view count and the favorite count.
  */
 public class MediaStatistics {
-    private Integer views;
+    private Long views;
     private Integer favorites;
 
     /**
      * Number of views.
      * @return views
      */
-    public Integer getViews() {
+    public Long getViews() {
         return views;
     }
 
@@ -19,7 +19,7 @@ public class MediaStatistics {
      * Number of views.
      * @param views views
      */
-    public void setViews(Integer views) {
+    public void setViews(Long views) {
         this.views = views;
     }
 

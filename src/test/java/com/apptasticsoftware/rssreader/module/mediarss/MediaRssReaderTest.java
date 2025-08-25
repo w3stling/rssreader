@@ -175,9 +175,9 @@ class MediaRssReaderTest {
         assertThat(community.getMediaStarRating().get().getCount(), equalTo(20));
         assertThat(community.getMediaStarRating().get().getMin(), equalTo(1));
         assertThat(community.getMediaStarRating().get().getMax(), equalTo(10));
-        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5));
+        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5L));
         assertThat(community.getMediaStatistics().get().getFavorites(), equalTo(4));
-        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5));
+        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5L));
         assertThat(community.getMediaTags().get().getTags(), equalTo("news: 5, abc:3"));
 
         assertThat(mediaContent.getMediaComments(), equalTo(List.of("comment1", "comment2")));
@@ -334,7 +334,7 @@ class MediaRssReaderTest {
 
         var statistics = community.getMediaStatistics().orElse(null);
         assertNotNull(statistics);
-        assertThat(statistics.getViews(), is(56));
+        assertThat(statistics.getViews(), is(56L));
         assertThat(statistics.getFavorites(), is(5));
 
         var tags = community.getMediaTags().orElse(null);
@@ -528,7 +528,7 @@ class MediaRssReaderTest {
         assertThat(starRating.getMax(), equalTo(10));
         var statistics = community.getMediaStatistics().orElse(null);
         assertNotNull(statistics);
-        assertThat(statistics.getViews(), equalTo(5));
+        assertThat(statistics.getViews(), equalTo(5L));
         assertThat(statistics.getFavorites(), equalTo(4));
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
