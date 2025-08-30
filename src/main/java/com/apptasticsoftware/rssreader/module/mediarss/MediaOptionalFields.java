@@ -6,13 +6,13 @@ import java.util.Optional;
 // TODO remove add and set methods from interface
 public interface MediaOptionalFields {
     /**
-     * Gets the media rating that declares the permissible audience. If this element is not included,
+     * Gets a list of media rating that declares the permissible audience. If this element is not included,
      * it assumes that no restrictions are necessary. The rating can use different schemes like
      * urn:simple (adult | nonadult), urn:mpaa (g | pg | pg-13 | r | nc-17), urn:v-chip, or urn:icra.
      *
      * @return media rating or empty if not set
      */
-    Optional<MediaRating> getMediaRating();
+    List<MediaRating> getMediaRatings();
 
     /**
      * Sets the media rating that declares the permissible audience. If this element is not included,
@@ -21,7 +21,7 @@ public interface MediaOptionalFields {
      *
      * @param mediaRating media rating
      */
-    void setMediaRating(MediaRating mediaRating);
+    void addMediaRating(MediaRating mediaRating);
 
     /**
      * Returns the title for this item, if present.
@@ -374,6 +374,22 @@ public interface MediaOptionalFields {
      * @param mediaLocation the media location to add
      */
     void addMediaLocation(MediaLocation mediaLocation);
+
+    /**
+     * Returns the rights information of a media object, if present.
+     * Rights information specifies the rights status of the media object, such as user-created or official.
+     *
+     * @return optional rights information
+     */
+    Optional<MediaRights> getMediaRights();
+
+    /**
+     * Sets the rights information of a media object.
+     * Use this to specify the rights status of the media object.
+     *
+     * @param mediaRights the rights information to set
+     */
+    void setMediaRights(MediaRights mediaRights);
 
     /**
      * Returns the list of scenes for this item.

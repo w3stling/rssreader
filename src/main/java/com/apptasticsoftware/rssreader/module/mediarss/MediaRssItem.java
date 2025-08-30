@@ -46,8 +46,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
     // TODO: FIXED - Needed? MediaKeywords change to String?
     // TODO: FIXED - Needed? MediaBacklinks change to String?
     // TODO: FIXED - Needed? MediaTags change to String?
-    // TODO: MediaRights - String can only exist one
-    // MediaRatings[]??, Player??,
+    // TODO: FIXED - MediaRights
 
 
     /**
@@ -124,15 +123,15 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
     // Optional
 
     /**
-     * Gets the media rating that declares the permissible audience. If this element is not included,
+     * Gets a list of media rating that declares the permissible audience. If this element is not included,
      * it assumes that no restrictions are necessary. The rating can use different schemes like
      * urn:simple (adult | nonadult), urn:mpaa (g | pg | pg-13 | r | nc-17), urn:v-chip, or urn:icra.
      *
      * @return media rating or empty if not set
      */
     @Override
-    public Optional<MediaRating> getMediaRating() {
-        return optionalFields.getMediaRating();
+    public List<MediaRating> getMediaRatings() {
+        return optionalFields.getMediaRatings();
     }
 
     /**
@@ -143,8 +142,8 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      * @param mediaRating media rating
      */
     @Override
-    public void setMediaRating(MediaRating mediaRating) {
-        optionalFields.setMediaRating(mediaRating);
+    public void addMediaRating(MediaRating mediaRating) {
+        optionalFields.addMediaRating(mediaRating);
     }
 
     /**
@@ -607,6 +606,28 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
     @Override
     public void addMediaPeerLink(MediaPeerLink mediaPeerLink) {
         optionalFields.addMediaPeerLink(mediaPeerLink);
+    }
+
+    /**
+     * Returns the rights information of a media object, if present.
+     * Rights information specifies the rights status of the media object, such as user-created or official.
+     *
+     * @return optional rights information
+     */
+    @Override
+    public Optional<MediaRights> getMediaRights() {
+        return optionalFields.getMediaRights();
+    }
+
+    /**
+     * Sets the rights information of a media object.
+     * Use this to specify the rights status of the media object.
+     *
+     * @param mediaRights the rights information to set
+     */
+    @Override
+    public void setMediaRights(MediaRights mediaRights) {
+        optionalFields.setMediaRights(mediaRights);
     }
 
     /**

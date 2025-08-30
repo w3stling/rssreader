@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MediaOptionalFieldsImpl implements MediaOptionalFields {
-    private MediaRating mediaRating;
+    private final List<MediaRating> mediaRatings = new ArrayList<>();
     private MediaTitle mediaTitle;
     private MediaDescription mediaDescription;
     private final List<String> mediaKeywords = new ArrayList<>();
@@ -29,21 +29,20 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
     private final List<MediaSubTitle> mediaSubTitles = new ArrayList<>();
     private final List<MediaPeerLink> mediaPeerLinks = new ArrayList<>();
     private final List<MediaLocation> mediaLocations = new ArrayList<>();
-    // media:rights
+    private MediaRights mediaRights;
     private final List<MediaScene> mediaScenes = new ArrayList<>();
 
     // Optional
 
     /**
-     * Gets the media rating that declares the permissible audience. If this element is not included,
+     * Gets a list of media rating that declares the permissible audience. If this element is not included,
      * it assumes that no restrictions are necessary. The rating can use different schemes like
      * urn:simple (adult | nonadult), urn:mpaa (g | pg | pg-13 | r | nc-17), urn:v-chip, or urn:icra.
      *
      * @return media rating or empty if not set
      */
-    @Override
-    public Optional<MediaRating> getMediaRating() {
-        return Optional.ofNullable(mediaRating);
+    public List<MediaRating> getMediaRatings() {
+        return mediaRatings;
     }
 
     /**
@@ -53,9 +52,8 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
      *
      * @param mediaRating media rating
      */
-    @Override
-    public void setMediaRating(MediaRating mediaRating) {
-        this.mediaRating = mediaRating;
+    public void addMediaRating(MediaRating mediaRating) {
+        this.mediaRatings.add(mediaRating);
     }
 
     /**
@@ -541,6 +539,28 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
     }
 
     /**
+     * Returns the rights information of a media object, if present.
+     * Rights information specifies the rights status of the media object, such as user-created or official.
+     *
+     * @return optional rights information
+     */
+    @Override
+    public Optional<MediaRights> getMediaRights() {
+        return Optional.ofNullable(mediaRights);
+    }
+
+    /**
+     * Sets the rights information of a media object.
+     * Use this to specify the rights status of the media object.
+     *
+     * @param mediaRights the rights information to set
+     */
+    @Override
+    public void setMediaRights(MediaRights mediaRights) {
+        this.mediaRights = mediaRights;
+    }
+
+    /**
      * Returns the list of scenes for this item.
      * Scene information specifies details about specific segments within the media object, such as title, description, and time offsets.
      *
@@ -566,11 +586,11 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MediaOptionalFieldsImpl that = (MediaOptionalFieldsImpl) o;
-        return Objects.equals(getMediaRating(), that.getMediaRating()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaPlayer(), that.getMediaPlayer()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(getMediaPrices(), that.getMediaPrices()) && Objects.equals(getMediaLicenses(), that.getMediaLicenses()) && Objects.equals(getMediaSubTitles(), that.getMediaSubTitles()) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaScenes(), that.getMediaScenes());
+        return Objects.equals(getMediaRatings(), that.getMediaRatings()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaPlayer(), that.getMediaPlayer()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(getMediaPrices(), that.getMediaPrices()) && Objects.equals(getMediaLicenses(), that.getMediaLicenses()) && Objects.equals(getMediaSubTitles(), that.getMediaSubTitles()) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaRights(), that.getMediaRights()) && Objects.equals(getMediaScenes(), that.getMediaScenes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMediaRating(), getMediaTitle(), getMediaDescription(), getMediaKeywords(), getMediaThumbnails(), getMediaCategories(), getMediaHashes(), getMediaPlayer(), getMediaCredits(), getMediaCopyright(), getMediaTexts(), getMediaRestrictions(), getMediaCommunity(), getMediaComments(), getMediaEmbed(), getMediaResponses(), getMediaBackLinks(), getMediaStatus(), getMediaPrices(), getMediaLicenses(), getMediaSubTitles(), getMediaPeerLinks(), getMediaLocations(), getMediaScenes());
+        return Objects.hash(getMediaRatings(), getMediaTitle(), getMediaDescription(), getMediaKeywords(), getMediaThumbnails(), getMediaCategories(), getMediaHashes(), getMediaPlayer(), getMediaCredits(), getMediaCopyright(), getMediaTexts(), getMediaRestrictions(), getMediaCommunity(), getMediaComments(), getMediaEmbed(), getMediaResponses(), getMediaBackLinks(), getMediaStatus(), getMediaPrices(), getMediaLicenses(), getMediaSubTitles(), getMediaPeerLinks(), getMediaLocations(), getMediaRights(), getMediaScenes());
     }
 }

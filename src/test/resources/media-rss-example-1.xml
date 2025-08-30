@@ -15,6 +15,7 @@
                 http://www.creativecommons.org/licenses/by-nc/1.0
             </creativeCommons:license>
             <media:rating scheme="urn:simple">nonadult</media:rating>
+            <media:rating scheme="urn:mpaa">pg</media:rating>
             <media:keywords>Steaks, Summer</media:keywords>
             <media:thumbnail url="http://www.example.com/examples/mrss/example.jpg" width="720" time="50.10" />
             <media:thumbnail url="http://www.foo.com/keyframe.jpg" width="75" height="50" time="12:05:01.123" />
@@ -22,6 +23,7 @@
             <media:category>music/artistname/album/song2</media:category>
             <media:hash algo="md5">dfdec888b72151965a34b4b59031290a</media:hash>
             <media:hash algo="sha-1">2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</media:hash>
+            <media:player url="http://www.foo.com/player?id=1111" height="200" width="400" />
             <media:credit role="producer" scheme="urn:ebu">entity name</media:credit>
             <media:credit role="owner" scheme="urn:yvs">copyright holder of the entity</media:credit>
             <media:copyright url="https://creativecommons.org/licenses/by/4.0/">2005 FooBar Media</media:copyright>
@@ -64,6 +66,7 @@
             <media:subTitle type="application/smil" lang="fr-FR" href="http://www.foo.org/fr/subtitle.smil" />
             <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile480.torrent" />
             <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile1080.torrent" />
+            <media:rights status="official" />
             <media:scenes>
                 <media:scene>
                     <sceneTitle>sceneTitle1</sceneTitle>

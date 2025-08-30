@@ -1,6 +1,5 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
@@ -420,10 +419,12 @@ class MediaRssReaderTest {
         assertNotNull(item);
 
         // Rating
-        var rating = item.getMediaRating().orElse(null);
-        assertNotNull(rating);
-        assertThat(rating.getScheme(), isPresentAnd(equalTo("urn:simple")));
-        assertEquals(rating.getRating(), "nonadult");
+        var ratings = item.getMediaRatings();
+        assertEquals(2, ratings.size());
+        assertThat(ratings.get(0).getScheme(), isPresentAnd(equalTo("urn:simple")));
+        assertEquals("nonadult", ratings.get(0).getRating());
+        assertThat(ratings.get(1).getScheme(), isPresentAnd(equalTo("urn:mpaa")));
+        assertEquals("pg", ratings.get(1).getRating());
 
         // Title
         var title = item.getMediaTitle().orElse(null);
@@ -476,7 +477,11 @@ class MediaRssReaderTest {
         assertThat(hashes.get(1).getAlgorithm(), isPresentAnd(equalTo("sha-1")));
 
         // Player
-        // TODO: add mappings
+        var player = item.getMediaPlayer().orElse(null);
+        assertNotNull(player);
+        assertThat(player.getUrl(), equalTo("http://www.foo.com/player?id=1111"));
+        assertThat(player.getHeight(), isPresentAnd(equalTo(200)));
+        assertThat(player.getWidth(), isPresentAnd(equalTo(400)));
 
         // Credits
         var credits = item.getMediaCredits();
@@ -626,7 +631,10 @@ class MediaRssReaderTest {
         assertThat(peerLinks.get(1).getHref(), equalTo("http://www.foo.org/sampleFile1080.torrent"));
 
         // Rights
-        // TODO: add mappings
+        var rights = item.getMediaRights().orElse(null);
+        assertNotNull(rights);
+        assertThat(rights.getStatus(), equalTo(MediaRights.Status.OFFICIAL));
+        assertThat(rights.getStatusValue(), equalTo("official"));
 
         // Scenes
         var scenes = item.getMediaScenes();
