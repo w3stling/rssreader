@@ -658,8 +658,9 @@ class MediaRssReaderTest {
         MediaRssItem item = items.get(0);
         assertNotNull(item);
         var content = item.getMediaContents();
-        assertEquals(2, content.size());
+        assertEquals(3, content.size());
 
+        // -- First media content
 
         // Rating
         var ratings = content.get(0).getMediaRatings();
@@ -891,7 +892,7 @@ class MediaRssReaderTest {
         assertThat(scenes.get(1).getSceneStartTime(), equalTo("00:57"));
         assertThat(scenes.get(1).getSceneEndTime(), equalTo("01:45"));
 
-        // ---
+        // -- Second media content
 
         // Rating
         credits = content.get(1).getMediaCredits();
@@ -900,6 +901,27 @@ class MediaRssReaderTest {
         assertThat(credits.get(0).getRole(), isPresentAnd(equalTo("musician")));
         assertThat(credits.get(0).getScheme(), isEmpty());
 
+        // Category
+        categories = content.get(1).getMediaCategories();
+        assertEquals(1, categories.size());
+        assertEquals("music/band1/album/song", categories.get(0).getCategory());
+        assertThat(categories.get(0).getSchema(), isEmpty());
+        assertThat(categories.get(0).getLabel(), isEmpty());
+
+        // Rating
+        ratings = content.get(1).getMediaRatings();
+        assertEquals(1, ratings.size());
+        assertEquals("nonadult", ratings.get(0).getRating());
+        assertThat(ratings.get(0).getScheme(), isEmpty());
+
+        // -- Third media content
+
+        // Rating
+        credits = content.get(2).getMediaCredits();
+        assertEquals(1, credits.size());
+        assertThat(credits.get(0).getCredit(), equalTo("member of band2"));
+        assertThat(credits.get(0).getRole(), isPresentAnd(equalTo("musician")));
+        assertThat(credits.get(0).getScheme(), isEmpty());
 
         // Category
         categories = content.get(1).getMediaCategories();
@@ -916,16 +938,6 @@ class MediaRssReaderTest {
     }
 
     @Test
-    void mediaRssExample3() {
-        var items = new MediaRssReader().read(fromFile("media-rss-example-3.xml"))
-                .collect(Collectors.toList());
-
-        assertEquals(1, items.size());
-        MediaRssItem item = items.get(0);
-        assertNotNull(item);
-    }
-
-    @Test
     void mediaRssExample4() {
         var items = new MediaRssReader().read(fromFile("media-rss-example-4.xml"))
                 .collect(Collectors.toList());
@@ -933,6 +945,15 @@ class MediaRssReaderTest {
         assertEquals(1, items.size());
         MediaRssItem item = items.get(0);
         assertNotNull(item);
+
+        var content = item.getMediaContents();
+        assertEquals(0, content.size());
+
+        var group = item.getMediaGroup().orElse(null);
+        assertNotNull(group);
+
+        var groupContent = group.getMediaContents();
+        assertEquals(3, groupContent.size());
     }
 
     @Test

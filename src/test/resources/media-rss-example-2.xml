@@ -85,6 +85,11 @@
                 <media:category>music/band1/album/song</media:category>
                 <media:rating>nonadult</media:rating>
             </media:content>
+            <media:content url="http://www.foo.com/band2-song1.mp3" fileSize="2000" type="audio/mpeg" expression="full">
+                <media:credit role="musician">member of band2</media:credit>
+                <media:category>music/band2/album/song</media:category>
+                <media:rating>nonadult</media:rating>
+            </media:content>
         </item>
     </channel>
 </rss>
