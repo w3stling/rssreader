@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,5 +40,17 @@ public class MediaRating {
      */
     public void setScheme(String scheme) {
         this.scheme = scheme;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaRating that = (MediaRating) o;
+        return Objects.equals(getRating(), that.getRating()) && Objects.equals(getScheme(), that.getScheme());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRating(), getScheme());
     }
 }

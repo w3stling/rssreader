@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -92,5 +93,17 @@ public class MediaText {
      */
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaText mediaText = (MediaText) o;
+        return Objects.equals(getText(), mediaText.getText()) && Objects.equals(getType(), mediaText.getType()) && Objects.equals(getLang(), mediaText.getLang()) && Objects.equals(getStart(), mediaText.getStart()) && Objects.equals(getEnd(), mediaText.getEnd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getText(), getType(), getLang(), getStart(), getEnd());
     }
 }

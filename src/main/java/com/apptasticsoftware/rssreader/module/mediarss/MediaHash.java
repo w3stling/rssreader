@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,5 +40,17 @@ public class MediaHash {
      */
     public void setAlgorithm(String algorithm) {
         this.algorithm = algorithm;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaHash mediaHash = (MediaHash) o;
+        return Objects.equals(getHash(), mediaHash.getHash()) && Objects.equals(getAlgorithm(), mediaHash.getAlgorithm());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getHash(), getAlgorithm());
     }
 }

@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 /**
  * P2P link of a media object.
  */
@@ -37,5 +39,17 @@ public class MediaPeerLink {
      */
     public void setHref(String href) {
         this.href = href;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaPeerLink that = (MediaPeerLink) o;
+        return Objects.equals(getType(), that.getType()) && Objects.equals(getHref(), that.getHref());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getHref());
     }
 }

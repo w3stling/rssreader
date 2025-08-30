@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,5 +40,17 @@ public class MediaStatus {
      */
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaStatus that = (MediaStatus) o;
+        return Objects.equals(getState(), that.getState()) && Objects.equals(getReason(), that.getReason());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getState(), getReason());
     }
 }

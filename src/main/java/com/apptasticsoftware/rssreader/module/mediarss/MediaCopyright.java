@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -39,5 +40,17 @@ public class MediaCopyright {
      */
     public void setCopyright(String copyright) {
         this.copyright = copyright;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaCopyright that = (MediaCopyright) o;
+        return Objects.equals(getUrl(), that.getUrl()) && Objects.equals(getCopyright(), that.getCopyright());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getCopyright());
     }
 }

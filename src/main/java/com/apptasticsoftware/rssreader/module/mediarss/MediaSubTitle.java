@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 public class MediaSubTitle {
     private String type;
     private String lang;
@@ -51,5 +53,17 @@ public class MediaSubTitle {
      */
     public void setHref(String href) {
         this.href = href;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaSubTitle that = (MediaSubTitle) o;
+        return Objects.equals(getType(), that.getType()) && Objects.equals(getLang(), that.getLang()) && Objects.equals(getHref(), that.getHref());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), getLang(), getHref());
     }
 }

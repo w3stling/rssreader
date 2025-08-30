@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
@@ -151,7 +152,7 @@ class MediaRssReaderTest {
         assertThat(mediaTitle.getType(), isPresentAnd(equalTo("plain")));
         assertThat(mediaTitle.getTitle(), equalTo("Title 1"));
 
-        MediaDescription mediaDescription = mediaContent.getMediaDesciption().orElse(null);
+        MediaDescription mediaDescription = mediaContent.getMediaDescription().orElse(null);
         assertNotNull(mediaDescription);
         assertThat(mediaDescription.getType(), isPresentAnd(equalTo("plain")));
         assertThat(mediaDescription.getDescription(), equalTo("Get perfectly done steaks every time"));
@@ -586,7 +587,7 @@ class MediaRssReaderTest {
         assertThat(status.getState(), equalTo("blocked"));
 
         // Price
-        var prices = item.getMediaPrice();
+        var prices = item.getMediaPrices();
         assertEquals(2, prices.size());
         assertThat(prices.get(0).getType(), equalTo("rent"));
         assertThat(prices.get(0).getCurrency(), isPresentAnd(equalTo("EUR")));
@@ -682,6 +683,35 @@ class MediaRssReaderTest {
 
     @Test
     void equalsContract() {
+        EqualsVerifier.simple().forClass(MediaCategory.class).verify();
+        EqualsVerifier.simple().forClass(MediaCommunity.class).verify();
+        EqualsVerifier.simple().forClass(MediaCopyright.class).verify();
+        EqualsVerifier.simple().forClass(MediaCredit.class).verify();
+        EqualsVerifier.simple().forClass(MediaDescription.class).verify();
+        EqualsVerifier.simple().forClass(MediaEmbed.class).verify();
+        EqualsVerifier.simple().forClass(MediaHash.class).verify();
+        EqualsVerifier.simple().forClass(MediaLicense.class).verify();
+        EqualsVerifier.simple().forClass(MediaLocation.class).verify();
+        EqualsVerifier.simple().forClass(MediaPeerLink.class).verify();
+        EqualsVerifier.simple().forClass(MediaPlayer.class).verify();
+        EqualsVerifier.simple().forClass(MediaPrice.class).verify();
+        EqualsVerifier.simple().forClass(MediaRating.class).verify();
+        EqualsVerifier.simple().forClass(MediaRestriction.class).verify();
+        EqualsVerifier.simple().forClass(MediaScene.class).verify();
+        EqualsVerifier.simple().forClass(MediaStarRating.class).verify();
+        EqualsVerifier.simple().forClass(MediaStatistics.class).verify();
+        EqualsVerifier.simple().forClass(MediaStatus.class).verify();
+        EqualsVerifier.simple().forClass(MediaSubTitle.class).verify();
+        EqualsVerifier.simple().forClass(MediaTag.class).verify();
+        EqualsVerifier.simple().forClass(MediaTags.class).verify();
+        EqualsVerifier.simple().forClass(MediaText.class).verify();
+        EqualsVerifier.simple().forClass(MediaThumbnail.class).verify();
+        EqualsVerifier.simple().forClass(MediaTitle.class).verify();
+
+        EqualsVerifier.simple().forClass(MediaOptionalFieldsImpl.class).verify();
+        EqualsVerifier.simple().forClass(MediaContent.class).verify();
+        EqualsVerifier.simple().forClass(MediaGroup.class).verify();
+
         EqualsVerifier.simple().forClass(MediaRssItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
     }
 

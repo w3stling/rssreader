@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -58,5 +59,17 @@ public class MediaCredit {
      */
     public void setCredit(String credit) {
         this.credit = credit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaCredit that = (MediaCredit) o;
+        return Objects.equals(getRole(), that.getRole()) && Objects.equals(getScheme(), that.getScheme()) && Objects.equals(getCredit(), that.getCredit());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRole(), getScheme(), getCredit());
     }
 }

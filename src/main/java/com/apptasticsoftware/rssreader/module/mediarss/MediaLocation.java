@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 /**
  * For specifying various locations conforming to geoRSS
  */
@@ -54,5 +56,17 @@ public class MediaLocation {
      */
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaLocation that = (MediaLocation) o;
+        return Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getStart(), that.getStart()) && Objects.equals(getEnd(), that.getEnd());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDescription(), getStart(), getEnd());
     }
 }

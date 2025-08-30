@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -58,4 +59,15 @@ public class MediaPlayer {
         this.width = width;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaPlayer that = (MediaPlayer) o;
+        return Objects.equals(getUrl(), that.getUrl()) && Objects.equals(getWidth(), that.getWidth()) && Objects.equals(getHeight(), that.getHeight());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getWidth(), getHeight());
+    }
 }

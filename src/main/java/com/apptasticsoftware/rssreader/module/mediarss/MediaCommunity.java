@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -63,5 +64,17 @@ public class MediaCommunity {
      */
     public void setMediaTags(MediaTags mediaTags) {
         this.mediaTags = mediaTags;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaCommunity that = (MediaCommunity) o;
+        return Objects.equals(getMediaStarRating(), that.getMediaStarRating()) && Objects.equals(getMediaStatistics(), that.getMediaStatistics()) && Objects.equals(getMediaTags(), that.getMediaTags());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getMediaStarRating(), getMediaStatistics(), getMediaTags());
     }
 }

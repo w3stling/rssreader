@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -56,5 +57,17 @@ public class MediaCategory {
      */
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaCategory that = (MediaCategory) o;
+        return Objects.equals(getSchema(), that.getSchema()) && Objects.equals(getLabel(), that.getLabel()) && Objects.equals(getCategory(), that.getCategory());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSchema(), getLabel(), getCategory());
     }
 }

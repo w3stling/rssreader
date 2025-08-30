@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Sometimes player-specific embed code is needed for a player to play any video.
@@ -66,16 +67,22 @@ public class MediaEmbed {
     }
 
     public void addParamName(String name) {
-        System.out.println("addParamName: " + name + ", params: " + params);
         params.put(name, "");
-        System.out.println("size: " + params.size() + ", params: " + params.hashCode());
     }
 
     public void addParamValue(String value) {
-        System.out.println("addParamValue: " + value);
-        System.out.println("size: " + params.size() + ", params: " + params.hashCode());
-        System.out.println(params.lastEntry());
         params.put(params.lastEntry().getKey(), value);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaEmbed that = (MediaEmbed) o;
+        return Objects.equals(getUrl(), that.getUrl()) && Objects.equals(getWidth(), that.getWidth()) && Objects.equals(getHeight(), that.getHeight()) && Objects.equals(getParams(), that.getParams());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getWidth(), getHeight(), getParams());
+    }
 }

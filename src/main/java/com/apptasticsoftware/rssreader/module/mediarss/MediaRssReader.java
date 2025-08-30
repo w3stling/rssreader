@@ -75,7 +75,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:scenes/media:scene", item -> item.addMediaScene(new MediaScene()));
 
         // media:content
-        onItemTags.put("/rss/channel/item/media:price", item -> item.addMediaPrices(new MediaPrice()));
+        onItemTags.put("/rss/channel/item/media:price", item -> item.addMediaPrice(new MediaPrice()));
         onItemTags.put("/rss/channel/item/media:content", item -> item.addMediaContents(new MediaContent()));
         onItemTags.put("/rss/channel/item/media:content/media:credit", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCredit(new MediaCredit())));
         onItemTags.put("/rss/channel/item/media:content/media:hash", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaHash(new MediaHash())));
@@ -87,7 +87,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:content/media:peerLink", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPeerLink(new MediaPeerLink())));
         onItemTags.put("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
         onItemTags.put("/rss/channel/item/media:content/media:scenes/media:scene", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaScene(new MediaScene())));
-        onItemTags.put("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaThumbnails(new MediaThumbnail())));
+        onItemTags.put("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaThumbnail(new MediaThumbnail())));
 
         super.addItemExtension("/rss/channel/item/media:content/media:credit", itemMediaContentMediaCredit(MediaCredit::setCredit));
         super.addItemExtension("/rss/channel/item/media:content/media:title", itemMediaContentMediaTitle(MediaTitle::setTitle));
@@ -443,7 +443,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaContentMediaDescription(BiConsumer<MediaDescription, String> setter) {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
-            var description = createIfNull(content::getMediaDesciption, content::setMediaDesciption, MediaDescription::new);
+            var description = createIfNull(content::getMediaDescription, content::setMediaDescription, MediaDescription::new);
             setter.accept(description, value);
         };
     }
@@ -811,7 +811,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaPrice(BiConsumer<MediaPrice, String> setter) {
-        return (item, value) -> setter.accept(item.getMediaPrice().getLast(), value);
+        return (item, value) -> setter.accept(item.getMediaPrices().getLast(), value);
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaLicense(BiConsumer<MediaLicense, String> setter) {

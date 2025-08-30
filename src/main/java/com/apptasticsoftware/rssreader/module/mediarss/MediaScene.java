@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 /**
  * To specify various scenes within a media object.
  */
@@ -71,5 +73,17 @@ public class MediaScene {
      */
     public void setSceneEndTime(String sceneEndTime) {
         this.sceneEndTime = sceneEndTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaScene that = (MediaScene) o;
+        return Objects.equals(getSceneTitle(), that.getSceneTitle()) && Objects.equals(getSceneDescription(), that.getSceneDescription()) && Objects.equals(getSceneStartTime(), that.getSceneStartTime()) && Objects.equals(getSceneEndTime(), that.getSceneEndTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSceneTitle(), getSceneDescription(), getSceneStartTime(), getSceneEndTime());
     }
 }

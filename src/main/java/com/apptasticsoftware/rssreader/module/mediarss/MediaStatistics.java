@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 /**
  * Specifies various statistics about a media object like the view count and the favorite count.
  */
@@ -37,5 +39,17 @@ public class MediaStatistics {
      */
     public void setFavorites(Integer favorites) {
         this.favorites = favorites;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaStatistics that = (MediaStatistics) o;
+        return Objects.equals(getViews(), that.getViews()) && Objects.equals(getFavorites(), that.getFavorites());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getViews(), getFavorites());
     }
 }

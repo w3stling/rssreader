@@ -1,125 +1,36 @@
-/*
- * MIT License
- *
- * Copyright (c) 2022, Apptastic Software
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package com.apptasticsoftware.rssreader.module.mediarss;
-
-import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * Class representing the media rss item.
- */
-public class MediaRssItem extends Item implements MediaOptionalFields {
-    private final List<MediaContent> mediaContents = new ArrayList<>();
-    private MediaGroup mediaGroup;
-    private final MediaOptionalFields optionalFields = new MediaOptionalFieldsImpl();
-
-    // TODO: FIXED - missing: keywords, ratings
-    // TODO: FIXED - thumbnail change from Optional to List
-    // TODO: FIXED - Needed? MediaResponses change to String?
-    // TODO: FIXED - Needed? MediaComments change to String?
-    // TODO: FIXED - Needed? MediaKeywords change to String?
-    // TODO: FIXED - Needed? MediaBacklinks change to String?
-    // TODO: FIXED - Needed? MediaTags change to String?
-    // TODO: MediaRights - String can only exist one
-    // MediaRatings[]??, Player??,
-
-
-    /**
-     * Constructor
-     *
-     * @param dateTimeParser timestamp parser
-     */
-    public MediaRssItem(DateTimeParser dateTimeParser) {
-        super(dateTimeParser);
-    }
-
-    /**
-     * Returns the list of media content elements associated with this item.
-     * Each item represents a media object, such as video, audio, or image, and may include attributes like URL, type, medium, duration, and more, as defined by the Media RSS specification.
-     *
-     * @return list of media content elements
-     */
-    public List<MediaContent> getMediaContents() {
-        return mediaContents;
-    }
-
-    /**
-     * Adds a media content element to this item.
-     * Use this to associate a new media object with the item.
-     *
-     * @param mediaContent the media content element to add
-     */
-    public void addMediaContents(MediaContent mediaContent) {
-        mediaContents.add(mediaContent);
-    }
-
-    /**
-     * Returns the media group associated with this item, if present.
-     * A group allows grouping of media objects that are different representations of the same content.
-     *
-     * @return optional media group
-     */
-    public Optional<MediaGroup> getMediaGroup() {
-        return Optional.ofNullable(mediaGroup);
-    }
-
-    /**
-     * Sets the media group for this item.
-     * Use this to group multiple media objects representing the same content in different formats.
-     *
-     * @param mediaGroup the media group to set
-     */
-    public void setMediaGroup(MediaGroup mediaGroup) {
-        this.mediaGroup = mediaGroup;
-    }
-
-    /**
-     * Returns the list of media location elements for this item.
-     * Each location specifies geographical information about places captured in the media content.
-     *
-     * @return list of media locations
-     */
-    @Override
-    public List<MediaLocation> getMediaLocations() {
-        return optionalFields.getMediaLocations();
-    }
-
-    /**
-     * Adds a media location element to this item.
-     * Use this to specify a location referenced in the media object, including description and time offsets.
-     *
-     * @param mediaLocation the media location to add
-     */
-    @Override
-    public void addMediaLocation(MediaLocation mediaLocation) {
-        optionalFields.addMediaLocation(mediaLocation);
-    }
+public class MediaOptionalFieldsImpl implements MediaOptionalFields {
+    private MediaRating mediaRating;
+    private MediaTitle mediaTitle;
+    private MediaDescription mediaDescription;
+    private final List<String> mediaKeywords = new ArrayList<>();
+    private final List<MediaThumbnail> mediaThumbnails = new ArrayList<>();
+    private final List<MediaCategory> mediaCategories = new ArrayList<>();
+    private final List<MediaHash> mediaHashes = new ArrayList<>();
+    private MediaPlayer mediaPlayer;
+    private final List<MediaCredit> mediaCredits = new ArrayList<>();
+    private MediaCopyright mediaCopyright;
+    private final List<MediaText> mediaTexts = new ArrayList<>();
+    private final List<MediaRestriction> mediaRestrictions = new ArrayList<>();
+    private MediaCommunity mediaCommunity;
+    private final List<String> mediaComments = new ArrayList<>();
+    private MediaEmbed mediaEmbed;
+    private final List<String> mediaResponses = new ArrayList<>();
+    private final List<String> mediaBackLinks = new ArrayList<>();
+    private MediaStatus mediaStatus;
+    private final List<MediaPrice> mediaPrices = new ArrayList<>();
+    private final List<MediaLicense> mediaLicenses = new ArrayList<>();
+    private final List<MediaSubTitle> mediaSubTitles = new ArrayList<>();
+    private final List<MediaPeerLink> mediaPeerLinks = new ArrayList<>();
+    private final List<MediaLocation> mediaLocations = new ArrayList<>();
+    // media:rights
+    private final List<MediaScene> mediaScenes = new ArrayList<>();
 
     // Optional
 
@@ -132,7 +43,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaRating> getMediaRating() {
-        return optionalFields.getMediaRating();
+        return Optional.ofNullable(mediaRating);
     }
 
     /**
@@ -144,7 +55,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaRating(MediaRating mediaRating) {
-        optionalFields.setMediaRating(mediaRating);
+        this.mediaRating = mediaRating;
     }
 
     /**
@@ -155,7 +66,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaTitle> getMediaTitle() {
-        return optionalFields.getMediaTitle();
+        return Optional.ofNullable(mediaTitle);
     }
 
     /**
@@ -166,7 +77,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaTitle(MediaTitle mediaTitle) {
-        optionalFields.setMediaTitle(mediaTitle);
+        this.mediaTitle = mediaTitle;
     }
 
     /**
@@ -177,7 +88,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaDescription> getMediaDescription() {
-        return optionalFields.getMediaDescription();
+        return Optional.ofNullable(mediaDescription);
     }
 
     /**
@@ -188,7 +99,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaDescription(MediaDescription mediaDescription) {
-        optionalFields.setMediaDescription(mediaDescription);
+        this.mediaDescription = mediaDescription;
     }
 
     /**
@@ -199,7 +110,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<String> getMediaKeywords() {
-        return optionalFields.getMediaKeywords();
+        return mediaKeywords;
     }
 
     /**
@@ -210,7 +121,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaKeyword(String mediaKeyword) {
-        optionalFields.addMediaKeyword(mediaKeyword);
+        this.mediaKeywords.add(mediaKeyword);
     }
 
     /**
@@ -221,7 +132,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaThumbnail> getMediaThumbnails() {
-        return optionalFields.getMediaThumbnails();
+        return mediaThumbnails;
     }
 
     /**
@@ -232,7 +143,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaThumbnail(MediaThumbnail mediaThumbnail) {
-        optionalFields.addMediaThumbnail(mediaThumbnail);
+        this.mediaThumbnails.add(mediaThumbnail);
     }
 
     /**
@@ -243,7 +154,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaCategory> getMediaCategories() {
-        return optionalFields.getMediaCategories();
+        return mediaCategories;
     }
 
     /**
@@ -254,7 +165,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaCategory(MediaCategory mediaCategory) {
-        optionalFields.addMediaCategory(mediaCategory);
+        mediaCategories.add(mediaCategory);
     }
 
     /**
@@ -265,7 +176,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaHash> getMediaHashes() {
-        return optionalFields.getMediaHashes();
+        return mediaHashes;
     }
 
     /**
@@ -276,7 +187,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaHash(MediaHash mediaHash) {
-        optionalFields.addMediaHash(mediaHash);
+        mediaHashes.add(mediaHash);
     }
 
     /**
@@ -285,9 +196,8 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      *
      * @return optional media player information
      */
-    @Override
     public Optional<MediaPlayer> getMediaPlayer() {
-        return optionalFields.getMediaPlayer();
+        return Optional.ofNullable(mediaPlayer);
     }
 
     /**
@@ -296,9 +206,8 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      *
      * @param mediaPlayer the media player information to set
      */
-    @Override
     public void setMediaPlayer(MediaPlayer mediaPlayer) {
-        optionalFields.setMediaPlayer(mediaPlayer);
+        this.mediaPlayer = mediaPlayer;
     }
 
     /**
@@ -309,7 +218,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaCredit> getMediaCredits() {
-        return optionalFields.getMediaCredits();
+        return mediaCredits;
     }
 
     /**
@@ -320,7 +229,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaCredit(MediaCredit mediaCredit) {
-        optionalFields.addMediaCredit(mediaCredit);
+        mediaCredits.add(mediaCredit);
     }
 
     /**
@@ -331,7 +240,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaCopyright> getMediaCopyright() {
-        return optionalFields.getMediaCopyright();
+        return Optional.ofNullable(mediaCopyright);
     }
 
     /**
@@ -342,7 +251,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaCopyright(MediaCopyright mediaCopyright) {
-        optionalFields.setMediaCopyright(mediaCopyright);
+        this.mediaCopyright = mediaCopyright;
     }
 
     /**
@@ -353,7 +262,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaText> getMediaTexts() {
-        return optionalFields.getMediaTexts();
+        return mediaTexts;
     }
 
     /**
@@ -364,7 +273,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaText(MediaText mediaText) {
-        optionalFields.addMediaText(mediaText);
+        mediaTexts.add(mediaText);
     }
 
     /**
@@ -375,7 +284,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaRestriction> getMediaRestrictions() {
-        return optionalFields.getMediaRestrictions();
+        return mediaRestrictions;
     }
 
     /**
@@ -386,7 +295,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaRestriction(MediaRestriction mediaRestriction) {
-        optionalFields.addMediaRestriction(mediaRestriction);
+        this.mediaRestrictions.add(mediaRestriction);
     }
 
     /**
@@ -397,7 +306,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaCommunity> getMediaCommunity() {
-        return optionalFields.getMediaCommunity();
+        return Optional.ofNullable(mediaCommunity);
     }
 
     /**
@@ -408,7 +317,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaCommunity(MediaCommunity mediaCommunity) {
-        optionalFields.setMediaCommunity(mediaCommunity);
+        this.mediaCommunity = mediaCommunity;
     }
 
     /**
@@ -419,7 +328,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<String> getMediaComments() {
-        return optionalFields.getMediaComments();
+        return mediaComments;
     }
 
     /**
@@ -430,7 +339,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaComment(String mediaComment) {
-        optionalFields.addMediaComment(mediaComment);
+        this.mediaComments.add(mediaComment);
     }
 
     /**
@@ -441,7 +350,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaEmbed> getMediaEmbed() {
-        return optionalFields.getMediaEmbed();
+        return Optional.ofNullable(mediaEmbed);
     }
 
     /**
@@ -452,7 +361,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaEmbed(MediaEmbed mediaEmbed) {
-        optionalFields.setMediaEmbed(mediaEmbed);
+        this.mediaEmbed = mediaEmbed;
     }
 
     /**
@@ -463,7 +372,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<String> getMediaResponses() {
-        return optionalFields.getMediaResponses();
+        return mediaResponses;
     }
 
     /**
@@ -474,7 +383,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaResponse(String mediaResponse) {
-        optionalFields.addMediaResponse(mediaResponse);
+        this.mediaResponses.add(mediaResponse);
     }
 
     /**
@@ -485,7 +394,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<String> getMediaBackLinks() {
-        return optionalFields.getMediaBackLinks();
+        return mediaBackLinks;
     }
 
     /**
@@ -496,7 +405,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaBackLink(String mediaBackLink) {
-        optionalFields.addMediaBackLink(mediaBackLink);
+        this.mediaBackLinks.add(mediaBackLink);
     }
 
     /**
@@ -507,7 +416,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public Optional<MediaStatus> getMediaStatus() {
-        return optionalFields.getMediaStatus();
+        return Optional.ofNullable(mediaStatus);
     }
 
     /**
@@ -518,7 +427,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void setMediaStatus(MediaStatus mediaStatus) {
-        optionalFields.setMediaStatus(mediaStatus);
+        this.mediaStatus = mediaStatus;
     }
 
     /**
@@ -529,7 +438,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaPrice> getMediaPrices() {
-        return optionalFields.getMediaPrices();
+        return mediaPrices;
     }
 
     /**
@@ -540,7 +449,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaPrice(MediaPrice mediaPrice) {
-        optionalFields.addMediaPrice(mediaPrice);
+        mediaPrices.add(mediaPrice);
     }
 
     /**
@@ -551,7 +460,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaLicense> getMediaLicenses() {
-        return optionalFields.getMediaLicenses();
+        return mediaLicenses;
     }
 
     /**
@@ -562,7 +471,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaLicense(MediaLicense mediaLicense) {
-        optionalFields.addMediaLicense(mediaLicense);
+        this.mediaLicenses.add(mediaLicense);
     }
 
     /**
@@ -573,7 +482,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaSubTitle> getMediaSubTitles() {
-        return optionalFields.getMediaSubTitles();
+        return mediaSubTitles;
     }
 
     /**
@@ -584,7 +493,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaSubTitle(MediaSubTitle mediaSubTitle) {
-        optionalFields.addMediaSubTitle(mediaSubTitle);
+        this.mediaSubTitles.add(mediaSubTitle);
     }
 
     /**
@@ -595,7 +504,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaPeerLink> getMediaPeerLinks() {
-        return optionalFields.getMediaPeerLinks();
+        return mediaPeerLinks;
     }
 
     /**
@@ -606,7 +515,29 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaPeerLink(MediaPeerLink mediaPeerLink) {
-        optionalFields.addMediaPeerLink(mediaPeerLink);
+        this.mediaPeerLinks.add(mediaPeerLink);
+    }
+
+    /**
+     * Returns the list of media location elements for this item.
+     * Each location specifies geographical information about places captured in the media content.
+     *
+     * @return list of media locations
+     */
+    @Override
+    public List<MediaLocation> getMediaLocations() {
+        return mediaLocations;
+    }
+
+    /**
+     * Adds a media location element to this item.
+     * Use this to specify a location referenced in the media object, including description and time offsets.
+     *
+     * @param mediaLocation the media location to add
+     */
+    @Override
+    public void addMediaLocation(MediaLocation mediaLocation) {
+        this.mediaLocations.add(mediaLocation);
     }
 
     /**
@@ -617,7 +548,7 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public List<MediaScene> getMediaScenes() {
-        return optionalFields.getMediaScenes();
+        return mediaScenes;
     }
 
     /**
@@ -628,19 +559,18 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
      */
     @Override
     public void addMediaScene(MediaScene mediaScenes) {
-        optionalFields.addMediaScene(mediaScenes);
+        this.mediaScenes.add(mediaScenes);
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(getMediaContents(), that.getMediaContents()) && Objects.equals(getMediaGroup(), that.getMediaGroup()) && Objects.equals(optionalFields, that.optionalFields);
+        MediaOptionalFieldsImpl that = (MediaOptionalFieldsImpl) o;
+        return Objects.equals(getMediaRating(), that.getMediaRating()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaPlayer(), that.getMediaPlayer()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(getMediaPrices(), that.getMediaPrices()) && Objects.equals(getMediaLicenses(), that.getMediaLicenses()) && Objects.equals(getMediaSubTitles(), that.getMediaSubTitles()) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaScenes(), that.getMediaScenes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaContents(), getMediaGroup(), optionalFields);
+        return Objects.hash(getMediaRating(), getMediaTitle(), getMediaDescription(), getMediaKeywords(), getMediaThumbnails(), getMediaCategories(), getMediaHashes(), getMediaPlayer(), getMediaCredits(), getMediaCopyright(), getMediaTexts(), getMediaRestrictions(), getMediaCommunity(), getMediaComments(), getMediaEmbed(), getMediaResponses(), getMediaBackLinks(), getMediaStatus(), getMediaPrices(), getMediaLicenses(), getMediaSubTitles(), getMediaPeerLinks(), getMediaLocations(), getMediaScenes());
     }
 }

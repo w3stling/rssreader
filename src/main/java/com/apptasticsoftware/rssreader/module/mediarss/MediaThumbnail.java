@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import java.time.Duration;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -119,5 +120,17 @@ public class MediaThumbnail {
             // ignore and return empty
         }
         return Optional.empty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaThumbnail that = (MediaThumbnail) o;
+        return Objects.equals(getUrl(), that.getUrl()) && Objects.equals(getWidth(), that.getWidth()) && Objects.equals(getHeight(), that.getHeight()) && Objects.equals(getTime(), that.getTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getWidth(), getHeight(), getTime());
     }
 }

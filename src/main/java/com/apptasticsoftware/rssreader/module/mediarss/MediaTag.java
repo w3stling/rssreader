@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -56,5 +57,17 @@ public class MediaTag {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaTag mediaTag = (MediaTag) o;
+        return Objects.equals(getTag(), mediaTag.getTag());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getTag());
     }
 }

@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.util.Objects;
+
 /**
  * Allows restrictions to be placed on the aggregator rendering the media in the feed.
  */
@@ -56,4 +58,15 @@ public class MediaRestriction {
         this.type = type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaRestriction that = (MediaRestriction) o;
+        return Objects.equals(getRestriction(), that.getRestriction()) && Objects.equals(getRelationship(), that.getRelationship()) && Objects.equals(getType(), that.getType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRestriction(), getRelationship(), getType());
+    }
 }
