@@ -71,17 +71,18 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         // media:content
         onItemTags.put("/rss/channel/item/media:content", item -> item.addMediaContents(new MediaContent()));
         onItemTags.put("/rss/channel/item/media:content/media:rating", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaRating(new MediaRating())));
-        onItemTags.put("/rss/channel/item/media:content/media:credit", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCredit(new MediaCredit())));
-        onItemTags.put("/rss/channel/item/media:content/media:hash", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaHash(new MediaHash())));
+        onItemTags.put("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaThumbnail(new MediaThumbnail())));
         onItemTags.put("/rss/channel/item/media:content/media:category", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCategory(new MediaCategory())));
+        onItemTags.put("/rss/channel/item/media:content/media:hash", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaHash(new MediaHash())));
+        onItemTags.put("/rss/channel/item/media:content/media:credit", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCredit(new MediaCredit())));
         onItemTags.put("/rss/channel/item/media:content/media:text", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaText(new MediaText())));
         onItemTags.put("/rss/channel/item/media:content/media:restriction", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaRestriction(new MediaRestriction())));
         onItemTags.put("/rss/channel/item/media:content/media:price", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPrice(new MediaPrice())));
+        onItemTags.put("/rss/channel/item/media:content/media:licence", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLicense(new MediaLicense())));
         onItemTags.put("/rss/channel/item/media:content/media:subTitle", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaSubTitle(new MediaSubTitle())));
         onItemTags.put("/rss/channel/item/media:content/media:peerLink", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPeerLink(new MediaPeerLink())));
         onItemTags.put("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
         onItemTags.put("/rss/channel/item/media:content/media:scenes/media:scene", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaScene(new MediaScene())));
-        onItemTags.put("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaThumbnail(new MediaThumbnail())));
 
         super.addItemExtension("/rss/channel/item/media:content/media:credit", itemMediaContentMediaCredit(MediaCredit::setCredit));
         super.addItemExtension("/rss/channel/item/media:content/media:title", itemMediaContentMediaTitle(MediaTitle::setTitle));
@@ -102,17 +103,19 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneDescription", itemMediaContentMediaScene(MediaScene::setSceneDescription));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneStartTime", itemMediaContentMediaScene(MediaScene::setSceneStartTime));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneEndTime", itemMediaContentMediaScene(MediaScene::setSceneEndTime));
+        super.addItemExtension("/rss/channel/item/media:content/media:license", itemMediaContentMediaLicense(MediaLicense::setLicense));
 
         // media:group
-        onItemTags.put("/rss/channel/item/media:group/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRating(new MediaRating())));
         onItemTags.put("/rss/channel/item/media:group/media:content", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaContent(new MediaContent())));
+        onItemTags.put("/rss/channel/item/media:group/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRating(new MediaRating())));
         onItemTags.put("/rss/channel/item/media:group/media:thumbnail", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaThumbnail(new MediaThumbnail())));
-        onItemTags.put("/rss/channel/item/media:group/media:credit", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaCredit(new MediaCredit())));
-        onItemTags.put("/rss/channel/item/media:group/media:hash", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaHash(new MediaHash())));
         onItemTags.put("/rss/channel/item/media:group/media:category", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaCategory(new MediaCategory())));
-        onItemTags.put("/rss/channel/item/media:group/media:restriction", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRestriction(new MediaRestriction())));
+        onItemTags.put("/rss/channel/item/media:group/media:hash", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaHash(new MediaHash())));
+        onItemTags.put("/rss/channel/item/media:group/media:credit", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaCredit(new MediaCredit())));
         onItemTags.put("/rss/channel/item/media:group/media:text", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaText(new MediaText())));
+        onItemTags.put("/rss/channel/item/media:group/media:restriction", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRestriction(new MediaRestriction())));
         onItemTags.put("/rss/channel/item/media:group/media:price", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaPrice(new MediaPrice())));
+        onItemTags.put("/rss/channel/item/media:group/media:license", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaLicense(new MediaLicense())));
         onItemTags.put("/rss/channel/item/media:group/media:subTitle", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaSubTitle(new MediaSubTitle())));
         onItemTags.put("/rss/channel/item/media:group/media:peerLink", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaPeerLink(new MediaPeerLink())));
         onItemTags.put("/rss/channel/item/media:group/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaLocation(new MediaLocation())));
@@ -133,6 +136,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:responses/media:response", itemMediaGroupStringList(MediaGroup::addMediaResponse));
         super.addItemExtension("/rss/channel/item/media:group/media:backLinks/media:backLink", itemMediaGroupStringList(MediaGroup::addMediaBackLink));
         super.addItemExtension("/rss/channel/item/media:group/media:embed/media:param", itemMediaGroupMediaEmbed(MediaEmbed::addParamValue));
+        super.addItemExtension("/rss/channel/item/media:group/media:license", itemMediaGroupMediaLicense(MediaLicense::setLicense));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneTitle", itemMediaGroupMediaScene(MediaScene::setSceneTitle));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneDescription", itemMediaGroupMediaScene(MediaScene::setSceneDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneStartTime", itemMediaGroupMediaScene(MediaScene::setSceneStartTime));
@@ -140,18 +144,18 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
         // item
         onItemTags.put("/rss/channel/item/media:rating", item -> item.addMediaRating(new MediaRating()));
-        onItemTags.put("/rss/channel/item/media:subTitle", item -> item.addMediaSubTitle(new MediaSubTitle()));
-        onItemTags.put("/rss/channel/item/media:peerLink", item -> item.addMediaPeerLink(new MediaPeerLink()));
-        onItemTags.put("/rss/channel/item/media:restriction", item -> item.addMediaRestriction(new MediaRestriction()));
-        onItemTags.put("/rss/channel/item/media:location", item -> item.addMediaLocation(new MediaLocation()));
-        onItemTags.put("/rss/channel/item/media:price", item -> item.addMediaPrice(new MediaPrice()));
-        onItemTags.put("/rss/channel/item/media:scenes/media:scene", item -> item.addMediaScene(new MediaScene()));
-        onItemTags.put("/rss/channel/item/media:hash", item -> item.addMediaHash(new MediaHash()));
-        onItemTags.put("/rss/channel/item/media:text", item -> item.addMediaText(new MediaText()));
         onItemTags.put("/rss/channel/item/media:thumbnail", item -> item.addMediaThumbnail(new MediaThumbnail()));
         onItemTags.put("/rss/channel/item/media:category", item -> item.addMediaCategory(new MediaCategory()));
+        onItemTags.put("/rss/channel/item/media:hash", item -> item.addMediaHash(new MediaHash()));
         onItemTags.put("/rss/channel/item/media:credit", item -> item.addMediaCredit(new MediaCredit()));
+        onItemTags.put("/rss/channel/item/media:text", item -> item.addMediaText(new MediaText()));
+        onItemTags.put("/rss/channel/item/media:restriction", item -> item.addMediaRestriction(new MediaRestriction()));
+        onItemTags.put("/rss/channel/item/media:price", item -> item.addMediaPrice(new MediaPrice()));
         onItemTags.put("/rss/channel/item/media:license", item -> item.addMediaLicense(new MediaLicense()));
+        onItemTags.put("/rss/channel/item/media:subTitle", item -> item.addMediaSubTitle(new MediaSubTitle()));
+        onItemTags.put("/rss/channel/item/media:peerLink", item -> item.addMediaPeerLink(new MediaPeerLink()));
+        onItemTags.put("/rss/channel/item/media:location", item -> item.addMediaLocation(new MediaLocation()));
+        onItemTags.put("/rss/channel/item/media:scenes/media:scene", item -> item.addMediaScene(new MediaScene()));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:tags", itemMediaCommunityMediaTags(MediaTags::setTags));
@@ -275,7 +279,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:location", "description", itemMediaContentMediaLocation(MediaLocation::setDescription));
         super.addItemExtension("/rss/channel/item/media:content/media:location", "start", itemMediaContentMediaLocation(MediaLocation::setStart));
         super.addItemExtension("/rss/channel/item/media:content/media:location", "end", itemMediaContentMediaLocation(MediaLocation::setEnd));
-
+        super.addItemExtension("/rss/channel/item/media:content/media:license", "type", itemMediaContentMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:content/media:license", "href", itemMediaContentMediaLicense(MediaLicense::setHref));
 
         // media:group
         super.addItemExtension("/rss/channel/item/media:group/media:content", "url", itemMediaGroupMediaContent(MediaContent::setUrl));
@@ -335,6 +340,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:location", "description", itemMediaGroupMediaLocation(MediaLocation::setDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:location", "start", itemMediaGroupMediaLocation(MediaLocation::setStart));
         super.addItemExtension("/rss/channel/item/media:group/media:location", "end", itemMediaGroupMediaLocation(MediaLocation::setEnd));
+        super.addItemExtension("/rss/channel/item/media:group/media:license", "type", itemMediaGroupMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:license", "href", itemMediaGroupMediaLicense(MediaLicense::setHref));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "average", itemMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
@@ -502,6 +509,13 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
             setter.accept(content.getMediaRatings().getLast(), value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaContentMediaLicense(BiConsumer<MediaLicense, String> setter) {
+        return (item, value) -> {
+            var content = item.getMediaContents().getLast();
+            setter.accept(content.getMediaLicenses().getLast(), value);
         };
     }
 
@@ -751,6 +765,13 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
             var tags = createIfNull(group::getMediaEmbed, group::setMediaEmbed, MediaEmbed::new);
             Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tag, value));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaLicense(BiConsumer<MediaLicense, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            setter.accept(group.getMediaLicenses().getLast(), value);
         };
     }
 
