@@ -319,6 +319,9 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:rating", "scheme", itemMediaGroupMediaRating(MediaRating::setScheme));
         super.addItemExtension("/rss/channel/item/media:group/media:copyright", "url", itemMediaGroupMediaCopyright(MediaCopyright::setUrl));
         super.addItemExtension("/rss/channel/item/media:group/media:hash", "algo", itemMediaGroupMediaHash(MediaHash::setAlgorithm));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "url", itemMediaGroupMediaPlayer(MediaPlayer::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "height", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "width", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setWidth)));
         super.addItemExtension("/rss/channel/item/media:group/media:restriction", "type", itemMediaGroupMediaRestriction(MediaRestriction::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:restriction", "relationship", itemMediaGroupMediaRestriction(MediaRestriction::setRelationship));
         super.addItemExtension("/rss/channel/item/media:group/media:text", "type", itemMediaGroupMediaText(MediaText::setType));
@@ -343,6 +346,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:location", "end", itemMediaGroupMediaLocation(MediaLocation::setEnd));
         super.addItemExtension("/rss/channel/item/media:group/media:license", "type", itemMediaGroupMediaLicense(MediaLicense::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:license", "href", itemMediaGroupMediaLicense(MediaLicense::setHref));
+        super.addItemExtension("/rss/channel/item/media:group/media:rights", "status", itemMediaGroupMediaRights(MediaRights::setStatus));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "average", itemMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
@@ -666,6 +670,14 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         };
     }
 
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaPlayer(BiConsumer<MediaPlayer, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var copyright = createIfNull(group::getMediaPlayer, group::setMediaPlayer, MediaPlayer::new);
+            setter.accept(copyright, value);
+        };
+    }
+
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaRestriction(BiConsumer<MediaRestriction, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
@@ -781,6 +793,14 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
             setter.accept(group.getMediaLicenses().getLast(), value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaRights(BiConsumer<MediaRights, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var rights = createIfNull(group::getMediaRights, group::setMediaRights, MediaRights::new);
+            setter.accept(rights, value);
         };
     }
 
