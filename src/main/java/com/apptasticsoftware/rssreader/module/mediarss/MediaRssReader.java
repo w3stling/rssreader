@@ -78,7 +78,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:content/media:text", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaText(new MediaText())));
         onItemTags.put("/rss/channel/item/media:content/media:restriction", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaRestriction(new MediaRestriction())));
         onItemTags.put("/rss/channel/item/media:content/media:price", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPrice(new MediaPrice())));
-        onItemTags.put("/rss/channel/item/media:content/media:licence", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLicense(new MediaLicense())));
+        onItemTags.put("/rss/channel/item/media:content/media:license", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLicense(new MediaLicense())));
         onItemTags.put("/rss/channel/item/media:content/media:subTitle", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaSubTitle(new MediaSubTitle())));
         onItemTags.put("/rss/channel/item/media:content/media:peerLink", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPeerLink(new MediaPeerLink())));
         onItemTags.put("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
@@ -281,6 +281,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:location", "end", itemMediaContentMediaLocation(MediaLocation::setEnd));
         super.addItemExtension("/rss/channel/item/media:content/media:license", "type", itemMediaContentMediaLicense(MediaLicense::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:license", "href", itemMediaContentMediaLicense(MediaLicense::setHref));
+        super.addItemExtension("/rss/channel/item/media:content/media:rights", "status", itemMediaContentMediaRights(MediaRights::setStatus));
 
         // media:group
         super.addItemExtension("/rss/channel/item/media:group/media:content", "url", itemMediaGroupMediaContent(MediaContent::setUrl));
@@ -516,6 +517,14 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
             setter.accept(content.getMediaLicenses().getLast(), value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaContentMediaRights(BiConsumer<MediaRights, String> setter) {
+        return (item, value) -> {
+            var content = item.getMediaContents().getLast();
+            var rights = createIfNull(content::getMediaRights, content::setMediaRights, MediaRights::new);
+            setter.accept(rights, value);
         };
     }
 
