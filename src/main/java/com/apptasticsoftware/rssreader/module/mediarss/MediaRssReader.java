@@ -530,7 +530,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaContentMediaThumbnail(BiConsumer<MediaThumbnail, String> setter) {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
-            Optional.ofNullable(content.getMediaThumbnails().getLast()).ifPresent(thumbnail -> setter.accept(thumbnail, value));
+            var thumbnail = content.getMediaThumbnails().getLast();
+            setter.accept(thumbnail, value);
         };
     }
 
@@ -561,7 +562,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaContentMediaCredit(BiConsumer<MediaCredit, String> setter) {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
-            Optional.ofNullable(content.getMediaCredits().getLast()).ifPresent(credit -> setter.accept(credit, value));
+            var credit = content.getMediaCredits().getLast();
+            setter.accept(credit, value);
         };
     }
 
@@ -654,7 +656,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var content = item.getMediaContents().getLast();
             var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
             var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            setter.accept(tags, value);
         };
     }
 
@@ -684,7 +686,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
             var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
+            setter.accept(embed, value);
         };
     }
 
@@ -809,17 +811,16 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaRating(BiConsumer<MediaRating, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-            Optional.ofNullable(group.getMediaRatings().getLast())
-                    .ifPresent(rating -> setter.accept(rating, value));
-
+            var rating = group.getMediaRatings().getLast();
+            setter.accept(rating, value);
         };
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaThumbnail(BiConsumer<MediaThumbnail, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-            Optional.ofNullable(group.getMediaThumbnails().getLast())
-                    .ifPresent(thumbnail -> setter.accept(thumbnail, value));
+            var thumbnail = group.getMediaThumbnails().getLast();
+            setter.accept(thumbnail, value);
         };
     }
 
@@ -846,7 +847,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
             var community = createIfNull(group::getMediaCommunity, group::setMediaCommunity, MediaCommunity::new);
             var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            setter.accept(tags, value);
         };
     }
 
@@ -861,7 +862,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaPrice(BiConsumer<MediaPrice, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-            setter.accept(group.getMediaPrices().getLast(), value);
+            var price = group.getMediaPrices().getLast();
+            setter.accept(price, value);
         };
     }
 
@@ -869,7 +871,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
             var embed = createIfNull(group::getMediaEmbed, group::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
+            setter.accept(embed, value);
         };
     }
 
@@ -937,7 +939,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return (item, value) -> {
             var community = createIfNull(item::getMediaCommunity, item::setMediaCommunity, MediaCommunity::new);
             var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            setter.accept(tags, value);
         };
     }
 
@@ -1009,7 +1011,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var content = group.getMediaContents().getLast();
             var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
             var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            setter.accept(tags, value);
         };
     }
 
@@ -1019,7 +1021,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var content = group.getMediaContents().getLast();
             var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
             var starRating = createIfNull(community::getMediaStarRating, community::setMediaStarRating, MediaStarRating::new);
-            Optional.ofNullable(starRating).ifPresent(tag -> setter.accept(starRating, value));
+            setter.accept(starRating, value);
         };
     }
 
@@ -1029,7 +1031,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var content = group.getMediaContents().getLast();
             var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
             var statistics = createIfNull(community::getMediaStatistics, community::setMediaStatistics, MediaStatistics::new);
-            Optional.ofNullable(statistics).ifPresent(tag -> setter.accept(statistics, value));
+            setter.accept(statistics, value);
         };
     }
 
@@ -1091,7 +1093,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
             var content = group.getMediaContents().getLast();
             var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
+            setter.accept(embed, value);
         };
     }
 
@@ -1196,28 +1198,28 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaEmbed(BiConsumer<MediaEmbed, String> setter) {
         return (item, value) -> {
             var embed = createIfNull(item::getMediaEmbed, item::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
+            setter.accept(embed, value);
         };
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaTitle(BiConsumer<MediaTitle, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaTitle, item::setMediaTitle, MediaTitle::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var title = createIfNull(item::getMediaTitle, item::setMediaTitle, MediaTitle::new);
+            setter.accept(title, value);
         };
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaDescription(BiConsumer<MediaDescription, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaDescription, item::setMediaDescription, MediaDescription::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var description = createIfNull(item::getMediaDescription, item::setMediaDescription, MediaDescription::new);
+            setter.accept(description, value);
         };
     }
 
     private static BiConsumer<MediaRssItem, String> itemMediaCopyright(BiConsumer<MediaCopyright, String> setter) {
         return (item, value) -> {
             var copyright = createIfNull(item::getMediaCopyright, item::setMediaCopyright, MediaCopyright::new);
-            Optional.ofNullable(copyright).ifPresent(tag -> setter.accept(copyright, value));
+            setter.accept(copyright, value);
         };
     }
 
@@ -1227,8 +1229,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
     private static BiConsumer<MediaRssItem, String> itemMediaPlayer(BiConsumer<MediaPlayer, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaPlayer, item::setMediaPlayer, MediaPlayer::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var player = createIfNull(item::getMediaPlayer, item::setMediaPlayer, MediaPlayer::new);
+            setter.accept(player, value);
         };
     }
 
@@ -1245,14 +1247,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
                 Mapper.split(value).forEach(keyword -> setter.accept(item, keyword));
     }
 
-    /*
-    private static BiConsumer<MediaRssItem, String> itemMediaRating(BiConsumer<MediaRating, String> setter) {
-        return (item, value) -> {
-            var tags = createIfNull(item::getMediaRating, item::setMediaRating, MediaRating::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
-        };
-    }
-    */
     private static BiConsumer<MediaRssItem, String> itemMediaRating(BiConsumer<MediaRating, String> setter) {
         return (item, value) -> setter.accept(item.getMediaRatings().getLast(), value);
     }
@@ -1267,8 +1261,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
     private static BiConsumer<MediaRssItem, String> itemMediaRights(BiConsumer<MediaRights, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaRights, item::setMediaRights, MediaRights::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var rights = createIfNull(item::getMediaRights, item::setMediaRights, MediaRights::new);
+            setter.accept(rights, value);
         };
     }
 }
