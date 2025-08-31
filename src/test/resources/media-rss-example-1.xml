@@ -66,7 +66,7 @@
             <media:subTitle type="application/smil" lang="fr-FR" href="http://www.foo.org/fr/subtitle.smil" />
             <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile480.torrent" />
             <media:peerLink type="application/x-bittorrent" href="http://www.foo.org/sampleFile1080.torrent" />
-            <media:rights status="official" />
+            <media:rights status="userCreated" />
             <media:scenes>
                 <media:scene>
                     <sceneTitle>sceneTitle1</sceneTitle>
