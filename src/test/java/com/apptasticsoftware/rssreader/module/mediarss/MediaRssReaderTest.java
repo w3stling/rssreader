@@ -648,6 +648,7 @@ class MediaRssReaderTest {
         var rights = item.getMediaRights().orElse(null);
         assertNotNull(rights);
         assertThat(rights.getStatus(), equalTo(MediaRights.Status.USER_CREATED));
+        assertThat(rights.getStatus().toString(), equalTo("userCreated"));
         assertThat(rights.getStatusValue(), equalTo("userCreated"));
 
         // Scenes

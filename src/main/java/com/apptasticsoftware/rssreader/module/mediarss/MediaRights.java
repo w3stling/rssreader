@@ -22,7 +22,7 @@ public class MediaRights {
             } else if ("official".equalsIgnoreCase(value)) {
                 return OFFICIAL;
             }
-            throw new IllegalArgumentException("Unknown value: " + value);
+            return null;
         }
 
         @Override
