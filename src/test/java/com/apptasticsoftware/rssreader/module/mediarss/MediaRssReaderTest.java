@@ -171,21 +171,29 @@ class MediaRssReaderTest {
 
         var community = mediaContent.getMediaCommunity().orElse(null);
         assertNotNull(community);
-        assertThat(community.getMediaStarRating().get().getAverage(), equalTo(3.5));
-        assertThat(community.getMediaStarRating().get().getCount(), equalTo(20));
-        assertThat(community.getMediaStarRating().get().getMin(), equalTo(1));
-        assertThat(community.getMediaStarRating().get().getMax(), equalTo(10));
-        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5L));
-        assertThat(community.getMediaStatistics().get().getFavorites(), equalTo(4));
-        assertThat(community.getMediaStatistics().get().getViews(), equalTo(5L));
-        assertThat(community.getMediaTags().get().getTags(), equalTo("news: 5, abc:3"));
+        var starRating = community.getMediaStarRating().orElse(null);
+        assertNotNull(starRating);
+        assertThat(starRating.getAverage(), equalTo(3.5));
+        assertThat(starRating.getCount(), equalTo(20));
+        assertThat(starRating.getMin(), equalTo(1));
+        assertThat(starRating.getMax(), equalTo(10));
+        var statistics = community.getMediaStatistics().orElse(null);
+        assertNotNull(statistics);
+        assertThat(statistics.getViews(), equalTo(5L));
+        assertThat(statistics.getFavorites(), equalTo(4));
+        assertThat(statistics.getViews(), equalTo(5L));
+        var tags = community.getMediaTags().orElse(null);
+        assertNotNull(tags);
+        assertThat(tags.getTags(), equalTo("news: 5, abc:3"));
 
         assertThat(mediaContent.getMediaComments(), equalTo(List.of("comment1", "comment2")));
         assertThat(mediaContent.getMediaResponses(), equalTo(List.of("http://www.response1.com", "http://www.response2.com")));
         assertThat(mediaContent.getMediaBackLinks(), equalTo(List.of("http://www.backlink1.com", "http://www.backlink2.com")));
 
-        assertThat(mediaContent.getMediaStatus().get().getReason(), isPresentAndIs("http://www.reasonforblocking.com"));
-        assertThat(mediaContent.getMediaStatus().get().getState(), equalTo("blocked"));
+        var status = mediaContent.getMediaStatus().orElse(null);
+        assertNotNull(status);
+        assertThat(status.getReason(), isPresentAndIs("http://www.reasonforblocking.com"));
+        assertThat(status.getState(), equalTo("blocked"));
 
         assertThat(mediaContent.getMediaPrices().get(0).getType(), equalTo("rent"));
         assertThat(mediaContent.getMediaPrices().get(0).getCurrency(), isPresentAndIs("EUR"));
@@ -195,15 +203,17 @@ class MediaRssReaderTest {
         assertThat(mediaContent.getMediaPrices().get(1).getCurrency(), isPresentAndIs("USD"));
         assertThat(mediaContent.getMediaPrices().get(1).getPrice(), isPresentAndIs(18.88));
 
-        assertThat(mediaContent.getMediaEmbed().get().getUrl(), equalTo("http://www.foo.com/player.swf"));
-        assertThat(mediaContent.getMediaEmbed().get().getHeight(), equalTo(323));
-        assertThat(mediaContent.getMediaEmbed().get().getWidth(), equalTo(512));
-        assertThat(mediaContent.getMediaEmbed().get().getParams().size(), is(5));
-        assertThat(mediaContent.getMediaEmbed().get().getParams(), hasEntry("type", "application/x-shockwave-flash"));
-        assertThat(mediaContent.getMediaEmbed().get().getParams(), hasEntry("width", "512"));
-        assertThat(mediaContent.getMediaEmbed().get().getParams(), hasEntry("height", "323"));
-        assertThat(mediaContent.getMediaEmbed().get().getParams(), hasEntry("allowFullScreen", "true"));
-        assertThat(mediaContent.getMediaEmbed().get().getParams(), hasEntry("flashVars", "id=12345&vid=678912i&lang=en-us&intl=us&thumbUrl=http://www.foo.com/thumbnail.jpg"));
+        var embed = mediaContent.getMediaEmbed().orElse(null);
+        assertNotNull(embed);
+        assertThat(embed.getUrl(), equalTo("http://www.foo.com/player.swf"));
+        assertThat(embed.getHeight(), equalTo(323));
+        assertThat(embed.getWidth(), equalTo(512));
+        assertThat(embed.getParams().size(), is(5));
+        assertThat(embed.getParams(), hasEntry("type", "application/x-shockwave-flash"));
+        assertThat(embed.getParams(), hasEntry("width", "512"));
+        assertThat(embed.getParams(), hasEntry("height", "323"));
+        assertThat(embed.getParams(), hasEntry("allowFullScreen", "true"));
+        assertThat(embed.getParams(), hasEntry("flashVars", "id=12345&vid=678912i&lang=en-us&intl=us&thumbUrl=http://www.foo.com/thumbnail.jpg"));
 
         assertThat(mediaContent.getMediaSubTitles().get(0).getType(), equalTo("application/smil"));
         assertThat(mediaContent.getMediaSubTitles().get(0).getLang(), equalTo("en-us"));
@@ -361,8 +371,10 @@ class MediaRssReaderTest {
         assertThat(group.getMediaResponses(), equalTo(List.of("http://www.response1.com", "http://www.response2.com")));
         assertThat(group.getMediaBackLinks(), equalTo(List.of("http://www.backlink1.com", "http://www.backlink2.com")));
 
-        assertThat(group.getMediaStatus().get().getReason(), isPresentAndIs("http://www.reasonforblocking.com"));
-        assertThat(group.getMediaStatus().get().getState(), equalTo("blocked"));
+        var status = group.getMediaStatus().orElse(null);
+        assertNotNull(status);
+        assertThat(status.getReason(), isPresentAndIs("http://www.reasonforblocking.com"));
+        assertThat(status.getState(), equalTo("blocked"));
 
         assertThat(group.getMediaPrices().get(0).getType(), equalTo("rent"));
         assertThat(group.getMediaPrices().get(0).getCurrency(), isPresentAndIs("EUR"));
@@ -372,15 +384,17 @@ class MediaRssReaderTest {
         assertThat(group.getMediaPrices().get(1).getCurrency(), isPresentAndIs("USD"));
         assertThat(group.getMediaPrices().get(1).getPrice(), isPresentAndIs(18.88));
 
-        assertThat(group.getMediaEmbed().get().getUrl(), equalTo("http://www.foo.com/player.swf"));
-        assertThat(group.getMediaEmbed().get().getHeight(), equalTo(323));
-        assertThat(group.getMediaEmbed().get().getWidth(), equalTo(512));
-        assertThat(group.getMediaEmbed().get().getParams().size(), is(5));
-        assertThat(group.getMediaEmbed().get().getParams(), hasEntry("type", "application/x-shockwave-flash"));
-        assertThat(group.getMediaEmbed().get().getParams(), hasEntry("width", "512"));
-        assertThat(group.getMediaEmbed().get().getParams(), hasEntry("height", "323"));
-        assertThat(group.getMediaEmbed().get().getParams(), hasEntry("allowFullScreen", "true"));
-        assertThat(group.getMediaEmbed().get().getParams(), hasEntry("flashVars", "id=12345&vid=678912i&lang=en-us&intl=us&thumbUrl=http://www.foo.com/thumbnail.jpg"));
+        var embed = group.getMediaEmbed().orElse(null);
+        assertNotNull(embed);
+        assertThat(embed.getUrl(), equalTo("http://www.foo.com/player.swf"));
+        assertThat(embed.getHeight(), equalTo(323));
+        assertThat(embed.getWidth(), equalTo(512));
+        assertThat(embed.getParams().size(), is(5));
+        assertThat(embed.getParams(), hasEntry("type", "application/x-shockwave-flash"));
+        assertThat(embed.getParams(), hasEntry("width", "512"));
+        assertThat(embed.getParams(), hasEntry("height", "323"));
+        assertThat(embed.getParams(), hasEntry("allowFullScreen", "true"));
+        assertThat(embed.getParams(), hasEntry("flashVars", "id=12345&vid=678912i&lang=en-us&intl=us&thumbUrl=http://www.foo.com/thumbnail.jpg"));
 
         assertThat(group.getMediaSubTitles().get(0).getType(), equalTo("application/smil"));
         assertThat(group.getMediaSubTitles().get(0).getLang(), equalTo("en-us"));
@@ -1221,10 +1235,11 @@ class MediaRssReaderTest {
         var contents = group.getMediaContents();
         assertEquals(2, contents.size());
 
+        // First group content
+
         var content = contents.get(0);
         assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song64kbps.mp3")));
         assertThat(content.getFileSize(), isPresentAnd(equalTo(1000L)));
-        assertThat(content.getBitrate(), isPresentAnd(equalTo(64.0)));
         assertThat(content.getBitrate(), isPresentAnd(equalTo(64.0)));
         assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
         assertThat(content.isDefault(), isPresentAnd(equalTo(true)));
@@ -1459,6 +1474,23 @@ class MediaRssReaderTest {
         assertThat(scenes.get(1).getSceneDescription(), equalTo("sceneDesc2"));
         assertThat(scenes.get(1).getSceneStartTime(), equalTo("00:57"));
         assertThat(scenes.get(1).getSceneEndTime(), equalTo("01:45"));
+
+        // Second group content
+
+        content = contents.get(1);
+        assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song128kbps.mp3")));
+        assertThat(content.getFileSize(), isPresentAnd(equalTo(2000L)));
+        assertThat(content.getBitrate(), isPresentAnd(equalTo(128.0)));
+        assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
+        assertThat(content.isDefault(), isEmpty());
+        assertThat(content.getExpression(), isPresentAnd(equalTo("full")));
+
+        // Group level
+
+        title = group.getMediaTitle().orElse(null);
+        assertNotNull(title);
+        assertThat(title.getType(), isPresentAnd(equalTo("html")));
+        assertEquals("Group title", title.getTitle());
     }
 
     @Test
