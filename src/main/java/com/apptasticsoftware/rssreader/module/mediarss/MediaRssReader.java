@@ -106,7 +106,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:license", itemMediaContentMediaLicense(MediaLicense::setLicense));
 
         // media:group
-        onItemTags.put("/rss/channel/item/media:group/media:content", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaContent(new MediaContent())));
         onItemTags.put("/rss/channel/item/media:group/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRating(new MediaRating())));
         onItemTags.put("/rss/channel/item/media:group/media:thumbnail", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaThumbnail(new MediaThumbnail())));
         onItemTags.put("/rss/channel/item/media:group/media:category", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaCategory(new MediaCategory())));
@@ -141,6 +140,43 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneDescription", itemMediaGroupMediaScene(MediaScene::setSceneDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneStartTime", itemMediaGroupMediaScene(MediaScene::setSceneStartTime));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneEndTime", itemMediaGroupMediaScene(MediaScene::setSceneEndTime));
+
+        // media:group / media:content
+        onItemTags.put("/rss/channel/item/media:group/media:content", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaContent(new MediaContent())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaRating(new MediaRating())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:thumbnail", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaThumbnail(new MediaThumbnail())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:category", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaCategory(new MediaCategory())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:hash", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaHash(new MediaHash())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:credit", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaCredit(new MediaCredit())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:text", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaText(new MediaText())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:restriction", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaRestriction(new MediaRestriction())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:price", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaPrice(new MediaPrice())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:license", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaLicense(new MediaLicense())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:subTitle", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaSubTitle(new MediaSubTitle())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:peerLink", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaPeerLink(new MediaPeerLink())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaLocation(new MediaLocation())));
+        onItemTags.put("/rss/channel/item/media:group/media:content/media:scenes/media:scene", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaScene(new MediaScene())));
+
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:title", itemMediaGroupMediaContentMediaTitle(MediaTitle::setTitle));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:description", itemMediaGroupMediaContentMediaDescription(MediaDescription::setDescription));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:keywords", itemMediaGroupMediaContentMediaKeywords(MediaContent::addMediaKeyword));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:credit", itemMediaGroupMediaContentMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:category", itemMediaGroupMediaContentMediaCategory(MediaCategory::setCategory));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:rating", itemMediaGroupMediaContentMediaRating(MediaRating::setRating));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:tags", itemMediaGroupMediaContentMediaCommunityMediaTags(MediaTags::setTags));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:copyright", itemMediaGroupMediaContentMediaCopyright(MediaCopyright::setCopyright));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:hash", itemMediaGroupMediaContentMediaHash(MediaHash::setHash));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:restriction", itemMediaGroupMediaContentMediaRestriction(MediaRestriction::setRestriction));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", itemMediaGroupMediaContentMediaText(MediaText::setText));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:comments/media:comment", itemMediaGroupMediaContentStringList(MediaContent::addMediaComment));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:responses/media:response", itemMediaGroupMediaContentStringList(MediaContent::addMediaResponse));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:backLinks/media:backLink", itemMediaGroupMediaContentStringList(MediaContent::addMediaBackLink));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed/media:param", itemMediaGroupMediaContentMediaEmbed(MediaEmbed::addParamValue));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:license", itemMediaGroupMediaContentMediaLicense(MediaLicense::setLicense));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneTitle", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneTitle));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneDescription", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneDescription));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneStartTime", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneStartTime));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneEndTime", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneEndTime));
 
         // item
         onItemTags.put("/rss/channel/item/media:rating", item -> item.addMediaRating(new MediaRating()));
@@ -284,20 +320,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:rights", "status", itemMediaContentMediaRights(MediaRights::setStatus));
 
         // media:group
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "url", itemMediaGroupMediaContent(MediaContent::setUrl));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "fileSize", itemMediaGroupMediaContent((content, value) -> mapLong(value, content::setFileSize)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "type", itemMediaGroupMediaContent(MediaContent::setType));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "medium", itemMediaGroupMediaContent(MediaContent::setMedium));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "isDefault", itemMediaGroupMediaContent((content, value) -> mapBoolean(value, content::setDefault)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "expression", itemMediaGroupMediaContent(MediaContent::setExpression));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "bitrate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setBitrate)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "framerate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setFramerate)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "samplingrate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setSamplingrate)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "channels", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setChannels)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "duration", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setDuration)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "height", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setHeight)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "width", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setWidth)));
-        super.addItemExtension("/rss/channel/item/media:group/media:content", "lang", itemMediaGroupMediaContent(MediaContent::setLang));
         super.addItemExtension("/rss/channel/item/media:group/media:title", "type", itemMediaGroupMediaTitle(MediaTitle::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:description", "type", itemMediaGroupMediaDescription(MediaDescription::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:thumbnail", "url", itemMediaGroupMediaThumbnail(MediaThumbnail::setUrl));
@@ -347,6 +369,68 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:license", "type", itemMediaGroupMediaLicense(MediaLicense::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:license", "href", itemMediaGroupMediaLicense(MediaLicense::setHref));
         super.addItemExtension("/rss/channel/item/media:group/media:rights", "status", itemMediaGroupMediaRights(MediaRights::setStatus));
+
+        // media:group / media:content
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "url", itemMediaGroupMediaContent(MediaContent::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "fileSize", itemMediaGroupMediaContent((content, value) -> mapLong(value, content::setFileSize)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "type", itemMediaGroupMediaContent(MediaContent::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "medium", itemMediaGroupMediaContent(MediaContent::setMedium));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "isDefault", itemMediaGroupMediaContent((content, value) -> mapBoolean(value, content::setDefault)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "expression", itemMediaGroupMediaContent(MediaContent::setExpression));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "bitrate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setBitrate)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "framerate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setFramerate)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "samplingrate", itemMediaGroupMediaContent((content, value) -> mapDouble(value, content::setSamplingrate)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "channels", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setChannels)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "duration", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setDuration)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "height", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "width", itemMediaGroupMediaContent((content, value) -> mapInteger(value, content::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content", "lang", itemMediaGroupMediaContent(MediaContent::setLang));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:rating", "scheme", itemMediaGroupMediaContentMediaRating(MediaRating::setScheme));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:title", "type", itemMediaGroupMediaContentMediaTitle(MediaTitle::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:description", "type", itemMediaGroupMediaContentMediaDescription(MediaDescription::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:thumbnail", "url", itemMediaGroupMediaContentMediaThumbnail(MediaThumbnail::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:thumbnail", "width", itemMediaGroupMediaContentMediaThumbnail((content, value) -> mapInteger(value, content::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:thumbnail", "height", itemMediaGroupMediaContentMediaThumbnail((content, value) -> mapInteger(value, content::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:thumbnail", "time", itemMediaGroupMediaContentMediaThumbnail(MediaThumbnail::setTime));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:category", "scheme", itemMediaGroupMediaContentMediaCategory(MediaCategory::setScheme));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:category", "label", itemMediaGroupMediaContentMediaCategory(MediaCategory::setLabel));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:hash", "algo", itemMediaGroupMediaContentMediaHash(MediaHash::setAlgorithm));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:player", "url", itemMediaGroupMediaContentMediaPlayer(MediaPlayer::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:player", "height", itemMediaGroupMediaContentMediaPlayer((content, value) -> mapInteger(value, content::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:player", "width", itemMediaGroupMediaContentMediaPlayer((content, value) -> mapInteger(value, content::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:credit", "role", itemMediaGroupMediaContentMediaCredit(MediaCredit::setRole));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:credit", "scheme", itemMediaGroupMediaContentMediaCredit(MediaCredit::setScheme));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:copyright", "url", itemMediaGroupMediaContentMediaCopyright(MediaCopyright::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", "type", itemMediaGroupMediaContentMediaText(MediaText::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", "lang", itemMediaGroupMediaContentMediaText(MediaText::setLang));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", "start", itemMediaGroupMediaContentMediaText(MediaText::setStart));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", "end", itemMediaGroupMediaContentMediaText(MediaText::setEnd));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:restriction", "relationship", itemMediaGroupMediaContentMediaRestriction(MediaRestriction::setRelationship));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:restriction", "type", itemMediaGroupMediaContentMediaRestriction(MediaRestriction::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:starRating", "average", itemMediaGroupMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:starRating", "count", itemMediaGroupMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:starRating", "max", itemMediaGroupMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:starRating", "min", itemMediaGroupMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:statistics", "views", itemMediaGroupMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:statistics", "favorites", itemMediaGroupMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed", "url", itemMediaGroupMediaContentMediaEmbed(MediaEmbed::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed", "width", itemMediaGroupMediaContentMediaEmbed((embed, value) -> mapInteger(value, embed::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed", "height", itemMediaGroupMediaContentMediaEmbed((embed, value) -> mapInteger(value, embed::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed/media:param", "name", itemMediaGroupMediaContentMediaEmbed(MediaEmbed::addParamName));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:status", "state", itemMediaGroupMediaContentMediaStatus(MediaStatus::setState));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:status", "reason", itemMediaGroupMediaContentMediaStatus(MediaStatus::setReason));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:price", "type", itemMediaGroupMediaContentMediaPrice(MediaPrice::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:price", "info", itemMediaGroupMediaContentMediaPrice(MediaPrice::setInfo));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:price", "price", itemMediaGroupMediaContentMediaPrice((content, value) -> mapDouble(value, content::setPrice)));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:price", "currency", itemMediaGroupMediaContentMediaPrice(MediaPrice::setCurrency));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:license", "type", itemMediaGroupMediaContentMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:license", "href", itemMediaGroupMediaContentMediaLicense(MediaLicense::setHref));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:subTitle", "type", itemMediaGroupMediaContentMediaSubTitle(MediaSubTitle::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:subTitle", "lang", itemMediaGroupMediaContentMediaSubTitle(MediaSubTitle::setLang));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:subTitle", "href", itemMediaGroupMediaContentMediaSubTitle(MediaSubTitle::setHref));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:peerLink", "type", itemMediaGroupMediaContentMediaPeerLink(MediaPeerLink::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:peerLink", "href", itemMediaGroupMediaContentMediaPeerLink(MediaPeerLink::setHref));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:rights", "status", itemMediaGroupMediaContentMediaRights(MediaRights::setStatus));
 
         // media:community
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "average", itemMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
@@ -599,8 +683,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaContentMediaEmbed(BiConsumer<MediaEmbed, String> setter) {
         return (item, value) -> {
             var content = item.getMediaContents().getLast();
-            var tags = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
+            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
         };
     }
 
@@ -784,8 +868,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaEmbed(BiConsumer<MediaEmbed, String> setter) {
         return (item, value) -> {
             var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-            var tags = createIfNull(group::getMediaEmbed, group::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tag, value));
+            var embed = createIfNull(group::getMediaEmbed, group::setMediaEmbed, MediaEmbed::new);
+            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
         };
     }
 
@@ -857,6 +941,223 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         };
     }
 
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaTitle(BiConsumer<MediaTitle, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var title = createIfNull(content::getMediaTitle, content::setMediaTitle, MediaTitle::new);
+            setter.accept(title, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaDescription(BiConsumer<MediaDescription, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var title = createIfNull(content::getMediaDescription, content::setMediaDescription, MediaDescription::new);
+            setter.accept(title, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaKeywords(BiConsumer<MediaContent, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            Mapper.split(value).forEach(keyword -> setter.accept(content, keyword));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaThumbnail(BiConsumer<MediaThumbnail, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var credit = content.getMediaThumbnails().getLast();
+            setter.accept(credit, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCredit(BiConsumer<MediaCredit, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var credit = content.getMediaCredits().getLast();
+            setter.accept(credit, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCategory(BiConsumer<MediaCategory, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var category = content.getMediaCategories().getLast();
+            setter.accept(category, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaRating(BiConsumer<MediaRating, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var rating = content.getMediaRatings().getLast();
+            setter.accept(rating, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCommunityMediaTags(BiConsumer<MediaTags, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
+            var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
+            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCommunityMediaStarRating(BiConsumer<MediaStarRating, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
+            var starRating = createIfNull(community::getMediaStarRating, community::setMediaStarRating, MediaStarRating::new);
+            Optional.ofNullable(starRating).ifPresent(tag -> setter.accept(starRating, value));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCommunityMediaStatistics(BiConsumer<MediaStatistics, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
+            var statistics = createIfNull(community::getMediaStatistics, community::setMediaStatistics, MediaStatistics::new);
+            Optional.ofNullable(statistics).ifPresent(tag -> setter.accept(statistics, value));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaCopyright(BiConsumer<MediaCopyright, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var copyright = createIfNull(content::getMediaCopyright, content::setMediaCopyright, MediaCopyright::new);
+            setter.accept(copyright, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaHash(BiConsumer<MediaHash, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var hash = content.getMediaHashes().getLast();
+            setter.accept(hash, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaPlayer(BiConsumer<MediaPlayer, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var player = createIfNull(content::getMediaPlayer, content::setMediaPlayer, MediaPlayer::new);
+            setter.accept(player, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaRestriction(BiConsumer<MediaRestriction, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var restriction = content.getMediaRestrictions().getLast();
+            setter.accept(restriction, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaText(BiConsumer<MediaText, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var text = content.getMediaTexts().getLast();
+            setter.accept(text, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentStringList(BiConsumer<MediaContent, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            setter.accept(content, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaEmbed(BiConsumer<MediaEmbed, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
+            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaLicense(BiConsumer<MediaLicense, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var license = content.getMediaLicenses().getLast();
+            setter.accept(license, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaSubTitle(BiConsumer<MediaSubTitle, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var license = content.getMediaSubTitles().getLast();
+            setter.accept(license, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaPeerLink(BiConsumer<MediaPeerLink, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var peerLinks = content.getMediaPeerLinks().getLast();
+            setter.accept(peerLinks, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaRights(BiConsumer<MediaRights, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var rights = createIfNull(content::getMediaRights, content::setMediaRights, MediaRights::new);
+            setter.accept(rights, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaScene(BiConsumer<MediaScene, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var license = content.getMediaScenes().getLast();
+            setter.accept(license, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaStatus(BiConsumer<MediaStatus, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var status = createIfNull(content::getMediaStatus, content::setMediaStatus, MediaStatus::new);
+            setter.accept(status, value);
+        };
+    }
+
+    private static BiConsumer<MediaRssItem, String> itemMediaGroupMediaContentMediaPrice(BiConsumer<MediaPrice, String> setter) {
+        return (item, value) -> {
+            var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
+            var content = group.getMediaContents().getLast();
+            var price = content.getMediaPrices().getLast();
+            setter.accept(price, value);
+        };
+    }
+
     private static BiConsumer<MediaRssItem, String> itemMediaStatus(BiConsumer<MediaStatus, String> setter) {
         return (item, value) -> {
             var status = createIfNull(item::getMediaStatus, item::setMediaStatus, MediaStatus::new);
@@ -894,8 +1195,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
     private static BiConsumer<MediaRssItem, String> itemMediaEmbed(BiConsumer<MediaEmbed, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaEmbed, item::setMediaEmbed, MediaEmbed::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var embed = createIfNull(item::getMediaEmbed, item::setMediaEmbed, MediaEmbed::new);
+            Optional.ofNullable(embed).ifPresent(tag -> setter.accept(embed, value));
         };
     }
 
@@ -915,8 +1216,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
     private static BiConsumer<MediaRssItem, String> itemMediaCopyright(BiConsumer<MediaCopyright, String> setter) {
         return (item, value) -> {
-            var tags = createIfNull(item::getMediaCopyright, item::setMediaCopyright, MediaCopyright::new);
-            Optional.ofNullable(tags).ifPresent(tag -> setter.accept(tags, value));
+            var copyright = createIfNull(item::getMediaCopyright, item::setMediaCopyright, MediaCopyright::new);
+            Optional.ofNullable(copyright).ifPresent(tag -> setter.accept(copyright, value));
         };
     }
 
