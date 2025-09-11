@@ -3,7 +3,12 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.Objects;
 
 /**
- * Link to specify the machine-readable license associated with the content.
+ * Optional link to specify the machine-readable license associated with the content.
+ *
+ * Example:
+ * {@code <media:license type="text/html" href="http://creativecommons.org/licenses/by/3.0/us/">
+ *     Creative Commons Attribution 3.0 United States License
+ * </media:license>}
  */
 public class MediaLicense {
     private String license;
@@ -11,48 +16,48 @@ public class MediaLicense {
     private String href;
 
     /**
-     * The license associated with the content
-     * @return license
+     * Gets the license text that appears between the media:license tags.
+     * @return the license text (e.g. "Creative Commons Attribution 3.0 United States License")
      */
     public String getLicense() {
         return license;
     }
 
     /**
-     * The license associated with the content
-     * @param license license
+     * Sets the license text that appears between the media:license tags.
+     * @param license the license text (e.g. "Creative Commons Attribution 3.0 United States License")
      */
     public void setLicense(String license) {
         this.license = license;
     }
 
     /**
-     * Type of the license.
-     * @return
+     * Gets the MIME type of the license content.
+     * @return the MIME type (e.g. "text/html")
      */
     public String getType() {
         return type;
     }
 
     /**
-     * Type of the license.
-     * @param type
+     * Sets the MIME type of the license content.
+     * @param type the MIME type (e.g. "text/html")
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * Href of the license.
-     * @return href
+     * Gets the URL pointing to the full license text.
+     * @return the URL (e.g. "http://creativecommons.org/licenses/by/3.0/us/")
      */
     public String getHref() {
         return href;
     }
 
     /**
-     * Href of the license.
-     * @param href href
+     * Sets the URL pointing to the full license text.
+     * @param href the URL (e.g. "http://creativecommons.org/licenses/by/3.0/us/")
      */
     public void setHref(String href) {
         this.href = href;
@@ -62,7 +67,9 @@ public class MediaLicense {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MediaLicense that = (MediaLicense) o;
-        return Objects.equals(getLicense(), that.getLicense()) && Objects.equals(getType(), that.getType()) && Objects.equals(getHref(), that.getHref());
+        return Objects.equals(getLicense(), that.getLicense()) &&
+               Objects.equals(getType(), that.getType()) &&
+               Objects.equals(getHref(), that.getHref());
     }
 
     @Override

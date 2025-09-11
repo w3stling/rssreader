@@ -5,6 +5,19 @@ import java.util.Optional;
 
 /**
  * Short description describing the media object typically a sentence in length.
+ *
+ * Examples:
+ * {@code
+ * <!-- Plain text description -->
+ * <media:description type="plain">
+ *     This was some really bizarre band I listened to as a young lad.
+ * </media:description>
+ *
+ * <!-- HTML formatted description -->
+ * <media:description type="html">
+ *     This was a &lt;b&gt;really bizarre&lt;/b&gt; band I listened to as a &lt;i&gt;young lad&lt;/i&gt;.
+ * </media:description>
+ * }
  */
 public class MediaDescription {
     private String type;

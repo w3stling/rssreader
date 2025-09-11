@@ -647,9 +647,7 @@ class MediaRssReaderTest {
         // Rights
         var rights = item.getMediaRights().orElse(null);
         assertNotNull(rights);
-        assertThat(rights.getStatus(), equalTo(MediaRights.Status.USER_CREATED));
-        assertThat(rights.getStatus().toString(), equalTo("userCreated"));
-        assertThat(rights.getStatusValue(), equalTo("userCreated"));
+        assertThat(rights.getStatus(), equalTo("userCreated"));
 
         // Scenes
         var scenes = item.getMediaScenes();
@@ -892,8 +890,7 @@ class MediaRssReaderTest {
         // Rights
         var rights = content.get(0).getMediaRights().orElse(null);
         assertNotNull(rights);
-        assertThat(rights.getStatus(), equalTo(MediaRights.Status.OFFICIAL));
-        assertThat(rights.getStatusValue(), equalTo("official"));
+        assertThat(rights.getStatus(), equalTo("official"));
 
         // Scenes
         var scenes = content.get(0).getMediaScenes();
@@ -1205,8 +1202,7 @@ class MediaRssReaderTest {
         // Rights
         var rights = group.getMediaRights().orElse(null);
         assertNotNull(rights);
-        assertThat(rights.getStatus(), equalTo(MediaRights.Status.OFFICIAL));
-        assertThat(rights.getStatusValue(), equalTo("official"));
+        assertThat(rights.getStatus(), equalTo("official"));
 
         // Scenes
         var scenes = group.getMediaScenes();
@@ -1461,8 +1457,7 @@ class MediaRssReaderTest {
         // Rights
         var rights = content.getMediaRights().orElse(null);
         assertNotNull(rights);
-        assertThat(rights.getStatus(), equalTo(MediaRights.Status.OFFICIAL));
-        assertThat(rights.getStatusValue(), equalTo("official"));
+        assertThat(rights.getStatus(), equalTo("official"));
 
         // Scenes
         var scenes = content.getMediaScenes();

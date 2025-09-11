@@ -3,7 +3,23 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.Objects;
 
 /**
- * To specify various scenes within a media object.
+ * Represents a scene within a media object. Each scene can have a title, description, start time,
+ * and end time to describe different segments of the media content.
+ *
+ * Example:
+ * {@code
+ * <media:scenes>
+ *     <media:scene>
+ *         <sceneTitle>Hurricane Florence Makes Landfall</sceneTitle>
+ *         <sceneDescription>Category 1 hurricane hits the coast</sceneDescription>
+ *         <sceneStartTime>00:15</sceneStartTime>
+ *         <sceneEndTime>00:45</sceneEndTime>
+ *     </media:scene>
+ * </media:scenes>
+ * }
+ *
+ * In this example, the scene describes a 30-second segment about a hurricane landfall,
+ * starting at 15 seconds into the media and ending at 45 seconds.
  */
 public class MediaScene {
     private String sceneTitle;

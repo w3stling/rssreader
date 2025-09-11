@@ -8,6 +8,12 @@ import java.util.stream.Collectors;
 
 /**
  * Contains user-generated tags separated by commas in the decreasing order of each tag's weight.
+ * Each tag can be assigned an integer weight in tag_name:weight format. If no weight is specified,
+ * the default weight is 1.
+ *
+ * Example:
+ * {@code <media:tags>news:5, abc:3, reuters</media:tags>}
+ * In this example, "news" has weight 5, "abc" has weight 3, and "reuters" has the default weight of 1.
  */
 public class MediaTags {
     private String tags;

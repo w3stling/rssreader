@@ -4,7 +4,27 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Allows the permissible audience to be declared
+ * Allows the permissible audience to be declared. If this element is not included,
+ * it assumes that no restrictions are necessary. Multiple rating elements can be used
+ * to specify ratings according to different schemes.
+ *
+ * Examples:
+ * {@code
+ * <!-- Simple rating scheme -->
+ * <media:rating scheme="urn:simple">adult</media:rating>
+ *
+ * <!-- ICRA rating scheme -->
+ * <media:rating scheme="urn:icra">r (cz 1 lz 1 nz 1 oz 1 vz 1)</media:rating>
+ *
+ * <!-- MPAA rating scheme -->
+ * <media:rating scheme="urn:mpaa">pg</media:rating>
+ *
+ * <!-- V-Chip rating scheme -->
+ * <media:rating scheme="urn:v-chip">tv-y7-fv</media:rating>
+ * }
+ *
+ * Note: If no scheme is specified, the default scheme is "urn:simple" with possible
+ * values of "adult" or "nonadult".
  */
 public class MediaRating {
     private String rating;

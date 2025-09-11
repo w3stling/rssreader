@@ -4,9 +4,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Notable entity and the contribution to the creation of the media object.
- * Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
- * and several entities can have the same role. These should appear as distinct <media:credit> elements
+ * Notable entity and the contribution to the creation of the media object. Current entities can include
+ * people, companies, locations, etc. Specific entities can have multiple roles, and several entities
+ * can have the same role. These should appear as distinct media:credit elements.
+ *
+ * Examples:
+ * {@code
+ * <!-- Producer credit using EBU scheme -->
+ * <media:credit role="producer" scheme="urn:ebu">Producer Name</media:credit>
+ *
+ * <!-- Content owner using Yahoo scheme -->
+ * <media:credit role="owner" scheme="urn:yvs">Copyright Owner</media:credit>
+ *
+ * <!-- Director credit using default EBU scheme -->
+ * <media:credit role="director">Director Name</media:credit>
+ * }
  */
 public class MediaCredit {
     private String role;

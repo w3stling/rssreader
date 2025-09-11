@@ -1,48 +1,29 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 /**
- * Specifies the rights information for the media object.
+ * Specifies the rights information for the media object. This element indicates whether
+ * the media object has been created by the publisher or if they have rights to circulate it.
+ * The status attribute is required and must be either "userCreated" or "official".
+ *
+ * Example:
+ * {@code
+ * <item>
+ *     <title>User Submitted Video</title>
+ *     <media:content url="http://videos.example.com/user/12345.mp4" />
+ *     <media:rights status="userCreated" />
+ * </item>
+ *
+ * <item>
+ *     <title>Official News Report</title>
+ *     <media:content url="http://videos.example.com/news/report.mp4" />
+ *     <media:rights status="official" />
+ * </item>
+ * }
  */
 public class MediaRights {
     private String status;
 
-    public enum Status {
-        USER_CREATED("userCreated"),
-        OFFICIAL("official");
-
-        private final String value;
-
-        Status(String value) {
-            this.value = value;
-        }
-
-        public static Status of(String value) {
-            if ("userCreated".equalsIgnoreCase(value)) {
-                return USER_CREATED;
-            } else if ("official".equalsIgnoreCase(value)) {
-                return OFFICIAL;
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return value;
-        }
-    }
-
-    /**
-     * The status of the media object saying whether a media object has been created by
-     * the publisher or they have rights to circulate it.
-     * Supported values are "userCreated" and "official"
-     *
-     * @return status
-     */
-    public Status getStatus() {
-        return Status.of(status);
-    }
-
-    public String getStatusValue() {
+    public String getStatus() {
         return status;
     }
 

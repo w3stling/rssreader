@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 /**
  * Class representing the media thumbnail from the media rss spec.
- * See <a href="https://www.rssboard.org/media-rss#media-thumbnails">for details</a>.
  */
 public class MediaThumbnail {
     private String url;

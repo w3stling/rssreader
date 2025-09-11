@@ -4,7 +4,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The hash of the binary media file.
+ * The hash of the binary media file. Can appear multiple times as long as each instance
+ * uses a different algorithm. If no algorithm is specified, the default is MD5.
+ *
+ * Examples:
+ * {@code
+ * <!-- MD5 hash -->
+ * <media:hash algo="md5">dfdec888b72151965a34b4b59031290a</media:hash>
+ *
+ * <!-- SHA-1 hash -->
+ * <media:hash algo="sha-1">2b8b815229aa8a61e483fb4ba0588b8b6c21645c</media:hash>
+ * }
  */
 public class MediaHash {
     private String hash;

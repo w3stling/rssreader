@@ -32,8 +32,6 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
     private MediaRights mediaRights;
     private final List<MediaScene> mediaScenes = new ArrayList<>();
 
-    // Optional
-
     /**
      * Gets a list of media rating that declares the permissible audience. If this element is not included,
      * it assumes that no restrictions are necessary. The rating can use different schemes like

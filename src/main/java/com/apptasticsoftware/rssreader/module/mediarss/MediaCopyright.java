@@ -4,7 +4,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Copyright information for the media object.
+ * Copyright information for the media object. If the media is operating under a Creative Commons
+ * license, the Creative Commons module should be used instead.
+ *
+ * Example:
+ * {@code <media:copyright url="http://blah.com/additional-info.html">2005 FooBar Media</media:copyright>}
  */
 public class MediaCopyright {
     private String url;

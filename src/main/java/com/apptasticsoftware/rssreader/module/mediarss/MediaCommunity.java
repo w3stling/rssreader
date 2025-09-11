@@ -4,8 +4,22 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * This element stands for the community related content.
- * This allows inclusion of the user perception about a media object in the form of view count, ratings and tags.
+ * This element stands for the community related content. This allows inclusion of the user perception
+ * about a media object in the form of view count, ratings and tags.
+ *
+ * Example:
+ * {@code
+ * <media:community>
+ *     <!-- Star rating with average and total votes -->
+ *     <media:starRating average="3.5" count="20" min="1" max="10" />
+ *
+ *     <!-- View and favorite counts -->
+ *     <media:statistics views="5" favorites="5" />
+ *
+ *     <!-- User tags with weights -->
+ *     <media:tags>news: 5, abc:3, reuters</media:tags>
+ * </media:community>
+ * }
  */
 public class MediaCommunity {
     private MediaStarRating mediaStarRating;

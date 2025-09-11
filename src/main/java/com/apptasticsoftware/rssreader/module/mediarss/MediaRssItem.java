@@ -39,16 +39,6 @@ public class MediaRssItem extends Item implements MediaOptionalFields {
     private MediaGroup mediaGroup;
     private final MediaOptionalFields optionalFields = new MediaOptionalFieldsImpl();
 
-    // TODO: FIXED - missing: keywords, ratings
-    // TODO: FIXED - thumbnail change from Optional to List
-    // TODO: FIXED - Needed? MediaResponses change to String?
-    // TODO: FIXED - Needed? MediaComments change to String?
-    // TODO: FIXED - Needed? MediaKeywords change to String?
-    // TODO: FIXED - Needed? MediaBacklinks change to String?
-    // TODO: FIXED - Needed? MediaTags change to String?
-    // TODO: FIXED - MediaRights
-
-
     /**
      * Constructor
      *

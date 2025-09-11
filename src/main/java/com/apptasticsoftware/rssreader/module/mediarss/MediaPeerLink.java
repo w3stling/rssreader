@@ -3,7 +3,19 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.Objects;
 
 /**
- * P2P link of a media object.
+ * Optional element for P2P link of a media object. This element can be used alongside or instead of
+ * direct media URLs to provide peer-to-peer download options. For a valid Media RSS item,
+ * at least one of media:content, media:player, or media:peerLink is required.
+ *
+ * Example:
+ * {@code
+ * <item>
+ *     <title>Sample Video</title>
+ *     <media:peerLink
+ *         type="application/x-bittorrent"
+ *         href="http://www.example.org/sampleFile.torrent" />
+ * </item>
+ * }
  */
 public class MediaPeerLink {
     private String type;

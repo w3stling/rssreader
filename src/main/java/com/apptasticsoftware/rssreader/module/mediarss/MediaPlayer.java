@@ -5,6 +5,23 @@ import java.util.Optional;
 
 /**
  * Allows the media object to be accessed through a web browser media player console.
+ * This element is required only if a direct media url attribute is not specified in
+ * the media:content element.
+ *
+ * Example:
+ * {@code
+ * <!-- Video player with specified dimensions -->
+ * <item>
+ *     <title>Funny Cats Compilation</title>
+ *     <media:player
+ *         url="http://www.example.com/player?id=1234"
+ *         height="200"
+ *         width="400" />
+ * </item>
+ *
+ * <!-- Simple video player without dimensions -->
+ * <media:player url="http://www.example.com/player?id=5678" />
+ * }
  */
 public class MediaPlayer {
     private String url;

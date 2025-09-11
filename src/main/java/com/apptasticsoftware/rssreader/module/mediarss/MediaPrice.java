@@ -5,6 +5,33 @@ import java.util.Optional;
 
 /**
  * Pricing information about a media object. If this tag is not present, the media object is supposed to be free.
+ * One media object can have multiple instances of this tag for including different pricing structures.
+ *
+ * Examples:
+ * {@code
+ * <!-- Rental price in Euros -->
+ * <media:price type="rent" price="19.99" currency="EUR" />
+ *
+ * <!-- Package pricing with additional information URL -->
+ * <media:price type="package"
+ *             info="http://www.example.com/package_info.html"
+ *             price="19.99"
+ *             currency="EUR" />
+ *
+ * <!-- Subscription pricing with information link -->
+ * <media:price type="subscription"
+ *             info="http://www.example.com/subscription_info"
+ *             price="9.99"
+ *             currency="USD" />
+ * }
+ *
+ * Type values:
+ * - "rent": For rental pricing
+ * - "purchase": For one-time purchase
+ * - "package": For package deals (requires info URL)
+ * - "subscription": For subscription pricing (requires info URL)
+ *
+ * Note: Currency codes follow ISO 4217 standard (e.g., USD, EUR, JPY)
  */
 public class MediaPrice {
     private String type;

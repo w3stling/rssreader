@@ -4,7 +4,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Specifies the status of a media object.
+ * Specifies the status of a media object. This element indicates whether a media object is still active
+ * or if it has been blocked/deleted by the publisher. The status can be "active", "blocked", or "deleted",
+ * and may include a reason explaining why the media object has been blocked or deleted.
+ *
+ * Example:
+ * {@code <media:status state="blocked" reason="http://www.reasonforblocking.com" />}
+ *
+ * Values for state:
+ * - "active": media object is active in the system
+ * - "blocked": media object is blocked by the publisher
+ * - "deleted": media object has been deleted by the publisher
  */
 public class MediaStatus {
     private String state;

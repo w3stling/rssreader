@@ -4,6 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 // TODO remove add and set methods from interface
+
+/**
+ * Interface defining optional fields for a media object in Media RSS.
+ * These fields provide additional metadata and attributes to describe
+ * various aspects of the media content, such as ratings, titles,
+ * descriptions, keywords, etc.
+ */
 public interface MediaOptionalFields {
     /**
      * Gets a list of media rating that declares the permissible audience. If this element is not included,

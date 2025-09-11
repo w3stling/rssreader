@@ -7,6 +7,20 @@ import java.util.Objects;
 /**
  * Sometimes player-specific embed code is needed for a player to play any video.
  * <media:embed> allows inclusion of such information in the form of key-value pairs.
+ *
+ * Example:
+ * {@code
+ * <media:embed url="http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf?ver=2.2.2"
+ *            width="512"
+ *            height="323">
+ *     <media:param name="type">application/x-shockwave-flash</media:param>
+ *     <media:param name="width">512</media:param>
+ *     <media:param name="height">323</media:param>
+ *     <media:param name="allowFullScreen">true</media:param>
+ *     <media:param name="flashVars">
+ *         id=7809705&amp;vid=2666306&amp;lang=en-us&amp;intl=us&amp;thumbUrl=http%3A//example.com/thumb.jpg
+ *     </media:param>
+ * </media:embed>}
  */
 public class MediaEmbed {
     private String url;

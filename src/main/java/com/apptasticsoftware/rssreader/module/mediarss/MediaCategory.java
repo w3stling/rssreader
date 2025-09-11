@@ -4,7 +4,27 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents
+ * Allows a taxonomy to be set that gives an indication of the type of media content, and its particular contents.
+ * The category can use different schemes to classify content, with the default being "http://search.yahoo.com/mrss/category_schema".
+ *
+ * Examples:
+ * {@code
+ * <!-- Using default Yahoo scheme -->
+ * <media:category scheme="http://search.yahoo.com/mrss/category_schema">
+ *     music/artist/album/song
+ * </media:category>
+ *
+ * <!-- Using DMOZ directory with human readable label -->
+ * <media:category scheme="http://dmoz.org"
+ *                 label="Ace Ventura - Pet Detective">
+ *     Arts/Movies/Titles/A/Ace_Ventura_Series/Ace_Ventura_-_Pet_Detective
+ * </media:category>
+ *
+ * <!-- Using Flickr tags -->
+ * <media:category scheme="urn:flickr:tags">
+ *     ycantpark mobile
+ * </media:category>
+ * }
  */
 public class MediaCategory {
     private String schema;
@@ -28,7 +48,7 @@ public class MediaCategory {
     }
 
     /**
-     * The human readable label that can be displayed in end user applications.
+     * The human-readable label that can be displayed in end user applications.
      * @return label
      */
     public Optional<String> getLabel() {
@@ -36,7 +56,7 @@ public class MediaCategory {
     }
 
     /**
-     * The human readable label that can be displayed in end user applications.
+     * The human-readable label that can be displayed in end user applications.
      * @param label label
      */
     public void setLabel(String label) {

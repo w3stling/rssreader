@@ -3,6 +3,29 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Represents a media object that can be used to publish any type of media. It contains attributes
+ * for specifying the content URL, format, size, and other media-specific characteristics.
+ *
+ * Example:
+ * {@code
+ * <media:content
+ *     url="http://www.foo.com/movie.mov"
+ *     fileSize="12216320"
+ *     type="video/quicktime"
+ *     medium="video"
+ *     isDefault="true"
+ *     expression="full"
+ *     bitrate="128"
+ *     framerate="25"
+ *     samplingrate="44.1"
+ *     channels="2"
+ *     duration="185"
+ *     height="200"
+ *     width="300"
+ *     lang="en" />
+ * }
+ */
 public class MediaContent extends MediaOptionalFieldsImpl{
     private String url;
     private Long fileSize;
@@ -18,8 +41,6 @@ public class MediaContent extends MediaOptionalFieldsImpl{
     private Integer height;
     private Integer width;
     private String lang;
-
-    // MediaRatings[]??, MediaLicense[]??, Player??,
 
     public Optional<String> getUrl() {
         return Optional.ofNullable(url);
