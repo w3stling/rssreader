@@ -27,7 +27,7 @@ public final class Mapper {
      * @param func boolean setter method
      */
     public static void mapBoolean(String text, Consumer<Boolean> func) {
-        text = text.toLowerCase(Locale.US);
+        text = text.toLowerCase(Locale.ENGLISH);
         if ("true".equals(text) || "yes".equals(text)) {
             func.accept(Boolean.TRUE);
         } else if ("false".equals(text) || "no".equals(text)) {

@@ -8,7 +8,7 @@ import java.util.Locale;
 public class Util {
 
     private Util() {
-
+        // Utility class
     }
 
     /**
