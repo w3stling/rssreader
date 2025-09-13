@@ -64,7 +64,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         return new MediaRssItem(dateTimeParser);
     }
 
-
     @Override
     protected void registerItemTags() {
         super.registerItemTags();
