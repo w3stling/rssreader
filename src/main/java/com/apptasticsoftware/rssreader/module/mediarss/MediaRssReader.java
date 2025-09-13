@@ -84,26 +84,26 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
         onItemTags.put("/rss/channel/item/media:content/media:scenes/media:scene", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaScene(new MediaScene())));
 
-        super.addItemExtension("/rss/channel/item/media:content/media:credit", itemMediaContentMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:content/media:rating", itemMediaContentMediaRating(MediaRating::setRating));
         super.addItemExtension("/rss/channel/item/media:content/media:title", itemMediaContentMediaTitle(MediaTitle::setTitle));
         super.addItemExtension("/rss/channel/item/media:content/media:description", itemMediaContentMediaDescription(MediaDescription::setDescription));
-        super.addItemExtension("/rss/channel/item/media:content/media:copyright", itemMediaContentMediaCopyright(MediaCopyright::setCopyright));
-        super.addItemExtension("/rss/channel/item/media:content/media:hash", itemMediaContentMediaHash(MediaHash::setHash));
-        super.addItemExtension("/rss/channel/item/media:content/media:category", itemMediaContentMediaCategory(MediaCategory::setCategory));
-        super.addItemExtension("/rss/channel/item/media:content/media:text", itemMediaContentMediaText(MediaText::setText));
-        super.addItemExtension("/rss/channel/item/media:content/media:rating", itemMediaContentMediaRating(MediaRating::setRating));
         super.addItemExtension("/rss/channel/item/media:content/media:keywords", itemMediaContentMediaKeywords(MediaContent::addMediaKeyword));
+        super.addItemExtension("/rss/channel/item/media:content/media:category", itemMediaContentMediaCategory(MediaCategory::setCategory));
+        super.addItemExtension("/rss/channel/item/media:content/media:hash", itemMediaContentMediaHash(MediaHash::setHash));
+        super.addItemExtension("/rss/channel/item/media:content/media:credit", itemMediaContentMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:content/media:copyright", itemMediaContentMediaCopyright(MediaCopyright::setCopyright));
+        super.addItemExtension("/rss/channel/item/media:content/media:text", itemMediaContentMediaText(MediaText::setText));
         super.addItemExtension("/rss/channel/item/media:content/media:restriction", itemMediaContentMediaRestriction(MediaRestriction::setRestriction));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:tags", itemMediaContentMediaCommunityMediaTags(MediaTags::setTags));
         super.addItemExtension("/rss/channel/item/media:content/media:comments/media:comment", itemMediaContentStringList(MediaContent::addMediaComment));
+        super.addItemExtension("/rss/channel/item/media:content/media:embed/media:param", itemMediaContentMediaEmbed(MediaEmbed::addParamValue));
         super.addItemExtension("/rss/channel/item/media:content/media:responses/media:response", itemMediaContentStringList(MediaContent::addMediaResponse));
         super.addItemExtension("/rss/channel/item/media:content/media:backLinks/media:backLink", itemMediaContentStringList(MediaContent::addMediaBackLink));
-        super.addItemExtension("/rss/channel/item/media:content/media:embed/media:param", itemMediaContentMediaEmbed(MediaEmbed::addParamValue));
+        super.addItemExtension("/rss/channel/item/media:content/media:license", itemMediaContentMediaLicense(MediaLicense::setLicense));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneTitle", itemMediaContentMediaScene(MediaScene::setSceneTitle));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneDescription", itemMediaContentMediaScene(MediaScene::setSceneDescription));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneStartTime", itemMediaContentMediaScene(MediaScene::setSceneStartTime));
         super.addItemExtension("/rss/channel/item/media:content/media:scenes/media:scene/sceneEndTime", itemMediaContentMediaScene(MediaScene::setSceneEndTime));
-        super.addItemExtension("/rss/channel/item/media:content/media:license", itemMediaContentMediaLicense(MediaLicense::setLicense));
 
         // media:group
         onItemTags.put("/rss/channel/item/media:group/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRating(new MediaRating())));
@@ -120,21 +120,21 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:group/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaLocation(new MediaLocation())));
         onItemTags.put("/rss/channel/item/media:group/media:scenes/media:scene", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaScene(new MediaScene())));
 
+        super.addItemExtension("/rss/channel/item/media:group/media:rating", itemMediaGroupMediaRating(MediaRating::setRating));
         super.addItemExtension("/rss/channel/item/media:group/media:title", itemMediaGroupMediaTitle(MediaTitle::setTitle));
         super.addItemExtension("/rss/channel/item/media:group/media:description", itemMediaGroupMediaDescription(MediaDescription::setDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:keywords", itemMediaGroupMediaKeywords(MediaGroup::addMediaKeyword));
-        super.addItemExtension("/rss/channel/item/media:group/media:credit", itemMediaGroupMediaCredit(MediaCredit::setCredit));
         super.addItemExtension("/rss/channel/item/media:group/media:category", itemMediaGroupMediaCategory(MediaCategory::setCategory));
-        super.addItemExtension("/rss/channel/item/media:group/media:rating", itemMediaGroupMediaRating(MediaRating::setRating));
-        super.addItemExtension("/rss/channel/item/media:group/media:community/media:tags", itemMediaGroupMediaCommunityMediaTags(MediaTags::setTags));
-        super.addItemExtension("/rss/channel/item/media:group/media:copyright", itemMediaGroupMediaCopyright(MediaCopyright::setCopyright));
         super.addItemExtension("/rss/channel/item/media:group/media:hash", itemMediaGroupMediaHash(MediaHash::setHash));
-        super.addItemExtension("/rss/channel/item/media:group/media:restriction", itemMediaGroupMediaRestriction(MediaRestriction::setRestriction));
+        super.addItemExtension("/rss/channel/item/media:group/media:credit", itemMediaGroupMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:group/media:copyright", itemMediaGroupMediaCopyright(MediaCopyright::setCopyright));
         super.addItemExtension("/rss/channel/item/media:group/media:text", itemMediaGroupMediaText(MediaText::setText));
+        super.addItemExtension("/rss/channel/item/media:group/media:restriction", itemMediaGroupMediaRestriction(MediaRestriction::setRestriction));
+        super.addItemExtension("/rss/channel/item/media:group/media:community/media:tags", itemMediaGroupMediaCommunityMediaTags(MediaTags::setTags));
         super.addItemExtension("/rss/channel/item/media:group/media:comments/media:comment", itemMediaGroupStringList(MediaGroup::addMediaComment));
+        super.addItemExtension("/rss/channel/item/media:group/media:embed/media:param", itemMediaGroupMediaEmbed(MediaEmbed::addParamValue));
         super.addItemExtension("/rss/channel/item/media:group/media:responses/media:response", itemMediaGroupStringList(MediaGroup::addMediaResponse));
         super.addItemExtension("/rss/channel/item/media:group/media:backLinks/media:backLink", itemMediaGroupStringList(MediaGroup::addMediaBackLink));
-        super.addItemExtension("/rss/channel/item/media:group/media:embed/media:param", itemMediaGroupMediaEmbed(MediaEmbed::addParamValue));
         super.addItemExtension("/rss/channel/item/media:group/media:license", itemMediaGroupMediaLicense(MediaLicense::setLicense));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneTitle", itemMediaGroupMediaScene(MediaScene::setSceneTitle));
         super.addItemExtension("/rss/channel/item/media:group/media:scenes/media:scene/sceneDescription", itemMediaGroupMediaScene(MediaScene::setSceneDescription));
@@ -157,21 +157,21 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:group/media:content/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaLocation(new MediaLocation())));
         onItemTags.put("/rss/channel/item/media:group/media:content/media:scenes/media:scene", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaScene(new MediaScene())));
 
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:rating", itemMediaGroupMediaContentMediaRating(MediaRating::setRating));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:title", itemMediaGroupMediaContentMediaTitle(MediaTitle::setTitle));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:description", itemMediaGroupMediaContentMediaDescription(MediaDescription::setDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:keywords", itemMediaGroupMediaContentMediaKeywords(MediaContent::addMediaKeyword));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:credit", itemMediaGroupMediaContentMediaCredit(MediaCredit::setCredit));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:category", itemMediaGroupMediaContentMediaCategory(MediaCategory::setCategory));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:rating", itemMediaGroupMediaContentMediaRating(MediaRating::setRating));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:tags", itemMediaGroupMediaContentMediaCommunityMediaTags(MediaTags::setTags));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:copyright", itemMediaGroupMediaContentMediaCopyright(MediaCopyright::setCopyright));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:hash", itemMediaGroupMediaContentMediaHash(MediaHash::setHash));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:restriction", itemMediaGroupMediaContentMediaRestriction(MediaRestriction::setRestriction));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:credit", itemMediaGroupMediaContentMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:copyright", itemMediaGroupMediaContentMediaCopyright(MediaCopyright::setCopyright));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:text", itemMediaGroupMediaContentMediaText(MediaText::setText));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:restriction", itemMediaGroupMediaContentMediaRestriction(MediaRestriction::setRestriction));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:community/media:tags", itemMediaGroupMediaContentMediaCommunityMediaTags(MediaTags::setTags));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:comments/media:comment", itemMediaGroupMediaContentStringList(MediaContent::addMediaComment));
+        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed/media:param", itemMediaGroupMediaContentMediaEmbed(MediaEmbed::addParamValue));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:responses/media:response", itemMediaGroupMediaContentStringList(MediaContent::addMediaResponse));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:backLinks/media:backLink", itemMediaGroupMediaContentStringList(MediaContent::addMediaBackLink));
-        super.addItemExtension("/rss/channel/item/media:group/media:content/media:embed/media:param", itemMediaGroupMediaContentMediaEmbed(MediaEmbed::addParamValue));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:license", itemMediaGroupMediaContentMediaLicense(MediaLicense::setLicense));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneTitle", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneTitle));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:scenes/media:scene/sceneDescription", itemMediaGroupMediaContentMediaScene(MediaScene::setSceneDescription));
@@ -193,59 +193,26 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         onItemTags.put("/rss/channel/item/media:location", item -> item.addMediaLocation(new MediaLocation()));
         onItemTags.put("/rss/channel/item/media:scenes/media:scene", item -> item.addMediaScene(new MediaScene()));
 
-        // media:community
-        super.addItemExtension("/rss/channel/item/media:community/media:tags", itemMediaCommunityMediaTags(MediaTags::setTags));
-
-        // media:comment
-        super.addItemExtension("/rss/channel/item/media:comments/media:comment", MediaRssItem::addMediaComment);
-
-        // media:response
-        super.addItemExtension("/rss/channel/item/media:responses/media:response", MediaRssItem::addMediaResponse);
-
-        // media:backLink
-        super.addItemExtension("/rss/channel/item/media:backLinks/media:backLink", MediaRssItem::addMediaBackLink);
-
-        // media:license
-        super.addItemExtension("/rss/channel/item/media:license",  itemMediaLicense(MediaLicense::setLicense));
-
-        // media:restriction
+        super.addItemExtension("/rss/channel/item/media:rating", itemMediaRating(MediaRating::setRating));
+        super.addItemExtension("/rss/channel/item/media:title", itemMediaTitle(MediaTitle::setTitle));
+        super.addItemExtension("/rss/channel/item/media:description", itemMediaDescription(MediaDescription::setDescription));
+        super.addItemExtension("/rss/channel/item/media:keywords", itemMediaKeywords(MediaRssItem::addMediaKeyword));
+        super.addItemExtension("/rss/channel/item/media:category", itemMediaCategory(MediaCategory::setCategory));
+        super.addItemExtension("/rss/channel/item/media:hash", itemMediaHash(MediaHash::setHash));
+        super.addItemExtension("/rss/channel/item/media:credit", itemMediaCredit(MediaCredit::setCredit));
+        super.addItemExtension("/rss/channel/item/media:copyright", itemMediaCopyright(MediaCopyright::setCopyright));
+        super.addItemExtension("/rss/channel/item/media:text", itemMediaText(MediaText::setText));
         super.addItemExtension("/rss/channel/item/media:restriction", itemMediaRestriction(MediaRestriction::setRestriction));
-
-        // media:scene
+        super.addItemExtension("/rss/channel/item/media:community/media:tags", itemMediaCommunityMediaTags(MediaTags::setTags));
+        super.addItemExtension("/rss/channel/item/media:comments/media:comment", MediaRssItem::addMediaComment);
+        super.addItemExtension("/rss/channel/item/media:embed/media:param", itemMediaEmbed(MediaEmbed::addParamValue));
+        super.addItemExtension("/rss/channel/item/media:responses/media:response", MediaRssItem::addMediaResponse);
+        super.addItemExtension("/rss/channel/item/media:backLinks/media:backLink", MediaRssItem::addMediaBackLink);
+        super.addItemExtension("/rss/channel/item/media:license",  itemMediaLicense(MediaLicense::setLicense));
         super.addItemExtension("/rss/channel/item/media:scenes/media:scene/sceneTitle", itemMediaScene(MediaScene::setSceneTitle));
         super.addItemExtension("/rss/channel/item/media:scenes/media:scene/sceneDescription", itemMediaScene(MediaScene::setSceneDescription));
         super.addItemExtension("/rss/channel/item/media:scenes/media:scene/sceneStartTime", itemMediaScene(MediaScene::setSceneStartTime));
         super.addItemExtension("/rss/channel/item/media:scenes/media:scene/sceneEndTime", itemMediaScene(MediaScene::setSceneEndTime));
-
-        // media:embed
-        super.addItemExtension("/rss/channel/item/media:embed/media:param", itemMediaEmbed(MediaEmbed::addParamValue));
-
-        // media:title
-        super.addItemExtension("/rss/channel/item/media:title", itemMediaTitle(MediaTitle::setTitle));
-
-        // media:description
-        super.addItemExtension("/rss/channel/item/media:description", itemMediaDescription(MediaDescription::setDescription));
-
-        // media:copyright
-        super.addItemExtension("/rss/channel/item/media:copyright", itemMediaCopyright(MediaCopyright::setCopyright));
-
-        // media:hash
-        super.addItemExtension("/rss/channel/item/media:hash", itemMediaHash(MediaHash::setHash));
-
-        // media:text
-        super.addItemExtension("/rss/channel/item/media:text", itemMediaText(MediaText::setText));
-
-        // media:keywords
-        super.addItemExtension("/rss/channel/item/media:keywords", itemMediaKeywords(MediaRssItem::addMediaKeyword));
-
-        // media:rating
-        super.addItemExtension("/rss/channel/item/media:rating", itemMediaRating(MediaRating::setRating));
-
-        // media:category
-        super.addItemExtension("/rss/channel/item/media:category", itemMediaCategory(MediaCategory::setCategory));
-
-        // media:credit
-        super.addItemExtension("/rss/channel/item/media:credit", itemMediaCredit(MediaCredit::setCredit));
     }
 
     @SuppressWarnings("java:S1192")
@@ -269,26 +236,26 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content", "width", itemMediaContent((content, value) -> mapInteger(value, content::setWidth)));
         super.addItemExtension("/rss/channel/item/media:content", "lang", itemMediaContent(MediaContent::setLang));
 
+        super.addItemExtension("/rss/channel/item/media:content/media:rating", "scheme", itemMediaContentMediaRating(MediaRating::setScheme));
+        super.addItemExtension("/rss/channel/item/media:content/media:title", "type", itemMediaContentMediaTitle(MediaTitle::setType));
+        super.addItemExtension("/rss/channel/item/media:content/media:description", "type", itemMediaContentMediaDescription(MediaDescription::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:thumbnail", "url", itemMediaContentMediaThumbnail(MediaThumbnail::setUrl));
         super.addItemExtension("/rss/channel/item/media:content/media:thumbnail", "height", itemMediaContentMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setHeight)));
         super.addItemExtension("/rss/channel/item/media:content/media:thumbnail", "width", itemMediaContentMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setWidth)));
         super.addItemExtension("/rss/channel/item/media:content/media:thumbnail", "time", itemMediaContentMediaThumbnail(MediaThumbnail::setTime));
+        super.addItemExtension("/rss/channel/item/media:content/media:category", "scheme", itemMediaContentMediaCategory(MediaCategory::setScheme));
+        super.addItemExtension("/rss/channel/item/media:content/media:category", "label", itemMediaContentMediaCategory(MediaCategory::setLabel));
+        super.addItemExtension("/rss/channel/item/media:content/media:hash", "algo", itemMediaContentMediaHash(MediaHash::setAlgorithm));
         super.addItemExtension("/rss/channel/item/media:content/media:player", "url", itemMediaContentMediaPlayer(MediaPlayer::setUrl));
         super.addItemExtension("/rss/channel/item/media:content/media:player", "height", itemMediaContentMediaPlayer((player, value) -> mapInteger(value, player::setHeight)));
         super.addItemExtension("/rss/channel/item/media:content/media:player", "width", itemMediaContentMediaPlayer((player, value) -> mapInteger(value, player::setWidth)));
         super.addItemExtension("/rss/channel/item/media:content/media:credit", "role", itemMediaContentMediaCredit(MediaCredit::setRole));
         super.addItemExtension("/rss/channel/item/media:content/media:credit", "scheme", itemMediaContentMediaCredit(MediaCredit::setScheme));
-        super.addItemExtension("/rss/channel/item/media:content/media:title", "type", itemMediaContentMediaTitle(MediaTitle::setType));
-        super.addItemExtension("/rss/channel/item/media:content/media:description", "type", itemMediaContentMediaDescription(MediaDescription::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:copyright", "url", itemMediaContentMediaCopyright(MediaCopyright::setUrl));
-        super.addItemExtension("/rss/channel/item/media:content/media:hash", "algo", itemMediaContentMediaHash(MediaHash::setAlgorithm));
-        super.addItemExtension("/rss/channel/item/media:content/media:category", "scheme", itemMediaContentMediaCategory(MediaCategory::setScheme));
-        super.addItemExtension("/rss/channel/item/media:content/media:category", "label", itemMediaContentMediaCategory(MediaCategory::setLabel));
         super.addItemExtension("/rss/channel/item/media:content/media:text", "type", itemMediaContentMediaText(MediaText::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:text", "lang", itemMediaContentMediaText(MediaText::setLang));
         super.addItemExtension("/rss/channel/item/media:content/media:text", "start", itemMediaContentMediaText(MediaText::setStart));
         super.addItemExtension("/rss/channel/item/media:content/media:text", "end", itemMediaContentMediaText(MediaText::setEnd));
-        super.addItemExtension("/rss/channel/item/media:content/media:rating", "scheme", itemMediaContentMediaRating(MediaRating::setScheme));
         super.addItemExtension("/rss/channel/item/media:content/media:restriction", "type", itemMediaContentMediaRestriction(MediaRestriction::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:restriction", "relationship", itemMediaContentMediaRestriction(MediaRestriction::setRelationship));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:starRating", "average", itemMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
@@ -297,16 +264,18 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:starRating", "min", itemMediaContentMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:statistics", "views", itemMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:content/media:community/media:statistics", "favorites", itemMediaContentMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
+        super.addItemExtension("/rss/channel/item/media:content/media:embed", "url", itemMediaContentMediaEmbed(MediaEmbed::setUrl));
+        super.addItemExtension("/rss/channel/item/media:content/media:embed", "width", itemMediaContentMediaEmbed((item, value) -> mapInteger(value, item::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:content/media:embed", "height", itemMediaContentMediaEmbed((item, value) -> mapInteger(value, item::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:content/media:embed/media:param", "name", itemMediaContentMediaEmbed(MediaEmbed::addParamName));
         super.addItemExtension("/rss/channel/item/media:content/media:status", "reason",  itemMediaContentMediaStatus(MediaStatus::setReason));
         super.addItemExtension("/rss/channel/item/media:content/media:status", "state",  itemMediaContentMediaStatus(MediaStatus::setState));
         super.addItemExtension("/rss/channel/item/media:content/media:price", "type",  itemMediaContentMediaPrice(MediaPrice::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:price", "price",  itemMediaContentMediaPrice((price, value) -> mapDouble(value, price::setPrice)));
         super.addItemExtension("/rss/channel/item/media:content/media:price", "currency",  itemMediaContentMediaPrice(MediaPrice::setCurrency));
         super.addItemExtension("/rss/channel/item/media:content/media:price", "info",  itemMediaContentMediaPrice(MediaPrice::setInfo));
-        super.addItemExtension("/rss/channel/item/media:content/media:embed", "url", itemMediaContentMediaEmbed(MediaEmbed::setUrl));
-        super.addItemExtension("/rss/channel/item/media:content/media:embed", "width", itemMediaContentMediaEmbed((item, value) -> mapInteger(value, item::setWidth)));
-        super.addItemExtension("/rss/channel/item/media:content/media:embed", "height", itemMediaContentMediaEmbed((item, value) -> mapInteger(value, item::setHeight)));
-        super.addItemExtension("/rss/channel/item/media:content/media:embed/media:param", "name", itemMediaContentMediaEmbed(MediaEmbed::addParamName));
+        super.addItemExtension("/rss/channel/item/media:content/media:license", "type", itemMediaContentMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:content/media:license", "href", itemMediaContentMediaLicense(MediaLicense::setHref));
         super.addItemExtension("/rss/channel/item/media:content/media:subTitle", "type",  itemMediaContentMediaSubTitle(MediaSubTitle::setType));
         super.addItemExtension("/rss/channel/item/media:content/media:subTitle", "lang",  itemMediaContentMediaSubTitle(MediaSubTitle::setLang));
         super.addItemExtension("/rss/channel/item/media:content/media:subTitle", "href",  itemMediaContentMediaSubTitle(MediaSubTitle::setHref));
@@ -315,49 +284,49 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:content/media:location", "description", itemMediaContentMediaLocation(MediaLocation::setDescription));
         super.addItemExtension("/rss/channel/item/media:content/media:location", "start", itemMediaContentMediaLocation(MediaLocation::setStart));
         super.addItemExtension("/rss/channel/item/media:content/media:location", "end", itemMediaContentMediaLocation(MediaLocation::setEnd));
-        super.addItemExtension("/rss/channel/item/media:content/media:license", "type", itemMediaContentMediaLicense(MediaLicense::setType));
-        super.addItemExtension("/rss/channel/item/media:content/media:license", "href", itemMediaContentMediaLicense(MediaLicense::setHref));
         super.addItemExtension("/rss/channel/item/media:content/media:rights", "status", itemMediaContentMediaRights(MediaRights::setStatus));
 
         // media:group
+        super.addItemExtension("/rss/channel/item/media:group/media:rating", "scheme", itemMediaGroupMediaRating(MediaRating::setScheme));
         super.addItemExtension("/rss/channel/item/media:group/media:title", "type", itemMediaGroupMediaTitle(MediaTitle::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:description", "type", itemMediaGroupMediaDescription(MediaDescription::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:thumbnail", "url", itemMediaGroupMediaThumbnail(MediaThumbnail::setUrl));
         super.addItemExtension("/rss/channel/item/media:group/media:thumbnail", "height", itemMediaGroupMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setHeight)));
         super.addItemExtension("/rss/channel/item/media:group/media:thumbnail", "width", itemMediaGroupMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setWidth)));
         super.addItemExtension("/rss/channel/item/media:group/media:thumbnail", "time", itemMediaGroupMediaThumbnail(MediaThumbnail::setTime));
+        super.addItemExtension("/rss/channel/item/media:group/media:category", "scheme", itemMediaGroupMediaCategory(MediaCategory::setScheme));
+        super.addItemExtension("/rss/channel/item/media:group/media:category", "label", itemMediaGroupMediaCategory(MediaCategory::setLabel));
+        super.addItemExtension("/rss/channel/item/media:group/media:hash", "algo", itemMediaGroupMediaHash(MediaHash::setAlgorithm));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "url", itemMediaGroupMediaPlayer(MediaPlayer::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "height", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:group/media:player", "width", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:group/media:credit", "role", itemMediaGroupMediaCredit(MediaCredit::setRole));
+        super.addItemExtension("/rss/channel/item/media:group/media:credit", "scheme", itemMediaGroupMediaCredit(MediaCredit::setScheme));
+        super.addItemExtension("/rss/channel/item/media:group/media:copyright", "url", itemMediaGroupMediaCopyright(MediaCopyright::setUrl));
+        super.addItemExtension("/rss/channel/item/media:group/media:text", "type", itemMediaGroupMediaText(MediaText::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:text", "lang", itemMediaGroupMediaText(MediaText::setLang));
+        super.addItemExtension("/rss/channel/item/media:group/media:text", "start", itemMediaGroupMediaText(MediaText::setStart));
+        super.addItemExtension("/rss/channel/item/media:group/media:text", "end", itemMediaGroupMediaText(MediaText::setEnd));
+        super.addItemExtension("/rss/channel/item/media:group/media:restriction", "type", itemMediaGroupMediaRestriction(MediaRestriction::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:restriction", "relationship", itemMediaGroupMediaRestriction(MediaRestriction::setRelationship));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "average", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "count", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "max", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:starRating", "min", itemMediaGroupMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:statistics", "views", itemMediaGroupMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:group/media:community/media:statistics", "favorites", itemMediaGroupMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
-        super.addItemExtension("/rss/channel/item/media:group/media:status", "reason",  itemMediaGroupMediaStatus(MediaStatus::setReason));
-        super.addItemExtension("/rss/channel/item/media:group/media:status", "state",  itemMediaGroupMediaStatus(MediaStatus::setState));
-        super.addItemExtension("/rss/channel/item/media:group/media:credit", "role", itemMediaGroupMediaCredit(MediaCredit::setRole));
-        super.addItemExtension("/rss/channel/item/media:group/media:credit", "scheme", itemMediaGroupMediaCredit(MediaCredit::setScheme));
-        super.addItemExtension("/rss/channel/item/media:group/media:category", "scheme", itemMediaGroupMediaCategory(MediaCategory::setScheme));
-        super.addItemExtension("/rss/channel/item/media:group/media:category", "label", itemMediaGroupMediaCategory(MediaCategory::setLabel));
-        super.addItemExtension("/rss/channel/item/media:group/media:rating", "scheme", itemMediaGroupMediaRating(MediaRating::setScheme));
-        super.addItemExtension("/rss/channel/item/media:group/media:copyright", "url", itemMediaGroupMediaCopyright(MediaCopyright::setUrl));
-        super.addItemExtension("/rss/channel/item/media:group/media:hash", "algo", itemMediaGroupMediaHash(MediaHash::setAlgorithm));
-        super.addItemExtension("/rss/channel/item/media:group/media:player", "url", itemMediaGroupMediaPlayer(MediaPlayer::setUrl));
-        super.addItemExtension("/rss/channel/item/media:group/media:player", "height", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setHeight)));
-        super.addItemExtension("/rss/channel/item/media:group/media:player", "width", itemMediaGroupMediaPlayer((item, value) -> mapInteger(value, item::setWidth)));
-        super.addItemExtension("/rss/channel/item/media:group/media:restriction", "type", itemMediaGroupMediaRestriction(MediaRestriction::setType));
-        super.addItemExtension("/rss/channel/item/media:group/media:restriction", "relationship", itemMediaGroupMediaRestriction(MediaRestriction::setRelationship));
-        super.addItemExtension("/rss/channel/item/media:group/media:text", "type", itemMediaGroupMediaText(MediaText::setType));
-        super.addItemExtension("/rss/channel/item/media:group/media:text", "lang", itemMediaGroupMediaText(MediaText::setLang));
-        super.addItemExtension("/rss/channel/item/media:group/media:text", "start", itemMediaGroupMediaText(MediaText::setStart));
-        super.addItemExtension("/rss/channel/item/media:group/media:text", "end", itemMediaGroupMediaText(MediaText::setEnd));
-        super.addItemExtension("/rss/channel/item/media:group/media:price", "type",  itemMediaGroupMediaPrice(MediaPrice::setType));
-        super.addItemExtension("/rss/channel/item/media:group/media:price", "price",  itemMediaGroupMediaPrice((price, value) -> mapDouble(value, price::setPrice)));
-        super.addItemExtension("/rss/channel/item/media:group/media:price", "currency",  itemMediaGroupMediaPrice(MediaPrice::setCurrency));
-        super.addItemExtension("/rss/channel/item/media:group/media:price", "info",  itemMediaGroupMediaPrice(MediaPrice::setInfo));
         super.addItemExtension("/rss/channel/item/media:group/media:embed", "url", itemMediaGroupMediaEmbed(MediaEmbed::setUrl));
         super.addItemExtension("/rss/channel/item/media:group/media:embed", "width", itemMediaGroupMediaEmbed((item, value) -> mapInteger(value, item::setWidth)));
         super.addItemExtension("/rss/channel/item/media:group/media:embed", "height", itemMediaGroupMediaEmbed((item, value) -> mapInteger(value, item::setHeight)));
         super.addItemExtension("/rss/channel/item/media:group/media:embed/media:param", "name", itemMediaGroupMediaEmbed(MediaEmbed::addParamName));
+        super.addItemExtension("/rss/channel/item/media:group/media:status", "reason",  itemMediaGroupMediaStatus(MediaStatus::setReason));
+        super.addItemExtension("/rss/channel/item/media:group/media:status", "state",  itemMediaGroupMediaStatus(MediaStatus::setState));
+        super.addItemExtension("/rss/channel/item/media:group/media:price", "type",  itemMediaGroupMediaPrice(MediaPrice::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:price", "price",  itemMediaGroupMediaPrice((price, value) -> mapDouble(value, price::setPrice)));
+        super.addItemExtension("/rss/channel/item/media:group/media:price", "currency",  itemMediaGroupMediaPrice(MediaPrice::setCurrency));
+        super.addItemExtension("/rss/channel/item/media:group/media:price", "info",  itemMediaGroupMediaPrice(MediaPrice::setInfo));
+        super.addItemExtension("/rss/channel/item/media:group/media:license", "type", itemMediaGroupMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:group/media:license", "href", itemMediaGroupMediaLicense(MediaLicense::setHref));
         super.addItemExtension("/rss/channel/item/media:group/media:subTitle", "type",  itemMediaGroupMediaSubTitle(MediaSubTitle::setType));
         super.addItemExtension("/rss/channel/item/media:group/media:subTitle", "lang",  itemMediaGroupMediaSubTitle(MediaSubTitle::setLang));
         super.addItemExtension("/rss/channel/item/media:group/media:subTitle", "href",  itemMediaGroupMediaSubTitle(MediaSubTitle::setHref));
@@ -366,8 +335,6 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:location", "description", itemMediaGroupMediaLocation(MediaLocation::setDescription));
         super.addItemExtension("/rss/channel/item/media:group/media:location", "start", itemMediaGroupMediaLocation(MediaLocation::setStart));
         super.addItemExtension("/rss/channel/item/media:group/media:location", "end", itemMediaGroupMediaLocation(MediaLocation::setEnd));
-        super.addItemExtension("/rss/channel/item/media:group/media:license", "type", itemMediaGroupMediaLicense(MediaLicense::setType));
-        super.addItemExtension("/rss/channel/item/media:group/media:license", "href", itemMediaGroupMediaLicense(MediaLicense::setHref));
         super.addItemExtension("/rss/channel/item/media:group/media:rights", "status", itemMediaGroupMediaRights(MediaRights::setStatus));
 
         // media:group / media:content
@@ -432,93 +399,55 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:peerLink", "href", itemMediaGroupMediaContentMediaPeerLink(MediaPeerLink::setHref));
         super.addItemExtension("/rss/channel/item/media:group/media:content/media:rights", "status", itemMediaGroupMediaContentMediaRights(MediaRights::setStatus));
 
-        // media:community
+        // item
+        super.addItemExtension("/rss/channel/item/media:rating", "scheme", itemMediaRating(MediaRating::setScheme));
+        super.addItemExtension("/rss/channel/item/media:title", "type", itemMediaTitle(MediaTitle::setType));
+        super.addItemExtension("/rss/channel/item/media:description", "type", itemMediaDescription(MediaDescription::setType));
+        super.addItemExtension("/rss/channel/item/media:thumbnail", "url", itemMediaThumbnail(MediaThumbnail::setUrl));
+        super.addItemExtension("/rss/channel/item/media:thumbnail", "height", itemMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:thumbnail", "width", itemMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:thumbnail", "time", itemMediaThumbnail(MediaThumbnail::setTime));
+        super.addItemExtension("/rss/channel/item/media:category", "scheme", itemMediaCategory(MediaCategory::setScheme));
+        super.addItemExtension("/rss/channel/item/media:category", "label", itemMediaCategory(MediaCategory::setLabel));
+        super.addItemExtension("/rss/channel/item/media:hash", "algo", itemMediaHash(MediaHash::setAlgorithm));
+        super.addItemExtension("/rss/channel/item/media:player", "url", itemMediaPlayer(MediaPlayer::setUrl));
+        super.addItemExtension("/rss/channel/item/media:player", "height", itemMediaPlayer((player, value) -> mapInteger(value, player::setHeight)));
+        super.addItemExtension("/rss/channel/item/media:player", "width", itemMediaPlayer((player, value) -> mapInteger(value, player::setWidth)));
+        super.addItemExtension("/rss/channel/item/media:credit", "role", itemMediaCredit(MediaCredit::setRole));
+        super.addItemExtension("/rss/channel/item/media:credit", "scheme", itemMediaCredit(MediaCredit::setScheme));
+        super.addItemExtension("/rss/channel/item/media:copyright", "url", itemMediaCopyright(MediaCopyright::setUrl));
+        super.addItemExtension("/rss/channel/item/media:text", "type", itemMediaText(MediaText::setType));
+        super.addItemExtension("/rss/channel/item/media:text", "lang", itemMediaText(MediaText::setLang));
+        super.addItemExtension("/rss/channel/item/media:text", "start", itemMediaText(MediaText::setStart));
+        super.addItemExtension("/rss/channel/item/media:text", "end", itemMediaText(MediaText::setEnd));
+        super.addItemExtension("/rss/channel/item/media:restriction", "type", itemMediaRestriction(MediaRestriction::setType));
+        super.addItemExtension("/rss/channel/item/media:restriction", "relationship", itemMediaRestriction(MediaRestriction::setRelationship));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "average", itemMediaCommunityMediaStarRating((starRating, value) -> mapDouble(value, starRating::setAverage)));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "count", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setCount)));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "max", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMax)));
         super.addItemExtension("/rss/channel/item/media:community/media:starRating", "min", itemMediaCommunityMediaStarRating((starRating, value) -> mapInteger(value, starRating::setMin)));
         super.addItemExtension("/rss/channel/item/media:community/media:statistics", "views", itemMediaCommunityMediaStatistics((statistics, value) -> mapLong(value, statistics::setViews)));
         super.addItemExtension("/rss/channel/item/media:community/media:statistics", "favorites", itemMediaCommunityMediaStatistics((statistics, value) -> mapInteger(value, statistics::setFavorites)));
-
-        // media:status
-        super.addItemExtension("/rss/channel/item/media:status", "reason",  itemMediaStatus(MediaStatus::setReason));
-        super.addItemExtension("/rss/channel/item/media:status", "state",  itemMediaStatus(MediaStatus::setState));
-
-        // media:price
-        super.addItemExtension("/rss/channel/item/media:price", "type",  itemMediaPrice(MediaPrice::setType));
-        super.addItemExtension("/rss/channel/item/media:price", "price",  itemMediaPrice((price, value) -> mapDouble(value, price::setPrice)));
-        super.addItemExtension("/rss/channel/item/media:price", "currency",  itemMediaPrice(MediaPrice::setCurrency));
-        super.addItemExtension("/rss/channel/item/media:price", "info",  itemMediaPrice(MediaPrice::setInfo));
-
-        // media:license
-        super.addItemExtension("/rss/channel/item/media:license", "type",  itemMediaLicense(MediaLicense::setType));
-        super.addItemExtension("/rss/channel/item/media:license", "href",  itemMediaLicense(MediaLicense::setHref));
-
-        // media:subTitle
-        super.addItemExtension("/rss/channel/item/media:subTitle", "type",  itemMediaSubTitle(MediaSubTitle::setType));
-        super.addItemExtension("/rss/channel/item/media:subTitle", "lang",  itemMediaSubTitle(MediaSubTitle::setLang));
-        super.addItemExtension("/rss/channel/item/media:subTitle", "href",  itemMediaSubTitle(MediaSubTitle::setHref));
-
-        // media:peerLink
-        super.addItemExtension("/rss/channel/item/media:peerLink", "type",  itemMediaPeerLink(MediaPeerLink::setType));
-        super.addItemExtension("/rss/channel/item/media:peerLink", "href",  itemMediaPeerLink(MediaPeerLink::setHref));
-
-        // media:restriction
-        super.addItemExtension("/rss/channel/item/media:restriction", "type", itemMediaRestriction(MediaRestriction::setType));
-        super.addItemExtension("/rss/channel/item/media:restriction", "relationship", itemMediaRestriction(MediaRestriction::setRelationship));
-
-        // media:location
-        super.addItemExtension("/rss/channel/item/media:location", "description", itemMediaLocation(MediaLocation::setDescription));
-        super.addItemExtension("/rss/channel/item/media:location", "start", itemMediaLocation(MediaLocation::setStart));
-        super.addItemExtension("/rss/channel/item/media:location", "end", itemMediaLocation(MediaLocation::setEnd));
-
-        // media:embed
         super.addItemExtension("/rss/channel/item/media:embed", "url", itemMediaEmbed(MediaEmbed::setUrl));
         super.addItemExtension("/rss/channel/item/media:embed", "width", itemMediaEmbed((item, value) -> mapInteger(value, item::setWidth)));
         super.addItemExtension("/rss/channel/item/media:embed", "height", itemMediaEmbed((item, value) -> mapInteger(value, item::setHeight)));
         super.addItemExtension("/rss/channel/item/media:embed/media:param", "name", itemMediaEmbed(MediaEmbed::addParamName));
-
-        // media:title
-        super.addItemExtension("/rss/channel/item/media:title", "type", itemMediaTitle(MediaTitle::setType));
-
-        // media:description
-        super.addItemExtension("/rss/channel/item/media:description", "type", itemMediaDescription(MediaDescription::setType));
-
-        // media:copyright
-        super.addItemExtension("/rss/channel/item/media:copyright", "url", itemMediaCopyright(MediaCopyright::setUrl));
-
-        // media:hash
-        super.addItemExtension("/rss/channel/item/media:hash", "algo", itemMediaHash(MediaHash::setAlgorithm));
-
-        // media:player
-        super.addItemExtension("/rss/channel/item/media:player", "url", itemMediaPlayer(MediaPlayer::setUrl));
-        super.addItemExtension("/rss/channel/item/media:player", "height", itemMediaPlayer((player, value) -> mapInteger(value, player::setHeight)));
-        super.addItemExtension("/rss/channel/item/media:player", "width", itemMediaPlayer((player, value) -> mapInteger(value, player::setWidth)));
-
-        // media:text
-        super.addItemExtension("/rss/channel/item/media:text", "type", itemMediaText(MediaText::setType));
-        super.addItemExtension("/rss/channel/item/media:text", "lang", itemMediaText(MediaText::setLang));
-        super.addItemExtension("/rss/channel/item/media:text", "start", itemMediaText(MediaText::setStart));
-        super.addItemExtension("/rss/channel/item/media:text", "end", itemMediaText(MediaText::setEnd));
-
-        // media:thumbnail
-        super.addItemExtension("/rss/channel/item/media:thumbnail", "url", itemMediaThumbnail(MediaThumbnail::setUrl));
-        super.addItemExtension("/rss/channel/item/media:thumbnail", "height", itemMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setHeight)));
-        super.addItemExtension("/rss/channel/item/media:thumbnail", "width", itemMediaThumbnail((thumbnail, value) -> mapInteger(value, thumbnail::setWidth)));
-        super.addItemExtension("/rss/channel/item/media:thumbnail", "time", itemMediaThumbnail(MediaThumbnail::setTime));
-
-        // media:rating
-        super.addItemExtension("/rss/channel/item/media:rating", "scheme", itemMediaRating(MediaRating::setScheme));
-
-        // media:category
-        super.addItemExtension("/rss/channel/item/media:category", "scheme", itemMediaCategory(MediaCategory::setScheme));
-        super.addItemExtension("/rss/channel/item/media:category", "label", itemMediaCategory(MediaCategory::setLabel));
-
-        // media:credit
-        super.addItemExtension("/rss/channel/item/media:credit", "role", itemMediaCredit(MediaCredit::setRole));
-        super.addItemExtension("/rss/channel/item/media:credit", "scheme", itemMediaCredit(MediaCredit::setScheme));
-
-        // media:rights
+        super.addItemExtension("/rss/channel/item/media:status", "reason",  itemMediaStatus(MediaStatus::setReason));
+        super.addItemExtension("/rss/channel/item/media:status", "state",  itemMediaStatus(MediaStatus::setState));
+        super.addItemExtension("/rss/channel/item/media:price", "type",  itemMediaPrice(MediaPrice::setType));
+        super.addItemExtension("/rss/channel/item/media:price", "price",  itemMediaPrice((price, value) -> mapDouble(value, price::setPrice)));
+        super.addItemExtension("/rss/channel/item/media:price", "currency",  itemMediaPrice(MediaPrice::setCurrency));
+        super.addItemExtension("/rss/channel/item/media:price", "info",  itemMediaPrice(MediaPrice::setInfo));
+        super.addItemExtension("/rss/channel/item/media:license", "type",  itemMediaLicense(MediaLicense::setType));
+        super.addItemExtension("/rss/channel/item/media:license", "href",  itemMediaLicense(MediaLicense::setHref));
+        super.addItemExtension("/rss/channel/item/media:subTitle", "type",  itemMediaSubTitle(MediaSubTitle::setType));
+        super.addItemExtension("/rss/channel/item/media:subTitle", "lang",  itemMediaSubTitle(MediaSubTitle::setLang));
+        super.addItemExtension("/rss/channel/item/media:subTitle", "href",  itemMediaSubTitle(MediaSubTitle::setHref));
+        super.addItemExtension("/rss/channel/item/media:peerLink", "type",  itemMediaPeerLink(MediaPeerLink::setType));
+        super.addItemExtension("/rss/channel/item/media:peerLink", "href",  itemMediaPeerLink(MediaPeerLink::setHref));
+        super.addItemExtension("/rss/channel/item/media:location", "description", itemMediaLocation(MediaLocation::setDescription));
+        super.addItemExtension("/rss/channel/item/media:location", "start", itemMediaLocation(MediaLocation::setStart));
+        super.addItemExtension("/rss/channel/item/media:location", "end", itemMediaLocation(MediaLocation::setEnd));
         super.addItemExtension("/rss/channel/item/media:rights", "status", itemMediaRights(MediaRights::setStatus));
     }
 
