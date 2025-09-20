@@ -6,7 +6,7 @@ import java.util.Optional;
 /**
  * Represents a media object that can be used to publish any type of media. It contains attributes
  * for specifying the content URL, format, size, and other media-specific characteristics.
- *
+ * <p>
  * Example:
  * {@code
  * <media:content
@@ -26,7 +26,7 @@ import java.util.Optional;
  *     lang="en" />
  * }
  */
-public class MediaContent extends MediaOptionalFieldsImpl{
+public class MediaContent extends MetadataImpl {
     private String url;
     private Long fileSize;
     private String type;

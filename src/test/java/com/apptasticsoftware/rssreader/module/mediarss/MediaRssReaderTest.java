@@ -1526,7 +1526,7 @@ class MediaRssReaderTest {
         EqualsVerifier.simple().forClass(MediaThumbnail.class).verify();
         EqualsVerifier.simple().forClass(MediaTitle.class).verify();
 
-        EqualsVerifier.simple().forClass(MediaOptionalFieldsImpl.class).verify();
+        EqualsVerifier.simple().forClass(MetadataImpl.class).verify();
         EqualsVerifier.simple().forClass(MediaContent.class).verify();
         EqualsVerifier.simple().forClass(MediaGroup.class).verify();
 

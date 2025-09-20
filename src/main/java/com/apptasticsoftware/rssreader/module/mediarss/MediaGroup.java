@@ -8,7 +8,7 @@ import java.util.Objects;
  * A group element that allows grouping of {@code <media:content>} elements that are effectively
  * the same content, yet different representations. For instance: the same song recorded in both
  * WAV and MP3 format.
- *
+ * <p>
  * Example:
  * {@code
  * <media:group>
@@ -16,14 +16,14 @@ import java.util.Objects;
  *                    type="audio/wav"
  *                    bitrate="128"
  *                    isDefault="true" />
- *
+ * <p>
  *     <media:content url="http://www.foo.com/song.mp3"
  *                    type="audio/mpeg"
  *                    bitrate="64" />
  * </media:group>
  * }
  */
-public class MediaGroup extends MediaOptionalFieldsImpl {
+public class MediaGroup extends MetadataImpl {
     private final List<MediaContent> mediaContents = new ArrayList<>();
 
     /**

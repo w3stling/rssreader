@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Specifies various statistics about a media object like the view count and the favorite count.
  * This element is part of the media:community element and provides engagement metrics for the media object.
- *
+ * <p>
  * Example:
  * {@code <media:community>
  *     <media:statistics views="5" favorites="5" />

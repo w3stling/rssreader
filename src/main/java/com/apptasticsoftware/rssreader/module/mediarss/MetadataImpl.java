@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MediaOptionalFieldsImpl implements MediaOptionalFields {
+public class MetadataImpl implements Metadata {
     private final List<MediaRating> mediaRatings = new ArrayList<>();
     private MediaTitle mediaTitle;
     private MediaDescription mediaDescription;
@@ -583,7 +583,7 @@ public class MediaOptionalFieldsImpl implements MediaOptionalFields {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        MediaOptionalFieldsImpl that = (MediaOptionalFieldsImpl) o;
+        MetadataImpl that = (MetadataImpl) o;
         return Objects.equals(getMediaRatings(), that.getMediaRatings()) && Objects.equals(getMediaTitle(), that.getMediaTitle()) && Objects.equals(getMediaDescription(), that.getMediaDescription()) && Objects.equals(getMediaKeywords(), that.getMediaKeywords()) && Objects.equals(getMediaThumbnails(), that.getMediaThumbnails()) && Objects.equals(getMediaCategories(), that.getMediaCategories()) && Objects.equals(getMediaHashes(), that.getMediaHashes()) && Objects.equals(getMediaPlayer(), that.getMediaPlayer()) && Objects.equals(getMediaCredits(), that.getMediaCredits()) && Objects.equals(getMediaCopyright(), that.getMediaCopyright()) && Objects.equals(getMediaTexts(), that.getMediaTexts()) && Objects.equals(getMediaRestrictions(), that.getMediaRestrictions()) && Objects.equals(getMediaCommunity(), that.getMediaCommunity()) && Objects.equals(getMediaComments(), that.getMediaComments()) && Objects.equals(getMediaEmbed(), that.getMediaEmbed()) && Objects.equals(getMediaResponses(), that.getMediaResponses()) && Objects.equals(getMediaBackLinks(), that.getMediaBackLinks()) && Objects.equals(getMediaStatus(), that.getMediaStatus()) && Objects.equals(getMediaPrices(), that.getMediaPrices()) && Objects.equals(getMediaLicenses(), that.getMediaLicenses()) && Objects.equals(getMediaSubTitles(), that.getMediaSubTitles()) && Objects.equals(getMediaPeerLinks(), that.getMediaPeerLinks()) && Objects.equals(getMediaLocations(), that.getMediaLocations()) && Objects.equals(getMediaRights(), that.getMediaRights()) && Objects.equals(getMediaScenes(), that.getMediaScenes());
     }
 

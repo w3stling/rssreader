@@ -3,13 +3,13 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.List;
 import java.util.Optional;
 
+
 /**
- * Interface defining optional fields for a media object in Media RSS.
- * These fields provide additional metadata and attributes to describe
- * various aspects of the media content, such as ratings, titles,
- * descriptions, keywords, etc.
+ * Represents the metadata of a media object, providing various details such as title, description,
+ * ratings, categories, thumbnails, and more. This interface defines methods to access and modify
+ * different aspects of the media metadata.
  */
-public interface MediaOptionalFields {
+public interface Metadata {
     /**
      * Gets a list of media rating that declares the permissible audience. If this element is not included,
      * it assumes that no restrictions are necessary. The rating can use different schemes like

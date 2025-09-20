@@ -34,10 +34,10 @@ import java.util.Optional;
 /**
  * Class representing the media rss item.
  */
-public class MediaRssItem extends Item implements MediaOptionalFields {
+public class MediaRssItem extends Item implements Metadata {
     private final List<MediaContent> mediaContents = new ArrayList<>();
     private MediaGroup mediaGroup;
-    private final MediaOptionalFields optionalFields = new MediaOptionalFieldsImpl();
+    private final Metadata optionalFields = new MetadataImpl();
 
     /**
      * Constructor
