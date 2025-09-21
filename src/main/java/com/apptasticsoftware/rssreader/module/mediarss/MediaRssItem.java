@@ -37,7 +37,7 @@ import java.util.Optional;
 public class MediaRssItem extends Item implements Metadata {
     private final List<MediaContent> mediaContents = new ArrayList<>();
     private MediaGroup mediaGroup;
-    private final Metadata optionalFields = new MetadataImpl();
+    private final Metadata metadata = new MetadataImpl();
 
     /**
      * Constructor
@@ -96,7 +96,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaLocation> getMediaLocations() {
-        return optionalFields.getMediaLocations();
+        return metadata.getMediaLocations();
     }
 
     /**
@@ -107,7 +107,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaLocation(MediaLocation mediaLocation) {
-        optionalFields.addMediaLocation(mediaLocation);
+        metadata.addMediaLocation(mediaLocation);
     }
 
     // Optional
@@ -121,7 +121,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaRating> getMediaRatings() {
-        return optionalFields.getMediaRatings();
+        return metadata.getMediaRatings();
     }
 
     /**
@@ -133,7 +133,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaRating(MediaRating mediaRating) {
-        optionalFields.addMediaRating(mediaRating);
+        metadata.addMediaRating(mediaRating);
     }
 
     /**
@@ -144,7 +144,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaTitle> getMediaTitle() {
-        return optionalFields.getMediaTitle();
+        return metadata.getMediaTitle();
     }
 
     /**
@@ -155,7 +155,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaTitle(MediaTitle mediaTitle) {
-        optionalFields.setMediaTitle(mediaTitle);
+        metadata.setMediaTitle(mediaTitle);
     }
 
     /**
@@ -166,7 +166,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaDescription> getMediaDescription() {
-        return optionalFields.getMediaDescription();
+        return metadata.getMediaDescription();
     }
 
     /**
@@ -177,7 +177,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaDescription(MediaDescription mediaDescription) {
-        optionalFields.setMediaDescription(mediaDescription);
+        metadata.setMediaDescription(mediaDescription);
     }
 
     /**
@@ -188,7 +188,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<String> getMediaKeywords() {
-        return optionalFields.getMediaKeywords();
+        return metadata.getMediaKeywords();
     }
 
     /**
@@ -199,7 +199,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaKeyword(String mediaKeyword) {
-        optionalFields.addMediaKeyword(mediaKeyword);
+        metadata.addMediaKeyword(mediaKeyword);
     }
 
     /**
@@ -210,7 +210,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaThumbnail> getMediaThumbnails() {
-        return optionalFields.getMediaThumbnails();
+        return metadata.getMediaThumbnails();
     }
 
     /**
@@ -221,7 +221,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaThumbnail(MediaThumbnail mediaThumbnail) {
-        optionalFields.addMediaThumbnail(mediaThumbnail);
+        metadata.addMediaThumbnail(mediaThumbnail);
     }
 
     /**
@@ -232,7 +232,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaCategory> getMediaCategories() {
-        return optionalFields.getMediaCategories();
+        return metadata.getMediaCategories();
     }
 
     /**
@@ -243,7 +243,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaCategory(MediaCategory mediaCategory) {
-        optionalFields.addMediaCategory(mediaCategory);
+        metadata.addMediaCategory(mediaCategory);
     }
 
     /**
@@ -254,7 +254,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaHash> getMediaHashes() {
-        return optionalFields.getMediaHashes();
+        return metadata.getMediaHashes();
     }
 
     /**
@@ -265,7 +265,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaHash(MediaHash mediaHash) {
-        optionalFields.addMediaHash(mediaHash);
+        metadata.addMediaHash(mediaHash);
     }
 
     /**
@@ -276,7 +276,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaPlayer> getMediaPlayer() {
-        return optionalFields.getMediaPlayer();
+        return metadata.getMediaPlayer();
     }
 
     /**
@@ -287,7 +287,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaPlayer(MediaPlayer mediaPlayer) {
-        optionalFields.setMediaPlayer(mediaPlayer);
+        metadata.setMediaPlayer(mediaPlayer);
     }
 
     /**
@@ -298,7 +298,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaCredit> getMediaCredits() {
-        return optionalFields.getMediaCredits();
+        return metadata.getMediaCredits();
     }
 
     /**
@@ -309,7 +309,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaCredit(MediaCredit mediaCredit) {
-        optionalFields.addMediaCredit(mediaCredit);
+        metadata.addMediaCredit(mediaCredit);
     }
 
     /**
@@ -320,7 +320,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaCopyright> getMediaCopyright() {
-        return optionalFields.getMediaCopyright();
+        return metadata.getMediaCopyright();
     }
 
     /**
@@ -331,7 +331,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaCopyright(MediaCopyright mediaCopyright) {
-        optionalFields.setMediaCopyright(mediaCopyright);
+        metadata.setMediaCopyright(mediaCopyright);
     }
 
     /**
@@ -342,7 +342,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaText> getMediaTexts() {
-        return optionalFields.getMediaTexts();
+        return metadata.getMediaTexts();
     }
 
     /**
@@ -353,7 +353,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaText(MediaText mediaText) {
-        optionalFields.addMediaText(mediaText);
+        metadata.addMediaText(mediaText);
     }
 
     /**
@@ -364,7 +364,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaRestriction> getMediaRestrictions() {
-        return optionalFields.getMediaRestrictions();
+        return metadata.getMediaRestrictions();
     }
 
     /**
@@ -375,7 +375,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaRestriction(MediaRestriction mediaRestriction) {
-        optionalFields.addMediaRestriction(mediaRestriction);
+        metadata.addMediaRestriction(mediaRestriction);
     }
 
     /**
@@ -386,7 +386,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaCommunity> getMediaCommunity() {
-        return optionalFields.getMediaCommunity();
+        return metadata.getMediaCommunity();
     }
 
     /**
@@ -397,7 +397,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaCommunity(MediaCommunity mediaCommunity) {
-        optionalFields.setMediaCommunity(mediaCommunity);
+        metadata.setMediaCommunity(mediaCommunity);
     }
 
     /**
@@ -408,7 +408,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<String> getMediaComments() {
-        return optionalFields.getMediaComments();
+        return metadata.getMediaComments();
     }
 
     /**
@@ -419,7 +419,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaComment(String mediaComment) {
-        optionalFields.addMediaComment(mediaComment);
+        metadata.addMediaComment(mediaComment);
     }
 
     /**
@@ -430,7 +430,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaEmbed> getMediaEmbed() {
-        return optionalFields.getMediaEmbed();
+        return metadata.getMediaEmbed();
     }
 
     /**
@@ -441,7 +441,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaEmbed(MediaEmbed mediaEmbed) {
-        optionalFields.setMediaEmbed(mediaEmbed);
+        metadata.setMediaEmbed(mediaEmbed);
     }
 
     /**
@@ -452,7 +452,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<String> getMediaResponses() {
-        return optionalFields.getMediaResponses();
+        return metadata.getMediaResponses();
     }
 
     /**
@@ -463,7 +463,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaResponse(String mediaResponse) {
-        optionalFields.addMediaResponse(mediaResponse);
+        metadata.addMediaResponse(mediaResponse);
     }
 
     /**
@@ -474,7 +474,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<String> getMediaBackLinks() {
-        return optionalFields.getMediaBackLinks();
+        return metadata.getMediaBackLinks();
     }
 
     /**
@@ -485,7 +485,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaBackLink(String mediaBackLink) {
-        optionalFields.addMediaBackLink(mediaBackLink);
+        metadata.addMediaBackLink(mediaBackLink);
     }
 
     /**
@@ -496,7 +496,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaStatus> getMediaStatus() {
-        return optionalFields.getMediaStatus();
+        return metadata.getMediaStatus();
     }
 
     /**
@@ -507,7 +507,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaStatus(MediaStatus mediaStatus) {
-        optionalFields.setMediaStatus(mediaStatus);
+        metadata.setMediaStatus(mediaStatus);
     }
 
     /**
@@ -518,7 +518,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaPrice> getMediaPrices() {
-        return optionalFields.getMediaPrices();
+        return metadata.getMediaPrices();
     }
 
     /**
@@ -529,7 +529,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaPrice(MediaPrice mediaPrice) {
-        optionalFields.addMediaPrice(mediaPrice);
+        metadata.addMediaPrice(mediaPrice);
     }
 
     /**
@@ -540,7 +540,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaLicense> getMediaLicenses() {
-        return optionalFields.getMediaLicenses();
+        return metadata.getMediaLicenses();
     }
 
     /**
@@ -551,7 +551,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaLicense(MediaLicense mediaLicense) {
-        optionalFields.addMediaLicense(mediaLicense);
+        metadata.addMediaLicense(mediaLicense);
     }
 
     /**
@@ -562,7 +562,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaSubTitle> getMediaSubTitles() {
-        return optionalFields.getMediaSubTitles();
+        return metadata.getMediaSubTitles();
     }
 
     /**
@@ -573,7 +573,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaSubTitle(MediaSubTitle mediaSubTitle) {
-        optionalFields.addMediaSubTitle(mediaSubTitle);
+        metadata.addMediaSubTitle(mediaSubTitle);
     }
 
     /**
@@ -584,7 +584,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaPeerLink> getMediaPeerLinks() {
-        return optionalFields.getMediaPeerLinks();
+        return metadata.getMediaPeerLinks();
     }
 
     /**
@@ -595,7 +595,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaPeerLink(MediaPeerLink mediaPeerLink) {
-        optionalFields.addMediaPeerLink(mediaPeerLink);
+        metadata.addMediaPeerLink(mediaPeerLink);
     }
 
     /**
@@ -606,7 +606,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public Optional<MediaRights> getMediaRights() {
-        return optionalFields.getMediaRights();
+        return metadata.getMediaRights();
     }
 
     /**
@@ -617,7 +617,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void setMediaRights(MediaRights mediaRights) {
-        optionalFields.setMediaRights(mediaRights);
+        metadata.setMediaRights(mediaRights);
     }
 
     /**
@@ -628,7 +628,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public List<MediaScene> getMediaScenes() {
-        return optionalFields.getMediaScenes();
+        return metadata.getMediaScenes();
     }
 
     /**
@@ -639,7 +639,7 @@ public class MediaRssItem extends Item implements Metadata {
      */
     @Override
     public void addMediaScene(MediaScene mediaScenes) {
-        optionalFields.addMediaScene(mediaScenes);
+        metadata.addMediaScene(mediaScenes);
     }
 
     @Override
@@ -647,11 +647,11 @@ public class MediaRssItem extends Item implements Metadata {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(getMediaContents(), that.getMediaContents()) && Objects.equals(getMediaGroup(), that.getMediaGroup()) && Objects.equals(optionalFields, that.optionalFields);
+        return Objects.equals(getMediaContents(), that.getMediaContents()) && Objects.equals(getMediaGroup(), that.getMediaGroup()) && Objects.equals(metadata, that.metadata);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaContents(), getMediaGroup(), optionalFields);
+        return Objects.hash(super.hashCode(), getMediaContents(), getMediaGroup(), metadata);
     }
 }
