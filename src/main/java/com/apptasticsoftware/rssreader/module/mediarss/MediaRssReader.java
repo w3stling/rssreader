@@ -56,7 +56,7 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
 
     @Override
     protected Channel createChannel(DateTimeParser dateTimeParser) {
-        return new Channel(dateTimeParser);
+        return new MediaRssChannel(dateTimeParser);
     }
 
     @Override
