@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.util;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -45,6 +47,15 @@ public final class Mapper {
      */
     public static void mapLong(String text, Consumer<Long> func) {
         mapNumber(text, func, Long::valueOf);
+    }
+
+    /**
+     * Maps a double text value to a double field.
+     * @param text text value
+     * @param func double setter method
+     */
+    public static void mapDouble(String text, Consumer<Double> func) {
+        mapNumber(text, func, Double::valueOf);
     }
 
     private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
@@ -100,6 +111,19 @@ public final class Mapper {
             instance = Optional.of(newInstance);
         }
         return instance;
+    }
+
+    /**
+     * Returns an empty list if the provided list is null.
+     * @param list the list to check
+     * @param <T> the type of items in the list
+     * @return an empty list if the provided list is null, otherwise returns the provided list
+     */
+    public static <T> List<T> emptyListIfNull(List<T> list) {
+        if (list == null) {
+            return Collections.emptyList();
+        }
+        return list;
     }
 
     private static <T> boolean isNullOrEmpty(Supplier<T> getter) {
