@@ -104,6 +104,7 @@ public class RssServer {
                 while ((readLength = is.read(buffer)) != -1) {
                     totalReadLength += readLength;
                     os.write(buffer, 0, readLength);
+                    os.flush();
                     if (isWritePause(totalReadLength, responseBodyLength) && !hasPaused) {
                         pause(writeBodyPause);
                         hasPaused = true;
