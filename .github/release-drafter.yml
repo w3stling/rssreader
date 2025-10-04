@@ -46,6 +46,8 @@ version-resolver:
 exclude-contributors:
   - 'w3stling'
   - 'dependabot'
+exclude-labels:
+  - 'github_actions'
 template: |
   ## What's Changed
   $CHANGES

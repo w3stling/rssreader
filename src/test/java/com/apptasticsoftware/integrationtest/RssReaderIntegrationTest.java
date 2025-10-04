@@ -852,6 +852,7 @@ class RssReaderIntegrationTest {
         var list = new RssReader()
                 // Disable content:encoded mapping to be able to test dc:content mapping
                 .addItemExtension("content:encoded", (i, s) -> {})
+                .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36")
                 .read("https://www.techradar.com/rss")
                 .collect(Collectors.toList());
         assertFalse(list.isEmpty());
