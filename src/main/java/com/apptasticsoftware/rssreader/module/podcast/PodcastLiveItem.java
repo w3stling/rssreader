@@ -165,11 +165,11 @@ public class PodcastLiveItem {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PodcastLiveItem that = (PodcastLiveItem) o;
-        return Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getStartTime(), that.getStartTime()) && Objects.equals(getEndTime(), that.getEndTime()) && Objects.equals(getPodcastSeason(), that.getPodcastSeason()) && Objects.equals(getPodcastEpisode(), that.getPodcastEpisode()) && Objects.equals(getPodcastChapters(), that.getPodcastChapters()) && Objects.equals(getPodcastImages(), that.getPodcastImages()) && Objects.equals(getPodcastSoundbites(), that.getPodcastSoundbites()) && Objects.equals(getPodcastTranscripts(), that.getPodcastTranscripts()) && Objects.equals(getPodcastPersons(), that.getPodcastPersons()) && Objects.equals(getPodcastAlternateEnclosures(), that.getPodcastAlternateEnclosures()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastSocialInteracts(), that.getPodcastSocialInteracts());
+        return Objects.equals(getStatus(), that.getStatus()) && Objects.equals(getStartTime(), that.getStartTime()) && Objects.equals(getEndTime(), that.getEndTime()) && Objects.equals(getPodcastSeason(), that.getPodcastSeason()) && Objects.equals(getPodcastEpisode(), that.getPodcastEpisode()) && Objects.equals(getPodcastChapters(), that.getPodcastChapters()) && Objects.equals(getPodcastImages(), that.getPodcastImages()) && Objects.equals(getPodcastSoundbites(), that.getPodcastSoundbites()) && Objects.equals(getPodcastTranscripts(), that.getPodcastTranscripts()) && Objects.equals(getPodcastPersons(), that.getPodcastPersons()) && Objects.equals(getPodcastAlternateEnclosures(), that.getPodcastAlternateEnclosures()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastSocialInteracts(), that.getPodcastSocialInteracts()) && Objects.equals(getEnclosures(), that.getEnclosures());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStatus(), getStartTime(), getEndTime(), getPodcastSeason(), getPodcastEpisode(), getPodcastChapters(), getPodcastImages(), getPodcastSoundbites(), getPodcastTranscripts(), getPodcastPersons(), getPodcastAlternateEnclosures(), getPodcastValues(), getPodcastSocialInteracts());
+        return Objects.hash(getStatus(), getStartTime(), getEndTime(), getPodcastSeason(), getPodcastEpisode(), getPodcastChapters(), getPodcastImages(), getPodcastSoundbites(), getPodcastTranscripts(), getPodcastPersons(), getPodcastAlternateEnclosures(), getPodcastValues(), getPodcastSocialInteracts(), getEnclosures());
     }
 }
