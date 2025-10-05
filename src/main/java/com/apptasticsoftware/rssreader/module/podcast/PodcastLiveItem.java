@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.Enclosure;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class PodcastLiveItem {
     private List<PodcastAlternateEnclosure> podcastAlternateEnclosures;
     private List<PodcastValue> podcastValues;
     private List<PodcastSocialInteract> podcastSocialInteracts;
+    private List<Enclosure> enclosures;
 
     public String getStatus() {
         return status;
@@ -145,6 +148,17 @@ public class PodcastLiveItem {
             podcastSocialInteracts = new ArrayList<>();
         }
         podcastSocialInteracts.add(podcastSocialInteract);
+    }
+
+    public List<Enclosure> getEnclosures() {
+        return emptyListIfNull(enclosures);
+    }
+
+    public void addEnclosure(Enclosure enclosure) {
+        if (enclosures == null) {
+            enclosures = new ArrayList<>();
+        }
+        enclosures.add(enclosure);
     }
 
     @Override
