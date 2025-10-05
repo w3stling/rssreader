@@ -41,6 +41,7 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastTranscript.class).verify();
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();
+        EqualsVerifier.simple().forClass(PodcastLiveItem.class).verify();
     }
 
     private InputStream fromFile(String fileName) {
