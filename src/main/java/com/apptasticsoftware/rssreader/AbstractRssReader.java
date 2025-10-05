@@ -78,6 +78,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private Duration requestTimeout = Duration.ofSeconds(25);
     private Duration readTimeout = Duration.ofSeconds(25);
     private final Map<String, String> headers = new HashMap<>();
+    protected final HashMap<String, Consumer<C>> onChannelTags = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
     protected final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
@@ -797,6 +798,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var elementFullPath = getElementFullPath();
 
             if (isChannelPart) {
+                onChannelTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(channel); return f; });
+                onChannelTags.computeIfPresent(getElementFullPath(), (k, f) -> { f.accept(channel); return f; });
                 // Map channel attributes
                 mapChannelAttributes(nsTagName);
                 mapChannelAttributes(elementFullPath);

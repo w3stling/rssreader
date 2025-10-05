@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.Channel;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MediaRssChannel extends Channel implements Metadata {
@@ -200,7 +201,7 @@ public class MediaRssChannel extends Channel implements Metadata {
 
     @Override
     public void addMediaPrice(MediaPrice mediaPrice) {
-        metadata.getMediaPrices();
+        metadata.addMediaPrice(mediaPrice);
     }
 
     @Override
@@ -261,5 +262,18 @@ public class MediaRssChannel extends Channel implements Metadata {
     @Override
     public void addMediaScene(MediaScene mediaScenes) {
         metadata.addMediaScene(mediaScenes);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        MediaRssChannel that = (MediaRssChannel) o;
+        return Objects.equals(metadata, that.metadata);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), metadata);
     }
 }
