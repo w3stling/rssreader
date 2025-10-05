@@ -20,6 +20,7 @@ public class PodcastChannel extends ItunesChannel {
     private String podcastMedium;
     private List<PodcastValue> podcastValues;
     private List<PodcastTrailer> podcastTrailers;
+    private List<PodcastLiveItem> podcastLiveItems;
 
     /**
      * Constructor
@@ -117,16 +118,27 @@ public class PodcastChannel extends ItunesChannel {
         podcastTrailers.add(podcastTrailer);
     }
 
+    public List<PodcastLiveItem> getPodcastLiveItems() {
+        return emptyListIfNull(podcastLiveItems);
+    }
+
+    public void addPodcastLiveItem(PodcastLiveItem podcastLiveItem) {
+        if (podcastLiveItems == null) {
+            podcastLiveItems = new ArrayList<>();
+        }
+        podcastLiveItems.add(podcastLiveItem);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         PodcastChannel that = (PodcastChannel) o;
-        return Objects.equals(getPodcastGuid(), that.getPodcastGuid()) && Objects.equals(getPodcastLicense(), that.getPodcastLicense()) && Objects.equals(getPodcastLocked(), that.getPodcastLocked()) && Objects.equals(getPodcastBlocks(), that.getPodcastBlocks()) && Objects.equals(getPodcastFundings(), that.getPodcastFundings()) && Objects.equals(podcastLocationsPodcast, that.podcastLocationsPodcast) && Objects.equals(getPodcastMedium(), that.getPodcastMedium()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastTrailers(), that.getPodcastTrailers());
+        return Objects.equals(getPodcastGuid(), that.getPodcastGuid()) && Objects.equals(getPodcastLicense(), that.getPodcastLicense()) && Objects.equals(getPodcastLocked(), that.getPodcastLocked()) && Objects.equals(getPodcastBlocks(), that.getPodcastBlocks()) && Objects.equals(getPodcastFundings(), that.getPodcastFundings()) && Objects.equals(podcastLocationsPodcast, that.podcastLocationsPodcast) && Objects.equals(getPodcastMedium(), that.getPodcastMedium()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastTrailers(), that.getPodcastTrailers()) && Objects.equals(getPodcastLiveItems(), that.getPodcastLiveItems());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getPodcastGuid(), getPodcastLicense(), getPodcastLocked(), getPodcastBlocks(), getPodcastFundings(), podcastLocationsPodcast, getPodcastMedium(), getPodcastValues(), getPodcastTrailers());
+        return Objects.hash(super.hashCode(), getPodcastGuid(), getPodcastLicense(), getPodcastLocked(), getPodcastBlocks(), getPodcastFundings(), podcastLocationsPodcast, getPodcastMedium(), getPodcastValues(), getPodcastTrailers(), getPodcastLiveItems());
     }
 }
