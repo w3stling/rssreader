@@ -12,6 +12,7 @@ public class PodcastValue {
     private String method;
     private Double suggested;
     private List<PodcastValueRecipient> valueRecipients;
+    private List<PodcastValueTimeSplit> valueTimeSplits;
 
     public String getType() {
         return type;
@@ -48,15 +49,26 @@ public class PodcastValue {
         valueRecipients.add(valueRecipient);
     }
 
+    public List<PodcastValueTimeSplit> getValueTimeSplits() {
+        return emptyListIfNull(valueTimeSplits);
+    }
+
+    public void addValueTimeSplit(PodcastValueTimeSplit valueTimeSplit) {
+        if (valueTimeSplits == null) {
+            valueTimeSplits = new ArrayList<>();
+        }
+        valueTimeSplits.add(valueTimeSplit);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PodcastValue that = (PodcastValue) o;
-        return Objects.equals(getType(), that.getType()) && Objects.equals(getMethod(), that.getMethod()) && Objects.equals(getSuggested(), that.getSuggested()) && Objects.equals(getValueRecipients(), that.getValueRecipients());
+        return Objects.equals(getType(), that.getType()) && Objects.equals(getMethod(), that.getMethod()) && Objects.equals(getSuggested(), that.getSuggested()) && Objects.equals(getValueRecipients(), that.getValueRecipients()) && Objects.equals(getValueTimeSplits(), that.getValueTimeSplits());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getMethod(), getSuggested(), getValueRecipients());
+        return Objects.hash(getType(), getMethod(), getSuggested(), getValueRecipients(), getValueTimeSplits());
     }
 }

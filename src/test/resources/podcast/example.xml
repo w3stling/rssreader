@@ -47,6 +47,13 @@
         <podcast:value type="lightning" method="keysend" suggested="0.00000005000">
             <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="99" />
             <podcast:valueRecipient name="hosting company" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="1" />
+            <podcast:valueTimeSplit startTime="60" duration="237" remotePercentage="95">
+                <podcast:remoteItem itemGuid="https://podcastindex.org/podcast/4148683#1" feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b" medium="music" />
+            </podcast:valueTimeSplit>
+            <podcast:valueTimeSplit startTime="367" duration="246">
+                <podcast:valueRecipient name="Alice (Podcaster)" type="node" address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52" split="85" />
+                <podcast:valueRecipient name="Bobjim (Guest)" type="node" address="032f4ffbbafffbe51726ad3c164a3d0d37ec27bc67b29a159b0f49ae8ac21b8508" split="10" />
+            </podcast:valueTimeSplit>
         </podcast:value>
 
         <podcast:trailer pubdate="Thu, 01 Apr 2021 08:00:00 EST" url="https://example.org/trailers/teaser" length="12345678" type="audio/mp3">Coming April 1st, 2021</podcast:trailer>
@@ -118,6 +125,13 @@
                 <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="49" />
                 <podcast:valueRecipient name="hosting company" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="1" />
                 <podcast:valueRecipient name="Gigi (Guest)" type="node" address="02e12fea95f576a680ec1938b7ed98ef0855eadeced493566877d404e404bfbf52" split="50" />
+                <podcast:valueTimeSplit startTime="60" duration="237" remotePercentage="95">
+                    <podcast:remoteItem itemGuid="https://podcastindex.org/podcast/4148683#1" feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b" medium="music" />
+                </podcast:valueTimeSplit>
+                <podcast:valueTimeSplit startTime="367" duration="246">
+                    <podcast:valueRecipient name="Alice (Podcaster)" type="node" address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52" split="85" />
+                    <podcast:valueRecipient name="Bobjim (Guest)" type="node" address="032f4ffbbafffbe51726ad3c164a3d0d37ec27bc67b29a159b0f49ae8ac21b8508" split="10" />
+                </podcast:valueTimeSplit>
             </podcast:value>
 
             <podcast:socialInteract priority="1" uri="https://podcastindex.social/web/@dave/108013847520053258" protocol="activitypub" accountId="@dave" accountUrl="https://podcastindex.social/web/@dave" />
