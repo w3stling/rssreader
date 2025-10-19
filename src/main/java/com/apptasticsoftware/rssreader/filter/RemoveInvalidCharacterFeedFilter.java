@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
  * that any characters not allowed in XML 1.0 are filtered out before parsing.
  * </p>
  */
-public class RemoveInvalidCharacterFilter implements FeedFilter {
+public class RemoveInvalidCharacterFeedFilter implements FeedFilter {
 
     /**
      * Filters the provided XML feed stream by removing invalid XML characters.
