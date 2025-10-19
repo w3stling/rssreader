@@ -117,6 +117,7 @@ public class RemoveInvalidCharacterFeedFilter implements FeedFilter {
          *
          * @throws IOException if an I/O error occurs
          */
+        @SuppressWarnings("java:S135")
         private void refillBuffer() throws IOException {
             byteBuffer.reset();
             int c;
