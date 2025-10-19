@@ -1,6 +1,7 @@
 package com.apptasticsoftware.integrationtest;
 
 import com.apptasticsoftware.rssreader.*;
+import com.apptasticsoftware.rssreader.filter.RemoveInvalidCharacterFeedFilter;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -597,6 +598,16 @@ class RssReaderIntegrationTest {
                 .sorted()
                 .collect(Collectors.toList());
         assertTrue(list.size() > 10);
+    }
+
+    @Test
+    void testBadXmlCharacter0x6() {
+        var fileInputSteam = fromFile("rss-invalid-xml-character-0x6.xml");
+        var list = new RssReader()
+                .addFeedFilter(new RemoveInvalidCharacterFeedFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+        assertEquals(25, list.size());
     }
 
     @Test
