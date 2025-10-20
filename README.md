@@ -85,8 +85,8 @@ For example, to remove invalid XML characters from a feed before parsing:
 ```java
 RssReader reader = new RssReader();
 List<Item> items = reader.addFeedFilter(new InvalidXmlCharacterFilter())
-                        .read(URL)
-                        .collect(Collectors.toList());
+                         .read(URL)
+                         .collect(Collectors.toList());
 ```
 
 ### Podcast / iTunes module
