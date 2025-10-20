@@ -78,6 +78,16 @@ For sorting on updated date instead of publication date
 .sorted(ItemComparator.oldestUpdatedItemFirst())
 ```
 
+### Feed Filters
+Feed filters allow you to clean or transform RSS feed data before it is parsed. This is useful for handling malformed content, removing invalid characters, or applying custom preprocessing logic.
+Filters are applied to the raw `InputStream` of the feed, allowing for flexible transformations before parsing begins. Each filter must implement the `FeedFilter` interface.
+For example, to remove invalid XML characters from a feed before parsing:
+```java
+RssReader reader = new RssReader();
+List<Item> items = reader.addFeedFilter(new InvalidXmlCharacterFilter())
+                        .read(URL)
+                        .collect(Collectors.toList());
+```
 
 ### Podcast / iTunes module
 Use iTunes module for extracting data from [Podcast][4] specific tags and attributes.
