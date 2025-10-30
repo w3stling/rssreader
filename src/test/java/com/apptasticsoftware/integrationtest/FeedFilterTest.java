@@ -21,6 +21,18 @@ class FeedFilterTest {
         assertEquals(25, list.size());
     }
 
+    @Test
+    void testInvalidXmlEscape() {
+        var fileInputSteam = fromFile("rss-invalid-xml-escape.xml");
+        var list = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+
+        assertEquals(10, list.size());
+        assertEquals("Myrskylän kunta", list.get(0).getChannel().getTitle());
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }

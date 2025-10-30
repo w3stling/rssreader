@@ -3,6 +3,8 @@ package com.apptasticsoftware.rssreader.filter;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A {@link FeedFilter} implementation that removes invalid XML characters from the feed stream.
@@ -38,12 +40,29 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
      * and surrogates and other forbidden code points.</p>
      */
     private static class StreamingXmlFilterInputStream extends InputStream {
+        private static final Map<String, String> HTML_ENTITIES;
+        static {
+            HTML_ENTITIES = new HashMap<>();
+            HTML_ENTITIES.put("auml", "&#228;");  // ä
+            HTML_ENTITIES.put("ouml", "&#246;");  // ö
+            HTML_ENTITIES.put("uuml", "&#252;");  // ü
+            HTML_ENTITIES.put("Auml", "&#196;");  // Ä
+            HTML_ENTITIES.put("Ouml", "&#214;");  // Ö
+            HTML_ENTITIES.put("Uuml", "&#220;");  // Ü
+            HTML_ENTITIES.put("aacute", "&#225;"); // á
+            HTML_ENTITIES.put("eacute", "&#233;"); // é
+            HTML_ENTITIES.put("iacute", "&#237;"); // í
+            HTML_ENTITIES.put("oacute", "&#243;"); // ó
+            HTML_ENTITIES.put("uacute", "&#250;"); // ú
+        }
 
         private final Reader reader;
         private final Charset charset;
         private final ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream(1024);
         private byte[] buffer = new byte[0];
         private int bufferPos = 0;
+        private final StringBuilder entityBuffer = new StringBuilder();
+        private boolean inEntity = false;
 
         /**
          * Constructs a new {@code StreamingXmlFilterInputStream} with UTF-8 encoding.
@@ -121,38 +140,54 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
         private void refillBuffer() throws IOException {
             byteBuffer.reset();
             int c;
-            // Read chars until we have some bytes to output or EOF
+            entityBuffer.setLength(0);
+
             while (true) {
                 c = reader.read();
                 if (c == -1) {
+                    if (inEntity) {
+                        // Write any incomplete entity as-is
+                        writeStringToBuffer(entityBuffer.toString());
+                    }
                     break; // EOF
                 }
-                char ch = (char) c;
-                if (isValidXmlChar(ch)) {
-                    // Convert char to bytes and write to buffer
-                    byte[] bytes = String.valueOf(ch).getBytes(charset);
-                    byteBuffer.write(bytes);
-                    // After writing at least one char, break to serve bytes first
-                    break;
-                }
-                // else skip invalid char silently
-            }
 
-            // Also read more valid chars immediately after to reduce calls
-            while (true) {
-                c = reader.read();
-                if (c == -1) break;
                 char ch = (char) c;
-                if (isValidXmlChar(ch)) {
-                    byte[] bytes = String.valueOf(ch).getBytes(charset);
-                    byteBuffer.write(bytes);
-                } else {
+
+                if (inEntity) {
+                    entityBuffer.append(ch);
+                    if (ch == ';') {
+                        inEntity = false;
+                        String entity = entityBuffer.substring(1, entityBuffer.length() - 1);
+                        String replacement = HTML_ENTITIES.get(entity);
+                        if (replacement != null) {
+                            writeStringToBuffer(replacement);
+                        } else {
+                            // If we don't recognize the entity, write it as-is
+                            writeStringToBuffer(entityBuffer.toString());
+                        }
+                        entityBuffer.setLength(0);
+                    }
+                } else if (ch == '&') {
+                    inEntity = true;
+                    entityBuffer.setLength(0);
+                    entityBuffer.append(ch);
+                } else if (isValidXmlChar(ch)) {
+                    writeStringToBuffer(String.valueOf(ch));
+                }
+
+                if (byteBuffer.size() > 0) {
                     break;
                 }
             }
 
             buffer = byteBuffer.toByteArray();
             bufferPos = 0;
+        }
+
+        private void writeStringToBuffer(String str) throws IOException {
+            byte[] bytes = str.getBytes(charset);
+            byteBuffer.write(bytes);
         }
 
         /**
