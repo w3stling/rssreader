@@ -143,7 +143,7 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
          *
          * @throws IOException if an I/O error occurs
          */
-        @SuppressWarnings("java:S135")
+        @SuppressWarnings({"java:S135", "java:S3776"})
         private void refillBuffer() throws IOException {
             byteBuffer.reset();
             int c;
