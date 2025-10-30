@@ -41,6 +41,9 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
      */
     private static class StreamingXmlFilterInputStream extends InputStream {
         private static final Map<String, String> HTML_ENTITIES;
+        private static final String CDATA_START = "<![CDATA[";
+        private static final String CDATA_END = "]]>";
+
         static {
             HTML_ENTITIES = new HashMap<>();
             HTML_ENTITIES.put("auml", "&#228;");  // ä
@@ -62,7 +65,11 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
         private byte[] buffer = new byte[0];
         private int bufferPos = 0;
         private final StringBuilder entityBuffer = new StringBuilder();
+        private final StringBuilder cdataBuffer = new StringBuilder();
         private boolean inEntity = false;
+        private boolean inCDATA = false;
+        private int cdataMatchPos = 0;
+        private int cdataEndMatchPos = 0;
 
         /**
          * Constructs a new {@code StreamingXmlFilterInputStream} with UTF-8 encoding.
@@ -145,35 +152,63 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
             while (true) {
                 c = reader.read();
                 if (c == -1) {
-                    if (inEntity) {
+                    if (inEntity && !inCDATA) {
                         // Write any incomplete entity as-is
                         writeStringToBuffer(entityBuffer.toString());
+                    }
+                    if (cdataBuffer.length() > 0) {
+                        // Write any incomplete CDATA buffer
+                        writeStringToBuffer(cdataBuffer.toString());
                     }
                     break; // EOF
                 }
 
                 char ch = (char) c;
 
-                if (inEntity) {
-                    entityBuffer.append(ch);
-                    if (ch == ';') {
-                        inEntity = false;
-                        String entity = entityBuffer.substring(1, entityBuffer.length() - 1);
-                        String replacement = HTML_ENTITIES.get(entity);
-                        if (replacement != null) {
-                            writeStringToBuffer(replacement);
-                        } else {
-                            // If we don't recognize the entity, write it as-is
-                            writeStringToBuffer(entityBuffer.toString());
-                        }
-                        entityBuffer.setLength(0);
+                // Always filter out invalid XML characters, regardless of context
+                if (!isValidXmlChar(ch)) {
+                    continue;
+                }
+
+                // Check for CDATA section start
+                if (!inCDATA && ch == CDATA_START.charAt(cdataMatchPos)) {
+                    cdataMatchPos++;
+                    cdataBuffer.append(ch);
+                    if (cdataMatchPos == CDATA_START.length()) {
+                        inCDATA = true;
+                        cdataMatchPos = 0;
+                        writeStringToBuffer(cdataBuffer.toString());
+                        cdataBuffer.setLength(0);
+                        continue;
                     }
-                } else if (ch == '&') {
-                    inEntity = true;
-                    entityBuffer.setLength(0);
-                    entityBuffer.append(ch);
-                } else if (isValidXmlChar(ch)) {
-                    writeStringToBuffer(String.valueOf(ch));
+                } else if (!inCDATA && cdataMatchPos > 0) {
+                    // Not a CDATA start, write buffered content and current char
+                    writeStringToBuffer(cdataBuffer.toString());
+                    cdataBuffer.setLength(0);
+                    cdataMatchPos = 0;
+                    processRegularChar(ch);
+                } else if (inCDATA) {
+                    // Check for CDATA end
+                    if (ch == CDATA_END.charAt(cdataEndMatchPos)) {
+                        cdataEndMatchPos++;
+                        cdataBuffer.append(ch);
+                        if (cdataEndMatchPos == CDATA_END.length()) {
+                            inCDATA = false;
+                            cdataEndMatchPos = 0;
+                            writeStringToBuffer(cdataBuffer.toString());
+                            cdataBuffer.setLength(0);
+                        }
+                    } else {
+                        if (cdataEndMatchPos > 0) {
+                            cdataBuffer.append(ch);
+                            cdataEndMatchPos = 0;
+                        } else {
+                            // Inside CDATA, write character as-is (but still validate XML char)
+                            writeStringToBuffer(String.valueOf(ch));
+                        }
+                    }
+                } else {
+                    processRegularChar(ch);
                 }
 
                 if (byteBuffer.size() > 0) {
@@ -183,6 +218,30 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
 
             buffer = byteBuffer.toByteArray();
             bufferPos = 0;
+        }
+
+        private void processRegularChar(char ch) throws IOException {
+            if (inEntity) {
+                entityBuffer.append(ch);
+                if (ch == ';') {
+                    inEntity = false;
+                    String entity = entityBuffer.substring(1, entityBuffer.length() - 1);
+                    String replacement = HTML_ENTITIES.get(entity);
+                    if (replacement != null) {
+                        writeStringToBuffer(replacement);
+                    } else {
+                        // If we don't recognize the entity, write it as-is
+                        writeStringToBuffer(entityBuffer.toString());
+                    }
+                    entityBuffer.setLength(0);
+                }
+            } else if (ch == '&') {
+                inEntity = true;
+                entityBuffer.setLength(0);
+                entityBuffer.append(ch);
+            } else if (isValidXmlChar(ch)) {
+                writeStringToBuffer(String.valueOf(ch));
+            }
         }
 
         private void writeStringToBuffer(String str) throws IOException {
