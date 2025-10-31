@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Mapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +26,7 @@ import java.util.Objects;
  * }
  */
 public class MediaGroup extends MetadataImpl {
-    private final List<MediaContent> mediaContents = new ArrayList<>();
+    private List<MediaContent> mediaContents;
 
     /**
      * Get the media content
@@ -32,7 +34,7 @@ public class MediaGroup extends MetadataImpl {
      * @return media content
      */
     public List<MediaContent> getMediaContents() {
-        return mediaContents;
+        return Mapper.emptyListIfNull(mediaContents);
     }
 
     /**
@@ -41,6 +43,9 @@ public class MediaGroup extends MetadataImpl {
      * @param mediaContent media content
      */
     public void addMediaContent(MediaContent mediaContent) {
+        if (mediaContents == null) {
+            mediaContents = new ArrayList<>();
+        }
         mediaContents.add(mediaContent);
     }
 

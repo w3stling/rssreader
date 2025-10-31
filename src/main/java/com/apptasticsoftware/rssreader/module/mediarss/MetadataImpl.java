@@ -1,36 +1,38 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Mapper;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 public class MetadataImpl implements Metadata {
-    private final List<MediaRating> mediaRatings = new ArrayList<>();
+    private List<MediaRating> mediaRatings;
     private MediaTitle mediaTitle;
     private MediaDescription mediaDescription;
-    private final List<String> mediaKeywords = new ArrayList<>();
-    private final List<MediaThumbnail> mediaThumbnails = new ArrayList<>();
-    private final List<MediaCategory> mediaCategories = new ArrayList<>();
-    private final List<MediaHash> mediaHashes = new ArrayList<>();
+    private List<String> mediaKeywords;
+    private List<MediaThumbnail> mediaThumbnails;
+    private List<MediaCategory> mediaCategories;
+    private List<MediaHash> mediaHashes;
     private MediaPlayer mediaPlayer;
-    private final List<MediaCredit> mediaCredits = new ArrayList<>();
+    private List<MediaCredit> mediaCredits;
     private MediaCopyright mediaCopyright;
-    private final List<MediaText> mediaTexts = new ArrayList<>();
-    private final List<MediaRestriction> mediaRestrictions = new ArrayList<>();
+    private List<MediaText> mediaTexts;
+    private List<MediaRestriction> mediaRestrictions;
     private MediaCommunity mediaCommunity;
-    private final List<String> mediaComments = new ArrayList<>();
+    private List<String> mediaComments;
     private MediaEmbed mediaEmbed;
-    private final List<String> mediaResponses = new ArrayList<>();
-    private final List<String> mediaBackLinks = new ArrayList<>();
+    private List<String> mediaResponses;
+    private List<String> mediaBackLinks;
     private MediaStatus mediaStatus;
-    private final List<MediaPrice> mediaPrices = new ArrayList<>();
-    private final List<MediaLicense> mediaLicenses = new ArrayList<>();
-    private final List<MediaSubTitle> mediaSubTitles = new ArrayList<>();
-    private final List<MediaPeerLink> mediaPeerLinks = new ArrayList<>();
-    private final List<MediaLocation> mediaLocations = new ArrayList<>();
+    private List<MediaPrice> mediaPrices;
+    private List<MediaLicense> mediaLicenses;
+    private List<MediaSubTitle> mediaSubTitles;
+    private List<MediaPeerLink> mediaPeerLinks;
+    private List<MediaLocation> mediaLocations;
     private MediaRights mediaRights;
-    private final List<MediaScene> mediaScenes = new ArrayList<>();
+    private List<MediaScene> mediaScenes;
 
     /**
      * Gets a list of media rating that declares the permissible audience. If this element is not included,
@@ -40,7 +42,7 @@ public class MetadataImpl implements Metadata {
      * @return media rating or empty if not set
      */
     public List<MediaRating> getMediaRatings() {
-        return mediaRatings;
+        return Mapper.emptyListIfNull(mediaRatings);
     }
 
     /**
@@ -51,6 +53,9 @@ public class MetadataImpl implements Metadata {
      * @param mediaRating media rating
      */
     public void addMediaRating(MediaRating mediaRating) {
+        if (mediaRatings == null) {
+            mediaRatings = new ArrayList<>();
+        }
         this.mediaRatings.add(mediaRating);
     }
 
@@ -106,7 +111,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<String> getMediaKeywords() {
-        return mediaKeywords;
+        return Mapper.emptyListIfNull(mediaKeywords);
     }
 
     /**
@@ -117,6 +122,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaKeyword(String mediaKeyword) {
+        if (mediaKeywords == null) {
+            mediaKeywords = new ArrayList<>();
+        }
         this.mediaKeywords.add(mediaKeyword);
     }
 
@@ -128,7 +136,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaThumbnail> getMediaThumbnails() {
-        return mediaThumbnails;
+        return Mapper.emptyListIfNull(mediaThumbnails);
     }
 
     /**
@@ -139,6 +147,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaThumbnail(MediaThumbnail mediaThumbnail) {
+        if (mediaThumbnails == null) {
+            mediaThumbnails = new ArrayList<>();
+        }
         this.mediaThumbnails.add(mediaThumbnail);
     }
 
@@ -150,7 +161,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaCategory> getMediaCategories() {
-        return mediaCategories;
+        return Mapper.emptyListIfNull(mediaCategories);
     }
 
     /**
@@ -161,6 +172,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaCategory(MediaCategory mediaCategory) {
+        if (mediaCategories == null) {
+            mediaCategories = new ArrayList<>();
+        }
         mediaCategories.add(mediaCategory);
     }
 
@@ -172,7 +186,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaHash> getMediaHashes() {
-        return mediaHashes;
+        return Mapper.emptyListIfNull(mediaHashes);
     }
 
     /**
@@ -183,6 +197,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaHash(MediaHash mediaHash) {
+        if (mediaHashes == null) {
+            mediaHashes = new ArrayList<>();
+        }
         mediaHashes.add(mediaHash);
     }
 
@@ -214,7 +231,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaCredit> getMediaCredits() {
-        return mediaCredits;
+        return Mapper.emptyListIfNull(mediaCredits);
     }
 
     /**
@@ -225,6 +242,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaCredit(MediaCredit mediaCredit) {
+        if (mediaCredits == null) {
+            mediaCredits = new ArrayList<>();
+        }
         mediaCredits.add(mediaCredit);
     }
 
@@ -258,7 +278,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaText> getMediaTexts() {
-        return mediaTexts;
+        return Mapper.emptyListIfNull(mediaTexts);
     }
 
     /**
@@ -269,6 +289,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaText(MediaText mediaText) {
+        if (mediaTexts == null) {
+            mediaTexts = new ArrayList<>();
+        }
         mediaTexts.add(mediaText);
     }
 
@@ -280,7 +303,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaRestriction> getMediaRestrictions() {
-        return mediaRestrictions;
+        return Mapper.emptyListIfNull(mediaRestrictions);
     }
 
     /**
@@ -291,6 +314,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaRestriction(MediaRestriction mediaRestriction) {
+        if (mediaRestrictions == null) {
+            mediaRestrictions = new ArrayList<>();
+        }
         this.mediaRestrictions.add(mediaRestriction);
     }
 
@@ -324,7 +350,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<String> getMediaComments() {
-        return mediaComments;
+        return Mapper.emptyListIfNull(mediaComments);
     }
 
     /**
@@ -335,6 +361,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaComment(String mediaComment) {
+        if (mediaComments == null) {
+            mediaComments = new ArrayList<>();
+        }
         this.mediaComments.add(mediaComment);
     }
 
@@ -368,7 +397,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<String> getMediaResponses() {
-        return mediaResponses;
+        return Mapper.emptyListIfNull(mediaResponses);
     }
 
     /**
@@ -379,6 +408,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaResponse(String mediaResponse) {
+        if (mediaResponses == null) {
+            mediaResponses = new ArrayList<>();
+        }
         this.mediaResponses.add(mediaResponse);
     }
 
@@ -390,7 +422,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<String> getMediaBackLinks() {
-        return mediaBackLinks;
+        return Mapper.emptyListIfNull(mediaBackLinks);
     }
 
     /**
@@ -401,6 +433,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaBackLink(String mediaBackLink) {
+        if (mediaBackLinks == null) {
+            mediaBackLinks = new ArrayList<>();
+        }
         this.mediaBackLinks.add(mediaBackLink);
     }
 
@@ -434,7 +469,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaPrice> getMediaPrices() {
-        return mediaPrices;
+        return Mapper.emptyListIfNull(mediaPrices);
     }
 
     /**
@@ -445,6 +480,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaPrice(MediaPrice mediaPrice) {
+        if (mediaPrices == null) {
+            mediaPrices = new ArrayList<>();
+        }
         mediaPrices.add(mediaPrice);
     }
 
@@ -456,7 +494,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaLicense> getMediaLicenses() {
-        return mediaLicenses;
+        return Mapper.emptyListIfNull(mediaLicenses);
     }
 
     /**
@@ -467,6 +505,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaLicense(MediaLicense mediaLicense) {
+        if (mediaLicenses == null) {
+            mediaLicenses = new ArrayList<>();
+        }
         this.mediaLicenses.add(mediaLicense);
     }
 
@@ -478,7 +519,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaSubTitle> getMediaSubTitles() {
-        return mediaSubTitles;
+        return Mapper.emptyListIfNull(mediaSubTitles);
     }
 
     /**
@@ -489,6 +530,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaSubTitle(MediaSubTitle mediaSubTitle) {
+        if (mediaSubTitles == null) {
+            mediaSubTitles = new ArrayList<>();
+        }
         this.mediaSubTitles.add(mediaSubTitle);
     }
 
@@ -500,7 +544,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaPeerLink> getMediaPeerLinks() {
-        return mediaPeerLinks;
+        return Mapper.emptyListIfNull(mediaPeerLinks);
     }
 
     /**
@@ -511,6 +555,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaPeerLink(MediaPeerLink mediaPeerLink) {
+        if (mediaPeerLinks == null) {
+            mediaPeerLinks = new ArrayList<>();
+        }
         this.mediaPeerLinks.add(mediaPeerLink);
     }
 
@@ -522,7 +569,7 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaLocation> getMediaLocations() {
-        return mediaLocations;
+        return Mapper.emptyListIfNull(mediaLocations);
     }
 
     /**
@@ -533,6 +580,9 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public void addMediaLocation(MediaLocation mediaLocation) {
+        if (mediaLocations == null) {
+            mediaLocations = new ArrayList<>();
+        }
         this.mediaLocations.add(mediaLocation);
     }
 
@@ -566,18 +616,21 @@ public class MetadataImpl implements Metadata {
      */
     @Override
     public List<MediaScene> getMediaScenes() {
-        return mediaScenes;
+        return Mapper.emptyListIfNull(mediaScenes);
     }
 
     /**
      * Adds a scene to this item.
      * Use this to associate scene-specific information, such as title, description, and time offsets, with the media object.
      *
-     * @param mediaScenes the scene to add
+     * @param mediaScene the scene to add
      */
     @Override
-    public void addMediaScene(MediaScene mediaScenes) {
-        this.mediaScenes.add(mediaScenes);
+    public void addMediaScene(MediaScene mediaScene) {
+        if (mediaScenes == null) {
+            this.mediaScenes = new ArrayList<>();
+        }
+        this.mediaScenes.add(mediaScene);
     }
 
     @Override

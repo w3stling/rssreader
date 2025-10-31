@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.Item;
+import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.Optional;
  * Class representing the media rss item.
  */
 public class MediaRssItem extends Item implements Metadata {
-    private final List<MediaContent> mediaContents = new ArrayList<>();
+    private List<MediaContent> mediaContents;
     private MediaGroup mediaGroup;
     private final Metadata metadata = new MetadataImpl();
 
@@ -55,7 +56,7 @@ public class MediaRssItem extends Item implements Metadata {
      * @return list of media content elements
      */
     public List<MediaContent> getMediaContents() {
-        return mediaContents;
+        return Mapper.emptyListIfNull(mediaContents);
     }
 
     /**
@@ -65,6 +66,9 @@ public class MediaRssItem extends Item implements Metadata {
      * @param mediaContent the media content element to add
      */
     public void addMediaContents(MediaContent mediaContent) {
+        if (mediaContents == null) {
+            mediaContents = new ArrayList<>();
+        }
         mediaContents.add(mediaContent);
     }
 

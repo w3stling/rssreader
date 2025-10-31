@@ -1,9 +1,6 @@
 package com.apptasticsoftware.rssreader.util;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -141,6 +138,20 @@ public final class Mapper {
             return Collections.emptyList();
         }
         return Collections.unmodifiableList(list);
+    }
+
+    /**
+     * Returns an empty map if the provided map is null.
+     * @param map the map to check
+     * @param <K> the type of keys in the map
+     * @param <V> the type of values in the map
+     * @return an empty map if the provided map is null, otherwise returns the provided map
+     */
+    public static <K, V> Map<K, V> emptyMapIfNull(Map<K, V> map) {
+        if (map == null) {
+            return Collections.emptyMap();
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     private static <T> boolean isNullOrEmpty(Supplier<T> getter) {

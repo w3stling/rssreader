@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Mapper;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -7,7 +9,6 @@ import java.util.Objects;
 /**
  * Sometimes player-specific embed code is needed for a player to play any video.
  * <media:embed> allows inclusion of such information in the form of key-value pairs.
- *
  * Example:
  * {@code
  * <media:embed url="http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf?ver=2.2.2"
@@ -26,7 +27,7 @@ public class MediaEmbed {
     private String url;
     private Integer width;
     private Integer height;
-    private final LinkedHashMap<String, String> params = new LinkedHashMap<>();
+    private LinkedHashMap<String, String> params;
 
     /**
      * The url of the embed code.
@@ -77,14 +78,20 @@ public class MediaEmbed {
     }
 
     public Map<String, String> getParams() {
-        return params;
+        return Mapper.emptyMapIfNull(params);
     }
 
     public void addParamName(String name) {
+        if (params == null) {
+            params = new LinkedHashMap<>();
+        }
         params.put(name, "");
     }
 
     public void addParamValue(String value) {
+        if (params == null) {
+            params = new LinkedHashMap<>();
+        }
         params.put(params.lastEntry().getKey(), value);
     }
 
