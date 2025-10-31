@@ -21,6 +21,50 @@ class FeedFilterTest {
         assertEquals(25, list.size());
     }
 
+    @Test
+    void testInvalidXmlEscapeString() {
+        var fileInputSteam = fromFile("rss-invalid-xml-escape-string.xml");
+        var list = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+
+        assertEquals(10, list.size());
+        assertEquals("Myrskylän kunta", list.get(0).getChannel().getTitle());
+    }
+
+    @Test
+    void testInvalidXmlEscapeStringExtra() {
+        var fileInputSteam = fromFile("rss-invalid-xml-escape-string-extra.xml");
+        var list = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    void testInvalidXmlEscapeStringWithinCdata() {
+        var fileInputSteam = fromFile("rss-invalid-xml-escape-string-within-cdata.xml");
+        var list = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+
+        assertEquals(1, list.size());
+        var item = list.get(0);
+
+        // Regular text should have converted entities
+        assertEquals("Regular text with ä entity should be converted",
+                item.getTitle().orElse(""));
+        // CDATA sections should preserve original entities
+        assertEquals("Text with &auml; entity inside CDATA should remain as &auml;",
+                item.getChannel().getDescription());
+        assertEquals("Another CDATA section with &auml; and &ouml; entities",
+                item.getDescription().orElse(""));
+    }
+
     private InputStream fromFile(String fileName) {
         return getClass().getClassLoader().getResourceAsStream(fileName);
     }
