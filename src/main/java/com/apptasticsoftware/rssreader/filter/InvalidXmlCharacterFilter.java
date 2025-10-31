@@ -44,6 +44,7 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
         private static final Map<String, String> HTML_ENTITIES;
         private static final String CDATA_START = "<![CDATA[";
         private static final String CDATA_END = "]]>";
+        private static final String QUOTE_ESCAPE = "&quot;";
 
         static {
             HTML_ENTITIES = new HashMap<>();
@@ -51,12 +52,12 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
             HTML_ENTITIES.put("amp", "&amp;");
             HTML_ENTITIES.put("lt", "&lt;");
             HTML_ENTITIES.put("gt", "&gt;");
-            HTML_ENTITIES.put("quot", "&quot;");
             HTML_ENTITIES.put("apos", "&apos;");
+            HTML_ENTITIES.put("quot", QUOTE_ESCAPE);
             // Special quotes and typographic entities
-            HTML_ENTITIES.put("ldquo", "&quot;");
-            HTML_ENTITIES.put("rdquo", "&quot;");
-            HTML_ENTITIES.put("rsquo", "&quot;");
+            HTML_ENTITIES.put("ldquo", QUOTE_ESCAPE);
+            HTML_ENTITIES.put("rdquo", QUOTE_ESCAPE);
+            HTML_ENTITIES.put("rsquo", QUOTE_ESCAPE);
             // Common special characters
             HTML_ENTITIES.put("auml", "&#228;");  // ä
             HTML_ENTITIES.put("ouml", "&#246;");  // ö
