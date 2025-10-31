@@ -23,12 +23,11 @@
  */
 package com.apptasticsoftware.rssreader;
 
-import com.apptasticsoftware.rssreader.internal.StreamUtil;
+import com.apptasticsoftware.rssreader.filter.FeedFilter;
+import com.apptasticsoftware.rssreader.internal.*;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.Mapper;
-import com.apptasticsoftware.rssreader.internal.DaemonThreadFactory;
-import com.apptasticsoftware.rssreader.internal.XMLInputFactorySecurity;
 
 import javax.net.ssl.SSLContext;
 import javax.xml.stream.XMLInputFactory;
@@ -74,6 +73,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private final HttpClient httpClient;
     private DateTimeParser dateTimeParser = Default.getDateTimeParser();
     private String userAgent = "";
+    private List<FeedFilter> feedFilters;
     private Duration connectionTimeout = Duration.ofSeconds(25);
     private Duration requestTimeout = Duration.ofSeconds(25);
     private Duration readTimeout = Duration.ofSeconds(25);
@@ -280,7 +280,19 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     /**
-     * Adds a http header to the http client.
+     * Adds a feed filter to process the feed input stream before parsing.
+     * @return updated RSSReader.
+     */
+    public AbstractRssReader<C, I> addFeedFilter(FeedFilter feedFilter) {
+        if (feedFilters == null) {
+            feedFilters = new ArrayList<>();
+        }
+        feedFilters.add(feedFilter);
+        return this;
+    }
+
+    /**
+     * Adds an http header to the http client.
      * @param key the key name of the header.
      * @param value the value of the header.
      * @return updated RSSReader.
@@ -649,6 +661,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 var xmlInputFactory = XMLInputFactorySecurity.hardenFactory(XMLInputFactory.newInstance());
                 xmlInputFactory.setProperty(XMLInputFactory.IS_COALESCING, true);
                 xmlInputFactory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
+
+                for (FeedFilter feedFilter : Optional.ofNullable(feedFilters).orElse(List.of())) {
+                    is = feedFilter.filter(is);
+                }
 
                 reader = xmlInputFactory.createXMLStreamReader(is);
                 cleanable = CLEANER.register(this, new CleaningAction(reader, is));
