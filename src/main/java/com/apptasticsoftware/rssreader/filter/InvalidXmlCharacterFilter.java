@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A {@link FeedFilter} implementation that removes invalid XML characters from the feed stream.
@@ -243,12 +244,8 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                     } else {
                         String entityName = entity.substring(1, entity.length() - 1);
                         String replacement = HTML_ENTITIES.get(entityName);
-                        if (replacement != null) {
-                            writeStringToBuffer(replacement);
-                        } else {
-                            // If we don't recognize the entity, write it as-is
-                            writeStringToBuffer(entity);
-                        }
+                        // If we don't recognize the entity, write it as-is
+                        writeStringToBuffer(Objects.requireNonNullElse(replacement, entity));
                     }
                     entityBuffer.setLength(0);
                 }
