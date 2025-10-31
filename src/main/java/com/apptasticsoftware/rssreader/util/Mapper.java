@@ -59,7 +59,7 @@ public final class Mapper {
     }
 
     private static <T> void mapNumber(String text, Consumer<T> func, Function<String, T> convert) {
-        if (!isNullOrEmpty(text)) {
+        if (isNotNullOrEmpty(text)) {
             try {
                 func.accept(convert.apply(text));
             } catch (NumberFormatException e) {
@@ -78,7 +78,7 @@ public final class Mapper {
      * @param <T> type
      */
     public static <T> void mapIfEmpty(String text, Supplier<T> getter, Consumer<String> setter) {
-        if (isNullOrEmpty(getter) && !isNullOrEmpty(text)) {
+        if (isNullOrEmpty(getter) && isNotNullOrEmpty(text)) {
             setter.accept(text);
         }
     }
@@ -123,7 +123,7 @@ public final class Mapper {
         if (list == null) {
             return Collections.emptyList();
         }
-        return list;
+        return Collections.unmodifiableList(list);
     }
 
     private static <T> boolean isNullOrEmpty(Supplier<T> getter) {
@@ -140,5 +140,9 @@ public final class Mapper {
 
     private static boolean isNullOrEmpty(String text) {
         return text == null || text.isBlank();
+    }
+
+    private static boolean isNotNullOrEmpty(String text) {
+        return !isNullOrEmpty(text);
     }
 }

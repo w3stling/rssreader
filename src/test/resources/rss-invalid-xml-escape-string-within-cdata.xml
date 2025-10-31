@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Test CDATA</title>
+        <description><![CDATA[Text with &auml; entity inside CDATA should remain as &auml;]]></description>
+        <item>
+            <title>Regular text with &auml; entity should be converted</title>
+            <description><![CDATA[Another CDATA section with &auml; and &ouml; entities]]></description>
+        </item>
+    </channel>
+</rss>
+

@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader.module.itunes;
 
 import com.apptasticsoftware.rssreader.Channel;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.util.*;
 
@@ -34,7 +35,7 @@ import java.util.*;
 public class ItunesChannel extends Channel {
 
     private String itunesImage;
-    private final List<String> itunesCategories = new ArrayList<>();
+    private List<String> itunesCategories;
     private boolean itunesExplicit;
     private String itunesAuthor;
     private ItunesOwner itunesOwner;
@@ -77,7 +78,7 @@ public class ItunesChannel extends Channel {
      * @return list of categories
      */
     public List<String> getItunesCategories() {
-        return Collections.unmodifiableList(itunesCategories);
+        return Mapper.emptyListIfNull(itunesCategories);
     }
 
     /**
@@ -85,9 +86,10 @@ public class ItunesChannel extends Channel {
      * @param itunesCategory category
      */
     public void addItunesCategory(String itunesCategory) {
-        if (itunesCategory != null) {
-            itunesCategories.add(itunesCategory);
+        if (itunesCategories == null) {
+            itunesCategories = new ArrayList<>();
         }
+        itunesCategories.add(itunesCategory);
     }
 
     /**

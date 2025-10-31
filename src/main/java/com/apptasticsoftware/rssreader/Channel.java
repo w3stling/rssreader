@@ -24,6 +24,7 @@
 package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.util.Default;
+import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.util.Util;
 
 import java.time.ZonedDateTime;
@@ -36,7 +37,7 @@ public class Channel {
     private String title;
     private String description;
     private String category;
-    private final List<String> categories = new ArrayList<>();
+    private List<String> categories;
     private String language;
     private String link;
     private String copyright;
@@ -139,7 +140,7 @@ public class Channel {
      * @return list of categories
      */
     public List<String> getCategories() {
-        return Collections.unmodifiableList(categories);
+        return Mapper.emptyListIfNull(categories);
     }
 
     /**
@@ -147,6 +148,9 @@ public class Channel {
      * @param category channel category
      */
     public void addCategory(String category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
         this.category = category;
         categories.add(category);
     }
