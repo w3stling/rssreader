@@ -46,6 +46,17 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
 
         static {
             HTML_ENTITIES = new HashMap<>();
+            // XML predefined entities (must be preserved)
+            HTML_ENTITIES.put("amp", "&amp;");
+            HTML_ENTITIES.put("lt", "&lt;");
+            HTML_ENTITIES.put("gt", "&gt;");
+            HTML_ENTITIES.put("quot", "&quot;");
+            HTML_ENTITIES.put("apos", "&apos;");
+            // Special quotes and typographic entities
+            HTML_ENTITIES.put("ldquo", "&quot;");
+            HTML_ENTITIES.put("rdquo", "&quot;");
+            HTML_ENTITIES.put("rsquo", "&quot;");
+            // Common special characters
             HTML_ENTITIES.put("auml", "&#228;");  // ä
             HTML_ENTITIES.put("ouml", "&#246;");  // ö
             HTML_ENTITIES.put("uuml", "&#252;");  // ü
@@ -225,13 +236,19 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                 entityBuffer.append(ch);
                 if (ch == ';') {
                     inEntity = false;
-                    String entity = entityBuffer.substring(1, entityBuffer.length() - 1);
-                    String replacement = HTML_ENTITIES.get(entity);
-                    if (replacement != null) {
-                        writeStringToBuffer(replacement);
+                    String entity = entityBuffer.toString();
+                    if (entity.startsWith("&#")) {
+                        // Preserve numeric entities as-is
+                        writeStringToBuffer(entity);
                     } else {
-                        // If we don't recognize the entity, write it as-is
-                        writeStringToBuffer(entityBuffer.toString());
+                        String entityName = entity.substring(1, entity.length() - 1);
+                        String replacement = HTML_ENTITIES.get(entityName);
+                        if (replacement != null) {
+                            writeStringToBuffer(replacement);
+                        } else {
+                            // If we don't recognize the entity, write it as-is
+                            writeStringToBuffer(entity);
+                        }
                     }
                     entityBuffer.setLength(0);
                 }

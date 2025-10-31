@@ -34,6 +34,17 @@ class FeedFilterTest {
     }
 
     @Test
+    void testInvalidXmlEscapeStringExtra() {
+        var fileInputSteam = fromFile("rss-invalid-xml-escape-string-extra.xml");
+        var list = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fileInputSteam)
+                .collect(Collectors.toList());
+
+        assertEquals(1, list.size());
+    }
+
+    @Test
     void testInvalidXmlEscapeStringWithinCdata() {
         var fileInputSteam = fromFile("rss-invalid-xml-escape-string-within-cdata.xml");
         var list = new RssReader()

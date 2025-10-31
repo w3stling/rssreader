@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>title</title>
+    <updated>2021-12-18T11:00:00</updated>
+    <id>http://example.com/</id>
+    <entry>
+        <id>http://example.com/entry</id>
+        <updated>2021-07-29T00:00:00</updated>
+        <content type="html">
+            &#39; &amp; &gt; &ldquo; &lt; &quot; &rdquo; &rsquo;
+        </content>
+    </entry>
+</feed>
