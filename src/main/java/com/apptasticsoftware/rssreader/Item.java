@@ -26,12 +26,13 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
+import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.time.ZonedDateTime;
 import java.util.*;
 
 /**
- * Class representing a RSS item. A channel may contain any number of items. An item may represent a "story" -- much
+ * Class representing an RSS item. A channel may contain any number of items. An item may represent a "story" -- much
  * like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points
  * to the full story.
  */
@@ -44,14 +45,14 @@ public class Item implements Comparable<Item> {
     private String link;
     private String author;
     private String category;
-    private final List<String> categories = new ArrayList<>();
+    private List<String> categories;
     private String guid;
     private Boolean isPermaLink;
     private String pubDate;
     private String updated;
     private String comments;
     private Enclosure enclosure;
-    private final List<Enclosure> enclosures = new ArrayList<>();
+    private List<Enclosure> enclosures;
     private Channel channel;
     private final DateTimeParser dateTimeParser;
 
@@ -201,7 +202,7 @@ public class Item implements Comparable<Item> {
      * @return list of categories
      */
     public List<String> getCategories() {
-        return Collections.unmodifiableList(categories);
+        return Mapper.emptyListIfNull(categories);
     }
 
     /**
@@ -209,6 +210,9 @@ public class Item implements Comparable<Item> {
      * @param category category
      */
     public void addCategory(String category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
         this.category = category;
         categories.add(category);
     }
@@ -347,7 +351,7 @@ public class Item implements Comparable<Item> {
      * @return list of enclosures
      */
     public List<Enclosure> getEnclosures() {
-        return Collections.unmodifiableList(enclosures);
+        return Mapper.emptyListIfNull(enclosures);
     }
 
     /**
@@ -355,6 +359,9 @@ public class Item implements Comparable<Item> {
      * @param enclosure enclosure
      */
     public void addEnclosure(Enclosure enclosure) {
+        if (enclosures == null) {
+            enclosures = new ArrayList<>();
+        }
         this.enclosure = enclosure;
         enclosures.add(enclosure);
     }
