@@ -27,8 +27,10 @@ import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.util.Util;
 
+import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class representing the RSS channel.
@@ -49,6 +51,8 @@ public class Channel {
     private String webMaster;
     private String docs;
     private String rating;
+    private List<Integer> skipHours;
+    private List<String> skipDays;
     private Image image;
     protected String syUpdatePeriod;
     protected int syUpdateFrequency = 1;
@@ -354,6 +358,65 @@ public class Channel {
     }
 
     /**
+     * Get the list of hours that aggregators can skip reading the channel.
+     * The values are numbers between 0 and 23, representing times in GMT.
+     * Hour zero is the hour beginning at midnight.
+     * Aggregators may not read the channel during hours listed in the skipHours element.
+     * @return list of skip hours
+     */
+    public List<Integer> getSkipHours() {
+        return Mapper.emptyListIfNull(skipHours);
+    }
+
+    /**
+     * Add an hour that aggregators can skip reading the channel.
+     * Valid values are numbers between 0 and 23, representing times in GMT.
+     * Hour zero is the hour beginning at midnight.
+     * @param skipHour the hour to skip reading the channel (0-23)
+     */
+    public void addSkipHour(Integer skipHour) {
+        if (skipHours == null) {
+            skipHours = new ArrayList<>();
+        }
+        skipHours.add(skipHour);
+    }
+
+    /**
+     * Get the list of days that aggregators can skip reading the channel.
+     * The values can be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.
+     * Aggregators may not read the channel during days listed in the skipDays element.
+     * @return list of skip days
+     */
+    public List<String> getSkipDays() {
+        return Mapper.emptyListIfNull(skipDays);
+    }
+
+    /**
+     * Get the list of days that aggregators can skip reading the channel as DayOfWeek enum values.
+     * The values are converted from the string representation (Monday, Tuesday, etc.) to their corresponding DayOfWeek enum values.
+     * Aggregators may not read the channel during days listed in the skipDays element.
+     * @return list of skip days as DayOfWeek enum values
+     */
+    public List<DayOfWeek> getSkipDaysAsDayOfWeek() {
+        return Mapper.emptyListIfNull(getSkipDays()).stream()
+                .map(day -> day.toUpperCase(Default.getLocale()))
+                .map(DayOfWeek::valueOf)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Add a day that aggregators can skip reading the channel.
+     * Valid values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.
+     * @param skipDay the day to skip reading the channel
+     */
+    public void addSkipDay(String skipDay) {
+        if (skipDays == null) {
+            skipDays = new ArrayList<>();
+        }
+        skipDays.add(skipDay);
+    }
+
+    /**
      * Get a GIF, JPEG or PNG image that can be displayed with the channel.
      * @return image
      */
@@ -376,7 +439,7 @@ public class Channel {
         Channel channel = (Channel) o;
         return Objects.equals(getTitle(), channel.getTitle()) &&
                 Objects.equals(getDescription(), channel.getDescription()) &&
-                getCategories().equals(channel.getCategories()) &&
+                Objects.equals(getCategories(), channel.getCategories()) &&
                 Objects.equals(getLanguage(), channel.getLanguage()) &&
                 Objects.equals(getLink(), channel.getLink()) &&
                 Objects.equals(getCopyright(), channel.getCopyright()) &&
@@ -388,6 +451,8 @@ public class Channel {
                 Objects.equals(getWebMaster(), channel.getWebMaster()) &&
                 Objects.equals(getDocs(), channel.getDocs()) &&
                 Objects.equals(getRating(), channel.getRating()) &&
+                Objects.equals(getSkipHours(), channel.getSkipHours()) &&
+                Objects.equals(getSkipDays(), channel.getSkipDays()) &&
                 Objects.equals(getImage(), channel.getImage());
     }
 
@@ -395,6 +460,6 @@ public class Channel {
     public int hashCode() {
         return Objects.hash(getTitle(), getDescription(), getCategories(), getLanguage(), getLink(),
                 getCopyright(), getGenerator(), getTtl(), getPubDate(), getLastBuildDate(),
-                getManagingEditor(), getWebMaster(), getDocs(), getRating(), getImage());
+                getManagingEditor(), getWebMaster(), getDocs(), getRating(), getSkipHours(), getSkipDays(), getImage());
     }
 }
