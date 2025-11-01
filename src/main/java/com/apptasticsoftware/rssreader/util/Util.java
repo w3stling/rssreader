@@ -18,7 +18,7 @@ public class Util {
      * @return the number of hours in the given time period, or 1 if the period is not recognized
      */
     public static int toMinutes(String period) {
-        switch (period.toLowerCase(Locale.ENGLISH)) {
+        switch (period.toLowerCase(Default.getLocale())) {
             case "daily": return 1440;
             case "weekly": return 10080;
             case "monthly": return 43800;

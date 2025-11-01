@@ -409,6 +409,17 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @Test
+    void rssSkipDaysSkipHours() {
+        RssReader reader = new RssReader();
+        List<Item> items = reader.read(fromFile("rss-skip-days-skip-hours.xml")).collect(Collectors.toList());
+
+        assertEquals(2, items.size());
+        var item = items.get(0);
+        assertEquals(List.of(0, 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23), item.getChannel().getSkipHours());
+        assertEquals(List.of("Saturday", "Sunday"), item.getChannel().getSkipDays());
+        assertEquals(List.of(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY), item.getChannel().getSkipDaysAsDayOfWeek());
+    }
 
     @Test
     void contentEncoding() throws IOException {
