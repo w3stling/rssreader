@@ -29,7 +29,6 @@ import com.apptasticsoftware.rssreader.util.ItemComparator;
 import java.time.*;
 import java.time.format.*;
 import java.util.Comparator;
-import java.util.Locale;
 
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_TIME;
 
