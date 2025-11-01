@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Default;
+
+import java.util.Currency;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -97,6 +100,16 @@ public class MediaPrice {
      */
     public Optional<String> getCurrency() {
         return Optional.ofNullable(currency);
+    }
+
+    /**
+     * The currency as a Currency instance. ISO 4217 for currency codes.
+     * @return currency
+     */
+    public Optional<Currency> getCurrencyAsCurrency() {
+        return getCurrency()
+                .map(currencyCode -> currencyCode.toUpperCase(Default.getLocale()))
+                .map(Currency::getInstance);
     }
 
     /**

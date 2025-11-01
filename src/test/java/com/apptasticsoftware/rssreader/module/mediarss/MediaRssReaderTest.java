@@ -5,6 +5,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
+import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -619,10 +620,12 @@ class MediaRssReaderTest {
         assertEquals(2, prices.size());
         assertThat(prices.get(0).getType(), equalTo("rent"));
         assertThat(prices.get(0).getCurrency(), isPresentAnd(equalTo("EUR")));
+        assertThat(prices.get(0).getCurrencyAsCurrency(), isPresentAnd(equalTo(Currency.getInstance("EUR"))));
         assertThat(prices.get(0).getPrice(), isPresentAnd(equalTo(19.99)));
         assertThat(prices.get(1).getType(), equalTo("subscription"));
         assertThat(prices.get(1).getInfo(), isPresentAnd(equalTo("http://www.dummy.jp/subscription_info")));
         assertThat(prices.get(1).getCurrency(), isPresentAnd(equalTo("USD")));
+        assertThat(prices.get(1).getCurrencyAsCurrency(), isPresentAnd(equalTo(Currency.getInstance("USD"))));
         assertThat(prices.get(1).getPrice(), isPresentAnd(equalTo(18.88)));
 
         // License
