@@ -399,7 +399,7 @@ public class Channel {
      */
     public List<DayOfWeek> getSkipDaysAsDayOfWeek() {
         return Mapper.emptyListIfNull(getSkipDays()).stream()
-                .map(day -> day.toUpperCase(Locale.ENGLISH))
+                .map(day -> day.toUpperCase(Default.getLocale()))
                 .map(DayOfWeek::valueOf)
                 .collect(Collectors.toList());
     }
