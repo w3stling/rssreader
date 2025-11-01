@@ -181,6 +181,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("webMaster", Channel::setWebMaster);
         channelTags.putIfAbsent("docs", Channel::setDocs);
         channelTags.putIfAbsent("rating", Channel::setRating);
+        channelTags.putIfAbsent("day", Channel::addSkipDay);
+        channelTags.putIfAbsent("hour", (channel, value) -> mapInteger(value, channel::addSkipHour));
         channelTags.putIfAbsent("/rss/channel/image/link", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setLink(value));
         channelTags.putIfAbsent("/rss/channel/image/title", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setTitle(value));
         channelTags.putIfAbsent("/rss/channel/image/url", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
