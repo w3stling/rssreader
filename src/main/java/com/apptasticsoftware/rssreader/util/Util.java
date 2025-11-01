@@ -1,7 +1,5 @@
 package com.apptasticsoftware.rssreader.util;
 
-import java.util.Locale;
-
 /**
  * Utility class for RSS reader.
  */
