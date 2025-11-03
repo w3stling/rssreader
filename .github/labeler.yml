@@ -7,3 +7,5 @@
   - head-branch: ['^chore/']
 'documentation':
   - head-branch: ['^doc/']
+'github_actions':
+  - head-branch: ['^dependabot/gradle/org.sonarqube-']
