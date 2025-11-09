@@ -59,7 +59,7 @@ public class PodcastValueTimeSplit {
         return emptyListIfNull(valueRecipients);
     }
 
-    public void addValueRecipients(PodcastValueRecipient valueRecipient) {
+    public void addValueRecipient(PodcastValueRecipient valueRecipient) {
         if (valueRecipients == null) {
             valueRecipients = new ArrayList<>();
         }

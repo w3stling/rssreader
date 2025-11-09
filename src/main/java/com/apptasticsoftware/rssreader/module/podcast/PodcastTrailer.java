@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.util.Default;
+
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -59,6 +62,14 @@ public class PodcastTrailer {
      */
     public String getPubDate() {
         return pubDate;
+    }
+
+    /**
+     * Gets the publication date of the trailer as a ZonedDateTime.
+     * @return the publication date as ZonedDateTime
+     */
+    public ZonedDateTime getPubDateAsZonedDateTime() {
+        return Default.getDateTimeParser().parse(pubDate);
     }
 
     /**

@@ -2,9 +2,11 @@ package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesExtensions;
 
 import java.net.http.HttpClient;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 
 import static com.apptasticsoftware.rssreader.util.Mapper.*;
 
@@ -38,11 +40,17 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
     @Override
     protected void registerChannelTags() {
         super.registerChannelTags();
+        var extensionRegistry = getExtensionRegistry();
+        //PodcastExtensions.register(mappingRegistry);
+        ItunesExtensions.register(extensionRegistry);
+
         onChannelTags.put("podcast:block", channel -> channel.addPodcastBlock(new PodcastBlock()));
         onChannelTags.put("podcast:funding", channel -> channel.addPodcastFunding(new PodcastFunding()));
         onChannelTags.put("podcast:location", channel -> channel.addPodcastLocation(new PodcastLocation()));
         onChannelTags.put("podcast:value", channel -> channel.addPodcastValue(new PodcastValue()));
-        onChannelTags.put("podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
+        onChannelTags.put("/rss/channel/podcast:value/podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
+        onChannelTags.put("podcast:valueTimeSplit", channel -> channel.getPodcastValues().getLast().addValueTimeSplit(new PodcastValueTimeSplit()));
+        onChannelTags.put("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
         onChannelTags.put("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
 
         addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
@@ -74,13 +82,44 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
         addChannelExtension("podcast:trailer", "type", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> trailer.setType(value)));
         addChannelExtension("podcast:trailer", "length", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> mapLong(value, trailer::setLength)));
         addChannelExtension("podcast:trailer", "season", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> mapInteger(value, trailer::setSeason)));
-        addChannelExtension("podcast:valueRecipient", "name", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setName(value)));
-        addChannelExtension("podcast:valueRecipient", "type", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setType(value)));
-        addChannelExtension("podcast:valueRecipient", "address", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setAddress(value)));
-        addChannelExtension("podcast:valueRecipient", "customKey", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomKey(value)));
-        addChannelExtension("podcast:valueRecipient", "customValue", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomValue(value)));
-        addChannelExtension("podcast:valueRecipient", "split", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setSplit)));
-        addChannelExtension("podcast:valueRecipient", "fee", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapBoolean(value, valueRecipient::setFee)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "name", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setName(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "type", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setType(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "address", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setAddress(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "customKey", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomKey(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "customValue", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomValue(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "split", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setSplit)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueRecipient", "fee", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapBoolean(value, valueRecipient::setFee)));
+        addChannelExtension("podcast:valueTimeSplit", "startTime", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setStartTime)));
+        addChannelExtension("podcast:valueTimeSplit", "duration", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setDuration)));
+        addChannelExtension("podcast:valueTimeSplit", "remotePercentage", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setRemotePercentage)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "name", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setName(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "type", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setType(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "address", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setAddress(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "customKey", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomKey(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "customValue", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomValue(value)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "split", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setSplit)));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "fee", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapBoolean(value, valueRecipient::setFee)));
+        addChannelExtension("podcast:remoteItem", "feedGuid", channelPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
+        addChannelExtension("podcast:remoteItem", "feedUrl", channelPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
+        addChannelExtension("podcast:remoteItem", "itemGuid", channelPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
+        addChannelExtension("podcast:remoteItem", "medium", channelPodcastRemoteItem(PodcastRemoteItem::setMedium));
+        addChannelExtension("podcast:remoteItem", "title", channelPodcastRemoteItem(PodcastRemoteItem::setTitle));
+    }
+
+    private static BiConsumer<PodcastChannel, String> channelPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
+        return (channel, value) -> {
+            var timeSplit = channel.getPodcastValues().getLast().getValueTimeSplits().getLast();
+            var remoteItem = createIfNull(timeSplit::getRemoteItem, timeSplit::setRemoteItem, PodcastRemoteItem::new);
+            setter.accept(remoteItem, value);
+        };
+    }
+
+    private static BiConsumer<PodcastItem, String> itemPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
+        return (item, value) -> {
+            var timeSplit = item.getPodcastValues().getLast().getValueTimeSplits().getLast();
+            var remoteItem = createIfNull(timeSplit::getRemoteItem, timeSplit::setRemoteItem, PodcastRemoteItem::new);
+            setter.accept(remoteItem, value);
+        };
     }
 
     @Override
@@ -93,7 +132,9 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
         onItemTags.put("podcast:alternateEnclosure", item ->item.addPodcastAlternateEnclosure(new PodcastAlternateEnclosure()));
         onItemTags.put("podcast:source", item ->item.getPodcastAlternateEnclosures().getLast().addSource(new PodcastSource()));
         onItemTags.put("podcast:value", item ->item.addPodcastValue(new PodcastValue()));
-        onItemTags.put("podcast:valueRecipient", item ->item.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
+        onItemTags.put("/rss/channel/item/podcast:value/podcast:valueRecipient", item ->item.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
+        onItemTags.put("podcast:valueTimeSplit", item -> item.getPodcastValues().getLast().addValueTimeSplit(new PodcastValueTimeSplit()));
+        onItemTags.put("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", item ->item.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
         onItemTags.put("podcast:socialInteract", item ->item.addPodcastSocialInteract(new PodcastSocialInteract()));
 
         addItemExtension("podcast:season", (item, value) -> createIfNullOptional(item::getPodcastSeason, item::setPodcastSeason, PodcastSeason::new).ifPresent(season -> mapInteger(value, season::setSeason)));
@@ -144,13 +185,28 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
         addItemExtension("podcast:value", "type", (item, value) -> item.getPodcastValues().getLast().setType(value));
         addItemExtension("podcast:value", "method", (item, value) -> item.getPodcastValues().getLast().setMethod(value));
         addItemExtension("podcast:value", "suggested", (item, value) -> Optional.of(item.getPodcastValues().getLast()).ifPresent(podcastValue -> mapDouble(value, podcastValue::setSuggested)));
-        addItemExtension("podcast:valueRecipient", "name", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setName(value));
-        addItemExtension("podcast:valueRecipient", "type", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setType(value));
-        addItemExtension("podcast:valueRecipient", "address", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setAddress(value));
-        addItemExtension("podcast:valueRecipient", "customKey", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setCustomKey(value));
-        addItemExtension("podcast:valueRecipient", "customValue", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setCustomValue(value));
-        addItemExtension("podcast:valueRecipient", "split", (item, value) -> Optional.of(item.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(recipient -> mapInteger(value, recipient::setSplit)));
-        addItemExtension("podcast:valueRecipient", "fee", (item, value) -> Optional.of(item.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(recipient -> mapBoolean(value, recipient::setFee)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "name", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setName(value));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "type", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setType(value));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "address", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setAddress(value));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "customKey", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setCustomKey(value));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "customValue", (item, value) -> item.getPodcastValues().getLast().getValueRecipients().getLast().setCustomValue(value));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "split", (item, value) -> Optional.of(item.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(recipient -> mapInteger(value, recipient::setSplit)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueRecipient", "fee", (item, value) -> Optional.of(item.getPodcastValues().getLast().getValueRecipients().getLast()).ifPresent(recipient -> mapBoolean(value, recipient::setFee)));
+        addItemExtension("podcast:valueTimeSplit", "startTime", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setStartTime)));
+        addItemExtension("podcast:valueTimeSplit", "duration", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setDuration)));
+        addItemExtension("podcast:valueTimeSplit", "remotePercentage", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setRemotePercentage)));
+        addItemExtension("podcast:remoteItem", "feedGuid", itemPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
+        addItemExtension("podcast:remoteItem", "feedUrl", itemPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
+        addItemExtension("podcast:remoteItem", "itemGuid", itemPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
+        addItemExtension("podcast:remoteItem", "medium", itemPodcastRemoteItem(PodcastRemoteItem::setMedium));
+        addItemExtension("podcast:remoteItem", "title", itemPodcastRemoteItem(PodcastRemoteItem::setTitle));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "name", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setName(value)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "type", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setType(value)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "address", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setAddress(value)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "customKey", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomKey(value)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "customValue", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomValue(value)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "split", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setSplit)));
+        addItemExtension("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "fee", (item, value) -> Optional.ofNullable(item.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapBoolean(value, valueRecipient::setFee)));
         addItemExtension("podcast:socialInteract", "protocol", (item, value) -> item.getPodcastSocialInteracts().getLast().setProtocol(value));
         addItemExtension("podcast:socialInteract", "uri", (item, value) -> item.getPodcastSocialInteracts().getLast().setUri(value));
         addItemExtension("podcast:socialInteract", "accountId", (item, value) -> item.getPodcastSocialInteracts().getLast().setAccountId(value));
