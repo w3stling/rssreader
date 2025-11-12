@@ -192,6 +192,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
         channelTags.putIfAbsent("dc:rights", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
+        channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
+        channelTags.putIfAbsent("dc:creator", (channel, value) -> Mapper.mapIfEmpty(value, channel::getManagingEditor, channel::setManagingEditor));
         channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> channel.syUpdatePeriod = value);
         channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> mapInteger(value, number -> channel.syUpdateFrequency = number));
         channelTags.putIfAbsent("/feed/icon", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
@@ -237,6 +239,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("dc:title", (item, value) -> Mapper.mapIfEmpty(value, item::getTitle, item::setTitle));
         itemTags.putIfAbsent("dc:description", (item, value) -> Mapper.mapIfEmpty(value, item::getDescription, item::setDescription));
         itemTags.putIfAbsent("dc:content", (item, value) -> Mapper.mapIfEmpty(value, item::getContent, item::setContent));
+        itemTags.putIfAbsent("dc:subject", Item::addCategory);
 
         onItemTags.put("enclosure", item -> item.addEnclosure(new Enclosure()));
     }
