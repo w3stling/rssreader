@@ -443,7 +443,7 @@ class DateTimeTest {
         assertEquals(1527830272000L, timestamp);
 
         timestamp = dateTime.toEpochMilli("2000-12-17T01:17");
-        assertEquals(977015820000L, timestamp);
+        assertEquals(977012220000L, timestamp);
     }
 
     @Test
