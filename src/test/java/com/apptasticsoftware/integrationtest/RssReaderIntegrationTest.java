@@ -846,6 +846,7 @@ class RssReaderIntegrationTest {
                 "            salt water ocean on it. Kind of ...", item.getDescription().orElse(""));
         assertEquals("timothy", item.getAuthor().orElse(""));
         assertEquals("2000-12-17T01:17", item.getPubDate().orElse(""));
+        assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17"), item.getPubDateZonedDateTime().orElse(null));
         assertEquals(1, item.getCategories().size());
         assertEquals("space", item.getCategories().get(0));
     }

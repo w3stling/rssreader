@@ -441,6 +441,9 @@ class DateTimeTest {
         dateTime = new DateTime(ZoneId.of("Europe/Paris"));
         timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527830272000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("2000-12-17T01:17");
+        assertEquals(977012220000L, timestamp);
     }
 
     @Test

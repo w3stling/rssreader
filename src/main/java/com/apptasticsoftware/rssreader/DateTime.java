@@ -212,7 +212,7 @@ public class DateTime implements DateTimeParser {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        if (dateTime.length() == 19) {
+        if (dateTime.length() == 19 || dateTime.length() == 16) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
@@ -288,7 +288,7 @@ public class DateTime implements DateTimeParser {
             return ISO_OFFSET_DATE_TIME_SPECIAL;
         else if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T') // && dateTime.charAt(dateTime.length() - 3) == ':')
             return ISO_OFFSET_DATE_TIME;
-        else if (dateTime.length() == 19 && dateTime.charAt(10) == 'T')
+        else if ((dateTime.length() == 19 || dateTime.length() == 16) && dateTime.charAt(10) == 'T')
             return ISO_LOCAL_DATE_TIME;
         else if (dateTime.length() == 19 && dateTime.charAt(10) == ' ')
             return ISO_LOCAL_DATE_TIME_SPECIAL;
