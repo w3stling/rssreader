@@ -426,24 +426,25 @@ class DateTimeTest {
 
     @Test
     void timestampWithNoTimezone() {
-        var dateTime = new DateTime();
-        var timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        var dateTimeParser = new DateTime();
+        var timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527837472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("Australia/Sydney"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("Australia/Sydney"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527801472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("America/Chicago"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("America/Chicago"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527855472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("Europe/Paris"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("Europe/Paris"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527830272000L, timestamp);
 
-        timestamp = dateTime.toEpochMilli("2000-12-17T01:17");
-        assertEquals(977012220000L, timestamp);
+        dateTimeParser = new DateTime();
+        timestamp = dateTimeParser.toEpochMilli("2000-12-17T01:17");
+        assertEquals(977015820000L, timestamp);
     }
 
     @Test
