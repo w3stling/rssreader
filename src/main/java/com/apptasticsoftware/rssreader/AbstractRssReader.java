@@ -189,6 +189,9 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("/rss/channel/image/description", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> i.setDescription(value)));
         channelTags.putIfAbsent("/rss/channel/image/height", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setHeight)));
         channelTags.putIfAbsent("/rss/channel/image/width", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setWidth)));
+        channelTags.putIfAbsent("/rdf:RDF/image/link", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setLink(value));
+        channelTags.putIfAbsent("/rdf:RDF/image/title", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setTitle(value));
+        channelTags.putIfAbsent("/rdf:RDF/image/url", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
         channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
         channelTags.putIfAbsent("dc:rights", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
