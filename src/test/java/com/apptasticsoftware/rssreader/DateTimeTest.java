@@ -425,6 +425,15 @@ class DateTimeTest {
     }
 
     @Test
+    void specialNonStandardDateTimeFormat() {
+        var timestamp = dateTime.toEpochMilli("16-09-2025 18:00 +0400");
+        assertEquals(1758031200000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("16-09-2025 18:00:01 +0400");
+        assertEquals(1758031201000L, timestamp);
+    }
+
+    @Test
     void timestampWithNoTimezone() {
         var dateTimeParser = new DateTime();
         var timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
