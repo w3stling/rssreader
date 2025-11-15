@@ -207,6 +207,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * Register channel attributes for mapping to channel object fields
      */
     protected void registerChannelAttributes() {
+        channelAttributes.computeIfAbsent("/feed", k -> new HashMap<>()).put("lang", Channel::setLanguage);
         channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
         channelAttributes.computeIfAbsent("category", k -> new HashMap<>()).putIfAbsent("term", Channel::addCategory);
     }

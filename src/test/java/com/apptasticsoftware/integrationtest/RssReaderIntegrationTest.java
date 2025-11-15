@@ -812,6 +812,14 @@ class RssReaderIntegrationTest {
     }
 
     @Test
+    void atomFeedWithLanguage() {
+        var list = new RssReader().read(fromFile("item-sort-test.xml"))
+                .collect(Collectors.toList());
+        assertEquals(10, list.size());
+        assertEquals("en", list.get(0).getChannel().getLanguage().orElse(""));
+    }
+
+    @Test
     void atomFeedWithCategory() {
         var list = new RssReader().read(fromFile("atom-feed-category.xml"))
                 .collect(Collectors.toList());
