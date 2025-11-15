@@ -118,7 +118,7 @@ class RssReaderIntegrationTest {
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Statistiska centralbyrån - Statistiknyheter"));
             assertThat(channel.getDescription(), is("Statistiknyheter via RSS"));
-            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLanguage(), isPresentAndIs("sv-SE"));
             assertThat(channel.getLink().toLowerCase(), is("http://www.scb.se/feed/statistiknyheter/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
@@ -809,6 +809,14 @@ class RssReaderIntegrationTest {
         var item = list.get(0);
         assertEquals("NYT > channel description", item.getChannel().getDescription());
         assertEquals("NYT > image description", item.getChannel().getImage().map(image -> image.getDescription().orElse("")).orElse(""));
+    }
+
+    @Test
+    void atomFeedWithLanguage() {
+        var list = new RssReader().read(fromFile("item-sort-test.xml"))
+                .collect(Collectors.toList());
+        assertEquals(10, list.size());
+        assertEquals("en", list.get(0).getChannel().getLanguage().orElse(""));
     }
 
     @Test
