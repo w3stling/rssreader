@@ -24,7 +24,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
-import com.apptasticsoftware.rssreader.Channel;
+import com.apptasticsoftware.rssreader.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.net.http.HttpClient;
@@ -33,7 +33,7 @@ import java.util.function.BiConsumer;
 /**
  * Class for reading media rss feeds.
  */
-public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
+public class MediaRssReader extends AbstractRssReader<ChannelImpl, MediaRssItem> {
 
     /**
      * Constructor
@@ -51,8 +51,8 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     }
 
     @Override
-    protected Channel createChannel(DateTimeParser dateTimeParser) {
-        return new Channel(dateTimeParser);
+    protected ChannelImpl createChannel(DateTimeParser dateTimeParser) {
+        return new ChannelImpl(dateTimeParser);
     }
 
     @Override

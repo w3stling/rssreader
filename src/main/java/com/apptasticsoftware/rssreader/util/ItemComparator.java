@@ -23,9 +23,7 @@
  */
 package com.apptasticsoftware.rssreader.util;
 
-import com.apptasticsoftware.rssreader.Channel;
-import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.Item;
+import com.apptasticsoftware.rssreader.*;
 
 import java.util.Comparator;
 import java.util.Objects;

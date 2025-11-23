@@ -108,11 +108,11 @@ public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem
 
     @Override
     protected ItunesChannel createChannel(DateTimeParser dateTimeParser) {
-        return new ItunesChannel(dateTimeParser);
+        return new ItunesChannelImpl(dateTimeParser);
     }
 
     @Override
     protected ItunesItem createItem(DateTimeParser dateTimeParser) {
-        return new ItunesItem(dateTimeParser);
+        return new ItunesItemImpl(dateTimeParser);
     }
 }

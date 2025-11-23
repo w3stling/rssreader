@@ -24,7 +24,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.Item;
+import com.apptasticsoftware.rssreader.ItemImpl;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -32,7 +32,7 @@ import java.util.Optional;
 /**
  * Class representing the media rss item.
  */
-public class MediaRssItem extends Item {
+public class MediaRssItem extends ItemImpl {
     private MediaThumbnail mediaThumbnail;
 
     /**

@@ -1,13 +1,9 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
-import com.apptasticsoftware.rssreader.Channel;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface PodcastChannel extends Channel, ItunesChannel {
-
+public interface PodcastChannelData {
     String getPodcastGuid();
 
     void setPodcastGuid(String podcastGuid);

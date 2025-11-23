@@ -489,7 +489,7 @@ public class DateTime implements DateTimeParser {
      */
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
-    public static Comparator<Item> pubDateComparator() {
+    public static Comparator<ItemImpl> pubDateComparator() {
         var dateTime = Default.getDateTimeParser();
         return Comparator.comparing(i -> i.getPubDate().map(dateTime::toInstant).orElse(Instant.EPOCH));
     }

@@ -1,11 +1,9 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
-import com.apptasticsoftware.rssreader.Item;
-
 import java.time.Duration;
 import java.util.Optional;
 
-public interface ItunesItem extends Item {
+public interface ItunesItemData {
     /**
      * Get the duration of an episode.
      * @return duration

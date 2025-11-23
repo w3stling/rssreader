@@ -1,11 +1,9 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
-import com.apptasticsoftware.rssreader.Channel;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface ItunesChannel extends Channel {
+public interface ItunesChannelData {
     /**
      * Get the artwork for the show.
      * Specify your show artwork by providing a URL linking to it.

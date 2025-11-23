@@ -1,6 +1,5 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
-import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ public class PodcastRssReaderTest {
 
         assertEquals(3, items.size());
         var item = items.get(0);
-        var channel = (PodcastChannel) item.getChannel();
+        var channel = (PodcastChannelImpl) item.getChannel();
         assertThat(channel.getPodcastGuid(), is("y0ur-gu1d-g035-h3r3"));
         assertTrue(channel.getPodcastLicense().isPresent());
         assertThat(channel.getPodcastLicense().get().getUrl(), isPresentAndIs("https://example.org/mypodcastlicense/full.pdf"));
@@ -208,7 +207,7 @@ public class PodcastRssReaderTest {
 
         assertEquals(3, items.size());
         var item = items.get(0);
-        var channel = (PodcastChannel) item.getChannel();
+        var channel = (PodcastChannelImpl) item.getChannel();
         assertThat(channel.getLink(), is("https://podnews.net"));
         assertThat(channel.getTitle(), is("Podnews Daily - podcast industry news"));
         assertThat(channel.getDescription(), is("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify, YouTube\n" +
@@ -291,8 +290,8 @@ public class PodcastRssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(PodcastChannel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").withNonnullFields("itunesCategories").verify();
-        EqualsVerifier.simple().forClass(PodcastItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PodcastChannelImpl.class).withNonnullFields("data").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+        EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(PodcastAlternateEnclosure.class).verify();
         EqualsVerifier.simple().forClass(PodcastBlock.class).verify();
         EqualsVerifier.simple().forClass(PodcastChapters.class).verify();

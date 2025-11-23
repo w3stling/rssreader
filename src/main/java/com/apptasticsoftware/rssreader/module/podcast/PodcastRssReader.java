@@ -24,13 +24,13 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
     }
 
     @Override
-    protected PodcastChannel createChannel(DateTimeParser dateTimeParser) {
-        return new PodcastChannel(dateTimeParser);
+    protected PodcastChannelImpl createChannel(DateTimeParser dateTimeParser) {
+        return new PodcastChannelImpl(dateTimeParser);
     }
 
     @Override
-    protected PodcastItem createItem(DateTimeParser dateTimeParser) {
-        return new PodcastItem(dateTimeParser);
+    protected PodcastItemImpl createItem(DateTimeParser dateTimeParser) {
+        return new PodcastItemImpl(dateTimeParser);
     }
 
     @Override

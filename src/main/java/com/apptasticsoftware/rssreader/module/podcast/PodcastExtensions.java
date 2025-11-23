@@ -36,7 +36,7 @@ public class PodcastExtensions {
 
     private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> extensions) {
         extensions.addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
-        extensions.addChannelExtension("podcast:license", (channel, value) -> createIfNull(channel::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
+        extensions.addChannelExtension("podcast:license", (channel, value) -> createIfNull(((PodcastChannel)channel)::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
         extensions.addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> mapBoolean(value, locked::setLocked)));
         extensions.addChannelExtension("podcast:block", (channel, value) -> Optional.ofNullable(channel.getPodcastBlocks().getLast()).ifPresent(block -> mapBoolean(value, block::setBlock)));
         extensions.addChannelExtension("podcast:funding", (channel, value) -> Optional.ofNullable(channel.getPodcastFundings().getLast()).ifPresent(funding -> funding.setFunding(value)));

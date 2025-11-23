@@ -47,12 +47,12 @@ public class RssReader extends AbstractRssReader<Channel, Item> {
 
     @Override
     protected Channel createChannel(DateTimeParser dateTimeParser) {
-        return new Channel(dateTimeParser);
+        return new ChannelImpl(dateTimeParser);
     }
 
     @Override
     protected Item createItem(DateTimeParser dateTimeParser) {
-        return new Item(dateTimeParser);
+        return new ItemImpl(dateTimeParser);
     }
 
 }

@@ -1,13 +1,9 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
-import com.apptasticsoftware.rssreader.Item;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
-
 import java.util.List;
 import java.util.Optional;
 
-public interface PodcastItem extends Item, ItunesItem {
-
+public interface PodcastItemData {
     Optional<PodcastSeason> getPodcastSeason();
 
     void setPodcastSeason(PodcastSeason podcastSeason);
@@ -47,5 +43,4 @@ public interface PodcastItem extends Item, ItunesItem {
     List<PodcastSocialInteract> getPodcastSocialInteracts();
 
     void addPodcastSocialInteract(PodcastSocialInteract podcastSocialInteract);
-
 }

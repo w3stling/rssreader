@@ -237,8 +237,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
         channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
         channelTags.putIfAbsent("dc:creator", (channel, value) -> Mapper.mapIfEmpty(value, channel::getManagingEditor, channel::setManagingEditor));
-        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> channel.syUpdatePeriod = value);
-        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> mapInteger(value, number -> channel.syUpdateFrequency = number));
+        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> { if (channel instanceof ChannelImpl) ((ChannelImpl)channel).syUpdatePeriod = value; });
+        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> { if (channel instanceof ChannelImpl) mapInteger(value, number -> ((ChannelImpl)channel).syUpdateFrequency = number); });
         channelTags.putIfAbsent("/feed/icon", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
         channelTags.putIfAbsent("/feed/logo", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
     }
