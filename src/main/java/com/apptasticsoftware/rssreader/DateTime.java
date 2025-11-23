@@ -101,6 +101,7 @@ public class DateTime implements DateTimeParser {
     private static final DateTimeFormatter RFC_1123_DATE_TIME_SPECIAL_PDT_NO_DOW;
 
     private static final DateTimeFormatter DATE_TIME_SPECIAL_1;
+    private static final DateTimeFormatter DATE_TIME_SPECIAL_2;
 
     static {
         BASIC_ISO_DATE = DateTimeFormatter.BASIC_ISO_DATE.withLocale(Default.getLocale());
@@ -165,6 +166,14 @@ public class DateTime implements DateTimeParser {
         RFC_1123_DATE_TIME_SPECIAL_PST_NO_DOW = DateTimeFormatter.ofPattern("d LLL yyyy H:m:s 'PST'", Default.getLocale()).withZone(ZoneOffset.ofHours(-8));
 
         DATE_TIME_SPECIAL_1 = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm:ss Z", Default.getLocale());
+        DATE_TIME_SPECIAL_2 = new DateTimeFormatterBuilder()
+                .appendPattern("dd-MM-uuuu HH:mm")
+                .optionalStart()
+                .appendPattern(":ss")
+                .optionalEnd()
+                .appendLiteral(' ')
+                .appendPattern("Z")
+                .toFormatter();
     }
 
     /**
@@ -212,7 +221,7 @@ public class DateTime implements DateTimeParser {
             throw new IllegalArgumentException("Unknown date time format " + dateTime);
         }
 
-        if (dateTime.length() == 19) {
+        if (dateTime.length() == 19 || dateTime.length() == 16) {
             // Missing time zone information use default time zone. If not setting any default time zone system default
             // time zone is used.
             LocalDateTime localDateTime = LocalDateTime.parse(dateTime, formatter);
@@ -260,8 +269,11 @@ public class DateTime implements DateTimeParser {
 
         if (index == -1) {
             index = dateTime.indexOf(' ');
-            if (Character.isDigit(dateTime.charAt(0)) && (index == 1 || index == 2)) {
+            if ((index == 1 || index == 2) && Character.isDigit(dateTime.charAt(0))) {
                 return DATE_TIME_SPECIAL_1;
+            }
+            else if (index == 10 && dateTime.charAt(2) == '-' && dateTime.charAt(5) == '-') {
+                return DATE_TIME_SPECIAL_2;
             }
             return parseIsoDateTime(dateTime);
         } else if (index <= 3) {
@@ -288,7 +300,7 @@ public class DateTime implements DateTimeParser {
             return ISO_OFFSET_DATE_TIME_SPECIAL;
         else if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T') // && dateTime.charAt(dateTime.length() - 3) == ':')
             return ISO_OFFSET_DATE_TIME;
-        else if (dateTime.length() == 19 && dateTime.charAt(10) == 'T')
+        else if ((dateTime.length() == 19 || dateTime.length() == 16) && dateTime.charAt(10) == 'T')
             return ISO_LOCAL_DATE_TIME;
         else if (dateTime.length() == 19 && dateTime.charAt(10) == ' ')
             return ISO_LOCAL_DATE_TIME_SPECIAL;

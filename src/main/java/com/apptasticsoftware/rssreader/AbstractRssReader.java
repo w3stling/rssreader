@@ -229,9 +229,14 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("/rss/channel/image/description", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> i.setDescription(value)));
         channelTags.putIfAbsent("/rss/channel/image/height", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setHeight)));
         channelTags.putIfAbsent("/rss/channel/image/width", (channel, value) -> createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger(value, i::setWidth)));
+        channelTags.putIfAbsent("/rdf:RDF/image/link", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setLink(value));
+        channelTags.putIfAbsent("/rdf:RDF/image/title", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setTitle(value));
+        channelTags.putIfAbsent("/rdf:RDF/image/url", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
         channelTags.putIfAbsent("dc:language", (channel, value) -> Mapper.mapIfEmpty(value, channel::getLanguage, channel::setLanguage));
         channelTags.putIfAbsent("dc:rights", (channel, value) -> Mapper.mapIfEmpty(value, channel::getCopyright, channel::setCopyright));
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
+        channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
+        channelTags.putIfAbsent("dc:creator", (channel, value) -> Mapper.mapIfEmpty(value, channel::getManagingEditor, channel::setManagingEditor));
         channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> channel.syUpdatePeriod = value);
         channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> mapInteger(value, number -> channel.syUpdateFrequency = number));
         channelTags.putIfAbsent("/feed/icon", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
@@ -242,6 +247,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * Register channel attributes for mapping to channel object fields
      */
     protected void registerChannelAttributes() {
+        channelAttributes.computeIfAbsent("/feed", k -> new HashMap<>()).put("lang", Channel::setLanguage);
         channelAttributes.computeIfAbsent("link", k -> new HashMap<>()).put("href", Channel::setLink);
         channelAttributes.computeIfAbsent("category", k -> new HashMap<>()).putIfAbsent("term", Channel::addCategory);
     }
@@ -277,6 +283,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         itemTags.putIfAbsent("dc:title", (item, value) -> Mapper.mapIfEmpty(value, item::getTitle, item::setTitle));
         itemTags.putIfAbsent("dc:description", (item, value) -> Mapper.mapIfEmpty(value, item::getDescription, item::setDescription));
         itemTags.putIfAbsent("dc:content", (item, value) -> Mapper.mapIfEmpty(value, item::getContent, item::setContent));
+        itemTags.putIfAbsent("dc:subject", Item::addCategory);
 
         onItemTags.put("enclosure", item -> item.addEnclosure(new Enclosure()));
     }
