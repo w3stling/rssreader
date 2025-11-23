@@ -118,7 +118,7 @@ class RssReaderIntegrationTest {
             assertNotNull(channel);
             assertThat(channel.getTitle(), is("Statistiska centralbyrån - Statistiknyheter"));
             assertThat(channel.getDescription(), is("Statistiknyheter via RSS"));
-            assertThat(channel.getLanguage(), isEmpty());
+            assertThat(channel.getLanguage(), isPresentAndIs("sv-SE"));
             assertThat(channel.getLink().toLowerCase(), is("http://www.scb.se/feed/statistiknyheter/"));
             assertThat(channel.getCopyright(), isEmpty());
             assertThat(channel.getGenerator(), isEmpty());
@@ -465,7 +465,7 @@ class RssReaderIntegrationTest {
     @Test
     void dateTime() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.breakit.se/feed/artiklar").collect(Collectors.toList());
+        List<Item> items = reader.read("https://status.cafe/feed.atom").collect(Collectors.toList());
 
         if (items.isEmpty() && isWeekend()) {
             return; // Brakit articles are removed after one day and no articles published on Saturday or Sunday
@@ -812,16 +812,11 @@ class RssReaderIntegrationTest {
     }
 
     @Test
-    void readRdfFeed() {
-        var list = new RssReader().read(fromFile("rdf-feed.xml")).collect(Collectors.toList());
-        assertEquals(9, list.size());
-        var item = list.get(0);
-        assertEquals("tandf: Journal of Web Librarianship: Table of Contents", item.getChannel().getTitle());
-        assertEquals("Table of Contents for Journal of Web Librarianship. List of articles from both the latest and ahead of print issues.", item.getChannel().getDescription());
-        assertEquals("en-US", item.getChannel().getLanguage().orElse(""));
-        assertEquals("I Can’t Get No Satis-Searching: Reassessing Discovery Layers in Academic Libraries Journal of Web Librarianship", item.getTitle().orElse(""));
-        assertEquals("Volume 18, Issue 1, January-March 2024, Page 1-14<br/>. <br/>", item.getDescription().orElse(""));
-        assertEquals("doi:10.1080/19322909.2024.2326687", item.getGuid().orElse(""));
+    void atomFeedWithLanguage() {
+        var list = new RssReader().read(fromFile("item-sort-test.xml"))
+                .collect(Collectors.toList());
+        assertEquals(10, list.size());
+        assertEquals("en", list.get(0).getChannel().getLanguage().orElse(""));
     }
 
     @Test

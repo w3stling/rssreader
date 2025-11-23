@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("java:S5976")
 class DateTimeTest {
+    final DateTime dateTime = new DateTime();
 
     @Test
     void dateTimeFormat1() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Fri, 01 Jun 2018 07:17:52 +0200");
         assertEquals(1527830272000L, timestamp);
 
@@ -34,15 +34,12 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat2() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52+02:00");
         assertEquals(1527830272000L, timestamp);
     }
 
     @Test
     void dateTimeFormat3() {
-        var dateTime = new DateTime();
-
         var timestamp = dateTime.toEpochMilli("Saturday, 26 August 2023 21:00:00 +07:00");
         assertEquals(1693058400000L, timestamp);
 
@@ -77,7 +74,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat4() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Sat, 30 Nov 2019 08:21:14 GMT");
         assertEquals(1575102074000L, timestamp);
 
@@ -99,14 +95,12 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat5() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2021-11-17T13:21:21Z");
         assertEquals(1637155281000L, timestamp);
     }
 
     @Test
     void dateTimeFormat6() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Sun, 04 Sep 2022 09:42:16");
         assertEquals(1662284536000L, timestamp);
 
@@ -120,7 +114,6 @@ class DateTimeTest {
     @Test
     void dateTimeFormat7() {
         //https://datatracker.ietf.org/doc/html/rfc4287#section-3.3
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2003-12-13T18:30:02Z");
         assertEquals(1071340202000L, timestamp);
 
@@ -136,14 +129,12 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat8() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2022-10-20 02:10:12");
         assertEquals(1666231812000L, timestamp);
     }
 
     @Test
     void dateTimeFormat9() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Fri, 04 Nov 2022 23:00:18 Z");
         assertEquals(1667602818000L, timestamp);
 
@@ -153,7 +144,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat10() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Mon, 07 Nov 2022 06:56:00 UTC");
         assertEquals(1667804160000L, timestamp);
 
@@ -164,8 +154,6 @@ class DateTimeTest {
     @Test
     void dateTimeFormat11() {
         // Eastern time
-        var dateTime = new DateTime();
-
         var timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 EDT");
         assertEquals(1667967714000L, timestamp);
 
@@ -230,7 +218,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat12() {
-        var dateTime = new DateTime();
         assertEquals(1423026000000L, dateTime.toEpochMilli("Wednesday, 04 Feb 2015 00:00:00 EST"));
         // Eastern time
         var timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 EDT");
@@ -290,7 +277,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat13() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Wed, 02 Oct 2002 13:00:00 CET");
         assertEquals(1033556400000L, timestamp);
 
@@ -300,7 +286,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat14() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53-5:30");
         assertEquals(1677869033000L, timestamp);
 
@@ -340,7 +325,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat15() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2023-02-28T17:37:08.823050123+00:00");
         assertEquals(1677605828823L, timestamp);
 
@@ -353,7 +337,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat16() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2023-08-07T10:06:05-0400");
         assertEquals(1691417165000L, timestamp);
 
@@ -363,7 +346,6 @@ class DateTimeTest {
 
     @Test
     void dateTimeFormat17() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("1 Dec 2024 09:15:08 +0000");
         assertEquals(1733044508000L, timestamp);
 
@@ -373,7 +355,6 @@ class DateTimeTest {
 
     @Test
     void testWrongDayOfWeek() {
-        var dateTime = new DateTime();
         assertEquals(1423026000000L, dateTime.toEpochMilli("Monday, 04 Feb 2015 00:00:00 EST"));
         // Eastern time
         var timestamp = dateTime.toEpochMilli("Monday, 09 Nov 2022 00:21:54 EDT");
@@ -436,7 +417,6 @@ class DateTimeTest {
 
     @Test
     void dateOnly() {
-        var dateTime = new DateTime();
         var timestamp = dateTime.toEpochMilli("2023-03-10");
         assertEquals(1678406400000L, timestamp);
 
@@ -445,27 +425,39 @@ class DateTimeTest {
     }
 
     @Test
+    void specialNonStandardDateTimeFormat() {
+        var timestamp = dateTime.toEpochMilli("16-09-2025 18:00 +0400");
+        assertEquals(1758031200000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("16-09-2025 18:00:01 +0400");
+        assertEquals(1758031201000L, timestamp);
+    }
+
+    @Test
     void timestampWithNoTimezone() {
-        var dateTime = new DateTime();
-        var timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        var dateTimeParser = new DateTime();
+        var timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527837472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("Australia/Sydney"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("Australia/Sydney"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527801472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("America/Chicago"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("America/Chicago"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527855472000L, timestamp);
 
-        dateTime = new DateTime(ZoneId.of("Europe/Paris"));
-        timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52");
+        dateTimeParser = new DateTime(ZoneId.of("Europe/Paris"));
+        timestamp = dateTimeParser.toEpochMilli("2018-06-01T07:17:52");
         assertEquals(1527830272000L, timestamp);
+
+        dateTimeParser = new DateTime();
+        timestamp = dateTimeParser.toEpochMilli("2000-12-17T01:17");
+        assertEquals(977015820000L, timestamp);
     }
 
     @Test
     void badInputNull() {
-        var dateTime = new DateTime();
         assertNull(dateTime.toLocalDateTime(null));
         assertNull(dateTime.toZonedDateTime(null));
         assertNull(dateTime.toEpochMilli(null));
@@ -473,14 +465,12 @@ class DateTimeTest {
 
     @Test
     void badInputZonedDateTime() {
-        var dateTime = new DateTime();
         assertThrows(IllegalArgumentException.class, () ->
                 dateTime.toZonedDateTime("sdflksd"));
     }
 
     @Test
     void badInputLocalDateTime() {
-        var dateTime = new DateTime();
         assertThrows(IllegalArgumentException.class, () ->
                 dateTime.toLocalDateTime("sdflksd"));
     }
