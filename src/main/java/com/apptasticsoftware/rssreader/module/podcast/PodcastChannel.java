@@ -16,9 +16,13 @@ public class PodcastChannel extends ItunesChannel {
     private PodcastLocked podcastLocked;
     private List<PodcastBlock> podcastBlocks;
     private List<PodcastFunding> podcastFundings;
-    private List<PodcastLocation> podcastLocationsPodcast;
+    private List<PodcastLocation> podcastLocations;
     private String podcastMedium;
     private List<PodcastValue> podcastValues;
+    private List<PodcastRemoteItem> podcastPodrolls;
+    private PodcastRemoteItem podcastPublisher;
+    private List<PodcastPerson> podcastPersons;
+    private PodcastUpdateFrequency podcastUpdateFrequency;
     private List<PodcastTrailer> podcastTrailers;
     private List<PodcastLiveItem> podcastLiveItems;
 
@@ -78,14 +82,14 @@ public class PodcastChannel extends ItunesChannel {
     }
 
     public List<PodcastLocation> getPodcastLocations() {
-        return emptyListIfNull(podcastLocationsPodcast);
+        return emptyListIfNull(podcastLocations);
     }
 
     public void addPodcastLocation(PodcastLocation podcastLocation) {
-        if (podcastLocationsPodcast == null) {
-            podcastLocationsPodcast = new ArrayList<>();
+        if (podcastLocations == null) {
+            podcastLocations = new ArrayList<>();
         }
-        podcastLocationsPodcast.add(podcastLocation);
+        podcastLocations.add(podcastLocation);
     }
 
     public String getPodcastMedium() {
@@ -105,6 +109,45 @@ public class PodcastChannel extends ItunesChannel {
             podcastValues = new ArrayList<>();
         }
         podcastValues.add(podcastValue);
+    }
+
+
+    public List<PodcastRemoteItem> getPodcastPodrolls() {
+        return emptyListIfNull(podcastPodrolls);
+    }
+
+    public void addPodcastPodroll(PodcastRemoteItem podcastPodroll) {
+        if (podcastPodrolls == null) {
+            podcastPodrolls = new ArrayList<>();
+        }
+        podcastPodrolls.add(podcastPodroll);
+    }
+
+    public Optional<PodcastRemoteItem> getPodcastPublisher() {
+        return Optional.ofNullable(podcastPublisher);
+    }
+
+    public void setPodcastPublisher(PodcastRemoteItem podcastPublisher) {
+        this.podcastPublisher = podcastPublisher;
+    }
+
+    public List<PodcastPerson> getPodcastPersons() {
+        return emptyListIfNull(podcastPersons);
+    }
+
+    public void addPodcastPerson(PodcastPerson podcastPerson) {
+        if (podcastPersons == null) {
+            podcastPersons = new ArrayList<>();
+        }
+        podcastPersons.add(podcastPerson);
+    }
+
+    public Optional<PodcastUpdateFrequency> getPodcastUpdateFrequency() {
+        return Optional.ofNullable(podcastUpdateFrequency);
+    }
+
+    public void setPodcastUpdateFrequency(PodcastUpdateFrequency podcastUpdateFrequency) {
+        this.podcastUpdateFrequency = podcastUpdateFrequency;
     }
 
     public List<PodcastTrailer> getPodcastTrailers() {
@@ -134,11 +177,27 @@ public class PodcastChannel extends ItunesChannel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         PodcastChannel that = (PodcastChannel) o;
-        return Objects.equals(getPodcastGuid(), that.getPodcastGuid()) && Objects.equals(getPodcastLicense(), that.getPodcastLicense()) && Objects.equals(getPodcastLocked(), that.getPodcastLocked()) && Objects.equals(getPodcastBlocks(), that.getPodcastBlocks()) && Objects.equals(getPodcastFundings(), that.getPodcastFundings()) && Objects.equals(podcastLocationsPodcast, that.podcastLocationsPodcast) && Objects.equals(getPodcastMedium(), that.getPodcastMedium()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastTrailers(), that.getPodcastTrailers()) && Objects.equals(getPodcastLiveItems(), that.getPodcastLiveItems());
+        return Objects.equals(getPodcastGuid(), that.getPodcastGuid()) &&
+                Objects.equals(getPodcastLicense(), that.getPodcastLicense()) &&
+                Objects.equals(getPodcastLocked(), that.getPodcastLocked()) &&
+                Objects.equals(getPodcastBlocks(), that.getPodcastBlocks()) &&
+                Objects.equals(getPodcastFundings(), that.getPodcastFundings()) &&
+                Objects.equals(getPodcastLocations(), that.getPodcastLocations()) &&
+                Objects.equals(getPodcastMedium(), that.getPodcastMedium()) &&
+                Objects.equals(getPodcastValues(), that.getPodcastValues()) &&
+                Objects.equals(getPodcastPodrolls(), that.getPodcastPodrolls()) &&
+                Objects.equals(getPodcastPublisher(), that.getPodcastPublisher()) &&
+                Objects.equals(getPodcastPersons(), that.getPodcastPersons()) &&
+                Objects.equals(getPodcastUpdateFrequency(), that.getPodcastUpdateFrequency()) &&
+                Objects.equals(getPodcastTrailers(), that.getPodcastTrailers()) &&
+                Objects.equals(getPodcastLiveItems(), that.getPodcastLiveItems());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getPodcastGuid(), getPodcastLicense(), getPodcastLocked(), getPodcastBlocks(), getPodcastFundings(), podcastLocationsPodcast, getPodcastMedium(), getPodcastValues(), getPodcastTrailers(), getPodcastLiveItems());
+        return Objects.hash(super.hashCode(), getPodcastGuid(), getPodcastLicense(), getPodcastLocked(),
+                getPodcastBlocks(), getPodcastFundings(), getPodcastLocations(), getPodcastMedium(),
+                getPodcastValues(), getPodcastPodrolls(), getPodcastPublisher(), getPodcastPersons(),
+                getPodcastUpdateFrequency(), getPodcastTrailers(), getPodcastLiveItems());
     }
 }

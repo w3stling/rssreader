@@ -28,9 +28,6 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.net.http.HttpClient;
 
-import static com.apptasticsoftware.rssreader.util.Mapper.mapBoolean;
-import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
-
 /**
  * Class for reading podcast (itunes) feeds.
  */
@@ -51,6 +48,13 @@ public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem
         super(httpClient);
     }
 
+    @Override
+    protected void registerChannelTags() {
+        super.registerChannelTags();
+        ItunesExtensions.register(getFeedExtensionRegistry());
+    }
+
+    /*
     @Override
     protected void registerChannelTags() {
         super.registerChannelTags();
@@ -100,6 +104,7 @@ public class ItunesRssReader extends AbstractRssReader<ItunesChannel, ItunesItem
         addItemExtension("itunes:block", (i, v) -> mapBoolean(v, i::setItunesBlock));
         addItemExtension("itunes:image", "href", ItunesItem::setItunesImage);
     }
+    */
 
     @Override
     protected ItunesChannel createChannel(DateTimeParser dateTimeParser) {

@@ -1,10 +1,12 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
@@ -205,8 +207,87 @@ public class PodcastRssReaderTest {
                 .collect(Collectors.toList());
 
         assertEquals(3, items.size());
-    }
+        var item = items.get(0);
+        var channel = (PodcastChannel) item.getChannel();
+        assertThat(channel.getLink(), is("https://podnews.net"));
+        assertThat(channel.getTitle(), is("Podnews Daily - podcast industry news"));
+        assertThat(channel.getDescription(), is("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify, YouTube\n" +
+                "            Music to Joe Rogan. Podnews also covers the latest jobs and events and trending shows in a short update\n" +
+                "            every weekday. editor@podnews.net - visit https://podnews.net to get our free newsletter."));
+        assertThat(channel.getLanguage(), isPresentAndIs("en-gb"));
+        assertThat(channel.getGenerator(), isPresentAndIs("Podnews LLC"));
+        assertThat(channel.getItunesNewFeedUrl(), isPresentAndIs("https://podnews.net/rss"));
+        assertThat(channel.getLastBuildDate(), isPresentAndIs("Sat, 27 Sep 2025 11:00:18 +0000"));
+        assertThat(channel.getLastBuildDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Sat, 27 Sep 2025 11:00:18 +0000")));
+        assertThat(channel.getPodcastLocations().size(), is(1));
+        assertThat(channel.getPodcastLocations().get(0).getLocation(), is("Brisbane, Australia"));
+        assertThat(channel.getPodcastLocations().get(0).getGeo(), isPresentAndIs("geo:-27.4679,153.028"));
+        assertThat(channel.getPodcastLocations().get(0).getOsm(), isPresentAndIs("R11677792"));
+        assertThat(channel.getPodcastLocations().get(0).getCountry(), isPresentAndIs("au"));
+        assertThat(channel.getPodcastLocations().get(0).getRel(), isPresentAndIs("creator"));
+        assertThat(channel.getPubDate(), isPresentAndIs("Fri, 26 Sep 2025 09:19:05 +0000"));
+        assertThat(channel.getPubDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 26 Sep 2025 09:19:05 +0000")));
+        assertThat(channel.getSkipDays(), is(List.of("Saturday", "Sunday")));
+        assertThat(channel.getSkipHours(), is(List.of(0, 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23)));
+        assertThat(channel.getPodcastGuid(), is("9b024349-ccf0-5f69-a609-6b82873eab3c"));
+        assertThat(channel.getPodcastFundings().size(), is(1));
+        assertThat(channel.getPodcastFundings().get(0).getFunding(), is("Support us"));
+        assertThat(channel.getPodcastFundings().get(0).getUrl(), is("https://buy.stripe.com/4gw8zIcpc58CcGQ6ot"));
+        assertThat(channel.getPodcastValues().size(), is(1));
+        assertThat(channel.getPodcastValues().get(0).getType(), is("lightning"));
+        assertThat(channel.getPodcastValues().get(0).getMethod(), is("keysend"));
+        assertThat(channel.getPodcastValues().get(0).getSuggested(), isPresentAndIs(0.00000100000));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().size(), is(3));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getName(), is("Podnews via node"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getType(), is("node"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getAddress(), is("02b307fdad2e68d08ba5a59cfc8a0a7ec0ff375291e1082fa22a5524e68608c520"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getSplit(), is(49));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getName(), is("Podcast Index"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getType(), is("node"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getAddress(), is("03ae9f91a0cb8ff43840e3c322c4c61f019d8c1c3cea15a25cfc425ac605e61a4a"));
+        assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getSplit(), is(2));
+        // TODO: podcast:podping
+        assertThat(channel.getPodcastPersons().size(), is(1));
+        assertThat(channel.getPodcastPersons().get(0).getPerson(), is("James Cridland"));
+        assertThat(channel.getPodcastPersons().get(0).getRole(), isPresentAndIs("host"));
+        assertThat(channel.getPodcastPersons().get(0).getGroup(), isPresentAndIs("cast"));
+        assertThat(channel.getPodcastPersons().get(0).getImg(), isPresentAndIs("https://james.cridland.net/james-cridland-thumbnail.jpg"));
+        assertThat(channel.getPodcastPersons().get(0).getHref(), isPresentAndIs("https://james.cridland.net/"));
+        assertThat(channel.getItunesAuthor(), isPresentAndIs("Podnews LLC"));
+        assertTrue(channel.getItunesOwner().isPresent());
+        assertThat(channel.getItunesOwner().get().getEmail(), is("editor+dailyrss@podnews.net"));
+        assertThat(channel.getItunesOwner().get().getName(), isPresentAndIs("Podnews LLC"));
+        assertThat(channel.getItunesSubtitle(), isPresentAndIs("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify,\n" +
+                "            YouTube Music to Joe Rogan. Podnews also covers the latest jobs and events and trending shows in a short\n" +
+                "            update every weekday. editor@podnews.net"));
+        // TODO: missing ItunesKeywords <-- deprected!
+        assertThat(channel.getItunesCategories(), is(List.of("News", "Daily News", "Technology")));
+        assertThat(channel.getItunesType(), isPresentAndIs("episodic"));
+        assertThat(channel.getItunesImage(), is("https://podnews.net/static/podnews-2000x2000.png"));
+        assertTrue(channel.getImage().isPresent());
+        assertThat(channel.getImage().get().getUrl(), is("https://podnews.net/static/_favicons/apple-icon.png"));
+        assertThat(channel.getImage().get().getTitle(), is("Podnews"));
+        assertThat(channel.getImage().get().getLink(), is("https://podnews.net"));
+        assertTrue(channel.getPodcastUpdateFrequency().isPresent());
+        assertThat(channel.getPodcastUpdateFrequency().get().getUpdateFrequency(), is("Every weekday"));
+        assertThat(channel.getPodcastUpdateFrequency().get().getRrule(), is("FREQ=DAILY;INTERVAL=1;BYDAY=MO,TU,WE,TH,FR"));
 
+        assertThat(channel.getPodcastPodrolls().size(), is(3));
+        assertThat(channel.getPodcastPodrolls().get(0).getFeedGuid(), is("396d9ae0-da7e-5557-b894-b606231fa3ea"));
+        assertThat(channel.getPodcastPodrolls().get(0).getFeedUrl(), isPresentAndIs("https://feeds.buzzsprout.com/1538779.rss"));
+        assertThat(channel.getPodcastPodrolls().get(1).getFeedGuid(), is("d04f3195-25e8-52d9-b87f-969251009f1e"));
+        assertThat(channel.getPodcastPodrolls().get(1).getFeedUrl(), isPresentAndIs("https://feeds.buzzsprout.com/2105583.rss"));
+        assertThat(channel.getPodcastPodrolls().get(2).getFeedGuid(), is("dc87f50b-8c0d-5980-8f2d-067dde67c7e4"));
+        assertThat(channel.getPodcastPodrolls().get(2).getFeedUrl(), isPresentAndIs("https://podnews.net/sitemap/trailers.xml"));
+        assertTrue(channel.getPodcastPublisher().isPresent());
+        assertThat(channel.getPodcastPublisher().get().getFeedGuid(), is("d76ccec7-e6df-5616-9d7d-8dc1fb9d9820"));
+        assertThat(channel.getPodcastPublisher().get().getMedium(), isPresentAndIs("publisher"));
+        assertThat(channel.getPodcastPublisher().get().getFeedUrl(), isPresentAndIs("https://podnews.net/static/feeds/publisher.xml"));
+
+        assertThat(channel.getCategories(), is(List.of("podcasting", "radio")));
+        assertThat(channel.getTtl(), isPresentAndIs("30"));
+
+    }
 
     @Test
     void equalsContract() {
@@ -234,6 +315,7 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastLiveItem.class).verify();
         EqualsVerifier.simple().forClass(PodcastRemoteItem.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
+        EqualsVerifier.simple().forClass(PodcastUpdateFrequency.class).verify();
     }
 
     private InputStream fromFile(String fileName) {

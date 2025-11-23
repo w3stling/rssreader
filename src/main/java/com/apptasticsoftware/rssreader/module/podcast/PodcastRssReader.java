@@ -40,7 +40,7 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
     @Override
     protected void registerChannelTags() {
         super.registerChannelTags();
-        var extensionRegistry = getExtensionRegistry();
+        var extensionRegistry = getFeedExtensionRegistry();
         //PodcastExtensions.register(mappingRegistry);
         ItunesExtensions.register(extensionRegistry);
 
@@ -51,16 +51,20 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
         onChannelTags.put("/rss/channel/podcast:value/podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
         onChannelTags.put("podcast:valueTimeSplit", channel -> channel.getPodcastValues().getLast().addValueTimeSplit(new PodcastValueTimeSplit()));
         onChannelTags.put("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
+        onChannelTags.put("/rss/channel/podcast:podroll/podcast:remoteItem", channel -> channel.addPodcastPodroll(new PodcastRemoteItem()));
+        onChannelTags.put("podcast:person", channel ->channel.addPodcastPerson(new PodcastPerson()));
         onChannelTags.put("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
 
         addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
         addChannelExtension("podcast:license", (channel, value) -> createIfNull(channel::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
-        addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent((locked) -> mapBoolean(value, locked::setLocked)));
+        addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> mapBoolean(value, locked::setLocked)));
         addChannelExtension("podcast:block", (channel, value) -> Optional.ofNullable(channel.getPodcastBlocks().getLast()).ifPresent(block -> mapBoolean(value, block::setBlock)));
         addChannelExtension("podcast:funding", (channel, value) -> Optional.ofNullable(channel.getPodcastFundings().getLast()).ifPresent(funding -> funding.setFunding(value)));
         addChannelExtension("podcast:location", (channel, value) -> Optional.ofNullable(channel.getPodcastLocations().getLast()).ifPresent(location -> location.setLocation(value)));
         addChannelExtension("podcast:medium", PodcastChannel::setPodcastMedium);
+        addChannelExtension("podcast:person", (channel, value) -> channel.getPodcastPersons().getLast().setPerson(value));
         addChannelExtension("podcast:trailer", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> trailer.setTrailer(value)));
+        addChannelExtension("podcast:updateFrequency", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setUpdateFrequency(value)));
     }
 
     @Override
@@ -99,17 +103,51 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
         addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "customValue", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> valueRecipient.setCustomValue(value)));
         addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "split", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapInteger(value, valueRecipient::setSplit)));
         addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", "fee", (channel, value) -> Optional.ofNullable(channel.getPodcastValues().getLast().getValueTimeSplits().getLast().getValueRecipients().getLast()).ifPresent(valueRecipient -> mapBoolean(value, valueRecipient::setFee)));
-        addChannelExtension("podcast:remoteItem", "feedGuid", channelPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
-        addChannelExtension("podcast:remoteItem", "feedUrl", channelPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
-        addChannelExtension("podcast:remoteItem", "itemGuid", channelPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
-        addChannelExtension("podcast:remoteItem", "medium", channelPodcastRemoteItem(PodcastRemoteItem::setMedium));
-        addChannelExtension("podcast:remoteItem", "title", channelPodcastRemoteItem(PodcastRemoteItem::setTitle));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:remoteItem", "feedGuid", channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:remoteItem", "feedUrl", channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:remoteItem", "itemGuid", channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:remoteItem", "medium", channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastRemoteItem::setMedium));
+        addChannelExtension("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:remoteItem", "title", channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastRemoteItem::setTitle));
+        addChannelExtension("/rss/channel/podcast:podroll/podcast:remoteItem", "feedGuid", channelPodcastPodrollPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
+        addChannelExtension("/rss/channel/podcast:podroll/podcast:remoteItem", "feedUrl", channelPodcastPodrollPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
+        addChannelExtension("/rss/channel/podcast:podroll/podcast:remoteItem", "itemGuid", channelPodcastPodrollPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
+        addChannelExtension("/rss/channel/podcast:podroll/podcast:remoteItem", "medium", channelPodcastPodrollPodcastRemoteItem(PodcastRemoteItem::setMedium));
+        addChannelExtension("/rss/channel/podcast:podroll/podcast:remoteItem", "title", channelPodcastPodrollPodcastRemoteItem(PodcastRemoteItem::setTitle));
+        addChannelExtension("/rss/channel/podcast:publisher/podcast:remoteItem", "feedGuid", channelPodcastPublisherItemPodcastRemoteItem(PodcastRemoteItem::setFeedGuid));
+        addChannelExtension("/rss/channel/podcast:publisher/podcast:remoteItem", "feedUrl", channelPodcastPublisherItemPodcastRemoteItem(PodcastRemoteItem::setFeedUrl));
+        addChannelExtension("/rss/channel/podcast:publisher/podcast:remoteItem", "itemGuid", channelPodcastPublisherItemPodcastRemoteItem(PodcastRemoteItem::setItemGuid));
+        addChannelExtension("/rss/channel/podcast:publisher/podcast:remoteItem", "medium", channelPodcastPublisherItemPodcastRemoteItem(PodcastRemoteItem::setMedium));
+        addChannelExtension("/rss/channel/podcast:publisher/podcast:remoteItem", "title", channelPodcastPublisherItemPodcastRemoteItem(PodcastRemoteItem::setTitle));
+        addChannelExtension("podcast:person", "role", (channel, value) -> channel.getPodcastPersons().getLast().setRole(value));
+        addChannelExtension("podcast:person", "group", (channel, value) -> channel.getPodcastPersons().getLast().setGroup(value));
+        addChannelExtension("podcast:person", "img", (channel, value) -> channel.getPodcastPersons().getLast().setImg(value));
+        addChannelExtension("podcast:person", "href", (channel, value) -> channel.getPodcastPersons().getLast().setHref(value));
+
+        addChannelExtension("podcast:updateFrequency", "rrule", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setRrule(value)));
+        addChannelExtension("podcast:updateFrequency", "complete", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setComplete(value)));
+        addChannelExtension("podcast:updateFrequency", "dtstart", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setDtstart(value)));
+
+
     }
 
-    private static BiConsumer<PodcastChannel, String> channelPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
+    private static BiConsumer<PodcastChannel, String> channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
         return (channel, value) -> {
             var timeSplit = channel.getPodcastValues().getLast().getValueTimeSplits().getLast();
             var remoteItem = createIfNull(timeSplit::getRemoteItem, timeSplit::setRemoteItem, PodcastRemoteItem::new);
+            setter.accept(remoteItem, value);
+        };
+    }
+
+    private static BiConsumer<PodcastChannel, String> channelPodcastPodrollPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
+        return (channel, value) -> {
+            var remoteItem = channel.getPodcastPodrolls().getLast();
+            setter.accept(remoteItem, value);
+        };
+    }
+
+    private static BiConsumer<PodcastChannel, String> channelPodcastPublisherItemPodcastRemoteItem(BiConsumer<PodcastRemoteItem, String> setter) {
+        return (channel, value) -> {
+            var remoteItem = createIfNull(channel::getPodcastPublisher, channel::setPodcastPublisher, PodcastRemoteItem::new);
             setter.accept(remoteItem, value);
         };
     }
