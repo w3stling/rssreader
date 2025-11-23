@@ -7,36 +7,36 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
 
 public class ItunesExtensions {
 
-    public static void register(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> feedExtensionRegistry) {
-        channelTagExtensions(feedExtensionRegistry);
-        channelAttributeExtensions(feedExtensionRegistry);
-        itemTagExtensions(feedExtensionRegistry);
-        itemAttributesExtensions(feedExtensionRegistry);
+    public static void register(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
+        channelTagExtensions(registry);
+        channelAttributeExtensions(registry);
+        itemTagExtensions(registry);
+        itemAttributesExtensions(registry);
     }
 
-    private static void channelTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {
-        extensions.addChannelExtension("itunes:explicit", (i, v) -> mapBoolean(v, i::setItunesExplicit));
-        extensions.addChannelExtension("itunes:author", ItunesChannel::setItunesAuthor);
+    private static void channelTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
+        registry.addChannelExtension("itunes:explicit", (i, v) -> mapBoolean(v, i::setItunesExplicit));
+        registry.addChannelExtension("itunes:author", ItunesChannel::setItunesAuthor);
 
-        extensions.addChannelExtension("itunes:name", (i, v) -> {
+        registry.addChannelExtension("itunes:name", (i, v) -> {
             if (i.getItunesOwner().isEmpty())
                 i.setItunesOwner(new ItunesOwner());
             i.getItunesOwner().ifPresent(a -> a.setName(v));
         });
 
-        extensions.addChannelExtension("itunes:email", (i, v) -> {
+        registry.addChannelExtension("itunes:email", (i, v) -> {
             if (i.getItunesOwner().isEmpty())
                 i.setItunesOwner(new ItunesOwner());
             i.getItunesOwner().ifPresent(a -> a.setEmail(v));
         });
 
-        extensions.addChannelExtension("itunes:title", ItunesChannel::setItunesTitle);
-        extensions.addChannelExtension("itunes:subtitle", ItunesChannel::setItunesSubtitle);
-        extensions.addChannelExtension("itunes:summary", ItunesChannel::setItunesSummary);
-        extensions.addChannelExtension("itunes:type", ItunesChannel::setItunesType);
-        extensions.addChannelExtension("itunes:new-feed-url", ItunesChannel::setItunesNewFeedUrl);
-        extensions.addChannelExtension("itunes:block", (i, v) -> mapBoolean(v, i::setItunesBlock));
-        extensions.addChannelExtension("itunes:complete", (i, v) -> mapBoolean(v, i::setItunesComplete));
+        registry.addChannelExtension("itunes:title", ItunesChannel::setItunesTitle);
+        registry.addChannelExtension("itunes:subtitle", ItunesChannel::setItunesSubtitle);
+        registry.addChannelExtension("itunes:summary", ItunesChannel::setItunesSummary);
+        registry.addChannelExtension("itunes:type", ItunesChannel::setItunesType);
+        registry.addChannelExtension("itunes:new-feed-url", ItunesChannel::setItunesNewFeedUrl);
+        registry.addChannelExtension("itunes:block", (i, v) -> mapBoolean(v, i::setItunesBlock));
+        registry.addChannelExtension("itunes:complete", (i, v) -> mapBoolean(v, i::setItunesComplete));
     }
 
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {
