@@ -4,43 +4,86 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PodcastItemData {
-    Optional<PodcastSeason> getPodcastSeason();
 
-    void setPodcastSeason(PodcastSeason podcastSeason);
+    PodcastItemData getPodcastItemData();
 
-    Optional<PodcastEpisode> getPodcastEpisode();
+    default Optional<PodcastSeason> getPodcastSeason() {
+        return getPodcastItemData().getPodcastSeason();
+    }
 
-    void setPodcastEpisode(PodcastEpisode podcastEpisode);
+    default void setPodcastSeason(PodcastSeason podcastSeason) {
+        getPodcastItemData().setPodcastSeason(podcastSeason);
+    }
 
-    Optional<PodcastChapters> getPodcastChapters();
+    default Optional<PodcastEpisode> getPodcastEpisode() {
+        return getPodcastItemData().getPodcastEpisode();
+    }
 
-    void setPodcastChapters(PodcastChapters podcastChapters);
+    default void setPodcastEpisode(PodcastEpisode podcastEpisode) {
+        getPodcastItemData().setPodcastEpisode(podcastEpisode);
+    }
 
-    List<PodcastImage> getPodcastImages();
+    default Optional<PodcastChapters> getPodcastChapters() {
+        return getPodcastItemData().getPodcastChapters();
+    }
 
-    void addPodcastImage(PodcastImage podcastImage);
+    default void setPodcastChapters(PodcastChapters podcastChapters) {
+        getPodcastItemData().setPodcastChapters(podcastChapters);
+    }
 
-    List<PodcastSoundbite> getPodcastSoundbites();
+    default List<PodcastImage> getPodcastImages() {
+        return getPodcastItemData().getPodcastImages();
+    }
 
-    void addPodcastSoundbite(PodcastSoundbite podcastSoundbite);
+    default void addPodcastImage(PodcastImage podcastImage) {
+        getPodcastItemData().addPodcastImage(podcastImage);
+    }
 
-    List<PodcastTranscript> getPodcastTranscripts();
+    default List<PodcastSoundbite> getPodcastSoundbites() {
+        return getPodcastItemData().getPodcastSoundbites();
+    }
 
-    void addPodcastTranscript(PodcastTranscript podcastTranscript);
+    default void addPodcastSoundbite(PodcastSoundbite podcastSoundbite) {
+        getPodcastItemData().addPodcastSoundbite(podcastSoundbite);
+    }
 
-    List<PodcastPerson> getPodcastPersons();
+    default List<PodcastTranscript> getPodcastTranscripts() {
+        return getPodcastItemData().getPodcastTranscripts();
+    }
 
-    void addPodcastPerson(PodcastPerson podcastPerson);
+    default void addPodcastTranscript(PodcastTranscript podcastTranscript) {
+        getPodcastItemData().addPodcastTranscript(podcastTranscript);
+    }
 
-    List<PodcastAlternateEnclosure> getPodcastAlternateEnclosures();
+    default List<PodcastPerson> getPodcastPersons() {
+        return getPodcastItemData().getPodcastPersons();
+    }
 
-    void addPodcastAlternateEnclosure(PodcastAlternateEnclosure podcastAlternateEnclosure);
+    default void addPodcastPerson(PodcastPerson podcastPerson) {
+        getPodcastItemData().addPodcastPerson(podcastPerson);
+    }
 
-    List<PodcastValue> getPodcastValues();
+    default List<PodcastAlternateEnclosure> getPodcastAlternateEnclosures() {
+        return getPodcastItemData().getPodcastAlternateEnclosures();
+    }
 
-    void addPodcastValue(PodcastValue podcastValue);
+    default void addPodcastAlternateEnclosure(PodcastAlternateEnclosure podcastAlternateEnclosure) {
+        getPodcastItemData().addPodcastAlternateEnclosure(podcastAlternateEnclosure);
+    }
 
-    List<PodcastSocialInteract> getPodcastSocialInteracts();
+    default List<PodcastValue> getPodcastValues() {
+        return getPodcastItemData().getPodcastValues();
+    }
 
-    void addPodcastSocialInteract(PodcastSocialInteract podcastSocialInteract);
+    default void addPodcastValue(PodcastValue podcastValue) {
+        getPodcastItemData().addPodcastValue(podcastValue);
+    }
+
+    default List<PodcastSocialInteract> getPodcastSocialInteracts() {
+        return getPodcastItemData().getPodcastSocialInteracts();
+    }
+
+    default void addPodcastSocialInteract(PodcastSocialInteract podcastSocialInteract) {
+        getPodcastItemData().addPodcastSocialInteract(podcastSocialInteract);
+    }
 }

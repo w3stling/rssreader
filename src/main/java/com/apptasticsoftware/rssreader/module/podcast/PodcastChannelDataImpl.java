@@ -23,6 +23,11 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     private List<PodcastLiveItem> podcastLiveItems;
 
     @Override
+    public PodcastChannelData getPodcastChannelData() {
+        return this;
+    }
+
+    @Override
     public String getPodcastGuid() {
         return podcastGuid;
     }

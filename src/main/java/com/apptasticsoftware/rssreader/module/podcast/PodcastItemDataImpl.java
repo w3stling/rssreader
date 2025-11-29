@@ -19,6 +19,11 @@ public class PodcastItemDataImpl implements PodcastItemData {
     private List<PodcastSocialInteract> podcastSocialInteracts;
 
     @Override
+    public PodcastItemData getPodcastItemData() {
+        return this;
+    }
+
+    @Override
     public Optional<PodcastSeason> getPodcastSeason() {
         return Optional.ofNullable(podcastSeason);
     }

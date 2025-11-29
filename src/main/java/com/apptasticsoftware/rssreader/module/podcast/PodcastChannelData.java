@@ -4,60 +4,118 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PodcastChannelData {
-    String getPodcastGuid();
 
-    void setPodcastGuid(String podcastGuid);
+    PodcastChannelData getPodcastChannelData();
 
-    Optional<PodcastLicense> getPodcastLicense();
+    default String getPodcastGuid() {
+        return getPodcastChannelData().getPodcastGuid();
+    }
 
-    void setPodcastLicense(PodcastLicense podcastLicense);
+    default void setPodcastGuid(String podcastGuid) {
+        getPodcastChannelData().setPodcastGuid(podcastGuid);
+    }
 
-    Optional<PodcastLocked> getPodcastLocked();
+    default Optional<PodcastLicense> getPodcastLicense() {
+        return getPodcastChannelData().getPodcastLicense();
+    }
 
-    void setPodcastLocked(PodcastLocked podcastLocked);
+    default void setPodcastLicense(PodcastLicense podcastLicense) {
+        getPodcastChannelData().setPodcastLicense(podcastLicense);
+    }
 
-    List<PodcastBlock> getPodcastBlocks();
+    default Optional<PodcastLocked> getPodcastLocked() {
+        return getPodcastChannelData().getPodcastLocked();
+    }
 
-    void addPodcastBlock(PodcastBlock podcastBlock);
+    default void setPodcastLocked(PodcastLocked podcastLocked) {
+        getPodcastChannelData().setPodcastLocked(podcastLocked);
+    }
 
-    List<PodcastFunding> getPodcastFundings();
+    default List<PodcastBlock> getPodcastBlocks() {
+        return getPodcastChannelData().getPodcastBlocks();
+    }
 
-    void addPodcastFunding(PodcastFunding podcastFunding);
+    default void addPodcastBlock(PodcastBlock podcastBlock) {
+        getPodcastChannelData().addPodcastBlock(podcastBlock);
+    }
 
-    List<PodcastLocation> getPodcastLocations();
+    default List<PodcastFunding> getPodcastFundings() {
+        return getPodcastChannelData().getPodcastFundings();
+    }
 
-    void addPodcastLocation(PodcastLocation podcastLocation);
+    default void addPodcastFunding(PodcastFunding podcastFunding) {
+        getPodcastChannelData().addPodcastFunding(podcastFunding);
+    }
 
-    String getPodcastMedium();
+    default List<PodcastLocation> getPodcastLocations() {
+        return getPodcastChannelData().getPodcastLocations();
+    }
 
-    void setPodcastMedium(String podcastMedium);
+    default void addPodcastLocation(PodcastLocation podcastLocation) {
+        getPodcastChannelData().addPodcastLocation(podcastLocation);
+    }
 
-    List<PodcastValue> getPodcastValues();
+    default String getPodcastMedium() {
+        return getPodcastChannelData().getPodcastMedium();
+    }
 
-    void addPodcastValue(PodcastValue podcastValue);
+    default void setPodcastMedium(String podcastMedium) {
+        getPodcastChannelData().setPodcastMedium(podcastMedium);
+    }
 
+    default List<PodcastValue> getPodcastValues() {
+        return getPodcastChannelData().getPodcastValues();
+    }
 
-    List<PodcastRemoteItem> getPodcastPodrolls();
+    default void addPodcastValue(PodcastValue podcastValue) {
+        getPodcastChannelData().addPodcastValue(podcastValue);
+    }
 
-    void addPodcastPodroll(PodcastRemoteItem podcastPodroll);
+    default List<PodcastRemoteItem> getPodcastPodrolls() {
+        return getPodcastChannelData().getPodcastPodrolls();
+    }
 
-    Optional<PodcastRemoteItem> getPodcastPublisher();
+    default void addPodcastPodroll(PodcastRemoteItem podcastPodroll) {
+        getPodcastChannelData().addPodcastPodroll(podcastPodroll);
+    }
 
-    void setPodcastPublisher(PodcastRemoteItem podcastPublisher);
+    default Optional<PodcastRemoteItem> getPodcastPublisher() {
+        return getPodcastChannelData().getPodcastPublisher();
+    }
 
-    List<PodcastPerson> getPodcastPersons();
+    default void setPodcastPublisher(PodcastRemoteItem podcastPublisher) {
+        getPodcastChannelData().setPodcastPublisher(podcastPublisher);
+    }
 
-    void addPodcastPerson(PodcastPerson podcastPerson);
+    default List<PodcastPerson> getPodcastPersons() {
+        return getPodcastChannelData().getPodcastPersons();
+    }
 
-    Optional<PodcastUpdateFrequency> getPodcastUpdateFrequency();
+    default void addPodcastPerson(PodcastPerson podcastPerson) {
+        getPodcastChannelData().addPodcastPerson(podcastPerson);
+    }
 
-    void setPodcastUpdateFrequency(PodcastUpdateFrequency podcastUpdateFrequency);
+    default Optional<PodcastUpdateFrequency> getPodcastUpdateFrequency() {
+        return getPodcastChannelData().getPodcastUpdateFrequency();
+    }
 
-    List<PodcastTrailer> getPodcastTrailers();
+    default void setPodcastUpdateFrequency(PodcastUpdateFrequency podcastUpdateFrequency) {
+        getPodcastChannelData().setPodcastUpdateFrequency(podcastUpdateFrequency);
+    }
 
-    void addPodcastTrailer(PodcastTrailer podcastTrailer);
+    default List<PodcastTrailer> getPodcastTrailers() {
+        return getPodcastChannelData().getPodcastTrailers();
+    }
 
-    List<PodcastLiveItem> getPodcastLiveItems();
+    default void addPodcastTrailer(PodcastTrailer podcastTrailer) {
+        getPodcastChannelData().addPodcastTrailer(podcastTrailer);
+    }
 
-    void addPodcastLiveItem(PodcastLiveItem podcastLiveItem);
+    default List<PodcastLiveItem> getPodcastLiveItems() {
+        return getPodcastChannelData().getPodcastLiveItems();
+    }
+
+    default void addPodcastLiveItem(PodcastLiveItem podcastLiveItem) {
+        getPodcastChannelData().addPodcastLiveItem(podcastLiveItem);
+    }
 }
