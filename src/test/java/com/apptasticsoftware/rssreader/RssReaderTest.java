@@ -259,7 +259,7 @@ class RssReaderTest {
 
     @Test
     void itemHashCodeTest() {
-        Item item1 = new Item();
+        Item item1 = new ItemImpl();
         item1.setAuthor("a1");
         item1.setCategory("a2");
         item1.setTitle("a3");
@@ -270,7 +270,7 @@ class RssReaderTest {
         item1.setPubDate("a7");
         int h1 = item1.hashCode();
 
-        Item item2 = new Item(new DateTime());
+        Item item2 = new ItemImpl(new DateTime());
         item2.setAuthor("b1");
         item2.setCategory("a2");
         item2.setTitle("a3");
@@ -286,7 +286,7 @@ class RssReaderTest {
 
     @Test
     void itemEqualsTest() {
-        Item item1 = new Item(new DateTime());
+        Item item1 = new ItemImpl(new DateTime());
         item1.setAuthor("a1");
         item1.setCategory("a2");
         item1.setTitle("a3");
@@ -296,7 +296,7 @@ class RssReaderTest {
         item1.setLink("a6");
         item1.setPubDate("a7");
 
-        Item item2 = new Item(new DateTime());
+        Item item2 = new ItemImpl(new DateTime());
         item2.setAuthor("b1");
         item2.setCategory("a2");
         item2.setTitle("a3");
@@ -306,7 +306,7 @@ class RssReaderTest {
         item2.setLink("a6");
         item2.setPubDate("a7");
 
-        Item item3 = new Item(new DateTime());
+        Item item3 = new ItemImpl(new DateTime());
         item3.setAuthor("a1");
         item3.setCategory("a2");
         item3.setTitle("a3");
@@ -323,7 +323,7 @@ class RssReaderTest {
 
     @Test
     void channelHashCodeTest() {
-        Channel channel1 = new Channel();
+        Channel channel1 = new ChannelImpl();
         channel1.setTitle("a1");
         channel1.setDescription("a2");
         channel1.setCategory("a3");
@@ -339,7 +339,7 @@ class RssReaderTest {
         channel1.setRating("a11");
         int h1 = channel1.hashCode();
 
-        Channel channel2 = new Channel(new DateTime());
+        Channel channel2 = new ChannelImpl(new DateTime());
         channel2.setTitle("b1");
         channel2.setDescription("a2");
         channel2.setCategory("a3");
@@ -361,7 +361,7 @@ class RssReaderTest {
 
     @Test
     void channelEqualsTest() {
-        Channel channel1 = new Channel(new DateTime());
+        Channel channel1 = new ChannelImpl(new DateTime());
         channel1.setTitle("a1");
         channel1.setDescription("a2");
         channel1.setCategory("a3");
@@ -376,7 +376,7 @@ class RssReaderTest {
         channel1.setWebMaster("a10");
         channel1.setRating("a11");
 
-        Channel channel2 = new Channel(new DateTime());
+        Channel channel2 = new ChannelImpl(new DateTime());
         channel2.setTitle("b1");
         channel2.setDescription("a2");
         channel2.setCategory("a3");
@@ -391,7 +391,7 @@ class RssReaderTest {
         channel2.setWebMaster("a10");
         channel2.setRating("a11");
 
-        Channel channel3 = new Channel(new DateTime());
+        Channel channel3 = new ChannelImpl(new DateTime());
         channel3.setTitle("a1");
         channel3.setDescription("a2");
         channel3.setCategory("a3");
@@ -508,14 +508,14 @@ class RssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(Channel.class)
+        EqualsVerifier.simple().forClass(ChannelImpl.class)
                 .withIgnoredFields("dateTimeParser")
                 .withIgnoredFields("category")
                 .withIgnoredFields("syUpdatePeriod")
                 .withIgnoredFields("syUpdateFrequency")
                 .withNonnullFields("categories")
                 .verify();
-        EqualsVerifier.simple().forClass(Item.class)
+        EqualsVerifier.simple().forClass(ItemImpl.class)
                 .withIgnoredFields("defaultComparator")
                 .withIgnoredFields("dateTimeParser")
                 .withIgnoredFields("category")

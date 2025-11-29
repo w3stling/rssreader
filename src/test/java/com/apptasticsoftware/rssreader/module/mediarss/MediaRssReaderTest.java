@@ -435,7 +435,7 @@ class MediaRssReaderTest {
         assertThat(item.getTitle(), isPresentAndIs("Movie Title: Is this a good movie?"));
         assertThat(item.getLink(), isPresentAndIs("http://www.foo.com/item1.htm"));
 
-        MediaRssChannel channel = (MediaRssChannel) item.getChannel();
+        MediaRssChannelImpl channel = (MediaRssChannelImpl) item.getChannel();
         assertNotNull(channel);
 
         assertThat(channel.getTitle(), is("My Movie Review Site"));
@@ -1783,7 +1783,9 @@ class MediaRssReaderTest {
         EqualsVerifier.simple().forClass(MediaContent.class).verify();
         EqualsVerifier.simple().forClass(MediaGroup.class).verify();
 
-        EqualsVerifier.simple().forClass(MediaRssItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(MediaRssItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+
+        EqualsVerifier.simple().forClass(MediaRssChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
     }
 
     private InputStream fromFile(String fileName) {

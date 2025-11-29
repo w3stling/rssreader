@@ -21,38 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader;
+package com.apptasticsoftware.rssreader.module.mediarss;
 
-import java.net.http.HttpClient;
+import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.ItemImpl;
+
+import java.util.Objects;
 
 /**
- * Class for reading RSS (Rich Site Summary) and Atom types of web feeds.
+ * Class representing the media rss item.
  */
-public class RssReader extends AbstractRssReader<Channel, Item> {
+public class MediaRssItemImpl extends ItemImpl implements MediaRssItem {
+    private final MediaRssItemData data = new MediaRssItemDataImpl();
 
     /**
      * Constructor
+     *
+     * @param dateTimeParser timestamp parser
      */
-    public RssReader() {
-        super();
+    public MediaRssItemImpl(DateTimeParser dateTimeParser) {
+        super(dateTimeParser);
     }
+
 
     /**
-     * Constructor
-     * @param httpClient http client
+     * Internal method to get media rss item data.
+     *
+     * @return media rss item data
      */
-    public RssReader(HttpClient httpClient) {
-        super(httpClient);
+    @Override
+    public MediaRssItemData getMediaRssItemData() {
+        return data;
     }
 
     @Override
-    protected Channel createChannel(DateTimeParser dateTimeParser) {
-        return new ChannelImpl(dateTimeParser);
+    public boolean equals(Object o) {
+        if (!(o instanceof MediaRssItem)) return false;
+        if (!super.equals(o)) return false;
+        MediaRssItem that = (MediaRssItem) o;
+        return Objects.equals(data, that.getMediaRssItemData());
     }
 
     @Override
-    protected Item createItem(DateTimeParser dateTimeParser) {
-        return new ItemImpl(dateTimeParser);
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), data);
     }
-
 }

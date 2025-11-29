@@ -23,35 +23,95 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.util.Default;
+import com.apptasticsoftware.rssreader.util.Mapper;
+import com.apptasticsoftware.rssreader.util.Util;
+
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-public interface Channel {
+/**
+ * Class representing the RSS channel.
+ */
+public class ChannelImpl implements Channel {
+    private String title;
+    private String description;
+    private String category;
+    private List<String> categories;
+    private String language;
+    private String link;
+    private String copyright;
+    private String generator;
+    private String ttl;
+    private String pubDate;
+    private String lastBuildDate;
+    private String managingEditor;
+    private String webMaster;
+    private String docs;
+    private String rating;
+    private List<Integer> skipHours;
+    private List<String> skipDays;
+    private Image image;
+    protected String syUpdatePeriod;
+    protected int syUpdateFrequency = 1;
+    private final DateTimeParser dateTimeParser;
+
+    /**
+     * Constructor for Channel
+     * @deprecated
+     * Use {@link ChannelImpl#ChannelImpl(DateTimeParser)} instead.
+     */
+    @SuppressWarnings("java:S1133")
+    @Deprecated(since="3.5.0", forRemoval=true)
+    public ChannelImpl() {
+        dateTimeParser = Default.getDateTimeParser();
+    }
+
+    /**
+     * Constructor for Channel
+     * @param dateTimeParser dateTimeParser
+     */
+    public ChannelImpl(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
+    }
+
     /**
      * Get the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
      * @return title
      */
-    String getTitle();
+    public String getTitle() {
+        return title;
+    }
 
     /**
      * Set the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.
      * @param title title
      */
-    void setTitle(String title);
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     /**
      * Get phrase or sentence describing the channel.
      * @return description
      */
-    String getDescription();
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * Set phrase or sentence describing the channel.
      * @param description channel description
      */
-    void setDescription(String description);
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Get category for the channel.
      *
@@ -63,7 +123,9 @@ public interface Channel {
      */
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
-    Optional<String> getCategory();
+    public Optional<String> getCategory() {
+        return Optional.ofNullable(category);
+    }
 
     /**
      * Set category for the channel.
@@ -76,164 +138,227 @@ public interface Channel {
      */
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
-    void setCategory(String category);
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     /**
      * Get categories for the channel.
      * @return list of categories
      */
-    List<String> getCategories();
+    public List<String> getCategories() {
+        return Mapper.emptyListIfNull(categories);
+    }
 
     /**
      * Add category for the channel.
      * @param category channel category
      */
-    void addCategory(String category);
+    public void addCategory(String category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        this.category = category;
+        categories.add(category);
+    }
 
     /**
      * Get the language the channel is written in.
      * @return language
      */
-    Optional<String> getLanguage();
+    public Optional<String> getLanguage() {
+        return Optional.ofNullable(language);
+    }
 
     /**
      * Set the language the channel is written in.
      * @param language language
      */
-    void setLanguage(String language);
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     /**
      * Get the URL to the HTML website corresponding to the channel.
      * @return link
      */
-    String getLink();
+    public String getLink() {
+        return link;
+    }
 
     /**
      * Set the URL to the HTML website corresponding to the channel.
      * @param link URL
      */
-    void setLink(String link);
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     /**
      * Get copyright notice for content in the channel.
      * @return URL
      */
-    Optional<String> getCopyright();
+    public Optional<String> getCopyright() {
+        return Optional.ofNullable(copyright);
+    }
 
     /**
      * Set copyright notice for content in the channel.
      * @param copyright copyright
      */
-    void setCopyright(String copyright);
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
 
     /**
      * Get a string indicating the program used to generate the channel.
      * @return generator
      */
-    Optional<String> getGenerator();
+    public Optional<String> getGenerator() {
+        return Optional.ofNullable(generator);
+    }
 
     /**
      * Set a string indicating the program used to generate the channel.
      * @param generator generator
      */
-    void setGenerator(String generator);
+    public void setGenerator(String generator) {
+        this.generator = generator;
+    }
 
     /**
      * Get ttl (time to live). It's a number of minutes that indicates how long a channel can be cached before
      * refreshing from the source.
      * @return time to live
      */
-    Optional<String> getTtl();
+    public Optional<String> getTtl() {
+        return Optional.ofNullable(ttl)
+                .or(() -> Optional.ofNullable(syUpdatePeriod)
+                        .map(Util::toMinutes)
+                        .map(minutes -> minutes / Math.max(syUpdateFrequency, 1))
+                        .map(String::valueOf));
+    }
 
     /**
      * Set ttl (time to live). It's a number of minutes that indicates how long a channel can be cached before
      * refreshing from the source.
      * @param ttl time to live
      */
-    void setTtl(String ttl);
+    public void setTtl(String ttl) {
+        this.ttl = ttl;
+    }
 
     /**
      * Get the publication date for the content in the channel.
      * @return publication date
      */
-    Optional<String> getPubDate();
+    public Optional<String> getPubDate() {
+        return Optional.ofNullable(pubDate);
+    }
 
     /**
      * Get the publication date for the content in the channel.
      * @return publication date
      */
-    Optional<ZonedDateTime> getPubDateZonedDateTime();
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDate().map(dateTimeParser::parse);
+    }
 
     /**
      * Set the publication date for the content in the channel.
      * @param pubDate publication date
      */
-    void setPubDate(String pubDate);
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
+    }
 
     /**
      * Get the last time the content of the channel changed.
      * @return last build date
      */
-    Optional<String> getLastBuildDate();
+    public Optional<String> getLastBuildDate() {
+        return Optional.ofNullable(lastBuildDate);
+    }
 
     /**
      * Get the last time the content of the channel changed.
      * @return last build date
      */
-    Optional<ZonedDateTime> getLastBuildDateZonedDateTime();
+    public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
+        return getLastBuildDate().map(dateTimeParser::parse);
+    }
 
     /**
      * Set the last time the content of the channel changed.
      * @param lastBuildDate last build date
      */
-    void setLastBuildDate(String lastBuildDate);
+    public void setLastBuildDate(String lastBuildDate) {
+        this.lastBuildDate = lastBuildDate;
+    }
 
     /**
      * Get email address for person responsible for editorial content.
      * @return managing editor
      */
-    Optional<String> getManagingEditor();
+    public Optional<String> getManagingEditor() {
+        return Optional.ofNullable(managingEditor);
+    }
 
     /**
      * Set email address for person responsible for editorial content.
      * @param managingEditor managing editor
      */
-    void setManagingEditor(String managingEditor);
+    public void setManagingEditor(String managingEditor) {
+        this.managingEditor = managingEditor;
+    }
 
     /**
      * Get email address for person responsible for technical issues relating to channel.
      * @return web master
      */
-    Optional<String> getWebMaster();
+    public Optional<String> getWebMaster() {
+        return Optional.ofNullable(webMaster);
+    }
 
     /**
      * Set email address for person responsible for technical issues relating to channel.
      * @param webMaster web master
      */
-    void setWebMaster(String webMaster);
+    public void setWebMaster(String webMaster) {
+        this.webMaster = webMaster;
+    }
+
     /**
      * Get the documentation for the format used in the RSS file.
      * @return documentation
      */
-    String getDocs();
+    public String getDocs() {
+        return docs;
+    }
 
     /**
      * Set  the documentation for the format used in the RSS file.
      * @param docs documentation
      */
-    void setDocs(String docs);
+    public void setDocs(String docs) {
+        this.docs = docs;
+    }
 
     /**
      * Get the PICS rating for the channel.
      * @return rating
      */
-    String getRating();
+    public String getRating() {
+        return rating;
+    }
 
     /**
      * Set the PICS rating for the channel.
      * @param rating rating
      */
-    void setRating(String rating);
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     /**
      * Get the list of hours that aggregators can skip reading the channel.
@@ -242,7 +367,9 @@ public interface Channel {
      * Aggregators may not read the channel during hours listed in the skipHours element.
      * @return list of skip hours
      */
-    List<Integer> getSkipHours();
+    public List<Integer> getSkipHours() {
+        return Mapper.emptyListIfNull(skipHours);
+    }
 
     /**
      * Add an hour that aggregators can skip reading the channel.
@@ -250,7 +377,12 @@ public interface Channel {
      * Hour zero is the hour beginning at midnight.
      * @param skipHour the hour to skip reading the channel (0-23)
      */
-    void addSkipHour(Integer skipHour);
+    public void addSkipHour(Integer skipHour) {
+        if (skipHours == null) {
+            skipHours = new ArrayList<>();
+        }
+        skipHours.add(skipHour);
+    }
 
     /**
      * Get the list of days that aggregators can skip reading the channel.
@@ -258,7 +390,9 @@ public interface Channel {
      * Aggregators may not read the channel during days listed in the skipDays element.
      * @return list of skip days
      */
-    List<String> getSkipDays();
+    public List<String> getSkipDays() {
+        return Mapper.emptyListIfNull(skipDays);
+    }
 
     /**
      * Get the list of days that aggregators can skip reading the channel as DayOfWeek enum values.
@@ -266,24 +400,69 @@ public interface Channel {
      * Aggregators may not read the channel during days listed in the skipDays element.
      * @return list of skip days as DayOfWeek enum values
      */
-    List<DayOfWeek> getSkipDaysAsDayOfWeek();
+    public List<DayOfWeek> getSkipDaysAsDayOfWeek() {
+        return Mapper.emptyListIfNull(getSkipDays()).stream()
+                .map(day -> day.toUpperCase(Default.getLocale()))
+                .map(DayOfWeek::valueOf)
+                .collect(Collectors.toList());
+    }
 
     /**
      * Add a day that aggregators can skip reading the channel.
      * Valid values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.
      * @param skipDay the day to skip reading the channel
      */
-    void addSkipDay(String skipDay);
+    public void addSkipDay(String skipDay) {
+        if (skipDays == null) {
+            skipDays = new ArrayList<>();
+        }
+        skipDays.add(skipDay);
+    }
 
     /**
      * Get a GIF, JPEG or PNG image that can be displayed with the channel.
      * @return image
      */
-    Optional<Image> getImage();
+    public Optional<Image> getImage() {
+        return Optional.ofNullable(image);
+    }
 
     /**
      * Set a GIF, JPEG or PNG image that can be displayed with the channel.
      * @param image image
      */
-    void setImage(Image image);
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChannelImpl channel = (ChannelImpl) o;
+        return Objects.equals(getTitle(), channel.getTitle()) &&
+                Objects.equals(getDescription(), channel.getDescription()) &&
+                Objects.equals(getCategories(), channel.getCategories()) &&
+                Objects.equals(getLanguage(), channel.getLanguage()) &&
+                Objects.equals(getLink(), channel.getLink()) &&
+                Objects.equals(getCopyright(), channel.getCopyright()) &&
+                Objects.equals(getGenerator(), channel.getGenerator()) &&
+                Objects.equals(getTtl(), channel.getTtl()) &&
+                Objects.equals(getPubDate(), channel.getPubDate()) &&
+                Objects.equals(getLastBuildDate(), channel.getLastBuildDate()) &&
+                Objects.equals(getManagingEditor(), channel.getManagingEditor()) &&
+                Objects.equals(getWebMaster(), channel.getWebMaster()) &&
+                Objects.equals(getDocs(), channel.getDocs()) &&
+                Objects.equals(getRating(), channel.getRating()) &&
+                Objects.equals(getSkipHours(), channel.getSkipHours()) &&
+                Objects.equals(getSkipDays(), channel.getSkipDays()) &&
+                Objects.equals(getImage(), channel.getImage());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getDescription(), getCategories(), getLanguage(), getLink(),
+                getCopyright(), getGenerator(), getTtl(), getPubDate(), getLastBuildDate(),
+                getManagingEditor(), getWebMaster(), getDocs(), getRating(), getSkipHours(), getSkipDays(), getImage());
+    }
 }
