@@ -16,6 +16,11 @@ public class ItunesItemDataImpl implements ItunesItemData {
     private String itunesEpisodeType;
     private boolean itunesBlock;
 
+    @Override
+    public ItunesItemData getItunesItemData() {
+        return this;
+    }
+
     /**
      * Get the duration of an episode.
      * @return duration

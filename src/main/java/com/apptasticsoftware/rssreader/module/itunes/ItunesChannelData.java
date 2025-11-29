@@ -4,31 +4,42 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItunesChannelData {
+
+    ItunesChannelData getItunesChannelData();
+
     /**
      * Get the artwork for the show.
      * Specify your show artwork by providing a URL linking to it.
      * @return image
      */
-    String getItunesImage();
+    default String getItunesImage() {
+        return getItunesChannelData().getItunesImage();
+    }
 
     /**
      * Set the artwork for the show.
      * Specify your show artwork by providing a URL linking to it.
      * @param image image
      */
-    void setItunesImage(String image);
+    default void setItunesImage(String image) {
+        getItunesChannelData().setItunesImage(image);
+    }
 
     /**
      * Get the show category information. For a complete list of categories and subcategories
      * @return list of categories
      */
-    List<String> getItunesCategories();
+    default List<String> getItunesCategories() {
+        return getItunesChannelData().getItunesCategories();
+    }
 
     /**
      * Add the show category information. For a complete list of categories and subcategories
      * @param itunesCategory category
      */
-    void addItunesCategory(String itunesCategory);
+    default void addItunesCategory(String itunesCategory) {
+        getItunesChannelData().addItunesCategory(itunesCategory);
+    }
 
     /**
      * Get the podcast parental advisory information.
@@ -43,7 +54,9 @@ public interface ItunesChannelData {
      * advisory graphic for your podcast.
      * @return explicit
      */
-    Boolean getItunesExplicit();
+    default Boolean getItunesExplicit() {
+        return getItunesChannelData().getItunesExplicit();
+    }
 
     /**
      * Get the podcast parental advisory information.
@@ -58,119 +71,157 @@ public interface ItunesChannelData {
      * advisory graphic for your podcast.
      * @param itunesExplicit explicit
      */
-    void setItunesExplicit(Boolean itunesExplicit);
+    default void setItunesExplicit(Boolean itunesExplicit) {
+        getItunesChannelData().setItunesExplicit(itunesExplicit);
+    }
 
     /**
      * Get the group responsible for creating the show.
      * @return author
      */
-    Optional<String> getItunesAuthor();
+    default Optional<String> getItunesAuthor() {
+        return getItunesChannelData().getItunesAuthor();
+    }
 
     /**
      * Set the group responsible for creating the show.
      * @param itunesAuthor author
      */
-    void setItunesAuthor(String itunesAuthor);
+    default void setItunesAuthor(String itunesAuthor) {
+        getItunesChannelData().setItunesAuthor(itunesAuthor);
+    }
 
     /**
      * Set the podcast owner contact information.
      * @param itunesOwner owner
      */
-    void setItunesOwner(ItunesOwner itunesOwner);
+    default void setItunesOwner(ItunesOwner itunesOwner) {
+        getItunesChannelData().setItunesOwner(itunesOwner);
+    }
 
     /**
      * Get the podcast owner contact information.
      * @return owner
      */
-    Optional<ItunesOwner> getItunesOwner();
+    default Optional<ItunesOwner> getItunesOwner() {
+        return getItunesChannelData().getItunesOwner();
+    }
 
     /**
      * Get the title specific for Apple Podcasts.
      * @return title
      */
-    Optional<String> getItunesTitle();
+    default Optional<String> getItunesTitle() {
+        return getItunesChannelData().getItunesTitle();
+    }
 
     /**
      * Set the title specific for Apple Podcasts.
      * @param itunesTitle title
      */
-    void setItunesTitle(String itunesTitle);
+    default void setItunesTitle(String itunesTitle) {
+        getItunesChannelData().setItunesTitle(itunesTitle);
+    }
 
     /**
      * Get the subtitle specific for Apple Podcasts.
      * @return subtitle
      */
-    Optional<String> getItunesSubtitle();
+    default Optional<String> getItunesSubtitle() {
+        return getItunesChannelData().getItunesSubtitle();
+    }
 
     /**
      * Set the subtitle specific for Apple Podcasts.
      * @param itunesSubtitle subtitle
      */
-    void setItunesSubtitle(String itunesSubtitle);
+    default void setItunesSubtitle(String itunesSubtitle) {
+        getItunesChannelData().setItunesSubtitle(itunesSubtitle);
+    }
 
     /**
      * Get the summary.
      * @return summary
      */
-    String getItunesSummary();
+    default String getItunesSummary() {
+        return getItunesChannelData().getItunesSummary();
+    }
 
     /**
      * Set the summary.
      * @param itunesSummary summary
      */
-    void setItunesSummary(String itunesSummary);
+    default void setItunesSummary(String itunesSummary) {
+        getItunesChannelData().setItunesSummary(itunesSummary);
+    }
 
     /**
      * Get the type of show.
      * @return type
      */
-    Optional<String> getItunesType();
+    default Optional<String> getItunesType() {
+        return getItunesChannelData().getItunesType();
+    }
 
     /**
      * Set the type of show.
      * @param itunesType type
      */
-    void setItunesType(String itunesType);
+    default void setItunesType(String itunesType) {
+        getItunesChannelData().setItunesType(itunesType);
+    }
 
     /**
      * Get the new podcast RSS Feed URL.
      * If you change the URL of your podcast feed, you should use this tag in your new feed.
      * @return new feed url
      */
-    Optional<String> getItunesNewFeedUrl();
+    default Optional<String> getItunesNewFeedUrl() {
+        return getItunesChannelData().getItunesNewFeedUrl();
+    }
 
     /**
      * Set the new podcast RSS Feed URL.
      * If you change the URL of your podcast feed, you should use this tag in your new feed.
      * @param itunesNewFeedUrl new feed url
      */
-    void setItunesNewFeedUrl(String itunesNewFeedUrl);
+    default void setItunesNewFeedUrl(String itunesNewFeedUrl) {
+        getItunesChannelData().setItunesNewFeedUrl(itunesNewFeedUrl);
+    }
 
     /**
      * Get the podcast show or hide status.
      * If you want your show removed from the Apple directory, use this tag.
      * @return block
      */
-    boolean isItunesBlock();
+    default boolean isItunesBlock() {
+        return getItunesChannelData().isItunesBlock();
+    }
 
     /**
      * Set the podcast show or hide status.
      * If you want your show removed from the Apple directory, use this tag.
      * @param itunesBlock block
      */
-    void setItunesBlock(boolean itunesBlock);
+    default void setItunesBlock(boolean itunesBlock) {
+        getItunesChannelData().setItunesBlock(itunesBlock);
+    }
 
     /**
      * Set the podcast update status.
      * If you will never publish another episode to your show, use this tag.
      * @return complete
      */
-    boolean isItunesComplete();
+    default boolean isItunesComplete() {
+        return getItunesChannelData().isItunesComplete();
+    }
 
     /**
      * Get the podcast update status.
      * If you will never publish another episode to your show, use this tag.
      * @param itunesComplete complete
      */
-    void setItunesComplete(boolean itunesComplete);
+    default void setItunesComplete(boolean itunesComplete) {
+        getItunesChannelData().setItunesComplete(itunesComplete);
+    }
 }
