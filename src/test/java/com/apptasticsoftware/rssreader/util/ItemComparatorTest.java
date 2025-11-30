@@ -18,7 +18,7 @@ class ItemComparatorTest {
     void testSortNewestItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst())
-                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .map(ZonedDateTime::toEpochSecond)
                                    .collect(Collectors.toList());
@@ -30,7 +30,7 @@ class ItemComparatorTest {
     void testSortNewestPublishedItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst())
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -43,7 +43,7 @@ class ItemComparatorTest {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                                    .read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst())
-                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .map(ZonedDateTime::toEpochSecond)
                                    .collect(Collectors.toList());
@@ -56,7 +56,7 @@ class ItemComparatorTest {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                 .read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst())
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -68,7 +68,7 @@ class ItemComparatorTest {
     void testSortNewestItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.newestItemFirst(Default.getDateTimeParser()))
-                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .map(ZonedDateTime::toEpochSecond)
                                    .collect(Collectors.toList());
@@ -80,7 +80,7 @@ class ItemComparatorTest {
     void testSortNewestPublishedItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestPublishedItemFirst(Default.getDateTimeParser()))
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -92,7 +92,7 @@ class ItemComparatorTest {
     void testSortOldestItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.oldestItemFirst())
-                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .collect(Collectors.toList());
 
@@ -103,7 +103,7 @@ class ItemComparatorTest {
     void testSortOldestPublishedItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -114,7 +114,7 @@ class ItemComparatorTest {
     void testSortOldestItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                                    .sorted(ItemComparator.oldestItemFirst(Default.getDateTimeParser()))
-                                   .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                                   .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                                    .filter(Objects::nonNull)
                                    .collect(Collectors.toList());
 
@@ -125,7 +125,7 @@ class ItemComparatorTest {
     void testSortOldestPublishedItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst(Default.getDateTimeParser()))
-                .map(i -> i.getPubDateZonedDateTime().orElse(null))
+                .map(i -> i.getPubDateAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -136,7 +136,7 @@ class ItemComparatorTest {
     void testSortNewestUpdatedItem() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst())
-                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .map(i -> i.getUpdatedAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -149,7 +149,7 @@ class ItemComparatorTest {
         var items = new RssReader().setDateTimeParser(Default.getDateTimeParser())
                 .read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst())
-                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .map(i -> i.getUpdatedAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -161,7 +161,7 @@ class ItemComparatorTest {
     void testSortNewestUpdatedItemWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.newestUpdatedItemFirst(Default.getDateTimeParser()))
-                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .map(i -> i.getUpdatedAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .map(ZonedDateTime::toEpochSecond)
                 .collect(Collectors.toList());
@@ -173,7 +173,7 @@ class ItemComparatorTest {
     void testSortOldestUpdatedItemFirst() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestUpdatedItemFirst())
-                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .map(i -> i.getUpdatedAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
@@ -184,7 +184,7 @@ class ItemComparatorTest {
     void testSortOldestUpdatedItemFirstWithDateTimeParser() {
         var items = new RssReader().read(fromFile("item-sort-test.xml"))
                 .sorted(ItemComparator.oldestUpdatedItemFirst(Default.getDateTimeParser()))
-                .map(i -> i.getUpdatedZonedDateTime().orElse(null))
+                .map(i -> i.getUpdatedAsZonedDateTime().orElse(null))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 

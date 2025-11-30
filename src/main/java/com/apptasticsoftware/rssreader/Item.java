@@ -280,8 +280,22 @@ public class Item implements Comparable<Item> {
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+    public Optional<ZonedDateTime> getPubDateAsZonedDateTime() {
         return getPubDate().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was published.
+     *
+     * @deprecated
+     * As of version 3.12.0, replaced by {@link Item#getPubDateAsZonedDateTime()}
+     *
+     * @return publication date
+     */
+    @SuppressWarnings("java:S1133")
+    @Deprecated(since = "3.12.0", forRemoval = true)
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDateAsZonedDateTime();
     }
 
     /**
@@ -307,8 +321,22 @@ public class Item implements Comparable<Item> {
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
+    public Optional<ZonedDateTime> getUpdatedAsZonedDateTime() {
         return getUpdated().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was updated.
+     *
+     * @deprecated
+     * As of version 3.12.0, replaced by {@link Item#getUpdatedAsZonedDateTime()}
+     *
+     * @return publication date
+     */
+    @SuppressWarnings("java:S1133")
+    @Deprecated(since = "3.12.0", forRemoval = true)
+    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
+        return getUpdatedAsZonedDateTime();
     }
 
     /**
