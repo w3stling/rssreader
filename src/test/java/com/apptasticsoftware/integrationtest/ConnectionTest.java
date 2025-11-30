@@ -150,6 +150,7 @@ class ConnectionTest {
         verify(2, items);
     }
 
+    @SuppressWarnings("java:S5738")
     private static void verify(int expectedSize, List<Item> items) {
         assertEquals(expectedSize, items.size());
 

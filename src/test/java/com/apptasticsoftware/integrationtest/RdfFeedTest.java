@@ -31,6 +31,7 @@ class RdfFeedTest {
         assertEquals("doi:10.1080/19322909.2024.2326687", item.getGuid().orElse(""));
     }
 
+    @SuppressWarnings("java:S5738")
     @Test
     void readRdfFeedExample2() {
         var list = new RssReader().read(fromFile("rdf-feed-example2.xml")).collect(Collectors.toList());
