@@ -269,6 +269,7 @@ public class Channel {
      *
      * @return publication date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since = "3.12.0", forRemoval = true)
     public Optional<ZonedDateTime> getPubDateZonedDateTime() {
         return getPubDateAsZonedDateTime();
@@ -306,6 +307,7 @@ public class Channel {
      *
      * @return last build date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since = "3.12.0", forRemoval = true)
     public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
         return getLastBuildDateAsZonedDateTime();

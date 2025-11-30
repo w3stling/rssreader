@@ -51,6 +51,7 @@ class RdfFeedTest {
         assertEquals("Copyright © 2000 Slashdot", item.getChannel().getCopyright().orElse(""));
         assertEquals("2000-12-17T01:17-05:00", item.getChannel().getPubDate().orElse(""));
         assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17-05:00"), item.getChannel().getPubDateAsZonedDateTime().orElse(null));
+        assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17-05:00"), item.getChannel().getPubDateZonedDateTime().orElse(null));
 
         assertEquals("Jupiter Moon Ganymede May Have An Ocean", item.getTitle().orElse(""));
         assertEquals("http://slashdot.org/article.pl?sid=00/12/17/0622203", item.getLink().orElse(""));
@@ -59,6 +60,7 @@ class RdfFeedTest {
         assertEquals("timothy", item.getAuthor().orElse(""));
         assertEquals("2000-12-17T01:17", item.getPubDate().orElse(""));
         assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17"), item.getPubDateAsZonedDateTime().orElse(null));
+        assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17"), item.getPubDateZonedDateTime().orElse(null));
         assertEquals(1, item.getCategories().size());
         assertEquals("space", item.getCategories().get(0));
     }
