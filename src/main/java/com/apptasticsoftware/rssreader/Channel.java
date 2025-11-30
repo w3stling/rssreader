@@ -257,8 +257,21 @@ public class Channel {
      * Get the publication date for the content in the channel.
      * @return publication date
      */
-    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+    public Optional<ZonedDateTime> getPubDateAsZonedDateTime() {
         return getPubDate().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get the publication date for the content in the channel.
+     *
+     * @deprecated
+     * As of version 3.12.0, replaced by {@link Channel#getPubDateAsZonedDateTime()}
+     *
+     * @return publication date
+     */
+    @Deprecated(since = "3.12.0", forRemoval = true)
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDateAsZonedDateTime();
     }
 
     /**
@@ -281,8 +294,21 @@ public class Channel {
      * Get the last time the content of the channel changed.
      * @return last build date
      */
-    public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
+    public Optional<ZonedDateTime> getLastBuildDateAsZonedDateTime() {
         return getLastBuildDate().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get the last time the content of the channel changed.
+     *
+     * @deprecated
+     * As of version 3.12.0, replaced by {@link Channel#getLastBuildDateAsZonedDateTime()}
+     *
+     * @return last build date
+     */
+    @Deprecated(since = "3.12.0", forRemoval = true)
+    public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
+        return getLastBuildDateAsZonedDateTime();
     }
 
     /**

@@ -184,9 +184,9 @@ class ConnectionTest {
             assertEquals("http://example.org/2003/12/13/atom04", items.get(2).getLink().orElse(null));
             assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b", items.get(2).getGuid().orElse(null));
             assertEquals("2003-12-13T09:28:28-04:00", items.get(2).getPubDate().orElse(null));
-            assertEquals(1071322108, items.get(2).getPubDateZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
+            assertEquals(1071322108, items.get(2).getPubDateAsZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
             assertEquals("2003-12-13T18:30:01Z", items.get(2).getUpdated().orElse(null));
-            assertEquals(1071340201, items.get(2).getUpdatedZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
+            assertEquals(1071340201, items.get(2).getUpdatedAsZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
             assertEquals(47, items.get(2).getDescription().orElse("").length());
         }
     }
