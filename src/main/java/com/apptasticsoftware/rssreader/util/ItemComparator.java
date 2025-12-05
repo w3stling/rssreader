@@ -58,7 +58,7 @@ public final class ItemComparator {
      */
     public static <I extends Item> Comparator<I> oldestPublishedItemFirst() {
         return Comparator.comparing((I i) ->
-                        i.getPubDateZonedDateTime().orElse(null),
+                        i.getPubDateAsZonedDateTime().orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder()));
     }
 
@@ -69,7 +69,7 @@ public final class ItemComparator {
      */
     public static <I extends Item> Comparator<I> oldestUpdatedItemFirst() {
         return Comparator.comparing((I i) ->
-                        i.getUpdatedZonedDateTime().orElse(i.getPubDateZonedDateTime().orElse(null)),
+                        i.getUpdatedAsZonedDateTime().orElse(i.getPubDateAsZonedDateTime().orElse(null)),
                 Comparator.nullsLast(Comparator.naturalOrder()));
     }
 
@@ -131,7 +131,7 @@ public final class ItemComparator {
      */
     public static <I extends Item> Comparator<I> newestPublishedItemFirst() {
         return Comparator.comparing((I i) ->
-                        i.getPubDateZonedDateTime().orElse(null),
+                        i.getPubDateAsZonedDateTime().orElse(null),
                 Comparator.nullsLast(Comparator.naturalOrder())).reversed();
     }
 
@@ -142,7 +142,7 @@ public final class ItemComparator {
      */
     public static <I extends Item> Comparator<I> newestUpdatedItemFirst() {
         return Comparator.comparing((I i) ->
-                        i.getUpdatedZonedDateTime().orElse(i.getPubDateZonedDateTime().orElse(null)),
+                        i.getUpdatedAsZonedDateTime().orElse(i.getPubDateAsZonedDateTime().orElse(null)),
                 Comparator.nullsLast(Comparator.naturalOrder())).reversed();
     }
 

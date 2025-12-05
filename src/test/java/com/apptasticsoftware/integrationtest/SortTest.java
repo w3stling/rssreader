@@ -47,7 +47,7 @@ class SortTest {
 
         var timestamps = new RssReader().read(urlList)
                 .sorted()
-                .map(Item::getPubDateZonedDateTime)
+                .map(Item::getPubDateAsZonedDateTime)
                 .flatMap(Optional::stream)
                 .map(t -> t.toInstant().toEpochMilli())
                 .collect(Collectors.toList());

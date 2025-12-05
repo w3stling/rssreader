@@ -139,6 +139,13 @@ public interface Channel {
      * Get the publication date for the content in the channel.
      * @return publication date
      */
+    Optional<ZonedDateTime> getPubDateAsZonedDateTime();
+
+    /**
+     * Get the publication date for the content in the channel.
+     * @return publication date
+     */
+    @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getPubDateZonedDateTime();
 
     /**
@@ -157,6 +164,13 @@ public interface Channel {
      * Get the last time the content of the channel changed.
      * @return last build date
      */
+    Optional<ZonedDateTime> getLastBuildDateAsZonedDateTime();
+
+    /**
+     * Get the last time the content of the channel changed.
+     * @return last build date
+     */
+    @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getLastBuildDateZonedDateTime();
 
     /**

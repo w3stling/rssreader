@@ -382,7 +382,7 @@ class RssReaderIntegrationTest {
             assertThat(channel.getLanguage(), isPresentAndIs("en"));
             assertThat(channel.getLink(), is("https://worldoftanks.eu/en/news/"));
             assertThat(channel.getPubDate(), isPresent());
-            assertThat(channel.getPubDateZonedDateTime(), isPresent());
+            assertThat(channel.getPubDateAsZonedDateTime(), isPresent());
             assertThat(channel.getImage(), isPresent());
             assertThat(channel.getImage().map(Image::getTitle).orElse(null), containsString("World of Tanks"));
             assertThat(channel.getImage().map(Image::getLink).orElse(null), is("https://worldoftanks.eu/en/news/"));
@@ -456,7 +456,7 @@ class RssReaderIntegrationTest {
         ZonedDateTime dateTime = items.stream()
                                       .sorted()
                                       .findFirst()
-                                      .flatMap(Item::getPubDateZonedDateTime)
+                                      .flatMap(Item::getPubDateAsZonedDateTime)
                                       .orElse(null);
         assertNotNull(dateTime);
     }
@@ -474,7 +474,7 @@ class RssReaderIntegrationTest {
 
         Optional<ZonedDateTime> dateTime = items.stream()
                                                 .findFirst()
-                                                .flatMap(Item::getPubDateZonedDateTime);
+                                                .flatMap(Item::getPubDateAsZonedDateTime);
 
         assertThat(dateTime, isPresent());
     }
@@ -510,7 +510,7 @@ class RssReaderIntegrationTest {
             assertThat(channel.getCopyright(), isPresentAndIs("© Breaking Media AB"));
             assertThat(channel.getGenerator(), isEmpty());
             assertThat(channel.getLastBuildDate(), isPresent());
-            assertThat(channel.getLastBuildDateZonedDateTime(), isPresent());
+            assertThat(channel.getLastBuildDateAsZonedDateTime(), isPresent());
 
             // Validate item
             assertNotNull(item);
@@ -519,7 +519,7 @@ class RssReaderIntegrationTest {
             assertThat(item.getTitle(), isPresentAnd(not(emptyString())));
             assertThat(item.getDescription(), anyOf(isEmpty(), isPresentAnd(not(emptyString()))));
             assertThat(item.getPubDate(), isPresent());
-            assertThat(item.getPubDateZonedDateTime(), isPresent());
+            assertThat(item.getPubDateAsZonedDateTime(), isPresent());
             assertThat(item.getLink(), isPresent());
         }
     }
@@ -706,9 +706,9 @@ class RssReaderIntegrationTest {
         assertEquals("http://example.org/2003/12/13/atom04", items.get(2).getLink().orElse(null));
         assertEquals("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b", items.get(2).getGuid().orElse(null));
         assertEquals("2003-12-13T09:28:28-04:00", items.get(2).getPubDate().orElse(null));
-        assertEquals(1071322108, items.get(2).getPubDateZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
+        assertEquals(1071322108, items.get(2).getPubDateAsZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
         assertEquals("2003-12-13T18:30:01Z", items.get(2).getUpdated().orElse(null));
-        assertEquals(1071340201, items.get(2).getUpdatedZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
+        assertEquals(1071340201, items.get(2).getUpdatedAsZonedDateTime().map(ZonedDateTime::toEpochSecond).orElse(null));
         assertEquals(47, items.get(2).getDescription().orElse("").length());
     }
 
