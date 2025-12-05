@@ -5,6 +5,8 @@
   - head-branch: ['^bug/']
 'chore':
   - head-branch: ['^chore/']
+'refactor':
+  - head-branch: ['^refactor/']
 'documentation':
   - head-branch: ['^doc/']
 'github_actions':

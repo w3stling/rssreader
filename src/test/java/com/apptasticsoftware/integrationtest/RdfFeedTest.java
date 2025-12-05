@@ -31,6 +31,7 @@ class RdfFeedTest {
         assertEquals("doi:10.1080/19322909.2024.2326687", item.getGuid().orElse(""));
     }
 
+    @SuppressWarnings("java:S5738")
     @Test
     void readRdfFeedExample2() {
         var list = new RssReader().read(fromFile("rdf-feed-example2.xml")).collect(Collectors.toList());
@@ -50,6 +51,7 @@ class RdfFeedTest {
         assertEquals("pater@slashdot.org", item.getChannel().getManagingEditor().orElse(""));
         assertEquals("Copyright © 2000 Slashdot", item.getChannel().getCopyright().orElse(""));
         assertEquals("2000-12-17T01:17-05:00", item.getChannel().getPubDate().orElse(""));
+        assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17-05:00"), item.getChannel().getPubDateAsZonedDateTime().orElse(null));
         assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17-05:00"), item.getChannel().getPubDateZonedDateTime().orElse(null));
 
         assertEquals("Jupiter Moon Ganymede May Have An Ocean", item.getTitle().orElse(""));
@@ -58,6 +60,7 @@ class RdfFeedTest {
                 "            salt water ocean on it. Kind of ...", item.getDescription().orElse(""));
         assertEquals("timothy", item.getAuthor().orElse(""));
         assertEquals("2000-12-17T01:17", item.getPubDate().orElse(""));
+        assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17"), item.getPubDateAsZonedDateTime().orElse(null));
         assertEquals(Default.getDateTimeParser().parse("2000-12-17T01:17"), item.getPubDateZonedDateTime().orElse(null));
         assertEquals(1, item.getCategories().size());
         assertEquals("space", item.getCategories().get(0));

@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
     id 'biz.aQute.bnd.builder' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
-    id 'org.sonarqube' version '7.0.1.6134'
+    id 'org.sonarqube' version '7.1.0.6387'
 }
 
 group = 'com.apptasticsoftware'
@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.14.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.14.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation('com.github.npathai:hamcrest-optional:2.0.0')
     testImplementation('org.hamcrest:hamcrest:3.0')
@@ -52,7 +52,7 @@ compileJava {
 }
 
 jacoco {
-    toolVersion = "0.8.13"
+    toolVersion = "0.8.14"
 }
 
 jacocoTestReport {

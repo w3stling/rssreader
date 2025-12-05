@@ -280,8 +280,18 @@ public class ItemImpl implements Item, Comparable<Item> {
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+    public Optional<ZonedDateTime> getPubDateAsZonedDateTime() {
         return getPubDate().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was published.
+     *
+     * @return publication date
+     */
+    @Deprecated(since="3.12.0", forRemoval=true)
+    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
+        return getPubDateAsZonedDateTime();
     }
 
     /**
@@ -307,8 +317,18 @@ public class ItemImpl implements Item, Comparable<Item> {
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
+    public Optional<ZonedDateTime> getUpdatedAsZonedDateTime() {
         return getUpdated().map(dateTimeParser::parse);
+    }
+
+    /**
+     * Get a ZonedDateTime that indicates when the item was updated.
+     *
+     * @return publication date
+     */
+    @Deprecated(since="3.12.0", forRemoval=true)
+    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
+        return getUpdatedAsZonedDateTime();
     }
 
     /**
