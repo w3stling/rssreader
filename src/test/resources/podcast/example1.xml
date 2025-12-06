@@ -60,6 +60,10 @@
 
         <podcast:chat server="irc.zeronode.net" protocol="irc" accountId="@jsmith" space="#myawesomepodcast"/>
 
+        <podcast:txt>naj3eEZaWVVY9a38uhX8FekACyhtqP4JO</podcast:txt>
+        <podcast:txt purpose="verify">S6lpp-7ZCn8-dZfGc-OoyaH</podcast:txt>
+        <podcast:txt purpose="applepodcastsverify">05125</podcast:txt>
+
         <podcast:liveItem status="live" start="2021-09-26T07:30:00.000-0600" end="2021-09-26T09:30:00.000-0600">
             <title>Podcasting 2.0 Live Show</title>
             <description>A look into the future of podcasting and how we get to Podcasting 2.0!</description>
@@ -141,6 +145,10 @@
             <podcast:socialInteract priority="1" uri="https://podcastindex.social/web/@dave/108013847520053258" protocol="activitypub" accountId="@dave" accountUrl="https://podcastindex.social/web/@dave" />
             <podcast:socialInteract priority="2" uri="https://twitter.com/PodcastindexOrg/status/1507120226361647115" protocol="twitter" accountId="@podcastindexorg" accountUrl="https://twitter.com/PodcastindexOrg" />
 
+            <podcast:txt>naj3eEZaWVVY9a38uhX8FekACyhtqP4JN</podcast:txt>
+            <podcast:txt purpose="verify">S6lpp-7ZCn8-dZfGc-OoyaG</podcast:txt>
+            <podcast:txt purpose="applepodcastsverify">05124</podcast:txt>
+            <podcast:txt purpose="release">2022-10-26T04:45:30.742Z</podcast:txt>
         </item>
 
         <item>

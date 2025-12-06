@@ -119,4 +119,11 @@ public interface PodcastChannelData {
         getPodcastChannelData().setPodcastChat(podcastChat);
     }
 
+    default List<PodcastTxt> getPodcastTxts() {
+        return getPodcastChannelData().getPodcastTxts();
+    }
+
+    default void addPodcastTxt(PodcastTxt podcastTxt) {
+        getPodcastChannelData().addPodcastTxt(podcastTxt);
+    }
 }

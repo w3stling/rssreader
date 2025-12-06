@@ -133,6 +133,14 @@ public class PodcastRssReaderTest {
         assertThat(channel.getPodcastChat().get().getAccountId(), is("@jsmith"));
         assertThat(channel.getPodcastChat().get().getSpace(), isPresentAndIs("#myawesomepodcast"));
 
+        assertThat(channel.getPodcastTxts().size(), is(3));
+        assertThat(channel.getPodcastTxts().get(0).getTxt(), is("naj3eEZaWVVY9a38uhX8FekACyhtqP4JO"));
+        assertThat(channel.getPodcastTxts().get(0).getPurpose(), isEmpty());
+        assertThat(channel.getPodcastTxts().get(1).getTxt(), is("S6lpp-7ZCn8-dZfGc-OoyaH"));
+        assertThat(channel.getPodcastTxts().get(1).getPurpose(), isPresentAndIs("verify"));
+        assertThat(channel.getPodcastTxts().get(2).getTxt(), is("05125"));
+        assertThat(channel.getPodcastTxts().get(2).getPurpose(), isPresentAndIs("applepodcastsverify"));
+
         assertThat(item.getTitle(), isPresentAndIs("Episode 3 - The Future"));
         assertThat(item.getDescription(), isPresentAndIs("<p>A look into the future of podcasting and how we get to Podcasting 2.0!</p>"));
         assertThat(item.getLink(), isPresentAndIs("https://example.com/podcast/ep0003"));
@@ -239,6 +247,16 @@ public class PodcastRssReaderTest {
         assertThat(item.getPodcastSocialInteracts().get(1).getProtocol(), is("twitter"));
         assertThat(item.getPodcastSocialInteracts().get(1).getAccountId(), isPresentAndIs("@podcastindexorg"));
         assertThat(item.getPodcastSocialInteracts().get(1).getAccountUrl(), isPresentAndIs("https://twitter.com/PodcastindexOrg"));
+
+        assertThat(item.getPodcastTxts().size(), is(4));
+        assertThat(item.getPodcastTxts().get(0).getTxt(), is("naj3eEZaWVVY9a38uhX8FekACyhtqP4JN"));
+        assertThat(item.getPodcastTxts().get(0).getPurpose(), isEmpty());
+        assertThat(item.getPodcastTxts().get(1).getTxt(), is("S6lpp-7ZCn8-dZfGc-OoyaG"));
+        assertThat(item.getPodcastTxts().get(1).getPurpose(), isPresentAndIs("verify"));
+        assertThat(item.getPodcastTxts().get(2).getTxt(), is("05124"));
+        assertThat(item.getPodcastTxts().get(2).getPurpose(), isPresentAndIs("applepodcastsverify"));
+        assertThat(item.getPodcastTxts().get(3).getTxt(), is("2022-10-26T04:45:30.742Z"));
+        assertThat(item.getPodcastTxts().get(3).getPurpose(), isPresentAndIs("release"));
     }
 
     @Test
@@ -360,6 +378,7 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastUpdateFrequency.class).verify();
         EqualsVerifier.simple().forClass(PodcastContentLink.class).verify();
         EqualsVerifier.simple().forClass(PodcastChat.class).verify();
+        EqualsVerifier.simple().forClass(PodcastTxt.class).verify();
     }
 
     private InputStream fromFile(String fileName) {

@@ -23,6 +23,7 @@ public class PodcastItemDataImpl implements PodcastItemData {
     private List<PodcastValue> podcastValues;
     private List<PodcastSocialInteract> podcastSocialInteracts;
     private List<PodcastContentLink> podcastContentLinks;
+    private List<PodcastTxt> podcastTxts;
     private String podcastLiveItemStatus;
     private String podcastLiveItemStart;
     private String podcastLiveItemEnd;
@@ -178,6 +179,19 @@ public class PodcastItemDataImpl implements PodcastItemData {
             podcastContentLinks = new ArrayList<>();
         }
         podcastContentLinks.add(podcastContentLink);
+    }
+
+    @Override
+    public List<PodcastTxt> getPodcastTxts() {
+        return emptyListIfNull(podcastTxts);
+    }
+
+    @Override
+    public void addPodcastTxt(PodcastTxt podcastTxt) {
+        if (podcastTxts == null) {
+            podcastTxts = new ArrayList<>();
+        }
+        podcastTxts.add(podcastTxt);
     }
 
     public boolean isPodcastLiveItem() {

@@ -21,6 +21,7 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     private PodcastUpdateFrequency podcastUpdateFrequency;
     private List<PodcastTrailer> podcastTrailers;
     private PodcastChat podcastChat;
+    private List<PodcastTxt> podcastTxts;
 
     @Override
     public PodcastChannelData getPodcastChannelData() {
@@ -188,4 +189,16 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
         this.podcastChat = podcastChat;
     }
 
+    @Override
+    public List<PodcastTxt> getPodcastTxts() {
+        return emptyListIfNull(podcastTxts);
+    }
+
+    @Override
+    public void addPodcastTxt(PodcastTxt podcastTxt) {
+        if (podcastTxts == null) {
+            podcastTxts = new ArrayList<>();
+        }
+        podcastTxts.add(podcastTxt);
+    }
 }

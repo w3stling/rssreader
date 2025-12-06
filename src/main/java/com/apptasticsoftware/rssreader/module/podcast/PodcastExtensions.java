@@ -32,6 +32,7 @@ public class PodcastExtensions {
         registry.addOnChannelTag("/rss/channel/podcast:podroll/podcast:remoteItem", channel -> channel.addPodcastPodroll(new PodcastRemoteItem()));
         registry.addOnChannelTag("podcast:person", channel ->channel.addPodcastPerson(new PodcastPerson()));
         registry.addOnChannelTag("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
+        registry.addOnChannelTag("podcast:txt", channel -> channel.addPodcastTxt(new PodcastTxt()));
     }
 
     private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -45,6 +46,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:person", (channel, value) -> channel.getPodcastPersons().getLast().setPerson(value));
         registry.addChannelExtension("podcast:trailer", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> trailer.setTrailer(value)));
         registry.addChannelExtension("podcast:updateFrequency", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setUpdateFrequency(value)));
+        registry.addChannelExtension("podcast:txt", (channel, value) -> channel.getPodcastTxts().getLast().setTxt(value));
     }
 
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -107,6 +109,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:chat", "protocol", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setProtocol(value)));
         registry.addChannelExtension("podcast:chat", "accountId", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
         registry.addChannelExtension("podcast:chat", "space", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
+        registry.addChannelExtension("podcast:txt", "purpose", (channel, value) -> channel.getPodcastTxts().getLast().setPurpose(value));
     }
 
     private static void onItemTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -122,6 +125,7 @@ public class PodcastExtensions {
         registry.addOnItemTag("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", item ->item.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
         registry.addOnItemTag("podcast:socialInteract", item -> item.addPodcastSocialInteract(new PodcastSocialInteract()));
         registry.addOnItemTag("podcast:contentLink", item -> item.addPodcastContentLink(new PodcastContentLink()));
+        registry.addOnItemTag("podcast:txt", item -> item.addPodcastTxt(new PodcastTxt()));
     }
 
     private static void itemTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -130,6 +134,7 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:soundbite", (item, value) -> item.getPodcastSoundbites().getLast().setSoundbite(value));
         registry.addItemExtension("podcast:person", (item, value) -> item.getPodcastPersons().getLast().setPerson(value));
         registry.addItemExtension("podcast:contentLink", (item, value) -> item.getPodcastContentLinks().getLast().setContentLink(value));
+        registry.addItemExtension("podcast:txt", (item, value) -> item.getPodcastTxts().getLast().setTxt(value));
     }
 
     private static void itemAttributesExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -206,6 +211,7 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:liveItem", "status", PodcastItemData::setPodcastLiveItemStatus);
         registry.addItemExtension("podcast:liveItem", "start", PodcastItemData::setPodcastLiveItemStart);
         registry.addItemExtension("podcast:liveItem", "end", PodcastItemData::setPodcastLiveItemEnd);
+        registry.addItemExtension("podcast:txt", "purpose", (item, value) -> item.getPodcastTxts().getLast().setPurpose(value));
     }
 
     private static void channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastChannel channel, String value, BiConsumer<PodcastRemoteItem, String> setter) {

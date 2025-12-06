@@ -104,6 +104,14 @@ public interface PodcastItemData {
         getPodcastItemData().addPodcastContentLink(podcastContentLink);
     }
 
+    default List<PodcastTxt> getPodcastTxts() {
+        return getPodcastItemData().getPodcastTxts();
+    }
+
+    default void addPodcastTxt(PodcastTxt podcastTxt) {
+        getPodcastItemData().addPodcastTxt(podcastTxt);
+    }
+
     default boolean isPodcastLiveItem() {
         return getPodcastItemData().isPodcastLiveItem();
     }
