@@ -111,11 +111,12 @@ public interface PodcastChannelData {
         getPodcastChannelData().addPodcastTrailer(podcastTrailer);
     }
 
-    default List<PodcastLiveItem> getPodcastLiveItems() {
-        return getPodcastChannelData().getPodcastLiveItems();
+    default Optional<PodcastChat> getPodcastChat() {
+        return getPodcastChannelData().getPodcastChat();
     }
 
-    default void addPodcastLiveItem(PodcastLiveItem podcastLiveItem) {
-        getPodcastChannelData().addPodcastLiveItem(podcastLiveItem);
+    default void setPodcastChat(PodcastChat podcastChat) {
+        getPodcastChannelData().setPodcastChat(podcastChat);
     }
+
 }

@@ -34,17 +34,17 @@ public class PodcastExtensions {
         registry.addOnChannelTag("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
     }
 
-    private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> extensions) {
-        extensions.addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
-        extensions.addChannelExtension("podcast:license", (channel, value) -> createIfNull(((PodcastChannel)channel)::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
-        extensions.addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> mapBoolean(value, locked::setLocked)));
-        extensions.addChannelExtension("podcast:block", (channel, value) -> Optional.ofNullable(channel.getPodcastBlocks().getLast()).ifPresent(block -> mapBoolean(value, block::setBlock)));
-        extensions.addChannelExtension("podcast:funding", (channel, value) -> Optional.ofNullable(channel.getPodcastFundings().getLast()).ifPresent(funding -> funding.setFunding(value)));
-        extensions.addChannelExtension("podcast:location", (channel, value) -> Optional.ofNullable(channel.getPodcastLocations().getLast()).ifPresent(location -> location.setLocation(value)));
-        extensions.addChannelExtension("podcast:medium", PodcastChannel::setPodcastMedium);
-        extensions.addChannelExtension("podcast:person", (channel, value) -> channel.getPodcastPersons().getLast().setPerson(value));
-        extensions.addChannelExtension("podcast:trailer", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> trailer.setTrailer(value)));
-        extensions.addChannelExtension("podcast:updateFrequency", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setUpdateFrequency(value)));
+    private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
+        registry.addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
+        registry.addChannelExtension("podcast:license", (channel, value) -> createIfNull(((PodcastChannel)channel)::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
+        registry.addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> mapBoolean(value, locked::setLocked)));
+        registry.addChannelExtension("podcast:block", (channel, value) -> Optional.ofNullable(channel.getPodcastBlocks().getLast()).ifPresent(block -> mapBoolean(value, block::setBlock)));
+        registry.addChannelExtension("podcast:funding", (channel, value) -> Optional.ofNullable(channel.getPodcastFundings().getLast()).ifPresent(funding -> funding.setFunding(value)));
+        registry.addChannelExtension("podcast:location", (channel, value) -> Optional.ofNullable(channel.getPodcastLocations().getLast()).ifPresent(location -> location.setLocation(value)));
+        registry.addChannelExtension("podcast:medium", PodcastChannel::setPodcastMedium);
+        registry.addChannelExtension("podcast:person", (channel, value) -> channel.getPodcastPersons().getLast().setPerson(value));
+        registry.addChannelExtension("podcast:trailer", (channel, value) -> Optional.ofNullable(channel.getPodcastTrailers().getLast()).ifPresent(trailer -> trailer.setTrailer(value)));
+        registry.addChannelExtension("podcast:updateFrequency", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setUpdateFrequency(value)));
     }
 
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -103,20 +103,25 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:updateFrequency", "rrule", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setRrule(value)));
         registry.addChannelExtension("podcast:updateFrequency", "complete", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setComplete(value)));
         registry.addChannelExtension("podcast:updateFrequency", "dtstart", (channel, value) -> createIfNullOptional(channel::getPodcastUpdateFrequency, channel::setPodcastUpdateFrequency, PodcastUpdateFrequency::new).ifPresent(updateFrequency -> updateFrequency.setDtstart(value)));
+        registry.addChannelExtension("podcast:chat", "server", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setServer(value)));
+        registry.addChannelExtension("podcast:chat", "protocol", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setProtocol(value)));
+        registry.addChannelExtension("podcast:chat", "accountId", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
+        registry.addChannelExtension("podcast:chat", "space", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
     }
 
     private static void onItemTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addOnItemTag("podcast:image", item -> item.addPodcastImage(new PodcastImage()));
-        registry.addOnItemTag("podcast:soundbite", item ->item.addPodcastSoundbite(new PodcastSoundbite()));
-        registry.addOnItemTag("podcast:transcript", item ->item.addPodcastTranscript(new PodcastTranscript()));
-        registry.addOnItemTag("podcast:person", item ->item.addPodcastPerson(new PodcastPerson()));
+        registry.addOnItemTag("podcast:soundbite", item -> item.addPodcastSoundbite(new PodcastSoundbite()));
+        registry.addOnItemTag("podcast:transcript", item -> item.addPodcastTranscript(new PodcastTranscript()));
+        registry.addOnItemTag("podcast:person", item -> item.addPodcastPerson(new PodcastPerson()));
         registry.addOnItemTag("podcast:alternateEnclosure", item ->item.addPodcastAlternateEnclosure(new PodcastAlternateEnclosure()));
-        registry.addOnItemTag("podcast:source", item ->item.getPodcastAlternateEnclosures().getLast().addSource(new PodcastSource()));
-        registry.addOnItemTag("podcast:value", item ->item.addPodcastValue(new PodcastValue()));
+        registry.addOnItemTag("podcast:source", item -> item.getPodcastAlternateEnclosures().getLast().addSource(new PodcastSource()));
+        registry.addOnItemTag("podcast:value", item -> item.addPodcastValue(new PodcastValue()));
         registry.addOnItemTag("/rss/channel/item/podcast:value/podcast:valueRecipient", item ->item.getPodcastValues().getLast().addValueRecipient(new PodcastValueRecipient()));
         registry.addOnItemTag("podcast:valueTimeSplit", item -> item.getPodcastValues().getLast().addValueTimeSplit(new PodcastValueTimeSplit()));
         registry.addOnItemTag("/rss/channel/item/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", item ->item.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
-        registry.addOnItemTag("podcast:socialInteract", item ->item.addPodcastSocialInteract(new PodcastSocialInteract()));
+        registry.addOnItemTag("podcast:socialInteract", item -> item.addPodcastSocialInteract(new PodcastSocialInteract()));
+        registry.addOnItemTag("podcast:contentLink", item -> item.addPodcastContentLink(new PodcastContentLink()));
     }
 
     private static void itemTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -124,6 +129,7 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:episode", (item, value) -> createIfNullOptional(item::getPodcastEpisode, item::setPodcastEpisode, PodcastEpisode::new).ifPresent(season -> mapDouble(value, season::setEpisode)));
         registry.addItemExtension("podcast:soundbite", (item, value) -> item.getPodcastSoundbites().getLast().setSoundbite(value));
         registry.addItemExtension("podcast:person", (item, value) -> item.getPodcastPersons().getLast().setPerson(value));
+        registry.addItemExtension("podcast:contentLink", (item, value) -> item.getPodcastContentLinks().getLast().setContentLink(value));
     }
 
     private static void itemAttributesExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
@@ -192,6 +198,14 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:socialInteract", "accountId", (item, value) -> item.getPodcastSocialInteracts().getLast().setAccountId(value));
         registry.addItemExtension("podcast:socialInteract", "accountUrl", (item, value) -> item.getPodcastSocialInteracts().getLast().setAccountUrl(value));
         registry.addItemExtension("podcast:socialInteract", "priority", (item, value) -> Optional.of(item.getPodcastSocialInteracts().getLast()).ifPresent(socialInteracts -> mapInteger(value, socialInteracts::setPriority)));
+        registry.addItemExtension("podcast:contentLink", "href", (item, value) -> item.getPodcastContentLinks().getLast().setHref(value));
+        registry.addItemExtension("podcast:chat", "server", (item, value) -> createIfNullOptional(item::getPodcastChat, item::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setServer(value)));
+        registry.addItemExtension("podcast:chat", "protocol", (item, value) -> createIfNullOptional(item::getPodcastChat, item::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setProtocol(value)));
+        registry.addItemExtension("podcast:chat", "accountId", (item, value) -> createIfNullOptional(item::getPodcastChat, item::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
+        registry.addItemExtension("podcast:chat", "space", (item, value) -> createIfNullOptional(item::getPodcastChat, item::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
+        registry.addItemExtension("podcast:liveItem", "status", PodcastItemData::setPodcastLiveItemStatus);
+        registry.addItemExtension("podcast:liveItem", "start", PodcastItemData::setPodcastLiveItemStart);
+        registry.addItemExtension("podcast:liveItem", "end", PodcastItemData::setPodcastLiveItemEnd);
     }
 
     private static void channelPodcastValuePodcastValueTimeSplitPodcastRemoteItem(PodcastChannel channel, String value, BiConsumer<PodcastRemoteItem, String> setter) {

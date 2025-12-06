@@ -21,9 +21,45 @@ public class PodcastRssReaderTest {
         var items = new PodcastRssReader().read(fromFile("podcast/example1.xml"))
                 .collect(Collectors.toList());
 
-        assertEquals(3, items.size());
-        var item = items.get(0);
-        var channel = (PodcastChannelImpl) item.getChannel();
+        assertEquals(4, items.size());
+
+        var liveItem = items.get(0);
+        assertTrue(liveItem.isPodcastLiveItem());
+        assertThat(liveItem.getPodcastLiveItemStatus(), isPresentAndIs("live"));
+        assertThat(liveItem.getPodcastLiveItemStart(), isPresentAndIs("2021-09-26T07:30:00.000-0600"));
+        //assertThat(liveItem.getPodcastLiveItemStartAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T07:30:00.000-0600")));
+        assertThat(liveItem.getPodcastLiveItemEnd(), isPresentAndIs("2021-09-26T09:30:00.000-0600"));
+        //assertThat(liveItem.getPodcastLiveItemEndAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T09:30:00.000-0600")));
+        assertThat(liveItem.getTitle(), isPresentAndIs("Podcasting 2.0 Live Show"));
+        assertThat(liveItem.getDescription(), isPresentAndIs("A look into the future of podcasting and how we get to Podcasting 2.0!"));
+        assertThat(liveItem.getLink(), isPresentAndIs("https://example.com/podcast/live"));
+        assertThat(liveItem.getIsPermaLink(), isPresentAndIs(true));
+        assertThat(liveItem.getGuid(), isPresentAndIs("https://example.com/live"));
+        assertThat(liveItem.getItunesImage(), isPresentAndIs("https://behindthesch3m3s.com/wp-content/uploads/2023/01/v4v-storm-good-quality.gif"));
+        assertThat(liveItem.getPodcastAlternateEnclosures().size(), is(1));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getType(), is("audio/mpeg"));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getLength(), is(312L));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getLength(), is(312L));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).isDefaults(), is(true));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getSources().size(), is(1));
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getSources().get(0).getUri(), is("https://example.com/pc20/livestream"));
+        assertThat(liveItem.getEnclosures().size(), is(1));
+        assertThat(liveItem.getEnclosures().get(0).getUrl(), is("https://example.com/pc20/livestream?format=.mp3"));
+        assertThat(liveItem.getEnclosures().get(0).getType(), is("audio/mpeg"));
+        assertThat(liveItem.getEnclosures().get(0).getLength(), isPresentAndIs(312L));
+        assertThat(liveItem.getPodcastContentLinks().size(), is(2));
+        assertThat(liveItem.getPodcastContentLinks().get(0).getContentLink(), is("YouTube!"));
+        assertThat(liveItem.getPodcastContentLinks().get(0).getHref(), is("https://youtube.com/pc20/livestream"));
+        assertThat(liveItem.getPodcastContentLinks().get(1).getContentLink(), is("Twitch!"));
+        assertThat(liveItem.getPodcastContentLinks().get(1).getHref(), is("https://twitch.com/pc20/livestream"));
+        assertTrue(liveItem.getPodcastChat().isPresent());
+        assertThat(liveItem.getPodcastChat().get().getServer(), is("jabber.example.com"));
+        assertThat(liveItem.getPodcastChat().get().getProtocol(), is("xmpp"));
+        assertThat(liveItem.getPodcastChat().get().getAccountId(), is("jsmith@jabber.example.org"));
+        assertThat(liveItem.getPodcastChat().get().getSpace(), isPresentAndIs("myawesomepodcast@jabber.example.org"));
+
+        var item = items.get(1);
+        var channel = (PodcastChannel) item.getChannel();
         assertThat(channel.getPodcastGuid(), is("y0ur-gu1d-g035-h3r3"));
         assertTrue(channel.getPodcastLicense().isPresent());
         assertThat(channel.getPodcastLicense().get().getUrl(), isPresentAndIs("https://example.org/mypodcastlicense/full.pdf"));
@@ -91,7 +127,11 @@ public class PodcastRssReaderTest {
         assertThat(channel.getPodcastTrailers().get(0).getUrl(), is("https://example.org/trailers/teaser"));
         assertThat(channel.getPodcastTrailers().get(0).getLength(), is(12345678L));
         assertThat(channel.getPodcastTrailers().get(0).getType(), is("audio/mp3"));
-        // TODO: test podcast:liveItem
+        assertTrue(channel.getPodcastChat().isPresent());
+        assertThat(channel.getPodcastChat().get().getServer(), is("irc.zeronode.net"));
+        assertThat(channel.getPodcastChat().get().getProtocol(), is("irc"));
+        assertThat(channel.getPodcastChat().get().getAccountId(), is("@jsmith"));
+        assertThat(channel.getPodcastChat().get().getSpace(), isPresentAndIs("#myawesomepodcast"));
 
         assertThat(item.getTitle(), isPresentAndIs("Episode 3 - The Future"));
         assertThat(item.getDescription(), isPresentAndIs("<p>A look into the future of podcasting and how we get to Podcasting 2.0!</p>"));
@@ -99,6 +139,7 @@ public class PodcastRssReaderTest {
         assertThat(item.getGuid(), isPresentAndIs("https://example.com/ep0003"));
         assertThat(item.getIsPermaLink(), isPresentAndIs(true));
         assertThat(item.getPubDate(), isPresentAndIs("Fri, 09 Oct 2020 04:30:38 GMT"));
+        assertThat(item.getPubDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 09 Oct 2020 04:30:38 GMT")));
         assertThat(item.getPubDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 09 Oct 2020 04:30:38 GMT")));
         assertThat(item.getAuthor(), isPresentAndIs("John Doe (john@example.com)"));
         assertThat(item.getItunesImage(), isPresentAndIs("https://example.com/ep0003/artMd.jpg"));
@@ -217,6 +258,7 @@ public class PodcastRssReaderTest {
         assertThat(channel.getGenerator(), isPresentAndIs("Podnews LLC"));
         assertThat(channel.getItunesNewFeedUrl(), isPresentAndIs("https://podnews.net/rss"));
         assertThat(channel.getLastBuildDate(), isPresentAndIs("Sat, 27 Sep 2025 11:00:18 +0000"));
+        assertThat(channel.getLastBuildDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Sat, 27 Sep 2025 11:00:18 +0000")));
         assertThat(channel.getLastBuildDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Sat, 27 Sep 2025 11:00:18 +0000")));
         assertThat(channel.getPodcastLocations().size(), is(1));
         assertThat(channel.getPodcastLocations().get(0).getLocation(), is("Brisbane, Australia"));
@@ -225,6 +267,7 @@ public class PodcastRssReaderTest {
         assertThat(channel.getPodcastLocations().get(0).getCountry(), isPresentAndIs("au"));
         assertThat(channel.getPodcastLocations().get(0).getRel(), isPresentAndIs("creator"));
         assertThat(channel.getPubDate(), isPresentAndIs("Fri, 26 Sep 2025 09:19:05 +0000"));
+        assertThat(channel.getPubDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 26 Sep 2025 09:19:05 +0000")));
         assertThat(channel.getPubDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 26 Sep 2025 09:19:05 +0000")));
         assertThat(channel.getSkipDays(), is(List.of("Saturday", "Sunday")));
         assertThat(channel.getSkipHours(), is(List.of(0, 1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23)));
@@ -315,6 +358,8 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastRemoteItem.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
         EqualsVerifier.simple().forClass(PodcastUpdateFrequency.class).verify();
+        EqualsVerifier.simple().forClass(PodcastContentLink.class).verify();
+        EqualsVerifier.simple().forClass(PodcastChat.class).verify();
     }
 
     private InputStream fromFile(String fileName) {

@@ -854,7 +854,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         protected boolean isItem(String tagName) {
-            return "item".equals(tagName) || "entry".equals(tagName);
+            return "item".equals(tagName) || "entry".equals(tagName) || "podcast:liveItem".equals(tagName);
         }
 
         private void parseAttributes() {

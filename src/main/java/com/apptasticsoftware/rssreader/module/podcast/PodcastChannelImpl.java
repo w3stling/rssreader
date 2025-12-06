@@ -39,8 +39,7 @@ public class PodcastChannelImpl extends ItunesChannelImpl implements PodcastChan
                 Objects.equals(getPodcastPublisher(), that.getPodcastPublisher()) &&
                 Objects.equals(getPodcastPersons(), that.getPodcastPersons()) &&
                 Objects.equals(getPodcastUpdateFrequency(), that.getPodcastUpdateFrequency()) &&
-                Objects.equals(getPodcastTrailers(), that.getPodcastTrailers()) &&
-                Objects.equals(getPodcastLiveItems(), that.getPodcastLiveItems());
+                Objects.equals(getPodcastTrailers(), that.getPodcastTrailers());
     }
 
     @Override
@@ -48,6 +47,6 @@ public class PodcastChannelImpl extends ItunesChannelImpl implements PodcastChan
         return Objects.hash(super.hashCode(), getPodcastGuid(), getPodcastLicense(), getPodcastLocked(),
                 getPodcastBlocks(), getPodcastFundings(), getPodcastLocations(), getPodcastMedium(),
                 getPodcastValues(), getPodcastPodrolls(), getPodcastPublisher(), getPodcastPersons(),
-                getPodcastUpdateFrequency(), getPodcastTrailers(), getPodcastLiveItems());
+                getPodcastUpdateFrequency(), getPodcastTrailers());
     }
 }

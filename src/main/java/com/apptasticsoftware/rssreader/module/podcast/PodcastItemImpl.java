@@ -6,7 +6,7 @@ import com.apptasticsoftware.rssreader.module.itunes.ItunesItemImpl;
 import java.util.Objects;
 
 public class PodcastItemImpl extends ItunesItemImpl implements PodcastItem {
-    private final PodcastItemDataImpl data = new PodcastItemDataImpl();
+    private final PodcastItemDataImpl data;
 
     /**
      * Constructor
@@ -15,6 +15,7 @@ public class PodcastItemImpl extends ItunesItemImpl implements PodcastItem {
      */
     public PodcastItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+        data = new PodcastItemDataImpl(dateTimeParser);
     }
 
     @Override

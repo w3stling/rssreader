@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.DateTimeParser;
+
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +10,11 @@ import java.util.Optional;
 import static com.apptasticsoftware.rssreader.util.Mapper.emptyListIfNull;
 
 public class PodcastItemDataImpl implements PodcastItemData {
+    private final DateTimeParser dateTimeParser;
     private PodcastSeason podcastSeason;
     private PodcastEpisode podcastEpisode;
     private PodcastChapters podcastChapters;
+    private PodcastChat podcastChat;
     private List<PodcastImage> podcastImages;
     private List<PodcastSoundbite> podcastSoundbites;
     private List<PodcastTranscript> podcastTranscripts;
@@ -17,6 +22,14 @@ public class PodcastItemDataImpl implements PodcastItemData {
     private List<PodcastAlternateEnclosure> podcastAlternateEnclosures;
     private List<PodcastValue> podcastValues;
     private List<PodcastSocialInteract> podcastSocialInteracts;
+    private List<PodcastContentLink> podcastContentLinks;
+    private String podcastLiveItemStatus;
+    private String podcastLiveItemStart;
+    private String podcastLiveItemEnd;
+
+    public PodcastItemDataImpl(DateTimeParser dateTimeParser) {
+        this.dateTimeParser = dateTimeParser;
+    }
 
     @Override
     public PodcastItemData getPodcastItemData() {
@@ -51,6 +64,16 @@ public class PodcastItemDataImpl implements PodcastItemData {
     @Override
     public void setPodcastChapters(PodcastChapters podcastChapters) {
         this.podcastChapters = podcastChapters;
+    }
+
+    @Override
+    public Optional<PodcastChat> getPodcastChat() {
+        return Optional.ofNullable(podcastChat);
+    }
+
+    @Override
+    public void setPodcastChat(PodcastChat podcastChat) {
+        this.podcastChat = podcastChat;
     }
 
     @Override
@@ -143,4 +166,54 @@ public class PodcastItemDataImpl implements PodcastItemData {
         }
         podcastSocialInteracts.add(podcastSocialInteract);
     }
+
+    @Override
+    public List<PodcastContentLink> getPodcastContentLinks() {
+        return emptyListIfNull(podcastContentLinks);
+    }
+
+    @Override
+    public void addPodcastContentLink(PodcastContentLink podcastContentLink) {
+        if (podcastContentLinks == null) {
+            podcastContentLinks = new ArrayList<>();
+        }
+        podcastContentLinks.add(podcastContentLink);
+    }
+
+    public boolean isPodcastLiveItem() {
+        return podcastLiveItemStatus != null;
+    }
+
+    public Optional<String> getPodcastLiveItemStatus() {
+        return Optional.ofNullable(podcastLiveItemStatus);
+    }
+
+    public void setPodcastLiveItemStatus(String podcastLiveItemStatus) {
+        this.podcastLiveItemStatus = podcastLiveItemStatus;
+    }
+
+    public Optional<String> getPodcastLiveItemStart() {
+        return Optional.ofNullable(podcastLiveItemStart);
+    }
+
+    public Optional<ZonedDateTime> getPodcastLiveItemStartAsZonedDateTime() {
+        return Optional.ofNullable(podcastLiveItemStart).map(dateTimeParser::parse);
+    }
+
+    public void setPodcastLiveItemStart(String podcastLiveItemStart) {
+        this.podcastLiveItemStart = podcastLiveItemStart;
+    }
+
+    public Optional<String> getPodcastLiveItemEnd() {
+        return Optional.ofNullable(podcastLiveItemEnd);
+    }
+
+    public Optional<ZonedDateTime> getPodcastLiveItemEndAsZonedDateTime() {
+        return Optional.ofNullable(podcastLiveItemEnd).map(dateTimeParser::parse);
+    }
+
+    public void setPodcastLiveItemEnd(String podcastLiveItemEnd) {
+        this.podcastLiveItemEnd = podcastLiveItemEnd;
+    }
+
 }

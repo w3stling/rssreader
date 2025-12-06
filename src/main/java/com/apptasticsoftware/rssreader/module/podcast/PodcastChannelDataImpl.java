@@ -20,7 +20,7 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     private List<PodcastPerson> podcastPersons;
     private PodcastUpdateFrequency podcastUpdateFrequency;
     private List<PodcastTrailer> podcastTrailers;
-    private List<PodcastLiveItem> podcastLiveItems;
+    private PodcastChat podcastChat;
 
     @Override
     public PodcastChannelData getPodcastChannelData() {
@@ -179,15 +179,13 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     }
 
     @Override
-    public List<PodcastLiveItem> getPodcastLiveItems() {
-        return emptyListIfNull(podcastLiveItems);
+    public Optional<PodcastChat> getPodcastChat() {
+        return Optional.ofNullable(podcastChat);
     }
 
     @Override
-    public void addPodcastLiveItem(PodcastLiveItem podcastLiveItem) {
-        if (podcastLiveItems == null) {
-            podcastLiveItems = new ArrayList<>();
-        }
-        podcastLiveItems.add(podcastLiveItem);
+    public void setPodcastChat(PodcastChat podcastChat) {
+        this.podcastChat = podcastChat;
     }
+
 }

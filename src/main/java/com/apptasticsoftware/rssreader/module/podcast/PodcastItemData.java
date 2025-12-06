@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,14 @@ public interface PodcastItemData {
 
     default void setPodcastChapters(PodcastChapters podcastChapters) {
         getPodcastItemData().setPodcastChapters(podcastChapters);
+    }
+
+    default Optional<PodcastChat> getPodcastChat() {
+        return getPodcastItemData().getPodcastChat();
+    }
+
+    default void setPodcastChat(PodcastChat podcastChat) {
+        getPodcastItemData().setPodcastChat(podcastChat);
     }
 
     default List<PodcastImage> getPodcastImages() {
@@ -85,5 +94,49 @@ public interface PodcastItemData {
 
     default void addPodcastSocialInteract(PodcastSocialInteract podcastSocialInteract) {
         getPodcastItemData().addPodcastSocialInteract(podcastSocialInteract);
+    }
+
+    default List<PodcastContentLink> getPodcastContentLinks() {
+        return getPodcastItemData().getPodcastContentLinks();
+    }
+
+    default void addPodcastContentLink(PodcastContentLink podcastContentLink) {
+        getPodcastItemData().addPodcastContentLink(podcastContentLink);
+    }
+
+    default boolean isPodcastLiveItem() {
+        return getPodcastItemData().isPodcastLiveItem();
+    }
+
+    default Optional<String> getPodcastLiveItemStatus() {
+        return getPodcastItemData().getPodcastLiveItemStatus();
+    }
+
+    default void setPodcastLiveItemStatus(String podcastLiveItemStatus) {
+        getPodcastItemData().setPodcastLiveItemStatus(podcastLiveItemStatus);
+    }
+
+    default Optional<String> getPodcastLiveItemStart() {
+        return getPodcastItemData().getPodcastLiveItemStart();
+    }
+
+    default Optional<ZonedDateTime> getPodcastLiveItemStartAsZonedDateTime() {
+        return getPodcastItemData().getPodcastLiveItemStartAsZonedDateTime();
+    }
+
+    default void setPodcastLiveItemStart(String podcastLiveItemStart) {
+        getPodcastItemData().setPodcastLiveItemStart(podcastLiveItemStart);
+    }
+
+    default Optional<String> getPodcastLiveItemEnd() {
+        return getPodcastItemData().getPodcastLiveItemEnd();
+    }
+
+    default Optional<ZonedDateTime> getPodcastLiveItemEndAsZonedDateTime() {
+        return getPodcastItemData().getPodcastLiveItemEndAsZonedDateTime();
+    }
+
+    default void setPodcastLiveItemEnd(String podcastLiveItemEnd) {
+        getPodcastItemData().setPodcastLiveItemEnd(podcastLiveItemEnd);
     }
 }
