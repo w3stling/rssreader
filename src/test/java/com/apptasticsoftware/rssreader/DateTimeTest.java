@@ -523,6 +523,12 @@ class DateTimeTest {
     }
 
     @Test
+    void testToInstant() {
+        var instant = dateTime.toInstant("Fri, 01 Jun 2018 07:17:52 +0200");
+        assertEquals(1527830272000L, instant.toEpochMilli());
+    }
+
+    @Test
     void badInputNull() {
         assertNull(dateTime.toLocalDateTime(null));
         assertNull(dateTime.toZonedDateTime(null));
