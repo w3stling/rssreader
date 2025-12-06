@@ -33,6 +33,15 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormatWithMilliseconds() {
+        var timestamp = dateTime.toEpochMilli("2025-03-21T19:50:00.001Z");
+        assertEquals(1742586600001L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("2021-09-26T09:30:00.001-0600");
+        assertEquals(1632670200001L, timestamp);
+    }
+
+    @Test
     void dateTimeFormat2() {
         var timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52+02:00");
         assertEquals(1527830272000L, timestamp);

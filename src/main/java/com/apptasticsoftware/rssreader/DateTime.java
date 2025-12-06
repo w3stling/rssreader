@@ -102,6 +102,8 @@ public class DateTime implements DateTimeParser {
 
     private static final DateTimeFormatter DATE_TIME_SPECIAL_1;
     private static final DateTimeFormatter DATE_TIME_SPECIAL_2;
+    private static final DateTimeFormatter ISO_OFFSET_DATE_TIME_WITH_MILLIS_Z;
+    private static final DateTimeFormatter ISO_OFFSET_DATE_TIME_WITH_MILLIS_OFFSET;
 
     static {
         BASIC_ISO_DATE = DateTimeFormatter.BASIC_ISO_DATE.withLocale(Default.getLocale());
@@ -174,6 +176,8 @@ public class DateTime implements DateTimeParser {
                 .appendLiteral(' ')
                 .appendPattern("Z")
                 .toFormatter();
+        ISO_OFFSET_DATE_TIME_WITH_MILLIS_Z = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX", Default.getLocale());
+        ISO_OFFSET_DATE_TIME_WITH_MILLIS_OFFSET = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Default.getLocale());
     }
 
     /**
@@ -296,7 +300,11 @@ public class DateTime implements DateTimeParser {
     }
 
     private static DateTimeFormatter parseIsoDateTime(String dateTime) {
-        if (dateTime.length() == 24 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && (dateTime.charAt(dateTime.length() - 5) == '-' || dateTime.charAt(dateTime.length() - 5) == '+'))
+        if (dateTime.length() == 24 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && dateTime.endsWith("Z") && dateTime.charAt(23) == 'Z')
+            return ISO_OFFSET_DATE_TIME_WITH_MILLIS_Z;
+        else if (dateTime.length() == 28 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && dateTime.charAt(19) == '.' && (dateTime.charAt(23) == '-' || dateTime.charAt(23) == '+'))
+            return ISO_OFFSET_DATE_TIME_WITH_MILLIS_OFFSET;
+        else if (dateTime.length() == 24 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && (dateTime.charAt(dateTime.length() - 5) == '-' || dateTime.charAt(dateTime.length() - 5) == '+'))
             return ISO_OFFSET_DATE_TIME_SPECIAL;
         else if (dateTime.length() >= 20 && dateTime.length() <= 35 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T') // && dateTime.charAt(dateTime.length() - 3) == ':')
             return ISO_OFFSET_DATE_TIME;
