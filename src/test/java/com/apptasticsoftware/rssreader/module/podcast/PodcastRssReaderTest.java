@@ -27,9 +27,9 @@ public class PodcastRssReaderTest {
         assertTrue(liveItem.isPodcastLiveItem());
         assertThat(liveItem.getPodcastLiveItemStatus(), isPresentAndIs("live"));
         assertThat(liveItem.getPodcastLiveItemStart(), isPresentAndIs("2021-09-26T07:30:00.000-0600"));
-        //assertThat(liveItem.getPodcastLiveItemStartAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T07:30:00.000-0600")));
+        assertThat(liveItem.getPodcastLiveItemStartAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T07:30:00.000-0600")));
         assertThat(liveItem.getPodcastLiveItemEnd(), isPresentAndIs("2021-09-26T09:30:00.000-0600"));
-        //assertThat(liveItem.getPodcastLiveItemEndAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T09:30:00.000-0600")));
+        assertThat(liveItem.getPodcastLiveItemEndAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2021-09-26T09:30:00.000-0600")));
         assertThat(liveItem.getTitle(), isPresentAndIs("Podcasting 2.0 Live Show"));
         assertThat(liveItem.getDescription(), isPresentAndIs("A look into the future of podcasting and how we get to Podcasting 2.0!"));
         assertThat(liveItem.getLink(), isPresentAndIs("https://example.com/podcast/live"));
@@ -57,7 +57,6 @@ public class PodcastRssReaderTest {
         assertThat(liveItem.getPodcastChat().get().getProtocol(), is("xmpp"));
         assertThat(liveItem.getPodcastChat().get().getAccountId(), is("jsmith@jabber.example.org"));
         assertThat(liveItem.getPodcastChat().get().getSpace(), isPresentAndIs("myawesomepodcast@jabber.example.org"));
-
 
         for (PodcastItem podcastItem : items) {
             var channel = (PodcastChannel) podcastItem.getChannel();
