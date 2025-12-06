@@ -338,7 +338,6 @@ public class PodcastRssReaderTest {
         assertThat(channel.getItunesSubtitle(), isPresentAndIs("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify,\n" +
                 "            YouTube Music to Joe Rogan. Podnews also covers the latest jobs and events and trending shows in a short\n" +
                 "            update every weekday. editor@podnews.net"));
-        // TODO: missing ItunesKeywords <-- deprected!
         assertThat(channel.getItunesCategories(), is(List.of("News", "Daily News", "Technology")));
         assertThat(channel.getItunesType(), isPresentAndIs("episodic"));
         assertThat(channel.getItunesImage(), is("https://podnews.net/static/podnews-2000x2000.png"));
@@ -362,9 +361,27 @@ public class PodcastRssReaderTest {
         assertThat(channel.getPodcastPublisher().get().getMedium(), isPresentAndIs("publisher"));
         assertThat(channel.getPodcastPublisher().get().getFeedUrl(), isPresentAndIs("https://podnews.net/static/feeds/publisher.xml"));
 
+        assertThat(channel.getPodcastImages().size(), is(2));
+        assertThat(channel.getPodcastImages().get(0).getHref(), is("https://example.com/images/channel/pci_square-massive.jpg"));
+        assertThat(channel.getPodcastImages().get(1).getAlt(), isPresentAndIs("An antenna emanating signal waves channel"));
+        assertThat(channel.getPodcastImages().get(1).getPurpose(), isPresentAndIs("channel artwork social"));
+        assertThat(channel.getPodcastImages().get(1).getType(), isPresentAndIs("image/png"));
+        assertThat(channel.getPodcastImages().get(1).getAspectRatio(), isPresentAndIs("9/16"));
+        assertThat(channel.getPodcastImages().get(1).getWidth(), isPresentAndIs(90));
+        assertThat(channel.getPodcastImages().get(1).getHeight(), isPresentAndIs(160));
+        assertThat(channel.getPodcastImages().get(1).getHref(), is("https://example.com/images/channel/pci_landscape-massive.jpg"));
+
         assertThat(channel.getCategories(), is(List.of("podcasting", "radio")));
         assertThat(channel.getTtl(), isPresentAndIs("30"));
 
+        assertThat(item.getPodcastImages().size(), is(1));
+        assertThat(item.getPodcastImages().get(0).getAlt(), isPresentAndIs("An antenna emanating signal waves"));
+        assertThat(item.getPodcastImages().get(0).getPurpose(), isPresentAndIs("artwork social"));
+        assertThat(item.getPodcastImages().get(0).getType(), isPresentAndIs("image/jpeg"));
+        assertThat(item.getPodcastImages().get(0).getAspectRatio(), isPresentAndIs("16/9"));
+        assertThat(item.getPodcastImages().get(0).getWidth(), isPresentAndIs(1600));
+        assertThat(item.getPodcastImages().get(0).getHeight(), isPresentAndIs(900));
+        assertThat(item.getPodcastImages().get(0).getHref(), is("https://example.com/images/ep1/pci_landscape-massive.jpg"));
     }
 
     @Test

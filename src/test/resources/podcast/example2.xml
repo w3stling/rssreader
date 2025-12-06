@@ -79,6 +79,15 @@
         <itunes:category text="Technology"></itunes:category>
         <itunes:type>episodic</itunes:type>
         <itunes:image href="https://podnews.net/static/podnews-2000x2000.png"/>
+        <podcast:image href="https://example.com/images/channel/pci_square-massive.jpg"/>
+        <podcast:image
+                alt="An antenna emanating signal waves channel"
+                purpose="channel artwork social"
+                type="image/png"
+                aspect-ratio="9/16"
+                width="90"
+                height="160"
+                href="https://example.com/images/channel/pci_landscape-massive.jpg"/>
         <image>
             <url>https://podnews.net/static/_favicons/apple-icon.png</url>
             <title>Podnews</title>
@@ -149,6 +158,14 @@ Visit <a href="https://podnews.net/update/jeanine-wright-interview">https://podn
                 <podcast:source
                         uri="https://op3.dev/e,pg=9b024349-ccf0-5f69-a609-6b82873eab3c/podnews.net/audio/podnews250926.mp4"/>
             </podcast:alternateEnclosure>
+            <podcast:image
+                    alt="An antenna emanating signal waves"
+                    purpose="artwork social"
+                    type="image/jpeg"
+                    aspect-ratio="16/9"
+                    width="1600"
+                    height="900"
+                    href="https://example.com/images/ep1/pci_landscape-massive.jpg"/>
         </item>
         <item>
             <title>New Heights makes it to Amazon Prime Video</title>

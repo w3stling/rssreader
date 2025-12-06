@@ -33,6 +33,7 @@ public class PodcastExtensions {
         registry.addOnChannelTag("/rss/channel/podcast:podroll/podcast:remoteItem", channel -> channel.addPodcastPodroll(new PodcastRemoteItem()));
         registry.addOnChannelTag("podcast:person", channel ->channel.addPodcastPerson(new PodcastPerson()));
         registry.addOnChannelTag("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
+        registry.addOnChannelTag("podcast:image", channel -> channel.addPodcastImage(new PodcastImage()));
         registry.addOnChannelTag("podcast:txt", channel -> channel.addPodcastTxt(new PodcastTxt()));
     }
 
@@ -111,6 +112,13 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:chat", "accountId", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
         registry.addChannelExtension("podcast:chat", "space", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
         registry.addChannelExtension("podcast:txt", "purpose", (channel, value) -> channel.getPodcastTxts().getLast().setPurpose(value));
+        registry.addChannelExtension("podcast:image", "href", (channel, value) -> channel.getPodcastImages().getLast().setHref(value));
+        registry.addChannelExtension("podcast:image", "alt", (channel, value) -> channel.getPodcastImages().getLast().setAlt(value));
+        registry.addChannelExtension("podcast:image", "aspect-ratio", (channel, value) -> channel.getPodcastImages().getLast().setAspectRatio(value));
+        registry.addChannelExtension("podcast:image", "width", (channel, value) -> Optional.of(channel.getPodcastImages().getLast()).ifPresent(image -> mapInteger(value, image::setWidth)));
+        registry.addChannelExtension("podcast:image", "height", (channel, value) -> Optional.of(channel.getPodcastImages().getLast()).ifPresent(image -> mapInteger(value, image::setHeight)));
+        registry.addChannelExtension("podcast:image", "type", (channel, value) -> channel.getPodcastImages().getLast().setType(value));
+        registry.addChannelExtension("podcast:image", "purpose", (channel, value) -> channel.getPodcastImages().getLast().setPurpose(value));
         registry.addChannelExtension("podcast:images", "srcset", (channel, value) -> parsePodcastImages(channel::addPodcastImage, value));
         registry.addChannelExtension("podcast:podping", "usesPodping", (channel, value) -> mapBoolean(value, channel::setPodcastUsingPodping));
     }
