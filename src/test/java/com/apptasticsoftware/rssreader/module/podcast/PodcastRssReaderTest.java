@@ -139,6 +139,15 @@ public class PodcastRssReaderTest {
             assertThat(channel.getPodcastTxts().get(1).getPurpose(), isPresentAndIs("verify"));
             assertThat(channel.getPodcastTxts().get(2).getTxt(), is("05125"));
             assertThat(channel.getPodcastTxts().get(2).getPurpose(), isPresentAndIs("applepodcastsverify"));
+            assertThat(channel.getPodcastImages().size(), is(4));
+            assertThat(channel.getPodcastImages().get(0).getHref(), is("https://example.com/images/channel/pci_avatar-massive.jpg"));
+            assertThat(channel.getPodcastImages().get(0).getWidth(), isPresentAndIs(1500));
+            assertThat(channel.getPodcastImages().get(1).getHref(), is("https://example.com/images/channel/pci_avatar-middle.jpg"));
+            assertThat(channel.getPodcastImages().get(1).getWidth(), isPresentAndIs(600));
+            assertThat(channel.getPodcastImages().get(2).getHref(), is("https://example.com/images/channel/pci_avatar-small.jpg"));
+            assertThat(channel.getPodcastImages().get(2).getWidth(), isPresentAndIs(300));
+            assertThat(channel.getPodcastImages().get(3).getHref(), is("https://example.com/images/channel/pci_avatar-tiny.jpg"));
+            assertThat(channel.getPodcastImages().get(3).getWidth(), isPresentAndIs(150));
             assertThat(channel.isPodcastUsingPodping(), isEmpty());
         }
 
@@ -153,7 +162,15 @@ public class PodcastRssReaderTest {
         assertThat(item.getPubDateZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 09 Oct 2020 04:30:38 GMT")));
         assertThat(item.getAuthor(), isPresentAndIs("John Doe (john@example.com)"));
         assertThat(item.getItunesImage(), isPresentAndIs("https://example.com/ep0003/artMd.jpg"));
-        // TODO: add mapping of old images tag
+        assertThat(item.getPodcastImages().size(), is(4));
+        assertThat(item.getPodcastImages().get(0).getHref(), is("https://example.com/images/ep3/pci_avatar-massive.jpg"));
+        assertThat(item.getPodcastImages().get(0).getWidth(), isPresentAndIs(1500));
+        assertThat(item.getPodcastImages().get(1).getHref(), is("https://example.com/images/ep3/pci_avatar-middle.jpg"));
+        assertThat(item.getPodcastImages().get(1).getWidth(), isPresentAndIs(600));
+        assertThat(item.getPodcastImages().get(2).getHref(), is("https://example.com/images/ep3/pci_avatar-small.jpg"));
+        assertThat(item.getPodcastImages().get(2).getWidth(), isPresentAndIs(300));
+        assertThat(item.getPodcastImages().get(3).getHref(), is("https://example.com/images/ep3/pci_avatar-tiny.jpg"));
+        assertThat(item.getPodcastImages().get(3).getWidth(), isPresentAndIs(150));
         //assertThat(item.getPodcastImages().size(), is(1));
         assertThat(item.isItunesExplicit(), is(false));
         assertTrue(item.getPodcastSeason().isPresent());

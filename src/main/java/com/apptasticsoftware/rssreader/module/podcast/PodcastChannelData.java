@@ -127,6 +127,14 @@ public interface PodcastChannelData {
         getPodcastChannelData().addPodcastTxt(podcastTxt);
     }
 
+    default List<PodcastImage> getPodcastImages() {
+        return getPodcastChannelData().getPodcastImages();
+    }
+
+    default void addPodcastImage(PodcastImage podcastImage) {
+        getPodcastChannelData().addPodcastImage(podcastImage);
+    }
+
     default Optional<Boolean> isPodcastUsingPodping() {
         return getPodcastChannelData().isPodcastUsingPodping();
     }

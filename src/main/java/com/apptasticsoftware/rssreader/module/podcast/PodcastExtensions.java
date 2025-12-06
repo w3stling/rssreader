@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.FeedExtensionRegistry;
 
 import java.util.Optional;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import static com.apptasticsoftware.rssreader.util.Mapper.*;
 import static com.apptasticsoftware.rssreader.util.Mapper.createIfNullOptional;
@@ -110,6 +111,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:chat", "accountId", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
         registry.addChannelExtension("podcast:chat", "space", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
         registry.addChannelExtension("podcast:txt", "purpose", (channel, value) -> channel.getPodcastTxts().getLast().setPurpose(value));
+        registry.addChannelExtension("podcast:images", "srcset", (channel, value) -> parsePodcastImages(channel::addPodcastImage, value));
         registry.addChannelExtension("podcast:podping", "usesPodping", (channel, value) -> mapBoolean(value, channel::setPodcastUsingPodping));
     }
 
@@ -146,6 +148,7 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:image", "height", (item, value) -> Optional.of(item.getPodcastImages().getLast()).ifPresent(image -> mapInteger(value, image::setHeight)));
         registry.addItemExtension("podcast:image", "type", (item, value) -> item.getPodcastImages().getLast().setType(value));
         registry.addItemExtension("podcast:image", "purpose", (item, value) -> item.getPodcastImages().getLast().setPurpose(value));
+        registry.addItemExtension("podcast:images", "srcset", (item, value) -> parsePodcastImages(item::addPodcastImage, value));
         registry.addItemExtension("podcast:season", "name", (item, value) -> createIfNull(item::getPodcastSeason, item::setPodcastSeason, PodcastSeason::new).setName(value));
         registry.addItemExtension("podcast:episode", "display", (item, value) -> createIfNull(item::getPodcastEpisode, item::setPodcastEpisode, PodcastEpisode::new).setDisplay(value));
         registry.addItemExtension("podcast:chapters", "url", (item, value) -> createIfNull(item::getPodcastChapters, item::setPodcastChapters, PodcastChapters::new).setUrl(value));
@@ -235,5 +238,62 @@ public class PodcastExtensions {
         var timeSplit = item.getPodcastValues().getLast().getValueTimeSplits().getLast();
         var remoteItem = createIfNull(timeSplit::getRemoteItem, timeSplit::setRemoteItem, PodcastRemoteItem::new);
         setter.accept(remoteItem, value);
+    }
+
+    private static void parsePodcastImages(Consumer<PodcastImage> addImage, String value) {
+        if (value == null || value.trim().isEmpty()) {
+            return;
+        }
+
+        // Split by comma to get individual image entries (HTML5 srcset format)
+        String[] entries = value.split(",");
+
+        for (String entry : entries) {
+            try {
+                entry = entry.trim();
+                if (entry.isEmpty()) {
+                    continue;
+                }
+
+                // Find the last whitespace to separate URL from descriptor
+                // According to HTML5 spec, URL is followed by optional whitespace and a descriptor
+                int lastWhitespace = entry.lastIndexOf(' ');
+                int lastTab = entry.lastIndexOf('\t');
+                int lastNewline = entry.lastIndexOf('\n');
+                int lastCarriageReturn = entry.lastIndexOf('\r');
+
+                int descriptorStart = Math.max(Math.max(lastWhitespace, lastTab), Math.max(lastNewline, lastCarriageReturn));
+
+                if (descriptorStart <= 0) {
+                    // No descriptor found, just a URL
+                    continue;
+                }
+
+                String url = entry.substring(0, descriptorStart).trim();
+                String descriptor = entry.substring(descriptorStart).trim();
+
+                if (url.isEmpty() || descriptor.isEmpty()) {
+                    continue;
+                }
+
+                // Create a new PodcastImage and add it to the item
+                PodcastImage image = new PodcastImage();
+                image.setHref(url);
+
+                // Parse width descriptor (e.g., "150w" -> 150)
+                // or pixel density descriptor (e.g., "2x" -> 2)
+                if (descriptor.endsWith("w") || descriptor.endsWith("W")) {
+                    String widthStr = descriptor.substring(0, descriptor.length() - 1);
+                    mapInteger(widthStr, image::setWidth);
+                } else if (descriptor.endsWith("x") || descriptor.endsWith("X")) {
+                    String densityStr = descriptor.substring(0, descriptor.length() - 1);
+                    mapDouble(densityStr, density -> image.setWidth(density.intValue()));
+                }
+
+                addImage.accept(image);
+            } catch (Exception e) {
+                // Ignore parsing errors for individual entries
+            }
+        }
     }
 }

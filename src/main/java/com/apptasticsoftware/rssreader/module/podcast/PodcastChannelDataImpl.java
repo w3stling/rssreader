@@ -22,6 +22,7 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     private List<PodcastTrailer> podcastTrailers;
     private PodcastChat podcastChat;
     private List<PodcastTxt> podcastTxts;
+    private List<PodcastImage> podcastImages;
     private Boolean podcastUsesPodping;
 
     @Override
@@ -201,6 +202,19 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
             podcastTxts = new ArrayList<>();
         }
         podcastTxts.add(podcastTxt);
+    }
+
+    @Override
+    public List<PodcastImage> getPodcastImages() {
+        return emptyListIfNull(podcastImages);
+    }
+
+    @Override
+    public void addPodcastImage(PodcastImage podcastImage) {
+        if (podcastImages == null) {
+            podcastImages = new ArrayList<>();
+        }
+        podcastImages.add(podcastImage);
     }
 
     @Override
