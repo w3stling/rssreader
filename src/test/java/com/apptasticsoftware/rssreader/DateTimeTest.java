@@ -169,10 +169,22 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 EDT");
         assertEquals(1667967714000L, timestamp);
 
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 EDT");
+        assertEquals(1667967714000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 EDT");
+        assertEquals(1667967714000L, timestamp);
+
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 EST");
         assertEquals(1667971314000L, timestamp);
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 EST");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 EST");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 EST");
         assertEquals(1667971314000L, timestamp);
 
 
@@ -183,10 +195,22 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 CDT");
         assertEquals(1667971314000L, timestamp);
 
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 CDT");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 CDT");
+        assertEquals(1667971314000L, timestamp);
+
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 CST");
         assertEquals(1667974914000L, timestamp);
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 CST");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 CST");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 CST");
         assertEquals(1667974914000L, timestamp);
 
 
@@ -197,10 +221,22 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 MDT");
         assertEquals(1667974914000L, timestamp);
 
-        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:15:12 MDT"); // new
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 MDT");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 MDT");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:15:12 MDT");
         assertEquals(1693055712000L, timestamp);
 
-        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:5:2 MDT"); // new
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:5:2 MDT");
+        assertEquals(1693055102000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 7:15:12 MDT");
+        assertEquals(1693055712000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Saturday, 26 Aug 2023 7:5:2 MDT");
         assertEquals(1693055102000L, timestamp);
 
 
@@ -208,6 +244,12 @@ class DateTimeTest {
         assertEquals(1667978514000L, timestamp);
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 MST");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 MST");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 MST");
         assertEquals(1667978514000L, timestamp);
 
 
@@ -218,10 +260,22 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 PDT");
         assertEquals(1667978514000L, timestamp);
 
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 PDT");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 PDT");
+        assertEquals(1667978514000L, timestamp);
+
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 PST");
         assertEquals(1667982114000L, timestamp);
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 PST");
+        assertEquals(1667982114000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 Nov 2022 00:21:54 PST");
+        assertEquals(1667982114000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 Nov 2022 00:21:54 PST");
         assertEquals(1667982114000L, timestamp);
     }
 
