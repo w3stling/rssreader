@@ -299,6 +299,7 @@ public class DateTime implements DateTimeParser {
         return (index3 - index2 - 1) > 3;
     }
 
+    @SuppressWarnings("java:S3776")
     private static DateTimeFormatter parseIsoDateTime(String dateTime) {
         if (dateTime.length() == 24 && dateTime.charAt(4) == '-' && dateTime.charAt(10) == 'T' && dateTime.endsWith("Z") && dateTime.charAt(23) == 'Z')
             return ISO_OFFSET_DATE_TIME_WITH_MILLIS_Z;
