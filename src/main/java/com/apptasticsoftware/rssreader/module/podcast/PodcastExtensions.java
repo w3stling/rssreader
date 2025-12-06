@@ -110,6 +110,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:chat", "accountId", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setAccountId(value)));
         registry.addChannelExtension("podcast:chat", "space", (channel, value) -> createIfNullOptional(channel::getPodcastChat, channel::setPodcastChat, PodcastChat::new).ifPresent(podcastChat -> podcastChat.setSpace(value)));
         registry.addChannelExtension("podcast:txt", "purpose", (channel, value) -> channel.getPodcastTxts().getLast().setPurpose(value));
+        registry.addChannelExtension("podcast:podping", "usesPodping", (channel, value) -> mapBoolean(value, channel::setPodcastUsingPodping));
     }
 
     private static void onItemTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {

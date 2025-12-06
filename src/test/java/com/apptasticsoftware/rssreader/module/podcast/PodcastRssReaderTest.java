@@ -139,6 +139,7 @@ public class PodcastRssReaderTest {
             assertThat(channel.getPodcastTxts().get(1).getPurpose(), isPresentAndIs("verify"));
             assertThat(channel.getPodcastTxts().get(2).getTxt(), is("05125"));
             assertThat(channel.getPodcastTxts().get(2).getPurpose(), isPresentAndIs("applepodcastsverify"));
+            assertThat(channel.isPodcastUsingPodping(), isEmpty());
         }
 
         var item = items.get(1);
@@ -306,7 +307,7 @@ public class PodcastRssReaderTest {
         assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getType(), is("node"));
         assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getAddress(), is("03ae9f91a0cb8ff43840e3c322c4c61f019d8c1c3cea15a25cfc425ac605e61a4a"));
         assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(2).getSplit(), is(2));
-        // TODO: podcast:podping
+        assertThat(channel.isPodcastUsingPodping(), isPresentAndIs(true));
         assertThat(channel.getPodcastPersons().size(), is(1));
         assertThat(channel.getPodcastPersons().get(0).getPerson(), is("James Cridland"));
         assertThat(channel.getPodcastPersons().get(0).getRole(), isPresentAndIs("host"));

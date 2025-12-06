@@ -126,4 +126,12 @@ public interface PodcastChannelData {
     default void addPodcastTxt(PodcastTxt podcastTxt) {
         getPodcastChannelData().addPodcastTxt(podcastTxt);
     }
+
+    default Optional<Boolean> isPodcastUsingPodping() {
+        return getPodcastChannelData().isPodcastUsingPodping();
+    }
+
+    default void setPodcastUsingPodping(Boolean podcastUsesPodping) {
+        getPodcastChannelData().setPodcastUsingPodping(podcastUsesPodping);
+    }
 }
