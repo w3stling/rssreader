@@ -33,6 +33,15 @@ class DateTimeTest {
     }
 
     @Test
+    void dateTimeFormatWithMilliseconds() {
+        var timestamp = dateTime.toEpochMilli("2025-03-21T19:50:00.001Z");
+        assertEquals(1742586600001L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("2021-09-26T09:30:00.001-0600");
+        assertEquals(1632670200001L, timestamp);
+    }
+
+    @Test
     void dateTimeFormat2() {
         var timestamp = dateTime.toEpochMilli("2018-06-01T07:17:52+02:00");
         assertEquals(1527830272000L, timestamp);
@@ -166,7 +175,6 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 EST");
         assertEquals(1667971314000L, timestamp);
 
-
         // Central time
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 CDT");
         assertEquals(1667971314000L, timestamp);
@@ -180,7 +188,6 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 CST");
         assertEquals(1667974914000L, timestamp);
 
-
         // Mountain time
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 MDT");
         assertEquals(1667974914000L, timestamp);
@@ -188,10 +195,10 @@ class DateTimeTest {
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 MDT");
         assertEquals(1667974914000L, timestamp);
 
-        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:15:12 MDT"); // new
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:15:12 MDT");
         assertEquals(1693055712000L, timestamp);
 
-        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:5:2 MDT"); // new
+        timestamp = dateTime.toEpochMilli("Sat, 26 Aug 2023 7:5:2 MDT");
         assertEquals(1693055102000L, timestamp);
 
 
@@ -200,7 +207,6 @@ class DateTimeTest {
 
         timestamp = dateTime.toEpochMilli("Wed, 9 Nov 2022 00:21:54 MST");
         assertEquals(1667978514000L, timestamp);
-
 
         // Pacific time
         timestamp = dateTime.toEpochMilli("Wed, 09 Nov 2022 00:21:54 PDT");
@@ -275,8 +281,68 @@ class DateTimeTest {
         assertEquals(1667982114000L, timestamp);
     }
 
+
     @Test
     void dateTimeFormat13() {
+        assertEquals(1423026000000L, dateTime.toEpochMilli("Wednesday, 04 February 2015 00:00:00 EST"));
+        // Eastern time
+        var timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 EDT");
+        assertEquals(1667967714000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 EDT");
+        assertEquals(1667967714000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 EST");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 EST");
+        assertEquals(1667971314000L, timestamp);
+
+
+        // Central time
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 CDT");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 CDT");
+        assertEquals(1667971314000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 CST");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 CST");
+        assertEquals(1667974914000L, timestamp);
+
+
+        // Mountain time
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 MDT");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 MDT");
+        assertEquals(1667974914000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 MST");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 MST");
+        assertEquals(1667978514000L, timestamp);
+
+
+        // Pacific time
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 PDT");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 PDT");
+        assertEquals(1667978514000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 09 November 2022 00:21:54 PST");
+        assertEquals(1667982114000L, timestamp);
+
+        timestamp = dateTime.toEpochMilli("Wednesday, 9 November 2022 00:21:54 PST");
+        assertEquals(1667982114000L, timestamp);
+    }
+
+    @Test
+    void dateTimeFormat14() {
         var timestamp = dateTime.toEpochMilli("Wed, 02 Oct 2002 13:00:00 CET");
         assertEquals(1033556400000L, timestamp);
 
@@ -285,7 +351,7 @@ class DateTimeTest {
     }
 
     @Test
-    void dateTimeFormat14() {
+    void dateTimeFormat15() {
         var timestamp = dateTime.toEpochMilli("Fri, 03 Mar 2023 13:13:53-5:30");
         assertEquals(1677869033000L, timestamp);
 
@@ -324,7 +390,7 @@ class DateTimeTest {
     }
 
     @Test
-    void dateTimeFormat15() {
+    void dateTimeFormat16() {
         var timestamp = dateTime.toEpochMilli("2023-02-28T17:37:08.823050123+00:00");
         assertEquals(1677605828823L, timestamp);
 
@@ -336,7 +402,7 @@ class DateTimeTest {
     }
 
     @Test
-    void dateTimeFormat16() {
+    void dateTimeFormat17() {
         var timestamp = dateTime.toEpochMilli("2023-08-07T10:06:05-0400");
         assertEquals(1691417165000L, timestamp);
 
@@ -345,7 +411,7 @@ class DateTimeTest {
     }
 
     @Test
-    void dateTimeFormat17() {
+    void dateTimeFormat18() {
         var timestamp = dateTime.toEpochMilli("1 Dec 2024 09:15:08 +0000");
         assertEquals(1733044508000L, timestamp);
 
@@ -454,6 +520,12 @@ class DateTimeTest {
         dateTimeParser = new DateTime();
         timestamp = dateTimeParser.toEpochMilli("2000-12-17T01:17");
         assertEquals(977015820000L, timestamp);
+    }
+
+    @Test
+    void testToInstant() {
+        var instant = dateTime.toInstant("Fri, 01 Jun 2018 07:17:52 +0200");
+        assertEquals(1527830272000L, instant.toEpochMilli());
     }
 
     @Test
