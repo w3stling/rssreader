@@ -1,18 +1,15 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.util.ItemComparator;
+import com.apptasticsoftware.rssreader.util.Util;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -376,7 +373,9 @@ class MediaRssReaderTest {
         assertThat(text2.getText(), equalTo("By the dawn's early light"));
         assertThat(text2.getLang(), isPresentAndIs("en"));
         assertThat(text2.getStart(), isPresentAndIs("00:00:10.000"));
+        assertThat(text2.getStartAsDuration(), isPresentAndIs(Util.toDuration("00:00:10.000")));
         assertThat(text2.getEnd(), isPresentAndIs("00:00:17.000"));
+        assertThat(text2.getEndAsDuration(), isPresentAndIs(Util.toDuration("00:00:17.000")));
 
         assertThat(group.getMediaComments(), equalTo(List.of("comment1", "comment2")));
         assertThat(group.getMediaResponses(), equalTo(List.of("http://www.response1.com", "http://www.response2.com")));
@@ -1760,35 +1759,6 @@ class MediaRssReaderTest {
         assertEquals(1, items.size());
         MediaRssItem item = items.get(0);
         assertNotNull(item);
-    }
-
-    @ParameterizedTest
-    @MethodSource("provideTimeData")
-    void mediaSceneStartEndTime(String time, Duration expectedDuration) {
-        var mediaScene = new MediaScene();
-        mediaScene.setSceneStartTime(time);
-        mediaScene.setSceneEndTime(time);
-        assertEquals(expectedDuration, mediaScene.getSceneStartTimeAsDuration());
-        assertEquals(expectedDuration, mediaScene.getSceneEndTimeAsDuration());
-    }
-
-    private static Stream<Arguments> provideTimeData() {
-        return Stream.of(
-                Arguments.of("00:01", Duration.parse("PT1S")),
-                Arguments.of("00:00:01", Duration.parse("PT1S")),
-                Arguments.of("00:01.123", Duration.parse("PT1.123S")),
-                Arguments.of("00:00:01.123", Duration.parse("PT1.123S")),
-                Arguments.of("01:02", Duration.parse("PT1M2S")),
-                Arguments.of("00:01:02", Duration.parse("PT1M2S")),
-                Arguments.of("01:02.123", Duration.parse("PT1M2.123S")),
-                Arguments.of("00:01:02.123", Duration.parse("PT1M2.123S")),
-                Arguments.of("01:02:03", Duration.parse("PT1H2M3S")),
-                Arguments.of("01:02:03.123", Duration.parse("PT1H2M3.123S")),
-                Arguments.of(null, null),
-                Arguments.of("", null),
-                Arguments.of(" ", null),
-                Arguments.of("          ", null)
-        );
     }
 
     @Test

@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
+import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -81,6 +84,14 @@ public class MediaText {
 
     /**
      * Specifies the start time offset that the text starts being relevant to the media object.
+     * @return start time
+     */
+    public Optional<Duration> getStartAsDuration() {
+        return Optional.ofNullable(start).map(Util::toDuration);
+    }
+
+    /**
+     * Specifies the start time offset that the text starts being relevant to the media object.
      * @param start start time
      */
     public void setStart(String start) {
@@ -94,6 +105,15 @@ public class MediaText {
      */
     public Optional<String> getEnd() {
         return Optional.ofNullable(end);
+    }
+
+    /**
+     * Specifies the end time that the text is relevant. If this attribute is not provided, and a start time is used,
+     * it is expected that the end time is either the end of the clip or the start of the next <media:text> element.
+     * @return end time
+     */
+    public Optional<Duration> getEndAsDuration() {
+        return Optional.ofNullable(end).map(Util::toDuration);
     }
 
     /**
