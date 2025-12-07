@@ -93,7 +93,7 @@
             <title>Podnews</title>
             <link>https://podnews.net</link>
         </image>
-        <podcast:updateFrequency rrule="FREQ=DAILY;INTERVAL=1;BYDAY=MO,TU,WE,TH,FR">Every weekday
+        <podcast:updateFrequency complete="true" dtstart="2025-01-01T00:00:00.000Z" rrule="FREQ=DAILY;INTERVAL=1;BYDAY=MO,TU,WE,TH,FR">Every weekday
         </podcast:updateFrequency>
         <!-- problem med podroll och publisher -->
         <podcast:podroll>

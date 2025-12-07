@@ -50,10 +50,10 @@
         <itunes:image href="https://example.com/images/pci_avatar-massive.jpg"/>
 
         <podcast:value type="lightning" method="keysend" suggested="0.00000005000">
-            <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="99" />
+            <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="99" customKey="channelKey" customValue="channelValue" fee="true" />
             <podcast:valueRecipient name="hosting company" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e58" split="1" />
-            <podcast:valueTimeSplit startTime="60" duration="237" remotePercentage="95">
-                <podcast:remoteItem itemGuid="https://podcastindex.org/podcast/4148683#1" feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b" medium="music" />
+            <podcast:valueTimeSplit startTime="60" duration="237" remoteStartTime="174" remotePercentage="95">
+                <podcast:remoteItem feedGuid="917393e3-1b1e-5cef-ace4-edaa54e1f810" feedUrl="https://feeds.example.org/917393e3-1b1e-5cef-ace4-edaa54e1f810/rss.xml" itemGuid="asdf089j0-ep240-20230510" medium="music" title="Here Comes the Sun"/>
             </podcast:valueTimeSplit>
             <podcast:valueTimeSplit startTime="367" duration="246">
                 <podcast:valueRecipient name="Alice (Podcaster)" type="node" address="02d5c1bf8b940dc9cadca86d1b0a3c37fbe39cee4c7e839e33bef9174531d27f52" split="85" />
@@ -61,7 +61,7 @@
             </podcast:valueTimeSplit>
         </podcast:value>
 
-        <podcast:trailer pubdate="Thu, 01 Apr 2021 08:00:00 EST" url="https://example.org/trailers/teaser" length="12345678" type="audio/mp3">Coming April 1st, 2021</podcast:trailer>
+        <podcast:trailer pubdate="Thu, 01 Apr 2021 08:00:00 EST" url="https://example.org/trailers/teaser" length="12345678" type="audio/mp3" season="2">Coming April 1st, 2021</podcast:trailer>
 
         <podcast:chat server="irc.zeronode.net" protocol="irc" accountId="@jsmith" space="#myawesomepodcast"/>
 
@@ -75,8 +75,9 @@
             <link>https://example.com/podcast/live</link>
             <guid isPermaLink="true">https://example.com/live</guid>
             <itunes:image href="https://behindthesch3m3s.com/wp-content/uploads/2023/01/v4v-storm-good-quality.gif"/>
-            <podcast:alternateEnclosure type="audio/mpeg" length="312" default="true">
+            <podcast:alternateEnclosure type="audio/mpeg" length="312" default="true" lang="en" rel="default" codecs="video/mp4">
                 <podcast:source uri="https://example.com/pc20/livestream" />
+                <podcast:source uri="https://example.com/file-1080.torrent" contentType="application/x-bittorrent" />
             </podcast:alternateEnclosure>
             <enclosure url="https://example.com/pc20/livestream?format=.mp3" type="audio/mpeg" length="312" />
             <podcast:contentLink href="https://youtube.com/pc20/livestream">YouTube!</podcast:contentLink>
@@ -98,10 +99,11 @@
                                         https://example.com/images/ep3/pci_avatar-tiny.jpg 150w" />
             <itunes:explicit>false</itunes:explicit>
             <podcast:season name="Podcasting 2.0">1</podcast:season>
-            <podcast:episode>3</podcast:episode>
+            <podcast:episode display="S1E3">1.3</podcast:episode>
             <podcast:chapters url="https://example.com/ep3_chapters.json" type="application/json"/>
-            <podcast:soundbite startTime="33.833" duration="60.0" />
-            <podcast:transcript url="https://example.com/ep3/transcript.txt" type="text/plain" />
+            <podcast:soundbite startTime="33.833" duration="42.25">Why the Podcast Namespace Matters</podcast:soundbite>
+            <podcast:transcript url="https://example.com/ep3/transcript.txt" type="text/plain"  />
+            <podcast:transcript url="https://example.com/episode1/transcript.json" type="application/json" language="es" rel="captions"/>
             <podcast:person href="https://www.podchaser.com/creators/adam-curry-107ZzmWE5f" img="https://example.com/images/adamcurry.jpg">Adam Curry</podcast:person>
             <podcast:person role="guest" href="https://github.com/daveajones/" img="https://example.com/images/davejones.jpg">Dave Jones</podcast:person>
             <podcast:person group="visuals" role="cover art designer" href="https://example.com/artist/beckysmith">Becky Smith</podcast:person>
@@ -109,8 +111,8 @@
             <enclosure url="https://example.com/file-03.mp3" length="43200000" type="audio/mpeg" />
 
             <podcast:alternateEnclosure type="audio/mpeg" length="43200000" bitrate="128000" default="true" title="Standard">
-                <podcast:source uri="https://example.com/file-03.mp3" />
-                <podcast:source uri="ipfs://someRandomMpegFile03" />
+                <podcast:source uri="https://example.com/file-03.mp3"  />
+                <podcast:source uri="https://example.com/file-720.torrent" contentType="application/x-bittorrent" />
             </podcast:alternateEnclosure>
 
             <podcast:alternateEnclosure type="audio/opus" length="32400000" bitrate="96000" title="High quality">
@@ -135,10 +137,10 @@
             </podcast:alternateEnclosure>
 
             <podcast:value type="lightning" method="keysend" suggested="0.00000005000">
-                <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="49" />
+                <podcast:valueRecipient name="podcaster" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="49" customKey="itemKey" customValue="itemValue" fee="true" />
                 <podcast:valueRecipient name="hosting company" type="node" address="036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e57" split="1" />
                 <podcast:valueRecipient name="Gigi (Guest)" type="node" address="02e12fea95f576a680ec1938b7ed98ef0855eadeced493566877d404e404bfbf52" split="50" />
-                <podcast:valueTimeSplit startTime="60" duration="237" remotePercentage="95">
+                <podcast:valueTimeSplit startTime="60" duration="237" remoteStartTime="175" remotePercentage="96">
                     <podcast:remoteItem itemGuid="https://podcastindex.org/podcast/4148683#1" feedGuid="a94f5cc9-8c58-55fc-91fe-a324087a655b" medium="music" />
                 </podcast:valueTimeSplit>
                 <podcast:valueTimeSplit startTime="367" duration="246">

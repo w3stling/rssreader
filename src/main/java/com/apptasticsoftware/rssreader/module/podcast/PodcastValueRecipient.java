@@ -60,7 +60,7 @@ public class PodcastValueRecipient {
         this.customValue = customValue;
     }
 
-    public boolean getFee() {
+    public boolean isFee() {
         return fee;
     }
 
@@ -72,11 +72,11 @@ public class PodcastValueRecipient {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PodcastValueRecipient that = (PodcastValueRecipient) o;
-        return getSplit() == that.getSplit() && getFee() == that.getFee() && Objects.equals(getType(), that.getType()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getName(), that.getName()) && Objects.equals(getCustomKey(), that.getCustomKey()) && Objects.equals(getCustomValue(), that.getCustomValue());
+        return getSplit() == that.getSplit() && isFee() == that.isFee() && Objects.equals(getType(), that.getType()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getName(), that.getName()) && Objects.equals(getCustomKey(), that.getCustomKey()) && Objects.equals(getCustomValue(), that.getCustomValue());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getAddress(), getSplit(), getName(), getCustomKey(), getCustomValue(), getFee());
+        return Objects.hash(getType(), getAddress(), getSplit(), getName(), getCustomKey(), getCustomValue(), isFee());
     }
 }

@@ -1,12 +1,15 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.util.Default;
+
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
 
 public class PodcastUpdateFrequency {
     private String updateFrequency;
-    private String complete;
+    private boolean complete;
     private String dtstart;
     private String rrule;
 
@@ -17,16 +20,20 @@ public class PodcastUpdateFrequency {
         this.updateFrequency = updateFrequency;
     }
 
-    public Optional<String> getComplete() {
-        return Optional.ofNullable(complete);
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setComplete(String complete) {
+    public void setComplete(boolean complete) {
         this.complete = complete;
     }
 
     public Optional<String> getDtstart() {
         return Optional.ofNullable(dtstart);
+    }
+
+    public Optional<ZonedDateTime> getDtstartAsZonedDateTime() {
+        return Optional.ofNullable(dtstart).map(time -> Default.getDateTimeParser().parse(time));
     }
 
     public void setDtstart(String dtstart) {
@@ -46,13 +53,13 @@ public class PodcastUpdateFrequency {
         if (o == null || getClass() != o.getClass()) return false;
         PodcastUpdateFrequency that = (PodcastUpdateFrequency) o;
         return Objects.equals(getUpdateFrequency(), that.getUpdateFrequency()) &&
-               Objects.equals(getComplete(), that.getComplete()) &&
+               Objects.equals(isComplete(), that.isComplete()) &&
                Objects.equals(getDtstart(), that.getDtstart()) &&
                Objects.equals(getRrule(), that.getRrule());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUpdateFrequency(), getComplete(), getDtstart(), getRrule());
+        return Objects.hash(getUpdateFrequency(), isComplete(), getDtstart(), getRrule());
     }
 }
