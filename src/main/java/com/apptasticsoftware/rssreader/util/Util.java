@@ -35,7 +35,7 @@ public class Util {
 
         time = time.trim();
 
-        // Handle formats: MM:SS, MM:SS.mmm, HH:MM:SS, HH:MM:SS.mmm
+        // Handle formats: S, S.mmm, MM:SS, MM:SS.mmm, HH:MM:SS, HH:MM:SS.mmm
         String[] parts = time.split("\\.");
         String timeWithoutMillis = parts[0];
         int millis = 0;
@@ -57,7 +57,12 @@ public class Util {
         int minutes;
         int seconds;
 
-        if (timeParts.length == 2) {
+        if (timeParts.length == 1) {
+            // S format (seconds only)
+            hours = 0;
+            minutes = 0;
+            seconds = Integer.parseInt(timeParts[0]);
+        } else if (timeParts.length == 2) {
             // MM:SS format
             hours = 0;
             minutes = Integer.parseInt(timeParts[0]);

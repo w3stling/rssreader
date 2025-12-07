@@ -41,6 +41,13 @@ class UtilTest {
 
     private static Stream<Arguments> provideTimeData() {
         return Stream.of(
+                // S format (seconds only)
+                Arguments.of("1", Duration.parse("PT1S")),
+                Arguments.of("2", Duration.parse("PT2S")),
+                // S.mmm format (seconds with milliseconds)
+                Arguments.of("2.123", Duration.parse("PT2.123S")),
+                Arguments.of("1.5", Duration.parse("PT1.5S")),
+                // MM:SS format
                 Arguments.of("00:01", Duration.parse("PT1S")),
                 Arguments.of("00:00:01", Duration.parse("PT1S")),
                 Arguments.of("00:01.123", Duration.parse("PT1.123S")),
@@ -49,8 +56,10 @@ class UtilTest {
                 Arguments.of("00:01:02", Duration.parse("PT1M2S")),
                 Arguments.of("01:02.123", Duration.parse("PT1M2.123S")),
                 Arguments.of("00:01:02.123", Duration.parse("PT1M2.123S")),
+                // HH:MM:SS format
                 Arguments.of("01:02:03", Duration.parse("PT1H2M3S")),
                 Arguments.of("01:02:03.123", Duration.parse("PT1H2M3.123S")),
+                // Edge cases
                 Arguments.of(null, null),
                 Arguments.of("", null),
                 Arguments.of(" ", null),

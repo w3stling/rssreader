@@ -1,10 +1,10 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
 import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Class representing the media thumbnail from the media rss spec.
@@ -94,31 +94,7 @@ public class MediaThumbnail {
      * @return Optional Duration
      */
     public Optional<Duration> getTimeAsDuration() {
-        if (time == null || time.isEmpty()) {
-            return Optional.empty();
-        }
-        // Pattern for H:M:S.h (npt-hhmmss)
-        Pattern patternHMS = Pattern.compile("^(\\d+):(\\d+):(\\d+(?:\\.\\d+)?)$");
-        // Pattern for S.h (npt-sec)
-        Pattern patternS = Pattern.compile("^(\\d+(?:\\.\\d+)?)$");
-        Matcher matcherHMS = patternHMS.matcher(time);
-        Matcher matcherS = patternS.matcher(time);
-        try {
-            if (matcherHMS.matches()) {
-                int hours = Integer.parseInt(matcherHMS.group(1));
-                int minutes = Integer.parseInt(matcherHMS.group(2));
-                double seconds = Double.parseDouble(matcherHMS.group(3));
-                long totalMillis = (long)(((long)hours * 3600L + (long)minutes * 60L + seconds) * 1000);
-                return Optional.of(Duration.ofMillis(totalMillis));
-            } else if (matcherS.matches()) {
-                double seconds = Double.parseDouble(matcherS.group(1));
-                long totalMillis = (long)(seconds * 1000);
-                return Optional.of(Duration.ofMillis(totalMillis));
-            }
-        } catch (NumberFormatException e) {
-            // ignore and return empty
-        }
-        return Optional.empty();
+        return getTime().map(Util::toDuration);
     }
 
     @Override
