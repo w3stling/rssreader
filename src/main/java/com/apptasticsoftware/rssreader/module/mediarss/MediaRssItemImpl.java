@@ -59,11 +59,11 @@ public class MediaRssItemImpl extends ItemImpl implements MediaRssItem {
         if (!(o instanceof MediaRssItem)) return false;
         if (!super.equals(o)) return false;
         MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(data, that.getMediaRssItemData());
+        return Objects.equals(getMediaRssItemData(), that.getMediaRssItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), data);
+        return Objects.hash(super.hashCode(), getMediaRssItemData());
     }
 }
