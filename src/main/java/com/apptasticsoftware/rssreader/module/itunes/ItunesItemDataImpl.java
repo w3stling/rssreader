@@ -3,6 +3,7 @@ package com.apptasticsoftware.rssreader.module.itunes;
 import com.apptasticsoftware.rssreader.util.Util;
 
 import java.time.Duration;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ItunesItemDataImpl implements ItunesItemData {
@@ -241,5 +242,17 @@ public class ItunesItemDataImpl implements ItunesItemData {
     @Override
     public void setItunesBlock(boolean itunesBlock) {
         this.itunesBlock = itunesBlock;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ItunesItemDataImpl that = (ItunesItemDataImpl) o;
+        return isItunesExplicit() == that.isItunesExplicit() && isItunesBlock() == that.isItunesBlock() && Objects.equals(getItunesDuration(), that.getItunesDuration()) && Objects.equals(getItunesImage(), that.getItunesImage()) && Objects.equals(getItunesTitle(), that.getItunesTitle()) && Objects.equals(getItunesSubtitle(), that.getItunesSubtitle()) && Objects.equals(getItunesSummary(), that.getItunesSummary()) && Objects.equals(getItunesKeywords(), that.getItunesKeywords()) && Objects.equals(getItunesEpisode(), that.getItunesEpisode()) && Objects.equals(getItunesSeason(), that.getItunesSeason()) && Objects.equals(getItunesEpisodeType(), that.getItunesEpisodeType());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getItunesDuration(), getItunesImage(), isItunesExplicit(), getItunesTitle(), getItunesSubtitle(), getItunesSummary(), getItunesKeywords(), getItunesEpisode(), getItunesSeason(), getItunesEpisodeType(), isItunesBlock());
     }
 }
