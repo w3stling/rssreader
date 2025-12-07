@@ -419,9 +419,11 @@ public class PodcastRssReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(PodcastChannelImpl.class).withNonnullFields("data").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PodcastChapters.class).verify();
         EqualsVerifier.simple().forClass(PodcastAlternateEnclosure.class).verify();
         EqualsVerifier.simple().forClass(PodcastBlock.class).verify();
-        EqualsVerifier.simple().forClass(PodcastChapters.class).verify();
+        EqualsVerifier.simple().forClass(PodcastChat.class).verify();
+        EqualsVerifier.simple().forClass(PodcastContentLink.class).verify();
         EqualsVerifier.simple().forClass(PodcastEpisode.class).verify();
         EqualsVerifier.simple().forClass(PodcastFunding.class).verify();
         EqualsVerifier.simple().forClass(PodcastImage.class).verify();
@@ -430,20 +432,18 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastLocation.class).verify();
         EqualsVerifier.simple().forClass(PodcastLocked.class).verify();
         EqualsVerifier.simple().forClass(PodcastPerson.class).verify();
+        EqualsVerifier.simple().forClass(PodcastRemoteItem.class).verify();
         EqualsVerifier.simple().forClass(PodcastSeason.class).verify();
         EqualsVerifier.simple().forClass(PodcastSocialInteract.class).verify();
         EqualsVerifier.simple().forClass(PodcastSoundbite.class).verify();
         EqualsVerifier.simple().forClass(PodcastSource.class).verify();
         EqualsVerifier.simple().forClass(PodcastTrailer.class).withIgnoredFields("dateTimeParser").verify();
         EqualsVerifier.simple().forClass(PodcastTranscript.class).verify();
+        EqualsVerifier.simple().forClass(PodcastTxt.class).verify();
+        EqualsVerifier.simple().forClass(PodcastUpdateFrequency.class).verify();
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();
-        EqualsVerifier.simple().forClass(PodcastRemoteItem.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
-        EqualsVerifier.simple().forClass(PodcastUpdateFrequency.class).verify();
-        EqualsVerifier.simple().forClass(PodcastContentLink.class).verify();
-        EqualsVerifier.simple().forClass(PodcastChat.class).verify();
-        EqualsVerifier.simple().forClass(PodcastTxt.class).verify();
     }
 
     private InputStream fromFile(String fileName) {
