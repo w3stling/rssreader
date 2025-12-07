@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
 import java.time.Duration;
 import java.util.Optional;
 
@@ -15,6 +17,11 @@ public class ItunesItemDataImpl implements ItunesItemData {
     private Integer itunesSeason;
     private String itunesEpisodeType;
     private boolean itunesBlock;
+
+    @Override
+    public ItunesItemData getItunesItemData() {
+        return this;
+    }
 
     /**
      * Get the duration of an episode.
@@ -39,25 +46,8 @@ public class ItunesItemDataImpl implements ItunesItemData {
      * @return duration
      */
     @Override
-    @SuppressWarnings("java:S108")
     public Optional<Duration> getItunesDurationAsDuration() {
-        if (itunesDuration != null && !itunesDuration.isBlank()) {
-            try {
-                String[] parts = itunesDuration.split(":");
-                if (parts.length == 1) {
-                    return Optional.of(Duration.ofSeconds(Long.parseLong(parts[0])));
-                } else if (parts.length == 2) {
-                    return Optional.of(Duration.ofMinutes(Long.parseLong(parts[0]))
-                            .plusSeconds(Long.parseLong(parts[1])));
-                } else if (parts.length == 3) {
-                    return Optional.of(Duration.ofHours(Long.parseLong(parts[0]))
-                            .plusMinutes(Long.parseLong(parts[1]))
-                            .plusSeconds(Long.parseLong(parts[2])));
-                }
-            } catch (NumberFormatException ignored) { }
-        }
-
-        return Optional.empty();
+        return getItunesDuration().map(Util::toDuration);
     }
 
     /**

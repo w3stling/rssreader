@@ -20,6 +20,11 @@ public class ItunesChannelDataImpl implements ItunesChannelData {
     private boolean itunesBlock;
     private boolean itunesComplete;
 
+    @Override
+    public ItunesChannelData getItunesChannelData() {
+        return this;
+    }
+
     /**
      * Get the artwork for the show.
      * Specify your show artwork by providing a URL linking to it.

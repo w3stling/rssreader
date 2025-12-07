@@ -44,6 +44,7 @@ class UtilTest {
                 // S format (seconds only)
                 Arguments.of("1", Duration.parse("PT1S")),
                 Arguments.of("2", Duration.parse("PT2S")),
+                Arguments.of("3627", Duration.parse("PT3627S")),
                 // S.mmm format (seconds with milliseconds)
                 Arguments.of("2.123", Duration.parse("PT2.123S")),
                 Arguments.of("1.5", Duration.parse("PT1.5S")),

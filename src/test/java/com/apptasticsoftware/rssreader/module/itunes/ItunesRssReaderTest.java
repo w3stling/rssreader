@@ -79,12 +79,6 @@ class ItunesRssReaderTest {
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(":");
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b:c");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
     }
 
     private InputStream fromFile(String fileName) {

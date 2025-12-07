@@ -4,36 +4,48 @@ import java.time.Duration;
 import java.util.Optional;
 
 public interface ItunesItemData {
+    ItunesItemData getItunesItemData();
+
     /**
      * Get the duration of an episode.
      * @return duration
      */
-    Optional<String> getItunesDuration();
+    default Optional<String> getItunesDuration() {
+        return getItunesItemData().getItunesDuration();
+    }
 
     /**
      * Set the duration of an episode.
      * @param itunesDuration duration
      */
-    void setItunesDuration(String itunesDuration);
+    default void setItunesDuration(String itunesDuration) {
+        getItunesItemData().setItunesDuration(itunesDuration);
+    }
 
     /**
      * Get the duration
      * @return duration
      */
     @SuppressWarnings("java:S108")
-    Optional<Duration> getItunesDurationAsDuration();
+    default Optional<Duration> getItunesDurationAsDuration() {
+        return getItunesItemData().getItunesDurationAsDuration();
+    }
 
     /**
      * Get the episode artwork.
      * @return image
      */
-    Optional<String> getItunesImage();
+    default Optional<String> getItunesImage() {
+        return getItunesItemData().getItunesImage();
+    }
 
     /**
      * Set the episode artwork.
      * @param itunesImage image
      */
-    void setItunesImage(String itunesImage);
+    default void setItunesImage(String itunesImage) {
+        getItunesItemData().setItunesImage(itunesImage);
+    }
 
     /**
      * Set the episode parental advisory information.
@@ -45,7 +57,9 @@ public interface ItunesItemData {
      * false. If you specify false, indicating that the episode does not contain explicit language or adult content, Apple Podcasts displays a Clean parental advisory graphic for your episode.
      * @return explicit
      */
-    boolean isItunesExplicit();
+    default boolean isItunesExplicit() {
+        return getItunesItemData().isItunesExplicit();
+    }
 
     /**
      * Set the episode parental advisory information.
@@ -57,103 +71,137 @@ public interface ItunesItemData {
      * false. If you specify false, indicating that the episode does not contain explicit language or adult content, Apple Podcasts displays a Clean parental advisory graphic for your episode.
      * @param itunesExplicit explicit
      */
-    void setItunesExplicit(boolean itunesExplicit);
+    default void setItunesExplicit(boolean itunesExplicit) {
+        getItunesItemData().setItunesExplicit(itunesExplicit);
+    }
 
     /**
      * Get the episode title specific for Apple Podcasts.
      * @return title
      */
-    Optional<String> getItunesTitle();
+    default Optional<String> getItunesTitle() {
+        return getItunesItemData().getItunesTitle();
+    }
 
     /**
      * Set the episode title specific for Apple Podcasts.
      * @param itunesTitle title
      */
-    void setItunesTitle(String itunesTitle);
+    default void setItunesTitle(String itunesTitle) {
+        getItunesItemData().setItunesTitle(itunesTitle);
+    }
 
     /**
      * Get the episode subtitle specific for Apple Podcasts.
      * @return subtitle
      */
-    Optional<String> getItunesSubtitle();
+    default Optional<String> getItunesSubtitle() {
+        return getItunesItemData().getItunesSubtitle();
+    }
 
     /**
      * Set the episode subtitle specific for Apple Podcasts.
      * @param itunesSubtitle subtitle
      */
-    void setItunesSubtitle(String itunesSubtitle);
+    default void setItunesSubtitle(String itunesSubtitle) {
+        getItunesItemData().setItunesSubtitle(itunesSubtitle);
+    }
 
     /**
      * Get the episode summary.
      * @return summary
      */
-    Optional<String> getItunesSummary();
+    default Optional<String> getItunesSummary() {
+        return getItunesItemData().getItunesSummary();
+    }
 
     /**
      * Get the episode summary.
      * @param itunesSummary summary
      */
-    void setItunesSummary(String itunesSummary);
+    default void setItunesSummary(String itunesSummary) {
+        getItunesItemData().setItunesSummary(itunesSummary);
+    }
 
     /**
      * Get the keywords.
      * @return keywords
      */
-    Optional<String> getItunesKeywords();
+    default Optional<String> getItunesKeywords() {
+        return getItunesItemData().getItunesKeywords();
+    }
 
     /**
      * Set the keywords.
      * @param itunesKeywords keywords
      */
-    void setItunesKeywords(String itunesKeywords);
+    default void setItunesKeywords(String itunesKeywords) {
+        getItunesItemData().setItunesKeywords(itunesKeywords);
+    }
 
     /**
      * Get the episode number.
      * @return episode
      */
-    Optional<Integer> getItunesEpisode();
+    default Optional<Integer> getItunesEpisode() {
+        return getItunesItemData().getItunesEpisode();
+    }
 
     /**
      * Set the episode number.
      * @param itunesEpisode episode
      */
-    void setItunesEpisode(Integer itunesEpisode);
+    default void setItunesEpisode(Integer itunesEpisode) {
+        getItunesItemData().setItunesEpisode(itunesEpisode);
+    }
 
     /**
      * Get the episode season number.
      * @return season
      */
-    Optional<Integer> getItunesSeason();
+    default Optional<Integer> getItunesSeason() {
+        return getItunesItemData().getItunesSeason();
+    }
 
     /**
      * Set the episode season number.
      * @param itunesSeason season
      */
-    void setItunesSeason(Integer itunesSeason);
+    default void setItunesSeason(Integer itunesSeason) {
+        getItunesItemData().setItunesSeason(itunesSeason);
+    }
 
     /**
      * Get the episode type.
      * @return type
      */
-    Optional<String> getItunesEpisodeType();
+    default Optional<String> getItunesEpisodeType() {
+        return getItunesItemData().getItunesEpisodeType();
+    }
 
     /**
      * Set the episode type.
      * @param itunesEpisodeType type
      */
-    void setItunesEpisodeType(String itunesEpisodeType);
+    default void setItunesEpisodeType(String itunesEpisodeType) {
+        getItunesItemData().setItunesEpisodeType(itunesEpisodeType);
+    }
 
     /**
      * Get the episode show or hide status.
      * If you want an episode removed from the Apple directory, use this tag.
      * @return block
      */
-    boolean isItunesBlock();
+    default boolean isItunesBlock() {
+        return getItunesItemData().isItunesBlock();
+    }
 
     /**
      * Set the episode show or hide status.
      * If you want an episode removed from the Apple directory, use this tag.
      * @param itunesBlock block
      */
-    void setItunesBlock(boolean itunesBlock);
+    default void setItunesBlock(boolean itunesBlock) {
+        getItunesItemData().setItunesBlock(itunesBlock);
+    }
 }
