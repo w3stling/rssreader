@@ -271,9 +271,9 @@ public class MediaRssExtensions {
         registry.addItemExtension("/rss/channel/item/media:content", "medium", (item, value) -> itemMediaContent(item, value, MediaContent::setMedium));
         registry.addItemExtension("/rss/channel/item/media:content", "isDefault", (item, value) -> itemMediaContent(item, value, (content, v) -> mapBoolean(v, content::setDefault)));
         registry.addItemExtension("/rss/channel/item/media:content", "expression", (item, value) -> itemMediaContent(item, value, MediaContent::setExpression));
-        registry.addItemExtension("/rss/channel/item/media:content", "bitrate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setBitrate)));
-        registry.addItemExtension("/rss/channel/item/media:content", "framerate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setFramerate)));
-        registry.addItemExtension("/rss/channel/item/media:content", "samplingrate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setSamplingrate)));
+        registry.addItemExtension("/rss/channel/item/media:content", "bitrate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setBitRate)));
+        registry.addItemExtension("/rss/channel/item/media:content", "framerate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setFrameRate)));
+        registry.addItemExtension("/rss/channel/item/media:content", "samplingrate", (item, value) -> itemMediaContent(item, value, (content, v) -> mapDouble(v, content::setSamplingRate)));
         registry.addItemExtension("/rss/channel/item/media:content", "channels", (item, value) -> itemMediaContent(item, value, (content, v) -> mapInteger(v, content::setChannels)));
         registry.addItemExtension("/rss/channel/item/media:content", "duration", (item, value) -> itemMediaContent(item, value, (content, v) -> mapInteger(v, content::setDuration)));
         registry.addItemExtension("/rss/channel/item/media:content", "height", (item, value) -> itemMediaContent(item, value, (content, v) -> mapInteger(v, content::setHeight)));
@@ -388,9 +388,9 @@ public class MediaRssExtensions {
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "medium", (item, value) -> itemMediaGroupMediaContent(item, value, MediaContent::setMedium));
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "isDefault", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapBoolean(v, content::setDefault)));
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "expression", (item, value) -> itemMediaGroupMediaContent(item, value, MediaContent::setExpression));
-        registry.addItemExtension("/rss/channel/item/media:group/media:content", "bitrate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setBitrate)));
-        registry.addItemExtension("/rss/channel/item/media:group/media:content", "framerate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setFramerate)));
-        registry.addItemExtension("/rss/channel/item/media:group/media:content", "samplingrate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setSamplingrate)));
+        registry.addItemExtension("/rss/channel/item/media:group/media:content", "bitrate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setBitRate)));
+        registry.addItemExtension("/rss/channel/item/media:group/media:content", "framerate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setFrameRate)));
+        registry.addItemExtension("/rss/channel/item/media:group/media:content", "samplingrate", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapDouble(v, content::setSamplingRate)));
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "channels", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapInteger(v, content::setChannels)));
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "duration", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapInteger(v, content::setDuration)));
         registry.addItemExtension("/rss/channel/item/media:group/media:content", "height", (item, value) -> itemMediaGroupMediaContent(item, value, (content, v) -> mapInteger(v, content::setHeight)));

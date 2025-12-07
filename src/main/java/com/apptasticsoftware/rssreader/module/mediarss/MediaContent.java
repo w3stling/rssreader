@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,9 +34,9 @@ public class MediaContent extends MetadataImpl {
     private String medium;
     private Boolean isDefault;
     private String expression;
-    private Double bitrate;
-    private Double framerate;
-    private Double samplingrate;
+    private Double bitRate;
+    private Double frameRate;
+    private Double samplingRate;
     private Integer channels;
     private Integer duration;
     private Integer height;
@@ -92,18 +93,18 @@ public class MediaContent extends MetadataImpl {
 
     /**
      * The kilobits per second rate of media.
-     * @return bitrate
+     * @return bit rate
      */
-    public Optional<Double> getBitrate() {
-        return Optional.ofNullable(bitrate);
+    public Optional<Double> getBitRate() {
+        return Optional.ofNullable(bitRate);
     }
 
     /**
      * The kilobits per second rate of media.
-     * @param bitrate bitrate
+     * @param bitRate bit rate
      */
-    public void setBitrate(Double bitrate) {
-        this.bitrate = bitrate;
+    public void setBitRate(Double bitRate) {
+        this.bitRate = bitRate;
     }
 
     /**
@@ -111,17 +112,17 @@ public class MediaContent extends MetadataImpl {
      *
      * @return frame rate
      */
-    public Optional<Double> getFramerate() {
-        return Optional.ofNullable(framerate);
+    public Optional<Double> getFrameRate() {
+        return Optional.ofNullable(frameRate);
     }
 
     /**
      * The number of frames per second for the media object.
      *
-     * @param framerate frame rate
+     * @param frameRate frame rate
      */
-    public void setFramerate(Double framerate) {
-        this.framerate = framerate;
+    public void setFrameRate(Double frameRate) {
+        this.frameRate = frameRate;
     }
 
     /**
@@ -130,18 +131,18 @@ public class MediaContent extends MetadataImpl {
      *
      * @return sampling rate
      */
-    public Optional<Double> getSamplingrate() {
-        return Optional.ofNullable(samplingrate);
+    public Optional<Double> getSamplingRate() {
+        return Optional.ofNullable(samplingRate);
     }
 
     /**
      * The number of samples per second taken to create the media object.
      * It is expressed in thousands of samples per second (kHz).
      *
-     * @param samplingrate sampling rate
+     * @param samplingRate sampling rate
      */
-    public void setSamplingrate(Double samplingrate) {
-        this.samplingrate = samplingrate;
+    public void setSamplingRate(Double samplingRate) {
+        this.samplingRate = samplingRate;
     }
 
     /**
@@ -168,6 +169,14 @@ public class MediaContent extends MetadataImpl {
      */
     public Optional<Integer> getDuration() {
         return Optional.ofNullable(duration);
+    }
+
+    /**
+     * The number of seconds the media object plays.
+     * @return duration
+     */
+    public Optional<Duration> getDurationAsDuration() {
+        return Optional.ofNullable(duration).map(Duration::ofSeconds);
     }
 
     /**
@@ -223,11 +232,11 @@ public class MediaContent extends MetadataImpl {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         MediaContent content = (MediaContent) o;
-        return Objects.equals(getUrl(), content.getUrl()) && Objects.equals(getFileSize(), content.getFileSize()) && Objects.equals(getType(), content.getType()) && Objects.equals(getMedium(), content.getMedium()) && Objects.equals(isDefault, content.isDefault) && Objects.equals(getExpression(), content.getExpression()) && Objects.equals(getBitrate(), content.getBitrate()) && Objects.equals(getFramerate(), content.getFramerate()) && Objects.equals(getSamplingrate(), content.getSamplingrate()) && Objects.equals(getChannels(), content.getChannels()) && Objects.equals(getDuration(), content.getDuration()) && Objects.equals(getHeight(), content.getHeight()) && Objects.equals(getWidth(), content.getWidth()) && Objects.equals(getLang(), content.getLang());
+        return Objects.equals(getUrl(), content.getUrl()) && Objects.equals(getFileSize(), content.getFileSize()) && Objects.equals(getType(), content.getType()) && Objects.equals(getMedium(), content.getMedium()) && Objects.equals(isDefault(), content.isDefault()) && Objects.equals(getExpression(), content.getExpression()) && Objects.equals(getBitRate(), content.getBitRate()) && Objects.equals(getFrameRate(), content.getFrameRate()) && Objects.equals(getSamplingRate(), content.getSamplingRate()) && Objects.equals(getChannels(), content.getChannels()) && Objects.equals(getDuration(), content.getDuration()) && Objects.equals(getHeight(), content.getHeight()) && Objects.equals(getWidth(), content.getWidth()) && Objects.equals(getLang(), content.getLang());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getUrl(), getFileSize(), getType(), getMedium(), isDefault, getExpression(), getBitrate(), getFramerate(), getSamplingrate(), getChannels(), getDuration(), getHeight(), getWidth(), getLang());
+        return Objects.hash(super.hashCode(), getUrl(), getFileSize(), getType(), getMedium(), isDefault(), getExpression(), getBitRate(), getFrameRate(), getSamplingRate(), getChannels(), getDuration(), getHeight(), getWidth(), getLang());
     }
 }

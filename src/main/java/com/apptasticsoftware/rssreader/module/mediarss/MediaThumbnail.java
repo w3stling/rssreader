@@ -93,7 +93,7 @@ public class MediaThumbnail {
      *
      * @return Optional Duration
      */
-    public Optional<Duration> getTimeDuration() {
+    public Optional<Duration> getTimeAsDuration() {
         if (time == null || time.isEmpty()) {
             return Optional.empty();
         }

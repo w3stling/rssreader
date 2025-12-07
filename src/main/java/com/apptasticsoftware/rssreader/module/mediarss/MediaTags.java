@@ -40,7 +40,7 @@ public class MediaTags {
         this.tags = tags;
     }
 
-    public List<MediaTag> getTagList() {
+    public List<MediaTag> getTagAsList() {
         if (tags == null || tags.isBlank()) {
             return List.of();
         }

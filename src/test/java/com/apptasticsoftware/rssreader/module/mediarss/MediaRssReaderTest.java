@@ -3,11 +3,16 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -121,12 +126,13 @@ class MediaRssReaderTest {
         assertThat(mediaContent.getType(), isPresentAnd(equalTo("video/mp4")));
         assertThat(mediaContent.isDefault(), isPresentAnd(equalTo(true)));
         assertThat(mediaContent.getExpression(), isPresentAnd(equalTo("sample")));
-        assertThat(mediaContent.getBitrate(), isPresentAnd(equalTo(3317.2d)));
-        assertThat(mediaContent.getFramerate(), isPresentAnd(equalTo(25.3d)));
-        assertThat(mediaContent.getSamplingrate(), isPresentAnd(equalTo(44.1d)));
-        assertThat(mediaContent.getSamplingrate(), isPresentAnd(equalTo(44.1d)));
+        assertThat(mediaContent.getBitRate(), isPresentAnd(equalTo(3317.2d)));
+        assertThat(mediaContent.getFrameRate(), isPresentAnd(equalTo(25.3d)));
+        assertThat(mediaContent.getSamplingRate(), isPresentAnd(equalTo(44.1d)));
+        assertThat(mediaContent.getSamplingRate(), isPresentAnd(equalTo(44.1d)));
         assertThat(mediaContent.getChannels(), isPresentAnd(equalTo(2)));
         assertThat(mediaContent.getDuration(), isPresentAnd(equalTo(120)));
+        assertThat(mediaContent.getDurationAsDuration(), isPresentAnd(equalTo(Duration.ofSeconds(120))));
         assertThat(mediaContent.getHeight(), isPresentAnd(equalTo(200)));
         assertThat(mediaContent.getWidth(), isPresentAnd(equalTo(300)));
         assertThat(mediaContent.getLang(), isPresentAnd(equalTo("en-us")));
@@ -235,11 +241,15 @@ class MediaRssReaderTest {
         assertThat(mediaContent.getMediaScenes().get(0).getSceneTitle(), equalTo("sceneTitle1"));
         assertThat(mediaContent.getMediaScenes().get(0).getSceneDescription(), equalTo("sceneDesc1"));
         assertThat(mediaContent.getMediaScenes().get(0).getSceneStartTime(), equalTo("00:15"));
+        assertThat(mediaContent.getMediaScenes().get(0).getSceneStartTimeAsDuration(), equalTo(Duration.ofSeconds(15)));
         assertThat(mediaContent.getMediaScenes().get(0).getSceneEndTime(), equalTo("00:45"));
+        assertThat(mediaContent.getMediaScenes().get(0).getSceneEndTimeAsDuration(), equalTo(Duration.ofSeconds(45)));
         assertThat(mediaContent.getMediaScenes().get(1).getSceneTitle(), equalTo("sceneTitle2"));
         assertThat(mediaContent.getMediaScenes().get(1).getSceneDescription(), equalTo("sceneDesc2"));
         assertThat(mediaContent.getMediaScenes().get(1).getSceneStartTime(), equalTo("00:57"));
+        assertThat(mediaContent.getMediaScenes().get(1).getSceneStartTimeAsDuration(), equalTo(Duration.ofSeconds(57)));
         assertThat(mediaContent.getMediaScenes().get(1).getSceneEndTime(), equalTo("01:45"));
+        assertThat(mediaContent.getMediaScenes().get(1).getSceneEndTimeAsDuration(), equalTo(Duration.ofSeconds(105)));
 
         assertThat(mediaContent.getMediaScenes().get(0).getSceneTitle(), equalTo("sceneTitle1"));
         assertThat(mediaContent.getMediaScenes().get(0).getSceneDescription(), equalTo("sceneDesc1"));
@@ -303,10 +313,10 @@ class MediaRssReaderTest {
         assertThat(content1.getType(), isPresentAndIs("video/mp4"));
         assertThat(content1.isDefault(), isPresentAndIs(true));
         assertThat(content1.getExpression(), isPresentAndIs("sample"));
-        assertThat(content1.getBitrate(), isPresentAndIs(3317.2d));
-        assertThat(content1.getFramerate(), isPresentAndIs(25.3d));
-        assertThat(content1.getSamplingrate(), isPresentAndIs(44.1d));
-        assertThat(content1.getSamplingrate(), isPresentAndIs(44.1d));
+        assertThat(content1.getBitRate(), isPresentAndIs(3317.2d));
+        assertThat(content1.getFrameRate(), isPresentAndIs(25.3d));
+        assertThat(content1.getSamplingRate(), isPresentAndIs(44.1d));
+        assertThat(content1.getSamplingRate(), isPresentAndIs(44.1d));
         assertThat(content1.getChannels(), isPresentAndIs(2));
         assertThat(content1.getDuration(), isPresentAndIs(120));
         assertThat(content1.getHeight(), isPresentAndIs(200));
@@ -475,12 +485,12 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
         assertThat(thumbnails.get(0).getHeight(), isEmpty());
         assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
-        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(0).getTimeAsDuration(), isPresent());
         assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
         assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
-        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(1).getTimeAsDuration(), isPresent());
 
         // Category
         var categories = channel.getMediaCategories();
@@ -563,7 +573,7 @@ class MediaRssReaderTest {
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
         assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
-        var tagList = tags.getTagList();
+        var tagList = tags.getTagAsList();
         assertEquals(4, tagList.size());
         assertEquals("news:5", tagList.get(0).getTag());
         assertEquals("news", tagList.get(0).getName());
@@ -718,12 +728,12 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
         assertThat(thumbnails.get(0).getHeight(), isEmpty());
         assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
-        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(0).getTimeAsDuration(), isPresent());
         assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
         assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
-        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(1).getTimeAsDuration(), isPresent());
 
         // Category
         var categories = item.getMediaCategories();
@@ -806,7 +816,7 @@ class MediaRssReaderTest {
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
         assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
-        var tagList = tags.getTagList();
+        var tagList = tags.getTagAsList();
         assertEquals(4, tagList.size());
         assertEquals("news:5", tagList.get(0).getTag());
         assertEquals("news", tagList.get(0).getName());
@@ -961,12 +971,12 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
         assertThat(thumbnails.get(0).getHeight(), isEmpty());
         assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
-        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(0).getTimeAsDuration(), isPresent());
         assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
         assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
-        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(1).getTimeAsDuration(), isPresent());
 
         // Category
         var categories = content.get(0).getMediaCategories();
@@ -1049,7 +1059,7 @@ class MediaRssReaderTest {
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
         assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
-        var tagList = tags.getTagList();
+        var tagList = tags.getTagAsList();
         assertEquals(4, tagList.size());
         assertEquals("news:5", tagList.get(0).getTag());
         assertEquals("news", tagList.get(0).getName());
@@ -1226,7 +1236,7 @@ class MediaRssReaderTest {
         var content = groupContent.get(0);
         assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song64kbps.mp3")));
         assertThat(content.getFileSize(), isPresentAnd(equalTo(1000L)));
-        assertThat(content.getBitrate(), isPresentAnd(equalTo(64.0)));
+        assertThat(content.getBitRate(), isPresentAnd(equalTo(64.0)));
         assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
         assertThat(content.isDefault(), isPresentAnd(equalTo(true)));
         assertThat(content.getExpression(), isPresentAnd(equalTo("full")));
@@ -1235,7 +1245,7 @@ class MediaRssReaderTest {
         content = groupContent.get(1);
         assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song128kbps.mp3")));
         assertThat(content.getFileSize(), isPresentAnd(equalTo(2000L)));
-        assertThat(content.getBitrate(), isPresentAnd(equalTo(128.0)));
+        assertThat(content.getBitRate(), isPresentAnd(equalTo(128.0)));
         assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
         assertThat(content.isDefault(), isEmpty());
         assertThat(content.getExpression(), isPresentAnd(equalTo("full")));
@@ -1273,12 +1283,12 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
         assertThat(thumbnails.get(0).getHeight(), isEmpty());
         assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
-        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(0).getTimeAsDuration(), isPresent());
         assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
         assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
-        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(1).getTimeAsDuration(), isPresent());
 
         // Category
         var categories = group.getMediaCategories();
@@ -1361,7 +1371,7 @@ class MediaRssReaderTest {
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
         assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
-        var tagList = tags.getTagList();
+        var tagList = tags.getTagAsList();
         assertEquals(4, tagList.size());
         assertEquals("news:5", tagList.get(0).getTag());
         assertEquals("news", tagList.get(0).getName());
@@ -1490,7 +1500,7 @@ class MediaRssReaderTest {
         var content = contents.get(0);
         assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song64kbps.mp3")));
         assertThat(content.getFileSize(), isPresentAnd(equalTo(1000L)));
-        assertThat(content.getBitrate(), isPresentAnd(equalTo(64.0)));
+        assertThat(content.getBitRate(), isPresentAnd(equalTo(64.0)));
         assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
         assertThat(content.isDefault(), isPresentAnd(equalTo(true)));
         assertThat(content.getExpression(), isPresentAnd(equalTo("full")));
@@ -1528,12 +1538,12 @@ class MediaRssReaderTest {
         assertThat(thumbnails.get(0).getWidth(), isPresentAnd(equalTo(720)));
         assertThat(thumbnails.get(0).getHeight(), isEmpty());
         assertThat(thumbnails.get(0).getTime(), isPresentAnd(equalTo("50.10")));
-        assertThat(thumbnails.get(0).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(0).getTimeAsDuration(), isPresent());
         assertEquals("http://www.foo.com/keyframe.jpg", thumbnails.get(1).getUrl());
         assertThat(thumbnails.get(1).getWidth(), isPresentAnd(equalTo(75)));
         assertThat(thumbnails.get(1).getHeight(), isPresentAnd(equalTo(50)));
         assertThat(thumbnails.get(1).getTime(), isPresentAnd(equalTo("12:05:01.123")));
-        assertThat(thumbnails.get(1).getTimeDuration(), isPresent());
+        assertThat(thumbnails.get(1).getTimeAsDuration(), isPresent());
 
         // Category
         var categories = content.getMediaCategories();
@@ -1616,7 +1626,7 @@ class MediaRssReaderTest {
         var tags = community.getMediaTags().orElse(null);
         assertNotNull(tags);
         assertThat(tags.getTags(), equalTo("news:5, nbc, abc:3, reuters:b"));
-        var tagList = tags.getTagList();
+        var tagList = tags.getTagAsList();
         assertEquals(4, tagList.size());
         assertEquals("news:5", tagList.get(0).getTag());
         assertEquals("news", tagList.get(0).getName());
@@ -1729,7 +1739,7 @@ class MediaRssReaderTest {
         content = contents.get(1);
         assertThat(content.getUrl(), isPresentAnd(equalTo("http://www.foo.com/song128kbps.mp3")));
         assertThat(content.getFileSize(), isPresentAnd(equalTo(2000L)));
-        assertThat(content.getBitrate(), isPresentAnd(equalTo(128.0)));
+        assertThat(content.getBitRate(), isPresentAnd(equalTo(128.0)));
         assertThat(content.getType(), isPresentAnd(equalTo("audio/mpeg")));
         assertThat(content.isDefault(), isEmpty());
         assertThat(content.getExpression(), isPresentAnd(equalTo("full")));
@@ -1750,6 +1760,35 @@ class MediaRssReaderTest {
         assertEquals(1, items.size());
         MediaRssItem item = items.get(0);
         assertNotNull(item);
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideTimeData")
+    void mediaSceneStartEndTime(String time, Duration expectedDuration) {
+        var mediaScene = new MediaScene();
+        mediaScene.setSceneStartTime(time);
+        mediaScene.setSceneEndTime(time);
+        assertEquals(expectedDuration, mediaScene.getSceneStartTimeAsDuration());
+        assertEquals(expectedDuration, mediaScene.getSceneEndTimeAsDuration());
+    }
+
+    private static Stream<Arguments> provideTimeData() {
+        return Stream.of(
+                Arguments.of("00:01", Duration.parse("PT1S")),
+                Arguments.of("00:00:01", Duration.parse("PT1S")),
+                Arguments.of("00:01.123", Duration.parse("PT1.123S")),
+                Arguments.of("00:00:01.123", Duration.parse("PT1.123S")),
+                Arguments.of("01:02", Duration.parse("PT1M2S")),
+                Arguments.of("00:01:02", Duration.parse("PT1M2S")),
+                Arguments.of("01:02.123", Duration.parse("PT1M2.123S")),
+                Arguments.of("00:01:02.123", Duration.parse("PT1M2.123S")),
+                Arguments.of("01:02:03", Duration.parse("PT1H2M3S")),
+                Arguments.of("01:02:03.123", Duration.parse("PT1H2M3.123S")),
+                Arguments.of(null, null),
+                Arguments.of("", null),
+                Arguments.of(" ", null),
+                Arguments.of("          ", null)
+        );
     }
 
     @Test
