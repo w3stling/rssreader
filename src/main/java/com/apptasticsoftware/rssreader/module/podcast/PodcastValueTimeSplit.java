@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +22,10 @@ public class PodcastValueTimeSplit {
         return startTime;
     }
 
+    public Duration getStartTimeAsDuration() {
+        return Util.toDuration(startTime);
+    }
+
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
@@ -27,12 +34,20 @@ public class PodcastValueTimeSplit {
         return duration;
     }
 
+    public Duration getDurationAsDuration() {
+        return Util.toDuration(duration);
+    }
+
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
     public Optional<Integer> getRemoteStartTime() {
         return Optional.ofNullable(remoteStartTime);
+    }
+
+    public Optional<Duration> getRemoteStartTimeAsDuration() {
+        return Optional.ofNullable(remoteStartTime).map(Util::toDuration);
     }
 
     public void setRemoteStartTime(Integer remoteStartTime) {

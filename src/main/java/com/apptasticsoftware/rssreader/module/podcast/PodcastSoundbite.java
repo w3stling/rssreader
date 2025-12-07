@@ -1,5 +1,8 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
+import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -40,6 +43,14 @@ public class PodcastSoundbite {
     }
 
     /**
+     * Gets the start time of the soundbite within the podcast episode.
+     * @return The time in seconds where the soundbite begins.
+     */
+    public Duration getStartTimeAsDuration() {
+        return Util.toDuration(startTime);
+    }
+
+    /**
      * Sets the start time of the soundbite within the podcast episode.
      * @param startTime The time in seconds where the soundbite begins.
      */
@@ -53,6 +64,14 @@ public class PodcastSoundbite {
      */
     public double getDuration() {
         return duration;
+    }
+
+    /**
+     * Gets the duration of the soundbite.
+     * @return The length of the soundbite in seconds (recommended between 15 and 120 seconds).
+     */
+    public Duration getDurationAsDuration() {
+        return Util.toDuration(duration);
     }
 
     /**

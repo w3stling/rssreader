@@ -5,6 +5,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -113,8 +114,11 @@ public class PodcastRssReaderTest {
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(1).getSplit(), is(1));
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().size(), is(2));
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getStartTime(), is(60));
+            assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getStartTimeAsDuration(), is(Duration.ofSeconds(60)));
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getDuration(), is(237));
+            assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getDurationAsDuration(), is(Duration.ofSeconds(237)));
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getRemoteStartTime(), isPresentAndIs(174));
+            assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getRemoteStartTimeAsDuration(), isPresentAndIs(Duration.ofSeconds(174)));
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getRemotePercentage(), isPresentAndIs(95));
             assertTrue(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getRemoteItem().isPresent());
             assertThat(channel.getPodcastValues().get(0).getValueTimeSplits().get(0).getRemoteItem().get().getItemGuid(), isPresentAndIs("asdf089j0-ep240-20230510"));
@@ -198,7 +202,9 @@ public class PodcastRssReaderTest {
         assertThat(item.getPodcastChapters().get().getType(), is("application/json"));
         assertThat(item.getPodcastSoundbites().size(), is(1));
         assertThat(item.getPodcastSoundbites().get(0).getStartTime(), is(33.833));
+        assertThat(item.getPodcastSoundbites().get(0).getStartTimeAsDuration(), is(Duration.ofMillis(33833)));
         assertThat(item.getPodcastSoundbites().get(0).getDuration(), is(42.25));
+        assertThat(item.getPodcastSoundbites().get(0).getDurationAsDuration(), is(Duration.ofMillis(42250)));
         assertThat(item.getPodcastSoundbites().get(0).getSoundbite(), isPresentAndIs("Why the Podcast Namespace Matters"));
         assertThat(item.getPodcastTranscripts().size(), is(2));
         assertThat(item.getPodcastTranscripts().get(0).getUrl(), is("https://example.com/ep3/transcript.txt"));

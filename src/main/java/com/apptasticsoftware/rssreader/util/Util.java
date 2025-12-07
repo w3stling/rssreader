@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.util;
 
+import java.time.Duration;
+
 /**
  * Utility class for RSS reader.
  */
@@ -24,5 +26,9 @@ public class Util {
             case "hourly":
             default: return 60;
         }
+    }
+
+    public static Duration toDuration(double duration) {
+        return Duration.ofMillis((long) (duration * 1000));
     }
 }
