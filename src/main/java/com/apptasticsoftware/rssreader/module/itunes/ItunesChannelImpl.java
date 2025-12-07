@@ -53,24 +53,11 @@ public class ItunesChannelImpl extends ChannelImpl implements ItunesChannel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ItunesChannelImpl that = (ItunesChannelImpl) o;
-        return getItunesExplicit() == that.getItunesExplicit() &&
-                isItunesBlock() == that.isItunesBlock() &&
-                isItunesComplete() == that.isItunesComplete() &&
-                Objects.equals(getItunesImage(), that.getItunesImage()) &&
-                getItunesCategories().equals(that.getItunesCategories()) &&
-                Objects.equals(getItunesAuthor(), that.getItunesAuthor()) &&
-                Objects.equals(getItunesOwner(), that.getItunesOwner()) &&
-                Objects.equals(getItunesTitle(), that.getItunesTitle()) &&
-                Objects.equals(getItunesSubtitle(), that.getItunesSubtitle()) &&
-                Objects.equals(getItunesSummary(), that.getItunesSummary()) &&
-                Objects.equals(getItunesType(), that.getItunesType()) &&
-                Objects.equals(getItunesNewFeedUrl(), that.getItunesNewFeedUrl());
+        return Objects.equals(getItunesChannelData(), that.getItunesChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesImage(), getItunesCategories(), getItunesExplicit(),
-                getItunesAuthor(), getItunesOwner(), getItunesTitle(), getItunesSubtitle(), getItunesSummary(),
-                getItunesType(), getItunesNewFeedUrl(), isItunesBlock(), isItunesComplete());
+        return Objects.hash(super.hashCode(), getItunesChannelData());
     }
 }
