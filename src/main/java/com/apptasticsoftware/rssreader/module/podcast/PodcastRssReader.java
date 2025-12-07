@@ -37,7 +37,7 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
     protected void registerChannelTags() {
         super.registerChannelTags();
         var registry = getFeedExtensionRegistry();
-        PodcastExtensions.register(registry);
+        PodcastExtensions.register(registry, dateTimeParser);
         ItunesExtensions.register(registry);
     }
 }

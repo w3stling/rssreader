@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.FeedExtensionRegistry;
 
 import java.util.Optional;
@@ -12,8 +13,8 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapBoolean;
 
 public class PodcastExtensions {
 
-    public static void register(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
-        onChannelTag(registry);
+    public static void register(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry, DateTimeParser dateTimeParser) {
+        onChannelTag(registry, dateTimeParser);
         channelTagExtensions(registry);
         channelAttributeExtensions(registry);
 
@@ -22,7 +23,7 @@ public class PodcastExtensions {
         itemAttributesExtensions(registry);
     }
 
-    private static void onChannelTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
+    private static void onChannelTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry, DateTimeParser dateTimeParser) {
         registry.addOnChannelTag("podcast:block", channel -> channel.addPodcastBlock(new PodcastBlock()));
         registry.addOnChannelTag("podcast:funding", channel -> channel.addPodcastFunding(new PodcastFunding()));
         registry.addOnChannelTag("podcast:location", channel -> channel.addPodcastLocation(new PodcastLocation()));
@@ -32,7 +33,7 @@ public class PodcastExtensions {
         registry.addOnChannelTag("/rss/channel/podcast:value/podcast:valueTimeSplit/podcast:valueRecipient", channel -> channel.getPodcastValues().getLast().getValueTimeSplits().getLast().addValueRecipient(new PodcastValueRecipient()));
         registry.addOnChannelTag("/rss/channel/podcast:podroll/podcast:remoteItem", channel -> channel.addPodcastPodroll(new PodcastRemoteItem()));
         registry.addOnChannelTag("podcast:person", channel ->channel.addPodcastPerson(new PodcastPerson()));
-        registry.addOnChannelTag("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer()));
+        registry.addOnChannelTag("podcast:trailer", channel -> channel.addPodcastTrailer(new PodcastTrailer(dateTimeParser)));
         registry.addOnChannelTag("podcast:image", channel -> channel.addPodcastImage(new PodcastImage()));
         registry.addOnChannelTag("podcast:txt", channel -> channel.addPodcastTxt(new PodcastTxt()));
     }

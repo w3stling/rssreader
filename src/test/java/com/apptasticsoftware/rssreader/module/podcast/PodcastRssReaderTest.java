@@ -434,7 +434,7 @@ public class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastSocialInteract.class).verify();
         EqualsVerifier.simple().forClass(PodcastSoundbite.class).verify();
         EqualsVerifier.simple().forClass(PodcastSource.class).verify();
-        EqualsVerifier.simple().forClass(PodcastTrailer.class).verify();
+        EqualsVerifier.simple().forClass(PodcastTrailer.class).withIgnoredFields("dateTimeParser").verify();
         EqualsVerifier.simple().forClass(PodcastTranscript.class).verify();
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();

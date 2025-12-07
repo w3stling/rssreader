@@ -140,7 +140,7 @@ class RssReaderIntegrationTest {
     @Test
     void rssPlacera() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://www.avanza.se/placera/forstasidan.rss.xml").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.placera.se/artiklar/rss.xml").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
@@ -168,7 +168,7 @@ class RssReaderIntegrationTest {
 
     @Test
     void rssPlaceraString() throws IOException, InterruptedException {
-        String rssText = getRssFeedAsString("https://www.avanza.se/placera/forstasidan.rss.xml");
+        String rssText = getRssFeedAsString("https://www.placera.se/artiklar/rss.xml");
         InputStream inputStream = new ByteArrayInputStream(rssText.getBytes(StandardCharsets.UTF_8));
 
         RssReader reader = new RssReader();
