@@ -308,6 +308,7 @@ public interface MediaRssItemData {
     default void addMediaRestriction(MediaRestriction mediaRestriction) {
         getMediaRssItemData().addMediaRestriction(mediaRestriction);
     }
+
     /**
      * Returns the community information for this item, if present.
      * Community information includes feedback, ratings, statistics, and tags for the media object.
