@@ -166,6 +166,10 @@ public interface Channel {
 
     /**
      * Get the publication date for the content in the channel.
+     *
+     * @deprecated
+     * <p> Use {@link Channel#getPubDateAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
     @Deprecated(since="3.12.0", forRemoval=true)
@@ -191,6 +195,10 @@ public interface Channel {
 
     /**
      * Get the last time the content of the channel changed.
+     *
+     * @deprecated
+     * <p> Use {@link Channel#getLastBuildDateAsZonedDateTime()} instead.
+     *
      * @return last build date
      */
     @Deprecated(since="3.12.0", forRemoval=true)

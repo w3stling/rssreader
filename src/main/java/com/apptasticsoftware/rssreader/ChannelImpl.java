@@ -266,6 +266,10 @@ public class ChannelImpl implements Channel {
 
     /**
      * Get the publication date for the content in the channel.
+     *
+     * @deprecated
+     * <p> Use {@link ChannelImpl#getPubDateAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
     @Deprecated(since="3.12.0", forRemoval=true)
@@ -299,6 +303,10 @@ public class ChannelImpl implements Channel {
 
     /**
      * Get the last time the content of the channel changed.
+     *
+     * @deprecated
+     * <p> Use {@link ChannelImpl#getLastBuildDateAsZonedDateTime()} instead.
+     *
      * @return last build date
      */
     @Deprecated(since="3.12.0", forRemoval=true)

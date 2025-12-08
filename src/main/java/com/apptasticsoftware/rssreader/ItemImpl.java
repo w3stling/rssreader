@@ -287,6 +287,9 @@ public class ItemImpl implements Item, Comparable<Item> {
     /**
      * Get a ZonedDateTime that indicates when the item was published.
      *
+     * @deprecated
+     * <p> Use {@link ItemImpl#getPubDateAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
     @Deprecated(since="3.12.0", forRemoval=true)
@@ -323,6 +326,9 @@ public class ItemImpl implements Item, Comparable<Item> {
 
     /**
      * Get a ZonedDateTime that indicates when the item was updated.
+     *
+     * @deprecated
+     * <p> Use {@link ItemImpl#getUpdatedAsZonedDateTime()} instead.
      *
      * @return publication date
      */
