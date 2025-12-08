@@ -211,6 +211,7 @@ public class ItunesItemDataImpl implements ItunesItemData {
      * Get the episode type.
      * @return type
      */
+    @Override
     public Optional<String> getItunesEpisodeType() {
         return Optional.ofNullable(itunesEpisodeType);
     }

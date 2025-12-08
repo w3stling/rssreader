@@ -18,6 +18,7 @@ public class MediaRssItemDataImpl implements MediaRssItemData {
         return this;
     }
 
+    @Override
     public List<MediaContent> getMediaContents() {
         return Mapper.emptyListIfNull(mediaContents);
     }
