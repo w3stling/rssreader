@@ -24,16 +24,14 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
-import com.apptasticsoftware.rssreader.Channel;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.net.http.HttpClient;
-import java.util.function.BiConsumer;
 
 /**
  * Class for reading media rss feeds.
  */
-public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
+public class MediaRssReader extends AbstractRssReader<MediaRssChannel, MediaRssItem> {
 
     /**
      * Constructor
@@ -51,33 +49,19 @@ public class MediaRssReader extends AbstractRssReader<Channel, MediaRssItem> {
     }
 
     @Override
-    protected Channel createChannel(DateTimeParser dateTimeParser) {
-        return new Channel(dateTimeParser);
+    protected MediaRssChannelImpl createChannel(DateTimeParser dateTimeParser) {
+        return new MediaRssChannelImpl(dateTimeParser);
     }
 
     @Override
-    protected MediaRssItem createItem(DateTimeParser dateTimeParser) {
-        return new MediaRssItem(dateTimeParser);
+    protected MediaRssItemImpl createItem(DateTimeParser dateTimeParser) {
+        return new MediaRssItemImpl(dateTimeParser);
     }
 
-    @SuppressWarnings("java:S1192")
     @Override
-    protected void registerItemAttributes() {
-        super.registerItemAttributes();
-        super.addItemExtension("media:thumbnail", "url", mediaThumbnailSetterTemplateBuilder(MediaThumbnail::setUrl));
-        super.addItemExtension("media:thumbnail", "height", mediaThumbnailSetterTemplateBuilder(
-                (mediaThumbnail, height) -> mediaThumbnail.setHeight(Integer.parseInt(height))
-        ));
-        super.addItemExtension("media:thumbnail", "width", mediaThumbnailSetterTemplateBuilder(
-                (mediaThumbnail, width) -> mediaThumbnail.setWidth(Integer.parseInt(width))
-        ));
-    }
-
-    private BiConsumer<MediaRssItem, String> mediaThumbnailSetterTemplateBuilder(BiConsumer<MediaThumbnail, String> setter) {
-        return (mediaRssItem, value) -> {
-            var mediaThumbnail = mediaRssItem.getMediaThumbnail().orElse(new MediaThumbnail());
-            setter.accept(mediaThumbnail, value);
-            mediaRssItem.setMediaThumbnail(mediaThumbnail);
-        };
+    protected void registerChannelTags() {
+        super.registerChannelTags();
+        var registry = getFeedExtensionRegistry();
+        MediaRssExtensions.register(registry);
     }
 }

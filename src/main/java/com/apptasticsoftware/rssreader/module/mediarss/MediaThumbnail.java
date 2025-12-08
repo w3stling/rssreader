@@ -1,10 +1,13 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.util.Util;
+
+import java.time.Duration;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Class representing the media thumbnail from the media rss spec.
- * See <a href="https://www.rssboard.org/media-rss#media-thumbnails">for details</a>.
  */
 public class MediaThumbnail {
     private String url;
@@ -82,5 +85,27 @@ public class MediaThumbnail {
      */
     public void setTime(String time) {
         this.time = time;
+    }
+
+    /**
+     * Get the duration of the thumbnail as a java Duration object
+     * Parses the time field (H:M:S.h or S.h) to Duration
+     *
+     * @return Optional Duration
+     */
+    public Optional<Duration> getTimeAsDuration() {
+        return getTime().map(Util::toDuration);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        MediaThumbnail that = (MediaThumbnail) o;
+        return Objects.equals(getUrl(), that.getUrl()) && Objects.equals(getWidth(), that.getWidth()) && Objects.equals(getHeight(), that.getHeight()) && Objects.equals(getTime(), that.getTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUrl(), getWidth(), getHeight(), getTime());
     }
 }

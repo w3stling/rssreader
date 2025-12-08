@@ -78,9 +78,10 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private Duration requestTimeout = Duration.ofSeconds(25);
     private Duration readTimeout = Duration.ofSeconds(25);
     private final Map<String, String> headers = new HashMap<>();
+    protected final HashMap<String, Consumer<C>> onChannelTags = new HashMap<>();
     private final HashMap<String, BiConsumer<C, String>> channelTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<C, String>>> channelAttributes = new HashMap<>();
-    private final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
+    protected final HashMap<String, Consumer<I>> onItemTags = new HashMap<>();
     private final HashMap<String, BiConsumer<I, String>> itemTags = new HashMap<>();
     private final HashMap<String, Map<String, BiConsumer<I, String>>> itemAttributes = new HashMap<>();
     private final Set<String> collectChildNodesForTag = Set.of("content", "summary");
@@ -146,6 +147,45 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      */
     protected abstract I createItem(DateTimeParser dateTimeParser);
 
+
+    /**
+     * Get feed extension registry for adding custom tags and attributes
+     * @return extension registry
+     */
+    protected FeedExtensionRegistry<C, I> getFeedExtensionRegistry() {
+        return new FeedExtensionRegistry<>() {
+            @Override
+            public void addOnChannelTag(String tag, Consumer<C> mapper) {
+                onChannelTags.put(tag, mapper);
+            }
+
+            @Override
+            public void addChannelExtension(String tag, BiConsumer<C, String> consumer) {
+                AbstractRssReader.this.addChannelExtension(tag, consumer);
+            }
+
+            @Override
+            public void addChannelExtension(String tag, String attribute, BiConsumer<C, String> consumer) {
+                AbstractRssReader.this.addChannelExtension(tag, attribute, consumer);
+            }
+
+            @Override
+            public void addOnItemTag(String tag, Consumer<I> mapper) {
+                onItemTags.put(tag, mapper);
+            }
+
+            @Override
+            public void addItemExtension(String tag, BiConsumer<I, String> consumer) {
+                AbstractRssReader.this.addItemExtension(tag, consumer);
+            }
+
+            @Override
+            public void addItemExtension(String tag, String attribute, BiConsumer<I, String> consumer) {
+                AbstractRssReader.this.addItemExtension(tag, attribute, consumer);
+            }
+        };
+    }
+
     /**
      * Initialize channel and items tags and attributes
      */
@@ -197,8 +237,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
         channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
         channelTags.putIfAbsent("dc:creator", (channel, value) -> Mapper.mapIfEmpty(value, channel::getManagingEditor, channel::setManagingEditor));
-        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> channel.syUpdatePeriod = value);
-        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> mapInteger(value, number -> channel.syUpdateFrequency = number));
+        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> { if (channel instanceof ChannelImpl) ((ChannelImpl)channel).syUpdatePeriod = value; });
+        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> { if (channel instanceof ChannelImpl) mapInteger(value, number -> ((ChannelImpl)channel).syUpdateFrequency = number); });
         channelTags.putIfAbsent("/feed/icon", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
         channelTags.putIfAbsent("/feed/logo", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
     }
@@ -822,6 +862,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             var elementFullPath = getElementFullPath();
 
             if (isChannelPart) {
+                onChannelTags.computeIfPresent(nsTagName, (k, f) -> { f.accept(channel); return f; });
+                onChannelTags.computeIfPresent(getElementFullPath(), (k, f) -> { f.accept(channel); return f; });
                 // Map channel attributes
                 mapChannelAttributes(nsTagName);
                 mapChannelAttributes(elementFullPath);

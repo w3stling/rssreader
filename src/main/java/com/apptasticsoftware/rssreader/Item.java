@@ -1,239 +1,132 @@
-/*
- * MIT License
- *
- * Copyright (c) 2022, Apptastic Software
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package com.apptasticsoftware.rssreader;
 
-
-import com.apptasticsoftware.rssreader.util.Default;
-import com.apptasticsoftware.rssreader.util.ItemComparator;
-import com.apptasticsoftware.rssreader.util.Mapper;
-
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * Class representing an RSS item. A channel may contain any number of items. An item may represent a "story" -- much
- * like a story in a newspaper or magazine; if so its description is a synopsis of the story, and the link points
- * to the full story.
- */
-@SuppressWarnings("javaarchitecture:S7091")
-public class Item implements Comparable<Item> {
-    private final Comparator<Item> defaultComparator;
-    private String title;
-    private String description;
-    private String content;
-    private String link;
-    private String author;
-    private String category;
-    private List<String> categories;
-    private String guid;
-    private Boolean isPermaLink;
-    private String pubDate;
-    private String updated;
-    private String comments;
-    private Enclosure enclosure;
-    private List<Enclosure> enclosures;
-    private Channel channel;
-    private final DateTimeParser dateTimeParser;
-
-    /**
-     * Constructor for Item
-     * @deprecated
-     * Use {@link Item#Item(DateTimeParser)} instead.
-     */
-    @SuppressWarnings("java:S1133")
-    @Deprecated(since="3.5.0", forRemoval=true)
-    public Item() {
-        dateTimeParser = Default.getDateTimeParser();
-        defaultComparator = ItemComparator.newestPublishedItemFirst();
-    }
-
-    /**
-     * Constructor for Item
-     * @param dateTimeParser dateTimeParser
-     */
-    public Item(DateTimeParser dateTimeParser) {
-        this.dateTimeParser = dateTimeParser;
-        defaultComparator = ItemComparator.newestPublishedItemFirst(dateTimeParser);
-    }
+public interface Item extends Comparable<Item> {
 
     /**
      * Get the title of the item.
      *
      * @return title
      */
-    public Optional<String> getTitle() {
-        return Optional.ofNullable(title);
-    }
+    Optional<String> getTitle();
 
     /**
      * Set the title of the item.
      *
      * @param title title
      */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    void setTitle(String title);
 
     /**
      * Get the item synopsis.
      *
      * @return description
      */
-    public Optional<String> getDescription() {
-        return Optional.ofNullable(description).or(this::getContent);
-    }
+    Optional<String> getDescription();
 
     /**
      * Set the item synopsis.
      *
      * @param description description
      */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    void setDescription(String description);
 
     /**
      * Get the item content.
      *
      * @return content
      */
-    public Optional<String> getContent() {
-        return Optional.ofNullable(content);
-    }
+    Optional<String> getContent();
 
     /**
      * Set the item content.
      *
      * @param content content
      */
-    public void setContent(String content) {
-        this.content = content;
-    }
+    void setContent(String content);
 
     /**
      * Get the URL of the item.
      *
      * @return link
      */
-    public Optional<String> getLink() {
-        return Optional.ofNullable(link);
-    }
+    Optional<String> getLink();
 
     /**
      * Set the URL of the item.
      *
      * @param link link
      */
-    public void setLink(String link) {
-        this.link = link;
-    }
+    void setLink(String link);
 
     /**
      * Get email address of the author of the item.
      *
      * @return author
      */
-    public Optional<String> getAuthor() {
-        return Optional.ofNullable(author);
-    }
+    Optional<String> getAuthor();
 
     /**
      * Set email address of the author of the item.
      *
      * @param author author
      */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    void setAuthor(String author);
 
     /**
      * Get category for item.
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link Item#getCategories()} instead.
+     * <p> Use {@link ItemImpl#getCategories()} instead.
      *
      * @return category
      */
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
-    public Optional<String> getCategory() {
-        return Optional.ofNullable(category);
-    }
+    Optional<String> getCategory();
 
     /**
      * Set category for item.
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link Item#addCategory(String category)} instead.
+     * <p> Use {@link ItemImpl#addCategory(String category)} instead.
      *
      * @param category category
      */
     @SuppressWarnings("java:S1133")
     @Deprecated(since="3.3.0", forRemoval=true)
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    void setCategory(String category);
 
     /**
      * Get categories for item.
      * @return list of categories
      */
-    public List<String> getCategories() {
-        return Mapper.emptyListIfNull(categories);
-    }
+    List<String> getCategories();
 
     /**
      * Add category for item.
      * @param category category
      */
-    public void addCategory(String category) {
-        if (categories == null) {
-            categories = new ArrayList<>();
-        }
-        this.category = category;
-        categories.add(category);
-    }
+    void addCategory(String category);
 
     /**
      * Get a string that uniquely identifies the item.
      *
      * @return guid
      */
-    public Optional<String> getGuid() {
-        return Optional.ofNullable(guid);
-    }
+    Optional<String> getGuid();
 
     /**
      * Set a string that uniquely identifies the item.
      *
      * @param guid guid
      */
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
+    void setGuid(String guid);
 
     /**
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
@@ -242,9 +135,7 @@ public class Item implements Comparable<Item> {
      *
      * @return permanent link
      */
-    public Optional<Boolean> getIsPermaLink() {
-        return Optional.ofNullable(isPermaLink);
-    }
+    Optional<Boolean> getIsPermaLink();
 
     /**
      * If the guid element has an attribute named "isPermaLink" with a value of true, the reader may assume that
@@ -253,200 +144,124 @@ public class Item implements Comparable<Item> {
      *
      * @param isPermaLink is perma link
      */
-    public void setIsPermaLink(boolean isPermaLink) {
-        this.isPermaLink = isPermaLink;
-    }
+    void setIsPermaLink(boolean isPermaLink);
 
     /**
      * Get a string that indicates when the item was published.
      *
      * @return publication date
      */
-    public Optional<String> getPubDate() {
-        return Optional.ofNullable(pubDate);
-    }
+    Optional<String> getPubDate();
 
     /**
      * Set a string that indicates when the item was published.
      *
      * @param pubDate publication date
      */
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
-    }
+    void setPubDate(String pubDate);
 
     /**
      * Get a ZonedDateTime that indicates when the item was published.
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getPubDateAsZonedDateTime() {
-        return getPubDate().map(dateTimeParser::parse);
-    }
+    Optional<ZonedDateTime> getPubDateAsZonedDateTime();
 
     /**
      * Get a ZonedDateTime that indicates when the item was published.
      *
      * @deprecated
-     * As of version 3.12.0, replaced by {@link Item#getPubDateAsZonedDateTime()}
+     * <p> Use {@link Item#getPubDateAsZonedDateTime()} instead.
      *
      * @return publication date
      */
     @SuppressWarnings("java:S1133")
-    @Deprecated(since = "3.12.0", forRemoval = true)
-    public Optional<ZonedDateTime> getPubDateZonedDateTime() {
-        return getPubDateAsZonedDateTime();
-    }
+    @Deprecated(since="3.12.0", forRemoval=true)
+    Optional<ZonedDateTime> getPubDateZonedDateTime();
 
     /**
      * Get a string that indicates when the item was updated.
      *
      * @return updated date
      */
-    public Optional<String> getUpdated() {
-        return Optional.ofNullable(updated);
-    }
+    Optional<String> getUpdated();
 
     /**
      * Set a string that indicates when the item was updated.
      *
      * @param updated updated date
      */
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
+    void setUpdated(String updated);
 
     /**
      * Get a ZonedDateTime that indicates when the item was updated.
      *
      * @return publication date
      */
-    public Optional<ZonedDateTime> getUpdatedAsZonedDateTime() {
-        return getUpdated().map(dateTimeParser::parse);
-    }
+    Optional<ZonedDateTime> getUpdatedAsZonedDateTime();
 
     /**
      * Get a ZonedDateTime that indicates when the item was updated.
      *
      * @deprecated
-     * As of version 3.12.0, replaced by {@link Item#getUpdatedAsZonedDateTime()}
+     * <p> Use {@link Item#getUpdatedAsZonedDateTime()} instead.
      *
      * @return publication date
      */
     @SuppressWarnings("java:S1133")
-    @Deprecated(since = "3.12.0", forRemoval = true)
-    public Optional<ZonedDateTime> getUpdatedZonedDateTime() {
-        return getUpdatedAsZonedDateTime();
-    }
+    @Deprecated(since="3.12.0", forRemoval=true)
+    Optional<ZonedDateTime> getUpdatedZonedDateTime();
 
     /**
      * Get comments relating to the item.
      * @return comments
      */
-    public Optional<String> getComments() {
-        return Optional.ofNullable(comments);
-    }
+    Optional<String> getComments();
 
     /**
      * Set comments relating to the item.
      * @param comments comments
      */
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
+    void setComments(String comments);
 
     /**
      * Get the enclosure of the item.
      *
      * @return enclosure
      */
-    public Optional<Enclosure> getEnclosure() {
-        return Optional.ofNullable(enclosure);
-    }
+    Optional<Enclosure> getEnclosure();
 
     /**
      * Set the enclosure of the item.
      *
      * @param enclosure enclosure
      */
-    public void setEnclosure(Enclosure enclosure) {
-        addEnclosure(enclosure);
-    }
+    void setEnclosure(Enclosure enclosure);
 
     /**
      * Get enclosures for item.
      * Use this method if multiple enclosures exist per item.
      * @return list of enclosures
      */
-    public List<Enclosure> getEnclosures() {
-        return Mapper.emptyListIfNull(enclosures);
-    }
+    List<Enclosure> getEnclosures();
 
     /**
      * Add enclosure for item.
      * @param enclosure enclosure
      */
-    public void addEnclosure(Enclosure enclosure) {
-        if (enclosures == null) {
-            enclosures = new ArrayList<>();
-        }
-        this.enclosure = enclosure;
-        enclosures.add(enclosure);
-    }
+    void addEnclosure(Enclosure enclosure);
 
     /**
      * Get the channel that this item was published in.
      *
      * @return channel
      */
-    public Channel getChannel() {
-        return channel;
-    }
+    Channel getChannel();
 
     /**
      * Set the channel that this item was published in.
      *
      * @param channel channel
      */
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equals(getTitle(), item.getTitle()) &&
-                Objects.equals(getDescription(), item.getDescription()) &&
-                Objects.equals(getContent(), item.getContent()) &&
-                Objects.equals(getLink(), item.getLink()) &&
-                Objects.equals(getAuthor(), item.getAuthor()) &&
-                getCategories().equals(item.getCategories()) &&
-                Objects.equals(getGuid(), item.getGuid()) &&
-                Objects.equals(getIsPermaLink(), item.getIsPermaLink()) &&
-                Objects.equals(getPubDate(), item.getPubDate()) &&
-                Objects.equals(getUpdated(), item.getUpdated()) &&
-                Objects.equals(getComments(), item.getComments()) &&
-                getEnclosures().equals(item.getEnclosures()) &&
-                Objects.equals(getChannel(), item.getChannel());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getTitle(), getDescription(), getContent(), getLink(), getAuthor(), getCategories(),
-                getGuid(), getIsPermaLink(), getPubDate(), getUpdated(), getComments(), getEnclosures(), getChannel());
-    }
-
-    /**
-     * Compares publication time of two {@code Item} objects.
-     *
-     * @param o item to compare
-     * @return value
-     * @since 2.2.0
-     */
-    @Override
-    public int compareTo(Item o) {
-        return defaultComparator.compare(this, o);
-    }
+    void setChannel(Channel channel);
 }

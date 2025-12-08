@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Class representing a image in channel.
+ * Class representing an image in channel.
  */
 public class Image {
     private String title;

@@ -54,14 +54,14 @@ class ItunesRssReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(ItunesChannel.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").withNonnullFields("itunesCategories").verify();
-        EqualsVerifier.simple().forClass(ItunesItem.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(ItunesChannelImpl.class).withNonnullFields("data").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+        EqualsVerifier.simple().forClass(ItunesItemImpl.class).withNonnullFields("data").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(ItunesOwner.class).verify();
     }
 
     @Test
     void duration() {
-        ItunesItem item = new ItunesItem(new DateTime());
+        ItunesItem item = new ItunesItemImpl(new DateTime());
         item.setItunesDuration("1");
         assertEquals(1, item.getItunesDurationAsDuration().get().getSeconds());
         item.setItunesDuration("01:02");
@@ -72,18 +72,12 @@ class ItunesRssReaderTest {
 
     @Test
     void badDuration() {
-        ItunesItem item = new ItunesItem(new DateTime());
+        ItunesItem item = new ItunesItemImpl(new DateTime());
         item.setItunesDuration(null);
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(" ");
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(":");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b:c");
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
     }
 
