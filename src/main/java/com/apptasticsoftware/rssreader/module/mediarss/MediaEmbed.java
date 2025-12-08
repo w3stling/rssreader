@@ -91,8 +91,20 @@ public class MediaEmbed {
     public void addParamValue(String value) {
         if (params == null) {
             params = new LinkedHashMap<>();
+            return;
         }
-        params.put(params.lastEntry().getKey(), value);
+
+        if (params.isEmpty()) {
+            return;
+        }
+
+        // Get the last key in insertion order
+        String lastKey = null;
+        for (String key : params.keySet()) {
+            lastKey = key;
+        }
+
+        params.put(lastKey, value);
     }
 
     @Override
