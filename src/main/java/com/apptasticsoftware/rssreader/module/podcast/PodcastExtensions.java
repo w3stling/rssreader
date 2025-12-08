@@ -14,6 +14,10 @@ import static com.apptasticsoftware.rssreader.util.Util.getLast;
 
 public class PodcastExtensions {
 
+    private PodcastExtensions() {
+
+    }
+
     public static void register(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry, DateTimeParser dateTimeParser) {
         onChannelTag(registry, dateTimeParser);
         channelTagExtensions(registry);
@@ -24,6 +28,7 @@ public class PodcastExtensions {
         itemAttributesExtensions(registry);
     }
 
+    @SuppressWarnings("java:S1192")
     private static void onChannelTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry, DateTimeParser dateTimeParser) {
         registry.addOnChannelTag("podcast:block", channel -> channel.addPodcastBlock(new PodcastBlock()));
         registry.addOnChannelTag("podcast:funding", channel -> channel.addPodcastFunding(new PodcastFunding()));
@@ -39,6 +44,7 @@ public class PodcastExtensions {
         registry.addOnChannelTag("podcast:txt", channel -> channel.addPodcastTxt(new PodcastTxt()));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
         registry.addChannelExtension("podcast:license", (channel, value) -> createIfNull(((PodcastChannel)channel)::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
@@ -53,6 +59,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:txt", (channel, value) -> getLast(channel.getPodcastTxts()).setTxt(value));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addChannelExtension("podcast:license", "url", (channel, value) -> createIfNull(channel::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setUrl(value));
         registry.addChannelExtension("podcast:locked", "owner", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> locked.setOwner(value)));
@@ -126,6 +133,7 @@ public class PodcastExtensions {
         registry.addChannelExtension("podcast:podping", "usesPodping", (channel, value) -> mapBoolean(value, channel::setPodcastUsingPodping));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void onItemTag(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addOnItemTag("podcast:image", item -> item.addPodcastImage(new PodcastImage()));
         registry.addOnItemTag("podcast:soundbite", item -> item.addPodcastSoundbite(new PodcastSoundbite()));
@@ -151,6 +159,7 @@ public class PodcastExtensions {
         registry.addItemExtension("podcast:txt", (item, value) -> getLast(item.getPodcastTxts()).setTxt(value));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void itemAttributesExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addItemExtension("podcast:image", "href", (item, value) -> getLast(item.getPodcastImages()).setHref(value));
         registry.addItemExtension("podcast:image", "alt", (item, value) -> getLast(item.getPodcastImages()).setAlt(value));

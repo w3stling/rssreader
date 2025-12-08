@@ -15,7 +15,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PodcastRssReaderTest {
+@SuppressWarnings("java:S5961")
+class PodcastRssReaderTest {
 
     @Test
     void example1() {
