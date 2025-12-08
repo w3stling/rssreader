@@ -7,6 +7,10 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
 
 public class ItunesExtensions {
 
+    private ItunesExtensions() {
+
+    }
+
     public static void register(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
         channelTagExtensions(registry);
         channelAttributeExtensions(registry);
@@ -15,7 +19,7 @@ public class ItunesExtensions {
     }
 
     private static void channelTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
-        registry.addChannelExtension("itunes:explicit", (c, v) -> c.setItunesExplicit(Boolean.parseBoolean(v))); //mapBoolean(v, c::setItunesExplicit));
+        registry.addChannelExtension("itunes:explicit", (c, v) -> mapBoolean(v, c::setItunesExplicit));
         registry.addChannelExtension("itunes:author", ItunesChannel::setItunesAuthor);
 
         registry.addChannelExtension("itunes:name", (i, v) -> {

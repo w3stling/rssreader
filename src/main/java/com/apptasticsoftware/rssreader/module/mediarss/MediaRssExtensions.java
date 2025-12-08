@@ -13,6 +13,10 @@ import static com.apptasticsoftware.rssreader.util.Util.getLast;
 
 public class MediaRssExtensions {
 
+    private MediaRssExtensions() {
+
+    }
+
     public static void register(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         onChannelTag(registry);
         channelTagExtensions(registry);
@@ -23,6 +27,7 @@ public class MediaRssExtensions {
         itemAttributesExtensions(registry);
     }
 
+    @SuppressWarnings("java:S1192")
     private static void onChannelTag(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         registry.addOnChannelTag("/rss/channel/media:rating", channel -> channel.addMediaRating(new MediaRating()));
         registry.addOnChannelTag("/rss/channel/media:thumbnail", channel -> channel.addMediaThumbnail(new MediaThumbnail()));
@@ -39,6 +44,7 @@ public class MediaRssExtensions {
         registry.addOnChannelTag("/rss/channel/media:scenes/media:scene", channel -> channel.addMediaScene(new MediaScene()));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void channelTagExtensions(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> extensions) {
         extensions.addChannelExtension("/rss/channel/media:rating", (channel, value) -> channelMediaRating(channel, value, MediaRating::setRating));
         extensions.addChannelExtension("/rss/channel/media:title", (channel, value) -> channelMediaTitle(channel, value, MediaTitle::setTitle));
@@ -62,6 +68,7 @@ public class MediaRssExtensions {
         extensions.addChannelExtension("/rss/channel/media:scenes/media:scene/sceneEndTime", (channel, value) -> channelMediaScene(channel, value, MediaScene::setSceneEndTime));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         registry.addChannelExtension("/rss/channel/media:rating", "scheme", (channel, value) -> channelMediaRating(channel, value, MediaRating::setScheme));
         registry.addChannelExtension("/rss/channel/media:title", "type", (channel, value) -> channelMediaTitle(channel, value, MediaTitle::setType));
@@ -114,6 +121,7 @@ public class MediaRssExtensions {
         registry.addChannelExtension("/rss/channel/media:rights", "status", (channel, value) -> channelMediaRights(channel, value, MediaRights::setStatus));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void onItemTag(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         // media:content
         registry.addOnItemTag("/rss/channel/item/media:content", item -> item.addMediaContents(new MediaContent()));
@@ -178,6 +186,7 @@ public class MediaRssExtensions {
         registry.addOnItemTag("/rss/channel/item/media:scenes/media:scene", item -> item.addMediaScene(new MediaScene()));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void itemTagExtensions(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         registry.addItemExtension("/rss/channel/item/media:content/media:rating", (item, value) -> itemMediaContentMediaRating(item, value, MediaRating::setRating));
         registry.addItemExtension("/rss/channel/item/media:content/media:title", (item, value) -> itemMediaContentMediaTitle(item, value, MediaTitle::setTitle));
@@ -264,6 +273,7 @@ public class MediaRssExtensions {
         registry.addItemExtension("/rss/channel/item/media:scenes/media:scene/sceneEndTime", (item, value) -> itemMediaScene(item, value, MediaScene::setSceneEndTime));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void itemAttributesExtensions(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         // media:content
         registry.addItemExtension("/rss/channel/item/media:content", "url", (item, value) -> itemMediaContent(item, value, MediaContent::setUrl));

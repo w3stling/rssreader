@@ -107,6 +107,7 @@ public class ItunesChannelDataImpl implements ItunesChannelData {
      * Get the group responsible for creating the show.
      * @return author
      */
+    @Override
     public Optional<String> getItunesAuthor() {
         return Optional.ofNullable(itunesAuthor);
     }
