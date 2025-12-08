@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.util;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Utility class for RSS reader.
@@ -28,6 +30,22 @@ public class Util {
         }
     }
 
+    /**
+     * Convert a time period string to a Duration object.
+     *
+     * Supports the following formats:
+     * <ul>
+     *   <li>S - seconds only (e.g., "30")</li>
+     *   <li>S.mmm - seconds with milliseconds (e.g., "30.500")</li>
+     *   <li>MM:SS - minutes and seconds (e.g., "1:30")</li>
+     *   <li>MM:SS.mmm - minutes, seconds, and milliseconds (e.g., "1:30.500")</li>
+     *   <li>HH:MM:SS - hours, minutes, and seconds (e.g., "1:2:30")</li>
+     *   <li>HH:MM:SS.mmm - hours, minutes, seconds, and milliseconds (e.g., "1:2:30.500")</li>
+     * </ul>
+     *
+     * @param time the time period string to convert
+     * @return a Duration object representing the specified time period, or null if the input is null, blank, or invalid
+     */
     public static Duration toDuration(String time) {
         if (time == null || time.isBlank()) {
             return null;
@@ -82,4 +100,18 @@ public class Util {
                 .plusMillis(millis);
     }
 
+    /**
+     * Retrieves the last element from a list.
+     *
+     * @param <T> the type of elements in the list
+     * @param list the list to get the last element from
+     * @return the last element in the list
+     * @throws NoSuchElementException if the list is null or empty
+     */
+    public static <T> T getLast(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            throw new NoSuchElementException("List is empty or null");
+        }
+        return list.get(list.size() - 1);
+    }
 }

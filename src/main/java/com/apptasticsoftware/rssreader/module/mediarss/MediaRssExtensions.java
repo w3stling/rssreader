@@ -9,6 +9,7 @@ import java.util.function.BiConsumer;
 import static com.apptasticsoftware.rssreader.util.Mapper.*;
 import static com.apptasticsoftware.rssreader.util.Mapper.mapDouble;
 import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
+import static com.apptasticsoftware.rssreader.util.Util.getLast;
 
 public class MediaRssExtensions {
 
@@ -116,19 +117,19 @@ public class MediaRssExtensions {
     private static void onItemTag(FeedExtensionRegistry<? extends MediaRssChannel, ? extends MediaRssItem> registry) {
         // media:content
         registry.addOnItemTag("/rss/channel/item/media:content", item -> item.addMediaContents(new MediaContent()));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:rating", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaRating(new MediaRating())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaThumbnail(new MediaThumbnail())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:category", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCategory(new MediaCategory())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:hash", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaHash(new MediaHash())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:credit", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaCredit(new MediaCredit())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:text", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaText(new MediaText())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:restriction", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaRestriction(new MediaRestriction())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:price", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPrice(new MediaPrice())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:license", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLicense(new MediaLicense())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:subTitle", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaSubTitle(new MediaSubTitle())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:peerLink", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaPeerLink(new MediaPeerLink())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
-        registry.addOnItemTag("/rss/channel/item/media:content/media:scenes/media:scene", item -> Optional.ofNullable(item.getMediaContents().getLast()).ifPresent(c -> c.addMediaScene(new MediaScene())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:rating", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaRating(new MediaRating())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:thumbnail", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaThumbnail(new MediaThumbnail())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:category", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaCategory(new MediaCategory())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:hash", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaHash(new MediaHash())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:credit", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaCredit(new MediaCredit())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:text", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaText(new MediaText())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:restriction", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaRestriction(new MediaRestriction())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:price", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaPrice(new MediaPrice())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:license", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaLicense(new MediaLicense())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:subTitle", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaSubTitle(new MediaSubTitle())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:peerLink", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaPeerLink(new MediaPeerLink())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:location", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaLocation(new MediaLocation())));
+        registry.addOnItemTag("/rss/channel/item/media:content/media:scenes/media:scene", item -> Optional.ofNullable(getLast(item.getMediaContents())).ifPresent(c -> c.addMediaScene(new MediaScene())));
 
         // media:group
         registry.addOnItemTag("/rss/channel/item/media:group/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaRating(new MediaRating())));
@@ -147,19 +148,19 @@ public class MediaRssExtensions {
 
         // media:group / media:content
         registry.addOnItemTag("/rss/channel/item/media:group/media:content", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.addMediaContent(new MediaContent())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaRating(new MediaRating())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:thumbnail", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaThumbnail(new MediaThumbnail())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:category", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaCategory(new MediaCategory())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:hash", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaHash(new MediaHash())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:credit", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaCredit(new MediaCredit())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:text", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaText(new MediaText())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:restriction", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaRestriction(new MediaRestriction())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:price", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaPrice(new MediaPrice())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:license", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaLicense(new MediaLicense())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:subTitle", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaSubTitle(new MediaSubTitle())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:peerLink", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaPeerLink(new MediaPeerLink())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaLocation(new MediaLocation())));
-        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:scenes/media:scene", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> g.getMediaContents().getLast().addMediaScene(new MediaScene())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:rating", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaRating(new MediaRating())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:thumbnail", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaThumbnail(new MediaThumbnail())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:category", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaCategory(new MediaCategory())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:hash", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaHash(new MediaHash())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:credit", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaCredit(new MediaCredit())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:text", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaText(new MediaText())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:restriction", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaRestriction(new MediaRestriction())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:price", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaPrice(new MediaPrice())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:license", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaLicense(new MediaLicense())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:subTitle", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaSubTitle(new MediaSubTitle())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:peerLink", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaPeerLink(new MediaPeerLink())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:location", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaLocation(new MediaLocation())));
+        registry.addOnItemTag("/rss/channel/item/media:group/media:content/media:scenes/media:scene", item -> createIfNullOptional(item::getMediaGroup, item::setMediaGroup, MediaGroup::new).ifPresent(g -> getLast(g.getMediaContents()).addMediaScene(new MediaScene())));
 
         // item
         registry.addOnItemTag("/rss/channel/item/media:rating", item -> item.addMediaRating(new MediaRating()));
@@ -498,7 +499,7 @@ public class MediaRssExtensions {
     // Channel mapping methods
 
     private static void channelMediaRating(MediaRssChannel channel, String value, BiConsumer<MediaRating, String> setter) {
-        setter.accept(channel.getMediaRatings().getLast(), value);
+        setter.accept(getLast(channel.getMediaRatings()), value);
     }
 
     private static void channelMediaTitle(MediaRssChannel channel, String value, BiConsumer<MediaTitle, String> setter) {
@@ -516,15 +517,15 @@ public class MediaRssExtensions {
     }
 
     private static void channelMediaCategory(MediaRssChannel channel, String value, BiConsumer<MediaCategory, String> setter) {
-        setter.accept(channel.getMediaCategories().getLast(), value);
+        setter.accept(getLast(channel.getMediaCategories()), value);
     }
 
     private static void channelMediaHash(MediaRssChannel channel, String value, BiConsumer<MediaHash, String> setter) {
-        setter.accept(channel.getMediaHashes().getLast(), value);
+        setter.accept(getLast(channel.getMediaHashes()), value);
     }
 
     private static void channelMediaCredit(MediaRssChannel channel, String value, BiConsumer<MediaCredit, String> setter) {
-        setter.accept(channel.getMediaCredits().getLast(), value);
+        setter.accept(getLast(channel.getMediaCredits()), value);
     }
 
     private static void channelMediaCopyright(MediaRssChannel channel, String value, BiConsumer<MediaCopyright, String> setter) {
@@ -533,11 +534,11 @@ public class MediaRssExtensions {
     }
 
     private static void channelMediaText(MediaRssChannel channel, String value, BiConsumer<MediaText, String> setter) {
-        setter.accept(channel.getMediaTexts().getLast(), value);
+        setter.accept(getLast(channel.getMediaTexts()), value);
     }
 
     private static void channelMediaRestriction(MediaRssChannel channel, String value, BiConsumer<MediaRestriction, String> setter) {
-        setter.accept(channel.getMediaRestrictions().getLast(), value);
+        setter.accept(getLast(channel.getMediaRestrictions()), value);
     }
 
     private static void channelMediaCommunityMediaTags(MediaRssChannel channel, String value, BiConsumer<MediaTags, String> setter) {
@@ -552,15 +553,15 @@ public class MediaRssExtensions {
     }
 
     private static void channelMediaLicense(MediaRssChannel channel, String value, BiConsumer<MediaLicense, String> setter) {
-        setter.accept(channel.getMediaLicenses().getLast(), value);
+        setter.accept(getLast(channel.getMediaLicenses()), value);
     }
 
     private static void channelMediaScene(MediaRssChannel channel, String value, BiConsumer<MediaScene, String> setter) {
-        setter.accept(channel.getMediaScenes().getLast(), value);
+        setter.accept(getLast(channel.getMediaScenes()), value);
     }
 
     private static void channelMediaThumbnail(MediaRssChannel channel, String value, BiConsumer<MediaThumbnail, String> setter) {
-        setter.accept(channel.getMediaThumbnails().getLast(), value);
+        setter.accept(getLast(channel.getMediaThumbnails()), value);
     }
 
     private static void channelMediaPlayer(MediaRssChannel channel, String value, BiConsumer<MediaPlayer, String> setter) {
@@ -586,19 +587,19 @@ public class MediaRssExtensions {
     }
 
     private static void channelMediaPrice(MediaRssChannel channel, String value, BiConsumer<MediaPrice, String> setter) {
-        setter.accept(channel.getMediaPrices().getLast(), value);
+        setter.accept(getLast(channel.getMediaPrices()), value);
     }
 
     private static void channelMediaSubTitle(MediaRssChannel channel, String value, BiConsumer<MediaSubTitle, String> setter) {
-        setter.accept(channel.getMediaSubTitles().getLast(), value);
+        setter.accept(getLast(channel.getMediaSubTitles()), value);
     }
 
     private static void channelMediaPeerLink(MediaRssChannel channel, String value, BiConsumer<MediaPeerLink, String> setter) {
-        setter.accept(channel.getMediaPeerLinks().getLast(), value);
+        setter.accept(getLast(channel.getMediaPeerLinks()), value);
     }
 
     private static void channelMediaLocation(MediaRssChannel channel, String value, BiConsumer<MediaLocation, String> setter) {
-        setter.accept(channel.getMediaLocations().getLast(), value);
+        setter.accept(getLast(channel.getMediaLocations()), value);
     }
 
     private static void channelMediaRights(MediaRssChannel channel, String value, BiConsumer<MediaRights, String> setter) {
@@ -609,155 +610,155 @@ public class MediaRssExtensions {
     // Item mapping methods
 
     private static void itemMediaContent(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
-        Optional.ofNullable(item.getMediaContents().getLast())
+        Optional.ofNullable(getLast(item.getMediaContents()))
                 .ifPresent(content -> setter.accept(content, value));
     }
 
     private static void itemMediaContentMediaThumbnail(MediaRssItem item, String value, BiConsumer<MediaThumbnail, String> setter) {
-        var content = item.getMediaContents().getLast();
-        var thumbnail = content.getMediaThumbnails().getLast();
+        var content = getLast(item.getMediaContents());
+        var thumbnail = getLast(content.getMediaThumbnails());
         setter.accept(thumbnail, value);
     }
 
     private static void itemMediaContentMediaTitle(MediaRssItem item, String value, BiConsumer<MediaTitle, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var title = createIfNull(content::getMediaTitle, content::setMediaTitle, MediaTitle::new);
         setter.accept(title, value);
     }
 
     private static void itemMediaContentMediaDescription(MediaRssItem item, String value, BiConsumer<MediaDescription, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var description = createIfNull(content::getMediaDescription, content::setMediaDescription, MediaDescription::new);
         setter.accept(description, value);
     }
 
     private static void itemMediaContentMediaPlayer(MediaRssItem item, String value, BiConsumer<MediaPlayer, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var player = createIfNull(content::getMediaPlayer, content::setMediaPlayer, MediaPlayer::new);
         setter.accept(player, value);
     }
 
     private static void itemMediaContentMediaCredit(MediaRssItem item, String value, BiConsumer<MediaCredit, String> setter) {
-        var content = item.getMediaContents().getLast();
-        var credit = content.getMediaCredits().getLast();
+        var content = getLast(item.getMediaContents());
+        var credit = getLast(content.getMediaCredits());
         setter.accept(credit, value);
     }
 
     private static void itemMediaContentMediaCopyright(MediaRssItem item, String value, BiConsumer<MediaCopyright, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var copyright = createIfNull(content::getMediaCopyright, content::setMediaCopyright, MediaCopyright::new);
         setter.accept(copyright, value);
     }
 
     private static void itemMediaContentMediaHash(MediaRssItem item, String value, BiConsumer<MediaHash, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaHashes().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaHashes()), value);
     }
 
     private static void itemMediaContentMediaCategory(MediaRssItem item, String value, BiConsumer<MediaCategory, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaCategories().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaCategories()), value);
     }
 
     private static void itemMediaContentMediaText(MediaRssItem item, String value, BiConsumer<MediaText, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaTexts().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaTexts()), value);
     }
 
     private static void itemMediaContentMediaRating(MediaRssItem item, String value, BiConsumer<MediaRating, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaRatings().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaRatings()), value);
     }
 
     private static void itemMediaContentMediaLicense(MediaRssItem item, String value, BiConsumer<MediaLicense, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaLicenses().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaLicenses()), value);
     }
 
     private static void itemMediaContentMediaRights(MediaRssItem item, String value, BiConsumer<MediaRights, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var rights = createIfNull(content::getMediaRights, content::setMediaRights, MediaRights::new);
         setter.accept(rights, value);
     }
 
     private static void itemMediaContentMediaKeywords(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         Mapper.split(value).forEach(keyword -> setter.accept(content, keyword));
     }
 
     private static void itemMediaContentMediaRestriction(MediaRssItem item, String value, BiConsumer<MediaRestriction, String> setter) {
-        var content = item.getMediaContents().getLast();
-        var restrictions = content.getMediaRestrictions().getLast();
+        var content = getLast(item.getMediaContents());
+        var restrictions = getLast(content.getMediaRestrictions());
         setter.accept(restrictions, value);
     }
 
     private static void itemMediaContentMediaCommunityMediaStarRating(MediaRssItem item, String value, BiConsumer<MediaStarRating, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var starRating = createIfNull(community::getMediaStarRating, community::setMediaStarRating, MediaStarRating::new);
         setter.accept(starRating, value);
     }
 
     private static void itemMediaContentMediaCommunityMediaStatistics(MediaRssItem item, String value, BiConsumer<MediaStatistics, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var statistics = createIfNull(community::getMediaStatistics, community::setMediaStatistics, MediaStatistics::new);
         setter.accept(statistics, value);
     }
 
     private static void itemMediaContentMediaCommunityMediaTags(MediaRssItem item, String value, BiConsumer<MediaTags, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
         setter.accept(tags, value);
     }
 
     private static void itemMediaContentStringList(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         setter.accept(content, value);
     }
 
     private static void itemMediaContentMediaStatus(MediaRssItem item, String value, BiConsumer<MediaStatus, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var status = createIfNull(content::getMediaStatus, content::setMediaStatus, MediaStatus::new);
         setter.accept(status, value);
     }
 
     private static void itemMediaContentMediaPrice(MediaRssItem item, String value, BiConsumer<MediaPrice, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaPrices().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaPrices()), value);
     }
 
     private static void itemMediaContentMediaEmbed(MediaRssItem item, String value, BiConsumer<MediaEmbed, String> setter) {
-        var content = item.getMediaContents().getLast();
+        var content = getLast(item.getMediaContents());
         var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
         setter.accept(embed, value);
     }
 
     private static void itemMediaContentMediaScene(MediaRssItem item, String value, BiConsumer<MediaScene, String> setter) {
-        var content = item.getMediaContents().getLast();
-        var scene = content.getMediaScenes().getLast();
+        var content = getLast(item.getMediaContents());
+        var scene = getLast(content.getMediaScenes());
         setter.accept(scene, value);
     }
 
     private static void itemMediaContentMediaSubTitle(MediaRssItem item, String value, BiConsumer<MediaSubTitle, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaSubTitles().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaSubTitles()), value);
     }
 
     private static void itemMediaContentMediaPeerLink(MediaRssItem item, String value, BiConsumer<MediaPeerLink, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaPeerLinks().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaPeerLinks()), value);
     }
 
     private static void itemMediaContentMediaLocation(MediaRssItem item, String value, BiConsumer<MediaLocation, String> setter) {
-        var content = item.getMediaContents().getLast();
-        setter.accept(content.getMediaLocations().getLast(), value);
+        var content = getLast(item.getMediaContents());
+        setter.accept(getLast(content.getMediaLocations()), value);
     }
 
     private static void itemMediaGroupMediaContent(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
         item.getMediaGroup()
-                .map(group -> group.getMediaContents().getLast())
+                .map(group -> getLast(group.getMediaContents()))
                 .ifPresent(content -> setter.accept(content, value));
     }
 
@@ -781,7 +782,7 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaHash(MediaRssItem item, String value, BiConsumer<MediaHash, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaHashes().getLast(), value);
+        setter.accept(getLast(group.getMediaHashes()), value);
     }
 
     private static void itemMediaGroupMediaPlayer(MediaRssItem item, String value, BiConsumer<MediaPlayer, String> setter) {
@@ -792,13 +793,13 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaRestriction(MediaRssItem item, String value, BiConsumer<MediaRestriction, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var restriction = group.getMediaRestrictions().getLast();
+        var restriction = getLast(group.getMediaRestrictions());
         setter.accept(restriction, value);
     }
 
     private static void itemMediaGroupMediaText(MediaRssItem item, String value, BiConsumer<MediaText, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var text = group.getMediaTexts().getLast();
+        var text = getLast(group.getMediaTexts());
         setter.accept(text, value);
     }
 
@@ -814,23 +815,23 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaCredit(MediaRssItem item, String value, BiConsumer<MediaCredit, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaCredits().getLast(), value);
+        setter.accept(getLast(group.getMediaCredits()), value);
     }
 
     private static void itemMediaGroupMediaCategory(MediaRssItem item, String value, BiConsumer<MediaCategory, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaCategories().getLast(), value);
+        setter.accept(getLast(group.getMediaCategories()), value);
     }
 
     private static void itemMediaGroupMediaRating(MediaRssItem item, String value, BiConsumer<MediaRating, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var rating = group.getMediaRatings().getLast();
+        var rating = getLast(group.getMediaRatings());
         setter.accept(rating, value);
     }
 
     private static void itemMediaGroupMediaThumbnail(MediaRssItem item, String value, BiConsumer<MediaThumbnail, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var thumbnail = group.getMediaThumbnails().getLast();
+        var thumbnail = getLast(group.getMediaThumbnails());
         setter.accept(thumbnail, value);
     }
 
@@ -863,7 +864,7 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaPrice(MediaRssItem item, String value, BiConsumer<MediaPrice, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var price = group.getMediaPrices().getLast();
+        var price = getLast(group.getMediaPrices());
         setter.accept(price, value);
     }
 
@@ -875,7 +876,7 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaLicense(MediaRssItem item, String value, BiConsumer<MediaLicense, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaLicenses().getLast(), value);
+        setter.accept(getLast(group.getMediaLicenses()), value);
     }
 
     private static void itemMediaGroupMediaRights(MediaRssItem item, String value, BiConsumer<MediaRights, String> setter) {
@@ -886,23 +887,23 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaScene(MediaRssItem item, String value, BiConsumer<MediaScene, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var scene = group.getMediaScenes().getLast();
+        var scene = getLast(group.getMediaScenes());
         setter.accept(scene, value);
     }
 
     private static void itemMediaGroupMediaSubTitle(MediaRssItem item, String value, BiConsumer<MediaSubTitle, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaSubTitles().getLast(), value);
+        setter.accept(getLast(group.getMediaSubTitles()), value);
     }
 
     private static void itemMediaGroupMediaPeerLink(MediaRssItem item, String value, BiConsumer<MediaPeerLink, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaPeerLinks().getLast(), value);
+        setter.accept(getLast(group.getMediaPeerLinks()), value);
     }
 
     private static void itemMediaGroupMediaLocation(MediaRssItem item, String value, BiConsumer<MediaLocation, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        setter.accept(group.getMediaLocations().getLast(), value);
+        setter.accept(getLast(group.getMediaLocations()), value);
     }
 
     private static void itemMediaCommunityMediaStarRating(MediaRssItem item, String value, BiConsumer<MediaStarRating, String> setter) {
@@ -925,55 +926,55 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaContentMediaTitle(MediaRssItem item, String value, BiConsumer<MediaTitle, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var title = createIfNull(content::getMediaTitle, content::setMediaTitle, MediaTitle::new);
         setter.accept(title, value);
     }
 
     private static void itemMediaGroupMediaContentMediaDescription(MediaRssItem item, String value, BiConsumer<MediaDescription, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var title = createIfNull(content::getMediaDescription, content::setMediaDescription, MediaDescription::new);
         setter.accept(title, value);
     }
 
     private static void itemMediaGroupMediaContentMediaKeywords(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         Mapper.split(value).forEach(keyword -> setter.accept(content, keyword));
     }
 
     private static void itemMediaGroupMediaContentMediaThumbnail(MediaRssItem item, String value, BiConsumer<MediaThumbnail, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var credit = content.getMediaThumbnails().getLast();
+        var content = getLast(group.getMediaContents());
+        var credit = getLast(content.getMediaThumbnails());
         setter.accept(credit, value);
     }
 
     private static void itemMediaGroupMediaContentMediaCredit(MediaRssItem item, String value, BiConsumer<MediaCredit, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var credit = content.getMediaCredits().getLast();
+        var content = getLast(group.getMediaContents());
+        var credit = getLast(content.getMediaCredits());
         setter.accept(credit, value);
     }
 
     private static void itemMediaGroupMediaContentMediaCategory(MediaRssItem item, String value, BiConsumer<MediaCategory, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var category = content.getMediaCategories().getLast();
+        var content = getLast(group.getMediaContents());
+        var category = getLast(content.getMediaCategories());
         setter.accept(category, value);
     }
 
     private static void itemMediaGroupMediaContentMediaRating(MediaRssItem item, String value, BiConsumer<MediaRating, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var rating = content.getMediaRatings().getLast();
+        var content = getLast(group.getMediaContents());
+        var rating = getLast(content.getMediaRatings());
         setter.accept(rating, value);
     }
 
     private static void itemMediaGroupMediaContentMediaCommunityMediaTags(MediaRssItem item, String value, BiConsumer<MediaTags, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var tags = createIfNull(community::getMediaTags, community::setMediaTags, MediaTags::new);
         setter.accept(tags, value);
@@ -981,7 +982,7 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaContentMediaCommunityMediaStarRating(MediaRssItem item, String value, BiConsumer<MediaStarRating, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var starRating = createIfNull(community::getMediaStarRating, community::setMediaStarRating, MediaStarRating::new);
         setter.accept(starRating, value);
@@ -989,7 +990,7 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaContentMediaCommunityMediaStatistics(MediaRssItem item, String value, BiConsumer<MediaStatistics, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var community = createIfNull(content::getMediaCommunity, content::setMediaCommunity, MediaCommunity::new);
         var statistics = createIfNull(community::getMediaStatistics, community::setMediaStatistics, MediaStatistics::new);
         setter.accept(statistics, value);
@@ -997,98 +998,98 @@ public class MediaRssExtensions {
 
     private static void itemMediaGroupMediaContentMediaCopyright(MediaRssItem item, String value, BiConsumer<MediaCopyright, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var copyright = createIfNull(content::getMediaCopyright, content::setMediaCopyright, MediaCopyright::new);
         setter.accept(copyright, value);
     }
 
     private static void itemMediaGroupMediaContentMediaHash(MediaRssItem item, String value, BiConsumer<MediaHash, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var hash = content.getMediaHashes().getLast();
+        var content = getLast(group.getMediaContents());
+        var hash = getLast(content.getMediaHashes());
         setter.accept(hash, value);
     }
 
     private static void itemMediaGroupMediaContentMediaPlayer(MediaRssItem item, String value, BiConsumer<MediaPlayer, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var player = createIfNull(content::getMediaPlayer, content::setMediaPlayer, MediaPlayer::new);
         setter.accept(player, value);
     }
 
     private static void itemMediaGroupMediaContentMediaRestriction(MediaRssItem item, String value, BiConsumer<MediaRestriction, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var restriction = content.getMediaRestrictions().getLast();
+        var content = getLast(group.getMediaContents());
+        var restriction = getLast(content.getMediaRestrictions());
         setter.accept(restriction, value);
     }
 
     private static void itemMediaGroupMediaContentMediaText(MediaRssItem item, String value, BiConsumer<MediaText, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var text = content.getMediaTexts().getLast();
+        var content = getLast(group.getMediaContents());
+        var text = getLast(content.getMediaTexts());
         setter.accept(text, value);
     }
 
     private static void itemMediaGroupMediaContentStringList(MediaRssItem item, String value, BiConsumer<MediaContent, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         setter.accept(content, value);
     }
 
     private static void itemMediaGroupMediaContentMediaEmbed(MediaRssItem item, String value, BiConsumer<MediaEmbed, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var embed = createIfNull(content::getMediaEmbed, content::setMediaEmbed, MediaEmbed::new);
         setter.accept(embed, value);
     }
 
     private static void itemMediaGroupMediaContentMediaLicense(MediaRssItem item, String value, BiConsumer<MediaLicense, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var license = content.getMediaLicenses().getLast();
+        var content = getLast(group.getMediaContents());
+        var license = getLast(content.getMediaLicenses());
         setter.accept(license, value);
     }
 
     private static void itemMediaGroupMediaContentMediaSubTitle(MediaRssItem item, String value, BiConsumer<MediaSubTitle, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var license = content.getMediaSubTitles().getLast();
+        var content = getLast(group.getMediaContents());
+        var license = getLast(content.getMediaSubTitles());
         setter.accept(license, value);
     }
 
     private static void itemMediaGroupMediaContentMediaPeerLink(MediaRssItem item, String value, BiConsumer<MediaPeerLink, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var peerLinks = content.getMediaPeerLinks().getLast();
+        var content = getLast(group.getMediaContents());
+        var peerLinks = getLast(content.getMediaPeerLinks());
         setter.accept(peerLinks, value);
     }
 
     private static void itemMediaGroupMediaContentMediaRights(MediaRssItem item, String value, BiConsumer<MediaRights, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var rights = createIfNull(content::getMediaRights, content::setMediaRights, MediaRights::new);
         setter.accept(rights, value);
     }
 
     private static void itemMediaGroupMediaContentMediaScene(MediaRssItem item, String value, BiConsumer<MediaScene, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var license = content.getMediaScenes().getLast();
+        var content = getLast(group.getMediaContents());
+        var license = getLast(content.getMediaScenes());
         setter.accept(license, value);
     }
 
     private static void itemMediaGroupMediaContentMediaStatus(MediaRssItem item, String value, BiConsumer<MediaStatus, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
+        var content = getLast(group.getMediaContents());
         var status = createIfNull(content::getMediaStatus, content::setMediaStatus, MediaStatus::new);
         setter.accept(status, value);
     }
 
     private static void itemMediaGroupMediaContentMediaPrice(MediaRssItem item, String value, BiConsumer<MediaPrice, String> setter) {
         var group = createIfNull(item::getMediaGroup, item::setMediaGroup, MediaGroup::new);
-        var content = group.getMediaContents().getLast();
-        var price = content.getMediaPrices().getLast();
+        var content = getLast(group.getMediaContents());
+        var price = getLast(content.getMediaPrices());
         setter.accept(price, value);
     }
 
@@ -1098,31 +1099,31 @@ public class MediaRssExtensions {
     }
 
     private static void itemMediaPrice(MediaRssItem item, String value, BiConsumer<MediaPrice, String> setter) {
-        setter.accept(item.getMediaPrices().getLast(), value);
+        setter.accept(getLast(item.getMediaPrices()), value);
     }
 
     private static void itemMediaLicense(MediaRssItem item, String value, BiConsumer<MediaLicense, String> setter) {
-        setter.accept(item.getMediaLicenses().getLast(), value);
+        setter.accept(getLast(item.getMediaLicenses()), value);
     }
 
     private static void itemMediaRestriction(MediaRssItem item, String value, BiConsumer<MediaRestriction, String> setter) {
-        setter.accept(item.getMediaRestrictions().getLast(), value);
+        setter.accept(getLast(item.getMediaRestrictions()), value);
     }
 
     private static void itemMediaScene(MediaRssItem item, String value, BiConsumer<MediaScene, String> setter) {
-        setter.accept(item.getMediaScenes().getLast(), value);
+        setter.accept(getLast(item.getMediaScenes()), value);
     }
 
     private static void itemMediaLocation(MediaRssItem item, String value, BiConsumer<MediaLocation, String> setter) {
-        setter.accept(item.getMediaLocations().getLast(), value);
+        setter.accept(getLast(item.getMediaLocations()), value);
     }
 
     private static void itemMediaSubTitle(MediaRssItem item, String value, BiConsumer<MediaSubTitle, String> setter) {
-        setter.accept(item.getMediaSubTitles().getLast(), value);
+        setter.accept(getLast(item.getMediaSubTitles()), value);
     }
 
     private static void itemMediaPeerLink(MediaRssItem item, String value, BiConsumer<MediaPeerLink, String> setter) {
-        setter.accept(item.getMediaPeerLinks().getLast(), value);
+        setter.accept(getLast(item.getMediaPeerLinks()), value);
     }
 
     private static void itemMediaEmbed(MediaRssItem item, String value, BiConsumer<MediaEmbed, String> setter) {
@@ -1146,7 +1147,7 @@ public class MediaRssExtensions {
     }
 
     private static void itemMediaHash(MediaRssItem item, String value, BiConsumer<MediaHash, String> setter) {
-        setter.accept(item.getMediaHashes().getLast(), value);
+        setter.accept(getLast(item.getMediaHashes()), value);
     }
 
     private static void itemMediaPlayer(MediaRssItem item, String value, BiConsumer<MediaPlayer, String> setter) {
@@ -1155,11 +1156,11 @@ public class MediaRssExtensions {
     }
 
     private static void itemMediaText(MediaRssItem item, String value, BiConsumer<MediaText, String> setter) {
-        setter.accept(item.getMediaTexts().getLast(), value);
+        setter.accept(getLast(item.getMediaTexts()), value);
     }
 
     private static void itemMediaThumbnail(MediaRssItem item, String value, BiConsumer<MediaThumbnail, String> setter) {
-        setter.accept(item.getMediaThumbnails().getLast(), value);
+        setter.accept(getLast(item.getMediaThumbnails()), value);
     }
 
     private static void itemMediaKeywords(MediaRssItem item, String value, BiConsumer<MediaRssItem, String> setter) {
@@ -1167,15 +1168,15 @@ public class MediaRssExtensions {
     }
 
     private static void itemMediaRating(MediaRssItem item, String value, BiConsumer<MediaRating, String> setter) {
-        setter.accept(item.getMediaRatings().getLast(), value);
+        setter.accept(getLast(item.getMediaRatings()), value);
     }
 
     private static void itemMediaCategory(MediaRssItem item, String value, BiConsumer<MediaCategory, String> setter) {
-        setter.accept(item.getMediaCategories().getLast(), value);
+        setter.accept(getLast(item.getMediaCategories()), value);
     }
 
     private static void itemMediaCredit(MediaRssItem item, String value, BiConsumer<MediaCredit, String> setter) {
-        setter.accept(item.getMediaCredits().getLast(), value);
+        setter.accept(getLast(item.getMediaCredits()), value);
     }
 
     private static void itemMediaRights(MediaRssItem item, String value, BiConsumer<MediaRights, String> setter) {
