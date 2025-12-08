@@ -12,7 +12,6 @@ import java.util.Optional;
  * it is encouraged, but not required, that the elements be grouped by language and appear
  * in time sequence order based on the start time. Elements can have overlapping start
  * and end times.
- *
  * Example:
  * {@code
  * <media:text type="plain" lang="en" start="00:00:03.000" end="00:00:10.000">Oh, say, can you see</media:text>
@@ -100,7 +99,7 @@ public class MediaText {
 
     /**
      * Specifies the end time that the text is relevant. If this attribute is not provided, and a start time is used,
-     * it is expected that the end time is either the end of the clip or the start of the next <media:text> element.
+     * it is expected that the end time is either the end of the clip or the start of the next &lt;media:text&gt; element.
      * @return end time
      */
     public Optional<String> getEnd() {
@@ -109,7 +108,7 @@ public class MediaText {
 
     /**
      * Specifies the end time that the text is relevant. If this attribute is not provided, and a start time is used,
-     * it is expected that the end time is either the end of the clip or the start of the next <media:text> element.
+     * it is expected that the end time is either the end of the clip or the start of the next &lt;media:text&gt; element.
      * @return end time
      */
     public Optional<Duration> getEndAsDuration() {
@@ -118,7 +117,7 @@ public class MediaText {
 
     /**
      * Specifies the end time that the text is relevant. If this attribute is not provided, and a start time is used,
-     * it is expected that the end time is either the end of the clip or the start of the next <media:text> element.
+     * it is expected that the end time is either the end of the clip or the start of the next &lt;media:text&gt; element.
      * @param end end time
      */
     public void setEnd(String end) {

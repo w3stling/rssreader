@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * Sometimes player-specific embed code is needed for a player to play any video.
- * <media:embed> allows inclusion of such information in the form of key-value pairs.
+ * &lt;media:embed&gt; allows inclusion of such information in the form of key-value pairs.
  * Example:
  * {@code
  * <media:embed url="http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf?ver=2.2.2"
