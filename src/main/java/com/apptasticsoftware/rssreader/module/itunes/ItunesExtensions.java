@@ -7,6 +7,10 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
 
 public class ItunesExtensions {
 
+    private ItunesExtensions() {
+
+    }
+
     public static void register(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
         channelTagExtensions(registry);
         channelAttributeExtensions(registry);
@@ -15,7 +19,7 @@ public class ItunesExtensions {
     }
 
     private static void channelTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
-        registry.addChannelExtension("itunes:explicit", (c, v) -> c.setItunesExplicit(Boolean.parseBoolean(v))); //mapBoolean(v, c::setItunesExplicit));
+        registry.addChannelExtension("itunes:explicit", (c, v) -> mapBoolean(v, c::setItunesExplicit));
         registry.addChannelExtension("itunes:author", ItunesChannel::setItunesAuthor);
 
         registry.addChannelExtension("itunes:name", (i, v) -> {
@@ -35,8 +39,8 @@ public class ItunesExtensions {
         registry.addChannelExtension("itunes:summary", ItunesChannel::setItunesSummary);
         registry.addChannelExtension("itunes:type", ItunesChannel::setItunesType);
         registry.addChannelExtension("itunes:new-feed-url", ItunesChannel::setItunesNewFeedUrl);
-        registry.addChannelExtension("itunes:block", (c, v) -> c.setItunesBlock(Boolean.parseBoolean(v))); // mapBoolean(v, c::setItunesBlock));
-        registry.addChannelExtension("itunes:complete", (c, v) -> c.setItunesComplete(Boolean.parseBoolean(v))); //mapBoolean(v, c::setItunesComplete));
+        registry.addChannelExtension("itunes:block", (c, v) -> mapBoolean(v, c::setItunesBlock));
+        registry.addChannelExtension("itunes:complete", (c, v) -> mapBoolean(v, c::setItunesComplete));
     }
 
     private static void channelAttributeExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {

@@ -47,7 +47,7 @@ public class PodcastSoundbite {
      * @return The time in seconds where the soundbite begins.
      */
     public Duration getStartTimeAsDuration() {
-        return Util.toDuration(startTime);
+        return Util.toDuration(Double.toString(startTime));
     }
 
     /**
@@ -71,7 +71,7 @@ public class PodcastSoundbite {
      * @return The length of the soundbite in seconds (recommended between 15 and 120 seconds).
      */
     public Duration getDurationAsDuration() {
-        return Util.toDuration(duration);
+        return Util.toDuration(Double.toString(duration));
     }
 
     /**

@@ -1,13 +1,15 @@
 package com.apptasticsoftware.rssreader.util;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.function.Predicate.not;
 
 /**
  * Provides methods for mapping field
@@ -23,7 +25,7 @@ public final class Mapper {
      * @param func boolean setter method
      */
     public static void mapBoolean(String text, Consumer<Boolean> func) {
-        text = text.toLowerCase();
+        text = text.toLowerCase(Locale.ENGLISH);
         if ("true".equals(text) || "yes".equals(text)) {
             func.accept(Boolean.TRUE);
         } else if ("false".equals(text) || "no".equals(text)) {
@@ -68,6 +70,18 @@ public final class Mapper {
                 }
             }
         }
+    }
+
+    /**
+     * Split string on comma delimiter.
+     * @param string string to split
+     * @return list of strings
+     */
+    public static List<String> split(String string) {
+        return Stream.of(string.split(","))
+                .map(String::trim)
+                .filter(not(String::isBlank))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -124,6 +138,20 @@ public final class Mapper {
             return Collections.emptyList();
         }
         return Collections.unmodifiableList(list);
+    }
+
+    /**
+     * Returns an empty map if the provided map is null.
+     * @param map the map to check
+     * @param <K> the type of keys in the map
+     * @param <V> the type of values in the map
+     * @return an empty map if the provided map is null, otherwise returns the provided map
+     */
+    public static <K, V> Map<K, V> emptyMapIfNull(Map<K, V> map) {
+        if (map == null) {
+            return Collections.emptyMap();
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     private static <T> boolean isNullOrEmpty(Supplier<T> getter) {

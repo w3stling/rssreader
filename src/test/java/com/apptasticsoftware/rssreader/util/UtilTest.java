@@ -1,9 +1,11 @@
 package com.apptasticsoftware.rssreader.util;
 
+import com.apptasticsoftware.rssreader.module.mediarss.MediaScene;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.Duration;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +26,45 @@ class UtilTest {
                 Arguments.of("yearly", 525600),
                 Arguments.of("hourly", 60),
                 Arguments.of("unknown", 60)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideTimeData")
+    void mediaSceneStartEndTime(String time, Duration expectedDuration) {
+        var mediaScene = new MediaScene();
+        mediaScene.setSceneStartTime(time);
+        mediaScene.setSceneEndTime(time);
+        assertEquals(expectedDuration, mediaScene.getSceneStartTimeAsDuration());
+        assertEquals(expectedDuration, mediaScene.getSceneEndTimeAsDuration());
+    }
+
+    private static Stream<Arguments> provideTimeData() {
+        return Stream.of(
+                // S format (seconds only)
+                Arguments.of("1", Duration.parse("PT1S")),
+                Arguments.of("2", Duration.parse("PT2S")),
+                Arguments.of("3627", Duration.parse("PT3627S")),
+                // S.mmm format (seconds with milliseconds)
+                Arguments.of("2.123", Duration.parse("PT2.123S")),
+                Arguments.of("1.5", Duration.parse("PT1.5S")),
+                // MM:SS format
+                Arguments.of("00:01", Duration.parse("PT1S")),
+                Arguments.of("00:00:01", Duration.parse("PT1S")),
+                Arguments.of("00:01.123", Duration.parse("PT1.123S")),
+                Arguments.of("00:00:01.123", Duration.parse("PT1.123S")),
+                Arguments.of("01:02", Duration.parse("PT1M2S")),
+                Arguments.of("00:01:02", Duration.parse("PT1M2S")),
+                Arguments.of("01:02.123", Duration.parse("PT1M2.123S")),
+                Arguments.of("00:01:02.123", Duration.parse("PT1M2.123S")),
+                // HH:MM:SS format
+                Arguments.of("01:02:03", Duration.parse("PT1H2M3S")),
+                Arguments.of("01:02:03.123", Duration.parse("PT1H2M3.123S")),
+                // Edge cases
+                Arguments.of(null, null),
+                Arguments.of("", null),
+                Arguments.of(" ", null),
+                Arguments.of("          ", null)
         );
     }
 }

@@ -339,7 +339,7 @@ class RssReaderTest {
         channel1.setRating("a11");
         int h1 = channel1.hashCode();
 
-        ChannelImpl channel2 = new ChannelImpl(new DateTime());
+        Channel channel2 = new ChannelImpl(new DateTime());
         channel2.setTitle("b1");
         channel2.setDescription("a2");
         channel2.setCategory("a3");

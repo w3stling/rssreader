@@ -29,7 +29,10 @@ import com.apptasticsoftware.rssreader.util.Util;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -263,8 +266,13 @@ public class ChannelImpl implements Channel {
 
     /**
      * Get the publication date for the content in the channel.
+     *
+     * @deprecated
+     * <p> Use {@link ChannelImpl#getPubDateAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     public Optional<ZonedDateTime> getPubDateZonedDateTime() {
         return getPubDateAsZonedDateTime();
@@ -296,8 +304,13 @@ public class ChannelImpl implements Channel {
 
     /**
      * Get the last time the content of the channel changed.
+     *
+     * @deprecated
+     * <p> Use {@link ChannelImpl#getLastBuildDateAsZonedDateTime()} instead.
+     *
      * @return last build date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     public Optional<ZonedDateTime> getLastBuildDateZonedDateTime() {
         return getLastBuildDateAsZonedDateTime();

@@ -20,7 +20,7 @@ class MapperTest {
     @ParameterizedTest
     @ValueSource(strings = {"true", "TRUE", "True", "yes", "YES", "Yes"})
     void testMapBooleanTrue(String trueValue) {
-        ItemImpl item = new ItemImpl(new DateTime());
+        Item item = new ItemImpl(new DateTime());
         Mapper.mapBoolean(trueValue, item::setIsPermaLink);
         assertEquals(true, item.getIsPermaLink().orElse(null));
     }
@@ -28,7 +28,7 @@ class MapperTest {
     @ParameterizedTest
     @ValueSource(strings = {"false", "FALSE", "False", "no", "NO", "No"})
     void testMapBooleanFalse(String falseValue) {
-        ItemImpl item = new ItemImpl(new DateTime());
+        Item item = new ItemImpl(new DateTime());
         Mapper.mapBoolean(falseValue, item::setIsPermaLink);
         assertEquals(false, item.getIsPermaLink().orElse(null));
     }
@@ -36,7 +36,7 @@ class MapperTest {
     @ParameterizedTest
     @ValueSource(strings = {"Bad value", ""})
     void testMapBooleanBadValue(String falseValue) {
-        ItemImpl item = new ItemImpl(new DateTime());
+        Item item = new ItemImpl(new DateTime());
         Mapper.mapBoolean(falseValue, item::setIsPermaLink);
         assertNull(item.getIsPermaLink().orElse(null));
     }
@@ -76,7 +76,7 @@ class MapperTest {
 
     @Test
     void testCreateIfNull() {
-        ChannelImpl channel = new ChannelImpl(new DateTime());
+        Channel channel = new ChannelImpl(new DateTime());
         Mapper.createIfNull(channel::getImage, channel::setImage, Image::new).setTitle("title");
         assertEquals("title", channel.getImage().map(Image::getTitle).orElse("-"));
         Mapper.createIfNull(channel::getImage, channel::setImage, Image::new).setUrl("url");
@@ -86,7 +86,7 @@ class MapperTest {
 
     @Test
     void testCreateIfNullOptional() {
-        ChannelImpl channel = new ChannelImpl(new DateTime());
+        Channel channel = new ChannelImpl(new DateTime());
         Mapper.createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger("200", i::setHeight));
         assertEquals(200, channel.getImage().flatMap(Image::getHeight).orElse(0));
         Mapper.createIfNullOptional(channel::getImage, channel::setImage, Image::new).ifPresent(i -> mapInteger("100", i::setWidth));

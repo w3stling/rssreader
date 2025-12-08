@@ -23,7 +23,7 @@ public class PodcastValueTimeSplit {
     }
 
     public Duration getStartTimeAsDuration() {
-        return Util.toDuration(startTime);
+        return Util.toDuration(Integer.toString(startTime));
     }
 
     public void setStartTime(int startTime) {
@@ -35,7 +35,7 @@ public class PodcastValueTimeSplit {
     }
 
     public Duration getDurationAsDuration() {
-        return Util.toDuration(duration);
+        return Util.toDuration(Integer.toString(duration));
     }
 
     public void setDuration(int duration) {
@@ -47,7 +47,7 @@ public class PodcastValueTimeSplit {
     }
 
     public Optional<Duration> getRemoteStartTimeAsDuration() {
-        return Optional.ofNullable(remoteStartTime).map(Util::toDuration);
+        return Optional.ofNullable(remoteStartTime).map(Object::toString).map(Util::toDuration);
     }
 
     public void setRemoteStartTime(Integer remoteStartTime) {

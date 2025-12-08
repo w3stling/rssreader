@@ -135,7 +135,7 @@ class ConnectionTest {
 
     @Test
     void testReadTimeout() throws IOException {
-        var server = RssServer.withWritePause(getFile("atom-feed.xml"), Duration.ofSeconds(4))
+        var server = RssServer.withWritePause(getFile("atom-feed.xml"), Duration.ofSeconds(3))
                 .port(PORT)
                 .endpointPath("/slow-server")
                 .build();

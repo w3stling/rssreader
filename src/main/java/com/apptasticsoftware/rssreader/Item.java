@@ -170,8 +170,12 @@ public interface Item extends Comparable<Item> {
     /**
      * Get a ZonedDateTime that indicates when the item was published.
      *
+     * @deprecated
+     * <p> Use {@link Item#getPubDateAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getPubDateZonedDateTime();
 
@@ -194,14 +198,17 @@ public interface Item extends Comparable<Item> {
      *
      * @return publication date
      */
-    @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getUpdatedAsZonedDateTime();
 
     /**
      * Get a ZonedDateTime that indicates when the item was updated.
      *
+     * @deprecated
+     * <p> Use {@link Item#getUpdatedAsZonedDateTime()} instead.
+     *
      * @return publication date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getUpdatedZonedDateTime();
 

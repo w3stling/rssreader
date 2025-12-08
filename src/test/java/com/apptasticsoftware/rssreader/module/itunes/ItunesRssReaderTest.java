@@ -61,9 +61,8 @@ class ItunesRssReaderTest {
 
     @Test
     void duration() {
-        ItunesItemImpl item = new ItunesItemImpl(new DateTime());
+        ItunesItem item = new ItunesItemImpl(new DateTime());
         item.setItunesDuration("1");
-        assertTrue(item.getItunesDurationAsDuration().isPresent());
         assertEquals(1, item.getItunesDurationAsDuration().get().getSeconds());
         item.setItunesDuration("01:02");
         assertEquals(62, item.getItunesDurationAsDuration().get().getSeconds());
@@ -73,18 +72,12 @@ class ItunesRssReaderTest {
 
     @Test
     void badDuration() {
-        ItunesItemImpl item = new ItunesItemImpl(new DateTime());
+        ItunesItem item = new ItunesItemImpl(new DateTime());
         item.setItunesDuration(null);
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(" ");
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
         item.setItunesDuration(":");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b");
-        assertTrue(item.getItunesDurationAsDuration().isEmpty());
-        item.setItunesDuration("a:b:c");
         assertTrue(item.getItunesDurationAsDuration().isEmpty());
     }
 

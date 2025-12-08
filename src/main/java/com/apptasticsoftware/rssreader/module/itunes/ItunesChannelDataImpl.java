@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ItunesChannelDataImpl implements ItunesChannelData {
@@ -106,6 +107,7 @@ public class ItunesChannelDataImpl implements ItunesChannelData {
      * Get the group responsible for creating the show.
      * @return author
      */
+    @Override
     public Optional<String> getItunesAuthor() {
         return Optional.ofNullable(itunesAuthor);
     }
@@ -269,4 +271,15 @@ public class ItunesChannelDataImpl implements ItunesChannelData {
         this.itunesComplete = itunesComplete;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ItunesChannelDataImpl that = (ItunesChannelDataImpl) o;
+        return getItunesExplicit() == that.getItunesExplicit() && isItunesBlock() == that.isItunesBlock() && isItunesComplete() == that.isItunesComplete() && Objects.equals(getItunesImage(), that.getItunesImage()) && Objects.equals(getItunesCategories(), that.getItunesCategories()) && Objects.equals(getItunesAuthor(), that.getItunesAuthor()) && Objects.equals(getItunesOwner(), that.getItunesOwner()) && Objects.equals(getItunesTitle(), that.getItunesTitle()) && Objects.equals(getItunesSubtitle(), that.getItunesSubtitle()) && Objects.equals(getItunesSummary(), that.getItunesSummary()) && Objects.equals(getItunesType(), that.getItunesType()) && Objects.equals(getItunesNewFeedUrl(), that.getItunesNewFeedUrl());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getItunesImage(), getItunesCategories(), getItunesExplicit(), getItunesAuthor(), getItunesOwner(), getItunesTitle(), getItunesSubtitle(), getItunesSummary(), getItunesType(), getItunesNewFeedUrl(), isItunesBlock(), isItunesComplete());
+    }
 }

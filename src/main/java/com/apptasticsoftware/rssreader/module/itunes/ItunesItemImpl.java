@@ -53,11 +53,11 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ItunesItemImpl that = (ItunesItemImpl) o;
-        return isItunesExplicit() == that.isItunesExplicit() && isItunesBlock() == that.isItunesBlock() && Objects.equals(getItunesDuration(), that.getItunesDuration()) && Objects.equals(getItunesImage(), that.getItunesImage()) && Objects.equals(getItunesTitle(), that.getItunesTitle()) && Objects.equals(getItunesSubtitle(), that.getItunesSubtitle()) && Objects.equals(getItunesSummary(), that.getItunesSummary()) && Objects.equals(getItunesKeywords(), that.getItunesKeywords()) && Objects.equals(getItunesEpisode(), that.getItunesEpisode()) && Objects.equals(getItunesSeason(), that.getItunesSeason()) && Objects.equals(getItunesEpisodeType(), that.getItunesEpisodeType());
+        return Objects.equals(getItunesItemData(), that.getItunesItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesDuration(), getItunesImage(), isItunesExplicit(), getItunesTitle(), getItunesSubtitle(), getItunesSummary(), getItunesKeywords(), getItunesEpisode(), getItunesSeason(), getItunesEpisodeType(), isItunesBlock());
+        return Objects.hash(super.hashCode(), getItunesItemData());
     }
 }
