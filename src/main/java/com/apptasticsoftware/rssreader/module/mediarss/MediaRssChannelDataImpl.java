@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("java:S6539")
 public class MediaRssChannelDataImpl implements MediaRssChannelData {
     private final Metadata metadata = new MetadataImpl();
 

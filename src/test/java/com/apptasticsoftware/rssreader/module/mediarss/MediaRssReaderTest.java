@@ -17,8 +17,7 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-// https://feeds.bloomberg.com/markets/news.rss
-
+@SuppressWarnings("java:S5961")
 class MediaRssReaderTest {
 
     @Test

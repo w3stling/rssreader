@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("java:S6539")
 public class MetadataImpl implements Metadata {
     private List<MediaRating> mediaRatings;
     private MediaTitle mediaTitle;

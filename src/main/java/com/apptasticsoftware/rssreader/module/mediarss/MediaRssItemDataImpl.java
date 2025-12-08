@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("java:S6539")
 public class MediaRssItemDataImpl implements MediaRssItemData {
     private List<MediaContent> mediaContents;
     private MediaGroup mediaGroup;
@@ -27,6 +28,7 @@ public class MediaRssItemDataImpl implements MediaRssItemData {
      *
      * @param mediaContent the media content element to add
      */
+    @Override
     public void addMediaContents(MediaContent mediaContent) {
         if (mediaContents == null) {
             mediaContents = new ArrayList<>();
@@ -40,6 +42,7 @@ public class MediaRssItemDataImpl implements MediaRssItemData {
      *
      * @return optional media group
      */
+    @Override
     public Optional<MediaGroup> getMediaGroup() {
         return Optional.ofNullable(mediaGroup);
     }
@@ -50,6 +53,7 @@ public class MediaRssItemDataImpl implements MediaRssItemData {
      *
      * @param mediaGroup the media group to set
      */
+    @Override
     public void setMediaGroup(MediaGroup mediaGroup) {
         this.mediaGroup = mediaGroup;
     }

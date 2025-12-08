@@ -3,6 +3,7 @@ package com.apptasticsoftware.rssreader.module.mediarss;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("java:S6539")
 public interface MediaRssChannelData {
 
     MediaRssChannelData getMediaRssChannelData();
