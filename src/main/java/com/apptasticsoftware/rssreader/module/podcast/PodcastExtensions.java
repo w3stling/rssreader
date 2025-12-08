@@ -47,7 +47,7 @@ public class PodcastExtensions {
     @SuppressWarnings("java:S1192")
     private static void channelTagExtensions(FeedExtensionRegistry<? extends PodcastChannel, ? extends PodcastItem> registry) {
         registry.addChannelExtension("podcast:guid", PodcastChannel::setPodcastGuid);
-        registry.addChannelExtension("podcast:license", (channel, value) -> createIfNull(((PodcastChannel)channel)::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
+        registry.addChannelExtension("podcast:license", (channel, value) -> createIfNull(channel::getPodcastLicense, channel::setPodcastLicense, PodcastLicense::new).setLicense(value));
         registry.addChannelExtension("podcast:locked", (channel, value) -> createIfNullOptional(channel::getPodcastLocked, channel::setPodcastLocked, PodcastLocked::new).ifPresent(locked -> mapBoolean(value, locked::setLocked)));
         registry.addChannelExtension("podcast:block", (channel, value) -> Optional.ofNullable(getLast(channel.getPodcastBlocks())).ifPresent(block -> mapBoolean(value, block::setBlock)));
         registry.addChannelExtension("podcast:funding", (channel, value) -> Optional.ofNullable(getLast(channel.getPodcastFundings())).ifPresent(funding -> funding.setFunding(value)));
@@ -261,6 +261,7 @@ public class PodcastExtensions {
         setter.accept(remoteItem, value);
     }
 
+    @SuppressWarnings("java:S3776")
     private static void parsePodcastImages(Consumer<PodcastImage> addImage, String value) {
         if (value == null || value.trim().isEmpty()) {
             return;

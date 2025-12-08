@@ -194,38 +194,47 @@ public class PodcastItemDataImpl implements PodcastItemData {
         podcastTxts.add(podcastTxt);
     }
 
+    @Override
     public boolean isPodcastLiveItem() {
         return podcastLiveItemStatus != null;
     }
 
+    @Override
     public Optional<String> getPodcastLiveItemStatus() {
         return Optional.ofNullable(podcastLiveItemStatus);
     }
 
+    @Override
     public void setPodcastLiveItemStatus(String podcastLiveItemStatus) {
         this.podcastLiveItemStatus = podcastLiveItemStatus;
     }
 
+    @Override
     public Optional<String> getPodcastLiveItemStart() {
         return Optional.ofNullable(podcastLiveItemStart);
     }
 
+    @Override
     public Optional<ZonedDateTime> getPodcastLiveItemStartAsZonedDateTime() {
         return Optional.ofNullable(podcastLiveItemStart).map(dateTimeParser::parse);
     }
 
+    @Override
     public void setPodcastLiveItemStart(String podcastLiveItemStart) {
         this.podcastLiveItemStart = podcastLiveItemStart;
     }
 
+    @Override
     public Optional<String> getPodcastLiveItemEnd() {
         return Optional.ofNullable(podcastLiveItemEnd);
     }
 
+    @Override
     public Optional<ZonedDateTime> getPodcastLiveItemEndAsZonedDateTime() {
         return Optional.ofNullable(podcastLiveItemEnd).map(dateTimeParser::parse);
     }
 
+    @Override
     public void setPodcastLiveItemEnd(String podcastLiveItemEnd) {
         this.podcastLiveItemEnd = podcastLiveItemEnd;
     }

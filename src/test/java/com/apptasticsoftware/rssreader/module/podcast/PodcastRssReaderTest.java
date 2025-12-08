@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings("java:S5961")
+@SuppressWarnings({"java:S5961, java:S5738"})
 class PodcastRssReaderTest {
 
     @Test
@@ -190,7 +190,6 @@ class PodcastRssReaderTest {
         assertThat(item.getPodcastImages().get(2).getWidth(), isPresentAndIs(300));
         assertThat(item.getPodcastImages().get(3).getHref(), is("https://example.com/images/ep3/pci_avatar-tiny.jpg"));
         assertThat(item.getPodcastImages().get(3).getWidth(), isPresentAndIs(150));
-        //assertThat(item.getPodcastImages().size(), is(1));
         assertThat(item.isItunesExplicit(), is(false));
         assertTrue(item.getPodcastSeason().isPresent());
         assertThat(item.getPodcastSeason().get().getSeason(), is(1));
