@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PodcastRssReaderTest {
 
     @Test
-    @SuppressWarnings({"java:S5961, java:S5738"})
+    @SuppressWarnings({"java:S5961", "java:S5738"})
     void example1() {
         var items = new PodcastRssReader().read(fromFile("podcast/example1.xml"))
                 .collect(Collectors.toList());
@@ -312,7 +312,7 @@ class PodcastRssReaderTest {
     }
 
     @Test
-    @SuppressWarnings({"java:S5961, java:S5738"})
+    @SuppressWarnings({"java:S5961", "java:S5738"})
     void example2() {
         var items = new PodcastRssReader().read(fromFile("podcast/example2.xml"))
                 .collect(Collectors.toList());
