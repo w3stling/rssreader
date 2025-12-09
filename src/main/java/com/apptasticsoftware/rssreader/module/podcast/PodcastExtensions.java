@@ -261,7 +261,7 @@ public class PodcastExtensions {
         setter.accept(remoteItem, value);
     }
 
-    @SuppressWarnings("java:S3776")
+    @SuppressWarnings({"java:S3776", "java:S135"})
     private static void parsePodcastImages(Consumer<PodcastImage> addImage, String value) {
         if (value == null || value.trim().isEmpty()) {
             return;
