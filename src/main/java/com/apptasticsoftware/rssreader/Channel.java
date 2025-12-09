@@ -149,6 +149,7 @@ public interface Channel {
      *
      * @return publication date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getPubDateZonedDateTime();
 
@@ -178,6 +179,7 @@ public interface Channel {
      *
      * @return last build date
      */
+    @SuppressWarnings("java:S1133")
     @Deprecated(since="3.12.0", forRemoval=true)
     Optional<ZonedDateTime> getLastBuildDateZonedDateTime();
 
