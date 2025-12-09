@@ -47,12 +47,12 @@ public class PodcastTxt {
      * free form bit of info that is useful to the end consumer.
      * The value should not exceed 128 characters.</p>
      *
-     * <p>Known purposes include:
+     * <p>Known purposes include:</p>
      * <ul>
      *   <li>{@code verify} - The node value contains a string given by a third party platform
      *       to prove ownership of the feed.</li>
      *   <li>{@code applepodcastsverify} - Apple's variant of the verify purpose.</li>
-     * </ul> </p>
+     * </ul>
      *
      * @return an {@link Optional} containing the purpose attribute, or an empty Optional if not set
      */
