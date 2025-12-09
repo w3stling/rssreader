@@ -52,8 +52,7 @@ public class PodcastTxt {
      *   <li>{@code verify} - The node value contains a string given by a third party platform
      *       to prove ownership of the feed.</li>
      *   <li>{@code applepodcastsverify} - Apple's variant of the verify purpose.</li>
-     * </ul>
-     * </p>
+     * </ul> </p>
      *
      * @return an {@link Optional} containing the purpose attribute, or an empty Optional if not set
      */
