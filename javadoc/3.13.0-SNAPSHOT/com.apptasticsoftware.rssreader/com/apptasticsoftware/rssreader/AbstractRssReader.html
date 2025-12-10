@@ -60,6 +60,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#field-detail" tabindex="0">Field Details</a>
 <ol class="toc-list">
+<li><a href="#dateTimeParser" tabindex="0">dateTimeParser</a></li>
 <li><a href="#onChannelTags" tabindex="0">onChannelTags</a></li>
 <li><a href="#onItemTags" tabindex="0">onItemTags</a></li>
 </ol>
@@ -114,7 +115,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="module/itunes/ItunesRssReader.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesRssReader</a>, <a href="module/mediarss/MediaRssReader.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssReader</a>, <a href="RssReader.html" title="class in com.apptasticsoftware.rssreader">RssReader</a></code></dd>
+<dd><code><a href="module/itunes/ItunesRssReader.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesRssReader</a>, <a href="module/mediarss/MediaRssReader.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssReader</a>, <a href="module/podcast/PodcastRssReader.html" title="class in com.apptasticsoftware.rssreader.module.podcast">PodcastRssReader</a>, <a href="RssReader.html" title="class in com.apptasticsoftware.rssreader">RssReader</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
@@ -134,12 +135,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="#type-param-C" title="type parameter in AbstractRssReader">C</a>&gt;&gt;</code></div>
-<div class="col-second even-row-color"><code><a href="#onChannelTags" class="member-name-link">onChannelTags</a></code></div>
+<div class="col-first even-row-color"><code>protected <a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a></code></div>
+<div class="col-second even-row-color"><code><a href="#dateTimeParser" class="member-name-link">dateTimeParser</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="#type-param-I" title="type parameter in AbstractRssReader">I</a>&gt;&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#onItemTags" class="member-name-link">onItemTags</a></code></div>
+<div class="col-first odd-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="#type-param-C" title="type parameter in AbstractRssReader">C</a>&gt;&gt;</code></div>
+<div class="col-second odd-row-color"><code><a href="#onChannelTags" class="member-name-link">onChannelTags</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>protected final <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/HashMap.html" title="class or interface in java.util" class="external-link">HashMap</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/function/Consumer.html" title="class or interface in java.util.function" class="external-link">Consumer</a>&lt;<a href="#type-param-I" title="type parameter in AbstractRssReader">I</a>&gt;&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#onItemTags" class="member-name-link">onItemTags</a></code></div>
+<div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
 </li>
@@ -338,6 +342,14 @@ loadScripts(document, 'script');</script>
 <section class="field-details" id="field-detail">
 <h2>Field Details</h2>
 <ul class="member-list">
+<li>
+<section class="detail" id="dateTimeParser">
+<h3>dateTimeParser</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a></span>&nbsp;<span class="element-name">dateTimeParser</span></div>
+</div>
+</section>
+</li>
 <li>
 <section class="detail" id="onChannelTags">
 <h3>onChannelTags</h3>
