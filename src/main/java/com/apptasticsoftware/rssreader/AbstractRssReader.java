@@ -71,7 +71,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     private static final ScheduledExecutorService EXECUTOR = new ScheduledThreadPoolExecutor(1, new DaemonThreadFactory("RssReaderWorker"));
     private static final Cleaner CLEANER = Cleaner.create();
     private final HttpClient httpClient;
-    private DateTimeParser dateTimeParser = Default.getDateTimeParser();
+    protected DateTimeParser dateTimeParser = Default.getDateTimeParser();
     private String userAgent = "";
     private List<FeedFilter> feedFilters;
     private Duration connectionTimeout = Duration.ofSeconds(25);
@@ -854,7 +854,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
 
         protected boolean isItem(String tagName) {
-            return "item".equals(tagName) || "entry".equals(tagName);
+            return "item".equals(tagName) || "entry".equals(tagName) || "podcast:liveItem".equals(tagName);
         }
 
         private void parseAttributes() {
