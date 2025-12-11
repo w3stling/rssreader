@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.Optional;
 
 public interface ItunesItemData {
+
     ItunesItemData getItunesItemData();
 
     /**

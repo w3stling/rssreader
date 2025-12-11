@@ -1,12 +1,15 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItemImpl;
+import com.apptasticsoftware.rssreader.ItemImpl;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItemDataImpl;
 
 import java.util.Objects;
 
-public class PodcastItemImpl extends ItunesItemImpl implements PodcastItem {
+public class PodcastItemImpl extends ItemImpl implements PodcastItem {
     private final PodcastItemDataImpl data;
+    private final ItunesItemDataImpl itunesData;
 
     /**
      * Constructor
@@ -16,6 +19,7 @@ public class PodcastItemImpl extends ItunesItemImpl implements PodcastItem {
     public PodcastItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
         data = new PodcastItemDataImpl(dateTimeParser);
+        itunesData = new ItunesItemDataImpl();
     }
 
     @Override
@@ -23,16 +27,20 @@ public class PodcastItemImpl extends ItunesItemImpl implements PodcastItem {
         return data;
     }
 
+    public ItunesItemData getItunesItemData() {
+        return itunesData;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         PodcastItemImpl that = (PodcastItemImpl) o;
-        return Objects.equals(getPodcastSeason(), that.getPodcastSeason()) && Objects.equals(getPodcastEpisode(), that.getPodcastEpisode()) && Objects.equals(getPodcastChapters(), that.getPodcastChapters()) && Objects.equals(getPodcastImages(), that.getPodcastImages()) && Objects.equals(getPodcastSoundbites(), that.getPodcastSoundbites()) && Objects.equals(getPodcastTranscripts(), that.getPodcastTranscripts()) && Objects.equals(getPodcastPersons(), that.getPodcastPersons()) && Objects.equals(getPodcastAlternateEnclosures(), that.getPodcastAlternateEnclosures()) && Objects.equals(getPodcastValues(), that.getPodcastValues()) && Objects.equals(getPodcastSocialInteracts(), that.getPodcastSocialInteracts());
+        return Objects.equals(data, that.data) && Objects.equals(itunesData, that.itunesData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getPodcastSeason(), getPodcastEpisode(), getPodcastChapters(), getPodcastImages(), getPodcastSoundbites(), getPodcastTranscripts(), getPodcastPersons(), getPodcastAlternateEnclosures(), getPodcastValues(), getPodcastSocialInteracts());
+        return Objects.hash(super.hashCode(), data, itunesData);
     }
 }
