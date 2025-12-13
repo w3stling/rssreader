@@ -114,4 +114,8 @@ public class Util {
         }
         return list.get(list.size() - 1);
     }
+
+    public static boolean isBlank(String text) {
+        return text == null || text.isBlank();
+    }
 }

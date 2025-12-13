@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/">
+    <channel>
+        <title>Serial</title>
+        <link>https://serialpodcast.org</link>
+        <description>Serial is a new podcast from the creators of This American Life,
+            hosted by Sarah Koenig. Serial unfolds one story - a true story - over the course of a whole
+            season. The show follows the plot and characters wherever they lead, through many surprising
+            twists and turns. Sarah won't know what happens at the end of the story until she gets there, not
+            long before you get there with her. Each week she'll bring you the latest chapter, so it's
+            important to listen in, starting with Episode 1. New episodes are released on Thursday
+            mornings. Serial, like This American Life, is a production of WBEZ Chicago.
+        </description>
+        <language>en</language>
+        <spotify:limit recentCount="1" />
+        <spotify:countryOfOrigin>no dk se</spotify:countryOfOrigin>
+        <itunes:author>This American Life</itunes:author>
+        <itunes:category text="News &amp; Politics" />
+        <itunes:type>episodic</itunes:type>
+        <itunes:image href="https://serialpodcast.org/sites/all/modules/custom/serial/img/serial-itunes-logo.png" />
+        <media:restriction type="country" relationship="allow">us se</media:restriction>
+        <item>
+            <guid>1234</guid>
+            <title>Episode 09: To Be Suspected</title>
+            <description>New information is coming in about what maybe did not happen on
+                January 13, 1999. And while the memory of that day is foggy at best, he does remember what
+                happened next: being questioned, being arrested and, a little more than a year later, being
+                sentenced to life in prison.</description>
+            <pubDate>Thu, 20 Nov 2014 10:30:00 +0000</pubDate>
+            <itunes:duration>2700</itunes:duration>
+            <enclosure url="https://dts.podtrac.com/redirect.mp3/files.serialpodcast.org/sites/default/files/podcast/1422481890/serial-s01-e09.mp3" type="audio/mpeg" />
+            <media:title>Episode 9: Spotify</media:title>
+        </item>
+    </channel>
+</rss>
