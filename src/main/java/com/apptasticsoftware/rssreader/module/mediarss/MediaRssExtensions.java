@@ -13,8 +13,8 @@ import static com.apptasticsoftware.rssreader.util.Mapper.mapInteger;
 import static com.apptasticsoftware.rssreader.util.Util.getLast;
 
 public class MediaRssExtensions {
-    private final static List<String> CHANNEL_PATHS = List.of("/rss/channel/", "/feed/");
-    private final static List<String> ITEM_PATHS = List.of("/rss/channel/item/", "/feed/entry/");
+    private static final List<String> CHANNEL_PATHS = List.of("/rss/channel/", "/feed/");
+    private static final List<String> ITEM_PATHS = List.of("/rss/channel/item/", "/feed/entry/");
 
     private MediaRssExtensions() {
 
