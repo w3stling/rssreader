@@ -43,25 +43,25 @@ public class ItunesExtensions {
         registry.addChannelExtension("itunes:complete", (c, v) -> mapBoolean(v, c::setItunesComplete));
     }
 
-    private static void channelAttributeExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {
-        extensions.addChannelExtension("itunes:image", "href", ItunesChannel::setItunesImage);
-        extensions.addChannelExtension("itunes:category", "text", ItunesChannel::addItunesCategory);
+    private static void channelAttributeExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
+        registry.addChannelExtension("itunes:image", "href", ItunesChannel::setItunesImage);
+        registry.addChannelExtension("itunes:category", "text", ItunesChannel::addItunesCategory);
     }
 
-    private static void itemTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {
-        extensions.addItemExtension("itunes:duration", ItunesItem::setItunesDuration);
-        extensions.addItemExtension("itunes:explicit", (i, v) -> mapBoolean(v, i::setItunesExplicit));
-        extensions.addItemExtension("itunes:title", ItunesItem::setItunesTitle);
-        extensions.addItemExtension("itunes:subtitle", ItunesItem::setItunesSubtitle);
-        extensions.addItemExtension("itunes:summary", ItunesItem::setItunesSummary);
-        extensions.addItemExtension("itunes:keywords", ItunesItem::setItunesKeywords);
-        extensions.addItemExtension("itunes:episode", (i, v) -> mapInteger(v, i::setItunesEpisode));
-        extensions.addItemExtension("itunes:season", (i, v) -> mapInteger(v, i::setItunesSeason));
-        extensions.addItemExtension("itunes:episodeType", ItunesItem::setItunesEpisodeType);
-        extensions.addItemExtension("itunes:block", (i, v) -> mapBoolean(v, i::setItunesBlock));
+    private static void itemTagExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
+        registry.addItemExtension("itunes:duration", ItunesItem::setItunesDuration);
+        registry.addItemExtension("itunes:explicit", (i, v) -> mapBoolean(v, i::setItunesExplicit));
+        registry.addItemExtension("itunes:title", ItunesItem::setItunesTitle);
+        registry.addItemExtension("itunes:subtitle", ItunesItem::setItunesSubtitle);
+        registry.addItemExtension("itunes:summary", ItunesItem::setItunesSummary);
+        registry.addItemExtension("itunes:keywords", ItunesItem::setItunesKeywords);
+        registry.addItemExtension("itunes:episode", (i, v) -> mapInteger(v, i::setItunesEpisode));
+        registry.addItemExtension("itunes:season", (i, v) -> mapInteger(v, i::setItunesSeason));
+        registry.addItemExtension("itunes:episodeType", ItunesItem::setItunesEpisodeType);
+        registry.addItemExtension("itunes:block", (i, v) -> mapBoolean(v, i::setItunesBlock));
     }
 
-    private static void itemAttributesExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> extensions) {
-        extensions.addItemExtension("itunes:image", "href", ItunesItem::setItunesImage);
+    private static void itemAttributesExtensions(FeedExtensionRegistry<? extends ItunesChannel, ? extends ItunesItem> registry) {
+        registry.addItemExtension("itunes:image", "href", ItunesItem::setItunesImage);
     }
 }
