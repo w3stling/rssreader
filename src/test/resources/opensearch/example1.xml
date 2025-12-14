@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Example.com Search: New York history</title>
+        <link>http://example.com/New+York+history</link>
+        <description>Search results for "New York history" at Example.com</description>
+        <opensearch:totalResults>4230000</opensearch:totalResults>
+        <opensearch:startIndex>21</opensearch:startIndex>
+        <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+        <atom:link rel="search" type="application/opensearchdescription+xml" href="http://example.com/opensearchdescription.xml"/>
+        <opensearch:Query role="request" title="History" totalResults="10" searchTerms="New York History" count="15" startIndex="0" startPage="1" language="en" inputEncoding="UTF-8" outputEncoding="ISO-88859-1" />
+        <item>
+            <title>New York History</title>
+            <link>http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html</link>
+            <description>
+                ... Harlem.NYC - A virtual tour and information on
+                businesses ... with historic photos of Columbia's own New York
+                neighborhood ... Internet Resources for the City's History. ...
+            </description>
+        </item>
+        <!-- 9 additional <item> elements appear here -->
+    </channel>
+</rss>
