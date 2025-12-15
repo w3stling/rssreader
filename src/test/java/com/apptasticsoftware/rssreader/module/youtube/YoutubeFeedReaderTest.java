@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class YoutubeFeedReaderTest {
 
     @Test
+    @SuppressWarnings("java:S5961")
     void example1() {
         var items = new YoutubeFeedReader().read(fromFile("youtube/example1.xml"))
                 .collect(Collectors.toList());
