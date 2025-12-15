@@ -215,9 +215,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("generator", Channel::setGenerator);
         channelTags.putIfAbsent("ttl", Channel::setTtl);
         channelTags.putIfAbsent("pubDate", Channel::setPubDate);
+        channelTags.putIfAbsent("published", Channel::setPubDate);
         channelTags.putIfAbsent("lastBuildDate", Channel::setLastBuildDate);
         channelTags.putIfAbsent("updated", Channel::setLastBuildDate);
         channelTags.putIfAbsent("managingEditor", Channel::setManagingEditor);
+        channelTags.putIfAbsent("/feed/author/name", Channel::setManagingEditor);
         channelTags.putIfAbsent("webMaster", Channel::setWebMaster);
         channelTags.putIfAbsent("docs", Channel::setDocs);
         channelTags.putIfAbsent("rating", Channel::setRating);
