@@ -5,6 +5,7 @@ com.apptasticsoftware.rssreader.internal
 com.apptasticsoftware.rssreader.internal.stream
 com.apptasticsoftware.rssreader.module.itunes
 com.apptasticsoftware.rssreader.module.mediarss
+com.apptasticsoftware.rssreader.module.opensearch
 com.apptasticsoftware.rssreader.module.podcast
 com.apptasticsoftware.rssreader.module.youtube
 com.apptasticsoftware.rssreader.util
