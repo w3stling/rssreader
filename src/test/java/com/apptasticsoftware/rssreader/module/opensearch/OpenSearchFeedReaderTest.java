@@ -83,6 +83,7 @@ class OpenSearchFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(OpenSearchChannelImpl.class).withNonnullFields("openSearchData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(OpenSearchItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(OpenSearchChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(OpenSearchQuery.class).verify();
     }
 
