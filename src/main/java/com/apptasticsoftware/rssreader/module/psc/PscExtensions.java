@@ -18,6 +18,7 @@ public class PscExtensions {
         itemAttributesExtensions(registry);
     }
 
+    @SuppressWarnings("java:S1192")
     private static void onItemTag(FeedExtensionRegistry<? extends PscChannel, ? extends PscItem> registry) {
         registry.addOnItemTag(ITEM_PATHS, "psc:chapters", item -> item.setPscChapters(new PscChapters()));
         registry.addOnItemTag(ITEM_PATHS, "psc:chapters/psc:chapter", item -> item.getPscChapters().ifPresent(i -> i.addChapter(new PscChapter())));
