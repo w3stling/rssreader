@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Podlove Podcast</title>
+        <link>http://podlove.org</link>
+        <atom:link type="text/html" href="http://podlove.org/" />
+        <item>
+            <title>Fiat Lux</title>
+            <link href="http://podlove.org/podcast/1"/>
+            <guid isPermaLink="false">urn:uuid:3241ace2-ca21-dd12-2341-1412ce31fad2</guid>
+            <pubDate>Fri, 23 Mar 2012 23:25:19 +0000</pubDate>
+            <description>First episode</description>
+            <link rel="enclosure" type="audio/mpeg" length="12345" href="http://podlove.org/files/fiatlux.mp3"/>
+            <!-- specify chapter information -->
+            <psc:chapters version="1.2" xmlns:psc="http://podlove.org/simple-chapters">
+                <psc:chapter start="0" title="Welcome" />
+                <psc:chapter start="3:07" title="Introducing Podlove" href="http://podlove.org/" />
+                <psc:chapter start="8:26.250" title="Podlove WordPress Plugin" href="http://podlove.org/podlove-podcast-publisher" image="https://podlove.org/chapter/Podlove-WordPress-Plugin.png" />
+                <psc:chapter start="12:42" title="Resumée" image="https://podlove.org/chapter/Resumee.png" />
+            </psc:chapters>
+        </item>
+    </channel>
+</rss>
