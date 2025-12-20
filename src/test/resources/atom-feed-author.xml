@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xml:lang="en-US">
+    <id>tag:github.com,2008:/openjdk/jdk/commits/master</id>
+    <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commits/master"/>
+    <link type="application/atom+xml" rel="self" href="https://github.com/openjdk/jdk/commits/master.atom"/>
+    <title>Recent Commits to jdk:master</title>
+    <updated>2025-12-19T23:19:27Z</updated>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/2d0928406027a848cf2d2d0574024970b8fb535c</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/2d0928406027a848cf2d2d0574024970b8fb535c"/>
+        <title>
+            8373105: Test tools/jpackage/share/AsyncTest.java failed: problem run…
+        </title>
+        <updated>2025-12-19T23:19:27Z</updated>
+        <media:thumbnail height="30" width="30" url="https://0.gravatar.com/avatar/28a7022800ace395f0333368e95f0813?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>almatvee@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373105: Test tools/jpackage/share/AsyncTest.java failed: problem running hdiutil
+
+            Reviewed-by: asemenyuk&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/0a70da46f6fe98711f6f4b8b4e49e8ee3e4cb59e</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/0a70da46f6fe98711f6f4b8b4e49e8ee3e4cb59e"/>
+        <title>
+            8372564: Convert StringDedup to use Atomic&lt;T&gt;
+        </title>
+        <updated>2025-12-19T22:37:09Z</updated>
+        <media:thumbnail height="30" width="30" url="https://2.gravatar.com/avatar/08f4e14e90cec2bb7d926bfe25dcac90?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>kbarrett@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8372564: Convert StringDedup to use Atomic&amp;lt;T&amp;gt;
+
+            Reviewed-by: tschatzl, aboldtch, iwalulya&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/400d8cfb6914982e636b23bacf810ef61fc90ee1</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/400d8cfb6914982e636b23bacf810ef61fc90ee1"/>
+        <title>
+            8373793: TestDynamicStore.java &#39;/manual&#39; disables use of &#39;/timeout&#39;
+        </title>
+        <updated>2025-12-19T18:02:13Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/191995277?s=30&amp;v=4"/>
+        <author>
+            <name>myankelev</name>
+            <uri>https://github.com/myankelev</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373793: TestDynamicStore.java &amp;#39;/manual&amp;#39; disables use of &amp;#39;/timeout&amp;#39;
+
+            Reviewed-by: weijun&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/c1ad393e25c253c9b4e09824bf5fceee134e08c0</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/c1ad393e25c253c9b4e09824bf5fceee134e08c0"/>
+        <title>
+            8374048: Genshen: Backout fix for missed cancellation notice
+        </title>
+        <updated>2025-12-19T18:01:22Z</updated>
+        <media:thumbnail height="30" width="30" url="https://2.gravatar.com/avatar/116402c84019cdb30e6bc71e2fef8642?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>wkemper@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8374048: Genshen: Backout fix for missed cancellation notice
+
+            Reviewed-by: kdnilsen, ysr&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/23fc21a3e2db11e24568d4c47e52efc6947e956b</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/23fc21a3e2db11e24568d4c47e52efc6947e956b"/>
+        <title>
+            8374052: Use java/util/Calendar in ReplaceCriticalClasses.java test
+        </title>
+        <updated>2025-12-19T17:45:14Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/61806773?s=30&amp;v=4"/>
+        <author>
+            <name>coleenp</name>
+            <uri>https://github.com/coleenp</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8374052: Use java/util/Calendar in ReplaceCriticalClasses.java test
+
+            Reviewed-by: iklam&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/821e9ff965cad52cdd26c08785312db49bcce539</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/821e9ff965cad52cdd26c08785312db49bcce539"/>
+        <title>
+            8372493: [asan] java/foreign/sharedclosejvmti/TestSharedCloseJvmti.ja…
+        </title>
+        <updated>2025-12-19T17:38:30Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/5962029?s=30&amp;v=4"/>
+        <author>
+            <name>JornVernee</name>
+            <uri>https://github.com/JornVernee</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8372493: [asan] java/foreign/sharedclosejvmti/TestSharedCloseJvmti.java triggers heap-use-after-free
+
+            Reviewed-by: liach&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/6c9999ca8d0722bfb3a945dd4bea666eb4a028cc</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/6c9999ca8d0722bfb3a945dd4bea666eb4a028cc"/>
+        <title>
+            8373984: Check for macos 11 in CGraphicsDevice.m can be removed
+        </title>
+        <updated>2025-12-19T14:37:42Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/26144289?s=30&amp;v=4"/>
+        <author>
+            <name>MBaesken</name>
+            <uri>https://github.com/MBaesken</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373984: Check for macos 11 in CGraphicsDevice.m can be removed
+
+            Reviewed-by: prr, kizune&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/dca55b43664bb9f15ebd7b5f674e1a64b5c17c02</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/dca55b43664bb9f15ebd7b5f674e1a64b5c17c02"/>
+        <title>
+            8371420: Still sporadic failures of gc/TestAlwaysPreTouchBehavior.jav…
+        </title>
+        <updated>2025-12-19T14:28:04Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/26144289?s=30&amp;v=4"/>
+        <author>
+            <name>MBaesken</name>
+            <uri>https://github.com/MBaesken</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8371420: Still sporadic failures of gc/TestAlwaysPreTouchBehavior.java#&amp;lt;gcname&amp;gt; on Linux after JDK-8359104
+
+            Reviewed-by: mdoerr, ayang&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/b5ac8f83682ddb9623a1b43bd62f309b2961a504</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/b5ac8f83682ddb9623a1b43bd62f309b2961a504"/>
+        <title>
+            8373246: JDK-8351842 broke native debugging on Linux
+        </title>
+        <updated>2025-12-19T13:34:31Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/26298889?s=30&amp;v=4"/>
+        <author>
+            <name>RealCLanger</name>
+            <uri>https://github.com/RealCLanger</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373246: JDK-8351842 broke native debugging on Linux
+
+            Reviewed-by: erikj, stuefe&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/45642acf1b290306509375e58bde8f6c9cd1b308</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/45642acf1b290306509375e58bde8f6c9cd1b308"/>
+        <title>
+            8373710: Improve jpackage error reporting
+        </title>
+        <updated>2025-12-19T13:03:21Z</updated>
+        <media:thumbnail height="30" width="30" url="https://0.gravatar.com/avatar/73bc4ca16921c7f16007764979d78f26?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>asemenyuk@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373710: Improve jpackage error reporting
+
+            Reviewed-by: almatvee&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/14c93b2afbf0135e872866c7f8468d9ce6df1e0d</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/14c93b2afbf0135e872866c7f8468d9ce6df1e0d"/>
+        <title>
+            8373537: Migrate &quot;test/jdk/com/sun/net/httpserver/&quot; to null-safe &quot;Sim…
+        </title>
+        <updated>2025-12-19T12:57:57Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/72137?s=30&amp;v=4"/>
+        <author>
+            <name>vy</name>
+            <uri>https://github.com/vy</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373537: Migrate &amp;quot;test/jdk/com/sun/net/httpserver/&amp;quot; to null-safe &amp;quot;SimpleSSLContext&amp;quot; methods
+
+            Reviewed-by: dfuchs&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/53e77d21c2308daad7d4aecf05da56609ed0291c</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/53e77d21c2308daad7d4aecf05da56609ed0291c"/>
+        <title>
+            8373801: Adopt arraycopy OopCopyResult from the lworld branch
+        </title>
+        <updated>2025-12-19T10:52:43Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/52506146?s=30&amp;v=4"/>
+        <author>
+            <name>stefank</name>
+            <uri>https://github.com/stefank</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373801: Adopt arraycopy OopCopyResult from the lworld branch
+
+            Reviewed-by: jsikstro, tschatzl, aboldtch&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/45cf042099aa64a94574d21cce0bdde215abf07b</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/45cf042099aa64a94574d21cce0bdde215abf07b"/>
+        <title>
+            8374082: net_util.c should use logical &amp;&amp; when setting IPv6_available
+        </title>
+        <updated>2025-12-19T09:30:41Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/143523?s=30&amp;v=4"/>
+        <author>
+            <name>jaikiran</name>
+            <uri>https://github.com/jaikiran</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8374082: net_util.c should use logical &amp;amp;&amp;amp; when setting IPv6_available
+
+            Reviewed-by: alanb&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/5eb8774909bd250c7ff8cfc56506a949b547bda2</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/5eb8774909bd250c7ff8cfc56506a949b547bda2"/>
+        <title>
+            8373998: RISC-V: simple optimization of ConvHF2F
+        </title>
+        <updated>2025-12-19T09:19:46Z</updated>
+        <media:thumbnail height="30" width="30" url="https://0.gravatar.com/avatar/0ef9dcaea8061119d75637dccc41c45a?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>mli@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373998: RISC-V: simple optimization of ConvHF2F
+
+            Co-authored-by: Fei Yang &amp;lt;fyang@openjdk.org&amp;gt;
+            Reviewed-by: fyang, dzhang&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/e72f205ae312b15ebab0cbeedb73bbf86e485251</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/e72f205ae312b15ebab0cbeedb73bbf86e485251"/>
+        <title>
+            8373524: C2: no reachable node should have no use
+        </title>
+        <updated>2025-12-19T08:31:04Z</updated>
+        <media:thumbnail height="30" width="30" url="https://avatars.githubusercontent.com/u/47032191?s=30&amp;v=4"/>
+        <author>
+            <name>rwestrel</name>
+            <uri>https://github.com/rwestrel</uri>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373524: C2: no reachable node should have no use
+
+            Reviewed-by: chagedorn, mhaessig&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/360777c3ad8fe5bfeb2af15ce1b89e04d4397b9f</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/360777c3ad8fe5bfeb2af15ce1b89e04d4397b9f"/>
+        <title>
+            8371948: TestStackOverflowDuringInit.java fails xss too small on linu…
+        </title>
+        <updated>2025-12-19T02:22:06Z</updated>
+        <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/6f4eeafca0328863231c9d233df1184f?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>syan@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8371948: TestStackOverflowDuringInit.java fails xss too small on linux-aarch64
+
+            Reviewed-by: dholmes, aph&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/f0add8854501f13b611220804dcb54d118c43717</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/f0add8854501f13b611220804dcb54d118c43717"/>
+        <title>
+            8373837: &quot;assert(thread-&gt;is_VM_thread() || thread-&gt;is_Java_thread()) …
+        </title>
+        <updated>2025-12-19T01:54:10Z</updated>
+        <media:thumbnail height="30" width="30" url="https://1.gravatar.com/avatar/acc741a12b8d5a8fee4b140fc2daf47a?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>dholmes@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373837: &amp;quot;assert(thread-&amp;gt;is_VM_thread() || thread-&amp;gt;is_Java_thread()) failed: Must be VMThread or JavaThread&amp;quot; on macosx-aarch64-26
+
+            Reviewed-by: fbredberg, coleenp&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/623164651cd35870aa438a3f6d546994f3d1753c</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/623164651cd35870aa438a3f6d546994f3d1753c"/>
+        <title>
+            8373208: Make Atomic class template constant initializable
+        </title>
+        <updated>2025-12-19T00:01:55Z</updated>
+        <media:thumbnail height="30" width="30" url="https://2.gravatar.com/avatar/08f4e14e90cec2bb7d926bfe25dcac90?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>kbarrett@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8373208: Make Atomic class template constant initializable
+
+            Reviewed-by: stefank, dholmes&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/f88cbfb8c6b320f773f8d8c3cdf2598d117c5521</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/f88cbfb8c6b320f773f8d8c3cdf2598d117c5521"/>
+        <title>
+            8374044: Docs build fails: Cannot determine current path
+        </title>
+        <updated>2025-12-18T21:40:06Z</updated>
+        <media:thumbnail height="30" width="30" url="https://0.gravatar.com/avatar/0fed51522dcd65a338eb9fb543c2b396?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>dlsmith@openjdk.org</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8374044: Docs build fails: Cannot determine current path
+
+            Reviewed-by: dholmes&lt;/pre&gt;
+        </content>
+    </entry>
+    <entry>
+        <id>tag:github.com,2008:Grit::Commit/8a93658e87e2e2f344d7dbfa6f916bd28175d013</id>
+        <link type="text/html" rel="alternate" href="https://github.com/openjdk/jdk/commit/8a93658e87e2e2f344d7dbfa6f916bd28175d013"/>
+        <title>
+            8371284: GenShen: Avoid unnecessary card marking
+        </title>
+        <updated>2025-12-18T21:15:44Z</updated>
+        <media:thumbnail height="30" width="30" url="https://0.gravatar.com/avatar/23a622d9a9b886cc96acc8e6a7e5e126?d=https%3A%2F%2Fgithub.githubassets.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png&amp;r=g&amp;s=30"/>
+        <author>
+            <name></name>
+            <email>nityanar@amazon.com</email>
+        </author>
+        <content type="html">
+            &lt;pre style=&#39;white-space:pre-wrap;width:81ex&#39;&gt;8371284: GenShen: Avoid unnecessary card marking
+
+            Reviewed-by: wkemper, shade, ysr&lt;/pre&gt;
+        </content>
+    </entry>
+</feed>
