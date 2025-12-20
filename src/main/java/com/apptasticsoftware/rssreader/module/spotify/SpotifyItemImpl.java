@@ -6,6 +6,8 @@ import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemDataImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemDataImpl;
+import com.apptasticsoftware.rssreader.module.psc.PscItemData;
+import com.apptasticsoftware.rssreader.module.psc.PscItemDataImpl;
 
 import java.util.Objects;
 
@@ -13,6 +15,7 @@ public class SpotifyItemImpl extends ItemImpl implements SpotifyItem {
     private final SpotifyItemData spotifyData = new SpotifyItemDataImpl();
     private final ItunesItemData itunesData = new ItunesItemDataImpl();
     private final MediaRssItemData mediaRssData = new MediaRssItemDataImpl();
+    private final PscItemData pscData = new PscItemDataImpl();
 
     public SpotifyItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
@@ -34,15 +37,20 @@ public class SpotifyItemImpl extends ItemImpl implements SpotifyItem {
     }
 
     @Override
+    public PscItemData getPscItemData() {
+        return pscData;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SpotifyItemImpl that = (SpotifyItemImpl) o;
-        return Objects.equals(getSpotifyItemData(), that.getSpotifyItemData()) && Objects.equals(getItunesItemData(), that.getItunesItemData()) && Objects.equals(getMediaRssItemData(), that.getMediaRssItemData());
+        return Objects.equals(getSpotifyItemData(), that.getSpotifyItemData()) && Objects.equals(getItunesItemData(), that.getItunesItemData()) && Objects.equals(getMediaRssItemData(), that.getMediaRssItemData()) && Objects.equals(getPscItemData(), that.getPscItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSpotifyItemData(), getItunesItemData(), getMediaRssItemData());
+        return Objects.hash(super.hashCode(), getSpotifyItemData(), getItunesItemData(), getMediaRssItemData(), getPscItemData());
     }
 }

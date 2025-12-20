@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/">
+<rss xmlns:spotify="http://www.spotify.com/ns/rss" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/" xmlns:psc="http://podlove.org/simple-chapters">
     <channel>
         <title>Serial</title>
         <link>https://serialpodcast.org</link>
@@ -30,6 +30,13 @@
             <itunes:duration>2700</itunes:duration>
             <enclosure url="https://dts.podtrac.com/redirect.mp3/files.serialpodcast.org/sites/default/files/podcast/1422481890/serial-s01-e09.mp3" type="audio/mpeg" />
             <media:title>Episode 9: Spotify</media:title>
+            <psc:chapters>
+                <psc:chapter start="0" title="Opening credits" />
+                <psc:chapter start="0:35" title="Today's CNN headlines"
+                         href="https://edition.cnn.com/"
+                         image="https://cdn.cnn.com/cnn/.e/img/3.0/global/misc/cnn-logo.png"/>
+                <psc:chapter start="8:36" title="End credits" />
+            </psc:chapters>
         </item>
     </channel>
 </rss>

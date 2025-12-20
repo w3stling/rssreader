@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesExtensions;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssExtensions;
+import com.apptasticsoftware.rssreader.module.psc.PscExtensions;
 
 public class SpotifyRssReader extends AbstractRssReader<SpotifyChannel, SpotifyItem> {
 
@@ -23,6 +24,7 @@ public class SpotifyRssReader extends AbstractRssReader<SpotifyChannel, SpotifyI
         var registry = getFeedExtensionRegistry();
         ItunesExtensions.register(registry);
         MediaRssExtensions.register(registry);
+        PscExtensions.register(registry);
         SpotifyExtensions.register(registry);
     }
 }

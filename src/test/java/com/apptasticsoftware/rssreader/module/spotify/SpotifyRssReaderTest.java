@@ -9,8 +9,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAnd;
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
+import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
@@ -56,6 +55,21 @@ public class SpotifyRssReaderTest {
         assertThat(item.getEnclosures().get(0).getType(), is("audio/mpeg"));
         assertTrue(item.getMediaTitle().isPresent());
         assertThat(item.getMediaTitle().get().getTitle(), is("Episode 9: Spotify"));
+
+        assertTrue(item.getPscChapters().isPresent());
+        assertThat(item.getPscChapters().get().getVersion(), isEmpty());
+        assertThat(item.getPscChapters().get().getChapters().size(), is(3));
+        assertThat(item.getPscChapters().get().getChapters().get(0).getStart(), is("0"));
+        assertThat(item.getPscChapters().get().getChapters().get(0).getStartAsDuration(), is(Duration.ofSeconds(0)));
+        assertThat(item.getPscChapters().get().getChapters().get(0).getTitle(), is("Opening credits"));
+        assertThat(item.getPscChapters().get().getChapters().get(1).getStart(), is("0:35"));
+        assertThat(item.getPscChapters().get().getChapters().get(1).getStartAsDuration(), is(Duration.ofSeconds(35)));
+        assertThat(item.getPscChapters().get().getChapters().get(1).getTitle(), is("Today's CNN headlines"));
+        assertThat(item.getPscChapters().get().getChapters().get(1).getHref(), isPresentAndIs("https://edition.cnn.com/"));
+        assertThat(item.getPscChapters().get().getChapters().get(1).getImage(), isPresentAndIs("https://cdn.cnn.com/cnn/.e/img/3.0/global/misc/cnn-logo.png"));
+        assertThat(item.getPscChapters().get().getChapters().get(2).getStart(), is("8:36"));
+        assertThat(item.getPscChapters().get().getChapters().get(2).getStartAsDuration(), is(Duration.parse("PT8M36S")));
+        assertThat(item.getPscChapters().get().getChapters().get(2).getTitle(), is("End credits"));
     }
 
     @Test
