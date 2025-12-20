@@ -36,6 +36,7 @@ module com.apptasticsoftware.rssreader {
     exports com.apptasticsoftware.rssreader.module.mediarss;
     exports com.apptasticsoftware.rssreader.module.opensearch;
     exports com.apptasticsoftware.rssreader.module.podcast;
+    exports com.apptasticsoftware.rssreader.module.psc;
     exports com.apptasticsoftware.rssreader.module.youtube;
     exports com.apptasticsoftware.rssreader.filter;
 }
