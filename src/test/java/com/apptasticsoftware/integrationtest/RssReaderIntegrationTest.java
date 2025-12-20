@@ -593,7 +593,7 @@ class RssReaderIntegrationTest {
         List<Item> items = new RssReader()
                 .addItemExtension("name", Item::setComments)
                 .addItemExtension("email", Item::setComments)
-                .read("https://github.com/openjdk/jdk/commits.atom")
+                .read(fromFile("atom-feed-author.xml"))
                 .collect(Collectors.toList());
 
         for (Item item : items) {
