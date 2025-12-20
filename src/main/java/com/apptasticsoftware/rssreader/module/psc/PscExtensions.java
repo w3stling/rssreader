@@ -23,11 +23,16 @@ public class PscExtensions {
         registry.addOnItemTag(ITEM_PATHS, "psc:chapters/psc:chapter", item -> item.getPscChapters().ifPresent(i -> i.addChapter(new PscChapter())));
     }
 
+    @SuppressWarnings("java:S1192")
     private static void itemAttributesExtensions(FeedExtensionRegistry<? extends PscChannel, ? extends PscItem> registry) {
         registry.addItemExtension(ITEM_PATHS, "psc:chapters", "version", (item, value) -> item.getPscChapters().ifPresent(chapter -> chapter.setVersion(value)));
-        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "start", (item, value) -> item.getPscChapters().ifPresent(chapters -> getLast(chapters.getChapters()).setStart(value)));
-        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "title", (item, value) -> item.getPscChapters().ifPresent(chapters -> getLast(chapters.getChapters()).setTitle(value)));
-        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "href", (item, value) -> item.getPscChapters().ifPresent(chapters -> getLast(chapters.getChapters()).setHref(value)));
-        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "image", (item, value) -> item.getPscChapters().ifPresent(chapters -> getLast(chapters.getChapters()).setImage(value)));
+        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "start", (item, value) -> setChapterAttribute(item, value, PscChapter::setStart));
+        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "title", (item, value) -> setChapterAttribute(item, value, PscChapter::setTitle));
+        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "href", (item, value) -> setChapterAttribute(item, value, PscChapter::setHref));
+        registry.addItemExtension(ITEM_PATHS, "psc:chapters/psc:chapter", "image", (item, value) -> setChapterAttribute(item, value, PscChapter::setImage));
+    }
+
+    private static void setChapterAttribute(PscItem item, String value, java.util.function.BiConsumer<PscChapter, String> setter) {
+        item.getPscChapters().ifPresent(chapters -> setter.accept(getLast(chapters.getChapters()), value));
     }
 }

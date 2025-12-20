@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PscFeedReaderTest {
 
     @Test
+    @SuppressWarnings("java:S5961")
     void example1() {
         var items = new PscFeedReader().read(fromFile("psc/example1.xml"))
                 .collect(Collectors.toList());

@@ -19,6 +19,7 @@ public class PscItemDataImpl implements PscItemData {
         return Optional.ofNullable(pscChapters);
     }
 
+    @Override
     public void setPscChapters(PscChapters pscChapters) {
         this.pscChapters = pscChapters;
     }
