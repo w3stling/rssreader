@@ -589,7 +589,7 @@ class RssReaderIntegrationTest {
     }
 
     @Test
-    void testItemExtensionNoNamespace() throws IOException {
+    void testItemExtensionNoNamespace() {
         List<Item> items = new RssReader()
                 .addItemExtension("name", Item::setComments)
                 .addItemExtension("email", Item::setComments)
