@@ -8,5 +8,6 @@ com.apptasticsoftware.rssreader.module.mediarss
 com.apptasticsoftware.rssreader.module.opensearch
 com.apptasticsoftware.rssreader.module.podcast
 com.apptasticsoftware.rssreader.module.psc
+com.apptasticsoftware.rssreader.module.spotify
 com.apptasticsoftware.rssreader.module.youtube
 com.apptasticsoftware.rssreader.util
