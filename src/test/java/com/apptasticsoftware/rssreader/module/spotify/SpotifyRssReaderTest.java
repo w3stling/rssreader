@@ -16,9 +16,10 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SpotifyRssReaderTest {
+class SpotifyRssReaderTest {
 
     @Test
+    @SuppressWarnings("java:S5961")
     void example1() {
         var items = new SpotifyRssReader().read(fromFile("spotify/example1.xml"))
                 .collect(Collectors.toList());
