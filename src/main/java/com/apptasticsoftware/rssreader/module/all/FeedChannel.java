@@ -6,7 +6,8 @@ import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannel;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannel;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastChannel;
 import com.apptasticsoftware.rssreader.module.psc.PscChannel;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannel;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannel;
 
-public interface FeedChannel extends Channel, ItunesChannel, MediaRssChannel, OpenSearchChannel, PodcastChannel, PscChannel, YoutubeChannel {
+public interface FeedChannel extends Channel, ItunesChannel, MediaRssChannel, OpenSearchChannel, PodcastChannel, PscChannel, SpotifyChannel, YoutubeChannel {
 }

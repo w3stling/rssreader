@@ -10,6 +10,8 @@ import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannelData;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastChannelData;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastChannelDataImpl;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannelData;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelData;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelDataImpl;
 
@@ -20,6 +22,7 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
     private final MediaRssChannelData mediaRssChannelData = new MediaRssChannelDataImpl();
     private final OpenSearchChannelData openSearchChannelData = new OpenSearchChannelDataImpl();
     private final PodcastChannelData podcastChannelData = new PodcastChannelDataImpl();
+    private final SpotifyChannelData spotifyChannelData = new SpotifyChannelDataImpl();
     private final YoutubeChannelData youtubeChannelData = new YoutubeChannelDataImpl();
 
     /**
@@ -49,6 +52,11 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
     @Override
     public PodcastChannelData getPodcastChannelData() {
         return podcastChannelData;
+    }
+
+    @Override
+    public SpotifyChannelData getSpotifyChannelData() {
+        return spotifyChannelData;
     }
 
     @Override

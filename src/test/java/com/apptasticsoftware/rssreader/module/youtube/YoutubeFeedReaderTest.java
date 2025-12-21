@@ -1,11 +1,17 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.module.all.FeedReader;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,10 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class YoutubeFeedReaderTest {
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
     @SuppressWarnings("java:S5961")
-    void example1() {
-        var items = new YoutubeFeedReader().read(fromFile("youtube/example1.xml"))
+    void example1(AbstractRssReader<YoutubeChannel, YoutubeItem> feedReader) {
+        var items = feedReader.read(fromFile("youtube/example1.xml"))
                 .collect(Collectors.toList());
         assertEquals(15, items.size());
 
@@ -105,6 +112,13 @@ class YoutubeFeedReaderTest {
         EqualsVerifier.simple().forClass(YoutubeChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(YoutubeItemDataImpl.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new YoutubeFeedReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {
