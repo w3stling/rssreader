@@ -81,7 +81,7 @@ public interface Item extends Comparable<Item> {
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link ItemImpl#getCategories()} instead.
+     * <p> Use {@link Item#getCategories()} instead.
      *
      * @return category
      */
@@ -94,7 +94,7 @@ public interface Item extends Comparable<Item> {
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link ItemImpl#addCategory(String category)} instead.
+     * <p> Use {@link Item#addCategory(String category)} instead.
      *
      * @param category category
      */

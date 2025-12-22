@@ -1,15 +1,21 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import com.apptasticsoftware.rssreader.util.Util;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.Currency;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -682,9 +688,10 @@ class MediaRssReaderTest {
         assertThat(scenes.get(1).getSceneEndTime(), equalTo("01:45"));
     }
 
-    @Test
-    void mediaRssExample1() {
-        var items = new MediaRssReader().read(fromFile("mediarss/media-rss-example-1.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void mediaRssExample1(AbstractRssReader<MediaRssChannel, MediaRssItem> feedReader) {
+        var items = feedReader.read(fromFile("mediarss/media-rss-example-1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -1794,6 +1801,13 @@ class MediaRssReaderTest {
         EqualsVerifier.simple().forClass(MediaRssItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
 
         EqualsVerifier.simple().forClass(MediaRssChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new MediaRssReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

@@ -1,6 +1,6 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
-import com.apptasticsoftware.rssreader.ChannelImpl;
+import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelData;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelDataImpl;

@@ -1,7 +1,7 @@
 package com.apptasticsoftware.rssreader.module.psc;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.ItemImpl;
+import com.apptasticsoftware.rssreader.internal.ItemImpl;
 
 import java.util.Objects;
 

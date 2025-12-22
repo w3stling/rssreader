@@ -1,10 +1,16 @@
 package com.apptasticsoftware.rssreader.module.opensearch;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAnd;
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
@@ -15,9 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OpenSearchFeedReaderTest {
 
-    @Test
-    void example1() {
-        var items = new OpenSearchFeedReader().read(fromFile("opensearch/example1.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example1(AbstractRssReader<OpenSearchChannel, OpenSearchItem> feedReader) {
+        var items = feedReader.read(fromFile("opensearch/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -47,9 +54,10 @@ class OpenSearchFeedReaderTest {
         assertThat(item.getDescription(), isPresentAnd(containsString("... Harlem.NYC - A virtual tour and information on")));
     }
 
-    @Test
-    void example2() {
-        var items = new OpenSearchFeedReader().read(fromFile("opensearch/example2.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example2(AbstractRssReader<OpenSearchChannel, OpenSearchItem> feedReader) {
+        var items = feedReader.read(fromFile("opensearch/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -85,6 +93,13 @@ class OpenSearchFeedReaderTest {
         EqualsVerifier.simple().forClass(OpenSearchItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(OpenSearchChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(OpenSearchQuery.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new OpenSearchFeedReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

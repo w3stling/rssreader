@@ -1,6 +1,6 @@
 package com.apptasticsoftware.rssreader.module.spotify;
 
-import com.apptasticsoftware.rssreader.ChannelImpl;
+import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelData;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelDataImpl;

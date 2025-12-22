@@ -199,7 +199,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     /**
      * Register channel tags for mapping to channel object fields
      */
-    @SuppressWarnings("java:S1192")
+    @SuppressWarnings({"java:S1192", "java:S1612"})
     protected void registerChannelTags() {
         channelTags.putIfAbsent("title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
         channelTags.putIfAbsent("description", (channel, value) -> Mapper.mapIfEmpty(value, channel::getDescription, channel::setDescription));
@@ -239,8 +239,8 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         channelTags.putIfAbsent("dc:title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
         channelTags.putIfAbsent("dc:date", (channel, value) -> Mapper.mapIfEmpty(value, channel::getPubDate, channel::setPubDate));
         channelTags.putIfAbsent("dc:creator", (channel, value) -> Mapper.mapIfEmpty(value, channel::getManagingEditor, channel::setManagingEditor));
-        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> { if (channel instanceof ChannelImpl) ((ChannelImpl)channel).syUpdatePeriod = value; });
-        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> { if (channel instanceof ChannelImpl) mapInteger(value, number -> ((ChannelImpl)channel).syUpdateFrequency = number); });
+        channelTags.putIfAbsent("sy:updatePeriod", (channel, value) -> { if (channel instanceof ChannelImpl) ((ChannelImpl)channel).setSyUpdatePeriod(value); });
+        channelTags.putIfAbsent("sy:updateFrequency", (channel, value) -> { if (channel instanceof ChannelImpl) mapInteger(value, number -> ((ChannelImpl)channel).setSyUpdateFrequency(number)); });
         channelTags.putIfAbsent("/feed/icon", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
         channelTags.putIfAbsent("/feed/logo", (channel, value) -> createIfNull(channel::getImage, channel::setImage, Image::new).setUrl(value));
     }

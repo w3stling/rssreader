@@ -1,6 +1,6 @@
 package com.apptasticsoftware.rssreader.module.opensearch;
 
-import com.apptasticsoftware.rssreader.ChannelImpl;
+import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
 import java.util.Objects;

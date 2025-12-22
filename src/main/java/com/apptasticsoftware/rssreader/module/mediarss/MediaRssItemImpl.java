@@ -24,7 +24,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.ItemImpl;
+import com.apptasticsoftware.rssreader.internal.ItemImpl;
 
 import java.util.Objects;
 

@@ -1,12 +1,18 @@
 package com.apptasticsoftware.rssreader.module.psc;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,10 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PscFeedReaderTest {
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
     @SuppressWarnings("java:S5961")
-    void example1() {
-        var items = new PscFeedReader().read(fromFile("psc/example1.xml"))
+    void example1(AbstractRssReader<PscChannel, PscItem> feedReader) {
+        var items = feedReader.read(fromFile("psc/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -72,6 +79,13 @@ class PscFeedReaderTest {
         EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(PscItemDataImpl.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new PscFeedReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

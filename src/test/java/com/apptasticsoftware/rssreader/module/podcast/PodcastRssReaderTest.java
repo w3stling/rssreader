@@ -1,13 +1,19 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,10 +23,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PodcastRssReaderTest {
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
     @SuppressWarnings({"java:S5961", "java:S5738"})
-    void example1() {
-        var items = new PodcastRssReader().read(fromFile("podcast/example1.xml"))
+    void example1(AbstractRssReader<PodcastChannel, PodcastItem> feedReader) {
+        var items = feedReader.read(fromFile("podcast/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(4, items.size());
@@ -311,15 +318,16 @@ class PodcastRssReaderTest {
         assertThat(item.getPodcastTxts().get(3).getPurpose(), isPresentAndIs("release"));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
     @SuppressWarnings({"java:S5961", "java:S5738"})
-    void example2() {
-        var items = new PodcastRssReader().read(fromFile("podcast/example2.xml"))
+    void example2(AbstractRssReader<PodcastChannel, PodcastItem> feedReader) {
+        var items = feedReader.read(fromFile("podcast/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(3, items.size());
         var item = items.get(0);
-        var channel = (PodcastChannelImpl) item.getChannel();
+        var channel = (PodcastChannel) item.getChannel();
         assertThat(channel.getLink(), is("https://podnews.net"));
         assertThat(channel.getTitle(), is("Podnews Daily - podcast industry news"));
         assertThat(channel.getDescription(), is("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify, YouTube\n" +
@@ -452,6 +460,13 @@ class PodcastRssReaderTest {
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new PodcastRssReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

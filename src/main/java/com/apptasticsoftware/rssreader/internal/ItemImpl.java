@@ -21,9 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader;
+package com.apptasticsoftware.rssreader.internal;
 
 
+import com.apptasticsoftware.rssreader.Channel;
+import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.Enclosure;
+import com.apptasticsoftware.rssreader.Item;
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import com.apptasticsoftware.rssreader.util.Mapper;

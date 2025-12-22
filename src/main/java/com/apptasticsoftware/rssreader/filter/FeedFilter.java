@@ -1,13 +1,11 @@
 package com.apptasticsoftware.rssreader.filter;
 
-import com.apptasticsoftware.rssreader.ItemImpl;
-
 import java.io.InputStream;
 
 /**
  * An interface for filtering RSS or Atom feed streams. This filter can
  * modify or clean feed data before it is processed by the feed parser,
- * which maps it to {@link ItemImpl} objects.
+ * which maps it to {@link com.apptasticsoftware.rssreader.Item} objects.
  */
 public interface FeedFilter {
 

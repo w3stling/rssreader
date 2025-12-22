@@ -23,6 +23,7 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 

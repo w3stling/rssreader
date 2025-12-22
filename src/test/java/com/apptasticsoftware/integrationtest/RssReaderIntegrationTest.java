@@ -895,11 +895,11 @@ class RssReaderIntegrationTest {
     void readFromAMixOfUrlAndFileUri() throws URISyntaxException {
         var sources = List.of(
                 getFileUri("rss-feed.xml"),
-                "https://www.nasa.gov/news-release/feed/",
+                "https://www.ubergizmo.com/rss-ubergizmo/",
                 getFileUri("atom-feed.xml")
         );
         var items = new RssReader().read(sources).collect(Collectors.toList());
-        assertEquals(33, items.size());
+        assertEquals(53, items.size());
     }
 
     @Test
@@ -913,11 +913,11 @@ class RssReaderIntegrationTest {
     void readFromAMixOfUrlAndString() throws IOException, URISyntaxException {
         var sources = List.of(
                 toString(fromFile("rss-feed.xml")),
-                "https://www.nasa.gov/news-release/feed/",
+                "https://www.ubergizmo.com/rss-ubergizmo/",
                 getFileUri("atom-feed.xml")
         );
         var items = new RssReader().read(sources).collect(Collectors.toList());
-        assertEquals(33, items.size());
+        assertEquals(53, items.size());
     }
 
     @Test

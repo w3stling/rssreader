@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader;
+package com.apptasticsoftware.rssreader.internal;
 
+import com.apptasticsoftware.rssreader.Channel;
+import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.Image;
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.Mapper;
 import com.apptasticsoftware.rssreader.util.Util;
@@ -57,8 +60,8 @@ public class ChannelImpl implements Channel {
     private List<Integer> skipHours;
     private List<String> skipDays;
     private Image image;
-    protected String syUpdatePeriod;
-    protected int syUpdateFrequency = 1;
+    private String syUpdatePeriod;
+    private int syUpdateFrequency = 1;
     private final DateTimeParser dateTimeParser;
 
     /**
@@ -461,6 +464,14 @@ public class ChannelImpl implements Channel {
      */
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public void setSyUpdatePeriod(String syUpdatePeriod) {
+        this.syUpdatePeriod = syUpdatePeriod;
+    }
+
+    public void setSyUpdateFrequency(int syUpdateFrequency) {
+        this.syUpdateFrequency = syUpdateFrequency;
     }
 
     @Override

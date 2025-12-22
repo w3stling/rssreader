@@ -34,7 +34,7 @@ public interface Channel {
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link ChannelImpl#getCategories()} instead.
+     * <p> Use {@link Channel#getCategories()} instead.
      *
      * @return category
      */
@@ -47,7 +47,7 @@ public interface Channel {
      *
      * @deprecated
      * This method be removed in a future version.
-     * <p> Use {@link ChannelImpl#addCategory(String category)} instead.
+     * <p> Use {@link Channel#addCategory(String category)} instead.
      *
      * @param category channel category
      */
