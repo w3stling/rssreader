@@ -1,6 +1,5 @@
-package com.apptasticsoftware.rssreader.module.all;
+package com.apptasticsoftware.rssreader;
 
-import com.apptasticsoftware.rssreader.Channel;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannel;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannel;

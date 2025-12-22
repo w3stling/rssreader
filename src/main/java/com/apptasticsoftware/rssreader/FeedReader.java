@@ -1,7 +1,7 @@
-package com.apptasticsoftware.rssreader.module.all;
+package com.apptasticsoftware.rssreader;
 
-import com.apptasticsoftware.rssreader.AbstractRssReader;
-import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.internal.FeedChannelImpl;
+import com.apptasticsoftware.rssreader.internal.FeedItemImpl;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesExtensions;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssExtensions;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchExtensions;

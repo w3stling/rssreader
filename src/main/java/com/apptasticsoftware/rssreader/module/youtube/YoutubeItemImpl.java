@@ -1,7 +1,7 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
-import com.apptasticsoftware.rssreader.ItemImpl;
+import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemDataImpl;
 

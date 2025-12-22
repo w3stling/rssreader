@@ -1,7 +1,7 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
-import com.apptasticsoftware.rssreader.module.all.FeedReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import com.apptasticsoftware.rssreader.util.Util;
 import nl.jqno.equalsverifier.EqualsVerifier;

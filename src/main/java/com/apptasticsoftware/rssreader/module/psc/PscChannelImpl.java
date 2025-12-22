@@ -1,6 +1,6 @@
 package com.apptasticsoftware.rssreader.module.psc;
 
-import com.apptasticsoftware.rssreader.ChannelImpl;
+import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 
 /**

@@ -1,7 +1,7 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
-import com.apptasticsoftware.rssreader.module.all.FeedReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

@@ -23,6 +23,9 @@
  */
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.internal.ChannelImpl;
+import com.apptasticsoftware.rssreader.internal.ItemImpl;
+
 import java.net.http.HttpClient;
 
 /**

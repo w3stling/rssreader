@@ -1,6 +1,5 @@
-package com.apptasticsoftware.rssreader.module.all;
+package com.apptasticsoftware.rssreader;
 
-import com.apptasticsoftware.rssreader.Item;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItem;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchItem;
