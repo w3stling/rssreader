@@ -212,11 +212,20 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                             cdataBuffer.setLength(0);
                         }
                     } else {
+                        // Character doesn't match the next position in "]]>"
+                        // First, write any previously buffered partial "]]>" match
                         if (cdataEndMatchPos > 0) {
-                            cdataBuffer.append(ch);
+                            writeStringToBuffer(cdataBuffer.toString());
+                            cdataBuffer.setLength(0);
                             cdataEndMatchPos = 0;
+                        }
+                        // Now check if current character could start a new "]]>" match
+                        if (ch == CDATA_END.charAt(0)) {
+                            // Start matching "]]>"
+                            cdataEndMatchPos = 1;
+                            cdataBuffer.append(ch);
                         } else {
-                            // Inside CDATA, write character as-is (but still validate XML char)
+                            // Just a regular character in CDATA
                             writeStringToBuffer(String.valueOf(ch));
                         }
                     }
