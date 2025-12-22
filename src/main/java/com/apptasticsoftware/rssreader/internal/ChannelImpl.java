@@ -60,8 +60,8 @@ public class ChannelImpl implements Channel {
     private List<Integer> skipHours;
     private List<String> skipDays;
     private Image image;
-    public String syUpdatePeriod;
-    public int syUpdateFrequency = 1;
+    private String syUpdatePeriod;
+    private int syUpdateFrequency = 1;
     private final DateTimeParser dateTimeParser;
 
     /**
@@ -464,6 +464,16 @@ public class ChannelImpl implements Channel {
      */
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public void setSyUpdatePeriod(String syUpdatePeriod) {
+        this.syUpdatePeriod = syUpdatePeriod;
+    }
+
+    public void setSyUpdateFrequency(Integer syUpdateFrequency) {
+        if (syUpdateFrequency != null) {
+            this.syUpdateFrequency = syUpdateFrequency;
+        }
     }
 
     @Override
