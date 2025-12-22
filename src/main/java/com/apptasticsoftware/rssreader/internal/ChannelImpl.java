@@ -470,10 +470,8 @@ public class ChannelImpl implements Channel {
         this.syUpdatePeriod = syUpdatePeriod;
     }
 
-    public void setSyUpdateFrequency(Integer syUpdateFrequency) {
-        if (syUpdateFrequency != null) {
-            this.syUpdateFrequency = syUpdateFrequency;
-        }
+    public void setSyUpdateFrequency(int syUpdateFrequency) {
+        this.syUpdateFrequency = syUpdateFrequency;
     }
 
     @Override
