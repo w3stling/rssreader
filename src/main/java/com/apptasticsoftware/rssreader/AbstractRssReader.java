@@ -199,7 +199,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     /**
      * Register channel tags for mapping to channel object fields
      */
-    @SuppressWarnings("java:S1192")
+    @SuppressWarnings({"java:S1192", "java:S1612"})
     protected void registerChannelTags() {
         channelTags.putIfAbsent("title", (channel, value) -> Mapper.mapIfEmpty(value, channel::getTitle, channel::setTitle));
         channelTags.putIfAbsent("description", (channel, value) -> Mapper.mapIfEmpty(value, channel::getDescription, channel::setDescription));
