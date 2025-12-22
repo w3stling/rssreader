@@ -5,16 +5,16 @@
 <title>ChannelImpl (rssreader unspecified API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: module: com.apptasticsoftware.rssreader, package: com.apptasticsoftware.rssreader, class: ChannelImpl">
+<meta name="description" content="declaration: module: com.apptasticsoftware.rssreader, package: com.apptasticsoftware.rssreader.internal, class: ChannelImpl">
 <meta name="generator" content="javadoc/ClassWriter">
-<link rel="stylesheet" type="text/css" href="../../../../resource-files/jquery-ui.min.css">
-<link rel="stylesheet" type="text/css" href="../../../../resource-files/stylesheet.css">
-<script type="text/javascript" src="../../../../script-files/script.js"></script>
-<script type="text/javascript" src="../../../../script-files/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="../../../../script-files/jquery-ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../../resource-files/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../../resource-files/stylesheet.css">
+<script type="text/javascript" src="../../../../../script-files/script.js"></script>
+<script type="text/javascript" src="../../../../../script-files/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="../../../../../script-files/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
-<script type="text/javascript">const pathtoroot = "../../../../";
+<script type="text/javascript">const pathtoroot = "../../../../../";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -27,21 +27,21 @@ loadScripts(document, 'script');</script>
 <div class="nav-menu-button"><button id="navbar-toggle-button" aria-controls="navbar-top" aria-expanded="false" aria-label="Toggle navigation links"><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span><span class="nav-bar-toggle-icon">&nbsp;</span></button></div>
 <div class="skip-nav"><a href="#skip-navbar-top" title="Skip navigation links">Skip navigation links</a></div>
 <ul id="navbar-top-firstrow" class="nav-list" title="Navigation">
-<li><a href="../../../module-summary.html">Module</a></li>
+<li><a href="../../../../module-summary.html">Module</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
-<li><a href="../../../../deprecated-list.html">Deprecated</a></li>
-<li><a href="../../../../index-all.html">Index</a></li>
-<li><a href="../../../../search.html">Search</a></li>
-<li><a href="../../../../help-doc.html#class">Help</a></li>
+<li><a href="../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../search.html">Search</a></li>
+<li><a href="../../../../../help-doc.html#class">Help</a></li>
 </ul>
 </div>
 </div>
 <div class="sub-nav">
 <div class="nav-content">
 <ol class="sub-nav-list">
-<li><a href="../../../module-summary.html">com.apptasticsoftware.rssreader</a></li>
-<li><a href="package-summary.html">com.apptasticsoftware.rssreader</a></li>
+<li><a href="../../../../module-summary.html">com.apptasticsoftware.rssreader</a></li>
+<li><a href="package-summary.html">com.apptasticsoftware.rssreader.internal</a></li>
 <li><a href="ChannelImpl.html" class="current-selection">ChannelImpl</a></li>
 </ol>
 <div class="nav-list-search"><input type="text" id="search-input" disabled placeholder="Search documentation (type /)" aria-label="Search in documentation" autocomplete="off" spellcheck="false"><input type="reset" id="reset-search" disabled value="Reset"></div>
@@ -55,15 +55,8 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
-<li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
-<li><a href="#field-detail" tabindex="0">Field Details</a>
-<ol class="toc-list">
-<li><a href="#syUpdatePeriod" tabindex="0">syUpdatePeriod</a></li>
-<li><a href="#syUpdateFrequency" tabindex="0">syUpdateFrequency</a></li>
-</ol>
-</li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
 <ol class="toc-list">
 <li><a href="#%3Cinit%3E()" tabindex="0">ChannelImpl()</a></li>
@@ -113,57 +106,41 @@ loadScripts(document, 'script');</script>
 <li><a href="#addSkipDay(java.lang.String)" tabindex="0">addSkipDay(String)</a></li>
 <li><a href="#getImage()" tabindex="0">getImage()</a></li>
 <li><a href="#setImage(com.apptasticsoftware.rssreader.Image)" tabindex="0">setImage(Image)</a></li>
+<li><a href="#setSyUpdatePeriod(java.lang.String)" tabindex="0">setSyUpdatePeriod(String)</a></li>
+<li><a href="#setSyUpdateFrequency(int)" tabindex="0">setSyUpdateFrequency(int)</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
 </li>
 </ol>
-<button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
+<button class="hide-sidebar"><span>Hide sidebar&nbsp;</span><img src="../../../../../resource-files/left.svg" alt="Hide sidebar"></button><button class="show-sidebar"><img src="../../../../../resource-files/right.svg" alt="Show sidebar"><span>&nbsp;Show sidebar</span></button></nav>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <h1 title="Class ChannelImpl" class="title">Class ChannelImpl</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.apptasticsoftware.rssreader.ChannelImpl</div>
+<div class="inheritance">com.apptasticsoftware.rssreader.internal.ChannelImpl</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 </dl>
 <dl class="notes">
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="module/itunes/ItunesChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelImpl</a>, <a href="module/mediarss/MediaRssChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelImpl</a>, <a href="module/opensearch/OpenSearchChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelImpl</a>, <a href="module/podcast/PodcastChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelImpl</a>, <a href="module/psc/PscChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscChannelImpl</a>, <a href="module/spotify/SpotifyChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelImpl</a>, <a href="module/youtube/YoutubeChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelImpl</a></code></dd>
+<dd><code><a href="FeedChannelImpl.html" title="class in com.apptasticsoftware.rssreader.internal">FeedChannelImpl</a>, <a href="../module/itunes/ItunesChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelImpl</a>, <a href="../module/mediarss/MediaRssChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelImpl</a>, <a href="../module/opensearch/OpenSearchChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelImpl</a>, <a href="../module/podcast/PodcastChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelImpl</a>, <a href="../module/psc/PscChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscChannelImpl</a>, <a href="../module/spotify/SpotifyChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelImpl</a>, <a href="../module/youtube/YoutubeChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelImpl</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ChannelImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></span></div>
+implements <a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></span></div>
 <div class="block">Class representing the RSS channel.</div>
 </div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>protected int</code></div>
-<div class="col-second even-row-color"><code><a href="#syUpdateFrequency" class="member-name-link">syUpdateFrequency</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#syUpdatePeriod" class="member-name-link">syUpdatePeriod</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -178,7 +155,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="deprecation-comment">Use <a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)"><code>ChannelImpl(DateTimeParser)</code></a> instead.</div>
 </div>
 </div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">ChannelImpl</a><wbr>(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">ChannelImpl</a><wbr>(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Constructor for Channel</div>
 </div>
@@ -246,7 +223,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get a string indicating the program used to generate the channel.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getImage()" class="member-name-link">getImage</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get a GIF, JPEG or PNG image that can be displayed with the channel.</div>
@@ -366,7 +343,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set a string indicating the program used to generate the channel.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setImage(com.apptasticsoftware.rssreader.Image)" class="member-name-link">setImage</a><wbr>(<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setImage(com.apptasticsoftware.rssreader.Image)" class="member-name-link">setImage</a><wbr>(<a href="../Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 </div>
@@ -401,6 +378,12 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set the PICS rating for the channel.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSyUpdateFrequency(int)" class="member-name-link">setSyUpdateFrequency</a><wbr>(int&nbsp;syUpdateFrequency)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSyUpdatePeriod(java.lang.String)" class="member-name-link">setSyUpdatePeriod</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;syUpdatePeriod)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setTitle(java.lang.String)" class="member-name-link">setTitle</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;title)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Set the name of the channel.</div>
@@ -427,30 +410,6 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="syUpdatePeriod">
-<h3>syUpdatePeriod</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">syUpdatePeriod</span></div>
-</div>
-</section>
-</li>
-<li>
-<section class="detail" id="syUpdateFrequency">
-<h3>syUpdateFrequency</h3>
-<div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">syUpdateFrequency</span></div>
-</div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -474,7 +433,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <section class="detail" id="&lt;init&gt;(com.apptasticsoftware.rssreader.DateTimeParser)">
 <h3>ChannelImpl</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ChannelImpl</span><wbr><span class="parameters">(<a href="DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ChannelImpl</span><wbr><span class="parameters">(<a href="../DateTimeParser.html" title="interface in com.apptasticsoftware.rssreader">DateTimeParser</a>&nbsp;dateTimeParser)</span></div>
 <div class="block">Constructor for Channel</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -499,7 +458,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getTitle()">getTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>title</dd>
 </dl>
@@ -514,7 +473,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set the name of the channel. It's how people refer to your service. If you have an HTML website that contains the same information as your RSS file, the title of your channel should be the same as the title of your website.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setTitle(java.lang.String)">setTitle</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setTitle(java.lang.String)">setTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>title</code> - title</dd>
 </dl>
@@ -529,7 +488,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get phrase or sentence describing the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getDescription()">getDescription</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getDescription()">getDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>description</dd>
 </dl>
@@ -544,7 +503,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set phrase or sentence describing the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setDescription(java.lang.String)">setDescription</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setDescription(java.lang.String)">setDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>description</code> - channel description</dd>
 </dl>
@@ -565,7 +524,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get category for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getCategory()">getCategory</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getCategory()">getCategory</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>category</dd>
 </dl>
@@ -586,7 +545,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set category for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setCategory(java.lang.String)">setCategory</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setCategory(java.lang.String)">setCategory</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>category</code> - channel category</dd>
 </dl>
@@ -601,7 +560,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get categories for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getCategories()">getCategories</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getCategories()">getCategories</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>list of categories</dd>
 </dl>
@@ -616,7 +575,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Add category for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#addCategory(java.lang.String)">addCategory</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#addCategory(java.lang.String)">addCategory</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>category</code> - channel category</dd>
 </dl>
@@ -631,7 +590,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get the language the channel is written in.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getLanguage()">getLanguage</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getLanguage()">getLanguage</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>language</dd>
 </dl>
@@ -646,7 +605,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set the language the channel is written in.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setLanguage(java.lang.String)">setLanguage</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setLanguage(java.lang.String)">setLanguage</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>language</code> - language</dd>
 </dl>
@@ -661,7 +620,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get the URL to the HTML website corresponding to the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getLink()">getLink</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getLink()">getLink</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>link</dd>
 </dl>
@@ -676,7 +635,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set the URL to the HTML website corresponding to the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setLink(java.lang.String)">setLink</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setLink(java.lang.String)">setLink</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>link</code> - URL</dd>
 </dl>
@@ -691,7 +650,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get copyright notice for content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getCopyright()">getCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getCopyright()">getCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>URL</dd>
 </dl>
@@ -706,7 +665,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set copyright notice for content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setCopyright(java.lang.String)">setCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setCopyright(java.lang.String)">setCopyright</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>copyright</code> - copyright</dd>
 </dl>
@@ -721,7 +680,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Get a string indicating the program used to generate the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getGenerator()">getGenerator</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getGenerator()">getGenerator</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>generator</dd>
 </dl>
@@ -736,7 +695,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 <div class="block">Set a string indicating the program used to generate the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setGenerator(java.lang.String)">setGenerator</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setGenerator(java.lang.String)">setGenerator</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>generator</code> - generator</dd>
 </dl>
@@ -752,7 +711,7 @@ implements <a href="Channel.html" title="interface in com.apptasticsoftware.rssr
 refreshing from the source.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getTtl()">getTtl</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getTtl()">getTtl</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>time to live</dd>
 </dl>
@@ -768,7 +727,7 @@ refreshing from the source.</div>
 refreshing from the source.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setTtl(java.lang.String)">setTtl</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setTtl(java.lang.String)">setTtl</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>ttl</code> - time to live</dd>
 </dl>
@@ -783,7 +742,7 @@ refreshing from the source.</div>
 <div class="block">Get the publication date for the content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getPubDate()">getPubDate</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getPubDate()">getPubDate</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>publication date</dd>
 </dl>
@@ -798,7 +757,7 @@ refreshing from the source.</div>
 <div class="block">Get the publication date for the content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>publication date</dd>
 </dl>
@@ -818,7 +777,7 @@ refreshing from the source.</div>
 <div class="block">Get the publication date for the content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getPubDateZonedDateTime()">getPubDateZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getPubDateZonedDateTime()">getPubDateZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>publication date</dd>
 </dl>
@@ -833,7 +792,7 @@ refreshing from the source.</div>
 <div class="block">Set the publication date for the content in the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setPubDate(java.lang.String)">setPubDate</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setPubDate(java.lang.String)">setPubDate</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>pubDate</code> - publication date</dd>
 </dl>
@@ -848,7 +807,7 @@ refreshing from the source.</div>
 <div class="block">Get the last time the content of the channel changed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getLastBuildDate()">getLastBuildDate</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getLastBuildDate()">getLastBuildDate</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>last build date</dd>
 </dl>
@@ -863,7 +822,7 @@ refreshing from the source.</div>
 <div class="block">Get the last time the content of the channel changed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getLastBuildDateAsZonedDateTime()">getLastBuildDateAsZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getLastBuildDateAsZonedDateTime()">getLastBuildDateAsZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>last build date</dd>
 </dl>
@@ -883,7 +842,7 @@ refreshing from the source.</div>
 <div class="block">Get the last time the content of the channel changed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getLastBuildDateZonedDateTime()">getLastBuildDateZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getLastBuildDateZonedDateTime()">getLastBuildDateZonedDateTime</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>last build date</dd>
 </dl>
@@ -898,7 +857,7 @@ refreshing from the source.</div>
 <div class="block">Set the last time the content of the channel changed.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setLastBuildDate(java.lang.String)">setLastBuildDate</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setLastBuildDate(java.lang.String)">setLastBuildDate</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>lastBuildDate</code> - last build date</dd>
 </dl>
@@ -913,7 +872,7 @@ refreshing from the source.</div>
 <div class="block">Get email address for person responsible for editorial content.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getManagingEditor()">getManagingEditor</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getManagingEditor()">getManagingEditor</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>managing editor</dd>
 </dl>
@@ -928,7 +887,7 @@ refreshing from the source.</div>
 <div class="block">Set email address for person responsible for editorial content.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setManagingEditor(java.lang.String)">setManagingEditor</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setManagingEditor(java.lang.String)">setManagingEditor</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>managingEditor</code> - managing editor</dd>
 </dl>
@@ -943,7 +902,7 @@ refreshing from the source.</div>
 <div class="block">Get email address for person responsible for technical issues relating to channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getWebMaster()">getWebMaster</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getWebMaster()">getWebMaster</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>web master</dd>
 </dl>
@@ -958,7 +917,7 @@ refreshing from the source.</div>
 <div class="block">Set email address for person responsible for technical issues relating to channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setWebMaster(java.lang.String)">setWebMaster</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setWebMaster(java.lang.String)">setWebMaster</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>webMaster</code> - web master</dd>
 </dl>
@@ -973,7 +932,7 @@ refreshing from the source.</div>
 <div class="block">Get the documentation for the format used in the RSS file.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getDocs()">getDocs</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getDocs()">getDocs</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>documentation</dd>
 </dl>
@@ -988,7 +947,7 @@ refreshing from the source.</div>
 <div class="block">Set  the documentation for the format used in the RSS file.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setDocs(java.lang.String)">setDocs</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setDocs(java.lang.String)">setDocs</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>docs</code> - documentation</dd>
 </dl>
@@ -1003,7 +962,7 @@ refreshing from the source.</div>
 <div class="block">Get the PICS rating for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getRating()">getRating</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getRating()">getRating</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>rating</dd>
 </dl>
@@ -1018,7 +977,7 @@ refreshing from the source.</div>
 <div class="block">Set the PICS rating for the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setRating(java.lang.String)">setRating</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setRating(java.lang.String)">setRating</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>rating</code> - rating</dd>
 </dl>
@@ -1036,7 +995,7 @@ Hour zero is the hour beginning at midnight.
 Aggregators may not read the channel during hours listed in the skipHours element.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getSkipHours()">getSkipHours</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getSkipHours()">getSkipHours</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>list of skip hours</dd>
 </dl>
@@ -1053,7 +1012,7 @@ Valid values are numbers between 0 and 23, representing times in GMT.
 Hour zero is the hour beginning at midnight.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#addSkipHour(java.lang.Integer)">addSkipHour</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#addSkipHour(java.lang.Integer)">addSkipHour</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>skipHour</code> - the hour to skip reading the channel (0-23)</dd>
 </dl>
@@ -1070,7 +1029,7 @@ The values can be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sund
 Aggregators may not read the channel during days listed in the skipDays element.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getSkipDays()">getSkipDays</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getSkipDays()">getSkipDays</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>list of skip days</dd>
 </dl>
@@ -1087,7 +1046,7 @@ The values are converted from the string representation (Monday, Tuesday, etc.) 
 Aggregators may not read the channel during days listed in the skipDays element.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getSkipDaysAsDayOfWeek()">getSkipDaysAsDayOfWeek</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getSkipDaysAsDayOfWeek()">getSkipDaysAsDayOfWeek</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>list of skip days as DayOfWeek enum values</dd>
 </dl>
@@ -1103,7 +1062,7 @@ Aggregators may not read the channel during days listed in the skipDays element.
 Valid values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#addSkipDay(java.lang.String)">addSkipDay</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#addSkipDay(java.lang.String)">addSkipDay</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>skipDay</code> - the day to skip reading the channel</dd>
 </dl>
@@ -1114,11 +1073,11 @@ Valid values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunda
 <section class="detail" id="getImage()">
 <h3>getImage</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</span>&nbsp;<span class="element-name">getImage</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&gt;</span>&nbsp;<span class="element-name">getImage</span>()</div>
 <div class="block">Get a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#getImage()">getImage</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#getImage()">getImage</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Returns:</dt>
 <dd>image</dd>
 </dl>
@@ -1129,14 +1088,30 @@ Valid values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday or Sunda
 <section class="detail" id="setImage(com.apptasticsoftware.rssreader.Image)">
 <h3>setImage</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setImage</span><wbr><span class="parameters">(<a href="Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setImage</span><wbr><span class="parameters">(<a href="../Image.html" title="class in com.apptasticsoftware.rssreader">Image</a>&nbsp;image)</span></div>
 <div class="block">Set a GIF, JPEG or PNG image that can be displayed with the channel.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="Channel.html#setImage(com.apptasticsoftware.rssreader.Image)">setImage</a></code>&nbsp;in interface&nbsp;<code><a href="Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
+<dd><code><a href="../Channel.html#setImage(com.apptasticsoftware.rssreader.Image)">setImage</a></code>&nbsp;in interface&nbsp;<code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>image</code> - image</dd>
 </dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setSyUpdatePeriod(java.lang.String)">
+<h3>setSyUpdatePeriod</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSyUpdatePeriod</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;syUpdatePeriod)</span></div>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="setSyUpdateFrequency(int)">
+<h3>setSyUpdateFrequency</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setSyUpdateFrequency</span><wbr><span class="parameters">(int&nbsp;syUpdateFrequency)</span></div>
 </div>
 </section>
 </li>

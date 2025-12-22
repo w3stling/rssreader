@@ -108,11 +108,11 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Known Subinterfaces:</dt>
-<dd><code><a href="module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a></code></dd>
+<dd><code><a href="FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a></code></dd>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="ItemImpl.html" title="class in com.apptasticsoftware.rssreader">ItemImpl</a>, <a href="module/itunes/ItunesItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesItemImpl</a>, <a href="module/mediarss/MediaRssItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemImpl</a>, <a href="module/opensearch/OpenSearchItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemImpl</a>, <a href="module/podcast/PodcastItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.podcast">PodcastItemImpl</a>, <a href="module/psc/PscItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscItemImpl</a>, <a href="module/spotify/SpotifyItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemImpl</a>, <a href="module/youtube/YoutubeItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemImpl</a></code></dd>
+<dd><code><a href="internal/FeedItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">FeedItemImpl</a>, <a href="internal/ItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a>, <a href="module/itunes/ItunesItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.itunes">ItunesItemImpl</a>, <a href="module/mediarss/MediaRssItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemImpl</a>, <a href="module/opensearch/OpenSearchItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemImpl</a>, <a href="module/podcast/PodcastItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.podcast">PodcastItemImpl</a>, <a href="module/psc/PscItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscItemImpl</a>, <a href="module/spotify/SpotifyItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemImpl</a>, <a href="module/youtube/YoutubeItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemImpl</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
@@ -471,7 +471,7 @@ item described by the item element.</div>
 </span><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getCategory</span>()</div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">This method be removed in a future version.
-<p> Use <a href="ItemImpl.html#getCategories()"><code>ItemImpl.getCategories()</code></a> instead.</div>
+<p> Use <a href="#getCategories()"><code>getCategories()</code></a> instead.</div>
 </div>
 <div class="block">Get category for item.</div>
 <dl class="notes">
@@ -490,7 +490,7 @@ item described by the item element.</div>
 </span><span class="return-type">void</span>&nbsp;<span class="element-name">setCategory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
 <div class="deprecation-block"><span class="deprecated-label">Deprecated, for removal: This API element is subject to removal in a future version.</span>
 <div class="deprecation-comment">This method be removed in a future version.
-<p> Use <a href="ItemImpl.html#addCategory(java.lang.String)"><code>ItemImpl.addCategory(String category)</code></a> instead.</div>
+<p> Use <a href="#addCategory(java.lang.String)"><code>addCategory(String category)</code></a> instead.</div>
 </div>
 <div class="block">Set category for item.</div>
 <dl class="notes">
