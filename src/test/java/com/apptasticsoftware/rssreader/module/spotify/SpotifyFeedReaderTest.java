@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class SpotifyRssReaderTest {
+class SpotifyFeedReaderTest {
 
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
