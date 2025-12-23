@@ -22,7 +22,7 @@ class ItunesRssReaderTest {
 
     @Test
     void readItunesPodcastFeed() {
-        var res = new ItunesRssReader().read(fromFile("itunes-podcast.xml"))
+        var res = new ItunesFeedReader().read(fromFile("itunes-podcast.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -31,7 +31,7 @@ class ItunesRssReaderTest {
 
     @Test
     void readItunesPodcastFeedFromUrl() throws IOException {
-        var res = new ItunesRssReader().read("https://feeds.theincomparable.com/batmanuniversity")
+        var res = new ItunesFeedReader().read("https://feeds.theincomparable.com/batmanuniversity")
                 .collect(Collectors.toList());
 
         assertFalse(res.isEmpty());
@@ -48,7 +48,7 @@ class ItunesRssReaderTest {
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .build();
 
-        var res = new ItunesRssReader(httpClient).read("https://feeds.theincomparable.com/batmanuniversity")
+        var res = new ItunesFeedReader(httpClient).read("https://feeds.theincomparable.com/batmanuniversity")
                 .collect(Collectors.toList());
 
         assertFalse(res.isEmpty());

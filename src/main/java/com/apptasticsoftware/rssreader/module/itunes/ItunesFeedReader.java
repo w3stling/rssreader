@@ -23,23 +23,22 @@
  */
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemImpl;
+
 import java.net.http.HttpClient;
 
 /**
  * Class for reading podcast (itunes) feeds.
- *
- * @deprecated
- * Use {@link ItunesFeedReader} instead.
  */
-@SuppressWarnings("java:S1133")
-@Deprecated(since="3.13.0", forRemoval=true)
-public class ItunesRssReader extends ItunesFeedReader {
+public class ItunesFeedReader extends AbstractRssReader<ItunesChannel, ItunesItem> {
 
     /**
      * Constructor
      */
-    @Deprecated(since="3.13.0", forRemoval=true)
-    public ItunesRssReader() {
+    public ItunesFeedReader() {
         super();
     }
 
@@ -47,9 +46,23 @@ public class ItunesRssReader extends ItunesFeedReader {
      * Constructor
      * @param httpClient http client
      */
-    @Deprecated(since="3.13.0", forRemoval=true)
-    public ItunesRssReader(HttpClient httpClient) {
+    public ItunesFeedReader(HttpClient httpClient) {
         super(httpClient);
     }
 
+    @Override
+    protected void registerChannelTags() {
+        super.registerChannelTags();
+        ItunesExtensions.register(getFeedExtensionRegistry());
+    }
+
+    @Override
+    protected ItunesChannel createChannel(DateTimeParser dateTimeParser) {
+        return new ItunesChannelImpl(dateTimeParser);
+    }
+
+    @Override
+    protected ItunesItem createItem(DateTimeParser dateTimeParser) {
+        return new ItunesItemImpl(dateTimeParser);
+    }
 }
