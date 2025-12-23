@@ -29,16 +29,13 @@ import java.net.http.HttpClient;
  * Class for reading podcast (itunes) feeds.
  *
  * @deprecated
- * Use {@link com.apptasticsoftware.rssreader.module.itunes.ItunesFeedReader} instead.
+ * Use {@link ItunesFeedReader} instead.
  */
 @Deprecated(since="3.13.0", forRemoval=true)
 public class ItunesRssReader extends ItunesFeedReader {
 
     /**
      * Constructor
-     *
-     * @deprecated
-     * Use {@link com.apptasticsoftware.rssreader.module.itunes.ItunesFeedReader()} instead.
      */
     @Deprecated(since="3.13.0", forRemoval=true)
     public ItunesRssReader() {
@@ -47,10 +44,6 @@ public class ItunesRssReader extends ItunesFeedReader {
 
     /**
      * Constructor
-     *
-     * @deprecated
-     * Use {@link com.apptasticsoftware.rssreader.module.itunes.ItunesFeedReader(HttpClient)} instead.
-     *
      * @param httpClient http client
      */
     @Deprecated(since="3.13.0", forRemoval=true)
