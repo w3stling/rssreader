@@ -86,7 +86,7 @@ class SpotifyRssReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(SpotifyChannelImpl.class).withNonnullFields("spotifyData", "itunesData", "mediaRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(SpotifyItemImpl.class).withNonnullFields("spotifyData", "itunesData", "mediaRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(SpotifyItemImpl.class).withNonnullFields("itunesData", "mediaRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {
