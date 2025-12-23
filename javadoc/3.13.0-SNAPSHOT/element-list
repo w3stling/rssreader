@@ -4,10 +4,17 @@ com.apptasticsoftware.rssreader.filter
 com.apptasticsoftware.rssreader.internal
 com.apptasticsoftware.rssreader.internal.stream
 com.apptasticsoftware.rssreader.module.itunes
+com.apptasticsoftware.rssreader.module.itunes.internal
 com.apptasticsoftware.rssreader.module.mediarss
+com.apptasticsoftware.rssreader.module.mediarss.internal
 com.apptasticsoftware.rssreader.module.opensearch
+com.apptasticsoftware.rssreader.module.opensearch.internal
 com.apptasticsoftware.rssreader.module.podcast
+com.apptasticsoftware.rssreader.module.podcast.internal
 com.apptasticsoftware.rssreader.module.psc
+com.apptasticsoftware.rssreader.module.psc.internal
 com.apptasticsoftware.rssreader.module.spotify
+com.apptasticsoftware.rssreader.module.spotify.internal
 com.apptasticsoftware.rssreader.module.youtube
+com.apptasticsoftware.rssreader.module.youtube.internal
 com.apptasticsoftware.rssreader.util
