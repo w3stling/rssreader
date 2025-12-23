@@ -1,7 +1,9 @@
-package com.apptasticsoftware.rssreader.module.mediarss;
+package com.apptasticsoftware.rssreader.module.mediarss.internal;
 
 import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannel;
+import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelData;
 
 import java.util.Objects;
 

@@ -1,4 +1,6 @@
-package com.apptasticsoftware.rssreader.module.podcast;
+package com.apptasticsoftware.rssreader.module.podcast.internal;
+
+import com.apptasticsoftware.rssreader.module.podcast.*;
 
 import java.util.ArrayList;
 import java.util.List;

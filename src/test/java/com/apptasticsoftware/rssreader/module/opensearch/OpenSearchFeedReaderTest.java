@@ -2,6 +2,9 @@ package com.apptasticsoftware.rssreader.module.opensearch;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.FeedReader;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchChannelDataImpl;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchChannelImpl;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchItemImpl;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

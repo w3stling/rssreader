@@ -1,5 +1,6 @@
-package com.apptasticsoftware.rssreader.module.itunes;
+package com.apptasticsoftware.rssreader.module.itunes.internal;
 
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 import com.apptasticsoftware.rssreader.util.Util;
 
 import java.time.Duration;

@@ -1,5 +1,6 @@
-package com.apptasticsoftware.rssreader.module.spotify;
+package com.apptasticsoftware.rssreader.module.spotify.internal;
 
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannelData;
 import com.apptasticsoftware.rssreader.util.Util;
 
 import java.util.*;

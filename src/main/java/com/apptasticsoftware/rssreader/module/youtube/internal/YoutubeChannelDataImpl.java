@@ -1,4 +1,6 @@
-package com.apptasticsoftware.rssreader.module.youtube;
+package com.apptasticsoftware.rssreader.module.youtube.internal;
+
+import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelData;
 
 import java.util.Objects;
 

@@ -1,9 +1,11 @@
-package com.apptasticsoftware.rssreader.module.podcast;
+package com.apptasticsoftware.rssreader.module.podcast.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItemDataImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataImpl;
+import com.apptasticsoftware.rssreader.module.podcast.PodcastItem;
+import com.apptasticsoftware.rssreader.module.podcast.PodcastItemData;
 
 import java.util.Objects;
 

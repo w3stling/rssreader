@@ -1,5 +1,6 @@
-package com.apptasticsoftware.rssreader.module.mediarss;
+package com.apptasticsoftware.rssreader.module.mediarss.internal;
 
+import com.apptasticsoftware.rssreader.module.mediarss.*;
 import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.util.ArrayList;

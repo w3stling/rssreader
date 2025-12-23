@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
 import com.apptasticsoftware.rssreader.DateTime;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemImpl;
 import com.apptasticsoftware.rssreader.util.ItemComparator;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

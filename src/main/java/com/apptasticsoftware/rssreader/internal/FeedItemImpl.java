@@ -3,17 +3,17 @@ package com.apptasticsoftware.rssreader.internal;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesItemDataImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
-import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemDataImpl;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataImpl;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItemData;
-import com.apptasticsoftware.rssreader.module.podcast.PodcastItemDataImpl;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemDataImpl;
 import com.apptasticsoftware.rssreader.module.psc.PscItemData;
-import com.apptasticsoftware.rssreader.module.psc.PscItemDataImpl;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyItemData;
-import com.apptasticsoftware.rssreader.module.spotify.SpotifyItemDataImpl;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyItemDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
-import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemDataImpl;
+import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataImpl;
 
 import java.util.Objects;
 

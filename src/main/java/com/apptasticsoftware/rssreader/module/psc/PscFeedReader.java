@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.module.psc;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscChannelImpl;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemImpl;
 
 public class PscFeedReader extends AbstractRssReader<PscChannel, PscItem> {
 

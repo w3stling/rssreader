@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.module.spotify;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.FeedReader;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyChannelImpl;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyItemImpl;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

@@ -5,6 +5,8 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesExtensions;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssExtensions;
 import com.apptasticsoftware.rssreader.module.psc.PscExtensions;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyChannelImpl;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyItemImpl;
 
 public class SpotifyRssReader extends AbstractRssReader<SpotifyChannel, SpotifyItem> {
 

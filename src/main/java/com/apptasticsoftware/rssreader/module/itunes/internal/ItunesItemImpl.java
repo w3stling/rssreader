@@ -21,49 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader.module.mediarss;
+package com.apptasticsoftware.rssreader.module.itunes.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 
 import java.util.Objects;
 
 /**
- * Class representing the media rss item.
+ * Class representing the Itunes item.
  */
-public class MediaRssItemImpl extends ItemImpl implements MediaRssItem {
-    private final MediaRssItemData data = new MediaRssItemDataImpl();
+public class ItunesItemImpl extends ItemImpl implements ItunesItem {
+    private final ItunesItemDataImpl data = new ItunesItemDataImpl();
 
     /**
      * Constructor
-     *
      * @param dateTimeParser timestamp parser
      */
-    public MediaRssItemImpl(DateTimeParser dateTimeParser) {
+    public ItunesItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }
 
-
-    /**
-     * Internal method to get media rss item data.
-     *
-     * @return media rss item data
-     */
     @Override
-    public MediaRssItemData getMediaRssItemData() {
+    public ItunesItemData getItunesItemData() {
         return data;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof MediaRssItem)) return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(getMediaRssItemData(), that.getMediaRssItemData());
+        ItunesItemImpl that = (ItunesItemImpl) o;
+        return Objects.equals(getItunesItemData(), that.getItunesItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaRssItemData());
+        return Objects.hash(super.hashCode(), getItunesItemData());
     }
 }

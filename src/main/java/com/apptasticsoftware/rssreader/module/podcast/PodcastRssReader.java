@@ -3,6 +3,8 @@ package com.apptasticsoftware.rssreader.module.podcast;
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.itunes.*;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelImpl;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemImpl;
 
 import java.net.http.HttpClient;
 
@@ -24,12 +26,12 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
     }
 
     @Override
-    protected PodcastChannelImpl createChannel(DateTimeParser dateTimeParser) {
+    protected PodcastChannel createChannel(DateTimeParser dateTimeParser) {
         return new PodcastChannelImpl(dateTimeParser);
     }
 
     @Override
-    protected PodcastItemImpl createItem(DateTimeParser dateTimeParser) {
+    protected PodcastItem createItem(DateTimeParser dateTimeParser) {
         return new PodcastItemImpl(dateTimeParser);
     }
 

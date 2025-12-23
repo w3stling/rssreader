@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.FeedReader;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelImpl;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemImpl;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

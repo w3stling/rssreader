@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.apptasticsoftware.rssreader.module.itunes;
+package com.apptasticsoftware.rssreader.module.itunes.internal;
 
 import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelData;
 
 import java.util.*;
 

@@ -1,4 +1,7 @@
-package com.apptasticsoftware.rssreader.module.opensearch;
+package com.apptasticsoftware.rssreader.module.opensearch.internal;
+
+import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannelData;
+import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchQuery;
 
 import java.util.*;
 

@@ -1,5 +1,7 @@
-package com.apptasticsoftware.rssreader.module.itunes;
+package com.apptasticsoftware.rssreader.module.itunes.internal;
 
+import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelData;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesOwner;
 import com.apptasticsoftware.rssreader.util.Mapper;
 
 import java.util.ArrayList;

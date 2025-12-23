@@ -1,11 +1,13 @@
-package com.apptasticsoftware.rssreader.module.spotify;
+package com.apptasticsoftware.rssreader.module.spotify.internal;
 
 import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelData;
-import com.apptasticsoftware.rssreader.module.itunes.ItunesChannelDataImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelData;
-import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelDataImpl;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelDataImpl;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannel;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannelData;
 
 import java.util.Objects;
 

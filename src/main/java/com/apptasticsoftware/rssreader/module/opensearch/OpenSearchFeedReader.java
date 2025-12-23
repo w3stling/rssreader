@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.module.opensearch;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchChannelImpl;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchItemImpl;
 
 public class OpenSearchFeedReader extends AbstractRssReader<OpenSearchChannel, OpenSearchItem> {
 

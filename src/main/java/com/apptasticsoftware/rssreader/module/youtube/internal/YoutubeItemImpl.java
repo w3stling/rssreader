@@ -1,9 +1,11 @@
-package com.apptasticsoftware.rssreader.module.youtube;
+package com.apptasticsoftware.rssreader.module.youtube.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
-import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemDataImpl;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataImpl;
+import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
+import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 
 import java.util.Objects;
 

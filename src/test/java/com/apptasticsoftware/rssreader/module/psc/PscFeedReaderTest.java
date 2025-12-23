@@ -2,6 +2,9 @@ package com.apptasticsoftware.rssreader.module.psc;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.FeedReader;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscChannelImpl;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemImpl;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

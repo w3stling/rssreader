@@ -1,4 +1,6 @@
-package com.apptasticsoftware.rssreader.module.spotify;
+package com.apptasticsoftware.rssreader.module.spotify.internal;
+
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyItemData;
 
 public class SpotifyItemDataImpl implements SpotifyItemData {
 

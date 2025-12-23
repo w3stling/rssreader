@@ -1,6 +1,7 @@
-package com.apptasticsoftware.rssreader.module.podcast;
+package com.apptasticsoftware.rssreader.module.podcast.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.podcast.*;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;

@@ -1,7 +1,8 @@
-package com.apptasticsoftware.rssreader.module.psc;
+package com.apptasticsoftware.rssreader.module.psc.internal;
 
 import com.apptasticsoftware.rssreader.internal.ChannelImpl;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.psc.PscChannel;
 
 /**
  * Implementation of a podcast channel with Podcast Index Specification (PSC) data.

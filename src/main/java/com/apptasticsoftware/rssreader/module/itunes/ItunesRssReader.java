@@ -25,6 +25,8 @@ package com.apptasticsoftware.rssreader.module.itunes;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelImpl;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemImpl;
 
 import java.net.http.HttpClient;
 
