@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ItunesRssReaderTest {
+class ItunesRssFeedReaderTest {
 
     @Test
     void readItunesPodcastFeed() {
