@@ -23,22 +23,22 @@
  */
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelImpl;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemImpl;
+
 import java.net.http.HttpClient;
 
 /**
  * Class for reading media rss feeds.
- *
- * @deprecated
- * Use {@link MediaRssFeedReader} instead.
  */
-@SuppressWarnings("java:S1133")
-@Deprecated(since="3.13.0", forRemoval=true)
-public class MediaRssReader extends MediaRssFeedReader {
+public class MediaRssFeedReader extends AbstractRssReader<MediaRssChannel, MediaRssItem> {
 
     /**
      * Constructor
      */
-    public MediaRssReader() {
+    public MediaRssFeedReader() {
         super();
     }
 
@@ -46,8 +46,24 @@ public class MediaRssReader extends MediaRssFeedReader {
      * Constructor
      * @param httpClient http client
      */
-    public MediaRssReader(HttpClient httpClient) {
+    public MediaRssFeedReader(HttpClient httpClient) {
         super(httpClient);
     }
 
+    @Override
+    protected MediaRssChannel createChannel(DateTimeParser dateTimeParser) {
+        return new MediaRssChannelImpl(dateTimeParser);
+    }
+
+    @Override
+    protected MediaRssItem createItem(DateTimeParser dateTimeParser) {
+        return new MediaRssItemImpl(dateTimeParser);
+    }
+
+    @Override
+    protected void registerChannelTags() {
+        super.registerChannelTags();
+        var registry = getFeedExtensionRegistry();
+        MediaRssExtensions.register(registry);
+    }
 }
