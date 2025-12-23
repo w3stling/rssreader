@@ -31,6 +31,7 @@ import java.net.http.HttpClient;
  * @deprecated
  * Use {@link ItunesFeedReader} instead.
  */
+@SuppressWarnings("java:S1133")
 @Deprecated(since="3.13.0", forRemoval=true)
 public class ItunesRssReader extends ItunesFeedReader {
 
