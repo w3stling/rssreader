@@ -466,7 +466,7 @@ class PodcastRssReaderTest {
 
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new PodcastRssReader()),
+                Arguments.of(new PodcastFeedReader()),
                 Arguments.of(new FeedReader())
         );
     }

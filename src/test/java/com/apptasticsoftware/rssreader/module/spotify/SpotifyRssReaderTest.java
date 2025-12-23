@@ -91,7 +91,7 @@ class SpotifyRssReaderTest {
 
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new SpotifyRssReader()),
+                Arguments.of(new SpotifyFeedReader()),
                 Arguments.of(new FeedReader())
         );
     }

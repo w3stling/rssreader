@@ -8,12 +8,12 @@ import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemImpl;
 
 import java.net.http.HttpClient;
 
-public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastItem> {
+public class PodcastFeedReader extends AbstractRssReader<PodcastChannel, PodcastItem> {
 
     /**
      * Constructor
      */
-    public PodcastRssReader() {
+    public PodcastFeedReader() {
         super();
     }
 
@@ -21,7 +21,7 @@ public class PodcastRssReader extends AbstractRssReader<PodcastChannel, PodcastI
      * Constructor
      * @param httpClient http client
      */
-    public PodcastRssReader(HttpClient httpClient) {
+    public PodcastFeedReader(HttpClient httpClient) {
         super(httpClient);
     }
 

@@ -8,7 +8,7 @@ import com.apptasticsoftware.rssreader.module.psc.PscExtensions;
 import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyChannelImpl;
 import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyItemImpl;
 
-public class SpotifyRssReader extends AbstractRssReader<SpotifyChannel, SpotifyItem> {
+public class SpotifyFeedReader extends AbstractRssReader<SpotifyChannel, SpotifyItem> {
 
     @Override
     protected SpotifyChannel createChannel(DateTimeParser dateTimeParser) {
