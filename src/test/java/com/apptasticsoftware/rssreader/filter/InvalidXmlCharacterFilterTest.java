@@ -1,7 +1,6 @@
-package com.apptasticsoftware.integrationtest;
+package com.apptasticsoftware.rssreader.filter;
 
 import com.apptasticsoftware.rssreader.RssReader;
-import com.apptasticsoftware.rssreader.filter.InvalidXmlCharacterFilter;
 import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
@@ -9,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class FeedFilterTest {
+class InvalidXmlCharacterFilterTest {
 
     @Test
     void testInvalidXmlCharacter0x6() {
