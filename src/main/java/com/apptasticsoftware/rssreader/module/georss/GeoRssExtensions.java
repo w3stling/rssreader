@@ -107,7 +107,15 @@ public class GeoRssExtensions {
     }
 
     private static boolean containsWhitespace(String text) {
-        return text != null && text.matches(".*\\s.*");
+        if (text == null) {
+            return false;
+        }
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isWhitespace(text.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
