@@ -263,9 +263,24 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                 inEntity = true;
                 entityBuffer.setLength(0);
                 entityBuffer.append(ch);
+            } else if (isInvalidQuotationMark(ch)) {
+                // Replace fancy/curly quotation marks with standard straight quote
+                writeStringToBuffer("\"");
             } else if (isValidXmlChar(ch)) {
                 writeStringToBuffer(String.valueOf(ch));
             }
+        }
+
+        /**
+         * Determines if a character is a fancy/curly quotation mark that should be replaced
+         * with a standard straight quote.
+         *
+         * @param ch the character to check
+         * @return {@code true} if the character is a fancy quotation mark; {@code false} otherwise
+         */
+        private boolean isInvalidQuotationMark(char ch) {
+            // U+201C (left double quotation mark) and U+201D (right double quotation mark)
+            return ch == '\u201C' || ch == '\u201D';
         }
 
         private void writeStringToBuffer(String str) throws IOException {

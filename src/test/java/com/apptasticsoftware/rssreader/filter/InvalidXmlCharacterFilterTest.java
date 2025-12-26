@@ -68,12 +68,23 @@ class InvalidXmlCharacterFilterTest {
     void testCdataEndingWithTripleRightSquareBrackets() {
         var items = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
-                .read(fromFile("rss-cdata-ending-triple-right-square-brackets.xml")).collect(Collectors.toList());
+                .read(fromFile("rss-cdata-ending-triple-right-square-brackets.xml"))
+                .collect(Collectors.toList());
 
         assertEquals(20, items.size());
         var item = items.get(0);
 
         assertEquals("Sorti le 21 octobre dernier, Painkiller, le FPS action-coop « revisitant » le cultissime et unique Painkiller des années 2000 cher à nos cœurs, n&#8217;a pas connu le succès escompté et sa petite fanbase de joueurs commençait à s&#8217;inquiéter de ne pas avoir de nouvelles. Fort heureusement, la semaine dernière, le studio Anshar a publié [&#8230;]", item.getDescription().orElse(""));
+    }
+
+    @Test
+    void testInvalidQuotationMark() {
+        var items = new RssReader()
+                .addFeedFilter(new InvalidXmlCharacterFilter())
+                .read(fromFile("atom-invalid-xml-quotation-mark.xml"))
+                .collect(Collectors.toList());
+
+        assertEquals(1, items.size());
     }
 
     private InputStream fromFile(String fileName) {
