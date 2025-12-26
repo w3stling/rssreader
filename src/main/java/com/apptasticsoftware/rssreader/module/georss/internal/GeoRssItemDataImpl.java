@@ -151,7 +151,7 @@ public class GeoRssItemDataImpl implements GeoRssItemData {
     private List<Coordinate> toCoordinates(String value) {
         List<Coordinate> coordinates = new ArrayList<>();
         String[] parts = value.trim().split("\\s+");
-        for (int i = 0; i < parts.length; i += 2) {
+        for (int i = 0; i < parts.length - 1; i += 2) {
             Coordinate coordinate = new Coordinate();
             coordinate.setLatitude(Double.parseDouble(parts[i]));
             coordinate.setLongitude(Double.parseDouble(parts[i + 1]));
