@@ -18,6 +18,7 @@ public class GeoRssItemImpl extends ItemImpl implements GeoRssItem {
         super(dateTimeParser);
     }
 
+    @Override
     public GeoRssItemData getGeoRssItemData() {
         return geoRssData;
     }

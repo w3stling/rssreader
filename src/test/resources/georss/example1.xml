@@ -11,6 +11,17 @@
     <email>tremor@quakelab.edu</email>
     </author>
     <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+    <georss:point>45.255    -71.91 1.2</georss:point>
+    <georss:line>45.255 -110.44 46.45 -109.47 43.83 -109.85</georss:line>
+    <georss:polygon>45.255 -110.44 46.45 -109.47 43.83 -109.85 45.255 -110.44</georss:polygon>
+    <georss:box>42.942 -71.031 43.038 -69.855</georss:box>
+    <georss:elev>312</georss:elev>
+    <georss:floor>1</georss:floor>
+    <georss:radius>499</georss:radius>
+    <georss:featuretypetag>city-2</georss:featuretypetag>
+    <georss:relationshiptag>is-centered-at-2</georss:relationshiptag>
+    <georss:featurename>Podunk-2</georss:featurename>
+
     <entry>
         <title>M 3.2, Mona Passage</title>
         <link href="http://example.org/2005/09/09/atom01"/>

@@ -1,8 +1,6 @@
 package com.apptasticsoftware.rssreader.module.georss;
 
-import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssChannelImpl;
-import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssItemDataImpl;
-import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssItemImpl;
+import com.apptasticsoftware.rssreader.module.georss.internal.*;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
@@ -31,6 +29,20 @@ class GeoRssFeedReaderTest {
         assertThat(channel.getLastBuildDate(), isPresentAndIs("2005-12-13T18:30:02Z"));
         assertThat(channel.getLastBuildDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2005-12-13T18:30:02Z")));
         assertThat(channel.getManagingEditor(), isPresentAndIs("Dr. Thaddeus Remor"));
+        assertThat(channel.getGeoRssPoint(), isPresentAndIs("45.255    -71.91 1.2"));
+        assertThat(channel.getGeoRssPointAsCoordinate(), isPresentAndIs(new Coordinate(45.255, -71.91)));
+        assertThat(channel.getGeoRssLine(), isPresentAndIs("45.255 -110.44 46.45 -109.47 43.83 -109.85"));
+        assertThat(channel.getGeoRssLineAsCoordinates(), is(List.of(new Coordinate(45.255, -110.44), new Coordinate(46.45, -109.47), new Coordinate(43.83, -109.85))));
+        assertThat(channel.getGeoRssPolygon(), isPresentAndIs("45.255 -110.44 46.45 -109.47 43.83 -109.85 45.255 -110.44"));
+        assertThat(channel.getGeoRssPolygonAsCoordinates(), is(List.of(new Coordinate(45.255, -110.44), new Coordinate(46.45, -109.47), new Coordinate(43.83, -109.85), new Coordinate(45.255, -110.44))));
+        assertThat(channel.getGeoRssBox(), isPresentAndIs("42.942 -71.031 43.038 -69.855"));
+        assertThat(channel.getGeoRssBoxAsCoordinates(), is(List.of(new Coordinate(42.942, -71.031), new Coordinate(43.038, -69.855))));
+        assertThat(channel.getGeoRssElev(), isPresentAndIs(312.0));
+        assertThat(channel.getGeoRssFloor(), isPresentAndIs(1));
+        assertThat(channel.getGeoRssRadius(), isPresentAndIs(499.0));
+        assertThat(channel.getGeoRssFeatureTypeTag(), isPresentAndIs("city-2"));
+        assertThat(channel.getGeoRssRelationshipTag(), isPresentAndIs("is-centered-at-2"));
+        assertThat(channel.getGeoRssFeatureName(), isPresentAndIs("Podunk-2"));
 
         assertThat(item.getTitle(), isPresentAndIs("M 3.2, Mona Passage"));
         assertThat(item.getLink(), isPresentAndIs("http://example.org/2005/09/09/atom01"));
@@ -69,6 +81,14 @@ class GeoRssFeedReaderTest {
         assertThat(channel.getLastBuildDate(), isPresentAndIs("2005-12-13T18:30:02Z"));
         assertThat(channel.getLastBuildDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("2005-12-13T18:30:02Z")));
         assertThat(channel.getManagingEditor(), isPresentAndIs("Dr. Thaddeus Remor"));
+        assertThat(channel.getGeoRssPoint(), isPresentAndIs("45.256 -71.92"));
+        assertThat(channel.getGeoRssPointAsCoordinate(), isPresentAndIs(new Coordinate(45.256, -71.92)));
+        assertThat(channel.getGeoRssLine(), isPresentAndIs("45.255 -110.44 46.45 -109.47 43.83 -109.85"));
+        assertThat(channel.getGeoRssLineAsCoordinates(), is(List.of(new Coordinate(45.255, -110.44), new Coordinate(46.45, -109.47), new Coordinate(43.83, -109.85))));
+        assertThat(channel.getGeoRssPolygon(), isPresentAndIs("45.255 -110.44 46.45 -109.47 43.83 -109.85 45.255 -110.44"));
+        assertThat(channel.getGeoRssPolygonAsCoordinates(), is(List.of(new Coordinate(45.255, -110.44), new Coordinate(46.45, -109.47), new Coordinate(43.83, -109.85), new Coordinate(45.255, -110.44))));
+        assertThat(channel.getGeoRssBox(), isPresentAndIs("42.942 -71.031 43.038 -69.855"));
+        assertThat(channel.getGeoRssBoxAsCoordinates(), is(List.of(new Coordinate(42.942, -71.031), new Coordinate(43.038, -69.855))));
 
         assertThat(item.getTitle(), isPresentAndIs("M 3.2, Mona Passage"));
         assertThat(item.getLink(), isPresentAndIs("http://example.org/2005/09/09/atom01"));
@@ -89,9 +109,11 @@ class GeoRssFeedReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(GeoRssChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+        EqualsVerifier.simple().forClass(GeoRssChannelImpl.class).withNonnullFields("geoRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+        EqualsVerifier.simple().forClass(GeoRssChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(GeoRssItemImpl.class).withNonnullFields("geoRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(GeoRssItemDataImpl.class).verify();
+        EqualsVerifier.simple().forClass(MetaData.class).verify();
     }
 
     private InputStream fromFile(String fileName) {

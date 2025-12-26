@@ -11,6 +11,36 @@
     <email>tremor@quakelab.edu</email>
     </author>
     <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+    <georss:where>
+        <gml:Point>
+            <gml:pos>45.256 -71.92</gml:pos>
+        </gml:Point>
+    </georss:where>
+    <georss:where>
+        <gml:LineString>
+            <gml:posList>
+                45.255 -110.44 46.45 -109.47 43.83 -109.85
+            </gml:posList>
+        </gml:LineString>
+    </georss:where>
+    <georss:where>
+        <gml:Polygon srsName="urn:ogc:def:crs:EPSG:9.0:26986">
+            <gml:exterior>
+                <gml:LinearRing>
+                    <gml:posList>
+                        45.255 -110.44 46.45 -109.47 43.83 -109.85 45.255 -110.44
+                    </gml:posList>
+                </gml:LinearRing>
+            </gml:exterior>
+        </gml:Polygon>
+    </georss:where>
+    <georss:where>
+        <gml:Envelope>
+            <gml:lowerCorner>42.942 -71.031</gml:lowerCorner>
+            <gml:upperCorner>43.038 -69.855</gml:upperCorner>
+        </gml:Envelope>
+    </georss:where>
+
     <entry>
         <title>M 3.2, Mona Passage</title>
         <link href="http://example.org/2005/09/09/atom01"/>
