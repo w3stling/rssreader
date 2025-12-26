@@ -108,6 +108,32 @@ class GeoRssFeedReaderTest {
     }
 
     @Test
+    void example3() {
+        var items = new GeoRssFeedReader().read(fromFile("georss/example3.xml"))
+                .collect(Collectors.toList());
+
+        assertEquals(1, items.size());
+        var item = items.get(0);
+
+        var channel = (GeoRssChannel) item.getChannel();
+        assertThat(channel.getTitle(), is("USGS M5+ Earthquakes"));
+        assertThat(channel.getDescription(), is("Real-time, worldwide earthquake list for the past 7 days"));
+        assertThat(channel.getLink(), is("https://earthquake.usgs.gov/eqcenter/"));
+        assertThat(channel.getPubDate(), isPresentAndIs("Thu, 27 Dec 2007 23:56:15 PST"));
+        assertThat(channel.getPubDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Thu, 27 Dec 2007 23:56:15 PST")));
+        assertThat(channel.getGeoRssPoint(), isPresentAndIs("5.5318 95.8971"));
+        assertThat(channel.getGeoRssPointAsCoordinate(), isPresentAndIs(new Coordinate(5.5318, 95.8971)));
+
+        assertThat(item.getPubDate(), isPresentAndIs("Fri, 28 Dec 2007 05:24:17 GMT"));
+        assertThat(item.getPubDateAsZonedDateTime(), isPresentAndIs(Default.getDateTimeParser().parse("Fri, 28 Dec 2007 05:24:17 GMT")));
+        assertThat(item.getTitle(), isPresentAndIs("M 5.3, northern Sumatra, Indonesia"));
+        assertThat(item.getDescription(), isPresentAndIs("December 28, 2007 05:24:17 GMT"));
+        assertThat(item.getLink(), isPresentAndIs("https://earthquake.usgs.gov/eqcenter/recenteqsww/Quakes/us2007llai.php"));
+        assertThat(item.getGeoRssPoint(), isPresentAndIs("5.5319 95.8972"));
+        assertThat(item.getGeoRssPointAsCoordinate(), isPresentAndIs(new Coordinate(5.5319, 95.8972)));
+    }
+
+    @Test
     void equalsContract() {
         EqualsVerifier.simple().forClass(GeoRssChannelImpl.class).withNonnullFields("geoRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(GeoRssChannelDataImpl.class).verify();

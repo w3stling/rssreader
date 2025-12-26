@@ -27,6 +27,8 @@ public class GeoRssExtensions {
         registry.addChannelExtension("georss:featuretypetag", GeoRssChannel::setGeoRssFeatureTypeTag);
         registry.addChannelExtension("georss:relationshiptag", GeoRssChannel::setGeoRssRelationshipTag);
         registry.addChannelExtension("georss:featurename", GeoRssChannel::setGeoRssFeatureName);
+        registry.addChannelExtension("geo:lat", GeoRssExtensions::mapLatitude);
+        registry.addChannelExtension("geo:long", GeoRssExtensions::mapLongitude);
 
         registry.addChannelExtension(CHANNEL_PATHS, "georss:where/gml:Point/gml:pos", GeoRssChannel::setGeoRssPoint);
         registry.addChannelExtension(CHANNEL_PATHS, "georss:where/gml:LineString/gml:posList", GeoRssChannel::setGeoRssLine);
@@ -46,6 +48,8 @@ public class GeoRssExtensions {
         registry.addItemExtension("georss:featuretypetag", GeoRssItem::setGeoRssFeatureTypeTag);
         registry.addItemExtension("georss:relationshiptag", GeoRssItem::setGeoRssRelationshipTag);
         registry.addItemExtension("georss:featurename", GeoRssItem::setGeoRssFeatureName);
+        registry.addItemExtension("geo:lat", GeoRssExtensions::mapLatitude);
+        registry.addItemExtension("geo:long", GeoRssExtensions::mapLongitude);
 
         registry.addItemExtension(ITEM_PATHS, "georss:where/gml:Point/gml:pos", GeoRssItem::setGeoRssPoint);
         registry.addItemExtension(ITEM_PATHS, "georss:where/gml:LineString/gml:posList", GeoRssItem::setGeoRssLine);
@@ -55,14 +59,55 @@ public class GeoRssExtensions {
     }
 
     private static void mapEnvelope(GeoRssChannel geoRssChannel, String text) {
-        var existingValue = geoRssChannel.getGeoRssBox().orElse("");
-        var newValue = existingValue.trim() + " " + text.trim();
+        var existingValue = geoRssChannel.getGeoRssBox().orElse("").trim();
+        var newValue = existingValue + " " + text.trim();
         geoRssChannel.setGeoRssBox(newValue);
     }
 
     private static void mapEnvelope(GeoRssItem geoRssItem, String text) {
-        var existingValue = geoRssItem.getGeoRssBox().orElse("");
-        var newValue = existingValue.trim() + " " + text.trim();
+        var existingValue = geoRssItem.getGeoRssBox().orElse("").trim();
+        var newValue = existingValue + " " + text.trim();
         geoRssItem.setGeoRssBox(newValue);
     }
+
+    private static void mapLatitude(GeoRssChannel geoRssItem, String text) {
+        var existingValue = geoRssItem.getGeoRssPoint().orElse("").trim();
+        if (!existingValue.isEmpty() && containsWhitespace(existingValue)) {
+            return;
+        }
+        var newValue = existingValue.isEmpty() ? text.trim() : text.trim() + " " + existingValue;
+        geoRssItem.setGeoRssPoint(newValue);
+    }
+
+    private static void mapLongitude(GeoRssChannel geoRssItem, String text) {
+        var existingValue = geoRssItem.getGeoRssPoint().orElse("").trim();
+        if (!existingValue.isEmpty() && containsWhitespace(existingValue)) {
+            return;
+        }
+        var newValue = existingValue.isEmpty() ? text.trim() : existingValue + " " + text.trim();
+        geoRssItem.setGeoRssPoint(newValue);
+    }
+
+    private static void mapLatitude(GeoRssItem geoRssItem, String text) {
+        var existingValue = geoRssItem.getGeoRssPoint().orElse("").trim();
+        if (!existingValue.isEmpty() && containsWhitespace(existingValue)) {
+            return;
+        }
+        var newValue = existingValue.isEmpty() ? text.trim() : text.trim() + " " + existingValue;
+        geoRssItem.setGeoRssPoint(newValue);
+    }
+
+    private static void mapLongitude(GeoRssItem geoRssItem, String text) {
+        var existingValue = geoRssItem.getGeoRssPoint().orElse("").trim();
+        if (!existingValue.isEmpty() && containsWhitespace(existingValue)) {
+            return;
+        }
+        var newValue = existingValue.isEmpty() ? text.trim() : existingValue + " " + text.trim();
+        geoRssItem.setGeoRssPoint(newValue);
+    }
+
+    private static boolean containsWhitespace(String text) {
+        return text != null && text.matches(".*\\s.*");
+    }
+
 }
