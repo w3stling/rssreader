@@ -85,6 +85,8 @@ class InvalidXmlCharacterFilterTest {
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
+        var item = items.get(0);
+        assertEquals("M 3.2, “Mona” Passage", item.getTitle().orElse(""));
     }
 
     private InputStream fromFile(String fileName) {
