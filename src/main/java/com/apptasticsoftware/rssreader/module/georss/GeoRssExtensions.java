@@ -14,6 +14,10 @@ public class GeoRssExtensions {
     private static final List<String> CHANNEL_PATHS = List.of("/rss/channel/", "/feed/");
     private static final List<String> ITEM_PATHS = List.of("/rss/channel/item/", "/feed/entry/");
 
+    private GeoRssExtensions() {
+        // Prevent instantiation
+    }
+
     /**
      * Registers GeoRSS channel and item extensions with the provided registry.
      *
