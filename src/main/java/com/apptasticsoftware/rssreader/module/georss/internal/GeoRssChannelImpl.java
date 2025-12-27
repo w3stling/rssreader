@@ -7,22 +7,37 @@ import com.apptasticsoftware.rssreader.module.georss.GeoRssChannelData;
 
 import java.util.Objects;
 
+/**
+ * Implementation of GeoRssChannel with geographic extension support.
+ */
 public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
     private final GeoRssChannelData geoRssData = new GeoRssChannelDataImpl();
 
     /**
-     * Constructor
-     * @param dateTimeParser timestamp parser
+     * Constructs a GeoRssChannelImpl with the specified date time parser.
+     *
+     * @param dateTimeParser the date time parser
      */
     public GeoRssChannelImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }
 
+    /**
+     * Returns the GeoRSS channel data.
+     *
+     * @return the GeoRSS channel data
+     */
     @Override
     public GeoRssChannelData getGeoRssChannelData() {
         return geoRssData;
     }
 
+    /**
+     * Compares this channel with another object for equality.
+     *
+     * @param o the object to compare with
+     * @return true if both channels are equal
+     */
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof GeoRssChannelImpl)) return false;
@@ -31,6 +46,11 @@ public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
         return Objects.equals(getGeoRssChannelData(), that.getGeoRssChannelData());
     }
 
+    /**
+     * Returns the hash code for this channel.
+     *
+     * @return the hash code
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getGeoRssChannelData());
