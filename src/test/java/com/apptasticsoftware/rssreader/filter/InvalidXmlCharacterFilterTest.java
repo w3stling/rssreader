@@ -12,7 +12,7 @@ class InvalidXmlCharacterFilterTest {
 
     @Test
     void testInvalidXmlCharacter0x6() {
-        var fileInputSteam = fromFile("rss-invalid-xml-character-0x6.xml");
+        var fileInputSteam = fromFile("filter/rss-invalid-xml-character-0x6.xml");
         var list = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
                 .read(fileInputSteam)
@@ -22,7 +22,7 @@ class InvalidXmlCharacterFilterTest {
 
     @Test
     void testInvalidXmlEscapeString() {
-        var fileInputSteam = fromFile("rss-invalid-xml-escape-string.xml");
+        var fileInputSteam = fromFile("filter/rss-invalid-xml-escape-string.xml");
         var list = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
                 .read(fileInputSteam)
@@ -34,7 +34,7 @@ class InvalidXmlCharacterFilterTest {
 
     @Test
     void testInvalidXmlEscapeStringExtra() {
-        var fileInputSteam = fromFile("rss-invalid-xml-escape-string-extra.xml");
+        var fileInputSteam = fromFile("filter/rss-invalid-xml-escape-string-extra.xml");
         var list = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
                 .read(fileInputSteam)
@@ -45,7 +45,7 @@ class InvalidXmlCharacterFilterTest {
 
     @Test
     void testInvalidXmlEscapeStringWithinCdata() {
-        var fileInputSteam = fromFile("rss-invalid-xml-escape-string-within-cdata.xml");
+        var fileInputSteam = fromFile("filter/rss-invalid-xml-escape-string-within-cdata.xml");
         var list = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
                 .read(fileInputSteam)
@@ -68,7 +68,7 @@ class InvalidXmlCharacterFilterTest {
     void testCdataEndingWithTripleRightSquareBrackets() {
         var items = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
-                .read(fromFile("rss-cdata-ending-triple-right-square-brackets.xml"))
+                .read(fromFile("filter/rss-cdata-ending-triple-right-square-brackets.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(20, items.size());
@@ -81,7 +81,7 @@ class InvalidXmlCharacterFilterTest {
     void testInvalidQuotationMark() {
         var items = new RssReader()
                 .addFeedFilter(new InvalidXmlCharacterFilter())
-                .read(fromFile("atom-invalid-xml-quotation-mark.xml"))
+                .read(fromFile("filter/atom-invalid-xml-quotation-mark.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());

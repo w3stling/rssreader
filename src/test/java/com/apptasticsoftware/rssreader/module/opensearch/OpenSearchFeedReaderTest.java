@@ -27,7 +27,7 @@ class OpenSearchFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example1(AbstractRssReader<OpenSearchChannel, OpenSearchItem> feedReader) {
-        var items = feedReader.read(fromFile("opensearch/example1.xml"))
+        var items = feedReader.read(fromFile("module/opensearch/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -60,7 +60,7 @@ class OpenSearchFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example2(AbstractRssReader<OpenSearchChannel, OpenSearchItem> feedReader) {
-        var items = feedReader.read(fromFile("opensearch/example2.xml"))
+        var items = feedReader.read(fromFile("module/opensearch/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());

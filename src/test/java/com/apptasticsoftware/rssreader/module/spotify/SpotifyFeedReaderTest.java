@@ -30,7 +30,7 @@ class SpotifyFeedReaderTest {
     @MethodSource("feedReaderArguments")
     @SuppressWarnings("java:S5961")
     void example1(AbstractRssReader<SpotifyChannel, SpotifyItem> feedReader) {
-        var items = feedReader.read(fromFile("spotify/example1.xml"))
+        var items = feedReader.read(fromFile("module/spotify/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());

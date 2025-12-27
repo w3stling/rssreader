@@ -30,7 +30,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeed() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(10, res.size());
@@ -38,7 +38,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedItemTitle() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -48,7 +48,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedItemPubDate() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -58,7 +58,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedItemLink() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -68,7 +68,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedDescription() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -78,7 +78,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedGuid() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -88,7 +88,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedIsPermaLink() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -98,7 +98,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssFeedThumbnail() {
-        var res = new MediaRssFeedReader().read(fromFile("mediarss/media-rss.xml"))
+        var res = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 
@@ -114,7 +114,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssContent() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-content.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-content.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -275,7 +275,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void readMediaRssGroup() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-group.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-group.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -442,7 +442,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void mediaRssChannel() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-channel.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-channel.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -693,7 +693,7 @@ class MediaRssFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void mediaRssExample1(AbstractRssReader<MediaRssChannel, MediaRssItem> feedReader) {
-        var items = feedReader.read(fromFile("mediarss/media-rss-example-1.xml"))
+        var items = feedReader.read(fromFile("module/mediarss/media-rss-example-1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -934,7 +934,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void mediaRssExample2() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-example-2.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-example-2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -1221,7 +1221,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void mediaRssExample3() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-example-3.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-example-3.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -1489,7 +1489,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void mediaRssExample4() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-example-4.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-example-4.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -1761,7 +1761,7 @@ class MediaRssFeedReaderTest {
 
     @Test
     void mediaRssExample5() {
-        var items = new MediaRssFeedReader().read(fromFile("mediarss/media-rss-example-5.xml"))
+        var items = new MediaRssFeedReader().read(fromFile("module/mediarss/media-rss-example-5.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());

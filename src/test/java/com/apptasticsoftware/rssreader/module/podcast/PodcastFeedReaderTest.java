@@ -29,7 +29,7 @@ class PodcastFeedReaderTest {
     @MethodSource("feedReaderArguments")
     @SuppressWarnings({"java:S5961", "java:S5738"})
     void example1(AbstractRssReader<PodcastChannel, PodcastItem> feedReader) {
-        var items = feedReader.read(fromFile("podcast/example1.xml"))
+        var items = feedReader.read(fromFile("module/podcast/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(4, items.size());
@@ -324,7 +324,7 @@ class PodcastFeedReaderTest {
     @MethodSource("feedReaderArguments")
     @SuppressWarnings({"java:S5961", "java:S5738"})
     void example2(AbstractRssReader<PodcastChannel, PodcastItem> feedReader) {
-        var items = feedReader.read(fromFile("podcast/example2.xml"))
+        var items = feedReader.read(fromFile("module/podcast/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(3, items.size());

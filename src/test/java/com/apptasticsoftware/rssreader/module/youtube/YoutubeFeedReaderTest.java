@@ -29,7 +29,7 @@ class YoutubeFeedReaderTest {
     @MethodSource("feedReaderArguments")
     @SuppressWarnings("java:S5961")
     void example1(AbstractRssReader<YoutubeChannel, YoutubeItem> feedReader) {
-        var items = feedReader.read(fromFile("youtube/example1.xml"))
+        var items = feedReader.read(fromFile("module/youtube/example1.xml"))
                 .collect(Collectors.toList());
         assertEquals(15, items.size());
 

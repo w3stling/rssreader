@@ -22,7 +22,7 @@ class ItunesRssFeedReaderTest {
 
     @Test
     void readItunesPodcastFeed() {
-        var res = new ItunesFeedReader().read(fromFile("itunes-podcast.xml"))
+        var res = new ItunesFeedReader().read(fromFile("module/itunes/itunes-podcast.xml"))
                 .sorted(ItemComparator.oldestPublishedItemFirst())
                 .collect(Collectors.toList());
 

@@ -715,7 +715,7 @@ class RssReaderIntegrationTest {
 
     @Test
     void testReadFromFile() {
-        long count = new RssReader().read(fromFile("itunes-podcast.xml")).count();
+        long count = new RssReader().read(fromFile("module/itunes/itunes-podcast.xml")).count();
         assertEquals(9, count);
     }
     

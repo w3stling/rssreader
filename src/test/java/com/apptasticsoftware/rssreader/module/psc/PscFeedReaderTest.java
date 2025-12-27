@@ -29,7 +29,7 @@ class PscFeedReaderTest {
     @MethodSource("feedReaderArguments")
     @SuppressWarnings("java:S5961")
     void example1(AbstractRssReader<PscChannel, PscItem> feedReader) {
-        var items = feedReader.read(fromFile("psc/example1.xml"))
+        var items = feedReader.read(fromFile("module/psc/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());

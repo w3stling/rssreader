@@ -26,7 +26,7 @@ class GeoRssFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example1(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
-        var items = feedReader.read(fromFile("georss/example1.xml"))
+        var items = feedReader.read(fromFile("module/georss/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -78,7 +78,7 @@ class GeoRssFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example2(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
-        var items = feedReader.read(fromFile("georss/example2.xml"))
+        var items = feedReader.read(fromFile("module/georss/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -119,7 +119,7 @@ class GeoRssFeedReaderTest {
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example3(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
-        var items =feedReader.read(fromFile("georss/example3.xml"))
+        var items =feedReader.read(fromFile("module/georss/example3.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
