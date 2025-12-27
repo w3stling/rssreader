@@ -141,6 +141,7 @@ class GeoRssFeedReaderTest {
         EqualsVerifier.simple().forClass(GeoRssItemImpl.class).withNonnullFields("geoRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(GeoRssItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
+        EqualsVerifier.simple().forClass(Coordinate.class).verify();
     }
 
     private InputStream fromFile(String fileName) {
