@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+    <channel>
+        <title>Example Website</title>
+        <link>https://www.example.com</link>
+        <description>Latest news and updates</description>
+        <item>
+            <title>First Sample Post</title>
+            <link>https://www.example.com/post1</link>
+            <description>This is a summary of the first post.</description>
+            <pubDate>Mon, 27 May 2024 10:00:00 GMT</pubDate>
+            <wfw:commentRss>https://ekzemplo.com/news/130/comments.xml</wfw:commentRss>
+            <wfw:comment>https://ekzemplo.com/comment?post=130</wfw:comment>
+        </item>
+    </channel>
+</rss>
