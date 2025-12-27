@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.FeedItem;
+import com.apptasticsoftware.rssreader.module.georss.GeoRssItemData;
+import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssItemDataImpl;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
@@ -16,6 +18,7 @@ import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataIm
 import java.util.Objects;
 
 public class FeedItemImpl extends ItemImpl implements FeedItem {
+    private final GeoRssItemData geoRssItemData = new GeoRssItemDataImpl();
     private final ItunesItemData itunesItemData = new ItunesItemDataImpl();
     private final MediaRssItemData mediaRssItemData = new MediaRssItemDataImpl();
     private final PodcastItemData podcastItemData;
@@ -30,6 +33,11 @@ public class FeedItemImpl extends ItemImpl implements FeedItem {
     public FeedItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
         podcastItemData = new PodcastItemDataImpl(dateTimeParser);
+    }
+
+    @Override
+    public GeoRssItemData getGeoRssItemData() {
+        return geoRssItemData;
     }
 
     @Override

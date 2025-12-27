@@ -1,13 +1,19 @@
 package com.apptasticsoftware.rssreader.module.georss;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.georss.internal.*;
 import com.apptasticsoftware.rssreader.util.Default;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,9 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SuppressWarnings("java:S5961")
 class GeoRssFeedReaderTest {
 
-    @Test
-    void example1() {
-        var items = new GeoRssFeedReader().read(fromFile("georss/example1.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example1(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
+        var items = feedReader.read(fromFile("georss/example1.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -68,9 +75,10 @@ class GeoRssFeedReaderTest {
         assertThat(item.getGeoRssFeatureName(), isPresentAndIs("Podunk"));
     }
 
-    @Test
-    void example2() {
-        var items = new GeoRssFeedReader().read(fromFile("georss/example2.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example2(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
+        var items = feedReader.read(fromFile("georss/example2.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -108,9 +116,10 @@ class GeoRssFeedReaderTest {
         assertThat(item.getGeoRssBoxAsCoordinates(), is(List.of(new Coordinate(42.943, -71.032), new Coordinate(43.039, -69.856))));
     }
 
-    @Test
-    void example3() {
-        var items = new GeoRssFeedReader().read(fromFile("georss/example3.xml"))
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example3(AbstractRssReader<GeoRssChannel, GeoRssItem> feedReader) {
+        var items =feedReader.read(fromFile("georss/example3.xml"))
                 .collect(Collectors.toList());
 
         assertEquals(1, items.size());
@@ -142,6 +151,13 @@ class GeoRssFeedReaderTest {
         EqualsVerifier.simple().forClass(GeoRssItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
         EqualsVerifier.simple().forClass(Coordinate.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new GeoRssFeedReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.module.georss.GeoRssChannel;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannel;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannel;
@@ -8,5 +9,5 @@ import com.apptasticsoftware.rssreader.module.psc.PscChannel;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannel;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannel;
 
-public interface FeedChannel extends Channel, ItunesChannel, MediaRssChannel, OpenSearchChannel, PodcastChannel, PscChannel, SpotifyChannel, YoutubeChannel {
+public interface FeedChannel extends Channel, GeoRssChannel, ItunesChannel, MediaRssChannel, OpenSearchChannel, PodcastChannel, PscChannel, SpotifyChannel, YoutubeChannel {
 }
