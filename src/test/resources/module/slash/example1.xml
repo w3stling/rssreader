@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+        xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+        xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+    <channel>
+        <title>Slashdot</title>
+        <link>http://slashdot.org</link>
+        <description>News for nerds, stuff that matters</description>
+        <dc:publisher>OSDN</dc:publisher>
+        <dc:creator>pater@slashdot.org</dc:creator>
+        <dc:rights>Copyright © 2000 Slashdot</dc:rights>
+        <dc:language>en-us</dc:language>
+        <dc:date>2000-12-17T01:17-05:00</dc:date>
+
+        <item>
+            <title>Jupiter Moon Ganymede May Have An Ocean</title>
+            <link>http://slashdot.org/article.pl?sid=00/12/17/0622203</link>
+            <description>
+                This article talks about how Jupiter's moon, Ganymede, may have a
+                salt water ocean on it. Kind of ...
+            </description>
+            <dc:creator>timothy</dc:creator>
+            <dc:subject>space</dc:subject>
+            <dc:date>2000-12-17T01:17</dc:date>
+            <slash:section>articles</slash:section>
+            <slash:department>not-an-ocean-unless-there-are-lobsters</slash:department>
+            <slash:comments>177</slash:comments>
+            <slash:hit_parade>177,155,105,33,6,3,0</slash:hit_parade>
+        </item>
+    </channel>
+</rss>

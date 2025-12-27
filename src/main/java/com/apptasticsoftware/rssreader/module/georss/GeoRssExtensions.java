@@ -65,7 +65,7 @@ public class GeoRssExtensions {
         registry.addItemExtension("georss:polygon", GeoRssItem::setGeoRssPolygon);
         registry.addItemExtension("georss:box", GeoRssItem::setGeoRssBox);
         registry.addItemExtension("georss:elev", (item, value) -> mapDouble(value, item::setGeoRssElevation));
-        registry.addItemExtension("georss:floor",  (item, value) -> mapInteger(value, item::setGeoRssFloor));
+        registry.addItemExtension("georss:floor", (item, value) -> mapInteger(value, item::setGeoRssFloor));
         registry.addItemExtension("georss:radius", (item, value) -> mapDouble(value, item::setGeoRssRadius));
         registry.addItemExtension("georss:featuretypetag", GeoRssItem::setGeoRssFeatureTypeTag);
         registry.addItemExtension("georss:relationshiptag", GeoRssItem::setGeoRssRelationshipTag);
