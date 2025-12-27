@@ -9,7 +9,7 @@ public class MetaData {
     private String geoRssLine;
     private String geoRssPolygon;
     private String geoRssBox;
-    private Double geoRssElev;
+    private Double geoRssElevation;
     private Integer geoRssFloor;
     private Double geoRssRadius;
     private String geoRssFeatureTypeTag;
@@ -64,12 +64,12 @@ public class MetaData {
         this.geoRssBox = geoRssBox;
     }
 
-    public Optional<Double> getGeoRssElev() {
-        return Optional.ofNullable(geoRssElev);
+    public Optional<Double> getGeoRssElevation() {
+        return Optional.ofNullable(geoRssElevation);
     }
 
-    public void setGeoRssElev(Double geoRssElev) {
-        this.geoRssElev = geoRssElev;
+    public void setGeoRssElevation(Double geoRssElevation) {
+        this.geoRssElevation = geoRssElevation;
     }
 
     public Optional<Integer> getGeoRssFloor() {
@@ -134,11 +134,11 @@ public class MetaData {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         MetaData that = (MetaData) o;
-        return Objects.equals(getGeoRssPoint(), that.getGeoRssPoint()) && Objects.equals(getGeoRssLine(), that.getGeoRssLine()) && Objects.equals(getGeoRssPolygon(), that.getGeoRssPolygon()) && Objects.equals(getGeoRssBox(), that.getGeoRssBox()) && Objects.equals(getGeoRssElev(), that.getGeoRssElev()) && Objects.equals(getGeoRssFloor(), that.getGeoRssFloor()) && Objects.equals(getGeoRssRadius(), that.getGeoRssRadius()) && Objects.equals(getGeoRssFeatureTypeTag(), that.getGeoRssFeatureTypeTag()) && Objects.equals(getGeoRssRelationshipTag(), that.getGeoRssRelationshipTag()) && Objects.equals(getGeoRssFeatureName(), that.getGeoRssFeatureName());
+        return Objects.equals(getGeoRssPoint(), that.getGeoRssPoint()) && Objects.equals(getGeoRssLine(), that.getGeoRssLine()) && Objects.equals(getGeoRssPolygon(), that.getGeoRssPolygon()) && Objects.equals(getGeoRssBox(), that.getGeoRssBox()) && Objects.equals(getGeoRssElevation(), that.getGeoRssElevation()) && Objects.equals(getGeoRssFloor(), that.getGeoRssFloor()) && Objects.equals(getGeoRssRadius(), that.getGeoRssRadius()) && Objects.equals(getGeoRssFeatureTypeTag(), that.getGeoRssFeatureTypeTag()) && Objects.equals(getGeoRssRelationshipTag(), that.getGeoRssRelationshipTag()) && Objects.equals(getGeoRssFeatureName(), that.getGeoRssFeatureName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getGeoRssPoint(), getGeoRssLine(), getGeoRssPolygon(), getGeoRssBox(), getGeoRssElev(), getGeoRssFloor(), getGeoRssRadius(), getGeoRssFeatureTypeTag(), getGeoRssRelationshipTag(), getGeoRssFeatureName());
+        return Objects.hash(getGeoRssPoint(), getGeoRssLine(), getGeoRssPolygon(), getGeoRssBox(), getGeoRssElevation(), getGeoRssFloor(), getGeoRssRadius(), getGeoRssFeatureTypeTag(), getGeoRssRelationshipTag(), getGeoRssFeatureName());
     }
 }

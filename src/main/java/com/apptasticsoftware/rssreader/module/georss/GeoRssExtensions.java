@@ -21,7 +21,7 @@ public class GeoRssExtensions {
         registry.addChannelExtension("georss:line", GeoRssChannel::setGeoRssLine);
         registry.addChannelExtension("georss:polygon", GeoRssChannel::setGeoRssPolygon);
         registry.addChannelExtension("georss:box", GeoRssChannel::setGeoRssBox);
-        registry.addChannelExtension("georss:elev", (item, value) -> mapDouble(value, item::setGeoRssElev));
+        registry.addChannelExtension("georss:elev", (item, value) -> mapDouble(value, item::setGeoRssElevation));
         registry.addChannelExtension("georss:floor",  (item, value) -> mapInteger(value, item::setGeoRssFloor));
         registry.addChannelExtension("georss:radius", (item, value) -> mapDouble(value, item::setGeoRssRadius));
         registry.addChannelExtension("georss:featuretypetag", GeoRssChannel::setGeoRssFeatureTypeTag);
@@ -42,7 +42,7 @@ public class GeoRssExtensions {
         registry.addItemExtension("georss:line", GeoRssItem::setGeoRssLine);
         registry.addItemExtension("georss:polygon", GeoRssItem::setGeoRssPolygon);
         registry.addItemExtension("georss:box", GeoRssItem::setGeoRssBox);
-        registry.addItemExtension("georss:elev", (item, value) -> mapDouble(value, item::setGeoRssElev));
+        registry.addItemExtension("georss:elev", (item, value) -> mapDouble(value, item::setGeoRssElevation));
         registry.addItemExtension("georss:floor",  (item, value) -> mapInteger(value, item::setGeoRssFloor));
         registry.addItemExtension("georss:radius", (item, value) -> mapDouble(value, item::setGeoRssRadius));
         registry.addItemExtension("georss:featuretypetag", GeoRssItem::setGeoRssFeatureTypeTag);

@@ -37,7 +37,7 @@ class GeoRssFeedReaderTest {
         assertThat(channel.getGeoRssPolygonAsCoordinates(), is(List.of(new Coordinate(45.255, -110.44), new Coordinate(46.45, -109.47), new Coordinate(43.83, -109.85), new Coordinate(45.255, -110.44))));
         assertThat(channel.getGeoRssBox(), isPresentAndIs("42.942 -71.031 43.038 -69.855"));
         assertThat(channel.getGeoRssBoxAsCoordinates(), is(List.of(new Coordinate(42.942, -71.031), new Coordinate(43.038, -69.855))));
-        assertThat(channel.getGeoRssElev(), isPresentAndIs(312.0));
+        assertThat(channel.getGeoRssElevation(), isPresentAndIs(312.0));
         assertThat(channel.getGeoRssFloor(), isPresentAndIs(1));
         assertThat(channel.getGeoRssRadius(), isPresentAndIs(499.0));
         assertThat(channel.getGeoRssFeatureTypeTag(), isPresentAndIs("city-2"));
@@ -59,7 +59,7 @@ class GeoRssFeedReaderTest {
         assertThat(item.getGeoRssPolygonAsCoordinates(), is(List.of(new Coordinate(45.256, -110.45), new Coordinate(46.46, -109.48), new Coordinate(43.84, -109.86), new Coordinate(45.256, -110.45))));
         assertThat(item.getGeoRssBox(), isPresentAndIs("42.943 -71.032 43.039 -69.856"));
         assertThat(item.getGeoRssBoxAsCoordinates(), is(List.of(new Coordinate(42.943, -71.032), new Coordinate(43.039, -69.856))));
-        assertThat(item.getGeoRssElev(), isPresentAndIs(313.0));
+        assertThat(item.getGeoRssElevation(), isPresentAndIs(313.0));
         assertThat(item.getGeoRssFloor(), isPresentAndIs(2));
         assertThat(item.getGeoRssRadius(), isPresentAndIs(500.0));
         assertThat(item.getGeoRssFeatureTypeTag(), isPresentAndIs("city"));

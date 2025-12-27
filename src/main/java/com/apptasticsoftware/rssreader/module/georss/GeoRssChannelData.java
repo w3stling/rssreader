@@ -55,12 +55,12 @@ public interface GeoRssChannelData {
         getGeoRssChannelData().setGeoRssBox(geoRssBox);
     }
 
-    default Optional<Double> getGeoRssElev() {
-        return getGeoRssChannelData().getGeoRssElev();
+    default Optional<Double> getGeoRssElevation() {
+        return getGeoRssChannelData().getGeoRssElevation();
     }
 
-    default void setGeoRssElev(Double geoRssElev) {
-        getGeoRssChannelData().setGeoRssElev(geoRssElev);
+    default void setGeoRssElevation(Double geoRssElevation) {
+        getGeoRssChannelData().setGeoRssElevation(geoRssElevation);
     }
 
     default Optional<Integer> getGeoRssFloor() {
