@@ -5,6 +5,13 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashChannelImpl;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemImpl;
 
+/**
+ * RSS feed reader with Slash module extensions.
+ * Provides parsing of RSS feeds that include Slash-specific metadata for items.
+ *
+ * @see SlashItem for item-level Slash properties
+ * @see SlashChannel for channel-level Slash properties
+ */
 public class SlashFeedReader extends AbstractRssReader<SlashChannel, SlashItem> {
 
     @Override

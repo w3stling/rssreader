@@ -7,9 +7,17 @@ import com.apptasticsoftware.rssreader.module.slash.SlashItemData;
 
 import java.util.Objects;
 
+/**
+ * Implementation of SlashItem combining core item functionality with Slash-specific metadata.
+ */
 public class SlashItemImpl extends ItemImpl implements SlashItem {
     private final SlashItemData slashData = new SlashItemDataImpl();
 
+    /**
+     * Constructs a SlashItemImpl with the provided date-time parser.
+     *
+     * @param dateTimeParser the parser for parsing date-time values
+     */
     public SlashItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }
