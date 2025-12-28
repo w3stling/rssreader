@@ -1,6 +1,5 @@
 package com.apptasticsoftware.rssreader.module.wfw;
 
-import com.apptasticsoftware.rssreader.module.georss.internal.*;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataImpl;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemImpl;
 import com.apptasticsoftware.rssreader.util.Default;
