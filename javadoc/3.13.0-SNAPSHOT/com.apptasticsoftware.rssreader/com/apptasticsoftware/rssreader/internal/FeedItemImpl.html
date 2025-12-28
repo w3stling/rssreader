@@ -69,6 +69,7 @@ loadScripts(document, 'script');</script>
 <li><a href="#getMediaRssItemData()" tabindex="0">getMediaRssItemData()</a></li>
 <li><a href="#getPodcastItemData()" tabindex="0">getPodcastItemData()</a></li>
 <li><a href="#getPscItemData()" tabindex="0">getPscItemData()</a></li>
+<li><a href="#getWfWItemData()" tabindex="0">getWfWItemData()</a></li>
 <li><a href="#getYoutubeItemData()" tabindex="0">getYoutubeItemData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
@@ -89,7 +90,7 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>, <a href="../module/georss/GeoRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItem</a>, <a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a>, <a href="../module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a>, <a href="../module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a>, <a href="../module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="../module/opensearch/OpenSearchItemData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemData</a>, <a href="../module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a>, <a href="../module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a>, <a href="../module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="../module/spotify/SpotifyItemData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemData</a>, <a href="../module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a>, <a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dd><code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>, <a href="../module/georss/GeoRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItem</a>, <a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a>, <a href="../module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a>, <a href="../module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a>, <a href="../module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="../module/opensearch/OpenSearchItemData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemData</a>, <a href="../module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a>, <a href="../module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a>, <a href="../module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="../module/spotify/SpotifyItemData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemData</a>, <a href="../module/wfw/WfwItem.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItem</a>, <a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a>, <a href="../module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a>, <a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
@@ -146,12 +147,17 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPscItemData()" class="member-name-link">getPscItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getYoutubeItemData()" class="member-name-link">getYoutubeItemData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWfWItemData()" class="member-name-link">getWfWItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the underlying WFW item data implementation.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getYoutubeItemData()" class="member-name-link">getYoutubeItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -182,6 +188,9 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.module.psc.PscItemData">Methods inherited from interface&nbsp;<a href="../module/psc/PscItemData.html#method-summary" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></h3>
 <code><a href="../module/psc/PscItemData.html#getPscChapters()" title="getPscChapters()">getPscChapters</a>, <a href="../module/psc/PscItemData.html#setPscChapters(com.apptasticsoftware.rssreader.module.psc.PscChapters)" title="setPscChapters(PscChapters)">setPscChapters</a></code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.module.wfw.WfwItemData">Methods inherited from interface&nbsp;<a href="../module/wfw/WfwItemData.html#method-summary" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></h3>
+<code><a href="../module/wfw/WfwItemData.html#getWfwComment()" title="getWfwComment()">getWfwComment</a>, <a href="../module/wfw/WfwItemData.html#getWfwCommentRss()" title="getWfwCommentRss()">getWfwCommentRss</a>, <a href="../module/wfw/WfwItemData.html#setWfwComment(java.lang.String)" title="setWfwComment(String)">setWfwComment</a>, <a href="../module/wfw/WfwItemData.html#setWfwCommentRss(java.lang.String)" title="setWfwCommentRss(String)">setWfwCommentRss</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData">Methods inherited from interface&nbsp;<a href="../module/youtube/YoutubeItemData.html#method-summary" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></h3>
 <code><a href="../module/youtube/YoutubeItemData.html#getYoutubeChannelId()" title="getYoutubeChannelId()">getYoutubeChannelId</a>, <a href="../module/youtube/YoutubeItemData.html#getYoutubeVideoId()" title="getYoutubeVideoId()">getYoutubeVideoId</a>, <a href="../module/youtube/YoutubeItemData.html#setYoutubeChannelId(java.lang.String)" title="setYoutubeChannelId(String)">setYoutubeChannelId</a>, <a href="../module/youtube/YoutubeItemData.html#setYoutubeVideoId(java.lang.String)" title="setYoutubeVideoId(String)">setYoutubeVideoId</a></code></div>
@@ -277,6 +286,22 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../module/psc/PscItemData.html#getPscItemData()">getPscItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="getWfWItemData()">
+<h3>getWfWItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span>&nbsp;<span class="element-name">getWfWItemData</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/wfw/WfwItemData.html#getWfWItemData()">WfwItemData</a></code></span></div>
+<div class="block">Returns the underlying WFW item data implementation.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/wfw/WfwItemData.html#getWfWItemData()">getWfWItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></dd>
+<dt>Returns:</dt>
+<dd>the WFW item data instance</dd>
 </dl>
 </div>
 </section>
