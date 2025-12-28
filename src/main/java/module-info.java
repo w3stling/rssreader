@@ -40,6 +40,7 @@ module com.apptasticsoftware.rssreader {
     exports com.apptasticsoftware.rssreader.module.psc;
     exports com.apptasticsoftware.rssreader.module.slash;
     exports com.apptasticsoftware.rssreader.module.spotify;
+    exports com.apptasticsoftware.rssreader.module.wfw;
     exports com.apptasticsoftware.rssreader.module.youtube;
     exports com.apptasticsoftware.rssreader.filter;
 }
