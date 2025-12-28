@@ -10,11 +10,11 @@ import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemImpl;
  * This reader extends {@link AbstractRssReader} to parse RSS feeds that include WFW comment-related
  * elements, allowing access to comment RSS feeds and comment submission endpoints.
  *
- * <p>The WFW namespace was introduced in 2003 and provides two ways for RSS feeds to support comments:
+ * The WFW namespace was introduced in 2003 and provides two ways for RSS feeds to support comments:
  * <ul>
  *   <li>Publicizing the URL of feeds that contain an item's comments ({@code wfw:commentRss})</li>
  *   <li>Providing a REST interface for RSS readers to submit comments ({@code wfw:comment})</li>
- * </ul></p>
+ * </ul>
  *
  * @see WfwChannel
  * @see WfwItem

@@ -9,11 +9,11 @@ import java.util.Optional;
  * Implementation of {@link WfwItemData} that stores WFW (Well-Formed Web Comment API) properties for RSS items.
  * This class maintains the WFW-specific data such as comment RSS feed URLs and comment submission endpoints.
  *
- * <p>Each WfwItemDataImpl instance stores:
+ * Each WfwItemDataImpl instance stores:
  * <ul>
  *   <li>{@code wfwCommentRss} - URL of an RSS feed containing comments for the item (optional)</li>
  *   <li>{@code wfwComment} - URL endpoint for submitting comments to the item (optional)</li>
- * </ul></p>
+ * </ul>
  *
  * @see WfwItemData
  */
