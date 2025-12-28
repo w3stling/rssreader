@@ -7,8 +7,9 @@ import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchItem;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItem;
 import com.apptasticsoftware.rssreader.module.psc.PscItem;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyItem;
+import com.apptasticsoftware.rssreader.module.wfw.WfwItem;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
 
-public interface FeedItem extends Item, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SpotifyItem, YoutubeItem {
+public interface FeedItem extends Item, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SpotifyItem, WfwItem, YoutubeItem {
 
 }

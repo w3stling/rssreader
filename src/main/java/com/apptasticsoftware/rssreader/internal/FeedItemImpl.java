@@ -12,6 +12,8 @@ import com.apptasticsoftware.rssreader.module.podcast.PodcastItemData;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemDataImpl;
 import com.apptasticsoftware.rssreader.module.psc.PscItemData;
 import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
+import com.apptasticsoftware.rssreader.module.wfw.WfwItemData;
+import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataImpl;
 
@@ -23,6 +25,7 @@ public class FeedItemImpl extends ItemImpl implements FeedItem {
     private final MediaRssItemData mediaRssItemData = new MediaRssItemDataImpl();
     private final PodcastItemData podcastItemData;
     private final PscItemData pscItemData = new PscItemDataImpl();
+    private final WfwItemData wfwItemData = new WfwItemDataImpl();
     private final YoutubeItemData youtubeItemData = new YoutubeItemDataImpl();
 
     /**
@@ -58,6 +61,11 @@ public class FeedItemImpl extends ItemImpl implements FeedItem {
     @Override
     public PscItemData getPscItemData() {
         return pscItemData;
+    }
+
+    @Override
+    public WfwItemData getWfWItemData() {
+        return wfwItemData;
     }
 
     @Override
