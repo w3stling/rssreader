@@ -13,8 +13,7 @@ import java.util.Optional;
  * <ul>
  *   <li>{@code wfwCommentRss} - URL of an RSS feed containing comments for the item (optional)</li>
  *   <li>{@code wfwComment} - URL endpoint for submitting comments to the item (optional)</li>
- * </ul>
- * </p>
+ * </ul></p>
  *
  * @see WfwItemData
  */

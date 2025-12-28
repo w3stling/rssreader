@@ -14,8 +14,7 @@ import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemImpl;
  * <ul>
  *   <li>Publicizing the URL of feeds that contain an item's comments ({@code wfw:commentRss})</li>
  *   <li>Providing a REST interface for RSS readers to submit comments ({@code wfw:comment})</li>
- * </ul>
- * </p>
+ * </ul></p>
  *
  * @see WfwChannel
  * @see WfwItem
