@@ -15,6 +15,8 @@ com.apptasticsoftware.rssreader.module.podcast
 com.apptasticsoftware.rssreader.module.podcast.internal
 com.apptasticsoftware.rssreader.module.psc
 com.apptasticsoftware.rssreader.module.psc.internal
+com.apptasticsoftware.rssreader.module.slash
+com.apptasticsoftware.rssreader.module.slash.internal
 com.apptasticsoftware.rssreader.module.spotify
 com.apptasticsoftware.rssreader.module.spotify.internal
 com.apptasticsoftware.rssreader.module.wfw
