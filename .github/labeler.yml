@@ -11,3 +11,4 @@
   - head-branch: ['^doc/']
 'github_actions':
   - head-branch: ['^dependabot/gradle/org.sonarqube-']
+  - head-branch: ['^dependabot/gradle/biz.aQute.bnd.builder-']
