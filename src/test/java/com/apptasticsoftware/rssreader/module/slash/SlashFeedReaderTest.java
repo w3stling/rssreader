@@ -1,12 +1,18 @@
 package com.apptasticsoftware.rssreader.module.slash;
 
+import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataImpl;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemImpl;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.InputStream;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,9 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SuppressWarnings("java:S5961")
 class SlashFeedReaderTest {
 
-    @Test
-    void example1() {
-        var items = new SlashFeedReader().read(fromFile("module/slash/example1.xml")).collect(Collectors.toList());
+    @ParameterizedTest
+    @MethodSource("feedReaderArguments")
+    void example1(AbstractRssReader<SlashChannel, SlashItem> feedReader) {
+        var items = feedReader.read(fromFile("module/slash/example1.xml")).collect(Collectors.toList());
         assertEquals(1, items.size());
 
         var item = items.get(0);
@@ -40,6 +47,13 @@ class SlashFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(SlashItemImpl.class).withNonnullFields("slashData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(SlashItemDataImpl.class).verify();
+    }
+
+    private static Stream<? extends Arguments> feedReaderArguments() {
+        return Stream.of(
+                Arguments.of(new SlashFeedReader()),
+                Arguments.of(new FeedReader())
+        );
     }
 
     private InputStream fromFile(String fileName) {

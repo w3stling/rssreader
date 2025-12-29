@@ -6,10 +6,11 @@ import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItem;
 import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchItem;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItem;
 import com.apptasticsoftware.rssreader.module.psc.PscItem;
+import com.apptasticsoftware.rssreader.module.slash.SlashItem;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyItem;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItem;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
 
-public interface FeedItem extends Item, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SpotifyItem, WfwItem, YoutubeItem {
+public interface FeedItem extends Item, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SlashItem, SpotifyItem, WfwItem, YoutubeItem {
 
 }
