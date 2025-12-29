@@ -24,6 +24,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @return an Optional containing the section, or empty if not set
      */
+    @Override
     public Optional<String> getSlashSection() {
         return Optional.ofNullable(slashSection);
     }
@@ -33,6 +34,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @param slashSection the section to set
      */
+    @Override
     public void setSlashSection(String slashSection) {
         this.slashSection = slashSection;
     }
@@ -42,6 +44,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @return an Optional containing the department, or empty if not set
      */
+    @Override
     public Optional<String> getSlashDepartment() {
         return Optional.ofNullable(slashDepartment);
     }
@@ -51,6 +54,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @param slashDepartment the department to set
      */
+    @Override
     public void setSlashDepartment(String slashDepartment) {
         this.slashDepartment = slashDepartment;
     }
@@ -60,6 +64,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @return an Optional containing the comment count, or empty if not set
      */
+    @Override
     public Optional<Integer> getSlashComments() {
         return Optional.ofNullable(slashComments);
     }
@@ -69,6 +74,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @param slashComments the comment count to set
      */
+    @Override
     public void setSlashComments(Integer slashComments) {
         this.slashComments = slashComments;
     }
@@ -78,6 +84,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @return an Optional containing the hit parade, or empty if not set
      */
+    @Override
     public Optional<String> getSlashHitParade() {
         return Optional.ofNullable(slashHitParade);
     }
