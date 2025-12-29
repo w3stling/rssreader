@@ -94,6 +94,7 @@ public class SlashItemDataImpl implements SlashItemData {
      *
      * @param slashHitParade the hit parade to set
      */
+    @Override
     public void setSlashHitParade(String slashHitParade) {
         this.slashHitParade = slashHitParade;
     }
