@@ -52,7 +52,7 @@
         <dc:format>Item format</dc:format>
         <dc:identifier>Item identifier</dc:identifier>
         <dc:source>Item source</dc:source>
-        <dc:language>en</dc:language>
+        <dc:language>en-us</dc:language>
         <dc:relation>Item relation</dc:relation>
         <dc:coverage>Item coverage</dc:coverage>
         <dc:rights>Copyright © 2000 O'Reilly &amp; Associates, Inc.</dc:rights>

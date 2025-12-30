@@ -59,7 +59,7 @@ class DcFeedReaderTest {
         assertThat(item.getDcFormat(), isPresentAndIs("Item format"));
         assertThat(item.getDcIdentifier(), isPresentAndIs("Item identifier"));
         assertThat(item.getDcSource(), isPresentAndIs("Item source"));
-        assertThat(item.getDcLanguage(), isPresentAndIs("en"));
+        assertThat(item.getDcLanguage(), isPresentAndIs("en-us"));
         assertThat(item.getDcRelation(), isPresentAndIs("Item relation"));
         assertThat(item.getDcCoverage(), isPresentAndIs("Item coverage"));
         assertThat(item.getDcRights(), isPresentAndIs("Copyright © 2000 O'Reilly & Associates, Inc."));
