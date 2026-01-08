@@ -252,67 +252,82 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
 
         private void processRegularChar(char ch) throws IOException {
             if (inEntity) {
-                entityBuffer.append(ch);
-                if (ch == ';') {
-                    inEntity = false;
-                    String entity = entityBuffer.toString();
-                    if (entity.startsWith("&#")) {
-                        // Preserve numeric entities as-is
-                        writeStringToBuffer(entity);
-                    } else {
-                        String entityName = entity.substring(1, entity.length() - 1);
-                        String replacement = HTML_ENTITIES.get(entityName);
-                        // If we don't recognize the entity, write it as-is
-                        writeStringToBuffer(Objects.requireNonNullElse(replacement, entity));
-                    }
-                    entityBuffer.setLength(0);
-                }
-                previousChar = ch;
+                processEntity(ch);
             } else if (ch == '&') {
-                inEntity = true;
-                entityBuffer.setLength(0);
-                entityBuffer.append(ch);
-                previousChar = ch;
+                startEntity(ch);
             } else {
-                // Determine if we should replace this curly quote
-                boolean replaceQuote = false;
-                if (isInvalidQuotationMark(ch)) {
-                    replaceQuote = shouldReplaceQuotationMark(ch);
-                }
+                processNonEntityChar(ch);
+            }
+        }
 
-                // Track XML tag/processing instruction state (after deciding on quote replacement)
-                if (ch == '<') {
-                    inTag = true;
+        private void startEntity(char ch) {
+            inEntity = true;
+            entityBuffer.setLength(0);
+            entityBuffer.append(ch);
+            previousChar = ch;
+        }
+
+        private void processEntity(char ch) throws IOException {
+            entityBuffer.append(ch);
+            if (ch == ';') {
+                inEntity = false;
+                String entity = entityBuffer.toString();
+                if (entity.startsWith("&#")) {
+                    // Preserve numeric entities as-is
+                    writeStringToBuffer(entity);
+                } else {
+                    String entityName = entity.substring(1, entity.length() - 1);
+                    String replacement = HTML_ENTITIES.get(entityName);
+                    // If we don't recognize the entity, write it as-is
+                    writeStringToBuffer(Objects.requireNonNullElse(replacement, entity));
+                }
+                entityBuffer.setLength(0);
+            }
+            previousChar = ch;
+        }
+
+        private void processNonEntityChar(char ch) throws IOException {
+            // Determine if we should replace this curly quote
+            boolean replaceQuote = false;
+            if (isInvalidQuotationMark(ch)) {
+                replaceQuote = shouldReplaceQuotationMark(ch);
+            }
+
+            updateTagState(ch, replaceQuote);
+
+            // Write the character (replaced or original)
+            if (replaceQuote) {
+                writeStringToBuffer("\"");
+            } else if (isValidXmlChar(ch)) {
+                writeStringToBuffer(String.valueOf(ch));
+            }
+
+            previousChar = ch;
+        }
+
+        private void updateTagState(char ch, boolean replaceQuote) {
+            // Track XML tag/processing instruction state (after deciding on quote replacement)
+            if (ch == '<') {
+                inTag = true;
+                inAttributeValue = false;
+                attributeQuoteChar = '\0';
+            } else if (ch == '>' && !inAttributeValue) {
+                // End of tag or processing instruction (> including ?>)
+                inTag = false;
+                attributeQuoteChar = '\0';
+            } else if (inTag) {
+                // Track attribute value state
+                char effectiveChar = replaceQuote ? '"' : ch;
+                if (!inAttributeValue && (effectiveChar == '"' || effectiveChar == '\'')) {
+                    // Starting an attribute value
+                    inAttributeValue = true;
+                    attributeQuoteChar = effectiveChar;
+                    attributeStartedWithCurlyQuote = replaceQuote;
+                } else if (inAttributeValue && effectiveChar == attributeQuoteChar) {
+                    // Ending an attribute value
                     inAttributeValue = false;
                     attributeQuoteChar = '\0';
-                } else if (ch == '>' && !inAttributeValue) {
-                    // End of tag or processing instruction (> including ?>)
-                    inTag = false;
-                    inAttributeValue = false;
-                    attributeQuoteChar = '\0';
-                } else if (inTag) {
-                    // Track attribute value state
-                    char effectiveChar = replaceQuote ? '"' : ch;
-                    if (!inAttributeValue && (effectiveChar == '"' || effectiveChar == '\'')) {
-                        // Starting an attribute value
-                        inAttributeValue = true;
-                        attributeQuoteChar = effectiveChar;
-                        attributeStartedWithCurlyQuote = replaceQuote;
-                    } else if (inAttributeValue && effectiveChar == attributeQuoteChar) {
-                        // Ending an attribute value
-                        inAttributeValue = false;
-                        attributeQuoteChar = '\0';
-                    }
                 }
-
-                // Write the character (replaced or original)
-                if (replaceQuote) {
-                    writeStringToBuffer("\"");
-                } else if (isValidXmlChar(ch)) {
-                    writeStringToBuffer(String.valueOf(ch));
-                }
-
-                previousChar = ch;
             }
         }
 
