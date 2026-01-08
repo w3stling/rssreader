@@ -83,6 +83,11 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
         private boolean inCDATA = false;
         private int cdataMatchPos = 0;
         private int cdataEndMatchPos = 0;
+        private boolean inTag = false;
+        private boolean inAttributeValue = false;
+        private char attributeQuoteChar = '\0';
+        private char previousChar = '\0';
+        private boolean attributeStartedWithCurlyQuote = false;
 
         /**
          * Constructs a new {@code StreamingXmlFilterInputStream} with UTF-8 encoding.
@@ -195,10 +200,13 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                         continue;
                     }
                 } else if (!inCDATA && cdataMatchPos > 0) {
-                    // Not a CDATA start, write buffered content and current char
-                    writeStringToBuffer(cdataBuffer.toString());
+                    // Not a CDATA start, process buffered content character by character, then current char
+                    String buffered = cdataBuffer.toString();
                     cdataBuffer.setLength(0);
                     cdataMatchPos = 0;
+                    for (int i = 0; i < buffered.length(); i++) {
+                        processRegularChar(buffered.charAt(i));
+                    }
                     processRegularChar(ch);
                 } else if (inCDATA) {
                     // Check for CDATA end
@@ -259,15 +267,52 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
                     }
                     entityBuffer.setLength(0);
                 }
+                previousChar = ch;
             } else if (ch == '&') {
                 inEntity = true;
                 entityBuffer.setLength(0);
                 entityBuffer.append(ch);
-            } else if (isInvalidQuotationMark(ch)) {
-                // Replace fancy/curly quotation marks with standard straight quote
-                writeStringToBuffer("\"");
-            } else if (isValidXmlChar(ch)) {
-                writeStringToBuffer(String.valueOf(ch));
+                previousChar = ch;
+            } else {
+                // Determine if we should replace this curly quote
+                boolean replaceQuote = false;
+                if (isInvalidQuotationMark(ch)) {
+                    replaceQuote = shouldReplaceQuotationMark(ch);
+                }
+
+                // Track XML tag/processing instruction state (after deciding on quote replacement)
+                if (ch == '<') {
+                    inTag = true;
+                    inAttributeValue = false;
+                    attributeQuoteChar = '\0';
+                } else if (ch == '>' && !inAttributeValue) {
+                    // End of tag or processing instruction (> including ?>)
+                    inTag = false;
+                    inAttributeValue = false;
+                    attributeQuoteChar = '\0';
+                } else if (inTag) {
+                    // Track attribute value state
+                    char effectiveChar = replaceQuote ? '"' : ch;
+                    if (!inAttributeValue && (effectiveChar == '"' || effectiveChar == '\'')) {
+                        // Starting an attribute value
+                        inAttributeValue = true;
+                        attributeQuoteChar = effectiveChar;
+                        attributeStartedWithCurlyQuote = replaceQuote;
+                    } else if (inAttributeValue && effectiveChar == attributeQuoteChar) {
+                        // Ending an attribute value
+                        inAttributeValue = false;
+                        attributeQuoteChar = '\0';
+                    }
+                }
+
+                // Write the character (replaced or original)
+                if (replaceQuote) {
+                    writeStringToBuffer("\"");
+                } else if (isValidXmlChar(ch)) {
+                    writeStringToBuffer(String.valueOf(ch));
+                }
+
+                previousChar = ch;
             }
         }
 
@@ -281,6 +326,34 @@ public class InvalidXmlCharacterFilter implements FeedFilter {
         private boolean isInvalidQuotationMark(char ch) {
             // U+201C (left double quotation mark) and U+201D (right double quotation mark)
             return ch == '\u201C' || ch == '\u201D';
+        }
+
+        /**
+         * Determines if a curly quotation mark should be replaced based on its context.
+         * Only replaces curly quotes when they appear at the start or end of an attribute value.
+         *
+         * @param ch the character to check (should be a curly quote)
+         * @return {@code true} if the curly quote should be replaced; {@code false} otherwise
+         */
+        private boolean shouldReplaceQuotationMark(char ch) {
+            if (!inTag) {
+                // Not in a tag, preserve the curly quote
+                return false;
+            }
+
+            // Check if this curly quote is at the boundary of an attribute value
+            if (ch == '\u201C') {
+                // Left curly quote - replace if previous character was '='
+                // This means it's starting an attribute value
+                return previousChar == '=';
+            } else if (ch == '\u201D') {
+                // Right curly quote - replace if we're currently in an attribute value
+                // This means it's ending an attribute value
+                // We need to check if the attribute was started with a curly quote (converted to straight quote)
+                return inAttributeValue && attributeStartedWithCurlyQuote;
+            }
+
+            return false;
         }
 
         private void writeStringToBuffer(String str) throws IOException {

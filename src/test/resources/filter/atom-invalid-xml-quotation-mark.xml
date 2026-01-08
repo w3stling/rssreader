@@ -18,4 +18,16 @@
         <updated>2005-08-17T07:02:32Z</updated>
         <summary>We just had a big one.</summary>
     </entry>
+    <entry>
+        <title>She said “yes”</title>
+        <link href="“http://example.org/2005/09/09/atom01”"/>
+        <updated>2005-08-17T07:02:33Z</updated>
+        <summary>Some description.</summary>
+    </entry>
+    <entry>
+        <title>”He said no“</title>
+        <link href="h“ttp://example.org/2005/09/09/atom0”1"/>
+        <updated>2005-08-17T07:02:34Z</updated>
+        <summary>Some other description.</summary>
+    </entry>
 </feed>
