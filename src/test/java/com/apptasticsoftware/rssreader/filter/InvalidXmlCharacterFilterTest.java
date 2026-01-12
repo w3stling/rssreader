@@ -84,9 +84,22 @@ class InvalidXmlCharacterFilterTest {
                 .read(fromFile("filter/atom-invalid-xml-quotation-mark.xml"))
                 .collect(Collectors.toList());
 
-        assertEquals(1, items.size());
+        assertEquals(3, items.size());
         var item = items.get(0);
         assertEquals("M 3.2, “Mona” Passage", item.getTitle().orElse(""));
+        assertEquals("http://example.org/2005/09/09/atom01", item.getLink().orElse(""));
+        assertEquals("2005-08-17T07:02:32Z", item.getPubDate().orElse(""));
+        assertEquals("We just had a big one.", item.getDescription().orElse(""));
+        item = items.get(1);
+        assertEquals("She said “yes”", item.getTitle().orElse(""));
+        assertEquals("“http://example.org/2005/09/09/atom01”", item.getLink().orElse(""));
+        assertEquals("2005-08-17T07:02:33Z", item.getPubDate().orElse(""));
+        assertEquals("Some description.", item.getDescription().orElse(""));
+        item = items.get(2);
+        assertEquals("”He said no“", item.getTitle().orElse(""));
+        assertEquals("h“ttp://example.org/2005/09/09/atom0”1", item.getLink().orElse(""));
+        assertEquals("2005-08-17T07:02:34Z", item.getPubDate().orElse(""));
+        assertEquals("Some other description.", item.getDescription().orElse(""));
     }
 
     private InputStream fromFile(String fileName) {
