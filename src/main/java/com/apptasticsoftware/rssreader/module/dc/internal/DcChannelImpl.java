@@ -7,9 +7,16 @@ import com.apptasticsoftware.rssreader.module.dc.DcChannelData;
 
 import java.util.Objects;
 
+/**
+ * Implementation of RSS channel with Dublin Core metadata support.
+ */
 public class DcChannelImpl extends ChannelImpl implements DcChannel {
     private final DcChannelDataImpl dcData = new DcChannelDataImpl();
 
+    /**
+     * Constructs a Dublin Core channel with the specified date-time parser.
+     * @param dateTimeParser date-time parser
+     */
     public DcChannelImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }

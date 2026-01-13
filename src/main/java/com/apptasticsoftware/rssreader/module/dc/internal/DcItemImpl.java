@@ -7,9 +7,16 @@ import com.apptasticsoftware.rssreader.module.dc.DcItemData;
 
 import java.util.Objects;
 
+/**
+ * Implementation of RSS item with Dublin Core metadata support.
+ */
 public class DcItemImpl extends ItemImpl implements DcItem {
     private final DcItemDataImpl dcData = new DcItemDataImpl();
 
+    /**
+     * Constructs a Dublin Core item with the specified date-time parser.
+     * @param dateTimeParser date-time parser
+     */
     public DcItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
     }

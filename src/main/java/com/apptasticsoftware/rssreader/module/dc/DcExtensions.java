@@ -3,12 +3,20 @@ package com.apptasticsoftware.rssreader.module.dc;
 import com.apptasticsoftware.rssreader.FeedExtensionRegistry;
 import com.apptasticsoftware.rssreader.util.Mapper;
 
+/**
+ * Registers Dublin Core metadata extensions for RSS feeds.
+ * Maps DC namespace elements to channel and item properties.
+ */
 public class DcExtensions {
 
     private DcExtensions() {
         // Prevent instantiation
     }
 
+    /**
+     * Registers all Dublin Core extensions for channels and items.
+     * @param registry the feed extension registry
+     */
     public static void register(FeedExtensionRegistry<? extends DcChannel, ? extends DcItem> registry) {
         channelTagExtensions(registry);
         itemTagExtensions(registry);

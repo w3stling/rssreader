@@ -5,6 +5,10 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelImpl;
 import com.apptasticsoftware.rssreader.module.dc.internal.DcItemImpl;
 
+/**
+ * RSS feed reader with Dublin Core metadata extension support.
+ * Parses RSS feeds and extracts Dublin Core metadata elements.
+ */
 public class DcFeedReader extends AbstractRssReader<DcChannel, DcItem> {
 
     @Override
