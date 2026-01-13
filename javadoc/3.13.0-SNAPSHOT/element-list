@@ -3,6 +3,8 @@ com.apptasticsoftware.rssreader
 com.apptasticsoftware.rssreader.filter
 com.apptasticsoftware.rssreader.internal
 com.apptasticsoftware.rssreader.internal.stream
+com.apptasticsoftware.rssreader.module.dc
+com.apptasticsoftware.rssreader.module.dc.internal
 com.apptasticsoftware.rssreader.module.georss
 com.apptasticsoftware.rssreader.module.georss.internal
 com.apptasticsoftware.rssreader.module.itunes

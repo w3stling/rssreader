@@ -801,6 +801,10 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/stream/package-summary.html">com.apptasticsoftware.rssreader.internal.stream</a> - package com.apptasticsoftware.rssreader.internal.stream</dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a> - package com.apptasticsoftware.rssreader.module.dc</dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a> - package com.apptasticsoftware.rssreader.module.dc.internal</dt>
+<dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/package-summary.html">com.apptasticsoftware.rssreader.module.georss</a> - package com.apptasticsoftware.rssreader.module.georss</dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/internal/package-summary.html">com.apptasticsoftware.rssreader.module.georss.internal</a> - package com.apptasticsoftware.rssreader.module.georss.internal</dt>
@@ -879,6 +883,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createChannel(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html" title="class in com.apptasticsoftware.rssreader">FeedReader</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createChannel(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.dc">DcFeedReader</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html#createChannel(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createChannel(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.georss">GeoRssFeedReader</a></dt>
 <dd>
 <div class="block">Creates a GeoRSS channel implementation.</div>
@@ -924,6 +930,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns an object of an Item implementation.</div>
 </dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html#createItem(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createItem(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html" title="class in com.apptasticsoftware.rssreader">FeedReader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html#createItem(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createItem(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.dc">DcFeedReader</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html#createItem(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">createItem(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.georss">GeoRssFeedReader</a></dt>
 <dd>
@@ -978,6 +986,60 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">For parsing timestamp in channel and items.</div>
 </dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannel.html" class="type-name-link" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a> - Interface in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">Channel interface with Dublin Core metadata extensions.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" class="type-name-link" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a> - Interface in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">Dublin Core metadata interface for RSS channels.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelDataImpl.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataImpl</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a></dt>
+<dd>
+<div class="block">Implementation of Dublin Core metadata for RSS channels.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelDataImpl.html#%3Cinit%3E()" class="member-name-link">DcChannelDataImpl()</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelDataImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelImpl</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a></dt>
+<dd>
+<div class="block">Implementation of RSS channel with Dublin Core metadata support.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">DcChannelImpl(DateTimeParser)</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelImpl</a></dt>
+<dd>
+<div class="block">Constructs a Dublin Core channel with the specified date-time parser.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcExtensions.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc">DcExtensions</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">Registers Dublin Core metadata extensions for RSS feeds.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc">DcFeedReader</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">RSS feed reader with Dublin Core metadata extension support.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html#%3Cinit%3E()" class="member-name-link">DcFeedReader()</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.dc">DcFeedReader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItem.html" class="type-name-link" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItem</a> - Interface in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">Item interface with Dublin Core metadata extensions.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" class="type-name-link" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a> - Interface in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/package-summary.html">com.apptasticsoftware.rssreader.module.dc</a></dt>
+<dd>
+<div class="block">Dublin Core metadata interface for RSS items.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemDataImpl.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataImpl</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a></dt>
+<dd>
+<div class="block">Implementation of Dublin Core metadata for RSS items.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemDataImpl.html#%3Cinit%3E()" class="member-name-link">DcItemDataImpl()</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemDataImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemImpl</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a></dt>
+<dd>
+<div class="block">Implementation of RSS item with Dublin Core metadata support.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html#%3Cinit%3E(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">DcItemImpl(DateTimeParser)</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemImpl</a></dt>
+<dd>
+<div class="block">Constructs a Dublin Core item with the specified date-time parser.</div>
+</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Default.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.util">Default</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/package-summary.html">com.apptasticsoftware.rssreader.util</a></dt>
 <dd>
 <div class="block">Provides default implementations for various components.</div>
@@ -1018,6 +1080,12 @@ loadScripts(document, 'script');</script>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/FeedItemImpl.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/FeedItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">FeedItemImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/ItemImpl.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/ItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/Coordinate.html#equals(java.lang.Object)" class="member-name-link">equals(Object)</a> - Method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/Coordinate.html" title="class in com.apptasticsoftware.rssreader.module.georss">Coordinate</a></dt>
 <dd>
@@ -1540,6 +1608,202 @@ loadScripts(document, 'script');</script>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Default.html#getDateTimeParser()" class="member-name-link">getDateTimeParser()</a> - Static method in class com.apptasticsoftware.rssreader.util.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/util/Default.html" title="class in com.apptasticsoftware.rssreader.util">Default</a></dt>
 <dd>
 <div class="block">Get the default date time parser.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcChannelData()" class="member-name-link">getDcChannelData()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the Dublin Core channel data.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelDataImpl.html#getDcChannelData()" class="member-name-link">getDcChannelData()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelDataImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html#getDcChannelData()" class="member-name-link">getDcChannelData()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcContributor()" class="member-name-link">getDcContributor()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for contributing to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcContributor()" class="member-name-link">getDcContributor()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for contributing to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcContributor()" class="member-name-link">getDcContributor()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for making contributions to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcCoverage()" class="member-name-link">getDcCoverage()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the spatial or temporal topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcCoverage()" class="member-name-link">getDcCoverage()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the spatial or temporal topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcCoverage()" class="member-name-link">getDcCoverage()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the spatial or temporal topic, spatial applicability, or jurisdiction of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcCreator()" class="member-name-link">getDcCreator()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for creating the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcCreator()" class="member-name-link">getDcCreator()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for creating the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcCreator()" class="member-name-link">getDcCreator()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the entity primarily responsible for making the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcDate()" class="member-name-link">getDcDate()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the point or period of time associated with the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcDate()" class="member-name-link">getDcDate()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the point or period of time associated with the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcDate()" class="member-name-link">getDcDate()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets a point or period of time associated with the resource (W3CDTF format).</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcDescription()" class="member-name-link">getDcDescription()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the account of the resource content.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcDescription()" class="member-name-link">getDcDescription()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the account of the resource content.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcDescription()" class="member-name-link">getDcDescription()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the description or account of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcFormat()" class="member-name-link">getDcFormat()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the file format or physical medium of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcFormat()" class="member-name-link">getDcFormat()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the file format or physical medium of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcFormat()" class="member-name-link">getDcFormat()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the file format, physical medium, or dimensions of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcIdentifier()" class="member-name-link">getDcIdentifier()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcIdentifier()" class="member-name-link">getDcIdentifier()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcIdentifier()" class="member-name-link">getDcIdentifier()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcItemData()" class="member-name-link">getDcItemData()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the Dublin Core item data.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemDataImpl.html#getDcItemData()" class="member-name-link">getDcItemData()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemDataImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html#getDcItemData()" class="member-name-link">getDcItemData()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcLanguage()" class="member-name-link">getDcLanguage()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcLanguage()" class="member-name-link">getDcLanguage()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcLanguage()" class="member-name-link">getDcLanguage()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcPublisher()" class="member-name-link">getDcPublisher()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcPublisher()" class="member-name-link">getDcPublisher()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcPublisher()" class="member-name-link">getDcPublisher()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcRelation()" class="member-name-link">getDcRelation()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcRelation()" class="member-name-link">getDcRelation()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcRelation()" class="member-name-link">getDcRelation()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcRights()" class="member-name-link">getDcRights()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcRights()" class="member-name-link">getDcRights()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcRights()" class="member-name-link">getDcRights()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcSource()" class="member-name-link">getDcSource()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcSource()" class="member-name-link">getDcSource()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcSource()" class="member-name-link">getDcSource()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcSubject()" class="member-name-link">getDcSubject()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcSubject()" class="member-name-link">getDcSubject()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcSubject()" class="member-name-link">getDcSubject()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcTitle()" class="member-name-link">getDcTitle()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the resource title.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcTitle()" class="member-name-link">getDcTitle()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the resource title.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcTitle()" class="member-name-link">getDcTitle()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the name given to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#getDcType()" class="member-name-link">getDcType()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Gets the nature or genre of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#getDcType()" class="member-name-link">getDcType()</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Gets the nature or genre of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#getDcType()" class="member-name-link">getDcType()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Gets the nature or genre of the resource.</div>
 </dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html#getDescription()" class="member-name-link">getDescription()</a> - Method in interface com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a></dt>
 <dd>
@@ -3982,6 +4246,12 @@ Parses the time field (H:M:S.h or S.h) to Duration</div>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/ItemImpl.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.apptasticsoftware.rssreader.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/ItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcChannelImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/DcItemImpl.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">DcItemImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/Coordinate.html#hashCode()" class="member-name-link">hashCode()</a> - Method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/Coordinate.html" title="class in com.apptasticsoftware.rssreader.module.georss">Coordinate</a></dt>
 <dd>
 <div class="block">Returns the hash code for this coordinate.</div>
@@ -4658,10 +4928,16 @@ in the content of a media object.</div>
 <div class="block">Represents the metadata of a media object, providing various details such as title, description,
 ratings, categories, thumbnails, and more.</div>
 </dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/package-summary.html">com.apptasticsoftware.rssreader.module.dc.internal</a></dt>
+<dd>
+<div class="block">Base class for Dublin Core metadata elements.</div>
+</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/internal/MetaData.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.georss.internal">MetaData</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/internal/package-summary.html">com.apptasticsoftware.rssreader.module.georss.internal</a></dt>
 <dd>
 <div class="block">Internal metadata class storing GeoRSS geographic information.</div>
 </dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#%3Cinit%3E()" class="member-name-link">MetaData()</a> - Constructor for class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/internal/MetaData.html#%3Cinit%3E()" class="member-name-link">MetaData()</a> - Constructor for class com.apptasticsoftware.rssreader.module.georss.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.georss.internal">MetaData</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/mediarss/MetadataImpl.html" class="type-name-link" title="class in com.apptasticsoftware.rssreader.module.mediarss">MetadataImpl</a> - Class in <a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/mediarss/package-summary.html">com.apptasticsoftware.rssreader.module.mediarss</a></dt>
@@ -5111,6 +5387,10 @@ transport method, and suggested payment amount.</div>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/stream/AutoCloseStream.html#reduce(U,java.util.function.BiFunction,java.util.function.BinaryOperator)" class="member-name-link">reduce(U, BiFunction, BinaryOperator)</a> - Method in class com.apptasticsoftware.rssreader.internal.stream.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/internal/stream/AutoCloseStream.html" title="class in com.apptasticsoftware.rssreader.internal.stream">AutoCloseStream</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcExtensions.html#register(com.apptasticsoftware.rssreader.FeedExtensionRegistry)" class="member-name-link">register(FeedExtensionRegistry)</a> - Static method in class com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcExtensions.html" title="class in com.apptasticsoftware.rssreader.module.dc">DcExtensions</a></dt>
+<dd>
+<div class="block">Registers all Dublin Core extensions for channels and items.</div>
+</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssExtensions.html#register(com.apptasticsoftware.rssreader.FeedExtensionRegistry)" class="member-name-link">register(FeedExtensionRegistry)</a> - Static method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssExtensions.html" title="class in com.apptasticsoftware.rssreader.module.georss">GeoRssExtensions</a></dt>
 <dd>
 <div class="block">Registers GeoRSS channel and item extensions with the provided registry.</div>
@@ -5146,6 +5426,8 @@ transport method, and suggested payment amount.</div>
 <div class="block">Register channel tags for mapping to channel object fields</div>
 </dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html#registerChannelTags()" class="member-name-link">registerChannelTags()</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/FeedReader.html" title="class in com.apptasticsoftware.rssreader">FeedReader</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html#registerChannelTags()" class="member-name-link">registerChannelTags()</a> - Method in class com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.dc">DcFeedReader</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html#registerChannelTags()" class="member-name-link">registerChannelTags()</a> - Method in class com.apptasticsoftware.rssreader.module.georss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/georss/GeoRssFeedReader.html" title="class in com.apptasticsoftware.rssreader.module.georss">GeoRssFeedReader</a></dt>
 <dd>
@@ -5379,6 +5661,186 @@ transport method, and suggested payment amount.</div>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html#setDateTimeParser(com.apptasticsoftware.rssreader.DateTimeParser)" class="member-name-link">setDateTimeParser(DateTimeParser)</a> - Method in class com.apptasticsoftware.rssreader.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/AbstractRssReader.html" title="class in com.apptasticsoftware.rssreader">AbstractRssReader</a></dt>
 <dd>
 <div class="block">Date and time parser for parsing timestamps.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcContributor(java.lang.String)" class="member-name-link">setDcContributor(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for contributing to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcContributor(java.lang.String)" class="member-name-link">setDcContributor(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for contributing to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcContributor(java.lang.String)" class="member-name-link">setDcContributor(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for making contributions to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcCoverage(java.lang.String)" class="member-name-link">setDcCoverage(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the spatial or temporal topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcCoverage(java.lang.String)" class="member-name-link">setDcCoverage(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the spatial or temporal topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcCoverage(java.lang.String)" class="member-name-link">setDcCoverage(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the spatial or temporal topic, spatial applicability, or jurisdiction of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcCreator(java.lang.String)" class="member-name-link">setDcCreator(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for creating the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcCreator(java.lang.String)" class="member-name-link">setDcCreator(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for creating the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcCreator(java.lang.String)" class="member-name-link">setDcCreator(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the entity primarily responsible for making the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcDate(java.lang.String)" class="member-name-link">setDcDate(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the point or period of time associated with the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcDate(java.lang.String)" class="member-name-link">setDcDate(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the point or period of time associated with the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcDate(java.lang.String)" class="member-name-link">setDcDate(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets a point or period of time associated with the resource (W3CDTF format).</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcDescription(java.lang.String)" class="member-name-link">setDcDescription(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the account of the resource content.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcDescription(java.lang.String)" class="member-name-link">setDcDescription(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the account of the resource content.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcDescription(java.lang.String)" class="member-name-link">setDcDescription(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the description or account of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcFormat(java.lang.String)" class="member-name-link">setDcFormat(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the file format or physical medium of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcFormat(java.lang.String)" class="member-name-link">setDcFormat(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the file format or physical medium of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcFormat(java.lang.String)" class="member-name-link">setDcFormat(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the file format, physical medium, or dimensions of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcIdentifier(java.lang.String)" class="member-name-link">setDcIdentifier(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcIdentifier(java.lang.String)" class="member-name-link">setDcIdentifier(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcIdentifier(java.lang.String)" class="member-name-link">setDcIdentifier(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets an unambiguous reference to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcLanguage(java.lang.String)" class="member-name-link">setDcLanguage(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcLanguage(java.lang.String)" class="member-name-link">setDcLanguage(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcLanguage(java.lang.String)" class="member-name-link">setDcLanguage(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the language of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcPublisher(java.lang.String)" class="member-name-link">setDcPublisher(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcPublisher(java.lang.String)" class="member-name-link">setDcPublisher(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcPublisher(java.lang.String)" class="member-name-link">setDcPublisher(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the entity responsible for making the resource available.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcRelation(java.lang.String)" class="member-name-link">setDcRelation(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcRelation(java.lang.String)" class="member-name-link">setDcRelation(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcRelation(java.lang.String)" class="member-name-link">setDcRelation(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets a related resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcRights(java.lang.String)" class="member-name-link">setDcRights(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcRights(java.lang.String)" class="member-name-link">setDcRights(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcRights(java.lang.String)" class="member-name-link">setDcRights(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets information about rights held in and over the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcSource(java.lang.String)" class="member-name-link">setDcSource(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcSource(java.lang.String)" class="member-name-link">setDcSource(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcSource(java.lang.String)" class="member-name-link">setDcSource(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets a related resource from which the described resource is derived.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcSubject(java.lang.String)" class="member-name-link">setDcSubject(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcSubject(java.lang.String)" class="member-name-link">setDcSubject(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcSubject(java.lang.String)" class="member-name-link">setDcSubject(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the topic of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcTitle(java.lang.String)" class="member-name-link">setDcTitle(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the resource title.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcTitle(java.lang.String)" class="member-name-link">setDcTitle(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the resource title.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcTitle(java.lang.String)" class="member-name-link">setDcTitle(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the name given to the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html#setDcType(java.lang.String)" class="member-name-link">setDcType(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></dt>
+<dd>
+<div class="block">Sets the nature or genre of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html#setDcType(java.lang.String)" class="member-name-link">setDcType(String)</a> - Method in interface com.apptasticsoftware.rssreader.module.dc.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></dt>
+<dd>
+<div class="block">Sets the nature or genre of the resource.</div>
+</dd>
+<dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html#setDcType(java.lang.String)" class="member-name-link">setDcType(String)</a> - Method in class com.apptasticsoftware.rssreader.module.dc.internal.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/dc/internal/MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a></dt>
+<dd>
+<div class="block">Sets the nature or genre of the resource.</div>
 </dd>
 <dt><a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/mediarss/MediaContent.html#setDefault(java.lang.Boolean)" class="member-name-link">setDefault(Boolean)</a> - Method in class com.apptasticsoftware.rssreader.module.mediarss.<a href="com.apptasticsoftware.rssreader/com/apptasticsoftware/rssreader/module/mediarss/MediaContent.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaContent</a></dt>
 <dd>&nbsp;</dd>
