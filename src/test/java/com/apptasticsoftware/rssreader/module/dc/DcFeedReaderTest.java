@@ -17,6 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings("java:S5961")
 class DcFeedReaderTest {
 
     @Test
@@ -52,7 +53,6 @@ class DcFeedReaderTest {
         assertThat(channel.getCopyright(), isPresentAndIs("Copyright © 2000 O'Reilly & Associates, Inc."));
 
         assertThat(item.getTitle(), isPresentAndIs("XML: A Disruptive Technology"));
-        //assertThat(item.getLink(), isPresentAndIs("http://c.moreover.com/click/here.pl?r123"));
         assertThat(item.getDcTitle(), isPresentAndIs("Item title"));
         assertThat(item.getDcCreator(), isPresentAndIs("Simon St.Laurent (mailto:simonstl@simonstl.com)"));
         assertThat(item.getAuthor(), isPresentAndIs("Simon St.Laurent (mailto:simonstl@simonstl.com)"));
