@@ -854,6 +854,7 @@ class RssReaderIntegrationTest {
         assertEquals("Azure", list.get(2).getCategories().get(2));
     }
 
+    @Disabled("content:encoded tag removed from feed")
     @Test
     void feedWithDcContent() throws IOException {
         var list = new RssReader()
