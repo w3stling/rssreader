@@ -32,6 +32,7 @@ public class AtomExtensions {
      *
      * @param registry the feed extension registry
      */
+    @SuppressWarnings("java:S1192")
     private static void channelTagExtensions(FeedExtensionRegistry<? extends AtomChannel, ? extends AtomItem> registry) {
         // atom:link - create a new AtomLink on tag start, then populate attributes
         registry.addOnChannelTag("atom:link", channel -> channel.addAtomLink(new AtomLink()));
@@ -60,6 +61,7 @@ public class AtomExtensions {
      *
      * @param registry the feed extension registry
      */
+    @SuppressWarnings("java:S1192")
     private static void itemTagExtensions(FeedExtensionRegistry<? extends AtomChannel, ? extends AtomItem> registry) {
         // atom:link - create a new AtomLink on tag start, then populate attributes
         registry.addOnItemTag("atom:link", item -> item.addAtomLink(new AtomLink()));

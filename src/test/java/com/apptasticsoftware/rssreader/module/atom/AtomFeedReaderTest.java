@@ -18,8 +18,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class AtomFeedReaderTest {
 
+    @SuppressWarnings("java:S5961")
     @ParameterizedTest
     @MethodSource("feedReaderArguments")
     void example1(AbstractRssReader<AtomChannel, AtomItem> feedReader) {
