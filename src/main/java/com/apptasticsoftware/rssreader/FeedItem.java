@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader;
 
+import com.apptasticsoftware.rssreader.module.atom.AtomItem;
 import com.apptasticsoftware.rssreader.module.dc.DcItem;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssItem;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
@@ -12,6 +13,6 @@ import com.apptasticsoftware.rssreader.module.spotify.SpotifyItem;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItem;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
 
-public interface FeedItem extends Item, DcItem, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SlashItem, SpotifyItem, WfwItem, YoutubeItem {
+public interface FeedItem extends Item, AtomItem, DcItem, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SlashItem, SpotifyItem, WfwItem, YoutubeItem {
 
 }

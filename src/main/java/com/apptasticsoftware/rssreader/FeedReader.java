@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.internal.FeedChannelImpl;
 import com.apptasticsoftware.rssreader.internal.FeedItemImpl;
+import com.apptasticsoftware.rssreader.module.atom.AtomExtensions;
 import com.apptasticsoftware.rssreader.module.dc.DcExtensions;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssExtensions;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesExtensions;
@@ -30,6 +31,7 @@ public class FeedReader extends AbstractRssReader<FeedChannel, FeedItem> {
     protected void registerChannelTags() {
         super.registerChannelTags();
         var registry = getFeedExtensionRegistry();
+        AtomExtensions.register(registry);
         DcExtensions.register(registry);
         GeoRssExtensions.register(registry);
         ItunesExtensions.register(registry);
