@@ -10,7 +10,7 @@ public class AtomLink {
     private String href;
     private String rel;
     private String type;
-    private String hreflang;
+    private String hrefLang;
     private String title;
     private Long length;
 
@@ -73,17 +73,17 @@ public class AtomLink {
      *
      * @return an Optional containing the language code, or empty if not set
      */
-    public Optional<String> getHreflang() {
-        return Optional.ofNullable(hreflang);
+    public Optional<String> getHrefLang() {
+        return Optional.ofNullable(hrefLang);
     }
 
     /**
      * Sets the language of the referenced resource.
      *
-     * @param hreflang the language code
+     * @param hrefLang the language code
      */
-    public void setHreflang(String hreflang) {
-        this.hreflang = hreflang;
+    public void setHrefLang(String hrefLang) {
+        this.hrefLang = hrefLang;
     }
 
     /**

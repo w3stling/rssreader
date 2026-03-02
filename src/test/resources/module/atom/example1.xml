@@ -5,7 +5,7 @@
         <link>https://technewsdaily.com</link>
         <description>Your daily source for the latest tech news</description>
         <atom:link href="https://technewsdaily.com/feed" type="application/rss+xml" rel="self" />
-        <atom:link href="https://technewsdaily.com/feed/alt" type="application/rss+xml" rel="alternate" />
+        <atom:link href="https://technewsdaily.com/feed/alt" type="application/rss+xml" rel="alternate" hreflang="en" />
         <atom:author>
             <atom:name>Jane Doe</atom:name>
             <atom:email>jane.doe@technewsdaily.com</atom:email>
@@ -20,7 +20,7 @@
             <title>Breaking: New Programming Language Released</title>
             <link>https://technewsdaily.com/articles/new-programming-language</link>
             <description><![CDATA[A new programming language promises to revolutionize software development.]]></description>
-            <atom:link href="https://technewsdaily.com/articles/new-programming-language/feed" type="application/rss+xml" rel="self" />
+            <atom:link href="https://technewsdaily.com/articles/new-programming-language/feed" type="application/rss+xml" rel="self" hreflang="en" length="900" title="Some title" />
             <atom:author>
                 <atom:name>Alice Johnson</atom:name>
                 <atom:email>alice.johnson@technewsdaily.com</atom:email>

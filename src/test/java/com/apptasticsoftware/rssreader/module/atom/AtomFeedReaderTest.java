@@ -73,6 +73,9 @@ class AtomFeedReaderTest {
         assertEquals("https://technewsdaily.com/articles/new-programming-language/feed", itemLink.getHref());
         assertEquals("application/rss+xml", itemLink.getType().orElse(null));
         assertEquals("self", itemLink.getRel().orElse(null));
+        assertEquals("en", itemLink.getHrefLang().orElse(null));
+        assertEquals(900, itemLink.getLength().orElse(null));
+        assertEquals("Some title", itemLink.getTitle().orElse(null));
 
         // Verify item atom:author
         var itemAuthors = atomItem.getAtomAuthors();

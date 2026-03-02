@@ -38,7 +38,7 @@ public class AtomExtensions {
         registry.addChannelExtension("atom:link", "href", (channel, value) -> lastAtomLink(channel).setHref(value));
         registry.addChannelExtension("atom:link", "rel",  (channel, value) -> lastAtomLink(channel).setRel(value));
         registry.addChannelExtension("atom:link", "type", (channel, value) -> lastAtomLink(channel).setType(value));
-        registry.addChannelExtension("atom:link", "hreflang", (channel, value) -> lastAtomLink(channel).setHreflang(value));
+        registry.addChannelExtension("atom:link", "hreflang", (channel, value) -> lastAtomLink(channel).setHrefLang(value));
         registry.addChannelExtension("atom:link", "title", (channel, value) -> lastAtomLink(channel).setTitle(value));
         registry.addChannelExtension("atom:link", "length", (channel, value) -> mapLong(value, lastAtomLink(channel)::setLength));
 
@@ -66,7 +66,7 @@ public class AtomExtensions {
         registry.addItemExtension("atom:link", "href", (item, value) -> lastAtomLink(item).setHref(value));
         registry.addItemExtension("atom:link", "rel",  (item, value) -> lastAtomLink(item).setRel(value));
         registry.addItemExtension("atom:link", "type", (item, value) -> lastAtomLink(item).setType(value));
-        registry.addItemExtension("atom:link", "hreflang", (item, value) -> lastAtomLink(item).setHreflang(value));
+        registry.addItemExtension("atom:link", "hreflang", (item, value) -> lastAtomLink(item).setHrefLang(value));
         registry.addItemExtension("atom:link", "title", (item, value) -> lastAtomLink(item).setTitle(value));
         registry.addItemExtension("atom:link", "length", (item, value) -> mapLong(value, lastAtomLink(item)::setLength));
 
