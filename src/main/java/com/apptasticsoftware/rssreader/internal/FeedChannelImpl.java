@@ -2,6 +2,8 @@ package com.apptasticsoftware.rssreader.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.module.atom.AtomChannelData;
+import com.apptasticsoftware.rssreader.module.atom.internal.AtomChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.dc.DcChannelData;
 import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssChannelData;
@@ -22,6 +24,7 @@ import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDat
 import java.util.Objects;
 
 public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
+    private final AtomChannelData atomChannelData = new AtomChannelDataImpl();
     private final DcChannelData dcChannelData = new DcChannelDataImpl();
     private final GeoRssChannelData geoRssChannelData = new GeoRssChannelDataImpl();
     private final ItunesChannelData itunesChannelData = new ItunesChannelDataImpl();
@@ -38,6 +41,11 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
      */
     public FeedChannelImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public AtomChannelData getAtomChannelData() {
+        return atomChannelData;
     }
 
     @Override

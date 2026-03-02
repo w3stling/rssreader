@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tech News Daily</title>
+        <link>https://technewsdaily.com</link>
+        <description>Your daily source for the latest tech news</description>
+        <atom:link href="https://technewsdaily.com/feed" type="application/rss+xml" rel="self" />
+        <atom:link href="https://technewsdaily.com/feed/alt" type="application/rss+xml" rel="alternate" hreflang="en" />
+        <atom:author>
+            <atom:name>Jane Doe</atom:name>
+            <atom:email>jane.doe@technewsdaily.com</atom:email>
+            <atom:uri>https://technewsdaily.com/authors/jane-doe</atom:uri>
+        </atom:author>
+        <atom:contributor>
+            <atom:name>John Smith</atom:name>
+            <atom:email>john.smith@technewsdaily.com</atom:email>
+            <atom:uri>https://technewsdaily.com/authors/john-smith</atom:uri>
+        </atom:contributor>
+        <item>
+            <title>Breaking: New Programming Language Released</title>
+            <link>https://technewsdaily.com/articles/new-programming-language</link>
+            <description><![CDATA[A new programming language promises to revolutionize software development.]]></description>
+            <atom:link href="https://technewsdaily.com/articles/new-programming-language/feed" type="application/rss+xml" rel="self" hreflang="en" length="900" title="Some title" />
+            <atom:author>
+                <atom:name>Alice Johnson</atom:name>
+                <atom:email>alice.johnson@technewsdaily.com</atom:email>
+                <atom:uri>https://technewsdaily.com/authors/alice-johnson</atom:uri>
+            </atom:author>
+            <atom:contributor>
+                <atom:name>Bob Williams</atom:name>
+                <atom:email>bob.williams@technewsdaily.com</atom:email>
+                <atom:uri>https://technewsdaily.com/authors/bob-williams</atom:uri>
+            </atom:contributor>
+        </item>
+    </channel>
+</rss>
