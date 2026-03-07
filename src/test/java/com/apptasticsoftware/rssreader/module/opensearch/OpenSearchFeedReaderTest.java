@@ -15,11 +15,7 @@ import java.io.InputStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAnd;
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OpenSearchFeedReaderTest {
@@ -34,27 +30,27 @@ class OpenSearchFeedReaderTest {
         var item = items.get(0);
         OpenSearchChannel channel = (OpenSearchChannel) item.getChannel();
 
-        assertThat(channel.getTitle(), is("Example.com Search: New York history"));
-        assertThat(channel.getLink(), is("http://example.com/New+York+history"));
-        assertThat(channel.getDescription(), is("Search results for \"New York history\" at Example.com"));
-        assertThat(channel.getOpenSearchTotalResults(), isPresentAndIs(4230000));
-        assertThat(channel.getOpenSearchStartIndex(), isPresentAndIs(21));
-        assertThat(channel.getOpenSearchItemsPerPage(), isPresentAndIs(10));
-        assertThat(channel.getOpenSearchQueries().size(), is(1));
-        assertThat(channel.getOpenSearchQueries().get(0).getRole(), is("request"));
-        assertThat(channel.getOpenSearchQueries().get(0).getTitle(), isPresentAndIs("History"));
-        assertThat(channel.getOpenSearchQueries().get(0).getTotalResults(), isPresentAndIs(10));
-        assertThat(channel.getOpenSearchQueries().get(0).getSearchTerms(), isPresentAndIs("New York History"));
-        assertThat(channel.getOpenSearchQueries().get(0).getCount(), isPresentAndIs(15));
-        assertThat(channel.getOpenSearchQueries().get(0).getStartIndex(), isPresentAndIs(0));
-        assertThat(channel.getOpenSearchQueries().get(0).getStartPage(), isPresentAndIs(1));
-        assertThat(channel.getOpenSearchQueries().get(0).getLanguage(), isPresentAndIs("en"));
-        assertThat(channel.getOpenSearchQueries().get(0).getInputEncoding(), isPresentAndIs("UTF-8"));
-        assertThat(channel.getOpenSearchQueries().get(0).getOutputEncoding(), isPresentAndIs("ISO-88859-1"));
+        assertThat(channel.getTitle()).isEqualTo("Example.com Search: New York history");
+        assertThat(channel.getLink()).isEqualTo("http://example.com/New+York+history");
+        assertThat(channel.getDescription()).isEqualTo("Search results for \"New York history\" at Example.com");
+        assertThat(channel.getOpenSearchTotalResults()).hasValue(4230000);
+        assertThat(channel.getOpenSearchStartIndex()).hasValue(21);
+        assertThat(channel.getOpenSearchItemsPerPage()).hasValue(10);
+        assertThat(channel.getOpenSearchQueries()).hasSize(1);
+        assertThat(channel.getOpenSearchQueries().get(0).getRole()).isEqualTo("request");
+        assertThat(channel.getOpenSearchQueries().get(0).getTitle()).hasValue("History");
+        assertThat(channel.getOpenSearchQueries().get(0).getTotalResults()).hasValue(10);
+        assertThat(channel.getOpenSearchQueries().get(0).getSearchTerms()).hasValue("New York History");
+        assertThat(channel.getOpenSearchQueries().get(0).getCount()).hasValue(15);
+        assertThat(channel.getOpenSearchQueries().get(0).getStartIndex()).hasValue(0);
+        assertThat(channel.getOpenSearchQueries().get(0).getStartPage()).hasValue(1);
+        assertThat(channel.getOpenSearchQueries().get(0).getLanguage()).hasValue("en");
+        assertThat(channel.getOpenSearchQueries().get(0).getInputEncoding()).hasValue("UTF-8");
+        assertThat(channel.getOpenSearchQueries().get(0).getOutputEncoding()).hasValue("ISO-88859-1");
 
-        assertThat(item.getTitle(), isPresentAndIs("New York History"));
-        assertThat(item.getLink(), isPresentAndIs("http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html"));
-        assertThat(item.getDescription(), isPresentAnd(containsString("... Harlem.NYC - A virtual tour and information on")));
+        assertThat(item.getTitle()).hasValue("New York History");
+        assertThat(item.getLink()).hasValue("http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html");
+        assertThat(item.getDescription()).hasValueSatisfying(v -> assertThat(v).contains("... Harlem.NYC - A virtual tour and information on"));
     }
 
     @ParameterizedTest
@@ -67,26 +63,26 @@ class OpenSearchFeedReaderTest {
         var item = items.get(0);
         OpenSearchChannel channel = (OpenSearchChannel) item.getChannel();
 
-        assertThat(channel.getTitle(), is("Example.com Search: New York history"));
-        assertThat(channel.getLink(), is("http://example.com/opensearchdescription.xml"));
-        assertThat(channel.getLastBuildDate(), isPresentAndIs("2003-12-13T18:30:02Z"));
-        assertThat(channel.getOpenSearchTotalResults(), isPresentAndIs(4230000));
-        assertThat(channel.getOpenSearchStartIndex(), isPresentAndIs(21));
-        assertThat(channel.getOpenSearchItemsPerPage(), isPresentAndIs(10));
-        assertThat(channel.getOpenSearchQueries().get(0).getRole(), is("request"));
-        assertThat(channel.getOpenSearchQueries().get(0).getTitle(), isPresentAndIs("History"));
-        assertThat(channel.getOpenSearchQueries().get(0).getTotalResults(), isPresentAndIs(10));
-        assertThat(channel.getOpenSearchQueries().get(0).getSearchTerms(), isPresentAndIs("New York History"));
-        assertThat(channel.getOpenSearchQueries().get(0).getCount(), isPresentAndIs(15));
-        assertThat(channel.getOpenSearchQueries().get(0).getStartIndex(), isPresentAndIs(0));
-        assertThat(channel.getOpenSearchQueries().get(0).getStartPage(), isPresentAndIs(1));
-        assertThat(channel.getOpenSearchQueries().get(0).getLanguage(), isPresentAndIs("en"));
-        assertThat(channel.getOpenSearchQueries().get(0).getInputEncoding(), isPresentAndIs("UTF-8"));
-        assertThat(channel.getOpenSearchQueries().get(0).getOutputEncoding(), isPresentAndIs("ISO-88859-1"));
+        assertThat(channel.getTitle()).isEqualTo("Example.com Search: New York history");
+        assertThat(channel.getLink()).isEqualTo("http://example.com/opensearchdescription.xml");
+        assertThat(channel.getLastBuildDate()).hasValue("2003-12-13T18:30:02Z");
+        assertThat(channel.getOpenSearchTotalResults()).hasValue(4230000);
+        assertThat(channel.getOpenSearchStartIndex()).hasValue(21);
+        assertThat(channel.getOpenSearchItemsPerPage()).hasValue(10);
+        assertThat(channel.getOpenSearchQueries().get(0).getRole()).isEqualTo("request");
+        assertThat(channel.getOpenSearchQueries().get(0).getTitle()).hasValue("History");
+        assertThat(channel.getOpenSearchQueries().get(0).getTotalResults()).hasValue(10);
+        assertThat(channel.getOpenSearchQueries().get(0).getSearchTerms()).hasValue("New York History");
+        assertThat(channel.getOpenSearchQueries().get(0).getCount()).hasValue(15);
+        assertThat(channel.getOpenSearchQueries().get(0).getStartIndex()).hasValue(0);
+        assertThat(channel.getOpenSearchQueries().get(0).getStartPage()).hasValue(1);
+        assertThat(channel.getOpenSearchQueries().get(0).getLanguage()).hasValue("en");
+        assertThat(channel.getOpenSearchQueries().get(0).getInputEncoding()).hasValue("UTF-8");
+        assertThat(channel.getOpenSearchQueries().get(0).getOutputEncoding()).hasValue("ISO-88859-1");
 
-        assertThat(item.getTitle(), isPresentAndIs("New York History"));
-        assertThat(item.getLink(), isPresentAndIs("http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html"));
-        assertThat(item.getDescription(), isPresentAnd(containsString("... Harlem.NYC - A virtual tour and information on")));
+        assertThat(item.getTitle()).hasValue("New York History");
+        assertThat(item.getLink()).hasValue("http://www.columbia.edu/cu/lweb/eguids/amerihist/nyc.html");
+        assertThat(item.getDescription()).hasValueSatisfying(v -> assertThat(v).contains("... Harlem.NYC - A virtual tour and information on"));
     }
 
     @Test

@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -91,19 +89,19 @@ class RssReaderTest {
 
         Item item = items.get(0);
         assertNotNull(item);
-        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
-        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
-        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
-        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+        assertThat(item.getTitle()).hasValue("Title item 1");
+        assertThat(item.getDescription()).hasValue("Description item 1.");
+        assertThat(item.getPubDate()).hasValue("Wed, 23 May 2018 09:30:20 +0200");
+        assertThat(item.getLink()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getGuid()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getIsPermaLink()).hasValue(false);
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), is("Title"));
-        assertThat(channel.getDescription(), is("Description"));
-        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
+        assertThat(channel.getTitle()).isEqualTo("Title");
+        assertThat(channel.getDescription()).isEqualTo("Description");
+        assertThat(channel.getLanguage()).hasValue("sv");
+        assertThat(channel.getLastBuildDate()).hasValue("Fri, 01 Jun 2018 07:17:52 +0200");
     }
 
     @Test
@@ -138,19 +136,19 @@ class RssReaderTest {
 
         Item item = items.get(0);
         assertNotNull(item);
-        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
-        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
-        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
-        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+        assertThat(item.getTitle()).hasValue("Title item 1");
+        assertThat(item.getDescription()).hasValue("Description item 1.");
+        assertThat(item.getPubDate()).hasValue("Wed, 23 May 2018 09:30:20 +0200");
+        assertThat(item.getLink()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getGuid()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getIsPermaLink()).hasValue(false);
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), is("Title"));
-        assertThat(channel.getDescription(), is("Description"));
-        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
+        assertThat(channel.getTitle()).isEqualTo("Title");
+        assertThat(channel.getDescription()).isEqualTo("Description");
+        assertThat(channel.getLanguage()).hasValue("sv");
+        assertThat(channel.getLastBuildDate()).hasValue("Fri, 01 Jun 2018 07:17:52 +0200");
     }
 
     @Test
@@ -185,19 +183,19 @@ class RssReaderTest {
 
         Item item = items.get(0);
         assertNotNull(item);
-        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
-        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
-        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
-        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+        assertThat(item.getTitle()).hasValue("Title item 1");
+        assertThat(item.getDescription()).hasValue("Description item 1.");
+        assertThat(item.getPubDate()).hasValue("Wed, 23 May 2018 09:30:20 +0200");
+        assertThat(item.getLink()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getGuid()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getIsPermaLink()).hasValue(false);
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), is("Title"));
-        assertThat(channel.getDescription(), is("Description"));
-        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
+        assertThat(channel.getTitle()).isEqualTo("Title");
+        assertThat(channel.getDescription()).isEqualTo("Description");
+        assertThat(channel.getLanguage()).hasValue("sv");
+        assertThat(channel.getLastBuildDate()).hasValue("Fri, 01 Jun 2018 07:17:52 +0200");
     }
 
     @Test
@@ -232,19 +230,19 @@ class RssReaderTest {
 
         Item item = items.get(0);
         assertNotNull(item);
-        assertThat(item.getTitle(), isPresentAndIs("Title item 1"));
-        assertThat(item.getDescription(), isPresentAndIs("Description item 1."));
-        assertThat(item.getPubDate(), isPresentAndIs("Wed, 23 May 2018 09:30:20 +0200"));
-        assertThat(item.getLink(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getGuid(), isPresentAndIs("https://www.dummy.com/item1"));
-        assertThat(item.getIsPermaLink(), isPresentAndIs(false));
+        assertThat(item.getTitle()).hasValue("Title item 1");
+        assertThat(item.getDescription()).hasValue("Description item 1.");
+        assertThat(item.getPubDate()).hasValue("Wed, 23 May 2018 09:30:20 +0200");
+        assertThat(item.getLink()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getGuid()).hasValue("https://www.dummy.com/item1");
+        assertThat(item.getIsPermaLink()).hasValue(false);
 
         Channel channel = item.getChannel();
         assertNotNull(channel);
-        assertThat(channel.getTitle(), is("Title"));
-        assertThat(channel.getDescription(), is("<p class=\"bodytext\">Description.</p>"));
-        assertThat(channel.getLanguage(), isPresentAndIs("sv"));
-        assertThat(channel.getLastBuildDate(), isPresentAndIs("Fri, 01 Jun 2018 07:17:52 +0200"));
+        assertThat(channel.getTitle()).isEqualTo("Title");
+        assertThat(channel.getDescription()).isEqualTo("<p class=\"bodytext\">Description.</p>");
+        assertThat(channel.getLanguage()).hasValue("sv");
+        assertThat(channel.getLastBuildDate()).hasValue("Fri, 01 Jun 2018 07:17:52 +0200");
     }
 
     @Test

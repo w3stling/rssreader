@@ -13,9 +13,7 @@ import java.io.InputStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.github.npathai.hamcrestopt.OptionalMatchers.isPresentAndIs;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -32,7 +30,7 @@ class AtomFeedReaderTest {
         var channel = (AtomChannel) items.get(0).getChannel();
 
         // Verify item link
-        assertThat(channel.getLink(), is("https://technewsdaily.com"));
+        assertThat(channel.getLink()).isEqualTo("https://technewsdaily.com");
 
         var channelLinks = channel.getAtomLinks();
         assertEquals(2, channelLinks.size());
@@ -66,7 +64,7 @@ class AtomFeedReaderTest {
         var atomItem = items.get(0);
 
         // Verify item link
-        assertThat(atomItem.getLink(), isPresentAndIs("https://technewsdaily.com/articles/new-programming-language"));
+        assertThat(atomItem.getLink()).hasValue("https://technewsdaily.com/articles/new-programming-language");
 
         // Verify item atom:link
         var itemLinks = atomItem.getAtomLinks();
