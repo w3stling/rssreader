@@ -22,8 +22,17 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelData;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataImpl;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.atom.internal.AtomChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataProvider;
 
-public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
+public class FeedChannelImpl extends ChannelImpl implements FeedChannel, AtomChannelDataProvider, DcChannelDataProvider, GeoRssChannelDataProvider, ItunesChannelDataProvider, MediaRssChannelDataProvider, OpenSearchChannelDataProvider, PodcastChannelDataProvider, SpotifyChannelDataProvider, YoutubeChannelDataProvider {
     private final AtomChannelData atomChannelData = new AtomChannelDataImpl();
     private final DcChannelData dcChannelData = new DcChannelDataImpl();
     private final GeoRssChannelData geoRssChannelData = new GeoRssChannelDataImpl();
@@ -44,47 +53,47 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
     }
 
     @Override
-    public AtomChannelData getAtomChannelData() {
+    public AtomChannelData atomChannelData() {
         return atomChannelData;
     }
 
     @Override
-    public DcChannelData getDcChannelData() {
+    public DcChannelData dcChannelData() {
         return dcChannelData;
     }
 
     @Override
-    public GeoRssChannelData getGeoRssChannelData() {
+    public GeoRssChannelData geoRssChannelData() {
         return geoRssChannelData;
     }
 
     @Override
-    public ItunesChannelData getItunesChannelData() {
+    public ItunesChannelData itunesChannelData() {
         return itunesChannelData;
     }
 
     @Override
-    public MediaRssChannelData getMediaRssChannelData() {
+    public MediaRssChannelData mediaRssChannelData() {
         return mediaRssChannelData;
     }
 
     @Override
-    public OpenSearchChannelData getOpenSearchChannelData() {
+    public OpenSearchChannelData openSearchChannelData() {
         return openSearchChannelData;
     }
 
     @Override
-    public PodcastChannelData getPodcastChannelData() {
+    public PodcastChannelData podcastChannelData() {
         return podcastChannelData;
     }
 
     @Override
-    public SpotifyChannelData getSpotifyChannelData() {
+    public SpotifyChannelData spotifyChannelData() {
         return spotifyChannelData;
     }
 
     @Override
-    public YoutubeChannelData getYoutubeChannelData() {
+    public YoutubeChannelData youtubeChannelData() {
         return youtubeChannelData;
     }
 
@@ -93,11 +102,11 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel {
         if (!(o instanceof FeedChannelImpl)) return false;
         if (!super.equals(o)) return false;
         FeedChannelImpl that = (FeedChannelImpl) o;
-        return Objects.equals(getItunesChannelData(), that.getItunesChannelData()) && Objects.equals(getMediaRssChannelData(), that.getMediaRssChannelData()) && Objects.equals(getOpenSearchChannelData(), that.getOpenSearchChannelData()) && Objects.equals(getPodcastChannelData(), that.getPodcastChannelData()) && Objects.equals(getYoutubeChannelData(), that.getYoutubeChannelData());
+        return Objects.equals(itunesChannelData(), that.itunesChannelData()) && Objects.equals(mediaRssChannelData(), that.mediaRssChannelData()) && Objects.equals(openSearchChannelData(), that.openSearchChannelData()) && Objects.equals(podcastChannelData(), that.podcastChannelData()) && Objects.equals(youtubeChannelData(), that.youtubeChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesChannelData(), getMediaRssChannelData(), getOpenSearchChannelData(), getPodcastChannelData(), getYoutubeChannelData());
+        return Objects.hash(super.hashCode(), itunesChannelData(), mediaRssChannelData(), openSearchChannelData(), podcastChannelData(), youtubeChannelData());
     }
 }

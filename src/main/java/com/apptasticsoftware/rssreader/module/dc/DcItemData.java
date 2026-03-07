@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.dc;
 
+import com.apptasticsoftware.rssreader.module.dc.internal.DcItemDataProvider;
 import java.util.Optional;
 
 /**
@@ -9,17 +10,11 @@ import java.util.Optional;
 public interface DcItemData {
 
     /**
-     * Gets the Dublin Core item data.
-     * @return the DC item data
-     */
-    DcItemData getDcItemData();
-
-    /**
      * Gets the resource title.
      * @return the title
      */
     default Optional<String> getDcTitle() {
-        return getDcItemData().getDcTitle();
+        return ((DcItemDataProvider) this).dcItemData().getDcTitle();
     }
 
     /**
@@ -27,7 +22,7 @@ public interface DcItemData {
      * @param dcTitle the title
      */
     default void setDcTitle(String dcTitle) {
-        getDcItemData().setDcTitle(dcTitle);
+        ((DcItemDataProvider) this).dcItemData().setDcTitle(dcTitle);
     }
 
     /**
@@ -35,7 +30,7 @@ public interface DcItemData {
      * @return the creator
      */
     default Optional<String> getDcCreator() {
-        return getDcItemData().getDcCreator();
+        return ((DcItemDataProvider) this).dcItemData().getDcCreator();
     }
 
     /**
@@ -43,7 +38,7 @@ public interface DcItemData {
      * @param dcCreator the creator
      */
     default void setDcCreator(String dcCreator) {
-        getDcItemData().setDcCreator(dcCreator);
+        ((DcItemDataProvider) this).dcItemData().setDcCreator(dcCreator);
     }
 
     /**
@@ -51,7 +46,7 @@ public interface DcItemData {
      * @return the subject
      */
     default Optional<String> getDcSubject() {
-        return getDcItemData().getDcSubject();
+        return ((DcItemDataProvider) this).dcItemData().getDcSubject();
     }
 
     /**
@@ -59,7 +54,7 @@ public interface DcItemData {
      * @param dcSubject the subject
      */
     default void setDcSubject(String dcSubject) {
-        getDcItemData().setDcSubject(dcSubject);
+        ((DcItemDataProvider) this).dcItemData().setDcSubject(dcSubject);
     }
 
     /**
@@ -67,7 +62,7 @@ public interface DcItemData {
      * @return the description
      */
     default Optional<String> getDcDescription() {
-        return getDcItemData().getDcDescription();
+        return ((DcItemDataProvider) this).dcItemData().getDcDescription();
     }
 
     /**
@@ -75,7 +70,7 @@ public interface DcItemData {
      * @param dcDescription the description
      */
     default void setDcDescription(String dcDescription) {
-        getDcItemData().setDcDescription(dcDescription);
+        ((DcItemDataProvider) this).dcItemData().setDcDescription(dcDescription);
     }
 
     /**
@@ -83,7 +78,7 @@ public interface DcItemData {
      * @return the publisher
      */
     default Optional<String> getDcPublisher() {
-        return getDcItemData().getDcPublisher();
+        return ((DcItemDataProvider) this).dcItemData().getDcPublisher();
     }
 
     /**
@@ -91,7 +86,7 @@ public interface DcItemData {
      * @param dcPublisher the publisher
      */
     default void setDcPublisher(String dcPublisher) {
-        getDcItemData().setDcPublisher(dcPublisher);
+        ((DcItemDataProvider) this).dcItemData().setDcPublisher(dcPublisher);
     }
 
     /**
@@ -99,7 +94,7 @@ public interface DcItemData {
      * @return the contributor
      */
     default Optional<String> getDcContributor() {
-        return getDcItemData().getDcContributor();
+        return ((DcItemDataProvider) this).dcItemData().getDcContributor();
     }
 
     /**
@@ -107,7 +102,7 @@ public interface DcItemData {
      * @param dcContributor the contributor
      */
     default void setDcContributor(String dcContributor) {
-        getDcItemData().setDcContributor(dcContributor);
+        ((DcItemDataProvider) this).dcItemData().setDcContributor(dcContributor);
     }
 
     /**
@@ -115,7 +110,7 @@ public interface DcItemData {
      * @return the date
      */
     default Optional<String> getDcDate() {
-        return getDcItemData().getDcDate();
+        return ((DcItemDataProvider) this).dcItemData().getDcDate();
     }
 
     /**
@@ -123,7 +118,7 @@ public interface DcItemData {
      * @param dcDate the date
      */
     default void setDcDate(String dcDate) {
-        getDcItemData().setDcDate(dcDate);
+        ((DcItemDataProvider) this).dcItemData().setDcDate(dcDate);
     }
 
     /**
@@ -131,7 +126,7 @@ public interface DcItemData {
      * @return the type
      */
     default Optional<String> getDcType() {
-        return getDcItemData().getDcType();
+        return ((DcItemDataProvider) this).dcItemData().getDcType();
     }
 
     /**
@@ -139,7 +134,7 @@ public interface DcItemData {
      * @param dcType the type
      */
     default void setDcType(String dcType) {
-        getDcItemData().setDcType(dcType);
+        ((DcItemDataProvider) this).dcItemData().setDcType(dcType);
     }
 
     /**
@@ -147,7 +142,7 @@ public interface DcItemData {
      * @return the format
      */
     default Optional<String> getDcFormat() {
-        return getDcItemData().getDcFormat();
+        return ((DcItemDataProvider) this).dcItemData().getDcFormat();
     }
 
     /**
@@ -155,7 +150,7 @@ public interface DcItemData {
      * @param dcFormat the format
      */
     default void setDcFormat(String dcFormat) {
-        getDcItemData().setDcFormat(dcFormat);
+        ((DcItemDataProvider) this).dcItemData().setDcFormat(dcFormat);
     }
 
     /**
@@ -163,7 +158,7 @@ public interface DcItemData {
      * @return the identifier
      */
     default Optional<String> getDcIdentifier() {
-        return getDcItemData().getDcIdentifier();
+        return ((DcItemDataProvider) this).dcItemData().getDcIdentifier();
     }
 
     /**
@@ -171,7 +166,7 @@ public interface DcItemData {
      * @param dcIdentifier the identifier
      */
     default void setDcIdentifier(String dcIdentifier) {
-        getDcItemData().setDcIdentifier(dcIdentifier);
+        ((DcItemDataProvider) this).dcItemData().setDcIdentifier(dcIdentifier);
     }
 
     /**
@@ -179,7 +174,7 @@ public interface DcItemData {
      * @return the source
      */
     default Optional<String> getDcSource() {
-        return getDcItemData().getDcSource();
+        return ((DcItemDataProvider) this).dcItemData().getDcSource();
     }
 
     /**
@@ -187,7 +182,7 @@ public interface DcItemData {
      * @param dcSource the source
      */
     default void setDcSource(String dcSource) {
-        getDcItemData().setDcSource(dcSource);
+        ((DcItemDataProvider) this).dcItemData().setDcSource(dcSource);
     }
 
     /**
@@ -195,7 +190,7 @@ public interface DcItemData {
      * @return the language
      */
     default Optional<String> getDcLanguage() {
-        return getDcItemData().getDcLanguage();
+        return ((DcItemDataProvider) this).dcItemData().getDcLanguage();
     }
 
     /**
@@ -203,7 +198,7 @@ public interface DcItemData {
      * @param dcLanguage the language
      */
     default void setDcLanguage(String dcLanguage) {
-        getDcItemData().setDcLanguage(dcLanguage);
+        ((DcItemDataProvider) this).dcItemData().setDcLanguage(dcLanguage);
     }
 
     /**
@@ -211,7 +206,7 @@ public interface DcItemData {
      * @return the relation
      */
     default Optional<String> getDcRelation() {
-        return getDcItemData().getDcRelation();
+        return ((DcItemDataProvider) this).dcItemData().getDcRelation();
     }
 
     /**
@@ -219,7 +214,7 @@ public interface DcItemData {
      * @param dcRelation the relation
      */
     default void setDcRelation(String dcRelation) {
-        getDcItemData().setDcRelation(dcRelation);
+        ((DcItemDataProvider) this).dcItemData().setDcRelation(dcRelation);
     }
 
     /**
@@ -227,7 +222,7 @@ public interface DcItemData {
      * @return the coverage
      */
     default Optional<String> getDcCoverage() {
-        return getDcItemData().getDcCoverage();
+        return ((DcItemDataProvider) this).dcItemData().getDcCoverage();
     }
 
     /**
@@ -235,7 +230,7 @@ public interface DcItemData {
      * @param dcCoverage the coverage
      */
     default void setDcCoverage(String dcCoverage) {
-        getDcItemData().setDcCoverage(dcCoverage);
+        ((DcItemDataProvider) this).dcItemData().setDcCoverage(dcCoverage);
     }
 
     /**
@@ -243,7 +238,7 @@ public interface DcItemData {
      * @return the rights
      */
     default Optional<String> getDcRights() {
-        return getDcItemData().getDcRights();
+        return ((DcItemDataProvider) this).dcItemData().getDcRights();
     }
 
     /**
@@ -251,6 +246,6 @@ public interface DcItemData {
      * @param dcRights the rights
      */
     default void setDcRights(String dcRights) {
-        getDcItemData().setDcRights(dcRights);
+        ((DcItemDataProvider) this).dcItemData().setDcRights(dcRights);
     }
 }

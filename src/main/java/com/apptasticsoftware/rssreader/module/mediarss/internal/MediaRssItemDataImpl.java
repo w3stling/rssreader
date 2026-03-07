@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("java:S6539")
-public class MediaRssItemDataImpl implements MediaRssItemData {
+public class MediaRssItemDataImpl implements MediaRssItemData, MediaRssItemDataProvider {
     private List<MediaContent> mediaContents;
     private MediaGroup mediaGroup;
     private final Metadata metadata = new MetadataImpl();
 
     @Override
-    public MediaRssItemData getMediaRssItemData() {
+    public MediaRssItemData mediaRssItemData() {
         return this;
     }
 

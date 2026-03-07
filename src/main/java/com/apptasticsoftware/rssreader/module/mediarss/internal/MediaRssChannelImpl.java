@@ -7,7 +7,7 @@ import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannelData;
 
 import java.util.Objects;
 
-public class MediaRssChannelImpl extends ChannelImpl implements MediaRssChannel {
+public class MediaRssChannelImpl extends ChannelImpl implements MediaRssChannel, MediaRssChannelDataProvider {
     private final MediaRssChannelData mediaRssChannelData = new MediaRssChannelDataImpl();
 
     public MediaRssChannelImpl(DateTimeParser dateTimeParser) {
@@ -15,20 +15,20 @@ public class MediaRssChannelImpl extends ChannelImpl implements MediaRssChannel 
     }
 
     @Override
-    public MediaRssChannelData getMediaRssChannelData() {
+    public MediaRssChannelData mediaRssChannelData() {
         return mediaRssChannelData;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof MediaRssChannel)) return false;
+        if (!(o instanceof MediaRssChannelImpl)) return false;
         if (!super.equals(o)) return false;
-        MediaRssChannel that = (MediaRssChannel) o;
-        return Objects.equals(getMediaRssChannelData(), that.getMediaRssChannelData());
+        MediaRssChannelImpl that = (MediaRssChannelImpl) o;
+        return Objects.equals(mediaRssChannelData, that.mediaRssChannelData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaRssChannelData());
+        return Objects.hash(super.hashCode(), mediaRssChannelData());
     }
 }

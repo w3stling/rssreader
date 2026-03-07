@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Implementation of RSS item with Dublin Core metadata support.
  */
-public class DcItemImpl extends ItemImpl implements DcItem {
+public class DcItemImpl extends ItemImpl implements DcItem, DcItemDataProvider {
     private final DcItemDataImpl dcData = new DcItemDataImpl();
 
     /**
@@ -22,7 +22,7 @@ public class DcItemImpl extends ItemImpl implements DcItem {
     }
 
     @Override
-    public DcItemData getDcItemData() {
+    public DcItemData dcItemData() {
         return dcData;
     }
 

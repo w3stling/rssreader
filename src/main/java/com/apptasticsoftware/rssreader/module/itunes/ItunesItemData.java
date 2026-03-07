@@ -1,18 +1,16 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataProvider;
 import java.time.Duration;
 import java.util.Optional;
 
 public interface ItunesItemData {
-
-    ItunesItemData getItunesItemData();
-
     /**
      * Get the duration of an episode.
      * @return duration
      */
     default Optional<String> getItunesDuration() {
-        return getItunesItemData().getItunesDuration();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesDuration();
     }
 
     /**
@@ -20,7 +18,7 @@ public interface ItunesItemData {
      * @param itunesDuration duration
      */
     default void setItunesDuration(String itunesDuration) {
-        getItunesItemData().setItunesDuration(itunesDuration);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesDuration(itunesDuration);
     }
 
     /**
@@ -29,7 +27,7 @@ public interface ItunesItemData {
      */
     @SuppressWarnings("java:S108")
     default Optional<Duration> getItunesDurationAsDuration() {
-        return getItunesItemData().getItunesDurationAsDuration();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesDurationAsDuration();
     }
 
     /**
@@ -37,7 +35,7 @@ public interface ItunesItemData {
      * @return image
      */
     default Optional<String> getItunesImage() {
-        return getItunesItemData().getItunesImage();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesImage();
     }
 
     /**
@@ -45,7 +43,7 @@ public interface ItunesItemData {
      * @param itunesImage image
      */
     default void setItunesImage(String itunesImage) {
-        getItunesItemData().setItunesImage(itunesImage);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesImage(itunesImage);
     }
 
     /**
@@ -59,7 +57,7 @@ public interface ItunesItemData {
      * @return explicit
      */
     default boolean isItunesExplicit() {
-        return getItunesItemData().isItunesExplicit();
+        return ((ItunesItemDataProvider) this).itunesItemData().isItunesExplicit();
     }
 
     /**
@@ -73,7 +71,7 @@ public interface ItunesItemData {
      * @param itunesExplicit explicit
      */
     default void setItunesExplicit(boolean itunesExplicit) {
-        getItunesItemData().setItunesExplicit(itunesExplicit);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesExplicit(itunesExplicit);
     }
 
     /**
@@ -81,7 +79,7 @@ public interface ItunesItemData {
      * @return title
      */
     default Optional<String> getItunesTitle() {
-        return getItunesItemData().getItunesTitle();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesTitle();
     }
 
     /**
@@ -89,7 +87,7 @@ public interface ItunesItemData {
      * @param itunesTitle title
      */
     default void setItunesTitle(String itunesTitle) {
-        getItunesItemData().setItunesTitle(itunesTitle);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesTitle(itunesTitle);
     }
 
     /**
@@ -97,7 +95,7 @@ public interface ItunesItemData {
      * @return subtitle
      */
     default Optional<String> getItunesSubtitle() {
-        return getItunesItemData().getItunesSubtitle();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesSubtitle();
     }
 
     /**
@@ -105,7 +103,7 @@ public interface ItunesItemData {
      * @param itunesSubtitle subtitle
      */
     default void setItunesSubtitle(String itunesSubtitle) {
-        getItunesItemData().setItunesSubtitle(itunesSubtitle);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesSubtitle(itunesSubtitle);
     }
 
     /**
@@ -113,7 +111,7 @@ public interface ItunesItemData {
      * @return summary
      */
     default Optional<String> getItunesSummary() {
-        return getItunesItemData().getItunesSummary();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesSummary();
     }
 
     /**
@@ -121,7 +119,7 @@ public interface ItunesItemData {
      * @param itunesSummary summary
      */
     default void setItunesSummary(String itunesSummary) {
-        getItunesItemData().setItunesSummary(itunesSummary);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesSummary(itunesSummary);
     }
 
     /**
@@ -129,7 +127,7 @@ public interface ItunesItemData {
      * @return keywords
      */
     default Optional<String> getItunesKeywords() {
-        return getItunesItemData().getItunesKeywords();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesKeywords();
     }
 
     /**
@@ -137,7 +135,7 @@ public interface ItunesItemData {
      * @param itunesKeywords keywords
      */
     default void setItunesKeywords(String itunesKeywords) {
-        getItunesItemData().setItunesKeywords(itunesKeywords);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesKeywords(itunesKeywords);
     }
 
     /**
@@ -145,7 +143,7 @@ public interface ItunesItemData {
      * @return episode
      */
     default Optional<Integer> getItunesEpisode() {
-        return getItunesItemData().getItunesEpisode();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesEpisode();
     }
 
     /**
@@ -153,7 +151,7 @@ public interface ItunesItemData {
      * @param itunesEpisode episode
      */
     default void setItunesEpisode(Integer itunesEpisode) {
-        getItunesItemData().setItunesEpisode(itunesEpisode);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesEpisode(itunesEpisode);
     }
 
     /**
@@ -161,7 +159,7 @@ public interface ItunesItemData {
      * @return season
      */
     default Optional<Integer> getItunesSeason() {
-        return getItunesItemData().getItunesSeason();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesSeason();
     }
 
     /**
@@ -169,7 +167,7 @@ public interface ItunesItemData {
      * @param itunesSeason season
      */
     default void setItunesSeason(Integer itunesSeason) {
-        getItunesItemData().setItunesSeason(itunesSeason);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesSeason(itunesSeason);
     }
 
     /**
@@ -177,7 +175,7 @@ public interface ItunesItemData {
      * @return type
      */
     default Optional<String> getItunesEpisodeType() {
-        return getItunesItemData().getItunesEpisodeType();
+        return ((ItunesItemDataProvider) this).itunesItemData().getItunesEpisodeType();
     }
 
     /**
@@ -185,7 +183,7 @@ public interface ItunesItemData {
      * @param itunesEpisodeType type
      */
     default void setItunesEpisodeType(String itunesEpisodeType) {
-        getItunesItemData().setItunesEpisodeType(itunesEpisodeType);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesEpisodeType(itunesEpisodeType);
     }
 
     /**
@@ -194,7 +192,7 @@ public interface ItunesItemData {
      * @return block
      */
     default boolean isItunesBlock() {
-        return getItunesItemData().isItunesBlock();
+        return ((ItunesItemDataProvider) this).itunesItemData().isItunesBlock();
     }
 
     /**
@@ -203,6 +201,6 @@ public interface ItunesItemData {
      * @param itunesBlock block
      */
     default void setItunesBlock(boolean itunesBlock) {
-        getItunesItemData().setItunesBlock(itunesBlock);
+        ((ItunesItemDataProvider) this).itunesItemData().setItunesBlock(itunesBlock);
     }
 }

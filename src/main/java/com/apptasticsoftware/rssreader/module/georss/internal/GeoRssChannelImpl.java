@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Implementation of GeoRssChannel with geographic extension support.
  */
-public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
+public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel, GeoRssChannelDataProvider {
     private final GeoRssChannelData geoRssData = new GeoRssChannelDataImpl();
 
     /**
@@ -28,7 +28,7 @@ public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
      * @return the GeoRSS channel data
      */
     @Override
-    public GeoRssChannelData getGeoRssChannelData() {
+    public GeoRssChannelData geoRssChannelData() {
         return geoRssData;
     }
 
@@ -43,7 +43,7 @@ public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
         if (!(o instanceof GeoRssChannelImpl)) return false;
         if (!super.equals(o)) return false;
         GeoRssChannelImpl that = (GeoRssChannelImpl) o;
-        return Objects.equals(getGeoRssChannelData(), that.getGeoRssChannelData());
+        return Objects.equals(geoRssChannelData(), that.geoRssChannelData());
     }
 
     /**
@@ -53,6 +53,6 @@ public class GeoRssChannelImpl extends ChannelImpl implements GeoRssChannel {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getGeoRssChannelData());
+        return Objects.hash(super.hashCode(), geoRssChannelData());
     }
 }

@@ -7,7 +7,7 @@ import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ItunesItemDataImpl implements ItunesItemData {
+public class ItunesItemDataImpl implements ItunesItemData, ItunesItemDataProvider {
     private String itunesDuration;
     private String itunesImage;
     private boolean itunesExplicit;
@@ -21,7 +21,7 @@ public class ItunesItemDataImpl implements ItunesItemData {
     private boolean itunesBlock;
 
     @Override
-    public ItunesItemData getItunesItemData() {
+    public ItunesItemData itunesItemData() {
         return this;
     }
 

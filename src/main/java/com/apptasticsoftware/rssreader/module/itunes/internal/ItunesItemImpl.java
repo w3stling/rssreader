@@ -33,7 +33,7 @@ import java.util.Objects;
 /**
  * Class representing the Itunes item.
  */
-public class ItunesItemImpl extends ItemImpl implements ItunesItem {
+public class ItunesItemImpl extends ItemImpl implements ItunesItem, ItunesItemDataProvider {
     private final ItunesItemDataImpl data = new ItunesItemDataImpl();
 
     /**
@@ -45,7 +45,7 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem {
     }
 
     @Override
-    public ItunesItemData getItunesItemData() {
+    public ItunesItemData itunesItemData() {
         return data;
     }
 
@@ -55,11 +55,11 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ItunesItemImpl that = (ItunesItemImpl) o;
-        return Objects.equals(getItunesItemData(), that.getItunesItemData());
+        return Objects.equals(itunesItemData(), that.itunesItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesItemData());
+        return Objects.hash(super.hashCode(), itunesItemData());
     }
 }

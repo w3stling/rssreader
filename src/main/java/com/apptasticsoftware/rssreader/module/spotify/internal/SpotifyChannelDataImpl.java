@@ -5,12 +5,12 @@ import com.apptasticsoftware.rssreader.util.Util;
 
 import java.util.*;
 
-public class SpotifyChannelDataImpl implements SpotifyChannelData {
+public class SpotifyChannelDataImpl implements SpotifyChannelData, SpotifyChannelDataProvider {
     private Integer spotifyLimitRecentCount;
     private String spotifyCountryOfOrigin;
 
     @Override
-    public SpotifyChannelData getSpotifyChannelData() {
+    public SpotifyChannelData spotifyChannelData() {
         return this;
     }
 

@@ -18,14 +18,24 @@ import com.apptasticsoftware.rssreader.module.psc.PscItemData;
 import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
 import com.apptasticsoftware.rssreader.module.slash.SlashItemData;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataImpl;
+import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataProvider;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItemData;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataImpl;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.atom.internal.AtomItemDataProvider;
+import com.apptasticsoftware.rssreader.module.dc.internal.DcItemDataProvider;
+import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssItemDataProvider;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataProvider;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataProvider;
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemDataProvider;
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataProvider;
+import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataProvider;
+import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataProvider;
 
-public class FeedItemImpl extends ItemImpl implements FeedItem {
+public class FeedItemImpl extends ItemImpl implements FeedItem, AtomItemDataProvider, DcItemDataProvider, GeoRssItemDataProvider, ItunesItemDataProvider, MediaRssItemDataProvider, PodcastItemDataProvider, PscItemDataProvider, SlashItemDataProvider, WfwItemDataProvider, YoutubeItemDataProvider {
     private final AtomItemData atomItemData = new AtomItemDataImpl();
     private final DcItemData dcItemData = new DcItemDataImpl();
     private final GeoRssItemData geoRssItemData = new GeoRssItemDataImpl();
@@ -48,52 +58,52 @@ public class FeedItemImpl extends ItemImpl implements FeedItem {
     }
 
     @Override
-    public AtomItemData getAtomItemData() {
+    public AtomItemData atomItemData() {
         return atomItemData;
     }
 
     @Override
-    public DcItemData getDcItemData() {
+    public DcItemData dcItemData() {
         return dcItemData;
     }
 
     @Override
-    public GeoRssItemData getGeoRssItemData() {
+    public GeoRssItemData geoRssItemData() {
         return geoRssItemData;
     }
 
     @Override
-    public ItunesItemData getItunesItemData() {
+    public ItunesItemData itunesItemData() {
         return itunesItemData;
     }
 
     @Override
-    public MediaRssItemData getMediaRssItemData() {
+    public MediaRssItemData mediaRssItemData() {
         return mediaRssItemData;
     }
 
     @Override
-    public PodcastItemData getPodcastItemData() {
+    public PodcastItemData podcastItemData() {
         return podcastItemData;
     }
 
     @Override
-    public PscItemData getPscItemData() {
+    public PscItemData pscItemData() {
         return pscItemData;
     }
 
     @Override
-    public SlashItemData getSlashItemData() {
+    public SlashItemData slashItemData() {
         return slashItemData;
     }
 
     @Override
-    public WfwItemData getWfWItemData() {
+    public WfwItemData wfwItemData() {
         return wfwItemData;
     }
 
     @Override
-    public YoutubeItemData getYoutubeItemData() {
+    public YoutubeItemData youtubeItemData() {
         return youtubeItemData;
     }
 
@@ -102,11 +112,11 @@ public class FeedItemImpl extends ItemImpl implements FeedItem {
         if (!(o instanceof FeedItemImpl)) return false;
         if (!super.equals(o)) return false;
         FeedItemImpl feedItem = (FeedItemImpl) o;
-        return Objects.equals(getItunesItemData(), feedItem.getItunesItemData()) && Objects.equals(getMediaRssItemData(), feedItem.getMediaRssItemData()) && Objects.equals(getPodcastItemData(), feedItem.getPodcastItemData()) && Objects.equals(getPscItemData(), feedItem.getPscItemData()) && Objects.equals(getYoutubeItemData(), feedItem.getYoutubeItemData());
+        return Objects.equals(itunesItemData(), feedItem.itunesItemData()) && Objects.equals(mediaRssItemData(), feedItem.mediaRssItemData()) && Objects.equals(podcastItemData(), feedItem.podcastItemData()) && Objects.equals(pscItemData(), feedItem.pscItemData()) && Objects.equals(youtubeItemData(), feedItem.youtubeItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesItemData(), getMediaRssItemData(), getPodcastItemData(), getPscItemData(), getYoutubeItemData());
+        return Objects.hash(super.hashCode(), itunesItemData(), mediaRssItemData(), podcastItemData(), pscItemData(), youtubeItemData());
     }
 }

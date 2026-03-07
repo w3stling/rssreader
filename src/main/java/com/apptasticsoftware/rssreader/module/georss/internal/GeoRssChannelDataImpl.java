@@ -5,14 +5,14 @@ import com.apptasticsoftware.rssreader.module.georss.GeoRssChannelData;
 /**
  * Implementation of GeoRssChannelData containing GeoRSS channel geographic information.
  */
-public class GeoRssChannelDataImpl extends MetaData implements GeoRssChannelData {
+public class GeoRssChannelDataImpl extends MetaData implements GeoRssChannelData, GeoRssChannelDataProvider {
 
     /**
      * Returns the underlying GeoRSS channel data.
      *
      * @return this instance
      */
-    public GeoRssChannelData getGeoRssChannelData() {
+    public GeoRssChannelData geoRssChannelData() {
         return this;
     }
 }

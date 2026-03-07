@@ -1,16 +1,14 @@
 package com.apptasticsoftware.rssreader.module.psc;
 
+import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataProvider;
 import java.util.Optional;
 
 public interface PscItemData {
-
-    PscItemData getPscItemData();
-
     default Optional<PscChapters> getPscChapters() {
-        return getPscItemData().getPscChapters();
+        return ((PscItemDataProvider) this).pscItemData().getPscChapters();
     }
 
     default void setPscChapters(PscChapters pscChapters) {
-        getPscItemData().setPscChapters(pscChapters);
+        ((PscItemDataProvider) this).pscItemData().setPscChapters(pscChapters);
     }
 }

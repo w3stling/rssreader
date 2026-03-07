@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.georss;
 
+import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssItemDataProvider;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,19 +10,12 @@ import java.util.Optional;
 public interface GeoRssItemData {
 
     /**
-     * Returns the underlying GeoRSS item data implementation.
-     *
-     * @return the GeoRSS item data
-     */
-    GeoRssItemData getGeoRssItemData();
-
-    /**
      * Returns the GeoRSS point as a string.
      *
      * @return the GeoRSS point
      */
     default Optional<String> getGeoRssPoint() {
-        return getGeoRssItemData().getGeoRssPoint();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssPoint();
     }
 
     /**
@@ -30,7 +24,7 @@ public interface GeoRssItemData {
      * @return the coordinate
      */
     default Optional<Coordinate> getGeoRssPointAsCoordinate() {
-        return getGeoRssItemData().getGeoRssPointAsCoordinate();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssPointAsCoordinate();
     }
 
     /**
@@ -39,7 +33,7 @@ public interface GeoRssItemData {
      * @param geoRssPoint the point to set
      */
     default void setGeoRssPoint(String geoRssPoint) {
-        getGeoRssItemData().setGeoRssPoint(geoRssPoint);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssPoint(geoRssPoint);
     }
 
     /**
@@ -48,7 +42,7 @@ public interface GeoRssItemData {
      * @return the GeoRSS line
      */
     default Optional<String> getGeoRssLine() {
-        return getGeoRssItemData().getGeoRssLine();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssLine();
     }
 
     /**
@@ -57,7 +51,7 @@ public interface GeoRssItemData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssLineAsCoordinates() {
-        return getGeoRssItemData().getGeoRssLineAsCoordinates();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssLineAsCoordinates();
     }
 
     /**
@@ -66,7 +60,7 @@ public interface GeoRssItemData {
      * @param geoRssLine the line to set
      */
     default void setGeoRssLine(String geoRssLine) {
-        getGeoRssItemData().setGeoRssLine(geoRssLine);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssLine(geoRssLine);
     }
 
     /**
@@ -75,7 +69,7 @@ public interface GeoRssItemData {
      * @return the GeoRSS polygon
      */
     default Optional<String> getGeoRssPolygon() {
-        return getGeoRssItemData().getGeoRssPolygon();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssPolygon();
     }
 
     /**
@@ -84,7 +78,7 @@ public interface GeoRssItemData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssPolygonAsCoordinates() {
-        return getGeoRssItemData().getGeoRssPolygonAsCoordinates();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssPolygonAsCoordinates();
     }
 
     /**
@@ -93,7 +87,7 @@ public interface GeoRssItemData {
      * @param geoRssPolygon the polygon to set
      */
     default void setGeoRssPolygon(String geoRssPolygon) {
-        getGeoRssItemData().setGeoRssPolygon(geoRssPolygon);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssPolygon(geoRssPolygon);
     }
 
     /**
@@ -102,7 +96,7 @@ public interface GeoRssItemData {
      * @return the GeoRSS box
      */
     default Optional<String> getGeoRssBox() {
-        return getGeoRssItemData().getGeoRssBox();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssBox();
     }
 
     /**
@@ -111,7 +105,7 @@ public interface GeoRssItemData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssBoxAsCoordinates() {
-        return getGeoRssItemData().getGeoRssBoxAsCoordinates();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssBoxAsCoordinates();
     }
 
     /**
@@ -120,7 +114,7 @@ public interface GeoRssItemData {
      * @param geoRssBox the box to set
      */
     default void setGeoRssBox(String geoRssBox) {
-        getGeoRssItemData().setGeoRssBox(geoRssBox);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssBox(geoRssBox);
     }
 
     /**
@@ -129,7 +123,7 @@ public interface GeoRssItemData {
      * @return the elevation
      */
     default Optional<Double> getGeoRssElevation() {
-        return getGeoRssItemData().getGeoRssElevation();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssElevation();
     }
 
     /**
@@ -138,7 +132,7 @@ public interface GeoRssItemData {
      * @param geoRssElevation the elevation to set
      */
     default void setGeoRssElevation(Double geoRssElevation) {
-        getGeoRssItemData().setGeoRssElevation(geoRssElevation);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssElevation(geoRssElevation);
     }
 
     /**
@@ -147,7 +141,7 @@ public interface GeoRssItemData {
      * @return the floor
      */
     default Optional<Integer> getGeoRssFloor() {
-        return getGeoRssItemData().getGeoRssFloor();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssFloor();
     }
 
     /**
@@ -156,7 +150,7 @@ public interface GeoRssItemData {
      * @param geoRssFloor the floor to set
      */
     default void setGeoRssFloor(Integer geoRssFloor) {
-        getGeoRssItemData().setGeoRssFloor(geoRssFloor);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssFloor(geoRssFloor);
     }
 
     /**
@@ -165,7 +159,7 @@ public interface GeoRssItemData {
      * @return the radius
      */
     default Optional<Double> getGeoRssRadius() {
-        return getGeoRssItemData().getGeoRssRadius();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssRadius();
     }
 
     /**
@@ -174,7 +168,7 @@ public interface GeoRssItemData {
      * @param geoRssRadius the radius to set
      */
     default void setGeoRssRadius(Double geoRssRadius) {
-        getGeoRssItemData().setGeoRssRadius(geoRssRadius);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssRadius(geoRssRadius);
     }
 
     /**
@@ -183,7 +177,7 @@ public interface GeoRssItemData {
      * @return the feature type tag
      */
     default Optional<String> getGeoRssFeatureTypeTag() {
-        return getGeoRssItemData().getGeoRssFeatureTypeTag();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssFeatureTypeTag();
     }
 
     /**
@@ -192,7 +186,7 @@ public interface GeoRssItemData {
      * @param geoRssFeatureTypeTag the feature type tag to set
      */
     default void setGeoRssFeatureTypeTag(String geoRssFeatureTypeTag) {
-        getGeoRssItemData().setGeoRssFeatureTypeTag(geoRssFeatureTypeTag);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssFeatureTypeTag(geoRssFeatureTypeTag);
     }
 
     /**
@@ -201,7 +195,7 @@ public interface GeoRssItemData {
      * @return the relationship tag
      */
     default Optional<String> getGeoRssRelationshipTag() {
-        return getGeoRssItemData().getGeoRssRelationshipTag();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssRelationshipTag();
     }
 
     /**
@@ -210,7 +204,7 @@ public interface GeoRssItemData {
      * @param geoRssRelationshipTag the relationship tag to set
      */
     default void setGeoRssRelationshipTag(String geoRssRelationshipTag) {
-        getGeoRssItemData().setGeoRssRelationshipTag(geoRssRelationshipTag);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssRelationshipTag(geoRssRelationshipTag);
     }
 
     /**
@@ -219,7 +213,7 @@ public interface GeoRssItemData {
      * @return the feature name
      */
     default Optional<String> getGeoRssFeatureName() {
-        return getGeoRssItemData().getGeoRssFeatureName();
+        return ((GeoRssItemDataProvider) this).geoRssItemData().getGeoRssFeatureName();
     }
 
     /**
@@ -228,6 +222,6 @@ public interface GeoRssItemData {
      * @param geoRssFeatureName the feature name to set
      */
     default void setGeoRssFeatureName(String geoRssFeatureName) {
-        getGeoRssItemData().setGeoRssFeatureName(geoRssFeatureName);
+        ((GeoRssItemDataProvider) this).geoRssItemData().setGeoRssFeatureName(geoRssFeatureName);
     }
 }

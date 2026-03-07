@@ -8,8 +8,9 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataProvider;
 
-public class YoutubeItemImpl extends ItemImpl implements YoutubeItem {
+public class YoutubeItemImpl extends ItemImpl implements YoutubeItem, YoutubeItemDataProvider, MediaRssItemDataProvider {
     private final YoutubeItemData youtubeData = new YoutubeItemDataImpl();
     private final MediaRssItemData mediaRssData = new MediaRssItemDataImpl();
 
@@ -18,12 +19,12 @@ public class YoutubeItemImpl extends ItemImpl implements YoutubeItem {
     }
 
     @Override
-    public YoutubeItemData getYoutubeItemData() {
+    public YoutubeItemData youtubeItemData() {
         return youtubeData;
     }
 
     @Override
-    public MediaRssItemData getMediaRssItemData() {
+    public MediaRssItemData mediaRssItemData() {
         return mediaRssData;
     }
 
@@ -32,11 +33,11 @@ public class YoutubeItemImpl extends ItemImpl implements YoutubeItem {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         YoutubeItemImpl that = (YoutubeItemImpl) o;
-        return Objects.equals(getYoutubeItemData(), that.getYoutubeItemData()) && Objects.equals(getMediaRssItemData(), that.getMediaRssItemData());
+        return Objects.equals(youtubeItemData(), that.youtubeItemData()) && Objects.equals(mediaRssItemData(), that.mediaRssItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getYoutubeItemData(), getMediaRssItemData());
+        return Objects.hash(super.hashCode(), youtubeItemData(), mediaRssItemData());
     }
 }

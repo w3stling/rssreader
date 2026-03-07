@@ -10,8 +10,8 @@ import java.util.Objects;
 /**
  * Implementation of SlashItem combining core item functionality with Slash-specific metadata.
  */
-public class SlashItemImpl extends ItemImpl implements SlashItem {
-    private final SlashItemData slashData = new SlashItemDataImpl();
+public class SlashItemImpl extends ItemImpl implements SlashItem, SlashItemDataProvider {
+    private final SlashItemDataImpl slashData = new SlashItemDataImpl();
 
     /**
      * Constructs a SlashItemImpl with the provided date-time parser.
@@ -23,7 +23,7 @@ public class SlashItemImpl extends ItemImpl implements SlashItem {
     }
 
     @Override
-    public SlashItemData getSlashItemData() {
+    public SlashItemData slashItemData() {
         return slashData;
     }
 
@@ -32,11 +32,11 @@ public class SlashItemImpl extends ItemImpl implements SlashItem {
         if (!(o instanceof SlashItemImpl)) return false;
         if (!super.equals(o)) return false;
         SlashItemImpl slashItem = (SlashItemImpl) o;
-        return Objects.equals(getSlashItemData(), slashItem.getSlashItemData());
+        return Objects.equals(slashData, slashItem.slashData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSlashItemData());
+        return Objects.hash(super.hashCode(), slashData);
     }
 }

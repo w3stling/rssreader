@@ -4,11 +4,11 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelData;
 
 import java.util.Objects;
 
-public class YoutubeChannelDataImpl implements YoutubeChannelData {
+public class YoutubeChannelDataImpl implements YoutubeChannelData, YoutubeChannelDataProvider {
     private String youtubeChannelId;
 
     @Override
-    public YoutubeChannelData getYoutubeChannelData() {
+    public YoutubeChannelData youtubeChannelData() {
         return this;
     }
 

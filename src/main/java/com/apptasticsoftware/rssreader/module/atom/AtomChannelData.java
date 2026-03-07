@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.atom;
 
+import com.apptasticsoftware.rssreader.module.atom.internal.AtomChannelDataProvider;
 import java.util.List;
 
 /**
@@ -8,17 +9,11 @@ import java.util.List;
 public interface AtomChannelData {
 
     /**
-     * Returns the underlying Atom channel data.
-     * @return the Atom channel data
-     */
-    AtomChannelData getAtomChannelData();
-
-    /**
      * Returns the list of Atom links.
      * @return the list of Atom links
      */
     default List<AtomLink> getAtomLinks() {
-        return getAtomChannelData().getAtomLinks();
+        return ((AtomChannelDataProvider) this).atomChannelData().getAtomLinks();
     }
 
     /**
@@ -26,7 +21,7 @@ public interface AtomChannelData {
      * @param atomLink the Atom link to add
      */
     default void addAtomLink(AtomLink atomLink) {
-        getAtomChannelData().addAtomLink(atomLink);
+        ((AtomChannelDataProvider) this).atomChannelData().addAtomLink(atomLink);
     }
 
     /**
@@ -34,7 +29,7 @@ public interface AtomChannelData {
      * @return the list of Atom authors
      */
     default List<AtomAuthor> getAtomAuthors() {
-        return getAtomChannelData().getAtomAuthors();
+        return ((AtomChannelDataProvider) this).atomChannelData().getAtomAuthors();
     }
 
     /**
@@ -42,7 +37,7 @@ public interface AtomChannelData {
      * @param atomAuthor the Atom author to add
      */
     default void addAtomAuthor(AtomAuthor atomAuthor) {
-        getAtomChannelData().addAtomAuthor(atomAuthor);
+        ((AtomChannelDataProvider) this).atomChannelData().addAtomAuthor(atomAuthor);
     }
 
     /**
@@ -50,7 +45,7 @@ public interface AtomChannelData {
      * @return the list of Atom contributors
      */
     default List<AtomContributor> getAtomContributors() {
-        return getAtomChannelData().getAtomContributors();
+        return ((AtomChannelDataProvider) this).atomChannelData().getAtomContributors();
     }
 
     /**
@@ -58,6 +53,6 @@ public interface AtomChannelData {
      * @param atomContributor the Atom contributor to add
      */
     default void addAtomContributor(AtomContributor atomContributor) {
-        getAtomChannelData().addAtomContributor(atomContributor);
+        ((AtomChannelDataProvider) this).atomChannelData().addAtomContributor(atomContributor);
     }
 }

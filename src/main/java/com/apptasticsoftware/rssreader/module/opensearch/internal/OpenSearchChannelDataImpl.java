@@ -7,14 +7,14 @@ import java.util.*;
 
 import static com.apptasticsoftware.rssreader.util.Mapper.emptyListIfNull;
 
-public class OpenSearchChannelDataImpl implements OpenSearchChannelData {
+public class OpenSearchChannelDataImpl implements OpenSearchChannelData, OpenSearchChannelDataProvider {
     private Integer openSearchTotalResults;
     private Integer openSearchStartIndex;
     private Integer openSearchItemsPerPage;
     private List<OpenSearchQuery> openSearchQueries;
 
     @Override
-    public OpenSearchChannelData getOpenSearchChannelData() {
+    public OpenSearchChannelData openSearchChannelData() {
         return this;
     }
 

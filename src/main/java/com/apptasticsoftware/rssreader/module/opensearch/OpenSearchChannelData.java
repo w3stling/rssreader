@@ -1,41 +1,39 @@
 package com.apptasticsoftware.rssreader.module.opensearch;
 
+import com.apptasticsoftware.rssreader.module.opensearch.internal.OpenSearchChannelDataProvider;
 import java.util.List;
 import java.util.Optional;
 
 public interface OpenSearchChannelData {
-
-    OpenSearchChannelData getOpenSearchChannelData();
-
     default Optional<Integer> getOpenSearchTotalResults() {
-        return getOpenSearchChannelData().getOpenSearchTotalResults();
+        return ((OpenSearchChannelDataProvider) this).openSearchChannelData().getOpenSearchTotalResults();
     }
 
     default void setOpenSearchTotalResults(Integer openSearchTotalResults) {
-        getOpenSearchChannelData().setOpenSearchTotalResults(openSearchTotalResults);
+        ((OpenSearchChannelDataProvider) this).openSearchChannelData().setOpenSearchTotalResults(openSearchTotalResults);
     }
 
     default Optional<Integer> getOpenSearchStartIndex() {
-        return getOpenSearchChannelData().getOpenSearchStartIndex();
+        return ((OpenSearchChannelDataProvider) this).openSearchChannelData().getOpenSearchStartIndex();
     }
 
     default void setOpenSearchStartIndex(Integer openSearchStartIndex) {
-        getOpenSearchChannelData().setOpenSearchStartIndex(openSearchStartIndex);
+        ((OpenSearchChannelDataProvider) this).openSearchChannelData().setOpenSearchStartIndex(openSearchStartIndex);
     }
 
     default Optional<Integer> getOpenSearchItemsPerPage() {
-        return getOpenSearchChannelData().getOpenSearchItemsPerPage();
+        return ((OpenSearchChannelDataProvider) this).openSearchChannelData().getOpenSearchItemsPerPage();
     }
 
     default void setOpenSearchItemsPerPage(Integer openSearchItemsPerPage) {
-        getOpenSearchChannelData().setOpenSearchItemsPerPage(openSearchItemsPerPage);
+        ((OpenSearchChannelDataProvider) this).openSearchChannelData().setOpenSearchItemsPerPage(openSearchItemsPerPage);
     }
 
     default List<OpenSearchQuery> getOpenSearchQueries() {
-        return getOpenSearchChannelData().getOpenSearchQueries();
+        return ((OpenSearchChannelDataProvider) this).openSearchChannelData().getOpenSearchQueries();
     }
 
     default void addOpenSearchQuery(OpenSearchQuery openSearchQuery) {
-        getOpenSearchChannelData().addOpenSearchQuery(openSearchQuery);
+        ((OpenSearchChannelDataProvider) this).openSearchChannelData().addOpenSearchQuery(openSearchQuery);
     }
 }

@@ -1,22 +1,21 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
+import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataProvider;
+
 public interface YoutubeItemData {
-
-    YoutubeItemData getYoutubeItemData();
-
     default String getYoutubeChannelId() {
-        return getYoutubeItemData().getYoutubeChannelId();
+        return ((YoutubeItemDataProvider) this).youtubeItemData().getYoutubeChannelId();
     }
 
     default void setYoutubeChannelId(String youtubeChannelId) {
-        getYoutubeItemData().setYoutubeChannelId(youtubeChannelId);
+        ((YoutubeItemDataProvider) this).youtubeItemData().setYoutubeChannelId(youtubeChannelId);
     }
 
     default String getYoutubeVideoId() {
-        return getYoutubeItemData().getYoutubeVideoId();
+        return ((YoutubeItemDataProvider) this).youtubeItemData().getYoutubeVideoId();
     }
 
     default void setYoutubeVideoId(String youtubeVideoId) {
-        getYoutubeItemData().setYoutubeVideoId(youtubeVideoId);
+        ((YoutubeItemDataProvider) this).youtubeItemData().setYoutubeVideoId(youtubeVideoId);
     }
 }

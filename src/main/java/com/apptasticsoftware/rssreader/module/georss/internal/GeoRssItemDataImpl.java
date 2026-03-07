@@ -5,7 +5,7 @@ import com.apptasticsoftware.rssreader.module.georss.GeoRssItemData;
 /**
  * Implementation of GeoRssItemData containing GeoRSS item geographic information.
  */
-public class GeoRssItemDataImpl extends MetaData implements GeoRssItemData {
+public class GeoRssItemDataImpl extends MetaData implements GeoRssItemData, GeoRssItemDataProvider {
 
     /**
      * Returns the underlying GeoRSS item data.
@@ -13,7 +13,7 @@ public class GeoRssItemDataImpl extends MetaData implements GeoRssItemData {
      * @return this instance
      */
     @Override
-    public GeoRssItemData getGeoRssItemData() {
+    public GeoRssItemData geoRssItemData() {
         return this;
     }
 }

@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.georss;
 
+import com.apptasticsoftware.rssreader.module.georss.internal.GeoRssChannelDataProvider;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,19 +10,12 @@ import java.util.Optional;
 public interface GeoRssChannelData {
 
     /**
-     * Returns the underlying GeoRSS channel data implementation.
-     *
-     * @return the GeoRSS channel data
-     */
-    GeoRssChannelData getGeoRssChannelData();
-
-    /**
      * Returns the GeoRSS point as a string.
      *
      * @return the GeoRSS point
      */
     default Optional<String> getGeoRssPoint() {
-        return getGeoRssChannelData().getGeoRssPoint();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssPoint();
     }
 
     /**
@@ -30,7 +24,7 @@ public interface GeoRssChannelData {
      * @return the coordinate
      */
     default Optional<Coordinate> getGeoRssPointAsCoordinate() {
-        return getGeoRssChannelData().getGeoRssPointAsCoordinate();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssPointAsCoordinate();
     }
 
     /**
@@ -39,7 +33,7 @@ public interface GeoRssChannelData {
      * @param geoRssPoint the point to set
      */
     default void setGeoRssPoint(String geoRssPoint) {
-        getGeoRssChannelData().setGeoRssPoint(geoRssPoint);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssPoint(geoRssPoint);
     }
 
     /**
@@ -48,7 +42,7 @@ public interface GeoRssChannelData {
      * @return the GeoRSS line
      */
     default Optional<String> getGeoRssLine() {
-        return getGeoRssChannelData().getGeoRssLine();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssLine();
     }
 
     /**
@@ -57,7 +51,7 @@ public interface GeoRssChannelData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssLineAsCoordinates() {
-        return getGeoRssChannelData().getGeoRssLineAsCoordinates();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssLineAsCoordinates();
     }
 
     /**
@@ -66,7 +60,7 @@ public interface GeoRssChannelData {
      * @param geoRssLine the line to set
      */
     default void setGeoRssLine(String geoRssLine) {
-        getGeoRssChannelData().setGeoRssLine(geoRssLine);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssLine(geoRssLine);
     }
 
     /**
@@ -75,7 +69,7 @@ public interface GeoRssChannelData {
      * @return the GeoRSS polygon
      */
     default Optional<String> getGeoRssPolygon() {
-        return getGeoRssChannelData().getGeoRssPolygon();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssPolygon();
     }
 
     /**
@@ -84,7 +78,7 @@ public interface GeoRssChannelData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssPolygonAsCoordinates() {
-        return getGeoRssChannelData().getGeoRssPolygonAsCoordinates();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssPolygonAsCoordinates();
     }
 
     /**
@@ -93,7 +87,7 @@ public interface GeoRssChannelData {
      * @param geoRssPolygon the polygon to set
      */
     default void setGeoRssPolygon(String geoRssPolygon) {
-        getGeoRssChannelData().setGeoRssPolygon(geoRssPolygon);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssPolygon(geoRssPolygon);
     }
 
     /**
@@ -102,7 +96,7 @@ public interface GeoRssChannelData {
      * @return the GeoRSS box
      */
     default Optional<String> getGeoRssBox() {
-        return getGeoRssChannelData().getGeoRssBox();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssBox();
     }
 
     /**
@@ -111,7 +105,7 @@ public interface GeoRssChannelData {
      * @return the list of coordinates
      */
     default List<Coordinate> getGeoRssBoxAsCoordinates() {
-        return getGeoRssChannelData().getGeoRssBoxAsCoordinates();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssBoxAsCoordinates();
     }
 
     /**
@@ -120,7 +114,7 @@ public interface GeoRssChannelData {
      * @param geoRssBox the box to set
      */
     default void setGeoRssBox(String geoRssBox) {
-        getGeoRssChannelData().setGeoRssBox(geoRssBox);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssBox(geoRssBox);
     }
 
     /**
@@ -129,7 +123,7 @@ public interface GeoRssChannelData {
      * @return the elevation
      */
     default Optional<Double> getGeoRssElevation() {
-        return getGeoRssChannelData().getGeoRssElevation();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssElevation();
     }
 
     /**
@@ -138,7 +132,7 @@ public interface GeoRssChannelData {
      * @param geoRssElevation the elevation to set
      */
     default void setGeoRssElevation(Double geoRssElevation) {
-        getGeoRssChannelData().setGeoRssElevation(geoRssElevation);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssElevation(geoRssElevation);
     }
 
     /**
@@ -147,7 +141,7 @@ public interface GeoRssChannelData {
      * @return the floor
      */
     default Optional<Integer> getGeoRssFloor() {
-        return getGeoRssChannelData().getGeoRssFloor();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssFloor();
     }
 
     /**
@@ -156,7 +150,7 @@ public interface GeoRssChannelData {
      * @param geoRssFloor the floor to set
      */
     default void setGeoRssFloor(Integer geoRssFloor) {
-        getGeoRssChannelData().setGeoRssFloor(geoRssFloor);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssFloor(geoRssFloor);
     }
 
     /**
@@ -165,7 +159,7 @@ public interface GeoRssChannelData {
      * @return the radius
      */
     default Optional<Double> getGeoRssRadius() {
-        return getGeoRssChannelData().getGeoRssRadius();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssRadius();
     }
 
     /**
@@ -174,7 +168,7 @@ public interface GeoRssChannelData {
      * @param geoRssRadius the radius to set
      */
     default void setGeoRssRadius(Double geoRssRadius) {
-        getGeoRssChannelData().setGeoRssRadius(geoRssRadius);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssRadius(geoRssRadius);
     }
 
     /**
@@ -183,7 +177,7 @@ public interface GeoRssChannelData {
      * @return the feature type tag
      */
     default Optional<String> getGeoRssFeatureTypeTag() {
-        return getGeoRssChannelData().getGeoRssFeatureTypeTag();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssFeatureTypeTag();
     }
 
     /**
@@ -192,7 +186,7 @@ public interface GeoRssChannelData {
      * @param geoRssFeatureTypeTag the feature type tag to set
      */
     default void setGeoRssFeatureTypeTag(String geoRssFeatureTypeTag) {
-        getGeoRssChannelData().setGeoRssFeatureTypeTag(geoRssFeatureTypeTag);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssFeatureTypeTag(geoRssFeatureTypeTag);
     }
 
     /**
@@ -201,7 +195,7 @@ public interface GeoRssChannelData {
      * @return the relationship tag
      */
     default Optional<String> getGeoRssRelationshipTag() {
-        return getGeoRssChannelData().getGeoRssRelationshipTag();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssRelationshipTag();
     }
 
     /**
@@ -210,7 +204,7 @@ public interface GeoRssChannelData {
      * @param geoRssRelationshipTag the relationship tag to set
      */
     default void setGeoRssRelationshipTag(String geoRssRelationshipTag) {
-        getGeoRssChannelData().setGeoRssRelationshipTag(geoRssRelationshipTag);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssRelationshipTag(geoRssRelationshipTag);
     }
 
     /**
@@ -219,7 +213,7 @@ public interface GeoRssChannelData {
      * @return the feature name
      */
     default Optional<String> getGeoRssFeatureName() {
-        return getGeoRssChannelData().getGeoRssFeatureName();
+        return ((GeoRssChannelDataProvider) this).geoRssChannelData().getGeoRssFeatureName();
     }
 
     /**
@@ -228,6 +222,6 @@ public interface GeoRssChannelData {
      * @param geoRssFeatureName the feature name to set
      */
     default void setGeoRssFeatureName(String geoRssFeatureName) {
-        getGeoRssChannelData().setGeoRssFeatureName(geoRssFeatureName);
+        ((GeoRssChannelDataProvider) this).geoRssChannelData().setGeoRssFeatureName(geoRssFeatureName);
     }
 }

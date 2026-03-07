@@ -1,12 +1,10 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataProvider;
 import java.util.List;
 import java.util.Optional;
 
 public interface MediaRssItemData {
-
-    MediaRssItemData getMediaRssItemData();
-
     /**
      * Returns the list of media content elements associated with this item.
      * Each item represents a media object, such as video, audio, or image, and may include attributes like URL, type, medium, duration, and more, as defined by the Media RSS specification.
@@ -14,7 +12,7 @@ public interface MediaRssItemData {
      * @return list of media content elements
      */
     default List<MediaContent> getMediaContents() {
-        return getMediaRssItemData().getMediaContents();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaContents();
     }
 
     /**
@@ -24,7 +22,7 @@ public interface MediaRssItemData {
      * @param mediaContent the media content element to add
      */
     default void addMediaContents(MediaContent mediaContent) {
-        getMediaRssItemData().addMediaContents(mediaContent);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaContents(mediaContent);
     }
 
     /**
@@ -34,7 +32,7 @@ public interface MediaRssItemData {
      * @return optional media group
      */
     default Optional<MediaGroup> getMediaGroup() {
-        return getMediaRssItemData().getMediaGroup();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaGroup();
     }
 
     /**
@@ -44,7 +42,7 @@ public interface MediaRssItemData {
      * @param mediaGroup the media group to set
      */
     default void setMediaGroup(MediaGroup mediaGroup) {
-        getMediaRssItemData().setMediaGroup(mediaGroup);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaGroup(mediaGroup);
     }
 
     /**
@@ -54,7 +52,7 @@ public interface MediaRssItemData {
      * @return list of media locations
      */
     default List<MediaLocation> getMediaLocations() {
-        return getMediaRssItemData().getMediaLocations();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaLocations();
     }
 
     /**
@@ -64,7 +62,7 @@ public interface MediaRssItemData {
      * @param mediaLocation the media location to add
      */
     default void addMediaLocation(MediaLocation mediaLocation) {
-        getMediaRssItemData().addMediaLocation(mediaLocation);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaLocation(mediaLocation);
     }
 
     /**
@@ -75,7 +73,7 @@ public interface MediaRssItemData {
      * @return media rating or empty if not set
      */
     default List<MediaRating> getMediaRatings() {
-        return getMediaRssItemData().getMediaRatings();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaRatings();
     }
 
     /**
@@ -86,7 +84,7 @@ public interface MediaRssItemData {
      * @param mediaRating media rating
      */
     default void addMediaRating(MediaRating mediaRating) {
-        getMediaRssItemData().addMediaRating(mediaRating);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaRating(mediaRating);
     }
 
     /**
@@ -96,7 +94,7 @@ public interface MediaRssItemData {
      * @return optional title
      */
     default Optional<MediaTitle> getMediaTitle() {
-        return getMediaRssItemData().getMediaTitle();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaTitle();
     }
 
     /**
@@ -106,7 +104,7 @@ public interface MediaRssItemData {
      * @param mediaTitle the title to set
      */
     default void setMediaTitle(MediaTitle mediaTitle) {
-        getMediaRssItemData().setMediaTitle(mediaTitle);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaTitle(mediaTitle);
     }
 
     /**
@@ -116,7 +114,7 @@ public interface MediaRssItemData {
      * @return optional description
      */
     default Optional<MediaDescription> getMediaDescription() {
-        return getMediaRssItemData().getMediaDescription();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaDescription();
     }
 
     /**
@@ -126,7 +124,7 @@ public interface MediaRssItemData {
      * @param mediaDescription the description to set
      */
     default void setMediaDescription(MediaDescription mediaDescription) {
-        getMediaRssItemData().setMediaDescription(mediaDescription);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaDescription(mediaDescription);
     }
 
     /**
@@ -136,7 +134,7 @@ public interface MediaRssItemData {
      * @return list of keywords
      */
     default List<String> getMediaKeywords() {
-        return getMediaRssItemData().getMediaKeywords();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaKeywords();
     }
 
     /**
@@ -146,7 +144,7 @@ public interface MediaRssItemData {
      * @param mediaKeyword the keyword to add
      */
     default void addMediaKeyword(String mediaKeyword) {
-        getMediaRssItemData().addMediaKeyword(mediaKeyword);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaKeyword(mediaKeyword);
     }
 
     /**
@@ -156,7 +154,7 @@ public interface MediaRssItemData {
      * @return list of thumbnails
      */
     default List<MediaThumbnail> getMediaThumbnails() {
-        return getMediaRssItemData().getMediaThumbnails();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaThumbnails();
     }
 
     /**
@@ -166,7 +164,7 @@ public interface MediaRssItemData {
      * @param mediaThumbnail the thumbnail to add
      */
     default void addMediaThumbnail(MediaThumbnail mediaThumbnail) {
-        getMediaRssItemData().addMediaThumbnail(mediaThumbnail);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaThumbnail(mediaThumbnail);
     }
 
     /**
@@ -176,7 +174,7 @@ public interface MediaRssItemData {
      * @return list of categories
      */
     default List<MediaCategory> getMediaCategories() {
-        return getMediaRssItemData().getMediaCategories();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaCategories();
     }
 
     /**
@@ -186,7 +184,7 @@ public interface MediaRssItemData {
      * @param mediaCategory the category to add
      */
     default void addMediaCategory(MediaCategory mediaCategory) {
-        getMediaRssItemData().addMediaCategory(mediaCategory);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaCategory(mediaCategory);
     }
 
     /**
@@ -196,7 +194,7 @@ public interface MediaRssItemData {
      * @return list of hashes
      */
     default List<MediaHash> getMediaHashes() {
-        return getMediaRssItemData().getMediaHashes();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaHashes();
     }
 
     /**
@@ -206,7 +204,7 @@ public interface MediaRssItemData {
      * @param mediaHash the hash to add
      */
     default void addMediaHash(MediaHash mediaHash) {
-        getMediaRssItemData().addMediaHash(mediaHash);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaHash(mediaHash);
     }
 
     /**
@@ -216,7 +214,7 @@ public interface MediaRssItemData {
      * @return optional media player information
      */
     default Optional<MediaPlayer> getMediaPlayer() {
-        return getMediaRssItemData().getMediaPlayer();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaPlayer();
     }
 
     /**
@@ -226,7 +224,7 @@ public interface MediaRssItemData {
      * @param mediaPlayer the media player information to set
      */
     default void setMediaPlayer(MediaPlayer mediaPlayer) {
-        getMediaRssItemData().setMediaPlayer(mediaPlayer);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaPlayer(mediaPlayer);
     }
 
     /**
@@ -236,7 +234,7 @@ public interface MediaRssItemData {
      * @return list of credits
      */
     default List<MediaCredit> getMediaCredits() {
-        return getMediaRssItemData().getMediaCredits();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaCredits();
     }
 
     /**
@@ -246,7 +244,7 @@ public interface MediaRssItemData {
      * @param mediaCredit the credit to add
      */
     default void addMediaCredit(MediaCredit mediaCredit) {
-        getMediaRssItemData().addMediaCredit(mediaCredit);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaCredit(mediaCredit);
     }
 
     /**
@@ -256,7 +254,7 @@ public interface MediaRssItemData {
      * @return optional copyright information
      */
     default Optional<MediaCopyright> getMediaCopyright() {
-        return getMediaRssItemData().getMediaCopyright();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaCopyright();
     }
 
     /**
@@ -266,7 +264,7 @@ public interface MediaRssItemData {
      * @param mediaCopyright the copyright information to set
      */
     default void setMediaCopyright(MediaCopyright mediaCopyright) {
-        getMediaRssItemData().setMediaCopyright(mediaCopyright);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaCopyright(mediaCopyright);
     }
 
     /**
@@ -276,7 +274,7 @@ public interface MediaRssItemData {
      * @return list of text elements
      */
     default List<MediaText> getMediaTexts() {
-        return getMediaRssItemData().getMediaTexts();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaTexts();
     }
 
     /**
@@ -286,7 +284,7 @@ public interface MediaRssItemData {
      * @param mediaText the text element to add
      */
     default void addMediaText(MediaText mediaText) {
-        getMediaRssItemData().addMediaText(mediaText);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaText(mediaText);
     }
 
     /**
@@ -296,7 +294,7 @@ public interface MediaRssItemData {
      * @return list of restrictions
      */
     default List<MediaRestriction> getMediaRestrictions() {
-        return getMediaRssItemData().getMediaRestrictions();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaRestrictions();
     }
 
     /**
@@ -306,7 +304,7 @@ public interface MediaRssItemData {
      * @param mediaRestriction the restriction to add
      */
     default void addMediaRestriction(MediaRestriction mediaRestriction) {
-        getMediaRssItemData().addMediaRestriction(mediaRestriction);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaRestriction(mediaRestriction);
     }
 
     /**
@@ -316,7 +314,7 @@ public interface MediaRssItemData {
      * @return optional community information
      */
     default Optional<MediaCommunity> getMediaCommunity() {
-        return getMediaRssItemData().getMediaCommunity();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaCommunity();
     }
 
     /**
@@ -326,7 +324,7 @@ public interface MediaRssItemData {
      * @param mediaCommunity the community information to set
      */
     default void setMediaCommunity(MediaCommunity mediaCommunity) {
-        getMediaRssItemData().setMediaCommunity(mediaCommunity);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaCommunity(mediaCommunity);
     }
 
     /**
@@ -336,7 +334,7 @@ public interface MediaRssItemData {
      * @return list of comments
      */
     default List<String> getMediaComments() {
-        return getMediaRssItemData().getMediaComments();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaComments();
     }
 
     /**
@@ -346,7 +344,7 @@ public interface MediaRssItemData {
      * @param mediaComment the comment to add
      */
     default void addMediaComment(String mediaComment) {
-        getMediaRssItemData().addMediaComment(mediaComment);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaComment(mediaComment);
     }
 
     /**
@@ -356,7 +354,7 @@ public interface MediaRssItemData {
      * @return optional embed information
      */
     default Optional<MediaEmbed> getMediaEmbed() {
-        return getMediaRssItemData().getMediaEmbed();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaEmbed();
     }
 
     /**
@@ -366,7 +364,7 @@ public interface MediaRssItemData {
      * @param mediaEmbed the embed information to set
      */
     default void setMediaEmbed(MediaEmbed mediaEmbed) {
-        getMediaRssItemData().setMediaEmbed(mediaEmbed);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaEmbed(mediaEmbed);
     }
 
     /**
@@ -376,7 +374,7 @@ public interface MediaRssItemData {
      * @return list of responses
      */
     default List<String> getMediaResponses() {
-        return getMediaRssItemData().getMediaResponses();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaResponses();
     }
 
     /**
@@ -386,7 +384,7 @@ public interface MediaRssItemData {
      * @param mediaResponse the response to add
      */
     default void addMediaResponse(String mediaResponse) {
-        getMediaRssItemData().addMediaResponse(mediaResponse);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaResponse(mediaResponse);
     }
 
     /**
@@ -396,7 +394,7 @@ public interface MediaRssItemData {
      * @return list of back links
      */
     default List<String> getMediaBackLinks() {
-        return getMediaRssItemData().getMediaBackLinks();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaBackLinks();
     }
 
     /**
@@ -406,7 +404,7 @@ public interface MediaRssItemData {
      * @param mediaBackLink the back link to add
      */
     default void addMediaBackLink(String mediaBackLink) {
-        getMediaRssItemData().addMediaBackLink(mediaBackLink);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaBackLink(mediaBackLink);
     }
 
     /**
@@ -416,7 +414,7 @@ public interface MediaRssItemData {
      * @return optional status information
      */
     default Optional<MediaStatus> getMediaStatus() {
-        return getMediaRssItemData().getMediaStatus();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaStatus();
     }
 
     /**
@@ -426,7 +424,7 @@ public interface MediaRssItemData {
      * @param mediaStatus the status information to set
      */
     default void setMediaStatus(MediaStatus mediaStatus) {
-        getMediaRssItemData().setMediaStatus(mediaStatus);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaStatus(mediaStatus);
     }
 
     /**
@@ -436,7 +434,7 @@ public interface MediaRssItemData {
      * @return list of prices
      */
     default List<MediaPrice> getMediaPrices() {
-        return getMediaRssItemData().getMediaPrices();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaPrices();
     }
 
     /**
@@ -446,7 +444,7 @@ public interface MediaRssItemData {
      * @param mediaPrice the price to add
      */
     default void addMediaPrice(MediaPrice mediaPrice) {
-        getMediaRssItemData().addMediaPrice(mediaPrice);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaPrice(mediaPrice);
     }
 
     /**
@@ -456,7 +454,7 @@ public interface MediaRssItemData {
      * @return optional license information
      */
     default List<MediaLicense> getMediaLicenses() {
-        return getMediaRssItemData().getMediaLicenses();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaLicenses();
     }
 
     /**
@@ -466,7 +464,7 @@ public interface MediaRssItemData {
      * @param mediaLicense the license information to set
      */
     default void addMediaLicense(MediaLicense mediaLicense) {
-        getMediaRssItemData().addMediaLicense(mediaLicense);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaLicense(mediaLicense);
     }
 
     /**
@@ -476,7 +474,7 @@ public interface MediaRssItemData {
      * @return list of subtitles
      */
     default List<MediaSubTitle> getMediaSubTitles() {
-        return getMediaRssItemData().getMediaSubTitles();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaSubTitles();
     }
 
     /**
@@ -486,7 +484,7 @@ public interface MediaRssItemData {
      * @param mediaSubTitle the subtitle to add
      */
     default void addMediaSubTitle(MediaSubTitle mediaSubTitle) {
-        getMediaRssItemData().addMediaSubTitle(mediaSubTitle);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaSubTitle(mediaSubTitle);
     }
 
     /**
@@ -496,7 +494,7 @@ public interface MediaRssItemData {
      * @return list of peer links
      */
     default List<MediaPeerLink> getMediaPeerLinks() {
-        return getMediaRssItemData().getMediaPeerLinks();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaPeerLinks();
     }
 
     /**
@@ -506,7 +504,7 @@ public interface MediaRssItemData {
      * @param mediaPeerLink the peer link to add
      */
     default void addMediaPeerLink(MediaPeerLink mediaPeerLink) {
-        getMediaRssItemData().addMediaPeerLink(mediaPeerLink);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaPeerLink(mediaPeerLink);
     }
 
     /**
@@ -516,7 +514,7 @@ public interface MediaRssItemData {
      * @return optional rights information
      */
     default Optional<MediaRights> getMediaRights() {
-        return getMediaRssItemData().getMediaRights();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaRights();
     }
 
     /**
@@ -526,7 +524,7 @@ public interface MediaRssItemData {
      * @param mediaRights the rights information to set
      */
     default void setMediaRights(MediaRights mediaRights) {
-        getMediaRssItemData().setMediaRights(mediaRights);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().setMediaRights(mediaRights);
     }
 
     /**
@@ -536,7 +534,7 @@ public interface MediaRssItemData {
      * @return list of scenes
      */
     default List<MediaScene> getMediaScenes() {
-        return getMediaRssItemData().getMediaScenes();
+        return ((MediaRssItemDataProvider) this).mediaRssItemData().getMediaScenes();
     }
 
     /**
@@ -546,6 +544,6 @@ public interface MediaRssItemData {
      * @param mediaScenes the scene to add
      */
     default void addMediaScene(MediaScene mediaScenes) {
-        getMediaRssItemData().addMediaScene(mediaScenes);
+        ((MediaRssItemDataProvider) this).mediaRssItemData().addMediaScene(mediaScenes);
     }
 }

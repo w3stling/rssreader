@@ -8,8 +8,9 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannel;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannelData;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelDataProvider;
 
-public class YoutubeChannelImpl extends ChannelImpl implements YoutubeChannel {
+public class YoutubeChannelImpl extends ChannelImpl implements YoutubeChannel, YoutubeChannelDataProvider, MediaRssChannelDataProvider {
     private final YoutubeChannelData youtubeData = new YoutubeChannelDataImpl();
     private final MediaRssChannelData mediaRssData = new MediaRssChannelDataImpl();
 
@@ -18,12 +19,12 @@ public class YoutubeChannelImpl extends ChannelImpl implements YoutubeChannel {
     }
 
     @Override
-    public YoutubeChannelData getYoutubeChannelData() {
+    public YoutubeChannelData youtubeChannelData() {
         return youtubeData;
     }
 
     @Override
-    public MediaRssChannelData getMediaRssChannelData() {
+    public MediaRssChannelData mediaRssChannelData() {
         return mediaRssData;
     }
 
@@ -32,11 +33,11 @@ public class YoutubeChannelImpl extends ChannelImpl implements YoutubeChannel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         YoutubeChannelImpl that = (YoutubeChannelImpl) o;
-        return Objects.equals(getYoutubeChannelData(), that.getYoutubeChannelData()) && Objects.equals(getMediaRssChannelData(), that.getMediaRssChannelData());
+        return Objects.equals(youtubeChannelData(), that.youtubeChannelData()) && Objects.equals(mediaRssChannelData(), that.mediaRssChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getYoutubeChannelData(), getMediaRssChannelData());
+        return Objects.hash(super.hashCode(), youtubeChannelData(), mediaRssChannelData());
     }
 }

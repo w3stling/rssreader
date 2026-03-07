@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Implementation of RSS channel with Dublin Core metadata support.
  */
-public class DcChannelImpl extends ChannelImpl implements DcChannel {
+public class DcChannelImpl extends ChannelImpl implements DcChannel, DcChannelDataProvider {
     private final DcChannelDataImpl dcData = new DcChannelDataImpl();
 
     /**
@@ -22,7 +22,7 @@ public class DcChannelImpl extends ChannelImpl implements DcChannel {
     }
 
     @Override
-    public DcChannelData getDcChannelData() {
+    public DcChannelData dcChannelData() {
         return dcData;
     }
 

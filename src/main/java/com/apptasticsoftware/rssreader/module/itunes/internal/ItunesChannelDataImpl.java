@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class ItunesChannelDataImpl implements ItunesChannelData {
+public class ItunesChannelDataImpl implements ItunesChannelData, ItunesChannelDataProvider {
     private String itunesImage;
     private List<String> itunesCategories;
     private boolean itunesExplicit;
@@ -24,7 +24,7 @@ public class ItunesChannelDataImpl implements ItunesChannelData {
     private boolean itunesComplete;
 
     @Override
-    public ItunesChannelData getItunesChannelData() {
+    public ItunesChannelData itunesChannelData() {
         return this;
     }
 

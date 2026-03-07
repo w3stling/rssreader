@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Internal implementation of {@link com.apptasticsoftware.rssreader.module.atom.AtomChannel}.
  */
-public class AtomChannelImpl extends ChannelImpl implements AtomChannel {
+public class AtomChannelImpl extends ChannelImpl implements AtomChannel, AtomChannelDataProvider {
     private final AtomChannelDataImpl atomData = new AtomChannelDataImpl();
 
     /**
@@ -23,7 +23,7 @@ public class AtomChannelImpl extends ChannelImpl implements AtomChannel {
     }
 
     @Override
-    public AtomChannelData getAtomChannelData() {
+    public AtomChannelData atomChannelData() {
         return atomData;
     }
 
@@ -32,11 +32,11 @@ public class AtomChannelImpl extends ChannelImpl implements AtomChannel {
         if (!(o instanceof AtomChannelImpl)) return false;
         if (!super.equals(o)) return false;
         AtomChannelImpl that = (AtomChannelImpl) o;
-        return Objects.equals(getAtomChannelData(), that.getAtomChannelData());
+        return Objects.equals(atomChannelData(), that.atomChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getAtomChannelData());
+        return Objects.hash(super.hashCode(), atomChannelData());
     }
 }

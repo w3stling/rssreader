@@ -7,7 +7,7 @@ import com.apptasticsoftware.rssreader.module.psc.PscItemData;
 
 import java.util.Objects;
 
-public class PscItemImpl extends ItemImpl implements PscItem {
+public class PscItemImpl extends ItemImpl implements PscItem, PscItemDataProvider {
     private final PscItemData pscData = new PscItemDataImpl();
 
     public PscItemImpl(DateTimeParser dateTimeParser) {
@@ -15,7 +15,7 @@ public class PscItemImpl extends ItemImpl implements PscItem {
     }
 
     @Override
-    public PscItemData getPscItemData() {
+    public PscItemData pscItemData() {
         return pscData;
     }
 

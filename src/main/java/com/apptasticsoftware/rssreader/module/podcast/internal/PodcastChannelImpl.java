@@ -8,8 +8,9 @@ import com.apptasticsoftware.rssreader.module.podcast.PodcastChannel;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastChannelData;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelDataProvider;
 
-public class PodcastChannelImpl extends ChannelImpl implements PodcastChannel {
+public class PodcastChannelImpl extends ChannelImpl implements PodcastChannel, PodcastChannelDataProvider, ItunesChannelDataProvider {
     private final PodcastChannelDataImpl data = new PodcastChannelDataImpl();
     private final ItunesChannelDataImpl itunesData = new ItunesChannelDataImpl();
 
@@ -23,12 +24,12 @@ public class PodcastChannelImpl extends ChannelImpl implements PodcastChannel {
     }
 
     @Override
-    public PodcastChannelData getPodcastChannelData() {
+    public PodcastChannelData podcastChannelData() {
         return data;
     }
 
     @Override
-    public ItunesChannelData getItunesChannelData() {
+    public ItunesChannelData itunesChannelData() {
         return itunesData;
     }
 

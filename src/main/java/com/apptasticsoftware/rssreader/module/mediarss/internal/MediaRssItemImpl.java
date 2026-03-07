@@ -33,7 +33,7 @@ import java.util.Objects;
 /**
  * Class representing the media rss item.
  */
-public class MediaRssItemImpl extends ItemImpl implements MediaRssItem {
+public class MediaRssItemImpl extends ItemImpl implements MediaRssItem, MediaRssItemDataProvider {
     private final MediaRssItemData data = new MediaRssItemDataImpl();
 
     /**
@@ -52,20 +52,20 @@ public class MediaRssItemImpl extends ItemImpl implements MediaRssItem {
      * @return media rss item data
      */
     @Override
-    public MediaRssItemData getMediaRssItemData() {
+    public MediaRssItemData mediaRssItemData() {
         return data;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof MediaRssItem)) return false;
+        if (!(o instanceof MediaRssItemImpl)) return false;
         if (!super.equals(o)) return false;
-        MediaRssItem that = (MediaRssItem) o;
-        return Objects.equals(getMediaRssItemData(), that.getMediaRssItemData());
+        MediaRssItemImpl that = (MediaRssItemImpl) o;
+        return Objects.equals(data, that.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getMediaRssItemData());
+        return Objects.hash(super.hashCode(), mediaRssItemData());
     }
 }

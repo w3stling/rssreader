@@ -5,10 +5,10 @@ import com.apptasticsoftware.rssreader.module.dc.DcItemData;
 /**
  * Implementation of Dublin Core metadata for RSS items.
  */
-public class DcItemDataImpl extends MetaData implements DcItemData {
+public class DcItemDataImpl extends MetaData implements DcItemData, DcItemDataProvider {
 
     @Override
-    public DcItemData getDcItemData() {
+    public DcItemData dcItemData() {
         return this;
     }
 }
