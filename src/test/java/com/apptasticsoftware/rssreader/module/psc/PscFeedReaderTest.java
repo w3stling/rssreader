@@ -46,7 +46,7 @@ class PscFeedReaderTest {
         assertThat(item.getLink()).hasValue("http://podlove.org/files/fiatlux.mp3");
         assertTrue(item.getPscChapters().isPresent());
         assertThat(item.getPscChapters().get().getVersion()).hasValue("1.2");
-        assertThat(item.getPscChapters().get().getChapters().size()).isEqualTo(4);
+        assertThat(item.getPscChapters().get().getChapters()).hasSize(4);
 
         assertThat(item.getPscChapters().get().getChapters().get(0).getStart()).isEqualTo("0");
         assertThat(item.getPscChapters().get().getChapters().get(0).getStartAsDuration()).isEqualTo(Duration.ofSeconds(0));

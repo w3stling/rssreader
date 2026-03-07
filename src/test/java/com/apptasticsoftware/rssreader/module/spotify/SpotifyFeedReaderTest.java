@@ -45,7 +45,7 @@ class SpotifyFeedReaderTest {
         assertThat(channel.getItunesCategories()).isEqualTo(List.of("News & Politics"));
         assertThat(channel.getItunesType()).hasValue("episodic");
         assertThat(channel.getItunesImage()).isEqualTo("https://serialpodcast.org/sites/all/modules/custom/serial/img/serial-itunes-logo.png");
-        assertThat(channel.getMediaRestrictions().size()).isEqualTo(1);
+        assertThat(channel.getMediaRestrictions()).hasSize(1);
         assertThat(channel.getMediaRestrictions().get(0).getType()).isEqualTo("country");
         assertThat(channel.getMediaRestrictions().get(0).getRelationship()).isEqualTo("allow");
         assertThat(channel.getMediaRestrictions().get(0).getRestriction()).isEqualTo("us se");
@@ -57,7 +57,7 @@ class SpotifyFeedReaderTest {
         assertThat(item.getPubDateAsZonedDateTime()).hasValue(Default.getDateTimeParser().parse("Thu, 20 Nov 2014 10:30:00 +0000"));
         assertThat(item.getItunesDuration()).hasValue("2700");
         assertThat(item.getItunesDurationAsDuration()).hasValue(Duration.ofSeconds(2700));
-        assertThat(item.getEnclosures().size()).isEqualTo(1);
+        assertThat(item.getEnclosures()).hasSize(1);
         assertThat(item.getEnclosures().get(0).getUrl()).isEqualTo("https://dts.podtrac.com/redirect.mp3/files.serialpodcast.org/sites/default/files/podcast/1422481890/serial-s01-e09.mp3");
         assertThat(item.getEnclosures().get(0).getType()).isEqualTo("audio/mpeg");
         assertTrue(item.getMediaTitle().isPresent());
@@ -65,7 +65,7 @@ class SpotifyFeedReaderTest {
 
         assertTrue(item.getPscChapters().isPresent());
         assertThat(item.getPscChapters().get().getVersion()).isEmpty();
-        assertThat(item.getPscChapters().get().getChapters().size()).isEqualTo(3);
+        assertThat(item.getPscChapters().get().getChapters()).hasSize(3);
         assertThat(item.getPscChapters().get().getChapters().get(0).getStart()).isEqualTo("0");
         assertThat(item.getPscChapters().get().getChapters().get(0).getStartAsDuration()).isEqualTo(Duration.ofSeconds(0));
         assertThat(item.getPscChapters().get().getChapters().get(0).getTitle()).isEqualTo("Opening credits");

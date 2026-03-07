@@ -36,7 +36,7 @@ class OpenSearchFeedReaderTest {
         assertThat(channel.getOpenSearchTotalResults()).hasValue(4230000);
         assertThat(channel.getOpenSearchStartIndex()).hasValue(21);
         assertThat(channel.getOpenSearchItemsPerPage()).hasValue(10);
-        assertThat(channel.getOpenSearchQueries().size()).isEqualTo(1);
+        assertThat(channel.getOpenSearchQueries()).hasSize(1);
         assertThat(channel.getOpenSearchQueries().get(0).getRole()).isEqualTo("request");
         assertThat(channel.getOpenSearchQueries().get(0).getTitle()).hasValue("History");
         assertThat(channel.getOpenSearchQueries().get(0).getTotalResults()).hasValue(10);

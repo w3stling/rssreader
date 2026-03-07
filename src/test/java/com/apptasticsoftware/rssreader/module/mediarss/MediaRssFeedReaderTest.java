@@ -145,7 +145,7 @@ class MediaRssFeedReaderTest {
         assertThat(mediaPlayer.getHeight()).hasValue(480);
         assertThat(mediaPlayer.getWidth()).hasValue(640);
 
-        assertThat(mediaContent.getMediaCredits().size()).isEqualTo(2);
+        assertThat(mediaContent.getMediaCredits()).hasSize(2);
         MediaCredit mediaCredit1 = mediaContent.getMediaCredits().get(0);
         assertThat(mediaCredit1.getRole()).hasValue("producer");
         assertThat(mediaCredit1.getScheme()).hasValue("urn:ebu");
@@ -217,7 +217,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -281,7 +281,7 @@ class MediaRssFeedReaderTest {
 
         assertNotNull(item.getMediaGroup());
         assertThat(item.getMediaGroup()).isPresent();
-        assertThat(item.getMediaGroup().map(MediaGroup::getMediaContents).orElse(List.of()).size()).isEqualTo(2);
+        assertThat(item.getMediaGroup().map(MediaGroup::getMediaContents).orElse(List.of())).hasSize(2);
 
         var group = item.getMediaGroup().orElse(null);
         assertNotNull(group);
@@ -404,7 +404,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -604,7 +604,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -848,7 +848,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -1091,7 +1091,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -1403,7 +1403,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");
@@ -1658,7 +1658,7 @@ class MediaRssFeedReaderTest {
         assertThat(embed.getUrl()).isEqualTo("http://www.foo.com/player.swf");
         assertThat(embed.getHeight()).isEqualTo(323);
         assertThat(embed.getWidth()).isEqualTo(512);
-        assertThat(embed.getParams().size()).isEqualTo(5);
+        assertThat(embed.getParams()).hasSize(5);
         assertThat(embed.getParams()).containsEntry("type", "application/x-shockwave-flash");
         assertThat(embed.getParams()).containsEntry("width", "512");
         assertThat(embed.getParams()).containsEntry("height", "323");

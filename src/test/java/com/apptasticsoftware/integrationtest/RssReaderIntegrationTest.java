@@ -241,7 +241,7 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle()).isEqualTo("Realtid");
-            assertThat(channel.getDescription()).isEqualTo("");
+            assertThat(channel.getDescription()).isEmpty();
             assertThat(channel.getLanguage()).hasValue("sv");
             assertThat(channel.getLink()).isEqualTo("https://www.realtid.se/rss/");
             assertThat(channel.getCopyright()).isEmpty();
@@ -280,7 +280,7 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle()).isEqualTo("Alla nyheter");
-            assertThat(channel.getDescription()).isEqualTo("");
+            assertThat(channel.getDescription()).isEmpty();
             assertThat(channel.getLanguage()).isEmpty();
             assertThat(channel.getLink()).isEqualTo("https://se.investing.com");
             assertThat(channel.getCopyright()).isEmpty();
@@ -311,7 +311,7 @@ class RssReaderIntegrationTest {
             Channel channel = item.getChannel();
             assertNotNull(channel);
             assertThat(channel.getTitle()).isEqualTo("Mest lästa nyheter");
-            assertThat(channel.getDescription()).isEqualTo("");
+            assertThat(channel.getDescription()).isEmpty();
             assertThat(channel.getLanguage()).isEmpty();
             assertThat(channel.getLink()).isEqualTo("https://se.investing.com");
             assertThat(channel.getCopyright()).isEmpty();
