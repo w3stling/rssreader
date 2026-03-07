@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelImpl;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class YoutubeFeedReaderTest {
 
@@ -30,6 +31,8 @@ class YoutubeFeedReaderTest {
         var items = feedReader.read(fromFile("module/youtube/example1.xml"))
                 .collect(Collectors.toList());
         assertEquals(15, items.size());
+
+        items.forEach(this::assertHasFeedItem);
 
         var item = items.get(0);
         YoutubeChannel channel = (YoutubeChannel) item.getChannel();
@@ -114,6 +117,22 @@ class YoutubeFeedReaderTest {
         EqualsVerifier.simple().forClass(YoutubeChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(YoutubeItemDataImpl.class).verify();
+    }
+
+    private void assertHasFeedItem(YoutubeItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertTrue(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertTrue(feedItem.hasYoutubeItem());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

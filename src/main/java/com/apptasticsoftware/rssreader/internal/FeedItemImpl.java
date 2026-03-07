@@ -36,16 +36,16 @@ import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataProvider;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeItemDataProvider;
 
 public class FeedItemImpl extends ItemImpl implements FeedItem, AtomItemDataProvider, DcItemDataProvider, GeoRssItemDataProvider, ItunesItemDataProvider, MediaRssItemDataProvider, PodcastItemDataProvider, PscItemDataProvider, SlashItemDataProvider, WfwItemDataProvider, YoutubeItemDataProvider {
-    private final AtomItemData atomItemData = new AtomItemDataImpl();
-    private final DcItemData dcItemData = new DcItemDataImpl();
-    private final GeoRssItemData geoRssItemData = new GeoRssItemDataImpl();
-    private final ItunesItemData itunesItemData = new ItunesItemDataImpl();
-    private final MediaRssItemData mediaRssItemData = new MediaRssItemDataImpl();
-    private final PodcastItemData podcastItemData;
-    private final PscItemData pscItemData = new PscItemDataImpl();
-    private final SlashItemData slashItemData = new SlashItemDataImpl();
-    private final WfwItemData wfwItemData = new WfwItemDataImpl();
-    private final YoutubeItemData youtubeItemData = new YoutubeItemDataImpl();
+    private AtomItemData atomItemData;
+    private DcItemData dcItemData;
+    private GeoRssItemData geoRssItemData;
+    private ItunesItemData itunesItemData;
+    private MediaRssItemData mediaRssItemData;
+    private PodcastItemData podcastItemData;
+    private PscItemData pscItemData;
+    private SlashItemData slashItemData;
+    private WfwItemData wfwItemData;
+    private YoutubeItemData youtubeItemData;
 
     /**
      * Constructor
@@ -54,56 +54,135 @@ public class FeedItemImpl extends ItemImpl implements FeedItem, AtomItemDataProv
      */
     public FeedItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
-        podcastItemData = new PodcastItemDataImpl(dateTimeParser);
+    }
+
+    @Override
+    public boolean hasAtomItem() {
+        return atomItemData != null;
     }
 
     @Override
     public AtomItemData atomItemData() {
+        if (atomItemData == null) {
+            atomItemData = new AtomItemDataImpl();
+        }
         return atomItemData;
     }
 
     @Override
+    public boolean hasDcItem() {
+        return dcItemData != null;
+    }
+
+    @Override
     public DcItemData dcItemData() {
+        if (dcItemData == null) {
+            dcItemData = new DcItemDataImpl();
+        }
         return dcItemData;
     }
 
     @Override
+    public boolean hasGeoRssItem() {
+        return geoRssItemData != null;
+    }
+
+    @Override
     public GeoRssItemData geoRssItemData() {
+        if (geoRssItemData == null) {
+            geoRssItemData = new GeoRssItemDataImpl();
+        }
         return geoRssItemData;
     }
 
     @Override
+    public boolean hasItunesItem() {
+        return itunesItemData != null;
+    }
+
+    @Override
     public ItunesItemData itunesItemData() {
+        if (itunesItemData == null) {
+            itunesItemData = new ItunesItemDataImpl();
+        }
         return itunesItemData;
     }
 
     @Override
+    public boolean hasMediaRssItem() {
+        return mediaRssItemData != null;
+    }
+
+    @Override
     public MediaRssItemData mediaRssItemData() {
+        if (mediaRssItemData == null) {
+            mediaRssItemData = new MediaRssItemDataImpl();
+        }
         return mediaRssItemData;
     }
 
     @Override
+    public boolean hasPodcastItem() {
+        return podcastItemData != null;
+    }
+
+    @Override
     public PodcastItemData podcastItemData() {
+        if (podcastItemData == null) {
+            podcastItemData = new PodcastItemDataImpl(dateTimeParser);
+        }
         return podcastItemData;
     }
 
     @Override
+    public boolean hasPscItem() {
+        return pscItemData != null;
+    }
+
+    @Override
     public PscItemData pscItemData() {
+        if (pscItemData == null) {
+            pscItemData = new PscItemDataImpl();
+        }
         return pscItemData;
     }
 
     @Override
+    public boolean hasSlashItem() {
+        return slashItemData != null;
+    }
+
+    @Override
     public SlashItemData slashItemData() {
+        if (slashItemData == null) {
+            slashItemData = new SlashItemDataImpl();
+        }
         return slashItemData;
     }
 
     @Override
+    public boolean hasWfwItem() {
+        return wfwItemData != null;
+    }
+
+    @Override
     public WfwItemData wfwItemData() {
+        if (wfwItemData == null) {
+            wfwItemData = new WfwItemDataImpl();
+        }
         return wfwItemData;
     }
 
     @Override
+    public boolean hasYoutubeItem() {
+        return youtubeItemData != null;
+    }
+
+    @Override
     public YoutubeItemData youtubeItemData() {
+        if (youtubeItemData == null) {
+            youtubeItemData = new YoutubeItemDataImpl();
+        }
         return youtubeItemData;
     }
 

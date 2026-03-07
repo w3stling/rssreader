@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.slash;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataImpl;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemImpl;
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SuppressWarnings("java:S5961")
 class SlashFeedReaderTest {
@@ -27,6 +29,7 @@ class SlashFeedReaderTest {
         assertEquals(1, items.size());
 
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Slashdot");
         assertThat(channel.getDescription()).isEqualTo("News for nerds, stuff that matters");
@@ -44,6 +47,22 @@ class SlashFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(SlashItemImpl.class).withNonnullFields("slashData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
         EqualsVerifier.simple().forClass(SlashItemDataImpl.class).verify();
+    }
+
+    private void assertHasFeedItem(SlashItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertTrue(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertTrue(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

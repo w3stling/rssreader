@@ -58,7 +58,7 @@ public class ItemImpl implements Item, Comparable<Item> {
     private Enclosure enclosure;
     private List<Enclosure> enclosures;
     private Channel channel;
-    private final DateTimeParser dateTimeParser;
+    protected final DateTimeParser dateTimeParser;
 
     /**
      * Constructor for Item

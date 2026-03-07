@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelImpl;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemImpl;
@@ -18,8 +19,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PodcastFeedReaderTest {
 
@@ -72,6 +73,7 @@ class PodcastFeedReaderTest {
         assertThat(liveItem.getPodcastChat().get().getSpace()).hasValue("myawesomepodcast@jabber.example.org");
 
         for (PodcastItem podcastItem : items) {
+            assertHasFeedItem(podcastItem);
             var channel = (PodcastChannel) podcastItem.getChannel();
             assertThat(channel.getPodcastGuid()).isEqualTo("y0ur-gu1d-g035-h3r3");
             assertTrue(channel.getPodcastLicense().isPresent());
@@ -327,6 +329,7 @@ class PodcastFeedReaderTest {
 
         assertEquals(3, items.size());
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = (PodcastChannel) item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://podnews.net");
         assertThat(channel.getTitle()).isEqualTo("Podnews Daily - podcast industry news");
@@ -460,6 +463,22 @@ class PodcastFeedReaderTest {
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
+    }
+
+    private void assertHasFeedItem(PodcastItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertTrue(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertTrue(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

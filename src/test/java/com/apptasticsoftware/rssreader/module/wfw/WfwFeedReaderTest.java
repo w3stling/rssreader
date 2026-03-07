@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.wfw;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataImpl;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemImpl;
@@ -16,7 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class WfwFeedReaderTest {
 
@@ -28,6 +30,7 @@ class WfwFeedReaderTest {
 
         assertEquals(1, items.size());
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Example Website");
         assertThat(channel.getLink()).isEqualTo("https://www.example.com");
@@ -40,6 +43,22 @@ class WfwFeedReaderTest {
         assertThat(item.getPubDateAsZonedDateTime()).hasValue(Default.getDateTimeParser().parse("Mon, 27 May 2024 10:00:00 GMT"));
         assertThat(item.getWfwCommentRss()).hasValue("https://ekzemplo.com/news/130/comments.xml");
         assertThat(item.getWfwComment()).hasValue("https://ekzemplo.com/comment?post=130");
+    }
+
+    private void assertHasFeedItem(WfwItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertTrue(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
     }
 
     @Test

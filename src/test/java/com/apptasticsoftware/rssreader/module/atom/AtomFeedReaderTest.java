@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.atom;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.atom.internal.*;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -62,6 +63,7 @@ class AtomFeedReaderTest {
         assertEquals("https://technewsdaily.com/authors/john-smith", channelContributor.getUri());
 
         var atomItem = items.get(0);
+        assertHasFeedItem(atomItem);
 
         // Verify item link
         assertThat(atomItem.getLink()).hasValue("https://technewsdaily.com/articles/new-programming-language");
@@ -103,10 +105,26 @@ class AtomFeedReaderTest {
         EqualsVerifier.simple().forClass(MetaData.class).verify();
     }
 
+    private void assertHasFeedItem(AtomItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertTrue(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
+    }
+
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new AtomFeedReader()),
-                Arguments.of(new FeedReader())
+            Arguments.of(new AtomFeedReader()),
+            Arguments.of(new FeedReader())
         );
     }
 

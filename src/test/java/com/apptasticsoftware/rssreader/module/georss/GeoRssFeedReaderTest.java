@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.georss;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.georss.internal.*;
 import com.apptasticsoftware.rssreader.util.Default;
@@ -16,7 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SuppressWarnings("java:S5961")
 class GeoRssFeedReaderTest {
@@ -29,6 +31,7 @@ class GeoRssFeedReaderTest {
 
         assertEquals(1, items.size());
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = (GeoRssChannel) item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Earthquakes");
         assertThat(channel.getLink()).isEqualTo("http://example.org/");
@@ -81,7 +84,7 @@ class GeoRssFeedReaderTest {
 
         assertEquals(1, items.size());
         var item = items.get(0);
-
+        assertHasFeedItem(item);
         var channel = (GeoRssChannel) item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Earthquakes");
         assertThat(channel.getLink()).isEqualTo("http://example.org/");
@@ -151,10 +154,26 @@ class GeoRssFeedReaderTest {
         EqualsVerifier.simple().forClass(Coordinate.class).verify();
     }
 
+    private void assertHasFeedItem(GeoRssItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertTrue(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
+    }
+
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new GeoRssFeedReader()),
-                Arguments.of(new FeedReader())
+            Arguments.of(new GeoRssFeedReader()),
+            Arguments.of(new FeedReader())
         );
     }
 

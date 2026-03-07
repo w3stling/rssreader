@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.dc;
 
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelImpl;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SuppressWarnings("java:S5961")
 class DcFeedReaderTest {
@@ -29,6 +31,7 @@ class DcFeedReaderTest {
         assertEquals(1, items.size());
 
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = (DcChannel) item.getChannel();
 
         assertThat(channel.getTitle()).isEqualTo("Meerkat");
@@ -85,10 +88,26 @@ class DcFeedReaderTest {
         EqualsVerifier.simple().forClass(MetaData.class).verify();
     }
 
+    private void assertHasFeedItem(DcItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertTrue(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+        }
+    }
+
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new DcFeedReader()),
-                Arguments.of(new FeedReader())
+            Arguments.of(new DcFeedReader()),
+            Arguments.of(new FeedReader())
         );
     }
 
