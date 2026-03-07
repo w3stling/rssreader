@@ -48,7 +48,7 @@ class PodcastFeedReaderTest {
         assertThat(liveItem.getPodcastAlternateEnclosures()).hasSize(1);
         assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getType()).isEqualTo("audio/mpeg");
         assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getLength()).isEqualTo(312L);
-        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).isDefaults()).isEqualTo(true);
+        assertThat(liveItem.getPodcastAlternateEnclosures().get(0).isDefaults()).isTrue();
         assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getLang()).isEqualTo("en");
         assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getRel()).isEqualTo("default");
         assertThat(liveItem.getPodcastAlternateEnclosures().get(0).getCodecs()).isEqualTo("video/mp4");
@@ -77,15 +77,15 @@ class PodcastFeedReaderTest {
             assertTrue(channel.getPodcastLicense().isPresent());
             assertThat(channel.getPodcastLicense().get().getUrl()).hasValue("https://example.org/mypodcastlicense/full.pdf");
             assertTrue(channel.getPodcastLocked().isPresent());
-            assertThat(channel.getPodcastLocked().get().isLocked()).isEqualTo(true);
+            assertThat(channel.getPodcastLocked().get().isLocked()).isTrue();
             assertThat(channel.getPodcastLocked().get().getOwner()).hasValue("podcastowner@example.com");
             assertThat(channel.getPodcastBlocks()).hasSize(3);
-            assertThat(channel.getPodcastBlocks().get(0).isBlock()).isEqualTo(true);
+            assertThat(channel.getPodcastBlocks().get(0).isBlock()).isTrue();
             assertThat(channel.getPodcastBlocks().get(0).getId()).isEmpty();
             assertThat(channel.getPodcastBlocks().get(1).getId()).hasValue("google");
-            assertThat(channel.getPodcastBlocks().get(1).isBlock()).isEqualTo(false);
+            assertThat(channel.getPodcastBlocks().get(1).isBlock()).isFalse();
             assertThat(channel.getPodcastBlocks().get(2).getId()).hasValue("amazon");
-            assertThat(channel.getPodcastBlocks().get(2).isBlock()).isEqualTo(false);
+            assertThat(channel.getPodcastBlocks().get(2).isBlock()).isFalse();
             assertThat(channel.getPodcastFundings()).hasSize(1);
             assertThat(channel.getPodcastFundings().get(0).getFunding()).isEqualTo("Support the show!");
             assertThat(channel.getPodcastFundings().get(0).getUrl()).isEqualTo("https://example.com/donate");
@@ -95,7 +95,7 @@ class PodcastFeedReaderTest {
             assertThat(channel.getPodcastLocations().get(0).getOsm()).hasValue("R113314");
             assertThat(channel.getPodcastMedium()).isEqualTo("podcast");
             assertThat(channel.getItunesAuthor()).hasValue("John Doe");
-            assertThat(channel.getItunesExplicit()).isEqualTo(false);
+            assertThat(channel.getItunesExplicit()).isFalse();
             assertThat(channel.getItunesType()).hasValue("episodic");
             assertThat(channel.getItunesCategories()).hasSize(2);
             assertThat(channel.getItunesCategories().get(0)).isEqualTo("News");
@@ -115,7 +115,7 @@ class PodcastFeedReaderTest {
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getSplit()).isEqualTo(99);
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getCustomKey()).hasValue("channelKey");
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).getCustomValue()).hasValue("channelValue");
-            assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).isFee()).isEqualTo(true);
+            assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(0).isFee()).isTrue();
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(1).getName()).isEqualTo("hosting company");
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(1).getType()).isEqualTo("node");
             assertThat(channel.getPodcastValues().get(0).getValueRecipients().get(1).getAddress()).isEqualTo("036557ea56b3b86f08be31bcd2557cae8021b0e3a9413f0c0e52625c6696972e58");
@@ -197,7 +197,7 @@ class PodcastFeedReaderTest {
         assertThat(item.getPodcastImages().get(2).getWidth()).hasValue(300);
         assertThat(item.getPodcastImages().get(3).getHref()).isEqualTo("https://example.com/images/ep3/pci_avatar-tiny.jpg");
         assertThat(item.getPodcastImages().get(3).getWidth()).hasValue(150);
-        assertThat(item.isItunesExplicit()).isEqualTo(false);
+        assertThat(item.isItunesExplicit()).isFalse();
         assertTrue(item.getPodcastSeason().isPresent());
         assertThat(item.getPodcastSeason().get().getSeason()).isEqualTo(1);
         assertThat(item.getPodcastSeason().get().getName()).hasValue("Podcasting 2.0");
@@ -240,7 +240,7 @@ class PodcastFeedReaderTest {
         assertThat(item.getPodcastAlternateEnclosures().get(0).getType()).isEqualTo("audio/mpeg");
         assertThat(item.getPodcastAlternateEnclosures().get(0).getLength()).isEqualTo(43200000L);
         assertThat(item.getPodcastAlternateEnclosures().get(0).getBitrate()).isEqualTo(128000d);
-        assertThat(item.getPodcastAlternateEnclosures().get(0).isDefaults()).isEqualTo(true);
+        assertThat(item.getPodcastAlternateEnclosures().get(0).isDefaults()).isTrue();
         assertThat(item.getPodcastAlternateEnclosures().get(0).getTitle()).isEqualTo("Standard");
         assertThat(item.getPodcastAlternateEnclosures().get(0).getSources()).hasSize(2);
         assertThat(item.getPodcastAlternateEnclosures().get(0).getSources().get(0).getUri()).isEqualTo("https://example.com/file-03.mp3");
@@ -268,7 +268,7 @@ class PodcastFeedReaderTest {
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(0).getSplit()).isEqualTo(49);
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(0).getCustomKey()).hasValue("itemKey");
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(0).getCustomValue()).hasValue("itemValue");
-        assertThat(item.getPodcastValues().get(0).getValueRecipients().get(0).isFee()).isEqualTo(true);
+        assertThat(item.getPodcastValues().get(0).getValueRecipients().get(0).isFee()).isTrue();
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(2).getName()).isEqualTo("Gigi (Guest)");
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(2).getType()).isEqualTo("node");
         assertThat(item.getPodcastValues().get(0).getValueRecipients().get(2).getAddress()).isEqualTo("02e12fea95f576a680ec1938b7ed98ef0855eadeced493566877d404e404bfbf52");
@@ -389,7 +389,7 @@ class PodcastFeedReaderTest {
         assertThat(channel.getImage().get().getTitle()).isEqualTo("Podnews");
         assertThat(channel.getImage().get().getLink()).isEqualTo("https://podnews.net");
         assertTrue(channel.getPodcastUpdateFrequency().isPresent());
-        assertThat(channel.getPodcastUpdateFrequency().get().isComplete()).isEqualTo(true);
+        assertThat(channel.getPodcastUpdateFrequency().get().isComplete()).isTrue();
         assertThat(channel.getPodcastUpdateFrequency().get().getDtstart()).hasValue("2025-01-01T00:00:00.000Z");
         assertThat(channel.getPodcastUpdateFrequency().get().getDtstartAsZonedDateTime()).hasValue(Default.getDateTimeParser().parse("2025-01-01T00:00:00.000Z"));
         assertThat(channel.getPodcastUpdateFrequency().get().getUpdateFrequency()).isEqualTo("Every weekday");

@@ -364,6 +364,7 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @SuppressWarnings("java:S5961")
     @Test
     void rssWorldOfTank() throws IOException {
         RssReader reader = new RssReader();
