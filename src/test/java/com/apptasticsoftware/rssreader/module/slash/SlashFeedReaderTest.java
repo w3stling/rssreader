@@ -14,10 +14,7 @@ import java.io.InputStream;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.github.npathai.hamcrestopt.OptionalMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.startsWith;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SuppressWarnings("java:S5961")
@@ -31,16 +28,16 @@ class SlashFeedReaderTest {
 
         var item = items.get(0);
         var channel = item.getChannel();
-        assertThat(channel.getTitle(), is("Slashdot"));
-        assertThat(channel.getDescription(), is("News for nerds, stuff that matters"));
+        assertThat(channel.getTitle()).isEqualTo("Slashdot");
+        assertThat(channel.getDescription()).isEqualTo("News for nerds, stuff that matters");
 
-        assertThat(item.getTitle(), isPresentAndIs("Jupiter Moon Ganymede May Have An Ocean"));
-        assertThat(item.getLink(), isPresentAndIs("http://slashdot.org/article.pl?sid=00/12/17/0622203"));
-        assertThat(item.getDescription(), isPresentAnd(startsWith("This article talks about how Jupiter's moon, Ganymede, may have a")));
-        assertThat(item.getSlashSection(), isPresentAndIs("articles"));
-        assertThat(item.getSlashDepartment(), isPresentAndIs("not-an-ocean-unless-there-are-lobsters"));
-        assertThat(item.getSlashComments(), isPresentAndIs(177));
-        assertThat(item.getSlashHitParade(), isPresentAndIs("177,155,105,33,6,3,0"));
+        assertThat(item.getTitle()).hasValue("Jupiter Moon Ganymede May Have An Ocean");
+        assertThat(item.getLink()).hasValue("http://slashdot.org/article.pl?sid=00/12/17/0622203");
+        assertThat(item.getDescription()).hasValueSatisfying(v -> assertThat(v).startsWith("This article talks about how Jupiter's moon, Ganymede, may have a"));
+        assertThat(item.getSlashSection()).hasValue("articles");
+        assertThat(item.getSlashDepartment()).hasValue("not-an-ocean-unless-there-are-lobsters");
+        assertThat(item.getSlashComments()).hasValue(177);
+        assertThat(item.getSlashHitParade()).hasValue("177,155,105,33,6,3,0");
     }
 
     @Test
