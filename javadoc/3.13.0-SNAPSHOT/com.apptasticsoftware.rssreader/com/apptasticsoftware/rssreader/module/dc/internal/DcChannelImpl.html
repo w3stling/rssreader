@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getDcChannelData()" tabindex="0">getDcChannelData()</a></li>
+<li><a href="#dcChannelData()" tabindex="0">dcChannelData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
@@ -84,13 +84,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a>, <a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></dd>
+<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a>, <a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a>, <a href="DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DcChannelImpl</span>
 <span class="extends-implements">extends <a href="../../../internal/ChannelImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ChannelImpl</a>
-implements <a href="../DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a></span></div>
+implements <a href="../DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a>, <a href="DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a></span></div>
 <div class="block">Implementation of RSS channel with Dublin Core metadata support.</div>
 </div>
 </section>
@@ -122,14 +122,12 @@ implements <a href="../DcChannel.html" title="interface in com.apptasticsoftware
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dcChannelData()" class="member-name-link">dcChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDcChannelData()" class="member-name-link">getDcChannelData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the Dublin Core channel data.</div>
-</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -181,17 +179,13 @@ implements <a href="../DcChannel.html" title="interface in com.apptasticsoftware
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getDcChannelData()">
-<h3>getDcChannelData</h3>
+<section class="detail" id="dcChannelData()">
+<h3>dcChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></span>&nbsp;<span class="element-name">getDcChannelData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../DcChannelData.html#getDcChannelData()">DcChannelData</a></code></span></div>
-<div class="block">Gets the Dublin Core channel data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></span>&nbsp;<span class="element-name">dcChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../DcChannelData.html#getDcChannelData()">getDcChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the DC channel data</dd>
+<dd><code><a href="DcChannelDataProvider.html#dcChannelData()">dcChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

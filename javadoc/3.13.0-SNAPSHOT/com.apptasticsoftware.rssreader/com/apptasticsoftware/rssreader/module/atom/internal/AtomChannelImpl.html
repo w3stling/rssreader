@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getAtomChannelData()" tabindex="0">getAtomChannelData()</a></li>
+<li><a href="#atomChannelData()" tabindex="0">atomChannelData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
@@ -84,13 +84,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a>, <a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></dd>
+<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a>, <a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a>, <a href="AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AtomChannelImpl</span>
 <span class="extends-implements">extends <a href="../../../internal/ChannelImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ChannelImpl</a>
-implements <a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a></span></div>
+implements <a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a>, <a href="AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a></span></div>
 <div class="block">Internal implementation of <a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom"><code>AtomChannel</code></a>.</div>
 </div>
 </section>
@@ -122,14 +122,12 @@ implements <a href="../AtomChannel.html" title="interface in com.apptasticsoftwa
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#atomChannelData()" class="member-name-link">atomChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAtomChannelData()" class="member-name-link">getAtomChannelData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the Atom channel data.</div>
-</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -181,19 +179,13 @@ implements <a href="../AtomChannel.html" title="interface in com.apptasticsoftwa
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getAtomChannelData()">
-<h3>getAtomChannelData</h3>
+<section class="detail" id="atomChannelData()">
+<h3>atomChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></span>&nbsp;<span class="element-name">getAtomChannelData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../AtomChannel.html#getAtomChannelData()">AtomChannel</a></code></span></div>
-<div class="block">Returns the Atom channel data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></span>&nbsp;<span class="element-name">atomChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../AtomChannel.html#getAtomChannelData()">getAtomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a></code></dd>
-<dt>Specified by:</dt>
-<dd><code><a href="../AtomChannelData.html#getAtomChannelData()">getAtomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the Atom channel data</dd>
+<dd><code><a href="AtomChannelDataProvider.html#atomChannelData()">atomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

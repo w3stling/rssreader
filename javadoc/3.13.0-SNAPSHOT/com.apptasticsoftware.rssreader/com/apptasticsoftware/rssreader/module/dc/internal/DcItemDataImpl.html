@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getDcItemData()" tabindex="0">getDcItemData()</a></li>
+<li><a href="#dcItemData()" tabindex="0">dcItemData()</a></li>
 </ol>
 </li>
 </ol>
@@ -82,13 +82,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></dd>
+<dd><code><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a>, <a href="DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DcItemDataImpl</span>
 <span class="extends-implements">extends <a href="MetaData.html" title="class in com.apptasticsoftware.rssreader.module.dc.internal">MetaData</a>
-implements <a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></span></div>
+implements <a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a>, <a href="DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a></span></div>
 <div class="block">Implementation of Dublin Core metadata for RSS items.</div>
 </div>
 </section>
@@ -119,10 +119,8 @@ implements <a href="../DcItemData.html" title="interface in com.apptasticsoftwar
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDcItemData()" class="member-name-link">getDcItemData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the Dublin Core item data.</div>
-</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dcItemData()" class="member-name-link">dcItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -163,17 +161,13 @@ implements <a href="../DcItemData.html" title="interface in com.apptasticsoftwar
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getDcItemData()">
-<h3>getDcItemData</h3>
+<section class="detail" id="dcItemData()">
+<h3>dcItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></span>&nbsp;<span class="element-name">getDcItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../DcItemData.html#getDcItemData()">DcItemData</a></code></span></div>
-<div class="block">Gets the Dublin Core item data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></span>&nbsp;<span class="element-name">dcItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../DcItemData.html#getDcItemData()">getDcItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the DC item data</dd>
+<dd><code><a href="DcItemDataProvider.html#dcItemData()">dcItemData</a></code>&nbsp;in interface&nbsp;<code><a href="DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

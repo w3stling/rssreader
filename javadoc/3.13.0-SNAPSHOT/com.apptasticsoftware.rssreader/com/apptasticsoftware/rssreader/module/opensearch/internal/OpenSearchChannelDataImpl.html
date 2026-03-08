@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getOpenSearchChannelData()" tabindex="0">getOpenSearchChannelData()</a></li>
+<li><a href="#openSearchChannelData()" tabindex="0">openSearchChannelData()</a></li>
 <li><a href="#getOpenSearchTotalResults()" tabindex="0">getOpenSearchTotalResults()</a></li>
 <li><a href="#setOpenSearchTotalResults(java.lang.Integer)" tabindex="0">setOpenSearchTotalResults(Integer)</a></li>
 <li><a href="#getOpenSearchStartIndex()" tabindex="0">getOpenSearchStartIndex()</a></li>
@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></dd>
+<dd><code><a href="OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a>, <a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">OpenSearchChannelDataImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></span></div>
+implements <a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a>, <a href="OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a></span></div>
 </div>
 </section>
 <section class="summary">
@@ -131,23 +131,23 @@ implements <a href="../OpenSearchChannelData.html" title="interface in com.appta
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchChannelData()" class="member-name-link">getOpenSearchChannelData</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchItemsPerPage()" class="member-name-link">getOpenSearchItemsPerPage</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchItemsPerPage()" class="member-name-link">getOpenSearchItemsPerPage</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../OpenSearchQuery.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchQuery</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchQueries()" class="member-name-link">getOpenSearchQueries</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchStartIndex()" class="member-name-link">getOpenSearchStartIndex</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../OpenSearchQuery.html" title="class in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchQuery</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchQueries()" class="member-name-link">getOpenSearchQueries</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchTotalResults()" class="member-name-link">getOpenSearchTotalResults</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchStartIndex()" class="member-name-link">getOpenSearchStartIndex</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchTotalResults()" class="member-name-link">getOpenSearchTotalResults</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#openSearchChannelData()" class="member-name-link">openSearchChannelData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setOpenSearchItemsPerPage(java.lang.Integer)" class="member-name-link">setOpenSearchItemsPerPage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;openSearchItemsPerPage)</code></div>
@@ -192,13 +192,13 @@ implements <a href="../OpenSearchChannelData.html" title="interface in com.appta
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getOpenSearchChannelData()">
-<h3>getOpenSearchChannelData</h3>
+<section class="detail" id="openSearchChannelData()">
+<h3>openSearchChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></span>&nbsp;<span class="element-name">getOpenSearchChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></span>&nbsp;<span class="element-name">openSearchChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../OpenSearchChannelData.html#getOpenSearchChannelData()">getOpenSearchChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></dd>
+<dd><code><a href="OpenSearchChannelDataProvider.html#openSearchChannelData()">openSearchChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getPscItemData()" tabindex="0">getPscItemData()</a></li>
+<li><a href="#pscItemData()" tabindex="0">pscItemData()</a></li>
 <li><a href="#getPscChapters()" tabindex="0">getPscChapters()</a></li>
 <li><a href="#setPscChapters(com.apptasticsoftware.rssreader.module.psc.PscChapters)" tabindex="0">setPscChapters(PscChapters)</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
@@ -84,13 +84,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></dd>
+<dd><code><a href="PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a>, <a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PscItemDataImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></span></div>
+implements <a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a>, <a href="PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a></span></div>
 <div class="block">Implementation of PscItemData interface.</div>
 </div>
 </section>
@@ -126,11 +126,11 @@ implements <a href="../PscItemData.html" title="interface in com.apptasticsoftwa
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../PscChapters.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscChapters</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPscChapters()" class="member-name-link">getPscChapters</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPscItemData()" class="member-name-link">getPscItemData</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pscItemData()" class="member-name-link">pscItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPscChapters(com.apptasticsoftware.rssreader.module.psc.PscChapters)" class="member-name-link">setPscChapters</a><wbr>(<a href="../PscChapters.html" title="class in com.apptasticsoftware.rssreader.module.psc">PscChapters</a>&nbsp;pscChapters)</code></div>
@@ -169,13 +169,13 @@ implements <a href="../PscItemData.html" title="interface in com.apptasticsoftwa
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getPscItemData()">
-<h3>getPscItemData</h3>
+<section class="detail" id="pscItemData()">
+<h3>pscItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></span>&nbsp;<span class="element-name">getPscItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></span>&nbsp;<span class="element-name">pscItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../PscItemData.html#getPscItemData()">getPscItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></dd>
+<dd><code><a href="PscItemDataProvider.html#pscItemData()">pscItemData</a></code>&nbsp;in interface&nbsp;<code><a href="PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

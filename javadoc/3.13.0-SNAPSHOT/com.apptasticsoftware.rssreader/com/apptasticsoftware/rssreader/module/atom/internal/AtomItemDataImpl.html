@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getAtomItemData()" tabindex="0">getAtomItemData()</a></li>
+<li><a href="#atomItemData()" tabindex="0">atomItemData()</a></li>
 </ol>
 </li>
 </ol>
@@ -82,13 +82,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></dd>
+<dd><code><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a>, <a href="AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AtomItemDataImpl</span>
 <span class="extends-implements">extends <a href="MetaData.html" title="class in com.apptasticsoftware.rssreader.module.atom.internal">MetaData</a>
-implements <a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></span></div>
+implements <a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a>, <a href="AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a></span></div>
 <div class="block">Internal implementation of <a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom"><code>AtomItemData</code></a>.</div>
 </div>
 </section>
@@ -119,7 +119,7 @@ implements <a href="../AtomItemData.html" title="interface in com.apptasticsoftw
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAtomItemData()" class="member-name-link">getAtomItemData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#atomItemData()" class="member-name-link">atomItemData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the underlying Atom item data.</div>
 </div>
@@ -163,14 +163,14 @@ implements <a href="../AtomItemData.html" title="interface in com.apptasticsoftw
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getAtomItemData()">
-<h3>getAtomItemData</h3>
+<section class="detail" id="atomItemData()">
+<h3>atomItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></span>&nbsp;<span class="element-name">getAtomItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></span>&nbsp;<span class="element-name">atomItemData</span>()</div>
 <div class="block">Returns the underlying Atom item data.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../AtomItemData.html#getAtomItemData()">getAtomItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></dd>
+<dd><code><a href="AtomItemDataProvider.html#atomItemData()">atomItemData</a></code>&nbsp;in interface&nbsp;<code><a href="AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a></code></dd>
 <dt>Returns:</dt>
 <dd>this instance</dd>
 </dl>

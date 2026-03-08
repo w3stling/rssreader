@@ -55,6 +55,7 @@ loadScripts(document, 'script');</script>
 <div class="toc-header">Contents&nbsp;<input type="text" class="filter-input" disabled placeholder="Filter contents (type .)" aria-label="Filter table of contents" autocomplete="off" spellcheck="false"><input type="reset" class="reset-filter" disabled tabindex="-1" value="Reset"></div>
 <ol class="toc-list" tabindex="-1">
 <li><a href="#" tabindex="0">Description</a></li>
+<li><a href="#field-summary" tabindex="0">Field Summary</a></li>
 <li><a href="#constructor-summary" tabindex="0">Constructor Summary</a></li>
 <li><a href="#method-summary" tabindex="0">Method Summary</a></li>
 <li><a href="#constructor-detail" tabindex="0">Constructor Details</a>
@@ -64,16 +65,27 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getAtomItemData()" tabindex="0">getAtomItemData()</a></li>
-<li><a href="#getDcItemData()" tabindex="0">getDcItemData()</a></li>
-<li><a href="#getGeoRssItemData()" tabindex="0">getGeoRssItemData()</a></li>
-<li><a href="#getItunesItemData()" tabindex="0">getItunesItemData()</a></li>
-<li><a href="#getMediaRssItemData()" tabindex="0">getMediaRssItemData()</a></li>
-<li><a href="#getPodcastItemData()" tabindex="0">getPodcastItemData()</a></li>
-<li><a href="#getPscItemData()" tabindex="0">getPscItemData()</a></li>
-<li><a href="#getSlashItemData()" tabindex="0">getSlashItemData()</a></li>
-<li><a href="#getWfWItemData()" tabindex="0">getWfWItemData()</a></li>
-<li><a href="#getYoutubeItemData()" tabindex="0">getYoutubeItemData()</a></li>
+<li><a href="#getChannel()" tabindex="0">getChannel()</a></li>
+<li><a href="#hasAtomItem()" tabindex="0">hasAtomItem()</a></li>
+<li><a href="#atomItemData()" tabindex="0">atomItemData()</a></li>
+<li><a href="#hasDcItem()" tabindex="0">hasDcItem()</a></li>
+<li><a href="#dcItemData()" tabindex="0">dcItemData()</a></li>
+<li><a href="#hasGeoRssItem()" tabindex="0">hasGeoRssItem()</a></li>
+<li><a href="#geoRssItemData()" tabindex="0">geoRssItemData()</a></li>
+<li><a href="#hasItunesItem()" tabindex="0">hasItunesItem()</a></li>
+<li><a href="#itunesItemData()" tabindex="0">itunesItemData()</a></li>
+<li><a href="#hasMediaRssItem()" tabindex="0">hasMediaRssItem()</a></li>
+<li><a href="#mediaRssItemData()" tabindex="0">mediaRssItemData()</a></li>
+<li><a href="#hasPodcastItem()" tabindex="0">hasPodcastItem()</a></li>
+<li><a href="#podcastItemData()" tabindex="0">podcastItemData()</a></li>
+<li><a href="#hasPscItem()" tabindex="0">hasPscItem()</a></li>
+<li><a href="#pscItemData()" tabindex="0">pscItemData()</a></li>
+<li><a href="#hasSlashItem()" tabindex="0">hasSlashItem()</a></li>
+<li><a href="#slashItemData()" tabindex="0">slashItemData()</a></li>
+<li><a href="#hasWfwItem()" tabindex="0">hasWfwItem()</a></li>
+<li><a href="#wfwItemData()" tabindex="0">wfwItemData()</a></li>
+<li><a href="#hasYoutubeItem()" tabindex="0">hasYoutubeItem()</a></li>
+<li><a href="#youtubeItemData()" tabindex="0">youtubeItemData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
@@ -93,17 +105,26 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>, <a href="../module/atom/AtomItem.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItem</a>, <a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a>, <a href="../module/dc/DcItem.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItem</a>, <a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a>, <a href="../module/georss/GeoRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItem</a>, <a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a>, <a href="../module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a>, <a href="../module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a>, <a href="../module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="../module/opensearch/OpenSearchItemData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemData</a>, <a href="../module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a>, <a href="../module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a>, <a href="../module/slash/SlashItem.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItem</a>, <a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a>, <a href="../module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="../module/spotify/SpotifyItemData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemData</a>, <a href="../module/wfw/WfwItem.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItem</a>, <a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a>, <a href="../module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a>, <a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
+<dd><code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>, <a href="../module/atom/AtomItem.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItem</a>, <a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a>, <a href="../module/atom/internal/AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a>, <a href="../module/dc/DcItem.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItem</a>, <a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a>, <a href="../module/dc/internal/DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a>, <a href="../module/georss/GeoRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItem</a>, <a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a>, <a href="../module/georss/internal/GeoRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssItemDataProvider</a>, <a href="../module/itunes/internal/ItunesItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesItemDataProvider</a>, <a href="../module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a>, <a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a>, <a href="../module/mediarss/internal/MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a>, <a href="../module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a>, <a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a>, <a href="../module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a>, <a href="../module/opensearch/OpenSearchItemData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItemData</a>, <a href="../module/podcast/internal/PodcastItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastItemDataProvider</a>, <a href="../module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a>, <a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a>, <a href="../module/psc/internal/PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a>, <a href="../module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a>, <a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a>, <a href="../module/slash/internal/SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a>, <a href="../module/slash/SlashItem.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItem</a>, <a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a>, <a href="../module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a>, <a href="../module/spotify/SpotifyItemData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItemData</a>, <a href="../module/wfw/internal/WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a>, <a href="../module/wfw/WfwItem.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItem</a>, <a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a>, <a href="../module/youtube/internal/YoutubeItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeItemDataProvider</a>, <a href="../module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a>, <a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;<a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a>&gt;</code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FeedItemImpl</span>
 <span class="extends-implements">extends <a href="ItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a>
-implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></span></div>
+implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a>, <a href="../module/atom/internal/AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a>, <a href="../module/dc/internal/DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a>, <a href="../module/georss/internal/GeoRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssItemDataProvider</a>, <a href="../module/itunes/internal/ItunesItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesItemDataProvider</a>, <a href="../module/mediarss/internal/MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a>, <a href="../module/podcast/internal/PodcastItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastItemDataProvider</a>, <a href="../module/psc/internal/PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a>, <a href="../module/slash/internal/SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a>, <a href="../module/wfw/internal/WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a>, <a href="../module/youtube/internal/YoutubeItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeItemDataProvider</a></span></div>
 </div>
 </section>
 <section class="summary">
 <ul class="summary-list">
+<!-- =========== FIELD SUMMARY =========== -->
+<li>
+<section class="field-summary" id="field-summary">
+<h2>Field Summary</h2>
+<div class="inherited-list">
+<h3 id="fields-inherited-from-class-com.apptasticsoftware.rssreader.internal.ItemImpl">Fields inherited from class&nbsp;<a href="ItemImpl.html#field-summary" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a></h3>
+<code><a href="ItemImpl.html#dateTimeParser">dateTimeParser</a></code></div>
+</section>
+</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -130,58 +151,103 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#atomItemData()" class="member-name-link">atomItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dcItemData()" class="member-name-link">dcItemData</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAtomItemData()" class="member-name-link">getAtomItemData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the Atom item data.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDcItemData()" class="member-name-link">getDcItemData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the Dublin Core item data.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGeoRssItemData()" class="member-name-link">getGeoRssItemData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#geoRssItemData()" class="member-name-link">geoRssItemData</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getChannel()" class="member-name-link">getChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Get the channel that this item was published in.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAtomItem()" class="member-name-link">hasAtomItem</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the underlying GeoRSS item data implementation.</div>
+<div class="block">Returns <code>true</code> if this item contains Atom namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasDcItem()" class="member-name-link">hasDcItem</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains Dublin Core (DC) namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasGeoRssItem()" class="member-name-link">hasGeoRssItem</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains GeoRSS namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasItunesItem()" class="member-name-link">hasItunesItem</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains iTunes namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasMediaRssItem()" class="member-name-link">hasMediaRssItem</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains Media RSS namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasPodcastItem()" class="member-name-link">hasPodcastItem</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains Podcast namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasPscItem()" class="member-name-link">hasPscItem</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains PSC (Podlove Simple Chapters) namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasSlashItem()" class="member-name-link">hasSlashItem</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains Slash namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasWfwItem()" class="member-name-link">hasWfwItem</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains WFW (Well-Formed Web) namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasYoutubeItem()" class="member-name-link">hasYoutubeItem</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this item contains YouTube namespace data.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getItunesItemData()" class="member-name-link">getItunesItemData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#itunesItemData()" class="member-name-link">itunesItemData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaRssItemData()" class="member-name-link">getMediaRssItemData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mediaRssItemData()" class="member-name-link">mediaRssItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPodcastItemData()" class="member-name-link">getPodcastItemData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#podcastItemData()" class="member-name-link">podcastItemData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPscItemData()" class="member-name-link">getPscItemData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pscItemData()" class="member-name-link">pscItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSlashItemData()" class="member-name-link">getSlashItemData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the underlying Slash item data object.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWfWItemData()" class="member-name-link">getWfWItemData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the underlying WFW item data implementation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getYoutubeItemData()" class="member-name-link">getYoutubeItemData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#slashItemData()" class="member-name-link">slashItemData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wfwItemData()" class="member-name-link">wfwItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#youtubeItemData()" class="member-name-link">youtubeItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.internal.ItemImpl">Methods inherited from class&nbsp;<a href="ItemImpl.html#method-summary" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a></h3>
-<code><a href="ItemImpl.html#addCategory(java.lang.String)" title="addCategory(String)">addCategory</a>, <a href="ItemImpl.html#addEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="addEnclosure(Enclosure)">addEnclosure</a>, <a href="ItemImpl.html#compareTo(com.apptasticsoftware.rssreader.Item)" title="compareTo(Item)">compareTo</a>, <a href="ItemImpl.html#getAuthor()" title="getAuthor()">getAuthor</a>, <a href="ItemImpl.html#getCategories()" title="getCategories()">getCategories</a>, <a href="ItemImpl.html#getCategory()" title="getCategory()">getCategory</a>, <a href="ItemImpl.html#getChannel()" title="getChannel()">getChannel</a>, <a href="ItemImpl.html#getComments()" title="getComments()">getComments</a>, <a href="ItemImpl.html#getContent()" title="getContent()">getContent</a>, <a href="ItemImpl.html#getDescription()" title="getDescription()">getDescription</a>, <a href="ItemImpl.html#getEnclosure()" title="getEnclosure()">getEnclosure</a>, <a href="ItemImpl.html#getEnclosures()" title="getEnclosures()">getEnclosures</a>, <a href="ItemImpl.html#getGuid()" title="getGuid()">getGuid</a>, <a href="ItemImpl.html#getIsPermaLink()" title="getIsPermaLink()">getIsPermaLink</a>, <a href="ItemImpl.html#getLink()" title="getLink()">getLink</a>, <a href="ItemImpl.html#getPubDate()" title="getPubDate()">getPubDate</a>, <a href="ItemImpl.html#getPubDateAsZonedDateTime()" title="getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a>, <a href="ItemImpl.html#getPubDateZonedDateTime()" title="getPubDateZonedDateTime()">getPubDateZonedDateTime</a>, <a href="ItemImpl.html#getTitle()" title="getTitle()">getTitle</a>, <a href="ItemImpl.html#getUpdated()" title="getUpdated()">getUpdated</a>, <a href="ItemImpl.html#getUpdatedAsZonedDateTime()" title="getUpdatedAsZonedDateTime()">getUpdatedAsZonedDateTime</a>, <a href="ItemImpl.html#getUpdatedZonedDateTime()" title="getUpdatedZonedDateTime()">getUpdatedZonedDateTime</a>, <a href="ItemImpl.html#setAuthor(java.lang.String)" title="setAuthor(String)">setAuthor</a>, <a href="ItemImpl.html#setCategory(java.lang.String)" title="setCategory(String)">setCategory</a>, <a href="ItemImpl.html#setChannel(com.apptasticsoftware.rssreader.Channel)" title="setChannel(Channel)">setChannel</a>, <a href="ItemImpl.html#setComments(java.lang.String)" title="setComments(String)">setComments</a>, <a href="ItemImpl.html#setContent(java.lang.String)" title="setContent(String)">setContent</a>, <a href="ItemImpl.html#setDescription(java.lang.String)" title="setDescription(String)">setDescription</a>, <a href="ItemImpl.html#setEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="setEnclosure(Enclosure)">setEnclosure</a>, <a href="ItemImpl.html#setGuid(java.lang.String)" title="setGuid(String)">setGuid</a>, <a href="ItemImpl.html#setIsPermaLink(boolean)" title="setIsPermaLink(boolean)">setIsPermaLink</a>, <a href="ItemImpl.html#setLink(java.lang.String)" title="setLink(String)">setLink</a>, <a href="ItemImpl.html#setPubDate(java.lang.String)" title="setPubDate(String)">setPubDate</a>, <a href="ItemImpl.html#setTitle(java.lang.String)" title="setTitle(String)">setTitle</a>, <a href="ItemImpl.html#setUpdated(java.lang.String)" title="setUpdated(String)">setUpdated</a></code></div>
+<code><a href="ItemImpl.html#addCategory(java.lang.String)" title="addCategory(String)">addCategory</a>, <a href="ItemImpl.html#addEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="addEnclosure(Enclosure)">addEnclosure</a>, <a href="ItemImpl.html#compareTo(com.apptasticsoftware.rssreader.Item)" title="compareTo(Item)">compareTo</a>, <a href="ItemImpl.html#getAuthor()" title="getAuthor()">getAuthor</a>, <a href="ItemImpl.html#getCategories()" title="getCategories()">getCategories</a>, <a href="ItemImpl.html#getCategory()" title="getCategory()">getCategory</a>, <a href="ItemImpl.html#getComments()" title="getComments()">getComments</a>, <a href="ItemImpl.html#getContent()" title="getContent()">getContent</a>, <a href="ItemImpl.html#getDescription()" title="getDescription()">getDescription</a>, <a href="ItemImpl.html#getEnclosure()" title="getEnclosure()">getEnclosure</a>, <a href="ItemImpl.html#getEnclosures()" title="getEnclosures()">getEnclosures</a>, <a href="ItemImpl.html#getGuid()" title="getGuid()">getGuid</a>, <a href="ItemImpl.html#getIsPermaLink()" title="getIsPermaLink()">getIsPermaLink</a>, <a href="ItemImpl.html#getLink()" title="getLink()">getLink</a>, <a href="ItemImpl.html#getPubDate()" title="getPubDate()">getPubDate</a>, <a href="ItemImpl.html#getPubDateAsZonedDateTime()" title="getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a>, <a href="ItemImpl.html#getPubDateZonedDateTime()" title="getPubDateZonedDateTime()">getPubDateZonedDateTime</a>, <a href="ItemImpl.html#getTitle()" title="getTitle()">getTitle</a>, <a href="ItemImpl.html#getUpdated()" title="getUpdated()">getUpdated</a>, <a href="ItemImpl.html#getUpdatedAsZonedDateTime()" title="getUpdatedAsZonedDateTime()">getUpdatedAsZonedDateTime</a>, <a href="ItemImpl.html#getUpdatedZonedDateTime()" title="getUpdatedZonedDateTime()">getUpdatedZonedDateTime</a>, <a href="ItemImpl.html#setAuthor(java.lang.String)" title="setAuthor(String)">setAuthor</a>, <a href="ItemImpl.html#setCategory(java.lang.String)" title="setCategory(String)">setCategory</a>, <a href="ItemImpl.html#setChannel(com.apptasticsoftware.rssreader.Channel)" title="setChannel(Channel)">setChannel</a>, <a href="ItemImpl.html#setComments(java.lang.String)" title="setComments(String)">setComments</a>, <a href="ItemImpl.html#setContent(java.lang.String)" title="setContent(String)">setContent</a>, <a href="ItemImpl.html#setDescription(java.lang.String)" title="setDescription(String)">setDescription</a>, <a href="ItemImpl.html#setEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="setEnclosure(Enclosure)">setEnclosure</a>, <a href="ItemImpl.html#setGuid(java.lang.String)" title="setGuid(String)">setGuid</a>, <a href="ItemImpl.html#setIsPermaLink(boolean)" title="setIsPermaLink(boolean)">setIsPermaLink</a>, <a href="ItemImpl.html#setLink(java.lang.String)" title="setLink(String)">setLink</a>, <a href="ItemImpl.html#setPubDate(java.lang.String)" title="setPubDate(String)">setPubDate</a>, <a href="ItemImpl.html#setTitle(java.lang.String)" title="setTitle(String)">setTitle</a>, <a href="ItemImpl.html#setUpdated(java.lang.String)" title="setUpdated(String)">setUpdated</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#method-summary" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
@@ -199,7 +265,7 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <code><a href="../module/georss/GeoRssItemData.html#getGeoRssBox()" title="getGeoRssBox()">getGeoRssBox</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssBoxAsCoordinates()" title="getGeoRssBoxAsCoordinates()">getGeoRssBoxAsCoordinates</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssElevation()" title="getGeoRssElevation()">getGeoRssElevation</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssFeatureName()" title="getGeoRssFeatureName()">getGeoRssFeatureName</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssFeatureTypeTag()" title="getGeoRssFeatureTypeTag()">getGeoRssFeatureTypeTag</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssFloor()" title="getGeoRssFloor()">getGeoRssFloor</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssLine()" title="getGeoRssLine()">getGeoRssLine</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssLineAsCoordinates()" title="getGeoRssLineAsCoordinates()">getGeoRssLineAsCoordinates</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssPoint()" title="getGeoRssPoint()">getGeoRssPoint</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssPointAsCoordinate()" title="getGeoRssPointAsCoordinate()">getGeoRssPointAsCoordinate</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssPolygon()" title="getGeoRssPolygon()">getGeoRssPolygon</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssPolygonAsCoordinates()" title="getGeoRssPolygonAsCoordinates()">getGeoRssPolygonAsCoordinates</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssRadius()" title="getGeoRssRadius()">getGeoRssRadius</a>, <a href="../module/georss/GeoRssItemData.html#getGeoRssRelationshipTag()" title="getGeoRssRelationshipTag()">getGeoRssRelationshipTag</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssBox(java.lang.String)" title="setGeoRssBox(String)">setGeoRssBox</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssElevation(java.lang.Double)" title="setGeoRssElevation(Double)">setGeoRssElevation</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssFeatureName(java.lang.String)" title="setGeoRssFeatureName(String)">setGeoRssFeatureName</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssFeatureTypeTag(java.lang.String)" title="setGeoRssFeatureTypeTag(String)">setGeoRssFeatureTypeTag</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssFloor(java.lang.Integer)" title="setGeoRssFloor(Integer)">setGeoRssFloor</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssLine(java.lang.String)" title="setGeoRssLine(String)">setGeoRssLine</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssPoint(java.lang.String)" title="setGeoRssPoint(String)">setGeoRssPoint</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssPolygon(java.lang.String)" title="setGeoRssPolygon(String)">setGeoRssPolygon</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssRadius(java.lang.Double)" title="setGeoRssRadius(Double)">setGeoRssRadius</a>, <a href="../module/georss/GeoRssItemData.html#setGeoRssRelationshipTag(java.lang.String)" title="setGeoRssRelationshipTag(String)">setGeoRssRelationshipTag</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.Item">Methods inherited from interface&nbsp;<a href="../Item.html#method-summary" title="interface in com.apptasticsoftware.rssreader">Item</a></h3>
-<code><a href="../Item.html#addCategory(java.lang.String)" title="addCategory(String)">addCategory</a>, <a href="../Item.html#addEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="addEnclosure(Enclosure)">addEnclosure</a>, <a href="../Item.html#getAuthor()" title="getAuthor()">getAuthor</a>, <a href="../Item.html#getCategories()" title="getCategories()">getCategories</a>, <a href="../Item.html#getCategory()" title="getCategory()">getCategory</a>, <a href="../Item.html#getChannel()" title="getChannel()">getChannel</a>, <a href="../Item.html#getComments()" title="getComments()">getComments</a>, <a href="../Item.html#getContent()" title="getContent()">getContent</a>, <a href="../Item.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Item.html#getEnclosure()" title="getEnclosure()">getEnclosure</a>, <a href="../Item.html#getEnclosures()" title="getEnclosures()">getEnclosures</a>, <a href="../Item.html#getGuid()" title="getGuid()">getGuid</a>, <a href="../Item.html#getIsPermaLink()" title="getIsPermaLink()">getIsPermaLink</a>, <a href="../Item.html#getLink()" title="getLink()">getLink</a>, <a href="../Item.html#getPubDate()" title="getPubDate()">getPubDate</a>, <a href="../Item.html#getPubDateAsZonedDateTime()" title="getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a>, <a href="../Item.html#getPubDateZonedDateTime()" title="getPubDateZonedDateTime()">getPubDateZonedDateTime</a>, <a href="../Item.html#getTitle()" title="getTitle()">getTitle</a>, <a href="../Item.html#getUpdated()" title="getUpdated()">getUpdated</a>, <a href="../Item.html#getUpdatedAsZonedDateTime()" title="getUpdatedAsZonedDateTime()">getUpdatedAsZonedDateTime</a>, <a href="../Item.html#getUpdatedZonedDateTime()" title="getUpdatedZonedDateTime()">getUpdatedZonedDateTime</a>, <a href="../Item.html#setAuthor(java.lang.String)" title="setAuthor(String)">setAuthor</a>, <a href="../Item.html#setCategory(java.lang.String)" title="setCategory(String)">setCategory</a>, <a href="../Item.html#setChannel(com.apptasticsoftware.rssreader.Channel)" title="setChannel(Channel)">setChannel</a>, <a href="../Item.html#setComments(java.lang.String)" title="setComments(String)">setComments</a>, <a href="../Item.html#setContent(java.lang.String)" title="setContent(String)">setContent</a>, <a href="../Item.html#setDescription(java.lang.String)" title="setDescription(String)">setDescription</a>, <a href="../Item.html#setEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="setEnclosure(Enclosure)">setEnclosure</a>, <a href="../Item.html#setGuid(java.lang.String)" title="setGuid(String)">setGuid</a>, <a href="../Item.html#setIsPermaLink(boolean)" title="setIsPermaLink(boolean)">setIsPermaLink</a>, <a href="../Item.html#setLink(java.lang.String)" title="setLink(String)">setLink</a>, <a href="../Item.html#setPubDate(java.lang.String)" title="setPubDate(String)">setPubDate</a>, <a href="../Item.html#setTitle(java.lang.String)" title="setTitle(String)">setTitle</a>, <a href="../Item.html#setUpdated(java.lang.String)" title="setUpdated(String)">setUpdated</a></code></div>
+<code><a href="../Item.html#addCategory(java.lang.String)" title="addCategory(String)">addCategory</a>, <a href="../Item.html#addEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="addEnclosure(Enclosure)">addEnclosure</a>, <a href="../Item.html#getAuthor()" title="getAuthor()">getAuthor</a>, <a href="../Item.html#getCategories()" title="getCategories()">getCategories</a>, <a href="../Item.html#getCategory()" title="getCategory()">getCategory</a>, <a href="../Item.html#getComments()" title="getComments()">getComments</a>, <a href="../Item.html#getContent()" title="getContent()">getContent</a>, <a href="../Item.html#getDescription()" title="getDescription()">getDescription</a>, <a href="../Item.html#getEnclosure()" title="getEnclosure()">getEnclosure</a>, <a href="../Item.html#getEnclosures()" title="getEnclosures()">getEnclosures</a>, <a href="../Item.html#getGuid()" title="getGuid()">getGuid</a>, <a href="../Item.html#getIsPermaLink()" title="getIsPermaLink()">getIsPermaLink</a>, <a href="../Item.html#getLink()" title="getLink()">getLink</a>, <a href="../Item.html#getPubDate()" title="getPubDate()">getPubDate</a>, <a href="../Item.html#getPubDateAsZonedDateTime()" title="getPubDateAsZonedDateTime()">getPubDateAsZonedDateTime</a>, <a href="../Item.html#getPubDateZonedDateTime()" title="getPubDateZonedDateTime()">getPubDateZonedDateTime</a>, <a href="../Item.html#getTitle()" title="getTitle()">getTitle</a>, <a href="../Item.html#getUpdated()" title="getUpdated()">getUpdated</a>, <a href="../Item.html#getUpdatedAsZonedDateTime()" title="getUpdatedAsZonedDateTime()">getUpdatedAsZonedDateTime</a>, <a href="../Item.html#getUpdatedZonedDateTime()" title="getUpdatedZonedDateTime()">getUpdatedZonedDateTime</a>, <a href="../Item.html#setAuthor(java.lang.String)" title="setAuthor(String)">setAuthor</a>, <a href="../Item.html#setCategory(java.lang.String)" title="setCategory(String)">setCategory</a>, <a href="../Item.html#setChannel(com.apptasticsoftware.rssreader.Channel)" title="setChannel(Channel)">setChannel</a>, <a href="../Item.html#setComments(java.lang.String)" title="setComments(String)">setComments</a>, <a href="../Item.html#setContent(java.lang.String)" title="setContent(String)">setContent</a>, <a href="../Item.html#setDescription(java.lang.String)" title="setDescription(String)">setDescription</a>, <a href="../Item.html#setEnclosure(com.apptasticsoftware.rssreader.Enclosure)" title="setEnclosure(Enclosure)">setEnclosure</a>, <a href="../Item.html#setGuid(java.lang.String)" title="setGuid(String)">setGuid</a>, <a href="../Item.html#setIsPermaLink(boolean)" title="setIsPermaLink(boolean)">setIsPermaLink</a>, <a href="../Item.html#setLink(java.lang.String)" title="setLink(String)">setLink</a>, <a href="../Item.html#setPubDate(java.lang.String)" title="setPubDate(String)">setPubDate</a>, <a href="../Item.html#setTitle(java.lang.String)" title="setTitle(String)">setTitle</a>, <a href="../Item.html#setUpdated(java.lang.String)" title="setUpdated(String)">setUpdated</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-com.apptasticsoftware.rssreader.module.itunes.ItunesItemData">Methods inherited from interface&nbsp;<a href="../module/itunes/ItunesItemData.html#method-summary" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a></h3>
 <code><a href="../module/itunes/ItunesItemData.html#getItunesDuration()" title="getItunesDuration()">getItunesDuration</a>, <a href="../module/itunes/ItunesItemData.html#getItunesDurationAsDuration()" title="getItunesDurationAsDuration()">getItunesDurationAsDuration</a>, <a href="../module/itunes/ItunesItemData.html#getItunesEpisode()" title="getItunesEpisode()">getItunesEpisode</a>, <a href="../module/itunes/ItunesItemData.html#getItunesEpisodeType()" title="getItunesEpisodeType()">getItunesEpisodeType</a>, <a href="../module/itunes/ItunesItemData.html#getItunesImage()" title="getItunesImage()">getItunesImage</a>, <a href="../module/itunes/ItunesItemData.html#getItunesKeywords()" title="getItunesKeywords()">getItunesKeywords</a>, <a href="../module/itunes/ItunesItemData.html#getItunesSeason()" title="getItunesSeason()">getItunesSeason</a>, <a href="../module/itunes/ItunesItemData.html#getItunesSubtitle()" title="getItunesSubtitle()">getItunesSubtitle</a>, <a href="../module/itunes/ItunesItemData.html#getItunesSummary()" title="getItunesSummary()">getItunesSummary</a>, <a href="../module/itunes/ItunesItemData.html#getItunesTitle()" title="getItunesTitle()">getItunesTitle</a>, <a href="../module/itunes/ItunesItemData.html#isItunesBlock()" title="isItunesBlock()">isItunesBlock</a>, <a href="../module/itunes/ItunesItemData.html#isItunesExplicit()" title="isItunesExplicit()">isItunesExplicit</a>, <a href="../module/itunes/ItunesItemData.html#setItunesBlock(boolean)" title="setItunesBlock(boolean)">setItunesBlock</a>, <a href="../module/itunes/ItunesItemData.html#setItunesDuration(java.lang.String)" title="setItunesDuration(String)">setItunesDuration</a>, <a href="../module/itunes/ItunesItemData.html#setItunesEpisode(java.lang.Integer)" title="setItunesEpisode(Integer)">setItunesEpisode</a>, <a href="../module/itunes/ItunesItemData.html#setItunesEpisodeType(java.lang.String)" title="setItunesEpisodeType(String)">setItunesEpisodeType</a>, <a href="../module/itunes/ItunesItemData.html#setItunesExplicit(boolean)" title="setItunesExplicit(boolean)">setItunesExplicit</a>, <a href="../module/itunes/ItunesItemData.html#setItunesImage(java.lang.String)" title="setItunesImage(String)">setItunesImage</a>, <a href="../module/itunes/ItunesItemData.html#setItunesKeywords(java.lang.String)" title="setItunesKeywords(String)">setItunesKeywords</a>, <a href="../module/itunes/ItunesItemData.html#setItunesSeason(java.lang.Integer)" title="setItunesSeason(Integer)">setItunesSeason</a>, <a href="../module/itunes/ItunesItemData.html#setItunesSubtitle(java.lang.String)" title="setItunesSubtitle(String)">setItunesSubtitle</a>, <a href="../module/itunes/ItunesItemData.html#setItunesSummary(java.lang.String)" title="setItunesSummary(String)">setItunesSummary</a>, <a href="../module/itunes/ItunesItemData.html#setItunesTitle(java.lang.String)" title="setItunesTitle(String)">setItunesTitle</a></code></div>
@@ -254,143 +320,315 @@ implements <a href="../FeedItem.html" title="interface in com.apptasticsoftware.
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getAtomItemData()">
-<h3>getAtomItemData</h3>
+<section class="detail" id="getChannel()">
+<h3>getChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></span>&nbsp;<span class="element-name">getAtomItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/atom/AtomItem.html#getAtomItemData()">AtomItem</a></code></span></div>
-<div class="block">Returns the Atom item data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></span>&nbsp;<span class="element-name">getChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from class:&nbsp;<code><a href="ItemImpl.html#getChannel()">ItemImpl</a></code></span></div>
+<div class="block">Get the channel that this item was published in.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/atom/AtomItem.html#getAtomItemData()">getAtomItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/AtomItem.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItem</a></code></dd>
+<dd><code><a href="../module/atom/AtomItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/AtomItem.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItem</a></code></dd>
 <dt>Specified by:</dt>
-<dd><code><a href="../module/atom/AtomItemData.html#getAtomItemData()">getAtomItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></code></dd>
+<dd><code><a href="../module/dc/DcItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/dc/DcItem.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/georss/GeoRssItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/GeoRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../Item.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../Item.html" title="interface in com.apptasticsoftware.rssreader">Item</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/itunes/ItunesItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/itunes/ItunesItem.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/mediarss/MediaRssItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/mediarss/MediaRssItem.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/opensearch/OpenSearchItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/opensearch/OpenSearchItem.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/podcast/PodcastItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/podcast/PodcastItem.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/psc/PscItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/psc/PscItem.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/slash/SlashItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/slash/SlashItem.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/spotify/SpotifyItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/spotify/SpotifyItem.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/wfw/WfwItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/wfw/WfwItem.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItem</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="../module/youtube/YoutubeItem.html#getChannel()">getChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../module/youtube/YoutubeItem.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItem</a></code></dd>
+<dt>Overrides:</dt>
+<dd><code><a href="ItemImpl.html#getChannel()">getChannel</a></code>&nbsp;in class&nbsp;<code><a href="ItemImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ItemImpl</a></code></dd>
 <dt>Returns:</dt>
-<dd>the Atom item data</dd>
+<dd>channel</dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getDcItemData()">
-<h3>getDcItemData</h3>
+<section class="detail" id="hasAtomItem()">
+<h3>hasAtomItem</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></span>&nbsp;<span class="element-name">getDcItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/dc/DcItemData.html#getDcItemData()">DcItemData</a></code></span></div>
-<div class="block">Gets the Dublin Core item data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAtomItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasAtomItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains Atom namespace data.
+Always check this before accessing any Atom-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/dc/DcItemData.html#getDcItemData()">getDcItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the DC item data</dd>
+<dd><code><a href="../FeedItem.html#hasAtomItem()">hasAtomItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getGeoRssItemData()">
-<h3>getGeoRssItemData</h3>
+<section class="detail" id="atomItemData()">
+<h3>atomItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a></span>&nbsp;<span class="element-name">getGeoRssItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/georss/GeoRssItemData.html#getGeoRssItemData()">GeoRssItemData</a></code></span></div>
-<div class="block">Returns the underlying GeoRSS item data implementation.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/atom/AtomItemData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomItemData</a></span>&nbsp;<span class="element-name">atomItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/georss/GeoRssItemData.html#getGeoRssItemData()">getGeoRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the GeoRSS item data</dd>
+<dd><code><a href="../module/atom/internal/AtomItemDataProvider.html#atomItemData()">atomItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/internal/AtomItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getItunesItemData()">
-<h3>getItunesItemData</h3>
+<section class="detail" id="hasDcItem()">
+<h3>hasDcItem</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a></span>&nbsp;<span class="element-name">getItunesItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasDcItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasDcItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains Dublin Core (DC) namespace data.
+Always check this before accessing any DC-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/itunes/ItunesItemData.html#getItunesItemData()">getItunesItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a></code></dd>
+<dd><code><a href="../FeedItem.html#hasDcItem()">hasDcItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getMediaRssItemData()">
-<h3>getMediaRssItemData</h3>
+<section class="detail" id="dcItemData()">
+<h3>dcItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></span>&nbsp;<span class="element-name">getMediaRssItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/dc/DcItemData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcItemData</a></span>&nbsp;<span class="element-name">dcItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/mediarss/MediaRssItemData.html#getMediaRssItemData()">getMediaRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></dd>
+<dd><code><a href="../module/dc/internal/DcItemDataProvider.html#dcItemData()">dcItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/dc/internal/DcItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getPodcastItemData()">
-<h3>getPodcastItemData</h3>
+<section class="detail" id="hasGeoRssItem()">
+<h3>hasGeoRssItem</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a></span>&nbsp;<span class="element-name">getPodcastItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasGeoRssItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasGeoRssItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains GeoRSS namespace data.
+Always check this before accessing any GeoRSS-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/podcast/PodcastItemData.html#getPodcastItemData()">getPodcastItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a></code></dd>
+<dd><code><a href="../FeedItem.html#hasGeoRssItem()">hasGeoRssItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getPscItemData()">
-<h3>getPscItemData</h3>
+<section class="detail" id="geoRssItemData()">
+<h3>geoRssItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></span>&nbsp;<span class="element-name">getPscItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/georss/GeoRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssItemData</a></span>&nbsp;<span class="element-name">geoRssItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/psc/PscItemData.html#getPscItemData()">getPscItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></code></dd>
+<dd><code><a href="../module/georss/internal/GeoRssItemDataProvider.html#geoRssItemData()">geoRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/internal/GeoRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getSlashItemData()">
-<h3>getSlashItemData</h3>
+<section class="detail" id="hasItunesItem()">
+<h3>hasItunesItem</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></span>&nbsp;<span class="element-name">getSlashItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/slash/SlashItemData.html#getSlashItemData()">SlashItemData</a></code></span></div>
-<div class="block">Returns the underlying Slash item data object.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasItunesItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasItunesItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains iTunes namespace data.
+Always check this before accessing any iTunes-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/slash/SlashItemData.html#getSlashItemData()">getSlashItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the Slash item data</dd>
+<dd><code><a href="../FeedItem.html#hasItunesItem()">hasItunesItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getWfWItemData()">
-<h3>getWfWItemData</h3>
+<section class="detail" id="itunesItemData()">
+<h3>itunesItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span>&nbsp;<span class="element-name">getWfWItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/wfw/WfwItemData.html#getWfWItemData()">WfwItemData</a></code></span></div>
-<div class="block">Returns the underlying WFW item data implementation.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/itunes/ItunesItemData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesItemData</a></span>&nbsp;<span class="element-name">itunesItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/wfw/WfwItemData.html#getWfWItemData()">getWfWItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the WFW item data instance</dd>
+<dd><code><a href="../module/itunes/internal/ItunesItemDataProvider.html#itunesItemData()">itunesItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/itunes/internal/ItunesItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getYoutubeItemData()">
-<h3>getYoutubeItemData</h3>
+<section class="detail" id="hasMediaRssItem()">
+<h3>hasMediaRssItem</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></span>&nbsp;<span class="element-name">getYoutubeItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasMediaRssItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasMediaRssItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains Media RSS namespace data.
+Always check this before accessing any Media RSS-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/youtube/YoutubeItemData.html#getYoutubeItemData()">getYoutubeItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></code></dd>
+<dd><code><a href="../FeedItem.html#hasMediaRssItem()">hasMediaRssItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="mediaRssItemData()">
+<h3>mediaRssItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/mediarss/MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></span>&nbsp;<span class="element-name">mediaRssItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/mediarss/internal/MediaRssItemDataProvider.html#mediaRssItemData()">mediaRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/mediarss/internal/MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasPodcastItem()">
+<h3>hasPodcastItem</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasPodcastItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasPodcastItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains Podcast namespace data.
+Always check this before accessing any Podcast-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#hasPodcastItem()">hasPodcastItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="podcastItemData()">
+<h3>podcastItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/podcast/PodcastItemData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastItemData</a></span>&nbsp;<span class="element-name">podcastItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/podcast/internal/PodcastItemDataProvider.html#podcastItemData()">podcastItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/podcast/internal/PodcastItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastItemDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasPscItem()">
+<h3>hasPscItem</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasPscItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasPscItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains PSC (Podlove Simple Chapters) namespace data.
+Always check this before accessing any PSC-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#hasPscItem()">hasPscItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="pscItemData()">
+<h3>pscItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/psc/PscItemData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscItemData</a></span>&nbsp;<span class="element-name">pscItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/psc/internal/PscItemDataProvider.html#pscItemData()">pscItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/psc/internal/PscItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.psc.internal">PscItemDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasSlashItem()">
+<h3>hasSlashItem</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasSlashItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasSlashItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains Slash namespace data.
+Always check this before accessing any Slash-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#hasSlashItem()">hasSlashItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="slashItemData()">
+<h3>slashItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/slash/SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></span>&nbsp;<span class="element-name">slashItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/slash/internal/SlashItemDataProvider.html#slashItemData()">slashItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/slash/internal/SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasWfwItem()">
+<h3>hasWfwItem</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasWfwItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasWfwItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains WFW (Well-Formed Web) namespace data.
+Always check this before accessing any WFW-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#hasWfwItem()">hasWfwItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="wfwItemData()">
+<h3>wfwItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/wfw/WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span>&nbsp;<span class="element-name">wfwItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/wfw/internal/WfwItemDataProvider.html#wfwItemData()">wfwItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/wfw/internal/WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasYoutubeItem()">
+<h3>hasYoutubeItem</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasYoutubeItem</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedItem.html#hasYoutubeItem()">FeedItem</a></code></span></div>
+<div class="block">Returns <code>true</code> if this item contains YouTube namespace data.
+Always check this before accessing any YouTube-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedItem.html#hasYoutubeItem()">hasYoutubeItem</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedItem.html" title="interface in com.apptasticsoftware.rssreader">FeedItem</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="youtubeItemData()">
+<h3>youtubeItemData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/youtube/YoutubeItemData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeItemData</a></span>&nbsp;<span class="element-name">youtubeItemData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/youtube/internal/YoutubeItemDataProvider.html#youtubeItemData()">youtubeItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/youtube/internal/YoutubeItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

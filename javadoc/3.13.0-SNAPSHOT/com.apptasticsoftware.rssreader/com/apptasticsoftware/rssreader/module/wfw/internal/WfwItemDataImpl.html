@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getWfWItemData()" tabindex="0">getWfWItemData()</a></li>
+<li><a href="#wfwItemData()" tabindex="0">wfwItemData()</a></li>
 <li><a href="#getWfwCommentRss()" tabindex="0">getWfwCommentRss()</a></li>
 <li><a href="#setWfwCommentRss(java.lang.String)" tabindex="0">setWfwCommentRss(String)</a></li>
 <li><a href="#getWfwComment()" tabindex="0">getWfwComment()</a></li>
@@ -86,16 +86,15 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></dd>
+<dd><code><a href="WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a>, <a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">WfwItemDataImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span></div>
+implements <a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a>, <a href="WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a></span></div>
 <div class="block">Implementation of <a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw"><code>WfwItemData</code></a> that stores WFW (Well-Formed Web Comment API) properties for RSS items.
 This class maintains the WFW-specific data such as comment RSS feed URLs and comment submission endpoints.
-
 Each WfwItemDataImpl instance stores:
 <ul>
   <li><code>wfwCommentRss</code> - URL of an RSS feed containing comments for the item (optional)</li>
@@ -152,25 +151,25 @@ Each WfwItemDataImpl instance stores:
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the URL of an RSS feed that contains user comments for the item.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWfWItemData()" class="member-name-link">getWfWItemData</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns this object as its own WfwItemData implementation.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the hash code for this WfwItemDataImpl.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWfwComment(java.lang.String)" class="member-name-link">setWfwComment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;wfwComment)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWfwComment(java.lang.String)" class="member-name-link">setWfwComment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;wfwComment)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the URL endpoint that accepts HTTP POST requests to submit comments for the item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWfwCommentRss(java.lang.String)" class="member-name-link">setWfwCommentRss</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;wfwCommentRss)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setWfwCommentRss(java.lang.String)" class="member-name-link">setWfwCommentRss</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;wfwCommentRss)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the URL of an RSS feed that contains user comments for the item.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#wfwItemData()" class="member-name-link">wfwItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns this object as its own WfwItemData implementation.</div>
 </div>
 </div>
 </div>
@@ -206,14 +205,14 @@ Each WfwItemDataImpl instance stores:
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getWfWItemData()">
-<h3>getWfWItemData</h3>
+<section class="detail" id="wfwItemData()">
+<h3>wfwItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span>&nbsp;<span class="element-name">getWfWItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></span>&nbsp;<span class="element-name">wfwItemData</span>()</div>
 <div class="block">Returns this object as its own WfwItemData implementation.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../WfwItemData.html#getWfWItemData()">getWfWItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../WfwItemData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwItemData</a></code></dd>
+<dd><code><a href="WfwItemDataProvider.html#wfwItemData()">wfwItemData</a></code>&nbsp;in interface&nbsp;<code><a href="WfwItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.wfw.internal">WfwItemDataProvider</a></code></dd>
 <dt>Returns:</dt>
 <dd>this WfwItemDataImpl instance</dd>
 </dl>

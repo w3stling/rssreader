@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getMediaRssItemData()" tabindex="0">getMediaRssItemData()</a></li>
+<li><a href="#mediaRssItemData()" tabindex="0">mediaRssItemData()</a></li>
 <li><a href="#getMediaContents()" tabindex="0">getMediaContents()</a></li>
 <li><a href="#addMediaContents(com.apptasticsoftware.rssreader.module.mediarss.MediaContent)" tabindex="0">addMediaContents(MediaContent)</a></li>
 <li><a href="#getMediaGroup()" tabindex="0">getMediaGroup()</a></li>
@@ -136,13 +136,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></dd>
+<dd><code><a href="MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a>, <a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">MediaRssItemDataImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></span></div>
+implements <a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a>, <a href="MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a></span></div>
 </div>
 </section>
 <section class="summary">
@@ -369,41 +369,41 @@ implements <a href="../MediaRssItemData.html" title="interface in com.apptastics
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the rights information of a media object, if present.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaRssItemData()" class="member-name-link">getMediaRssItemData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaScene.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaScene</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaScenes()" class="member-name-link">getMediaScenes</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaScene.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaScene</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaScenes()" class="member-name-link">getMediaScenes</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of scenes for this item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../MediaStatus.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaStatus</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaStatus()" class="member-name-link">getMediaStatus</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../MediaStatus.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaStatus</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaStatus()" class="member-name-link">getMediaStatus</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the status information for this item, if present.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaSubTitle.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaSubTitle</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaSubTitles()" class="member-name-link">getMediaSubTitles</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaSubTitle.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaSubTitle</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaSubTitles()" class="member-name-link">getMediaSubTitles</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of subtitles for this item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaText.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaText</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaTexts()" class="member-name-link">getMediaTexts</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaText.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaText</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaTexts()" class="member-name-link">getMediaTexts</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of text elements for this item.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaThumbnail.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaThumbnail</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaThumbnails()" class="member-name-link">getMediaThumbnails</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;<a href="../MediaThumbnail.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaThumbnail</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaThumbnails()" class="member-name-link">getMediaThumbnails</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the list of thumbnails for this item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../MediaTitle.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaTitle</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaTitle()" class="member-name-link">getMediaTitle</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="../MediaTitle.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaTitle</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaTitle()" class="member-name-link">getMediaTitle</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the title for this item, if present.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mediaRssItemData()" class="member-name-link">mediaRssItemData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setMediaCommunity(com.apptasticsoftware.rssreader.module.mediarss.MediaCommunity)" class="member-name-link">setMediaCommunity</a><wbr>(<a href="../MediaCommunity.html" title="class in com.apptasticsoftware.rssreader.module.mediarss">MediaCommunity</a>&nbsp;mediaCommunity)</code></div>
@@ -484,13 +484,13 @@ implements <a href="../MediaRssItemData.html" title="interface in com.apptastics
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getMediaRssItemData()">
-<h3>getMediaRssItemData</h3>
+<section class="detail" id="mediaRssItemData()">
+<h3>mediaRssItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></span>&nbsp;<span class="element-name">getMediaRssItemData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></span>&nbsp;<span class="element-name">mediaRssItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../MediaRssItemData.html#getMediaRssItemData()">getMediaRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../MediaRssItemData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssItemData</a></code></dd>
+<dd><code><a href="MediaRssItemDataProvider.html#mediaRssItemData()">mediaRssItemData</a></code>&nbsp;in interface&nbsp;<code><a href="MediaRssItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

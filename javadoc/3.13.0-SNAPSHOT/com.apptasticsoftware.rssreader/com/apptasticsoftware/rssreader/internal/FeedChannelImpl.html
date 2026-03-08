@@ -64,15 +64,24 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getAtomChannelData()" tabindex="0">getAtomChannelData()</a></li>
-<li><a href="#getDcChannelData()" tabindex="0">getDcChannelData()</a></li>
-<li><a href="#getGeoRssChannelData()" tabindex="0">getGeoRssChannelData()</a></li>
-<li><a href="#getItunesChannelData()" tabindex="0">getItunesChannelData()</a></li>
-<li><a href="#getMediaRssChannelData()" tabindex="0">getMediaRssChannelData()</a></li>
-<li><a href="#getOpenSearchChannelData()" tabindex="0">getOpenSearchChannelData()</a></li>
-<li><a href="#getPodcastChannelData()" tabindex="0">getPodcastChannelData()</a></li>
-<li><a href="#getSpotifyChannelData()" tabindex="0">getSpotifyChannelData()</a></li>
-<li><a href="#getYoutubeChannelData()" tabindex="0">getYoutubeChannelData()</a></li>
+<li><a href="#hasAtomChannel()" tabindex="0">hasAtomChannel()</a></li>
+<li><a href="#atomChannelData()" tabindex="0">atomChannelData()</a></li>
+<li><a href="#hasDcChannel()" tabindex="0">hasDcChannel()</a></li>
+<li><a href="#dcChannelData()" tabindex="0">dcChannelData()</a></li>
+<li><a href="#hasGeoRssChannel()" tabindex="0">hasGeoRssChannel()</a></li>
+<li><a href="#geoRssChannelData()" tabindex="0">geoRssChannelData()</a></li>
+<li><a href="#hasItunesChannel()" tabindex="0">hasItunesChannel()</a></li>
+<li><a href="#itunesChannelData()" tabindex="0">itunesChannelData()</a></li>
+<li><a href="#hasMediaRssChannel()" tabindex="0">hasMediaRssChannel()</a></li>
+<li><a href="#mediaRssChannelData()" tabindex="0">mediaRssChannelData()</a></li>
+<li><a href="#hasOpenSearchChannel()" tabindex="0">hasOpenSearchChannel()</a></li>
+<li><a href="#openSearchChannelData()" tabindex="0">openSearchChannelData()</a></li>
+<li><a href="#hasPodcastChannel()" tabindex="0">hasPodcastChannel()</a></li>
+<li><a href="#podcastChannelData()" tabindex="0">podcastChannelData()</a></li>
+<li><a href="#hasSpotifyChannel()" tabindex="0">hasSpotifyChannel()</a></li>
+<li><a href="#spotifyChannelData()" tabindex="0">spotifyChannelData()</a></li>
+<li><a href="#hasYoutubeChannel()" tabindex="0">hasYoutubeChannel()</a></li>
+<li><a href="#youtubeChannelData()" tabindex="0">youtubeChannelData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
@@ -92,13 +101,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a>, <a href="../module/atom/AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a>, <a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a>, <a href="../module/dc/DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a>, <a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a>, <a href="../module/georss/GeoRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannel</a>, <a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a>, <a href="../module/itunes/ItunesChannel.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannel</a>, <a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a>, <a href="../module/mediarss/MediaRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannel</a>, <a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a>, <a href="../module/opensearch/OpenSearchChannel.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannel</a>, <a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a>, <a href="../module/podcast/PodcastChannel.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannel</a>, <a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a>, <a href="../module/psc/PscChannel.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannel</a>, <a href="../module/psc/PscChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannelData</a>, <a href="../module/slash/SlashChannel.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashChannel</a>, <a href="../module/spotify/SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a>, <a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a>, <a href="../module/wfw/WfwChannel.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwChannel</a>, <a href="../module/wfw/WfwChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwChannelData</a>, <a href="../module/youtube/YoutubeChannel.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannel</a>, <a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></code></dd>
+<dd><code><a href="../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a>, <a href="../module/atom/AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a>, <a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a>, <a href="../module/atom/internal/AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a>, <a href="../module/dc/DcChannel.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannel</a>, <a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a>, <a href="../module/dc/internal/DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a>, <a href="../module/georss/GeoRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannel</a>, <a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a>, <a href="../module/georss/internal/GeoRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssChannelDataProvider</a>, <a href="../module/itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a>, <a href="../module/itunes/ItunesChannel.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannel</a>, <a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a>, <a href="../module/mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a>, <a href="../module/mediarss/MediaRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannel</a>, <a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a>, <a href="../module/opensearch/internal/OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a>, <a href="../module/opensearch/OpenSearchChannel.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannel</a>, <a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a>, <a href="../module/podcast/internal/PodcastChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastChannelDataProvider</a>, <a href="../module/podcast/PodcastChannel.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannel</a>, <a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a>, <a href="../module/psc/PscChannel.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannel</a>, <a href="../module/psc/PscChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannelData</a>, <a href="../module/slash/SlashChannel.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashChannel</a>, <a href="../module/spotify/internal/SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a>, <a href="../module/spotify/SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a>, <a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a>, <a href="../module/wfw/WfwChannel.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwChannel</a>, <a href="../module/wfw/WfwChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.wfw">WfwChannelData</a>, <a href="../module/youtube/internal/YoutubeChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeChannelDataProvider</a>, <a href="../module/youtube/YoutubeChannel.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannel</a>, <a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FeedChannelImpl</span>
 <span class="extends-implements">extends <a href="ChannelImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ChannelImpl</a>
-implements <a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></span></div>
+implements <a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a>, <a href="../module/atom/internal/AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a>, <a href="../module/dc/internal/DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a>, <a href="../module/georss/internal/GeoRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssChannelDataProvider</a>, <a href="../module/itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a>, <a href="../module/mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a>, <a href="../module/opensearch/internal/OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a>, <a href="../module/podcast/internal/PodcastChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastChannelDataProvider</a>, <a href="../module/spotify/internal/SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a>, <a href="../module/youtube/internal/YoutubeChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeChannelDataProvider</a></span></div>
 </div>
 </section>
 <section class="summary">
@@ -129,45 +138,84 @@ implements <a href="../FeedChannel.html" title="interface in com.apptasticsoftwa
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#atomChannelData()" class="member-name-link">atomChannelData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#dcChannelData()" class="member-name-link">dcChannelData</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAtomChannelData()" class="member-name-link">getAtomChannelData</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the Atom channel data.</div>
-</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDcChannelData()" class="member-name-link">getDcChannelData</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the Dublin Core channel data.</div>
-</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getGeoRssChannelData()" class="member-name-link">getGeoRssChannelData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#geoRssChannelData()" class="member-name-link">geoRssChannelData</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasAtomChannel()" class="member-name-link">hasAtomChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains Atom namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasDcChannel()" class="member-name-link">hasDcChannel</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the GeoRSS channel data.</div>
+<div class="block">Returns <code>true</code> if this channel contains Dublin Core (DC) namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasGeoRssChannel()" class="member-name-link">hasGeoRssChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains GeoRSS namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasItunesChannel()" class="member-name-link">hasItunesChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains iTunes namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasMediaRssChannel()" class="member-name-link">hasMediaRssChannel</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains Media RSS namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasOpenSearchChannel()" class="member-name-link">hasOpenSearchChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains OpenSearch namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasPodcastChannel()" class="member-name-link">hasPodcastChannel</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains Podcast namespace data.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasSpotifyChannel()" class="member-name-link">hasSpotifyChannel</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains Spotify namespace data.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hasYoutubeChannel()" class="member-name-link">hasYoutubeChannel</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns <code>true</code> if this channel contains YouTube namespace data.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getItunesChannelData()" class="member-name-link">getItunesChannelData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#itunesChannelData()" class="member-name-link">itunesChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaRssChannelData()" class="member-name-link">getMediaRssChannelData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mediaRssChannelData()" class="member-name-link">mediaRssChannelData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getOpenSearchChannelData()" class="member-name-link">getOpenSearchChannelData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#openSearchChannelData()" class="member-name-link">openSearchChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPodcastChannelData()" class="member-name-link">getPodcastChannelData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#podcastChannelData()" class="member-name-link">podcastChannelData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpotifyChannelData()" class="member-name-link">getSpotifyChannelData</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spotifyChannelData()" class="member-name-link">spotifyChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getYoutubeChannelData()" class="member-name-link">getYoutubeChannelData</a>()</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#youtubeChannelData()" class="member-name-link">youtubeChannelData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -240,125 +288,244 @@ implements <a href="../FeedChannel.html" title="interface in com.apptasticsoftwa
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getAtomChannelData()">
-<h3>getAtomChannelData</h3>
+<section class="detail" id="hasAtomChannel()">
+<h3>hasAtomChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></span>&nbsp;<span class="element-name">getAtomChannelData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/atom/AtomChannel.html#getAtomChannelData()">AtomChannel</a></code></span></div>
-<div class="block">Returns the Atom channel data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasAtomChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasAtomChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains Atom namespace data.
+Always check this before accessing any Atom-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/atom/AtomChannel.html#getAtomChannelData()">getAtomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/AtomChannel.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannel</a></code></dd>
-<dt>Specified by:</dt>
-<dd><code><a href="../module/atom/AtomChannelData.html#getAtomChannelData()">getAtomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the Atom channel data</dd>
+<dd><code><a href="../FeedChannel.html#hasAtomChannel()">hasAtomChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getDcChannelData()">
-<h3>getDcChannelData</h3>
+<section class="detail" id="atomChannelData()">
+<h3>atomChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></span>&nbsp;<span class="element-name">getDcChannelData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/dc/DcChannelData.html#getDcChannelData()">DcChannelData</a></code></span></div>
-<div class="block">Gets the Dublin Core channel data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/atom/AtomChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.atom">AtomChannelData</a></span>&nbsp;<span class="element-name">atomChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/dc/DcChannelData.html#getDcChannelData()">getDcChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the DC channel data</dd>
+<dd><code><a href="../module/atom/internal/AtomChannelDataProvider.html#atomChannelData()">atomChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/atom/internal/AtomChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.atom.internal">AtomChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getGeoRssChannelData()">
-<h3>getGeoRssChannelData</h3>
+<section class="detail" id="hasDcChannel()">
+<h3>hasDcChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a></span>&nbsp;<span class="element-name">getGeoRssChannelData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../module/georss/GeoRssChannel.html#getGeoRssChannelData()">GeoRssChannel</a></code></span></div>
-<div class="block">Returns the GeoRSS channel data.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasDcChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasDcChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains Dublin Core (DC) namespace data.
+Always check this before accessing any DC-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/georss/GeoRssChannel.html#getGeoRssChannelData()">getGeoRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/GeoRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannel</a></code></dd>
-<dt>Specified by:</dt>
-<dd><code><a href="../module/georss/GeoRssChannelData.html#getGeoRssChannelData()">getGeoRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the GeoRSS channel data</dd>
+<dd><code><a href="../FeedChannel.html#hasDcChannel()">hasDcChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getItunesChannelData()">
-<h3>getItunesChannelData</h3>
+<section class="detail" id="dcChannelData()">
+<h3>dcChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></span>&nbsp;<span class="element-name">getItunesChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/dc/DcChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.dc">DcChannelData</a></span>&nbsp;<span class="element-name">dcChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/itunes/ItunesChannelData.html#getItunesChannelData()">getItunesChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></code></dd>
+<dd><code><a href="../module/dc/internal/DcChannelDataProvider.html#dcChannelData()">dcChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/dc/internal/DcChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.dc.internal">DcChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getMediaRssChannelData()">
-<h3>getMediaRssChannelData</h3>
+<section class="detail" id="hasGeoRssChannel()">
+<h3>hasGeoRssChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></span>&nbsp;<span class="element-name">getMediaRssChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasGeoRssChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasGeoRssChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains GeoRSS namespace data.
+Always check this before accessing any GeoRSS-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/mediarss/MediaRssChannelData.html#getMediaRssChannelData()">getMediaRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></code></dd>
+<dd><code><a href="../FeedChannel.html#hasGeoRssChannel()">hasGeoRssChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getOpenSearchChannelData()">
-<h3>getOpenSearchChannelData</h3>
+<section class="detail" id="geoRssChannelData()">
+<h3>geoRssChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></span>&nbsp;<span class="element-name">getOpenSearchChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/georss/GeoRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.georss">GeoRssChannelData</a></span>&nbsp;<span class="element-name">geoRssChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/opensearch/OpenSearchChannelData.html#getOpenSearchChannelData()">getOpenSearchChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></code></dd>
+<dd><code><a href="../module/georss/internal/GeoRssChannelDataProvider.html#geoRssChannelData()">geoRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/georss/internal/GeoRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.georss.internal">GeoRssChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getPodcastChannelData()">
-<h3>getPodcastChannelData</h3>
+<section class="detail" id="hasItunesChannel()">
+<h3>hasItunesChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a></span>&nbsp;<span class="element-name">getPodcastChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasItunesChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasItunesChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains iTunes namespace data.
+Always check this before accessing any iTunes-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/podcast/PodcastChannelData.html#getPodcastChannelData()">getPodcastChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a></code></dd>
+<dd><code><a href="../FeedChannel.html#hasItunesChannel()">hasItunesChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getSpotifyChannelData()">
-<h3>getSpotifyChannelData</h3>
+<section class="detail" id="itunesChannelData()">
+<h3>itunesChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></span>&nbsp;<span class="element-name">getSpotifyChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></span>&nbsp;<span class="element-name">itunesChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/spotify/SpotifyChannelData.html#getSpotifyChannelData()">getSpotifyChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></dd>
+<dd><code><a href="../module/itunes/internal/ItunesChannelDataProvider.html#itunesChannelData()">itunesChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getYoutubeChannelData()">
-<h3>getYoutubeChannelData</h3>
+<section class="detail" id="hasMediaRssChannel()">
+<h3>hasMediaRssChannel</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></span>&nbsp;<span class="element-name">getYoutubeChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasMediaRssChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasMediaRssChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains Media RSS namespace data.
+Always check this before accessing any Media RSS-specific fields.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../module/youtube/YoutubeChannelData.html#getYoutubeChannelData()">getYoutubeChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></code></dd>
+<dd><code><a href="../FeedChannel.html#hasMediaRssChannel()">hasMediaRssChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="mediaRssChannelData()">
+<h3>mediaRssChannelData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></span>&nbsp;<span class="element-name">mediaRssChannelData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/mediarss/internal/MediaRssChannelDataProvider.html#mediaRssChannelData()">mediaRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasOpenSearchChannel()">
+<h3>hasOpenSearchChannel</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasOpenSearchChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasOpenSearchChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains OpenSearch namespace data.
+Always check this before accessing any OpenSearch-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedChannel.html#hasOpenSearchChannel()">hasOpenSearchChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="openSearchChannelData()">
+<h3>openSearchChannelData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/opensearch/OpenSearchChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch">OpenSearchChannelData</a></span>&nbsp;<span class="element-name">openSearchChannelData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/opensearch/internal/OpenSearchChannelDataProvider.html#openSearchChannelData()">openSearchChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/opensearch/internal/OpenSearchChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.opensearch.internal">OpenSearchChannelDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasPodcastChannel()">
+<h3>hasPodcastChannel</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasPodcastChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasPodcastChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains Podcast namespace data.
+Always check this before accessing any Podcast-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedChannel.html#hasPodcastChannel()">hasPodcastChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="podcastChannelData()">
+<h3>podcastChannelData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/podcast/PodcastChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.podcast">PodcastChannelData</a></span>&nbsp;<span class="element-name">podcastChannelData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/podcast/internal/PodcastChannelDataProvider.html#podcastChannelData()">podcastChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/podcast/internal/PodcastChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.podcast.internal">PodcastChannelDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasSpotifyChannel()">
+<h3>hasSpotifyChannel</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasSpotifyChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasSpotifyChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains Spotify namespace data.
+Always check this before accessing any Spotify-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedChannel.html#hasSpotifyChannel()">hasSpotifyChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="spotifyChannelData()">
+<h3>spotifyChannelData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/spotify/SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></span>&nbsp;<span class="element-name">spotifyChannelData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/spotify/internal/SpotifyChannelDataProvider.html#spotifyChannelData()">spotifyChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/spotify/internal/SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasYoutubeChannel()">
+<h3>hasYoutubeChannel</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">hasYoutubeChannel</span>()</div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../FeedChannel.html#hasYoutubeChannel()">FeedChannel</a></code></span></div>
+<div class="block">Returns <code>true</code> if this channel contains YouTube namespace data.
+Always check this before accessing any YouTube-specific fields.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../FeedChannel.html#hasYoutubeChannel()">hasYoutubeChannel</a></code>&nbsp;in interface&nbsp;<code><a href="../FeedChannel.html" title="interface in com.apptasticsoftware.rssreader">FeedChannel</a></code></dd>
+</dl>
+</div>
+</section>
+</li>
+<li>
+<section class="detail" id="youtubeChannelData()">
+<h3>youtubeChannelData</h3>
+<div class="horizontal-scroll">
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../module/youtube/YoutubeChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.youtube">YoutubeChannelData</a></span>&nbsp;<span class="element-name">youtubeChannelData</span>()</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="../module/youtube/internal/YoutubeChannelDataProvider.html#youtubeChannelData()">youtubeChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../module/youtube/internal/YoutubeChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.youtube.internal">YoutubeChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

@@ -64,7 +64,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getSlashItemData()" tabindex="0">getSlashItemData()</a></li>
+<li><a href="#slashItemData()" tabindex="0">slashItemData()</a></li>
 <li><a href="#getSlashSection()" tabindex="0">getSlashSection()</a></li>
 <li><a href="#setSlashSection(java.lang.String)" tabindex="0">setSlashSection(String)</a></li>
 <li><a href="#getSlashDepartment()" tabindex="0">getSlashDepartment()</a></li>
@@ -90,13 +90,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></dd>
+<dd><code><a href="SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a>, <a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SlashItemDataImpl</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></span></div>
+implements <a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a>, <a href="SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a></span></div>
 <div class="block">Implementation of SlashItemData storing Slash-specific item metadata.</div>
 </div>
 </section>
@@ -144,39 +144,37 @@ implements <a href="../SlashItemData.html" title="interface in com.apptasticsoft
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the Slash hit parade (comma-separated list of view counts).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSlashItemData()" class="member-name-link">getSlashItemData</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSlashSection()" class="member-name-link">getSlashSection</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Returns the underlying Slash item data object.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSlashSection()" class="member-name-link">getSlashSection</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the Slash section of the item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashComments(java.lang.Integer)" class="member-name-link">setSlashComments</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;slashComments)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashComments(java.lang.Integer)" class="member-name-link">setSlashComments</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&nbsp;slashComments)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the number of comments for the item.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashDepartment(java.lang.String)" class="member-name-link">setSlashDepartment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashDepartment)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashDepartment(java.lang.String)" class="member-name-link">setSlashDepartment</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashDepartment)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the Slash department of the item.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashHitParade(java.lang.String)" class="member-name-link">setSlashHitParade</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashHitParade)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashHitParade(java.lang.String)" class="member-name-link">setSlashHitParade</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashHitParade)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the Slash hit parade (comma-separated list of view counts).</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashSection(java.lang.String)" class="member-name-link">setSlashSection</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashSection)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSlashSection(java.lang.String)" class="member-name-link">setSlashSection</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;slashSection)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the Slash section of the item.</div>
 </div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#slashItemData()" class="member-name-link">slashItemData</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
 </div>
@@ -211,17 +209,13 @@ implements <a href="../SlashItemData.html" title="interface in com.apptasticsoft
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getSlashItemData()">
-<h3>getSlashItemData</h3>
+<section class="detail" id="slashItemData()">
+<h3>slashItemData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></span>&nbsp;<span class="element-name">getSlashItemData</span>()</div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../SlashItemData.html#getSlashItemData()">SlashItemData</a></code></span></div>
-<div class="block">Returns the underlying Slash item data object.</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></span>&nbsp;<span class="element-name">slashItemData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../SlashItemData.html#getSlashItemData()">getSlashItemData</a></code>&nbsp;in interface&nbsp;<code><a href="../SlashItemData.html" title="interface in com.apptasticsoftware.rssreader.module.slash">SlashItemData</a></code></dd>
-<dt>Returns:</dt>
-<dd>the Slash item data</dd>
+<dd><code><a href="SlashItemDataProvider.html#slashItemData()">slashItemData</a></code>&nbsp;in interface&nbsp;<code><a href="SlashItemDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.slash.internal">SlashItemDataProvider</a></code></dd>
 </dl>
 </div>
 </section>

@@ -64,9 +64,9 @@ loadScripts(document, 'script');</script>
 </li>
 <li><a href="#method-detail" tabindex="0">Method Details</a>
 <ol class="toc-list">
-<li><a href="#getSpotifyChannelData()" tabindex="0">getSpotifyChannelData()</a></li>
-<li><a href="#getItunesChannelData()" tabindex="0">getItunesChannelData()</a></li>
-<li><a href="#getMediaRssChannelData()" tabindex="0">getMediaRssChannelData()</a></li>
+<li><a href="#spotifyChannelData()" tabindex="0">spotifyChannelData()</a></li>
+<li><a href="#itunesChannelData()" tabindex="0">itunesChannelData()</a></li>
+<li><a href="#mediaRssChannelData()" tabindex="0">mediaRssChannelData()</a></li>
 <li><a href="#equals(java.lang.Object)" tabindex="0">equals(Object)</a></li>
 <li><a href="#hashCode()" tabindex="0">hashCode()</a></li>
 </ol>
@@ -86,13 +86,13 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../../itunes/ItunesChannel.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannel</a>, <a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a>, <a href="../../mediarss/MediaRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannel</a>, <a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a>, <a href="../../psc/PscChannel.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannel</a>, <a href="../../psc/PscChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannelData</a>, <a href="../SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a>, <a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></dd>
+<dd><code><a href="../../../Channel.html" title="interface in com.apptasticsoftware.rssreader">Channel</a>, <a href="../../itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a>, <a href="../../itunes/ItunesChannel.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannel</a>, <a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a>, <a href="../../mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a>, <a href="../../mediarss/MediaRssChannel.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannel</a>, <a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a>, <a href="../../psc/PscChannel.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannel</a>, <a href="../../psc/PscChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.psc">PscChannelData</a>, <a href="SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a>, <a href="../SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a>, <a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></dd>
 </dl>
 <hr>
 <div class="horizontal-scroll">
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">SpotifyChannelImpl</span>
 <span class="extends-implements">extends <a href="../../../internal/ChannelImpl.html" title="class in com.apptasticsoftware.rssreader.internal">ChannelImpl</a>
-implements <a href="../SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a></span></div>
+implements <a href="../SpotifyChannel.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannel</a>, <a href="SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a>, <a href="../../itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a>, <a href="../../mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a></span></div>
 </div>
 </section>
 <section class="summary">
@@ -124,17 +124,17 @@ implements <a href="../SpotifyChannel.html" title="interface in com.apptasticsof
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#equals(java.lang.Object)" class="member-name-link">equals</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;o)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getItunesChannelData()" class="member-name-link">getItunesChannelData</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getMediaRssChannelData()" class="member-name-link">getMediaRssChannelData</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#itunesChannelData()" class="member-name-link">itunesChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSpotifyChannelData()" class="member-name-link">getSpotifyChannelData</a>()</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#mediaRssChannelData()" class="member-name-link">mediaRssChannelData</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#spotifyChannelData()" class="member-name-link">spotifyChannelData</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 </div>
 </div>
@@ -185,37 +185,37 @@ implements <a href="../SpotifyChannel.html" title="interface in com.apptasticsof
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getSpotifyChannelData()">
-<h3>getSpotifyChannelData</h3>
+<section class="detail" id="spotifyChannelData()">
+<h3>spotifyChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></span>&nbsp;<span class="element-name">getSpotifyChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></span>&nbsp;<span class="element-name">spotifyChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../SpotifyChannelData.html#getSpotifyChannelData()">getSpotifyChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../SpotifyChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.spotify">SpotifyChannelData</a></code></dd>
+<dd><code><a href="SpotifyChannelDataProvider.html#spotifyChannelData()">spotifyChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="SpotifyChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.spotify.internal">SpotifyChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getItunesChannelData()">
-<h3>getItunesChannelData</h3>
+<section class="detail" id="itunesChannelData()">
+<h3>itunesChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></span>&nbsp;<span class="element-name">getItunesChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></span>&nbsp;<span class="element-name">itunesChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../itunes/ItunesChannelData.html#getItunesChannelData()">getItunesChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../../itunes/ItunesChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.itunes">ItunesChannelData</a></code></dd>
+<dd><code><a href="../../itunes/internal/ItunesChannelDataProvider.html#itunesChannelData()">itunesChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../../itunes/internal/ItunesChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.itunes.internal">ItunesChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
 </li>
 <li>
-<section class="detail" id="getMediaRssChannelData()">
-<h3>getMediaRssChannelData</h3>
+<section class="detail" id="mediaRssChannelData()">
+<h3>mediaRssChannelData</h3>
 <div class="horizontal-scroll">
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></span>&nbsp;<span class="element-name">getMediaRssChannelData</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></span>&nbsp;<span class="element-name">mediaRssChannelData</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../../mediarss/MediaRssChannelData.html#getMediaRssChannelData()">getMediaRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../../mediarss/MediaRssChannelData.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss">MediaRssChannelData</a></code></dd>
+<dd><code><a href="../../mediarss/internal/MediaRssChannelDataProvider.html#mediaRssChannelData()">mediaRssChannelData</a></code>&nbsp;in interface&nbsp;<code><a href="../../mediarss/internal/MediaRssChannelDataProvider.html" title="interface in com.apptasticsoftware.rssreader.module.mediarss.internal">MediaRssChannelDataProvider</a></code></dd>
 </dl>
 </div>
 </section>
