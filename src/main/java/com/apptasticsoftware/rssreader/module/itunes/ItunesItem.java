@@ -4,4 +4,7 @@ import com.apptasticsoftware.rssreader.Item;
 
 public interface ItunesItem extends Item, ItunesItemData {
 
+    @Override
+    ItunesChannel getChannel();
+
 }

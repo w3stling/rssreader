@@ -6,4 +6,8 @@ import com.apptasticsoftware.rssreader.Item;
  * Represents a GeoRSS item with geographic extension data.
  */
 public interface GeoRssItem extends Item, GeoRssItemData {
+
+    @Override
+    GeoRssChannel getChannel();
+
 }

@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.dc.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.dc.DcChannel;
 import com.apptasticsoftware.rssreader.module.dc.DcItem;
 import com.apptasticsoftware.rssreader.module.dc.DcItemData;
 
@@ -19,6 +20,15 @@ public class DcItemImpl extends ItemImpl implements DcItem, DcItemDataProvider {
      */
     public DcItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public DcChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof DcChannel) {
+            return (DcChannel) channel;
+        }
+        return null;
     }
 
     @Override

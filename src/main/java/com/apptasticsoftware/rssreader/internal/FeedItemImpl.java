@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
+import com.apptasticsoftware.rssreader.FeedChannel;
 import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.module.atom.AtomItemData;
 import com.apptasticsoftware.rssreader.module.atom.internal.AtomItemDataImpl;
@@ -57,8 +58,12 @@ public class FeedItemImpl extends ItemImpl implements FeedItem, AtomItemDataProv
     }
 
     @Override
-    public FeedChannelImpl getChannel() {
-        return (FeedChannelImpl) super.getChannel();
+    public FeedChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof FeedChannel) {
+            return (FeedChannel) channel;
+        }
+        return null;
     }
 
     @Override

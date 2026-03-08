@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader.module.itunes.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 
@@ -42,6 +43,15 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem, ItunesItemDa
      */
     public ItunesItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public ItunesChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof ItunesChannel) {
+            return (ItunesChannel) channel;
+        }
+        return null;
     }
 
     @Override

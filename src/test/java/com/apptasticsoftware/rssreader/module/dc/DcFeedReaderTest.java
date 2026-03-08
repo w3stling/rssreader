@@ -33,7 +33,7 @@ class DcFeedReaderTest {
 
         var item = items.get(0);
         assertHasFeedItem(item);
-        var channel = (DcChannel) item.getChannel();
+        var channel = item.getChannel();
 
         assertThat(channel.getTitle()).isEqualTo("Meerkat");
         assertThat(channel.getLink()).isEqualTo("http://meerkat.oreillynet.com");
@@ -84,7 +84,7 @@ class DcFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(DcChannelImpl.class).withNonnullFields("dcData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(DcChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(DcItemImpl.class).withNonnullFields("dcData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(DcItemImpl.class).withNonnullFields("dcData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(DcItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
     }

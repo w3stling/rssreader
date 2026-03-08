@@ -36,7 +36,7 @@ class YoutubeFeedReaderTest {
         items.forEach(this::assertHasFeedItem);
 
         var item = items.get(0);
-        YoutubeChannel channel = (YoutubeChannel) item.getChannel();
+        YoutubeChannel channel = item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://www.youtube.com/channel/UCX6OQ3DkcsbYNE6H8uQQuVA");
         assertThat(channel.getYoutubeChannelId()).isEqualTo("X6OQ3DkcsbYNE6H8uQQuVA");
         assertThat(channel.getTitle()).isEqualTo("MrBeast");
@@ -116,7 +116,7 @@ class YoutubeFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(YoutubeChannelImpl.class).withNonnullFields("youtubeData", "mediaRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(YoutubeChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(YoutubeItemDataImpl.class).verify();
     }
 

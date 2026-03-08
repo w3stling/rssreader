@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataImpl;
+import com.apptasticsoftware.rssreader.module.podcast.PodcastChannel;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItem;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItemData;
 
@@ -23,6 +24,15 @@ public class PodcastItemImpl extends ItemImpl implements PodcastItem, PodcastIte
         super(dateTimeParser);
         data = new PodcastItemDataImpl(dateTimeParser);
         itunesData = new ItunesItemDataImpl();
+    }
+
+    @Override
+    public PodcastChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof PodcastChannel) {
+            return (PodcastChannel) channel;
+        }
+        return null;
     }
 
     @Override

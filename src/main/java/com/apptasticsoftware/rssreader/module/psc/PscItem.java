@@ -8,4 +8,7 @@ import com.apptasticsoftware.rssreader.Item;
  * @see <a href="https://podcastindex.org/namespace/">Podcast Index Specification</a>
  */
 public interface PscItem extends Item, PscItemData {
+
+    @Override
+    PscChannel getChannel();
 }

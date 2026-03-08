@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.slash.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.slash.SlashChannel;
 import com.apptasticsoftware.rssreader.module.slash.SlashItem;
 import com.apptasticsoftware.rssreader.module.slash.SlashItemData;
 
@@ -20,6 +21,15 @@ public class SlashItemImpl extends ItemImpl implements SlashItem, SlashItemDataP
      */
     public SlashItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public SlashChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof SlashChannel) {
+            return (SlashChannel) channel;
+        }
+        return null;
     }
 
     @Override

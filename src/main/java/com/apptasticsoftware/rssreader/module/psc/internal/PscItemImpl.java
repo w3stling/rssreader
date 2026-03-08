@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.psc.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.psc.PscChannel;
 import com.apptasticsoftware.rssreader.module.psc.PscItem;
 import com.apptasticsoftware.rssreader.module.psc.PscItemData;
 
@@ -12,6 +13,15 @@ public class PscItemImpl extends ItemImpl implements PscItem, PscItemDataProvide
 
     public PscItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public PscChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof PscChannel) {
+            return (PscChannel) channel;
+        }
+        return null;
     }
 
     @Override

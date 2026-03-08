@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader.module.mediarss.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.mediarss.MediaRssChannel;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItem;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
 
@@ -45,6 +46,14 @@ public class MediaRssItemImpl extends ItemImpl implements MediaRssItem, MediaRss
         super(dateTimeParser);
     }
 
+    @Override
+    public MediaRssChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof MediaRssChannel) {
+            return (MediaRssChannel) channel;
+        }
+        return null;
+    }
 
     /**
      * Internal method to get media rss item data.

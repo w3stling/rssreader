@@ -8,6 +8,7 @@ import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
 import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataImpl;
 import com.apptasticsoftware.rssreader.module.psc.PscItemData;
 import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
+import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannel;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyItem;
 
 import java.util.Objects;
@@ -22,6 +23,15 @@ public class SpotifyItemImpl extends ItemImpl implements SpotifyItem, ItunesItem
 
     public SpotifyItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public SpotifyChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof SpotifyChannel) {
+            return (SpotifyChannel) channel;
+        }
+        return null;
     }
 
     @Override

@@ -75,7 +75,7 @@ class PodcastFeedReaderTest {
 
         for (PodcastItem podcastItem : items) {
             assertHasFeedItem(podcastItem, false);
-            var channel = (PodcastChannel) podcastItem.getChannel();
+            var channel = podcastItem.getChannel();
             assertThat(channel.getPodcastGuid()).isEqualTo("y0ur-gu1d-g035-h3r3");
             assertTrue(channel.getPodcastLicense().isPresent());
             assertThat(channel.getPodcastLicense().get().getUrl()).hasValue("https://example.org/mypodcastlicense/full.pdf");
@@ -331,7 +331,7 @@ class PodcastFeedReaderTest {
         assertEquals(3, items.size());
         var item = items.get(0);
         assertHasFeedItem(item, true);
-        var channel = (PodcastChannel) item.getChannel();
+        var channel = item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://podnews.net");
         assertThat(channel.getTitle()).isEqualTo("Podnews Daily - podcast industry news");
         assertThat(channel.getDescription()).isEqualTo("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify, YouTube\n" +
@@ -438,7 +438,7 @@ class PodcastFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(PodcastChannelImpl.class).withNonnullFields("data").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withNonnullFields("itunesData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withNonnullFields("itunesData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(PodcastChapters.class).verify();
         EqualsVerifier.simple().forClass(PodcastAlternateEnclosure.class).verify();
         EqualsVerifier.simple().forClass(PodcastBlock.class).verify();

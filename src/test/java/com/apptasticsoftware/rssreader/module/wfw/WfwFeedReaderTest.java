@@ -75,7 +75,7 @@ class WfwFeedReaderTest {
 
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(WfwItemImpl.class).withNonnullFields("wfwData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(WfwItemImpl.class).withNonnullFields("wfwData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(WfwItemDataImpl.class).verify();
     }
 

@@ -80,8 +80,7 @@ class PscFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(PscChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
-        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(PscItemDataImpl.class).verify();
     }
 

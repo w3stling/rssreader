@@ -4,6 +4,7 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.MediaRssItemData;
 import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemDataImpl;
+import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannel;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 
@@ -16,6 +17,15 @@ public class YoutubeItemImpl extends ItemImpl implements YoutubeItem, YoutubeIte
 
     public YoutubeItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public YoutubeChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof YoutubeChannel) {
+            return (YoutubeChannel) channel;
+        }
+        return null;
     }
 
     @Override

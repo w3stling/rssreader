@@ -5,4 +5,6 @@ import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 
 public interface PodcastItem extends Item, PodcastItemData, ItunesItem {
 
+    @Override
+    PodcastChannel getChannel();
 }

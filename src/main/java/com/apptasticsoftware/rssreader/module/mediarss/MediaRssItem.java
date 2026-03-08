@@ -4,4 +4,7 @@ import com.apptasticsoftware.rssreader.Item;
 
 public interface MediaRssItem extends MediaRssItemData, Item {
 
+    @Override
+    MediaRssChannel getChannel();
+
 }

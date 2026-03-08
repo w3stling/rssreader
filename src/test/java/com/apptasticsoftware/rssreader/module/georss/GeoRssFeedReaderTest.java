@@ -33,7 +33,7 @@ class GeoRssFeedReaderTest {
         assertEquals(1, items.size());
         var item = items.get(0);
         assertHasFeedItem(item);
-        var channel = (GeoRssChannel) item.getChannel();
+        var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Earthquakes");
         assertThat(channel.getLink()).isEqualTo("http://example.org/");
         assertThat(channel.getLastBuildDate()).hasValue("2005-12-13T18:30:02Z");
@@ -86,7 +86,7 @@ class GeoRssFeedReaderTest {
         assertEquals(1, items.size());
         var item = items.get(0);
         assertHasFeedItem(item);
-        var channel = (GeoRssChannel) item.getChannel();
+        var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Earthquakes");
         assertThat(channel.getLink()).isEqualTo("http://example.org/");
         assertThat(channel.getLastBuildDate()).hasValue("2005-12-13T18:30:02Z");
@@ -127,7 +127,7 @@ class GeoRssFeedReaderTest {
         assertEquals(1, items.size());
         var item = items.get(0);
 
-        var channel = (GeoRssChannel) item.getChannel();
+        var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("USGS M5+ Earthquakes");
         assertThat(channel.getDescription()).isEqualTo("Real-time, worldwide earthquake list for the past 7 days");
         assertThat(channel.getLink()).isEqualTo("https://earthquake.usgs.gov/eqcenter/");
@@ -149,7 +149,7 @@ class GeoRssFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(GeoRssChannelImpl.class).withNonnullFields("geoRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(GeoRssChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(GeoRssItemImpl.class).withNonnullFields("geoRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(GeoRssItemImpl.class).withNonnullFields("geoRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(GeoRssItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
         EqualsVerifier.simple().forClass(Coordinate.class).verify();

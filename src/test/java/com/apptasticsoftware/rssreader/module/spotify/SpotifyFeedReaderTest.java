@@ -36,7 +36,7 @@ class SpotifyFeedReaderTest {
 
         SpotifyItem item = items.get(0);
         assertHasFeedItem(item);
-        SpotifyChannel channel = (SpotifyChannel) item.getChannel();
+        SpotifyChannel channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Serial");
         assertThat(channel.getLink()).isEqualTo("https://serialpodcast.org");
         assertThat(channel.getDescription()).contains("Serial is a new podcast from the creators of This American Life,");
@@ -86,7 +86,7 @@ class SpotifyFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(SpotifyChannelImpl.class).withNonnullFields("spotifyData", "itunesData", "mediaRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(SpotifyItemImpl.class).withNonnullFields("itunesData", "mediaRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(SpotifyItemImpl.class).withNonnullFields("itunesData", "mediaRssData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
     }
 
     private void assertHasFeedItem(SpotifyItem item) {

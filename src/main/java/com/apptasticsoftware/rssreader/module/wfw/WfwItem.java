@@ -18,4 +18,8 @@ import com.apptasticsoftware.rssreader.Item;
  * @see <a href="http://wellformedweb.org/CommentAPI/">Well-Formed Web Comment API</a>
  */
 public interface WfwItem extends Item, WfwItemData {
+
+    @Override
+    WfwChannel getChannel();
+
 }

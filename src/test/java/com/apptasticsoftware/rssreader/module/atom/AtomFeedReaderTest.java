@@ -29,7 +29,7 @@ class AtomFeedReaderTest {
         assertEquals(1, items.size());
 
         // Verify channel atom:link elements
-        var channel = (AtomChannel) items.get(0).getChannel();
+        var channel = items.get(0).getChannel();
 
         // Verify item link
         assertThat(channel.getLink()).isEqualTo("https://technewsdaily.com");
@@ -101,7 +101,7 @@ class AtomFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(AtomChannelImpl.class).withNonnullFields("atomData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(AtomChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(AtomItemImpl.class).withNonnullFields("atomData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(AtomItemImpl.class).withNonnullFields("atomData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(AtomItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
     }

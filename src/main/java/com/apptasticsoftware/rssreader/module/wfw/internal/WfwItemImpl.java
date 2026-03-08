@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.wfw.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.wfw.WfwChannel;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItem;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItemData;
 
@@ -29,6 +30,15 @@ public class WfwItemImpl extends ItemImpl implements WfwItem, WfwItemDataProvide
      */
     public WfwItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public WfwChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof WfwChannel) {
+            return (WfwChannel) channel;
+        }
+        return null;
     }
 
     /**

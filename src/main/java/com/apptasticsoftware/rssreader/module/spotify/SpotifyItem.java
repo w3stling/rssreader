@@ -7,4 +7,7 @@ import com.apptasticsoftware.rssreader.module.psc.PscItem;
 
 public interface SpotifyItem extends Item, SpotifyItemData, ItunesItem, MediaRssItem, PscItem {
 
+    @Override
+    SpotifyChannel getChannel();
+
 }

@@ -7,4 +7,8 @@ import com.apptasticsoftware.rssreader.Item;
  * Combines standard RSS item data with Dublin Core metadata elements.
  */
 public interface DcItem extends Item, DcItemData {
+
+    @Override
+    DcChannel getChannel();
+
 }

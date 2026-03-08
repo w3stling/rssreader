@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.georss.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.georss.GeoRssChannel;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssItem;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssItemData;
 
@@ -20,6 +21,15 @@ public class GeoRssItemImpl extends ItemImpl implements GeoRssItem, GeoRssItemDa
      */
     public GeoRssItemImpl(DateTimeParser dateTimeParser) {
         super(dateTimeParser);
+    }
+
+    @Override
+    public GeoRssChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof GeoRssChannel) {
+            return (GeoRssChannel) channel;
+        }
+        return null;
     }
 
     /**

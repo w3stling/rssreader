@@ -32,7 +32,7 @@ class OpenSearchFeedReaderTest {
         assertEquals(1, items.size());
         var item = items.get(0);
         assertHasFeedItem(item);
-        OpenSearchChannel channel = (OpenSearchChannel) item.getChannel();
+        OpenSearchChannel channel = item.getChannel();
 
         assertThat(channel.getTitle()).isEqualTo("Example.com Search: New York history");
         assertThat(channel.getLink()).isEqualTo("http://example.com/New+York+history");
@@ -65,7 +65,7 @@ class OpenSearchFeedReaderTest {
 
         assertEquals(1, items.size());
         var item = items.get(0);
-        OpenSearchChannel channel = (OpenSearchChannel) item.getChannel();
+        OpenSearchChannel channel = item.getChannel();
 
         assertThat(channel.getTitle()).isEqualTo("Example.com Search: New York history");
         assertThat(channel.getLink()).isEqualTo("http://example.com/opensearchdescription.xml");
@@ -93,7 +93,7 @@ class OpenSearchFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(OpenSearchChannelImpl.class).withNonnullFields("openSearchData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(OpenSearchItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(OpenSearchItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(OpenSearchChannelDataImpl.class).verify();
         EqualsVerifier.simple().forClass(OpenSearchQuery.class).verify();
     }
