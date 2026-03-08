@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
 import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelImpl;
@@ -73,7 +74,7 @@ class PodcastFeedReaderTest {
         assertThat(liveItem.getPodcastChat().get().getSpace()).hasValue("myawesomepodcast@jabber.example.org");
 
         for (PodcastItem podcastItem : items) {
-            assertHasFeedItem(podcastItem);
+            assertHasFeedItem(podcastItem, false);
             var channel = (PodcastChannel) podcastItem.getChannel();
             assertThat(channel.getPodcastGuid()).isEqualTo("y0ur-gu1d-g035-h3r3");
             assertTrue(channel.getPodcastLicense().isPresent());
@@ -329,7 +330,7 @@ class PodcastFeedReaderTest {
 
         assertEquals(3, items.size());
         var item = items.get(0);
-        assertHasFeedItem(item);
+        assertHasFeedItem(item, true);
         var channel = (PodcastChannel) item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://podnews.net");
         assertThat(channel.getTitle()).isEqualTo("Podnews Daily - podcast industry news");
@@ -465,7 +466,7 @@ class PodcastFeedReaderTest {
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
     }
 
-    private void assertHasFeedItem(PodcastItem item) {
+    private void assertHasFeedItem(PodcastItem item, boolean hasAtomChannel) {
         if (item instanceof FeedItem) {
             FeedItem feedItem = (FeedItem) item;
             assertFalse(feedItem.hasAtomItem());
@@ -478,6 +479,17 @@ class PodcastFeedReaderTest {
             assertFalse(feedItem.hasSlashItem());
             assertFalse(feedItem.hasWfwItem());
             assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertEquals(feedChannel.hasAtomChannel(), hasAtomChannel);
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertTrue(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertTrue(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
         }
     }
 

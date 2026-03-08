@@ -14,4 +14,13 @@ import com.apptasticsoftware.rssreader.module.wfw.WfwChannel;
 import com.apptasticsoftware.rssreader.module.youtube.YoutubeChannel;
 
 public interface FeedChannel extends Channel, AtomChannel, DcChannel, GeoRssChannel, ItunesChannel, MediaRssChannel, OpenSearchChannel, PodcastChannel, PscChannel, SlashChannel, SpotifyChannel, WfwChannel, YoutubeChannel {
+    boolean hasAtomChannel();
+    boolean hasDcChannel();
+    boolean hasGeoRssChannel();
+    boolean hasItunesChannel();
+    boolean hasMediaRssChannel();
+    boolean hasOpenSearchChannel();
+    boolean hasPodcastChannel();
+    boolean hasSpotifyChannel();
+    boolean hasYoutubeChannel();
 }

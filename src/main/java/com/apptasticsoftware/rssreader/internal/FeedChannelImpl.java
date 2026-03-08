@@ -33,15 +33,15 @@ import com.apptasticsoftware.rssreader.module.spotify.internal.SpotifyChannelDat
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataProvider;
 
 public class FeedChannelImpl extends ChannelImpl implements FeedChannel, AtomChannelDataProvider, DcChannelDataProvider, GeoRssChannelDataProvider, ItunesChannelDataProvider, MediaRssChannelDataProvider, OpenSearchChannelDataProvider, PodcastChannelDataProvider, SpotifyChannelDataProvider, YoutubeChannelDataProvider {
-    private final AtomChannelData atomChannelData = new AtomChannelDataImpl();
-    private final DcChannelData dcChannelData = new DcChannelDataImpl();
-    private final GeoRssChannelData geoRssChannelData = new GeoRssChannelDataImpl();
-    private final ItunesChannelData itunesChannelData = new ItunesChannelDataImpl();
-    private final MediaRssChannelData mediaRssChannelData = new MediaRssChannelDataImpl();
-    private final OpenSearchChannelData openSearchChannelData = new OpenSearchChannelDataImpl();
-    private final PodcastChannelData podcastChannelData = new PodcastChannelDataImpl();
-    private final SpotifyChannelData spotifyChannelData = new SpotifyChannelDataImpl();
-    private final YoutubeChannelData youtubeChannelData = new YoutubeChannelDataImpl();
+    private AtomChannelData atomChannelData;
+    private DcChannelData dcChannelData;
+    private GeoRssChannelData geoRssChannelData;
+    private ItunesChannelData itunesChannelData;
+    private MediaRssChannelData mediaRssChannelData;
+    private OpenSearchChannelData openSearchChannelData;
+    private PodcastChannelData podcastChannelData;
+    private SpotifyChannelData spotifyChannelData;
+    private YoutubeChannelData youtubeChannelData;
 
     /**
      * Constructor
@@ -53,47 +53,119 @@ public class FeedChannelImpl extends ChannelImpl implements FeedChannel, AtomCha
     }
 
     @Override
+    public boolean hasAtomChannel() {
+        return atomChannelData != null;
+    }
+
+    @Override
     public AtomChannelData atomChannelData() {
+        if  (atomChannelData == null) {
+            atomChannelData = new AtomChannelDataImpl();
+        }
         return atomChannelData;
     }
 
     @Override
+    public boolean hasDcChannel() {
+        return dcChannelData != null;
+    }
+
+    @Override
     public DcChannelData dcChannelData() {
+        if (dcChannelData == null) {
+            dcChannelData = new DcChannelDataImpl();
+        }
         return dcChannelData;
     }
 
     @Override
+    public boolean hasGeoRssChannel() {
+        return geoRssChannelData != null;
+    }
+
+    @Override
     public GeoRssChannelData geoRssChannelData() {
+        if (geoRssChannelData == null) {
+            geoRssChannelData = new GeoRssChannelDataImpl();
+        }
         return geoRssChannelData;
     }
 
     @Override
+    public boolean hasItunesChannel() {
+        return itunesChannelData != null;
+    }
+
+    @Override
     public ItunesChannelData itunesChannelData() {
+        if (itunesChannelData == null) {
+            itunesChannelData = new ItunesChannelDataImpl();
+        }
         return itunesChannelData;
     }
 
     @Override
+    public boolean hasMediaRssChannel() {
+        return mediaRssChannelData != null;
+    }
+
+    @Override
     public MediaRssChannelData mediaRssChannelData() {
+        if (mediaRssChannelData == null) {
+            mediaRssChannelData = new MediaRssChannelDataImpl();
+        }
         return mediaRssChannelData;
     }
 
     @Override
+    public boolean hasOpenSearchChannel() {
+        return openSearchChannelData != null;
+    }
+
+    @Override
     public OpenSearchChannelData openSearchChannelData() {
+        if (openSearchChannelData == null) {
+            openSearchChannelData = new OpenSearchChannelDataImpl();
+        }
         return openSearchChannelData;
     }
 
     @Override
+    public boolean hasPodcastChannel() {
+        return podcastChannelData != null;
+    }
+
+    @Override
     public PodcastChannelData podcastChannelData() {
+        if (podcastChannelData == null) {
+            podcastChannelData = new PodcastChannelDataImpl();
+        }
         return podcastChannelData;
     }
 
     @Override
+    public boolean hasSpotifyChannel() {
+        return spotifyChannelData != null;
+    }
+
+    @Override
     public SpotifyChannelData spotifyChannelData() {
+        if (spotifyChannelData == null) {
+            spotifyChannelData = new SpotifyChannelDataImpl();
+        }
         return spotifyChannelData;
     }
 
     @Override
+    public boolean hasYoutubeChannel() {
+        return youtubeChannelData != null;
+    }
+
+    @Override
     public YoutubeChannelData youtubeChannelData() {
+        if (youtubeChannelData == null) {
+            youtubeChannelData = new YoutubeChannelDataImpl();
+        }
         return youtubeChannelData;
     }
 

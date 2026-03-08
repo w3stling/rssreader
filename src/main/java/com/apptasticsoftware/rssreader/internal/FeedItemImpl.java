@@ -57,6 +57,11 @@ public class FeedItemImpl extends ItemImpl implements FeedItem, AtomItemDataProv
     }
 
     @Override
+    public FeedChannelImpl getChannel() {
+        return (FeedChannelImpl) super.getChannel();
+    }
+
+    @Override
     public boolean hasAtomItem() {
         return atomItemData != null;
     }

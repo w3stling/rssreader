@@ -1,6 +1,7 @@
 package com.apptasticsoftware.rssreader.module.slash;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
 import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataImpl;
@@ -62,6 +63,17 @@ class SlashFeedReaderTest {
             assertTrue(feedItem.hasSlashItem());
             assertFalse(feedItem.hasWfwItem());
             assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertFalse(feedChannel.hasAtomChannel());
+            assertTrue(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
         }
     }
 

@@ -20,6 +20,9 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeItem;
  */
 public interface FeedItem extends Item, AtomItem, DcItem, GeoRssItem, ItunesItem, MediaRssItem, OpenSearchItem, PodcastItem, PscItem, SlashItem, SpotifyItem, WfwItem, YoutubeItem {
 
+    @Override
+    FeedChannel getChannel();
+
     /**
      * Returns {@code true} if this item contains Atom namespace data.
      * Always check this before accessing any Atom-specific fields.
