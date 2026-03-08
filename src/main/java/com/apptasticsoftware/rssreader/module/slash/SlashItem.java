@@ -10,4 +10,12 @@ import com.apptasticsoftware.rssreader.Item;
  * @see <a href="http://purl.org/rss/1.0/modules/slash/">Slash RSS Module Specification</a>
  */
 public interface SlashItem extends Item, SlashItemData {
+
+    /**
+     * Retrieves the Slash channel (feed) that this item belongs to.
+     *
+     * @return the SlashChannel associated with this item
+     */
+    @Override
+    SlashChannel getChannel();
 }

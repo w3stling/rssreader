@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.wfw.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.wfw.WfwChannel;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItem;
 import com.apptasticsoftware.rssreader.module.wfw.WfwItemData;
 
@@ -19,7 +20,7 @@ import java.util.Objects;
  * @see WfwItemData
  * @see ItemImpl
  */
-public class WfwItemImpl extends ItemImpl implements WfwItem {
+public class WfwItemImpl extends ItemImpl implements WfwItem, WfwItemDataProvider {
     private final WfwItemData wfwData = new WfwItemDataImpl();
 
     /**
@@ -31,13 +32,22 @@ public class WfwItemImpl extends ItemImpl implements WfwItem {
         super(dateTimeParser);
     }
 
+    @Override
+    public WfwChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof WfwChannel) {
+            return (WfwChannel) channel;
+        }
+        return null;
+    }
+
     /**
      * Returns the WFW-specific data for this item.
      *
      * @return the WfwItemData instance containing WFW comment-related properties
      */
     @Override
-    public WfwItemData getWfWItemData() {
+    public WfwItemData wfwItemData() {
         return wfwData;
     }
 
@@ -54,7 +64,7 @@ public class WfwItemImpl extends ItemImpl implements WfwItem {
         if (!(o instanceof WfwItemImpl)) return false;
         if (!super.equals(o)) return false;
         WfwItemImpl wfwItem = (WfwItemImpl) o;
-        return Objects.equals(getWfWItemData(), wfwItem.getWfWItemData());
+        return Objects.equals(wfwItemData(), wfwItem.wfwItemData());
     }
 
     /**
@@ -65,6 +75,6 @@ public class WfwItemImpl extends ItemImpl implements WfwItem {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getWfWItemData());
+        return Objects.hash(super.hashCode(), wfwItemData());
     }
 }

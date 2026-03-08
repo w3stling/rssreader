@@ -1,150 +1,148 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
+import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemDataProvider;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 public interface PodcastItemData {
-
-    PodcastItemData getPodcastItemData();
-
     default Optional<PodcastSeason> getPodcastSeason() {
-        return getPodcastItemData().getPodcastSeason();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastSeason();
     }
 
     default void setPodcastSeason(PodcastSeason podcastSeason) {
-        getPodcastItemData().setPodcastSeason(podcastSeason);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastSeason(podcastSeason);
     }
 
     default Optional<PodcastEpisode> getPodcastEpisode() {
-        return getPodcastItemData().getPodcastEpisode();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastEpisode();
     }
 
     default void setPodcastEpisode(PodcastEpisode podcastEpisode) {
-        getPodcastItemData().setPodcastEpisode(podcastEpisode);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastEpisode(podcastEpisode);
     }
 
     default Optional<PodcastChapters> getPodcastChapters() {
-        return getPodcastItemData().getPodcastChapters();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastChapters();
     }
 
     default void setPodcastChapters(PodcastChapters podcastChapters) {
-        getPodcastItemData().setPodcastChapters(podcastChapters);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastChapters(podcastChapters);
     }
 
     default Optional<PodcastChat> getPodcastChat() {
-        return getPodcastItemData().getPodcastChat();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastChat();
     }
 
     default void setPodcastChat(PodcastChat podcastChat) {
-        getPodcastItemData().setPodcastChat(podcastChat);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastChat(podcastChat);
     }
 
     default List<PodcastImage> getPodcastImages() {
-        return getPodcastItemData().getPodcastImages();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastImages();
     }
 
     default void addPodcastImage(PodcastImage podcastImage) {
-        getPodcastItemData().addPodcastImage(podcastImage);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastImage(podcastImage);
     }
 
     default List<PodcastSoundbite> getPodcastSoundbites() {
-        return getPodcastItemData().getPodcastSoundbites();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastSoundbites();
     }
 
     default void addPodcastSoundbite(PodcastSoundbite podcastSoundbite) {
-        getPodcastItemData().addPodcastSoundbite(podcastSoundbite);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastSoundbite(podcastSoundbite);
     }
 
     default List<PodcastTranscript> getPodcastTranscripts() {
-        return getPodcastItemData().getPodcastTranscripts();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastTranscripts();
     }
 
     default void addPodcastTranscript(PodcastTranscript podcastTranscript) {
-        getPodcastItemData().addPodcastTranscript(podcastTranscript);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastTranscript(podcastTranscript);
     }
 
     default List<PodcastPerson> getPodcastPersons() {
-        return getPodcastItemData().getPodcastPersons();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastPersons();
     }
 
     default void addPodcastPerson(PodcastPerson podcastPerson) {
-        getPodcastItemData().addPodcastPerson(podcastPerson);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastPerson(podcastPerson);
     }
 
     default List<PodcastAlternateEnclosure> getPodcastAlternateEnclosures() {
-        return getPodcastItemData().getPodcastAlternateEnclosures();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastAlternateEnclosures();
     }
 
     default void addPodcastAlternateEnclosure(PodcastAlternateEnclosure podcastAlternateEnclosure) {
-        getPodcastItemData().addPodcastAlternateEnclosure(podcastAlternateEnclosure);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastAlternateEnclosure(podcastAlternateEnclosure);
     }
 
     default List<PodcastValue> getPodcastValues() {
-        return getPodcastItemData().getPodcastValues();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastValues();
     }
 
     default void addPodcastValue(PodcastValue podcastValue) {
-        getPodcastItemData().addPodcastValue(podcastValue);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastValue(podcastValue);
     }
 
     default List<PodcastSocialInteract> getPodcastSocialInteracts() {
-        return getPodcastItemData().getPodcastSocialInteracts();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastSocialInteracts();
     }
 
     default void addPodcastSocialInteract(PodcastSocialInteract podcastSocialInteract) {
-        getPodcastItemData().addPodcastSocialInteract(podcastSocialInteract);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastSocialInteract(podcastSocialInteract);
     }
 
     default List<PodcastContentLink> getPodcastContentLinks() {
-        return getPodcastItemData().getPodcastContentLinks();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastContentLinks();
     }
 
     default void addPodcastContentLink(PodcastContentLink podcastContentLink) {
-        getPodcastItemData().addPodcastContentLink(podcastContentLink);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastContentLink(podcastContentLink);
     }
 
     default List<PodcastTxt> getPodcastTxts() {
-        return getPodcastItemData().getPodcastTxts();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastTxts();
     }
 
     default void addPodcastTxt(PodcastTxt podcastTxt) {
-        getPodcastItemData().addPodcastTxt(podcastTxt);
+        ((PodcastItemDataProvider) this).podcastItemData().addPodcastTxt(podcastTxt);
     }
 
     default boolean isPodcastLiveItem() {
-        return getPodcastItemData().isPodcastLiveItem();
+        return ((PodcastItemDataProvider) this).podcastItemData().isPodcastLiveItem();
     }
 
     default Optional<String> getPodcastLiveItemStatus() {
-        return getPodcastItemData().getPodcastLiveItemStatus();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastLiveItemStatus();
     }
 
     default void setPodcastLiveItemStatus(String podcastLiveItemStatus) {
-        getPodcastItemData().setPodcastLiveItemStatus(podcastLiveItemStatus);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastLiveItemStatus(podcastLiveItemStatus);
     }
 
     default Optional<String> getPodcastLiveItemStart() {
-        return getPodcastItemData().getPodcastLiveItemStart();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastLiveItemStart();
     }
 
     default Optional<ZonedDateTime> getPodcastLiveItemStartAsZonedDateTime() {
-        return getPodcastItemData().getPodcastLiveItemStartAsZonedDateTime();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastLiveItemStartAsZonedDateTime();
     }
 
     default void setPodcastLiveItemStart(String podcastLiveItemStart) {
-        getPodcastItemData().setPodcastLiveItemStart(podcastLiveItemStart);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastLiveItemStart(podcastLiveItemStart);
     }
 
     default Optional<String> getPodcastLiveItemEnd() {
-        return getPodcastItemData().getPodcastLiveItemEnd();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastLiveItemEnd();
     }
 
     default Optional<ZonedDateTime> getPodcastLiveItemEndAsZonedDateTime() {
-        return getPodcastItemData().getPodcastLiveItemEndAsZonedDateTime();
+        return ((PodcastItemDataProvider) this).podcastItemData().getPodcastLiveItemEndAsZonedDateTime();
     }
 
     default void setPodcastLiveItemEnd(String podcastLiveItemEnd) {
-        getPodcastItemData().setPodcastLiveItemEnd(podcastLiveItemEnd);
+        ((PodcastItemDataProvider) this).podcastItemData().setPodcastLiveItemEnd(podcastLiveItemEnd);
     }
 }

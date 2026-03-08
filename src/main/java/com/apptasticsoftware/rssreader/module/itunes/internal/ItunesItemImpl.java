@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader.module.itunes.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.itunes.ItunesChannel;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItem;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 
@@ -33,7 +34,7 @@ import java.util.Objects;
 /**
  * Class representing the Itunes item.
  */
-public class ItunesItemImpl extends ItemImpl implements ItunesItem {
+public class ItunesItemImpl extends ItemImpl implements ItunesItem, ItunesItemDataProvider {
     private final ItunesItemDataImpl data = new ItunesItemDataImpl();
 
     /**
@@ -45,7 +46,16 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem {
     }
 
     @Override
-    public ItunesItemData getItunesItemData() {
+    public ItunesChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof ItunesChannel) {
+            return (ItunesChannel) channel;
+        }
+        return null;
+    }
+
+    @Override
+    public ItunesItemData itunesItemData() {
         return data;
     }
 
@@ -55,11 +65,11 @@ public class ItunesItemImpl extends ItemImpl implements ItunesItem {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ItunesItemImpl that = (ItunesItemImpl) o;
-        return Objects.equals(getItunesItemData(), that.getItunesItemData());
+        return Objects.equals(itunesItemData(), that.itunesItemData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesItemData());
+        return Objects.hash(super.hashCode(), itunesItemData());
     }
 }

@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.psc;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.psc.internal.PscChannelImpl;
 import com.apptasticsoftware.rssreader.module.psc.internal.PscItemDataImpl;
@@ -18,8 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PscFeedReaderTest {
 
@@ -37,6 +39,7 @@ class PscFeedReaderTest {
         assertThat(channel.getLink()).isEqualTo("http://podlove.org");
 
         var item = items.get(0);
+        assertHasFeedItem(item);
         assertThat(item.getTitle()).hasValue("Fiat Lux");
         assertThat(item.getIsPermaLink()).hasValue(false);
         assertThat(item.getGuid()).hasValue("urn:uuid:3241ace2-ca21-dd12-2341-1412ce31fad2");
@@ -77,9 +80,35 @@ class PscFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(PscChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
-        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PscItemImpl.class).withNonnullFields("pscData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(PscItemDataImpl.class).verify();
+    }
+
+    private void assertHasFeedItem(PscItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertTrue(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertTrue(feedChannel.hasAtomChannel());
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

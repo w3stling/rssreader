@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.wfw;
 
+import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataProvider;
 import java.util.Optional;
 
 /**
@@ -15,13 +16,6 @@ import java.util.Optional;
 public interface WfwItemData {
 
     /**
-     * Returns the underlying WFW item data implementation.
-     *
-     * @return the WFW item data instance
-     */
-    WfwItemData getWfWItemData();
-
-    /**
      * Returns the URL of an RSS feed that contains user comments for this item.
      * This corresponds to the {@code wfw:commentRss} element in the item.
      *
@@ -32,7 +26,7 @@ public interface WfwItemData {
      * @return an Optional containing the comment RSS feed URL, or an empty Optional if not present
      */
     default Optional<String> getWfwCommentRss() {
-        return getWfWItemData().getWfwCommentRss();
+        return ((WfwItemDataProvider) this).wfwItemData().getWfwCommentRss();
     }
 
     /**
@@ -44,7 +38,7 @@ public interface WfwItemData {
      * @param wfwCommentRss the URL of the comment RSS feed, must be a valid URL
      */
     default void setWfwCommentRss(String wfwCommentRss) {
-        getWfWItemData().setWfwCommentRss(wfwCommentRss);
+        ((WfwItemDataProvider) this).wfwItemData().setWfwCommentRss(wfwCommentRss);
     }
 
     /**
@@ -62,7 +56,7 @@ public interface WfwItemData {
      * @return an Optional containing the comment submission endpoint URL, or an empty Optional if not present
      */
     default Optional<String> getWfwComment() {
-        return getWfWItemData().getWfwComment();
+        return ((WfwItemDataProvider) this).wfwItemData().getWfwComment();
     }
 
     /**
@@ -72,6 +66,6 @@ public interface WfwItemData {
      * @param wfwComment the URL endpoint for comment submission, must be a valid URL
      */
     default void setWfwComment(String wfwComment) {
-        getWfWItemData().setWfwComment(wfwComment);
+        ((WfwItemDataProvider) this).wfwItemData().setWfwComment(wfwComment);
     }
 }

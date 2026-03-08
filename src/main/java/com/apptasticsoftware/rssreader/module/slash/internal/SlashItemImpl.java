@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.slash.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.slash.SlashChannel;
 import com.apptasticsoftware.rssreader.module.slash.SlashItem;
 import com.apptasticsoftware.rssreader.module.slash.SlashItemData;
 
@@ -10,8 +11,8 @@ import java.util.Objects;
 /**
  * Implementation of SlashItem combining core item functionality with Slash-specific metadata.
  */
-public class SlashItemImpl extends ItemImpl implements SlashItem {
-    private final SlashItemData slashData = new SlashItemDataImpl();
+public class SlashItemImpl extends ItemImpl implements SlashItem, SlashItemDataProvider {
+    private final SlashItemDataImpl slashData = new SlashItemDataImpl();
 
     /**
      * Constructs a SlashItemImpl with the provided date-time parser.
@@ -23,7 +24,16 @@ public class SlashItemImpl extends ItemImpl implements SlashItem {
     }
 
     @Override
-    public SlashItemData getSlashItemData() {
+    public SlashChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof SlashChannel) {
+            return (SlashChannel) channel;
+        }
+        return null;
+    }
+
+    @Override
+    public SlashItemData slashItemData() {
         return slashData;
     }
 
@@ -32,11 +42,11 @@ public class SlashItemImpl extends ItemImpl implements SlashItem {
         if (!(o instanceof SlashItemImpl)) return false;
         if (!super.equals(o)) return false;
         SlashItemImpl slashItem = (SlashItemImpl) o;
-        return Objects.equals(getSlashItemData(), slashItem.getSlashItemData());
+        return Objects.equals(slashData, slashItem.slashData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSlashItemData());
+        return Objects.hash(super.hashCode(), slashData);
     }
 }

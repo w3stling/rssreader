@@ -9,11 +9,11 @@ import java.util.Optional;
 /**
  * Implementation of PscItemData interface.
  */
-public class PscItemDataImpl implements PscItemData {
+public class PscItemDataImpl implements PscItemData, PscItemDataProvider {
     private PscChapters pscChapters;
 
     @Override
-    public PscItemData getPscItemData() {
+    public PscItemData pscItemData() {
         return this;
     }
 

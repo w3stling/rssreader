@@ -33,7 +33,7 @@ import java.util.*;
 /**
  * Class representing the Itunes channel.
  */
-public class ItunesChannelImpl extends ChannelImpl implements ItunesChannel {
+public class ItunesChannelImpl extends ChannelImpl implements ItunesChannel, ItunesChannelDataProvider {
     private final ItunesChannelDataImpl data = new ItunesChannelDataImpl();
 
     /**
@@ -45,7 +45,7 @@ public class ItunesChannelImpl extends ChannelImpl implements ItunesChannel {
     }
 
     @Override
-    public ItunesChannelData getItunesChannelData() {
+    public ItunesChannelData itunesChannelData() {
         return data;
     }
 
@@ -55,11 +55,11 @@ public class ItunesChannelImpl extends ChannelImpl implements ItunesChannel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ItunesChannelImpl that = (ItunesChannelImpl) o;
-        return Objects.equals(getItunesChannelData(), that.getItunesChannelData());
+        return Objects.equals(itunesChannelData(), that.itunesChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getItunesChannelData());
+        return Objects.hash(super.hashCode(), itunesChannelData());
     }
 }

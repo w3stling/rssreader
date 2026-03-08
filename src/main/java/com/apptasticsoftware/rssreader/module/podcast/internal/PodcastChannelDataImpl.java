@@ -8,7 +8,7 @@ import java.util.Optional;
 
 import static com.apptasticsoftware.rssreader.util.Mapper.emptyListIfNull;
 
-public class PodcastChannelDataImpl implements PodcastChannelData {
+public class PodcastChannelDataImpl implements PodcastChannelData, PodcastChannelDataProvider {
     private String podcastGuid;
     private PodcastLicense podcastLicense;
     private PodcastLocked podcastLocked;
@@ -28,7 +28,7 @@ public class PodcastChannelDataImpl implements PodcastChannelData {
     private Boolean podcastUsesPodping;
 
     @Override
-    public PodcastChannelData getPodcastChannelData() {
+    public PodcastChannelData podcastChannelData() {
         return this;
     }
 

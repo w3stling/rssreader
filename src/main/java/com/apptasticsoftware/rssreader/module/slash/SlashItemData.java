@@ -1,5 +1,7 @@
 package com.apptasticsoftware.rssreader.module.slash;
 
+import com.apptasticsoftware.rssreader.module.slash.internal.SlashItemDataProvider;
+
 import java.util.Optional;
 
 /**
@@ -11,19 +13,12 @@ import java.util.Optional;
 public interface SlashItemData {
 
     /**
-     * Returns the underlying Slash item data object.
-     *
-     * @return the Slash item data
-     */
-    SlashItemData getSlashItemData();
-
-    /**
      * Returns the Slash section (category) of the item.
      *
      * @return an Optional containing the section, or empty if not set
      */
     default Optional<String> getSlashSection() {
-        return getSlashItemData().getSlashSection();
+        return ((SlashItemDataProvider) this).slashItemData().getSlashSection();
     }
 
     /**
@@ -32,7 +27,7 @@ public interface SlashItemData {
      * @param slashSection the section to set
      */
     default void setSlashSection(String slashSection) {
-        getSlashItemData().setSlashSection(slashSection);
+        ((SlashItemDataProvider) this).slashItemData().setSlashSection(slashSection);
     }
 
     /**
@@ -41,7 +36,7 @@ public interface SlashItemData {
      * @return an Optional containing the department, or empty if not set
      */
     default Optional<String> getSlashDepartment() {
-        return getSlashItemData().getSlashDepartment();
+        return ((SlashItemDataProvider) this).slashItemData().getSlashDepartment();
     }
 
     /**
@@ -50,7 +45,7 @@ public interface SlashItemData {
      * @param slashDepartment the department to set
      */
     default void setSlashDepartment(String slashDepartment) {
-        getSlashItemData().setSlashDepartment(slashDepartment);
+        ((SlashItemDataProvider) this).slashItemData().setSlashDepartment(slashDepartment);
     }
 
     /**
@@ -59,7 +54,7 @@ public interface SlashItemData {
      * @return an Optional containing the comment count, or empty if not set
      */
     default Optional<Integer> getSlashComments() {
-        return getSlashItemData().getSlashComments();
+        return ((SlashItemDataProvider) this).slashItemData().getSlashComments();
     }
 
     /**
@@ -68,7 +63,7 @@ public interface SlashItemData {
      * @param slashComments the comment count to set
      */
     default void setSlashComments(Integer slashComments) {
-        getSlashItemData().setSlashComments(slashComments);
+        ((SlashItemDataProvider) this).slashItemData().setSlashComments(slashComments);
     }
 
     /**
@@ -77,7 +72,7 @@ public interface SlashItemData {
      * @return an Optional containing the hit parade, or empty if not set
      */
     default Optional<String> getSlashHitParade() {
-        return getSlashItemData().getSlashHitParade();
+        return ((SlashItemDataProvider) this).slashItemData().getSlashHitParade();
     }
 
     /**
@@ -86,6 +81,6 @@ public interface SlashItemData {
      * @param slashHitParade the hit parade to set
      */
     default void setSlashHitParade(String slashHitParade) {
-        getSlashItemData().setSlashHitParade(slashHitParade);
+        ((SlashItemDataProvider) this).slashItemData().setSlashHitParade(slashHitParade);
     }
 }

@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.dc.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.dc.DcChannel;
 import com.apptasticsoftware.rssreader.module.dc.DcItem;
 import com.apptasticsoftware.rssreader.module.dc.DcItemData;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 /**
  * Implementation of RSS item with Dublin Core metadata support.
  */
-public class DcItemImpl extends ItemImpl implements DcItem {
+public class DcItemImpl extends ItemImpl implements DcItem, DcItemDataProvider {
     private final DcItemDataImpl dcData = new DcItemDataImpl();
 
     /**
@@ -22,7 +23,16 @@ public class DcItemImpl extends ItemImpl implements DcItem {
     }
 
     @Override
-    public DcItemData getDcItemData() {
+    public DcChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof DcChannel) {
+            return (DcChannel) channel;
+        }
+        return null;
+    }
+
+    @Override
+    public DcItemData dcItemData() {
         return dcData;
     }
 

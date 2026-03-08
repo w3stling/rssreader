@@ -8,14 +8,14 @@ import java.util.Optional;
 /**
  * Implementation of SlashItemData storing Slash-specific item metadata.
  */
-public class SlashItemDataImpl implements SlashItemData {
+public class SlashItemDataImpl implements SlashItemData, SlashItemDataProvider {
     private String slashSection;
     private String slashDepartment;
     private Integer slashComments;
     private String slashHitParade;
 
     @Override
-    public SlashItemData getSlashItemData() {
+    public SlashItemData slashItemData() {
         return this;
     }
 

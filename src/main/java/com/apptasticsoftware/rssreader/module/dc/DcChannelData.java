@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.dc;
 
+import com.apptasticsoftware.rssreader.module.dc.internal.DcChannelDataProvider;
 import java.util.Optional;
 
 /**
@@ -9,17 +10,11 @@ import java.util.Optional;
 public interface DcChannelData {
 
     /**
-     * Gets the Dublin Core channel data.
-     * @return the DC channel data
-     */
-    DcChannelData getDcChannelData();
-
-    /**
      * Gets the resource title.
      * @return the title
      */
     default Optional<String> getDcTitle() {
-        return getDcChannelData().getDcTitle();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcTitle();
     }
 
     /**
@@ -27,7 +22,7 @@ public interface DcChannelData {
      * @param dcTitle the title
      */
     default void setDcTitle(String dcTitle) {
-        getDcChannelData().setDcTitle(dcTitle);
+        ((DcChannelDataProvider) this).dcChannelData().setDcTitle(dcTitle);
     }
 
     /**
@@ -35,7 +30,7 @@ public interface DcChannelData {
      * @return the creator
      */
     default Optional<String> getDcCreator() {
-        return getDcChannelData().getDcCreator();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcCreator();
     }
 
     /**
@@ -43,7 +38,7 @@ public interface DcChannelData {
      * @param dcCreator the creator
      */
     default void setDcCreator(String dcCreator) {
-        getDcChannelData().setDcCreator(dcCreator);
+        ((DcChannelDataProvider) this).dcChannelData().setDcCreator(dcCreator);
     }
 
     /**
@@ -51,7 +46,7 @@ public interface DcChannelData {
      * @return the subject
      */
     default Optional<String> getDcSubject() {
-        return getDcChannelData().getDcSubject();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcSubject();
     }
 
     /**
@@ -59,7 +54,7 @@ public interface DcChannelData {
      * @param dcSubject the subject
      */
     default void setDcSubject(String dcSubject) {
-        getDcChannelData().setDcSubject(dcSubject);
+        ((DcChannelDataProvider) this).dcChannelData().setDcSubject(dcSubject);
     }
 
     /**
@@ -67,7 +62,7 @@ public interface DcChannelData {
      * @return the description
      */
     default Optional<String> getDcDescription() {
-        return getDcChannelData().getDcDescription();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcDescription();
     }
 
     /**
@@ -75,7 +70,7 @@ public interface DcChannelData {
      * @param dcDescription the description
      */
     default void setDcDescription(String dcDescription) {
-        getDcChannelData().setDcDescription(dcDescription);
+        ((DcChannelDataProvider) this).dcChannelData().setDcDescription(dcDescription);
     }
 
     /**
@@ -83,7 +78,7 @@ public interface DcChannelData {
      * @return the publisher
      */
     default Optional<String> getDcPublisher() {
-        return getDcChannelData().getDcPublisher();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcPublisher();
     }
 
     /**
@@ -91,7 +86,7 @@ public interface DcChannelData {
      * @param dcPublisher the publisher
      */
     default void setDcPublisher(String dcPublisher) {
-        getDcChannelData().setDcPublisher(dcPublisher);
+        ((DcChannelDataProvider) this).dcChannelData().setDcPublisher(dcPublisher);
     }
 
     /**
@@ -99,7 +94,7 @@ public interface DcChannelData {
      * @return the contributor
      */
     default Optional<String> getDcContributor() {
-        return getDcChannelData().getDcContributor();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcContributor();
     }
 
     /**
@@ -107,7 +102,7 @@ public interface DcChannelData {
      * @param dcContributor the contributor
      */
     default void setDcContributor(String dcContributor) {
-        getDcChannelData().setDcContributor(dcContributor);
+        ((DcChannelDataProvider) this).dcChannelData().setDcContributor(dcContributor);
     }
 
     /**
@@ -115,7 +110,7 @@ public interface DcChannelData {
      * @return the date
      */
     default Optional<String> getDcDate() {
-        return getDcChannelData().getDcDate();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcDate();
     }
 
     /**
@@ -123,7 +118,7 @@ public interface DcChannelData {
      * @param dcDate the date
      */
     default void setDcDate(String dcDate) {
-        getDcChannelData().setDcDate(dcDate);
+        ((DcChannelDataProvider) this).dcChannelData().setDcDate(dcDate);
     }
 
     /**
@@ -131,7 +126,7 @@ public interface DcChannelData {
      * @return the type
      */
     default Optional<String> getDcType() {
-        return getDcChannelData().getDcType();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcType();
     }
 
     /**
@@ -139,7 +134,7 @@ public interface DcChannelData {
      * @param dcType the type
      */
     default void setDcType(String dcType) {
-        getDcChannelData().setDcType(dcType);
+        ((DcChannelDataProvider) this).dcChannelData().setDcType(dcType);
     }
 
     /**
@@ -147,7 +142,7 @@ public interface DcChannelData {
      * @return the format
      */
     default Optional<String> getDcFormat() {
-        return getDcChannelData().getDcFormat();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcFormat();
     }
 
     /**
@@ -155,7 +150,7 @@ public interface DcChannelData {
      * @param dcFormat the format
      */
     default void setDcFormat(String dcFormat) {
-        getDcChannelData().setDcFormat(dcFormat);
+        ((DcChannelDataProvider) this).dcChannelData().setDcFormat(dcFormat);
     }
 
     /**
@@ -163,7 +158,7 @@ public interface DcChannelData {
      * @return the identifier
      */
     default Optional<String> getDcIdentifier() {
-        return getDcChannelData().getDcIdentifier();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcIdentifier();
     }
 
     /**
@@ -171,7 +166,7 @@ public interface DcChannelData {
      * @param dcIdentifier the identifier
      */
     default void setDcIdentifier(String dcIdentifier) {
-        getDcChannelData().setDcIdentifier(dcIdentifier);
+        ((DcChannelDataProvider) this).dcChannelData().setDcIdentifier(dcIdentifier);
     }
 
     /**
@@ -179,7 +174,7 @@ public interface DcChannelData {
      * @return the source
      */
     default Optional<String> getDcSource() {
-        return getDcChannelData().getDcSource();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcSource();
     }
 
     /**
@@ -187,7 +182,7 @@ public interface DcChannelData {
      * @param dcSource the source
      */
     default void setDcSource(String dcSource) {
-        getDcChannelData().setDcSource(dcSource);
+        ((DcChannelDataProvider) this).dcChannelData().setDcSource(dcSource);
     }
 
     /**
@@ -195,7 +190,7 @@ public interface DcChannelData {
      * @return the language
      */
     default Optional<String> getDcLanguage() {
-        return getDcChannelData().getDcLanguage();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcLanguage();
     }
 
     /**
@@ -203,7 +198,7 @@ public interface DcChannelData {
      * @param dcLanguage the language
      */
     default void setDcLanguage(String dcLanguage) {
-        getDcChannelData().setDcLanguage(dcLanguage);
+        ((DcChannelDataProvider) this).dcChannelData().setDcLanguage(dcLanguage);
     }
 
     /**
@@ -211,7 +206,7 @@ public interface DcChannelData {
      * @return the relation
      */
     default Optional<String> getDcRelation() {
-        return getDcChannelData().getDcRelation();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcRelation();
     }
 
     /**
@@ -219,7 +214,7 @@ public interface DcChannelData {
      * @param dcRelation the relation
      */
     default void setDcRelation(String dcRelation) {
-        getDcChannelData().setDcRelation(dcRelation);
+        ((DcChannelDataProvider) this).dcChannelData().setDcRelation(dcRelation);
     }
 
     /**
@@ -227,7 +222,7 @@ public interface DcChannelData {
      * @return the coverage
      */
     default Optional<String> getDcCoverage() {
-        return getDcChannelData().getDcCoverage();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcCoverage();
     }
 
     /**
@@ -235,7 +230,7 @@ public interface DcChannelData {
      * @param dcCoverage the coverage
      */
     default void setDcCoverage(String dcCoverage) {
-        getDcChannelData().setDcCoverage(dcCoverage);
+        ((DcChannelDataProvider) this).dcChannelData().setDcCoverage(dcCoverage);
     }
 
     /**
@@ -243,7 +238,7 @@ public interface DcChannelData {
      * @return the rights
      */
     default Optional<String> getDcRights() {
-        return getDcChannelData().getDcRights();
+        return ((DcChannelDataProvider) this).dcChannelData().getDcRights();
     }
 
     /**
@@ -251,6 +246,6 @@ public interface DcChannelData {
      * @param dcRights the rights
      */
     default void setDcRights(String dcRights) {
-        getDcChannelData().setDcRights(dcRights);
+        ((DcChannelDataProvider) this).dcChannelData().setDcRights(dcRights);
     }
 }

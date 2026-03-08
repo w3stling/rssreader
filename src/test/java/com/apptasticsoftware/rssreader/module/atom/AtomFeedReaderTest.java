@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.atom;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.atom.internal.*;
 import nl.jqno.equalsverifier.EqualsVerifier;
@@ -27,7 +29,7 @@ class AtomFeedReaderTest {
         assertEquals(1, items.size());
 
         // Verify channel atom:link elements
-        var channel = (AtomChannel) items.get(0).getChannel();
+        var channel = items.get(0).getChannel();
 
         // Verify item link
         assertThat(channel.getLink()).isEqualTo("https://technewsdaily.com");
@@ -62,6 +64,7 @@ class AtomFeedReaderTest {
         assertEquals("https://technewsdaily.com/authors/john-smith", channelContributor.getUri());
 
         var atomItem = items.get(0);
+        assertHasFeedItem(atomItem);
 
         // Verify item link
         assertThat(atomItem.getLink()).hasValue("https://technewsdaily.com/articles/new-programming-language");
@@ -98,15 +101,42 @@ class AtomFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(AtomChannelImpl.class).withNonnullFields("atomData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(AtomChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(AtomItemImpl.class).withNonnullFields("atomData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(AtomItemImpl.class).withNonnullFields("atomData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(AtomItemDataImpl.class).verify();
         EqualsVerifier.simple().forClass(MetaData.class).verify();
     }
 
+    private void assertHasFeedItem(AtomItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertTrue(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertTrue(feedChannel.hasAtomChannel());
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
+        }
+    }
+
     private static Stream<? extends Arguments> feedReaderArguments() {
         return Stream.of(
-                Arguments.of(new AtomFeedReader()),
-                Arguments.of(new FeedReader())
+            Arguments.of(new AtomFeedReader()),
+            Arguments.of(new FeedReader())
         );
     }
 

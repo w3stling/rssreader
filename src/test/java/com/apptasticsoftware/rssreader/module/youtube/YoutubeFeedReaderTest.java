@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataImpl;
 import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelImpl;
@@ -18,8 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class YoutubeFeedReaderTest {
 
@@ -31,8 +33,10 @@ class YoutubeFeedReaderTest {
                 .collect(Collectors.toList());
         assertEquals(15, items.size());
 
+        items.forEach(this::assertHasFeedItem);
+
         var item = items.get(0);
-        YoutubeChannel channel = (YoutubeChannel) item.getChannel();
+        YoutubeChannel channel = item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://www.youtube.com/channel/UCX6OQ3DkcsbYNE6H8uQQuVA");
         assertThat(channel.getYoutubeChannelId()).isEqualTo("X6OQ3DkcsbYNE6H8uQQuVA");
         assertThat(channel.getTitle()).isEqualTo("MrBeast");
@@ -112,8 +116,35 @@ class YoutubeFeedReaderTest {
     void equalsContract() {
         EqualsVerifier.simple().forClass(YoutubeChannelImpl.class).withNonnullFields("youtubeData", "mediaRssData").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
         EqualsVerifier.simple().forClass(YoutubeChannelDataImpl.class).verify();
-        EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(YoutubeItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(YoutubeItemDataImpl.class).verify();
+    }
+
+    private void assertHasFeedItem(YoutubeItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertTrue(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertTrue(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertFalse(feedChannel.hasAtomChannel());
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertTrue(feedChannel.hasYoutubeChannel());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

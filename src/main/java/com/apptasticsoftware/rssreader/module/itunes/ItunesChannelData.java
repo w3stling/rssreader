@@ -1,19 +1,17 @@
 package com.apptasticsoftware.rssreader.module.itunes;
 
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelDataProvider;
 import java.util.List;
 import java.util.Optional;
 
 public interface ItunesChannelData {
-
-    ItunesChannelData getItunesChannelData();
-
     /**
      * Get the artwork for the show.
      * Specify your show artwork by providing a URL linking to it.
      * @return image
      */
     default String getItunesImage() {
-        return getItunesChannelData().getItunesImage();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesImage();
     }
 
     /**
@@ -22,7 +20,7 @@ public interface ItunesChannelData {
      * @param image image
      */
     default void setItunesImage(String image) {
-        getItunesChannelData().setItunesImage(image);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesImage(image);
     }
 
     /**
@@ -30,7 +28,7 @@ public interface ItunesChannelData {
      * @return list of categories
      */
     default List<String> getItunesCategories() {
-        return getItunesChannelData().getItunesCategories();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesCategories();
     }
 
     /**
@@ -38,7 +36,7 @@ public interface ItunesChannelData {
      * @param itunesCategory category
      */
     default void addItunesCategory(String itunesCategory) {
-        getItunesChannelData().addItunesCategory(itunesCategory);
+        ((ItunesChannelDataProvider) this).itunesChannelData().addItunesCategory(itunesCategory);
     }
 
     /**
@@ -55,7 +53,7 @@ public interface ItunesChannelData {
      * @return explicit
      */
     default Boolean getItunesExplicit() {
-        return getItunesChannelData().getItunesExplicit();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesExplicit();
     }
 
     /**
@@ -72,7 +70,7 @@ public interface ItunesChannelData {
      * @param itunesExplicit explicit
      */
     default void setItunesExplicit(Boolean itunesExplicit) {
-        getItunesChannelData().setItunesExplicit(itunesExplicit);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesExplicit(itunesExplicit);
     }
 
     /**
@@ -80,7 +78,7 @@ public interface ItunesChannelData {
      * @return author
      */
     default Optional<String> getItunesAuthor() {
-        return getItunesChannelData().getItunesAuthor();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesAuthor();
     }
 
     /**
@@ -88,7 +86,7 @@ public interface ItunesChannelData {
      * @param itunesAuthor author
      */
     default void setItunesAuthor(String itunesAuthor) {
-        getItunesChannelData().setItunesAuthor(itunesAuthor);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesAuthor(itunesAuthor);
     }
 
     /**
@@ -96,7 +94,7 @@ public interface ItunesChannelData {
      * @param itunesOwner owner
      */
     default void setItunesOwner(ItunesOwner itunesOwner) {
-        getItunesChannelData().setItunesOwner(itunesOwner);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesOwner(itunesOwner);
     }
 
     /**
@@ -104,7 +102,7 @@ public interface ItunesChannelData {
      * @return owner
      */
     default Optional<ItunesOwner> getItunesOwner() {
-        return getItunesChannelData().getItunesOwner();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesOwner();
     }
 
     /**
@@ -112,7 +110,7 @@ public interface ItunesChannelData {
      * @return title
      */
     default Optional<String> getItunesTitle() {
-        return getItunesChannelData().getItunesTitle();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesTitle();
     }
 
     /**
@@ -120,7 +118,7 @@ public interface ItunesChannelData {
      * @param itunesTitle title
      */
     default void setItunesTitle(String itunesTitle) {
-        getItunesChannelData().setItunesTitle(itunesTitle);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesTitle(itunesTitle);
     }
 
     /**
@@ -128,7 +126,7 @@ public interface ItunesChannelData {
      * @return subtitle
      */
     default Optional<String> getItunesSubtitle() {
-        return getItunesChannelData().getItunesSubtitle();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesSubtitle();
     }
 
     /**
@@ -136,7 +134,7 @@ public interface ItunesChannelData {
      * @param itunesSubtitle subtitle
      */
     default void setItunesSubtitle(String itunesSubtitle) {
-        getItunesChannelData().setItunesSubtitle(itunesSubtitle);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesSubtitle(itunesSubtitle);
     }
 
     /**
@@ -144,7 +142,7 @@ public interface ItunesChannelData {
      * @return summary
      */
     default String getItunesSummary() {
-        return getItunesChannelData().getItunesSummary();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesSummary();
     }
 
     /**
@@ -152,7 +150,7 @@ public interface ItunesChannelData {
      * @param itunesSummary summary
      */
     default void setItunesSummary(String itunesSummary) {
-        getItunesChannelData().setItunesSummary(itunesSummary);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesSummary(itunesSummary);
     }
 
     /**
@@ -160,7 +158,7 @@ public interface ItunesChannelData {
      * @return type
      */
     default Optional<String> getItunesType() {
-        return getItunesChannelData().getItunesType();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesType();
     }
 
     /**
@@ -168,7 +166,7 @@ public interface ItunesChannelData {
      * @param itunesType type
      */
     default void setItunesType(String itunesType) {
-        getItunesChannelData().setItunesType(itunesType);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesType(itunesType);
     }
 
     /**
@@ -177,7 +175,7 @@ public interface ItunesChannelData {
      * @return new feed url
      */
     default Optional<String> getItunesNewFeedUrl() {
-        return getItunesChannelData().getItunesNewFeedUrl();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().getItunesNewFeedUrl();
     }
 
     /**
@@ -186,7 +184,7 @@ public interface ItunesChannelData {
      * @param itunesNewFeedUrl new feed url
      */
     default void setItunesNewFeedUrl(String itunesNewFeedUrl) {
-        getItunesChannelData().setItunesNewFeedUrl(itunesNewFeedUrl);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesNewFeedUrl(itunesNewFeedUrl);
     }
 
     /**
@@ -195,7 +193,7 @@ public interface ItunesChannelData {
      * @return block
      */
     default boolean isItunesBlock() {
-        return getItunesChannelData().isItunesBlock();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().isItunesBlock();
     }
 
     /**
@@ -204,7 +202,7 @@ public interface ItunesChannelData {
      * @param itunesBlock block
      */
     default void setItunesBlock(boolean itunesBlock) {
-        getItunesChannelData().setItunesBlock(itunesBlock);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesBlock(itunesBlock);
     }
 
     /**
@@ -213,7 +211,7 @@ public interface ItunesChannelData {
      * @return complete
      */
     default boolean isItunesComplete() {
-        return getItunesChannelData().isItunesComplete();
+        return ((ItunesChannelDataProvider) this).itunesChannelData().isItunesComplete();
     }
 
     /**
@@ -222,6 +220,6 @@ public interface ItunesChannelData {
      * @param itunesComplete complete
      */
     default void setItunesComplete(boolean itunesComplete) {
-        getItunesChannelData().setItunesComplete(itunesComplete);
+        ((ItunesChannelDataProvider) this).itunesChannelData().setItunesComplete(itunesComplete);
     }
 }

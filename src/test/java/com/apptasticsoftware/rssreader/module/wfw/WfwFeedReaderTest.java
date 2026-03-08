@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.wfw;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemDataImpl;
 import com.apptasticsoftware.rssreader.module.wfw.internal.WfwItemImpl;
@@ -16,7 +18,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class WfwFeedReaderTest {
 
@@ -28,6 +31,7 @@ class WfwFeedReaderTest {
 
         assertEquals(1, items.size());
         var item = items.get(0);
+        assertHasFeedItem(item);
         var channel = item.getChannel();
         assertThat(channel.getTitle()).isEqualTo("Example Website");
         assertThat(channel.getLink()).isEqualTo("https://www.example.com");
@@ -42,9 +46,36 @@ class WfwFeedReaderTest {
         assertThat(item.getWfwComment()).hasValue("https://ekzemplo.com/comment?post=130");
     }
 
+    private void assertHasFeedItem(WfwItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertTrue(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertFalse(feedChannel.hasAtomChannel());
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
+        }
+    }
+
     @Test
     void equalsContract() {
-        EqualsVerifier.simple().forClass(WfwItemImpl.class).withNonnullFields("wfwData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(WfwItemImpl.class).withNonnullFields("wfwData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(WfwItemDataImpl.class).verify();
     }
 

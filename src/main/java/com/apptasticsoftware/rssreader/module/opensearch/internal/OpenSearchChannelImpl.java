@@ -7,7 +7,7 @@ import com.apptasticsoftware.rssreader.module.opensearch.OpenSearchChannelData;
 
 import java.util.Objects;
 
-public class OpenSearchChannelImpl extends ChannelImpl implements OpenSearchChannel {
+public class OpenSearchChannelImpl extends ChannelImpl implements OpenSearchChannel, OpenSearchChannelDataProvider {
     private final OpenSearchChannelData openSearchData = new OpenSearchChannelDataImpl();
 
     public OpenSearchChannelImpl(DateTimeParser dateTimeParser) {
@@ -15,7 +15,7 @@ public class OpenSearchChannelImpl extends ChannelImpl implements OpenSearchChan
     }
 
     @Override
-    public OpenSearchChannelData getOpenSearchChannelData() {
+    public OpenSearchChannelData openSearchChannelData() {
         return openSearchData;
     }
 
@@ -24,11 +24,11 @@ public class OpenSearchChannelImpl extends ChannelImpl implements OpenSearchChan
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         OpenSearchChannelImpl that = (OpenSearchChannelImpl) o;
-        return Objects.equals(getOpenSearchChannelData(), that.getOpenSearchChannelData());
+        return Objects.equals(openSearchChannelData(), that.openSearchChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getOpenSearchChannelData());
+        return Objects.hash(super.hashCode(), openSearchChannelData());
     }
 }

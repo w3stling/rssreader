@@ -1,14 +1,13 @@
 package com.apptasticsoftware.rssreader.module.youtube;
 
+import com.apptasticsoftware.rssreader.module.youtube.internal.YoutubeChannelDataProvider;
+
 public interface YoutubeChannelData {
-
-    YoutubeChannelData getYoutubeChannelData();
-
     default String getYoutubeChannelId() {
-        return getYoutubeChannelData().getYoutubeChannelId();
+        return ((YoutubeChannelDataProvider) this).youtubeChannelData().getYoutubeChannelId();
     }
 
     default void setYoutubeChannelId(String youtubeChannelId) {
-        getYoutubeChannelData().setYoutubeChannelId(youtubeChannelId);
+        ((YoutubeChannelDataProvider) this).youtubeChannelData().setYoutubeChannelId(youtubeChannelId);
     }
 }

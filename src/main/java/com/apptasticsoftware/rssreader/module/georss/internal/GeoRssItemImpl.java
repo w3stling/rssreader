@@ -2,6 +2,7 @@ package com.apptasticsoftware.rssreader.module.georss.internal;
 
 import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
+import com.apptasticsoftware.rssreader.module.georss.GeoRssChannel;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssItem;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssItemData;
 
@@ -10,7 +11,7 @@ import java.util.Objects;
 /**
  * Implementation of GeoRssItem with geographic extension support.
  */
-public class GeoRssItemImpl extends ItemImpl implements GeoRssItem {
+public class GeoRssItemImpl extends ItemImpl implements GeoRssItem, GeoRssItemDataProvider {
     private final GeoRssItemDataImpl geoRssData = new GeoRssItemDataImpl();
 
     /**
@@ -22,13 +23,22 @@ public class GeoRssItemImpl extends ItemImpl implements GeoRssItem {
         super(dateTimeParser);
     }
 
+    @Override
+    public GeoRssChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof GeoRssChannel) {
+            return (GeoRssChannel) channel;
+        }
+        return null;
+    }
+
     /**
      * Returns the GeoRSS item data.
      *
      * @return the GeoRSS item data
      */
     @Override
-    public GeoRssItemData getGeoRssItemData() {
+    public GeoRssItemData geoRssItemData() {
         return geoRssData;
     }
 
@@ -43,7 +53,7 @@ public class GeoRssItemImpl extends ItemImpl implements GeoRssItem {
         if (!(o instanceof GeoRssItemImpl)) return false;
         if (!super.equals(o)) return false;
         GeoRssItemImpl that = (GeoRssItemImpl) o;
-        return Objects.equals(getGeoRssItemData(), that.getGeoRssItemData());
+        return Objects.equals(geoRssItemData(), that.geoRssItemData());
     }
 
     /**
@@ -53,6 +63,6 @@ public class GeoRssItemImpl extends ItemImpl implements GeoRssItem {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getGeoRssItemData());
+        return Objects.hash(super.hashCode(), geoRssItemData());
     }
 }

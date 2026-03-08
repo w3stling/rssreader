@@ -10,8 +10,10 @@ import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannel;
 import com.apptasticsoftware.rssreader.module.spotify.SpotifyChannelData;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesChannelDataProvider;
+import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelDataProvider;
 
-public class SpotifyChannelImpl extends ChannelImpl implements SpotifyChannel {
+public class SpotifyChannelImpl extends ChannelImpl implements SpotifyChannel, SpotifyChannelDataProvider, ItunesChannelDataProvider, MediaRssChannelDataProvider {
     private final SpotifyChannelData spotifyData = new SpotifyChannelDataImpl();
     private final ItunesChannelData itunesData = new ItunesChannelDataImpl();
     private final MediaRssChannelData mediaRssData = new MediaRssChannelDataImpl();
@@ -21,17 +23,17 @@ public class SpotifyChannelImpl extends ChannelImpl implements SpotifyChannel {
     }
 
     @Override
-    public SpotifyChannelData getSpotifyChannelData() {
+    public SpotifyChannelData spotifyChannelData() {
         return spotifyData;
     }
 
     @Override
-    public ItunesChannelData getItunesChannelData() {
+    public ItunesChannelData itunesChannelData() {
         return itunesData;
     }
 
     @Override
-    public MediaRssChannelData getMediaRssChannelData() {
+    public MediaRssChannelData mediaRssChannelData() {
         return mediaRssData;
     }
 
@@ -40,11 +42,11 @@ public class SpotifyChannelImpl extends ChannelImpl implements SpotifyChannel {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         SpotifyChannelImpl that = (SpotifyChannelImpl) o;
-        return Objects.equals(getSpotifyChannelData(), that.getSpotifyChannelData()) && Objects.equals(getItunesChannelData(), that.getItunesChannelData()) && Objects.equals(getMediaRssChannelData(), that.getMediaRssChannelData());
+        return Objects.equals(spotifyChannelData(), that.spotifyChannelData()) && Objects.equals(itunesChannelData(), that.itunesChannelData()) && Objects.equals(mediaRssChannelData(), that.mediaRssChannelData());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSpotifyChannelData(), getItunesChannelData(), getMediaRssChannelData());
+        return Objects.hash(super.hashCode(), spotifyChannelData(), itunesChannelData(), mediaRssChannelData());
     }
 }

@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 @SuppressWarnings("java:S6539")
-public class MediaRssChannelDataImpl implements MediaRssChannelData {
+public class MediaRssChannelDataImpl implements MediaRssChannelData, MediaRssChannelDataProvider {
     private final Metadata metadata = new MetadataImpl();
 
     @Override
-    public MediaRssChannelData getMediaRssChannelData() {
+    public MediaRssChannelData mediaRssChannelData() {
         return this;
     }
 

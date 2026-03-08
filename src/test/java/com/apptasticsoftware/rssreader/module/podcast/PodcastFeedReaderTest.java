@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.podcast;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastChannelImpl;
 import com.apptasticsoftware.rssreader.module.podcast.internal.PodcastItemImpl;
@@ -18,8 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PodcastFeedReaderTest {
 
@@ -72,7 +74,8 @@ class PodcastFeedReaderTest {
         assertThat(liveItem.getPodcastChat().get().getSpace()).hasValue("myawesomepodcast@jabber.example.org");
 
         for (PodcastItem podcastItem : items) {
-            var channel = (PodcastChannel) podcastItem.getChannel();
+            assertHasFeedItem(podcastItem, false);
+            var channel = podcastItem.getChannel();
             assertThat(channel.getPodcastGuid()).isEqualTo("y0ur-gu1d-g035-h3r3");
             assertTrue(channel.getPodcastLicense().isPresent());
             assertThat(channel.getPodcastLicense().get().getUrl()).hasValue("https://example.org/mypodcastlicense/full.pdf");
@@ -327,7 +330,8 @@ class PodcastFeedReaderTest {
 
         assertEquals(3, items.size());
         var item = items.get(0);
-        var channel = (PodcastChannel) item.getChannel();
+        assertHasFeedItem(item, true);
+        var channel = item.getChannel();
         assertThat(channel.getLink()).isEqualTo("https://podnews.net");
         assertThat(channel.getTitle()).isEqualTo("Podnews Daily - podcast industry news");
         assertThat(channel.getDescription()).isEqualTo("Daily news for the podcast and on-demand audio industry - from Apple Podcasts to Spotify, YouTube\n" +
@@ -434,7 +438,7 @@ class PodcastFeedReaderTest {
     @SuppressWarnings("java:S5961")
     void equalsContract() {
         EqualsVerifier.simple().forClass(PodcastChannelImpl.class).withNonnullFields("data").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
-        EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withNonnullFields("itunesData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(PodcastItemImpl.class).withNonnullFields("data").withNonnullFields("itunesData").withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
         EqualsVerifier.simple().forClass(PodcastChapters.class).verify();
         EqualsVerifier.simple().forClass(PodcastAlternateEnclosure.class).verify();
         EqualsVerifier.simple().forClass(PodcastBlock.class).verify();
@@ -460,6 +464,33 @@ class PodcastFeedReaderTest {
         EqualsVerifier.simple().forClass(PodcastValue.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueRecipient.class).verify();
         EqualsVerifier.simple().forClass(PodcastValueTimeSplit.class).verify();
+    }
+
+    private void assertHasFeedItem(PodcastItem item, boolean hasAtomChannel) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertTrue(feedItem.hasItunesItem());
+            assertFalse(feedItem.hasMediaRssItem());
+            assertTrue(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertEquals(feedChannel.hasAtomChannel(), hasAtomChannel);
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertTrue(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertTrue(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

@@ -15,7 +15,7 @@ import static com.apptasticsoftware.rssreader.util.Mapper.emptyListIfNull;
  * Stores and provides access to podcast-specific information such as episodes, chapters,
  * images, transcripts, and live item data.
  */
-public class PodcastItemDataImpl implements PodcastItemData {
+public class PodcastItemDataImpl implements PodcastItemData, PodcastItemDataProvider {
     private final DateTimeParser dateTimeParser;
     private PodcastSeason podcastSeason;
     private PodcastEpisode podcastEpisode;
@@ -49,7 +49,7 @@ public class PodcastItemDataImpl implements PodcastItemData {
      * @return this PodcastItemData
      */
     @Override
-    public PodcastItemData getPodcastItemData() {
+    public PodcastItemData podcastItemData() {
         return this;
     }
 

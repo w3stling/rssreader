@@ -8,4 +8,12 @@ import com.apptasticsoftware.rssreader.Item;
  * @see <a href="https://podcastindex.org/namespace/">Podcast Index Specification</a>
  */
 public interface PscItem extends Item, PscItemData {
+
+    /**
+     * Retrieves the PSC channel (feed) that this item belongs to.
+     *
+     * @return the PscChannel associated with this item
+     */
+    @Override
+    PscChannel getChannel();
 }

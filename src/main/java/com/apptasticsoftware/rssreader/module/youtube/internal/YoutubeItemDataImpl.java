@@ -4,12 +4,12 @@ import com.apptasticsoftware.rssreader.module.youtube.YoutubeItemData;
 
 import java.util.Objects;
 
-public class YoutubeItemDataImpl implements YoutubeItemData {
+public class YoutubeItemDataImpl implements YoutubeItemData, YoutubeItemDataProvider {
     private String youtubeChannelId;
     private String youtubeVideoId;
 
     @Override
-    public YoutubeItemData getYoutubeItemData() {
+    public YoutubeItemData youtubeItemData() {
         return this;
     }
 

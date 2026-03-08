@@ -4,12 +4,14 @@ import com.apptasticsoftware.rssreader.DateTimeParser;
 import com.apptasticsoftware.rssreader.internal.ItemImpl;
 import com.apptasticsoftware.rssreader.module.itunes.ItunesItemData;
 import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataImpl;
+import com.apptasticsoftware.rssreader.module.podcast.PodcastChannel;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItem;
 import com.apptasticsoftware.rssreader.module.podcast.PodcastItemData;
 
 import java.util.Objects;
+import com.apptasticsoftware.rssreader.module.itunes.internal.ItunesItemDataProvider;
 
-public class PodcastItemImpl extends ItemImpl implements PodcastItem {
+public class PodcastItemImpl extends ItemImpl implements PodcastItem, PodcastItemDataProvider, ItunesItemDataProvider {
     private final PodcastItemDataImpl data;
     private final ItunesItemDataImpl itunesData;
 
@@ -25,11 +27,20 @@ public class PodcastItemImpl extends ItemImpl implements PodcastItem {
     }
 
     @Override
-    public PodcastItemData getPodcastItemData() {
+    public PodcastChannel getChannel() {
+        var channel = super.getChannel();
+        if (channel instanceof PodcastChannel) {
+            return (PodcastChannel) channel;
+        }
+        return null;
+    }
+
+    @Override
+    public PodcastItemData podcastItemData() {
         return data;
     }
 
-    public ItunesItemData getItunesItemData() {
+    public ItunesItemData itunesItemData() {
         return itunesData;
     }
 

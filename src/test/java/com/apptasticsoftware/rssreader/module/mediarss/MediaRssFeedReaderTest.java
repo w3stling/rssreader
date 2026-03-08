@@ -1,6 +1,8 @@
 package com.apptasticsoftware.rssreader.module.mediarss;
 
 import com.apptasticsoftware.rssreader.AbstractRssReader;
+import com.apptasticsoftware.rssreader.FeedChannel;
+import com.apptasticsoftware.rssreader.FeedItem;
 import com.apptasticsoftware.rssreader.FeedReader;
 import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssChannelImpl;
 import com.apptasticsoftware.rssreader.module.mediarss.internal.MediaRssItemImpl;
@@ -20,8 +22,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("java:S5961")
 class MediaRssFeedReaderTest {
@@ -696,6 +697,7 @@ class MediaRssFeedReaderTest {
 
         assertEquals(1, items.size());
         MediaRssItem item = items.get(0);
+        assertHasFeedItem(item);
         assertThat(item.getTitle()).hasValue("Movie Title: Is this a good movie?");
         assertThat(item.getLink()).hasValue("http://www.foo.com/item1.htm");
         assertNotNull(item);
@@ -1798,9 +1800,36 @@ class MediaRssFeedReaderTest {
         EqualsVerifier.simple().forClass(MediaContent.class).verify();
         EqualsVerifier.simple().forClass(MediaGroup.class).verify();
 
-        EqualsVerifier.simple().forClass(MediaRssItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").verify();
+        EqualsVerifier.simple().forClass(MediaRssItemImpl.class).withIgnoredFields("defaultComparator").withIgnoredFields("dateTimeParser").withIgnoredFields("category").withNonnullFields("categories").withIgnoredFields("enclosure").withNonnullFields("enclosures").withIgnoredFields("channel").verify();
 
         EqualsVerifier.simple().forClass(MediaRssChannelImpl.class).withIgnoredFields("dateTimeParser").withIgnoredFields("category").withIgnoredFields("syUpdatePeriod").withIgnoredFields("syUpdateFrequency").verify();
+    }
+
+    private void assertHasFeedItem(MediaRssItem item) {
+        if (item instanceof FeedItem) {
+            FeedItem feedItem = (FeedItem) item;
+            assertFalse(feedItem.hasAtomItem());
+            assertFalse(feedItem.hasDcItem());
+            assertFalse(feedItem.hasGeoRssItem());
+            assertFalse(feedItem.hasItunesItem());
+            assertTrue(feedItem.hasMediaRssItem());
+            assertFalse(feedItem.hasPodcastItem());
+            assertFalse(feedItem.hasPscItem());
+            assertFalse(feedItem.hasSlashItem());
+            assertFalse(feedItem.hasWfwItem());
+            assertFalse(feedItem.hasYoutubeItem());
+
+            FeedChannel feedChannel = feedItem.getChannel();
+            assertFalse(feedChannel.hasAtomChannel());
+            assertFalse(feedChannel.hasDcChannel());
+            assertFalse(feedChannel.hasGeoRssChannel());
+            assertFalse(feedChannel.hasItunesChannel());
+            assertFalse(feedChannel.hasMediaRssChannel());
+            assertFalse(feedChannel.hasOpenSearchChannel());
+            assertFalse(feedChannel.hasPodcastChannel());
+            assertFalse(feedChannel.hasSpotifyChannel());
+            assertFalse(feedChannel.hasYoutubeChannel());
+        }
     }
 
     private static Stream<? extends Arguments> feedReaderArguments() {

@@ -1,5 +1,6 @@
 package com.apptasticsoftware.rssreader.module.atom;
 
+import com.apptasticsoftware.rssreader.module.atom.internal.AtomItemDataProvider;
 import java.util.List;
 
 /**
@@ -8,17 +9,11 @@ import java.util.List;
 public interface AtomItemData {
 
     /**
-     * Returns the underlying Atom item data.
-     * @return the Atom item data
-     */
-    AtomItemData getAtomItemData();
-
-    /**
      * Returns the list of Atom links.
      * @return the list of Atom links
      */
     default List<AtomLink> getAtomLinks() {
-        return getAtomItemData().getAtomLinks();
+        return ((AtomItemDataProvider) this).atomItemData().getAtomLinks();
     }
 
     /**
@@ -26,7 +21,7 @@ public interface AtomItemData {
      * @param atomLink the Atom link to add
      */
     default void addAtomLink(AtomLink atomLink) {
-        getAtomItemData().addAtomLink(atomLink);
+        ((AtomItemDataProvider) this).atomItemData().addAtomLink(atomLink);
     }
 
     /**
@@ -34,7 +29,7 @@ public interface AtomItemData {
      * @return the list of Atom authors
      */
     default List<AtomAuthor> getAtomAuthors() {
-        return getAtomItemData().getAtomAuthors();
+        return ((AtomItemDataProvider) this).atomItemData().getAtomAuthors();
     }
 
     /**
@@ -42,7 +37,7 @@ public interface AtomItemData {
      * @param atomAuthor the Atom author to add
      */
     default void addAtomAuthor(AtomAuthor atomAuthor) {
-        getAtomItemData().addAtomAuthor(atomAuthor);
+        ((AtomItemDataProvider) this).atomItemData().addAtomAuthor(atomAuthor);
     }
 
     /**
@@ -50,7 +45,7 @@ public interface AtomItemData {
      * @return the list of Atom contributors
      */
     default List<AtomContributor> getAtomContributors() {
-        return getAtomItemData().getAtomContributors();
+        return ((AtomItemDataProvider) this).atomItemData().getAtomContributors();
     }
 
     /**
@@ -58,6 +53,6 @@ public interface AtomItemData {
      * @param atomContributor the Atom contributor to add
      */
     default void addAtomContributor(AtomContributor atomContributor) {
-        getAtomItemData().addAtomContributor(atomContributor);
+        ((AtomItemDataProvider) this).atomItemData().addAtomContributor(atomContributor);
     }
 }
