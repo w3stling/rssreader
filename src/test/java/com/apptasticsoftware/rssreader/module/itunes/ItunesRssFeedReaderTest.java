@@ -19,6 +19,7 @@ import java.time.Duration;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItunesRssFeedReaderTest {
@@ -68,11 +69,11 @@ class ItunesRssFeedReaderTest {
     void duration() {
         ItunesItem item = new ItunesItemImpl(new DateTime());
         item.setItunesDuration("1");
-        assertEquals(1, item.getItunesDurationAsDuration().get().getSeconds());
+        assertThat(item.getItunesDurationAsDuration()).hasValueSatisfying(d -> assertEquals(1, d.getSeconds()));
         item.setItunesDuration("01:02");
-        assertEquals(62, item.getItunesDurationAsDuration().get().getSeconds());
+        assertThat(item.getItunesDurationAsDuration()).hasValueSatisfying(d -> assertEquals(62, d.getSeconds()));
         item.setItunesDuration("01:02:03");
-        assertEquals(3723, item.getItunesDurationAsDuration().get().getSeconds());
+        assertThat(item.getItunesDurationAsDuration()).hasValueSatisfying(d -> assertEquals(3723, d.getSeconds()));
     }
 
     @Test
