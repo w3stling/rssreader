@@ -7,6 +7,11 @@ import com.apptasticsoftware.rssreader.Item;
  */
 public interface AtomItem extends Item, AtomItemData {
 
+    /**
+     * Retrieves the Atom channel (feed) that this item belongs to.
+     *
+     * @return the AtomChannel associated with this item
+     */
     @Override
     AtomChannel getChannel();
 

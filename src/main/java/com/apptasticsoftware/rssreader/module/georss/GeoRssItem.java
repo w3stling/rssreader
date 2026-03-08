@@ -7,6 +7,11 @@ import com.apptasticsoftware.rssreader.Item;
  */
 public interface GeoRssItem extends Item, GeoRssItemData {
 
+    /**
+     * Retrieves the GeoRSS channel (feed) that this item belongs to.
+     *
+     * @return the GeoRssChannel associated with this item
+     */
     @Override
     GeoRssChannel getChannel();
 

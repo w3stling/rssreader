@@ -9,6 +9,11 @@ import com.apptasticsoftware.rssreader.Item;
  */
 public interface PscItem extends Item, PscItemData {
 
+    /**
+     * Retrieves the PSC channel (feed) that this item belongs to.
+     *
+     * @return the PscChannel associated with this item
+     */
     @Override
     PscChannel getChannel();
 }

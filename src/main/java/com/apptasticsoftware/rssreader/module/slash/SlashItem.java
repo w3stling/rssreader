@@ -11,6 +11,11 @@ import com.apptasticsoftware.rssreader.Item;
  */
 public interface SlashItem extends Item, SlashItemData {
 
+    /**
+     * Retrieves the Slash channel (feed) that this item belongs to.
+     *
+     * @return the SlashChannel associated with this item
+     */
     @Override
     SlashChannel getChannel();
 }

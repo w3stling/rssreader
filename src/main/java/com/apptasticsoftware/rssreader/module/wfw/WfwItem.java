@@ -19,6 +19,11 @@ import com.apptasticsoftware.rssreader.Item;
  */
 public interface WfwItem extends Item, WfwItemData {
 
+    /**
+    * Retrieves the WFW channel (feed) that this item belongs to.
+    *
+    * @return the WfwChannel associated with this item
+    */
     @Override
     WfwChannel getChannel();
 
