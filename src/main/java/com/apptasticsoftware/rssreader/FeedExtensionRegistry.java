@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-// Move into subpackage 'module'?
 public interface FeedExtensionRegistry<C extends Channel, I extends Item> {
     // Channel
     void addOnChannelTag(String tag, Consumer<C> mapper);

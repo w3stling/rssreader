@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Empty Feed</title>
+        <link>https://example.com/</link>
+        <description>A feed with no items</description>
+        <language>en-US</language>
+        <lastBuildDate>Wed, 18 Feb 2026 12:00:00 +0000</lastBuildDate>
+        <copyright>Copyright 2026, Example Inc.</copyright>
+        <generator>Example Generator</generator>
+    </channel>
+</rss>

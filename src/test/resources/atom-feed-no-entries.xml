@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Empty Atom Feed</title>
+    <subtitle>An Atom feed with no entries</subtitle>
+    <link href="https://example.com/"/>
+    <link rel="self" href="https://example.com/feed.atom"/>
+    <updated>2026-02-18T12:00:00Z</updated>
+    <rights>Copyright 2026, Example Inc.</rights>
+    <generator>Example Generator</generator>
+</feed>

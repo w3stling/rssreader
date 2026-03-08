@@ -1,7 +1,13 @@
 package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.internal.FeedChannelImpl;
+import com.apptasticsoftware.rssreader.internal.FeedDataImpl;
 import com.apptasticsoftware.rssreader.internal.FeedItemImpl;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.stream.Stream;
 import com.apptasticsoftware.rssreader.module.atom.AtomExtensions;
 import com.apptasticsoftware.rssreader.module.dc.DcExtensions;
 import com.apptasticsoftware.rssreader.module.georss.GeoRssExtensions;
@@ -43,5 +49,39 @@ public class FeedReader extends AbstractRssReader<FeedChannel, FeedItem> {
         SpotifyExtensions.register(registry);
         WfwExtensions.register(registry);
         YoutubeExtensions.register(registry);
+    }
+
+    /**
+     * Reads a feed from the given URL and returns a stream of {@link FeedData} records,
+     * each combining the feed URL, channel, and item.
+     *
+     * @param url the URL of the feed
+     * @return a stream of {@link FeedData}
+     * @throws IOException if an I/O error occurs
+     */
+    public Stream<FeedData> readFeed(String url) throws IOException {
+        return readFeedRecords(url).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
+    }
+
+    /**
+     * Reads feeds from the given URLs and returns a stream of {@link FeedData} records,
+     * each combining the feed URL, channel, and item.
+     *
+     * @param urls collection of URLs or file URIs
+     * @return a stream of {@link FeedData}
+     */
+    public Stream<FeedData> readFeed(Collection<String> urls) {
+        return readFeedRecords(urls).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
+    }
+
+    /**
+     * Reads a feed from the given input stream and returns a stream of {@link FeedData} records,
+     * each combining the feed URL, channel, and item.
+     *
+     * @param inputStream input stream containing the RSS feed
+     * @return a stream of {@link FeedData}
+     */
+    public Stream<FeedData> readFeed(InputStream inputStream) {
+        return readFeedRecords(inputStream).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
     }
 }

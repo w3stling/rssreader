@@ -25,6 +25,7 @@ package com.apptasticsoftware.rssreader;
 
 import com.apptasticsoftware.rssreader.filter.FeedFilter;
 import com.apptasticsoftware.rssreader.internal.*;
+import com.apptasticsoftware.rssreader.internal.FeedRecordImpl;
 import com.apptasticsoftware.rssreader.internal.stream.AutoCloseStream;
 import com.apptasticsoftware.rssreader.util.Default;
 import com.apptasticsoftware.rssreader.util.Mapper;
@@ -503,7 +504,68 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @param urls collections of URLs or file URIs
      * @return Stream of items
      */
-    public Stream<Item> read(Collection<String> urls) {
+    public Stream<I> read(Collection<String> urls) {
+        return readFeedRecords(urls).map(FeedRecord::getItem);
+    }
+
+    /**
+     * Read RSS feed from input stream.
+     * @param inputStream inputStream containing the RSS feed.
+     * @return Stream of items
+     */
+    public Stream<I> read(InputStream inputStream) {
+        Objects.requireNonNull(inputStream, "Input stream must not be null");
+        return read("", inputStream);
+    }
+
+    protected Stream<I> read(String source, InputStream inputStream) {
+        return readFeedRecords(source, inputStream).map(FeedRecord::getItem);
+    }
+
+    /**
+     * Read RSS feed with the given URL or file URI and return a stream of feed records.
+     * @param url URL to RSS feed or file URI.
+     * @return Stream of feed records
+     * @throws IOException Fail to read url or its content
+     */
+    @SuppressWarnings("squid:S1181")
+    protected Stream<FeedRecord<I, C>> readFeedRecords(String url) throws IOException {
+        Objects.requireNonNull(url, "URL must not be null");
+
+        try {
+            return readFeedRecordsAsync(url).get(1, TimeUnit.MINUTES);
+        } catch (CompletionException e) {
+            try {
+                throw e.getCause();
+            } catch (IOException e2) {
+                throw e2;
+            } catch(Throwable e2) {
+                throw new AssertionError(e2);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IOException(e);
+        } catch (ExecutionException | TimeoutException e) {
+            throw new IOException(e);
+        }
+    }
+
+    /**
+     * Read RSS feed from input stream and return a stream of feed records.
+     * @param inputStream inputStream containing the RSS feed.
+     * @return Stream of feed records
+     */
+    protected Stream<FeedRecord<I, C>> readFeedRecords(InputStream inputStream) {
+        Objects.requireNonNull(inputStream, "Input stream must not be null");
+        return readFeedRecords("", inputStream);
+    }
+
+    /**
+     * Read from a collection of RSS feeds and return a stream of feed records.
+     * @param urls collection of URLs or file URIs
+     * @return Stream of feed records
+     */
+    protected Stream<FeedRecord<I, C>> readFeedRecords(Collection<String> urls) {
         Objects.requireNonNull(urls, "URLs collection must not be null");
         urls.forEach(url -> Objects.requireNonNull(url, "URL must not be null. Url: " + url));
 
@@ -515,7 +577,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 .parallel()
                 .map(url -> {
                     try {
-                        return Map.entry(url, readAsync(url));
+                        return Map.entry(url, readFeedRecordsAsync(url));
                     } catch (Exception e) {
                         if (LOGGER.isLoggable(Level.WARNING)) {
                             LOGGER.log(Level.WARNING, () -> String.format("Failed read URL %s. Message: %s", url, e.getMessage()));
@@ -536,17 +598,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 }));
     }
 
-    /**
-     * Read RSS feed from input stream.
-     * @param inputStream inputStream containing the RSS feed.
-     * @return Stream of items
-     */
-    public Stream<I> read(InputStream inputStream) {
-        Objects.requireNonNull(inputStream, "Input stream must not be null");
-        return read("", inputStream);
-    }
-
-    protected Stream<I> read(String source, InputStream inputStream) {
+    protected Stream<FeedRecord<I, C>> readFeedRecords(String source, InputStream inputStream) {
         if (!isInitialized) {
             initialize();
             isInitialized = true;
@@ -564,6 +616,15 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public CompletableFuture<Stream<I>> readAsync(String url) {
+        return readFeedRecordsAsync(url).thenApply(s -> s.map(FeedRecord::getItem));
+    }
+
+    /**
+     * Read RSS feed asynchronous with the given URL and return a stream of feed records.
+     * @param url URL to RSS feed.
+     * @return Stream of feed records
+     */
+    private CompletableFuture<Stream<FeedRecord<I, C>>> readFeedRecordsAsync(String url) {
         Objects.requireNonNull(url, "URL must not be null");
 
         if (!isInitialized) {
@@ -577,7 +638,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                 // Read from file
                 return CompletableFuture.supplyAsync(() -> {
                     try {
-                        return read(uri.getPath(), new FileInputStream(uri.getPath()));
+                        return readFeedRecords(uri.getPath(), new FileInputStream(uri.getPath()));
                     } catch (FileNotFoundException e) {
                         throw new CompletionException(e);
                     }
@@ -590,7 +651,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             return CompletableFuture.supplyAsync(() -> {
                 // Read feed data provided as a string
                 var inputStream = new ByteArrayInputStream(url.getBytes(StandardCharsets.UTF_8));
-                return read("", inputStream);
+                return readFeedRecords("", inputStream);
             });
         }
     }
@@ -615,7 +676,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         return httpClient.sendAsync(builder.GET().build(), HttpResponse.BodyHandlers.ofInputStream());
     }
 
-    private Function<HttpResponse<InputStream>, Stream<I>> processResponse() {
+    private Function<HttpResponse<InputStream>, Stream<FeedRecord<I, C>>> processResponse() {
         return response -> {
             try {
                 if (response.statusCode() >= 400 && response.statusCode() < 600) {
@@ -683,7 +744,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         }
     }
 
-    class RssItemIterator implements Iterator<I>, AutoCloseable {
+    class RssItemIterator implements Iterator<FeedRecord<I, C>>, AutoCloseable {
         private final StringBuilder textBuilder;
         private final Map<String, StringBuilder> childNodeTextBuilder;
         private final Deque<String> elementStack;
@@ -691,7 +752,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
         private XMLStreamReader reader;
         private C channel;
         private I item = null;
-        private I nextItem;
+        private FeedRecord<I, C> nextItem;
         private boolean isChannelPart = false;
         private boolean isItemPart = false;
         private ScheduledFuture<?> parseWatchdog;
@@ -754,7 +815,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
 
         @Override
         @SuppressWarnings("squid:S3776")
-        public I next() {
+        public FeedRecord<I, C> next() {
             if (nextItem != null) {
                 var next = nextItem;
                 nextItem = null;
@@ -774,7 +835,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
                     } else if (type == END_ELEMENT) {
                         var itemParsed = parseEndElement();
                         if (itemParsed) {
-                            return item;
+                            return new FeedRecordImpl<>(source, channel, item);
                         }
                     }
                 }
@@ -783,6 +844,11 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
             }
 
             close();
+            if (channel != null && item == null) {
+                var channelRecord = new FeedRecordImpl<>(source, channel, (I) null);
+                channel = null;
+                return channelRecord;
+            }
             throw new NoSuchElementException();
         }
 
