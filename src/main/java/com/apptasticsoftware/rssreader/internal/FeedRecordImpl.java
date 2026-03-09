@@ -28,6 +28,7 @@ import com.apptasticsoftware.rssreader.FeedRecord;
 import com.apptasticsoftware.rssreader.Item;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public class FeedRecordImpl<I extends Item, C extends Channel> implements FeedRecord<I, C> {
     private final String feedUrl;
@@ -46,13 +47,13 @@ public class FeedRecordImpl<I extends Item, C extends Channel> implements FeedRe
     }
 
     @Override
-    public C getChannel() {
-        return channel;
+    public Optional<C> getChannel() {
+        return Optional.ofNullable(channel);
     }
 
     @Override
-    public I getItem() {
-        return item;
+    public Optional<I> getItem() {
+        return Optional.ofNullable(item);
     }
 
     @Override

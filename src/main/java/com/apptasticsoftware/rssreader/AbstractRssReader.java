@@ -505,7 +505,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public Stream<I> read(Collection<String> urls) {
-        return readFeedRecords(urls).map(FeedRecord::getItem);
+        return readFeedRecords(urls).flatMap(r -> r.getItem().stream());
     }
 
     /**
@@ -519,7 +519,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
     }
 
     protected Stream<I> read(String source, InputStream inputStream) {
-        return readFeedRecords(source, inputStream).map(FeedRecord::getItem);
+        return readFeedRecords(source, inputStream).flatMap(r -> r.getItem().stream());
     }
 
     /**
@@ -616,7 +616,7 @@ public abstract class AbstractRssReader<C extends Channel, I extends Item> {
      * @return Stream of items
      */
     public CompletableFuture<Stream<I>> readAsync(String url) {
-        return readFeedRecordsAsync(url).thenApply(s -> s.map(FeedRecord::getItem));
+        return readFeedRecordsAsync(url).thenApply(s -> s.flatMap(r -> r.getItem().stream()));
     }
 
     /**

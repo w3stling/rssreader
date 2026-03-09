@@ -60,7 +60,7 @@ public class FeedReader extends AbstractRssReader<FeedChannel, FeedItem> {
      * @throws IOException if an I/O error occurs
      */
     public Stream<FeedData> readFeed(String url) throws IOException {
-        return readFeedRecords(url).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
+        return readFeedRecords(url).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel().orElse(null), r.getItem().orElse(null)));
     }
 
     /**
@@ -71,7 +71,7 @@ public class FeedReader extends AbstractRssReader<FeedChannel, FeedItem> {
      * @return a stream of {@link FeedData}
      */
     public Stream<FeedData> readFeed(Collection<String> urls) {
-        return readFeedRecords(urls).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
+        return readFeedRecords(urls).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel().orElse(null), r.getItem().orElse(null)));
     }
 
     /**
@@ -82,6 +82,6 @@ public class FeedReader extends AbstractRssReader<FeedChannel, FeedItem> {
      * @return a stream of {@link FeedData}
      */
     public Stream<FeedData> readFeed(InputStream inputStream) {
-        return readFeedRecords(inputStream).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel(), r.getItem()));
+        return readFeedRecords(inputStream).map(r -> new FeedDataImpl(r.getFeedUrl(), r.getChannel().orElse(null), r.getItem().orElse(null)));
     }
 }

@@ -22,8 +22,10 @@ class FeedReaderTest {
         FeedData first = results.get(0);
         assertThat(first.getChannel()).isNotNull();
         assertThat(first.getItem()).isNotNull();
-        assertThat(first.getChannel()).isSameAs(first.getChannel());
-        assertThat(first.getItem()).isSameAs(first.getItem());
+        var channel = first.getChannel().get();
+        var item = first.getItem().get();
+        assertThat(first.getChannel()).hasValue(channel);
+        assertThat(first.getItem()).hasValue(item);
         assertThat(first.getFeedUrl()).isNotEmpty();
     }
 
@@ -35,8 +37,8 @@ class FeedReaderTest {
 
         assertThat(results).hasSize(1);
         FeedData first = results.get(0);
-        assertThat(first.getChannel()).isNotNull();
-        assertThat(first.getItem()).isNull();
+        assertThat(first.getChannel()).isNotEmpty();
+        assertThat(first.getItem()).isEmpty();
     }
 
     @Test
@@ -47,8 +49,8 @@ class FeedReaderTest {
 
         assertThat(results).hasSize(1);
         FeedData first = results.get(0);
-        assertThat(first.getChannel()).isNotNull();
-        assertThat(first.getItem()).isNull();
+        assertThat(first.getChannel()).isNotEmpty();
+        assertThat(first.getItem()).isEmpty();
     }
 
     @Test
