@@ -95,7 +95,7 @@ class SortTest {
 
     @Test
     void testSortChannelTitle() {
-        var urls = List.of("https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "https://gizmodo.com/feed");
+        var urls = List.of("https://feeds.a.dj.com/rss/RSSMarketsMain.xml", "https://github.com/w3stling/rssreader/releases.atom");
         var list = new RssReader().read(urls)
                 .sorted(ItemComparator.channelTitle())
                 .collect(Collectors.toList());
@@ -103,7 +103,7 @@ class SortTest {
         var first = list.get(0);
         var last = list.get(list.size() - 1);
         assertNotEquals(first.getChannel().getTitle(), last.getChannel().getTitle());
-        assertTrue(first.getChannel().getTitle().toLowerCase().contains("gizmodo"));
+        assertTrue(first.getChannel().getTitle().toLowerCase().contains("release notes"));
         assertTrue(last.getChannel().getTitle().toLowerCase().contains("wsj"));
     }
 }

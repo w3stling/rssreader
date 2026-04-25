@@ -32,7 +32,7 @@ class CloseTest {
 
     @Test
     void testUrl() throws IOException {
-        long count = new RssReader().read("https://gizmodo.com/feed").onClose(this::close).count();
+        long count = new RssReader().read("https://cneos.jpl.nasa.gov/feed/news.xml").onClose(this::close).count();
         assertEquals(1, closeCounter);
         assertTrue(count > 0);
     }
