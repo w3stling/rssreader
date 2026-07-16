@@ -27,7 +27,6 @@ class SortTest {
                 "https://feedforall.com/sample-feed.xml",
                 "https://se.investing.com/rss/news.rss",
                 "https://www.di.se/digital/rss",
-                "https://worldoftanks.eu/en/rss/news/",
                 "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
                 "https://github.com/openjdk/jdk/commits.atom",
                 "https://www.microsoft.com/releasecommunications/api/v2/azure/rss",
