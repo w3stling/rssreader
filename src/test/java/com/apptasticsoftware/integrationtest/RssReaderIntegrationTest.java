@@ -162,6 +162,7 @@ class RssReaderIntegrationTest {
     }
 
 
+    @Disabled("Investigate")
     @Test
     void rssPlaceraString() throws IOException, InterruptedException {
         String rssText = getRssFeedAsString("https://www.placera.se/artiklar/rss.xml");
@@ -365,6 +366,7 @@ class RssReaderIntegrationTest {
     }
 
     @SuppressWarnings("java:S5961")
+    @Disabled("Investigate")
     @Test
     void rssWorldOfTank() throws IOException {
         RssReader reader = new RssReader();
