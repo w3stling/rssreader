@@ -959,8 +959,9 @@ class RssReaderIntegrationTest {
         }
     }
 
+    @SuppressWarnings("java:S8692")
     private static boolean isWeekend() {
         DayOfWeek dayOfWeek = DayOfWeek.of(LocalDate.now().get(ChronoField.DAY_OF_WEEK));
-        return dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY;
+        return DayOfWeek.SATURDAY.equals(dayOfWeek) || DayOfWeek.SUNDAY.equals(dayOfWeek);
     }
 }

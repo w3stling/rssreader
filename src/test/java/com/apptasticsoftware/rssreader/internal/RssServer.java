@@ -83,7 +83,7 @@ public class RssServer {
 
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            LOGGER.info("New connection " + Instant.now());
+            LOGGER.info("New connection " + getTimestamp());
             var responseBodyLength = Files.size(file.toPath());
             exchange.sendResponseHeaders(200, responseBodyLength);
 
@@ -91,7 +91,7 @@ public class RssServer {
                 writeResponseBody(os, responseBodyLength);
             }
 
-            LOGGER.info("Connection closed " + Instant.now());
+            LOGGER.info("Connection closed " + getTimestamp());
         }
 
         private void writeResponseBody(OutputStream os, long responseBodyLength) throws IOException {
@@ -108,7 +108,7 @@ public class RssServer {
                     if (isWritePause(totalReadLength, responseBodyLength) && !hasPaused) {
                         pause(writeBodyPause);
                         hasPaused = true;
-                        LOGGER.info("Continue to write " + Instant.now());
+                        LOGGER.info("Continue to write " + getTimestamp());
                     }
                 }
             }
@@ -127,6 +127,11 @@ public class RssServer {
             } catch (InterruptedException ignore) {
                 Thread.currentThread().interrupt();
             }
+        }
+
+        @SuppressWarnings("java:S8692")
+        private Instant getTimestamp() {
+            return Instant.now();
         }
 
     }
