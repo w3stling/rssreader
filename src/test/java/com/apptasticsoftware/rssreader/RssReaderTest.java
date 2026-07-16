@@ -49,7 +49,7 @@ class RssReaderTest {
                 "</rss>\n";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         long count = readerMock.read("").count();
@@ -80,7 +80,7 @@ class RssReaderTest {
                 "</rss>\n";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -127,7 +127,7 @@ class RssReaderTest {
                 "</rss>\n";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -174,7 +174,7 @@ class RssReaderTest {
                 "</rss>\n";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -221,7 +221,7 @@ class RssReaderTest {
                 "</rss>\n";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         List<Item> items = readerMock.read("").collect(Collectors.toList());
@@ -250,7 +250,7 @@ class RssReaderTest {
         String response = "";
 
         var httpResponse = createMock(response);
-        RssReader readerMock = Mockito.spy(RssReader.class);
+        RssReader readerMock = spy(RssReader.class);
         doReturn(httpResponse).when(readerMock).sendAsyncRequest(anyString());
 
         long count = readerMock.read("").count();
