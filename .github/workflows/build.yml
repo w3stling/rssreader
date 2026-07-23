@@ -29,7 +29,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java ⚙️
-        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           java-version: '25'
           distribution: 'temurin'
@@ -57,7 +57,7 @@ jobs:
 
       - name: Get version number 🔢
         id: get-version
-        uses: release-drafter/release-drafter@4d75298e00d9e34c483e5ff8c68d0ea1c1940c1e # v7.5.1
+        uses: release-drafter/release-drafter@eada3c96a64734dd381cfbda23511034e328ddb0 # v7.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -98,7 +98,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java ⚙️
-        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           java-version: '25'
           distribution: 'temurin'
@@ -153,7 +153,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Java ⚙️
-        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
         with:
           java-version: '25'
           distribution: 'temurin'
