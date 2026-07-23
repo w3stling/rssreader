@@ -70,59 +70,19 @@ jobs:
         run: |
           echo "Next version: ${{ steps.version.outputs.next-version }}"
 
-  code-analysis:
-    name: 🔎 Code Analysis
-    needs: [build]
-    if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' && github.event_name != 'schedule' && github.repository == 'w3stling/rssreader' }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository ⚙️
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
-          fetch-depth: 0
-
-      - name: Setup Java ⚙️
-        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
-        with:
-          java-version: '25'
-          distribution: 'temurin'
-
       - name: Cache SonarCloud packages ⚙️
+        if: ${{ github.event_name != 'pull_request' && github.event_name != 'schedule' && github.repository == 'w3stling/rssreader' }}
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
 
-      - name: Setup Gradle dependencies cache ⚙️
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts') }}
-
-      - name: Setup Gradle wrapper cache ⚙️
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}
-
-      - name: Validate Gradle wrapper ⚙️
-        uses: gradle/actions/wrapper-validation@3f131e8634966bd73d06cc69884922b02e6faf92 # v6.2.0
-
-      - name: Grant execute permission for gradlew ⚙️
-        run: chmod +x gradlew
-
-      - name: Next version 🔢
-        run: |
-          echo "Next version: ${{ needs.build.outputs.next-version }}"
-
       - name: Analyze code 🔎️
-        run: ./gradlew test jacocoTestReport sonar --info -Dsonar.projectVersion=${{ needs.build.outputs.next-version }}-SNAPSHOT
+        if: ${{ github.event_name != 'pull_request' && github.event_name != 'schedule' && github.repository == 'w3stling/rssreader' }}
+        run: ./gradlew sonar --info -Dsonar.projectVersion=${{ steps.version.outputs.next-version }}-SNAPSHOT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
 
   documentation:
     name: 📚 Publish Javadoc
