@@ -338,7 +338,7 @@ class RssReaderIntegrationTest {
     @Test
     void diDigital() throws IOException {
         RssReader reader = new RssReader();
-        List<Item> items = reader.read("https://digital.di.se/rss").collect(Collectors.toList());
+        List<Item> items = reader.read("https://www.di.se/rss").collect(Collectors.toList());
 
         assertFalse(items.isEmpty());
 
